@@ -1,5 +1,9 @@
 package com.hart.mapper;
 
-public class TestMapper {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface TestMapper {
+	
+	public String getTest();
 }
