@@ -10,5 +10,6 @@ import com.hart.domain.ProductsVO;
 public interface ProductsService {
 
 	// (받을거 넣기 가격, 할인율, 할인후 가격, 상품이름)
+	
 	public List<ProductsVO> getProductList(ProductsVO productsVO) throws Exception;
 }

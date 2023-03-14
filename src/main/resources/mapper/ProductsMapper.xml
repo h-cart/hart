@@ -9,12 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="getproductslist" resultType="com.hart.domain.ProductsVO">
-	select p.pname, p.pprice, p.pdiscount, p.pcno,p.pid,p.stag, pc.pcategory,pc.pcno
-	from products p join product_category pc on p.pcno = pc.pcno
-	where pc.pcategory = '계절 과일';
+	select *from product_category
+	where pcno_top is null;
+	
 	</select>
-
-
 
 </mapper>
 

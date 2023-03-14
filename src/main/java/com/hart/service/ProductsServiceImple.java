@@ -19,7 +19,8 @@ public class ProductsServiceImple implements ProductsService {
 
 	@Override
 	public List<ProductsVO> getProductList(ProductsVO productsVO) {
-		log.info("productVO" +productsVO );
+		
+		log.info("#############productVO @@@@@@@@@=" +productsVO );
 		
 		return productsmapper.getproductslist(productsVO);
 	}
