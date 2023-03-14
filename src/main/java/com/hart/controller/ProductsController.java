@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.hart.domain.ProductsVO;
 import com.hart.service.ProductsService;
@@ -22,22 +24,15 @@ public class ProductsController {
 	private ProductsService productsservice;
 
 	@GetMapping("/list")
-	public String productlist(ProductsVO productsVO,Model model) {
-		
-		log.info("-------------products-------------1. = "+productsVO);
-		
-		List<ProductsVO> products = null;
-		try {
-			
-			products = productsservice.getProductList(productsVO);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		log.info("-------------products-------------2");
-		
-		model.addAttribute("products",products);
-		return "product/productList";
-	}
+	public String productlist(@RequestParam(value = "pcno_top",required = false) int pcno_top, 
+								@RequestParam(value ="pcno",required = false) int pcno, 
+								Model model) {
 
+		
+		return "product/productList";
+
+		
+	}
+	
+	
 }
