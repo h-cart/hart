@@ -1,4 +1,4 @@
-package com.hart.domain;
+package com.hart.domain.cart;
 
 import java.util.List;
 
@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class CartInsertDTO {
+public class CartDTO {
 	
-	private String pid;
-	private int pamount;
+	private List<CProductDTO> pLists;
 	
 }

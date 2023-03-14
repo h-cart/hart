@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.hart.domain.cart.CartDTO;
 import com.hart.service.cart.CartService;
 
 import lombok.extern.log4j.Log4j2;
@@ -14,13 +15,13 @@ import lombok.extern.log4j.Log4j2;
 @SpringBootTest
 @Log4j2
 public class CartServiceTests {
-	
+
 	@Autowired
 	private CartService cService;
-	
+
 	@Test
 	public void inserts() {
-		
+
 		try {
 			List<String> pids = new ArrayList<>();
 			pids.add("S02006004332");
@@ -29,9 +30,20 @@ public class CartServiceTests {
 			pamounts.add("2");
 			pamounts.add("3");
 			String mid = "skarns23";
-			log.info(cService.CartInsert(pids,pamounts, mid));
-		}catch (Exception e) {
+			log.info(cService.CartInsert(pids, pamounts, mid));
+		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
+	}
+	
+	@Test
+	public void getCarts() throws Exception{
+		try {
+			CartDTO cDTO = cService.getCarts("skarns23");
+			cDTO.getPLists().forEach(item -> log.info(item));
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			throw e;
 		}
+	}
 }
