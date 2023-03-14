@@ -1,12 +1,10 @@
 package com.hart.zuik.mapper;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.hart.domain.CartInsertDTO;
+import com.hart.domain.cart.CartInsertDTO;
 import com.hart.mapper.CartMapper;
 
 import lombok.extern.log4j.Log4j2;
@@ -34,5 +32,10 @@ public class CartMapperTests {
 	public void isExistProduct() throws Exception{
 		log.info(cMapper.isExistProduct(""
 				+ ""));
+	}
+	
+	@Test
+	public void getProducts() throws Exception{
+		cMapper.getProducts("skarns23").forEach(item -> log.info(item));
 	}
 }

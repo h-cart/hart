@@ -23,4 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM live_class
 		WHERE lcid = #{lcid}
 	</select>
+	
+	<select id="getProducts" parameterType="string" resultType="CProductDTO">
+		SELECT pc.pid, pi.pimg, pc.pname, pc.pprice, pc.pdiscount, mcamount
+		FROM pcart pc JOIN product_img pi on pc.pid = pi.pid and pdepth=0
+	</select>
 </mapper>

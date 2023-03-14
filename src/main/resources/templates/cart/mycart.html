@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta charset="UTF-8" />
 <meta name="description" content="Male_Fashion Template" />
 <meta name="keywords" content="Male_Fashion, unica, creative, html" />
@@ -32,6 +34,24 @@
 <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css" />
 <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
 <link rel="stylesheet" href="/css/style.css" type="text/css" />
+<style>
+.price-box h5, .price-box h6 {
+  display: inline-block;
+  margin: 0;
+}
+
+.product__cart__item__text {
+  overflow: hidden;
+}
+.product__cart__item__text .cost {
+  color: #999; /* 회색으로 표시 */
+  font-size: 0.8em; /* 작게 보이도록 설정 */
+  text-decoration: line-through; /* 선 그어지도록 설정 */
+}
+
+
+
+</style>
 </head>
 
 <body>
@@ -172,7 +192,7 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="pbody">
 								<tr>
 									<td class="product__cart__item">
 										<div class="product__cart__item__pic">
@@ -672,5 +692,76 @@
 	<script type="text/javascript" src="/js/mixitup.min.js"></script>
 	<script type="text/javascript" src="/js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>
+
+
+	<script>
+	 function numberWithCommas(x) {
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	function CartList(){
+		$.ajax({
+			url : '/capi/get',
+			type : 'post',
+			contentType : 'application/json',
+			beforeSend : function(xhr){
+        		xhr.setRequestHeader(header,token);
+        	},
+        	success : function(result){
+        		console.log(result.result.plists);
+        		str = "";
+        		var plist = result.result.plists;
+        		for(var i=0;i<result.result.plists.length;i++){
+        			var price = plist[i].pprice;
+        			if(plist[i].pdiscount!=0){
+        				price = price - plist[i].pprice*(plist[i].pdiscount/100);
+        			}
+        			str+="<tr><td class='product__cart__item'><div class='product__cart__item__pic'><img src='"+plist[i].pimg+"' alt='' style='width:90px; height:90px;'/>"
+        			str+="</div><div class='product__cart__item__text'><h6>"+plist[i].pname+"</h6>"
+        			str+="<span class='price-box'><h5 class='price'data-value='"+i+"' value='"+price+"'>₩"+numberWithCommas(price)+"</h5>"
+        			if(plist[i].pdiscount!=0){
+        				str+="    <h6 class='cost' data-value='"+i+"' value='"+plist[i].pprice+"'>₩"+numberWithCommas(plist[i].pprice)+"</h6>";
+        			}
+        			str+="</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'><span data-value="+i+" class='fa fa-angle-left dec qtybtn btn_minus'></span><input id='quantity_"+i+"'type='text' value='"+plist[i].mcamount+"' /><span data-value="+i+" class='fa fa-angle-right inc qtybtn btn_plus'></span>"
+        			str+="</div></div></td><td class='cart__price' id='cprice_"+i+"'>₩"+numberWithCommas(plist[i].pprice*plist[i].mcamount)+"</td>"
+        			str+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
+        		}
+        		$(".pbody").html(str);
+        	},
+        	error : function(err, xhr, status){
+        		console.log(err);
+        	}
+		})
+	}	
+	$(document).on("click",".btn_minus",function(){
+		
+		var pos = $(this).data('value');
+		var quantity = $("#quantity_"+pos).val();
+		if(quantity ==1){
+			alert('1개 이하로 수량을 조절할 수 없습니다.');
+			return;
+		}
+		$("#quantity_"+pos).val(+quantity-1);
+		
+	})
+	
+		$(document).on("click",".btn_plus",function(){
+		
+		var pos = $(this).data('value');
+		var quantity = $("#quantity_"+pos).val();
+		console.log(pos);
+		if(+quantity+1 >=3){
+			alert('3개 이상 상품 주문 불가능');
+			return;
+		}
+		$("#quantity_"+pos).val(+quantity+1);
+		
+		
+	})
+	$(document).ready(function(){
+			CartList();
+		})
+	</script>
 </body>
 </html>
