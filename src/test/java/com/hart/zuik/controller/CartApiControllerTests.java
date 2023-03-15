@@ -64,6 +64,23 @@ public class CartApiControllerTests {
     System.out.println(responseJson);
   }
   
+  @Test
+  public void removeCarts() throws Exception  {
+    
+    Map<String, List<String>> requestBody = new HashMap<>();
+    List<String> pids = new ArrayList<>();
+    pids.add("S02103036855");
+    pids.add("S02203100153");
+    requestBody.put("pids", pids);
+    String json = new Gson().toJson(requestBody);
+    MvcResult result = mockMvc.perform(post("/capi/removes")
+    		.with(csrf())
+    		.content(json)
+    		.contentType(MediaType.APPLICATION_JSON_VALUE))
+    .andExpect(status().isOk()).andReturn();
+    String responseJson = result.getResponse().getContentAsString();
+    System.out.println(responseJson);
+  }
 }
 
 

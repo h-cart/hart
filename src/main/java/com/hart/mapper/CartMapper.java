@@ -18,4 +18,8 @@ public interface CartMapper {
 	int isExistClass(String lcid)throws SQLException;
 	List<CProductDTO> getProducts(String mid)throws SQLException;
 	List<CClassDTO> getClasss(String mid)throws SQLException;
+	int updateAmount(@Param("cDTO")CartInsertDTO cDTO, @Param("mid")String mid) throws SQLException;
+	int removeCart(@Param("pids")List<String> pids, @Param("mid")String mid) throws SQLException;
+	
+	
 }

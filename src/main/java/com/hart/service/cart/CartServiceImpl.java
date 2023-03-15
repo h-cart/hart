@@ -46,6 +46,16 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
+	public int updateAmount(CartInsertDTO cDTO, String mid) throws Exception {
+		try {
+			return cMapper.updateAmount(cDTO, mid);
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			throw e;
+		}
+	}
+
+	@Override
 	public CartDTO getCarts(String mid) throws Exception {
 		
 		try {
@@ -53,6 +63,17 @@ public class CartServiceImpl implements CartService {
 							.pLists(cMapper.getProducts(mid))
 							.build();
 			return cDTO;
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public int deleteProducts(List<String> pids, String mid) throws Exception {
+		try {
+			return cMapper.removeCart(pids, mid);
 		}catch (Exception e) {
 			log.info(e.getMessage());
 			throw e;

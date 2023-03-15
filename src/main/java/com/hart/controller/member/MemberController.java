@@ -40,7 +40,7 @@ public class MemberController {
 
 		model.addAttribute("user", clubAuthMemberDTO);
 		model.addAttribute("roles", ((UsernamePasswordAuthenticationToken) clubAuthMemberDTO.getAuthorities()).getAuthorities());
-		return "/admin";
+		return "/admin";                                                                                                                                                                                                      
 	}
 
 }

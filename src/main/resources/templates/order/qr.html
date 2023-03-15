@@ -3,12 +3,14 @@
 <head>
 <title>QR Code Scanner</title>
 <meta charset="UTF-8" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
 <link rel="stylesheet" href="/includes/styles.css" />
 <script
 	src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
-
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 <style>
 html {
 	height: 100%;
@@ -83,7 +85,8 @@ h1 {
 	</div>
 
 	<script>
-
+	const token = $("meta[name='_csrf']").attr("content");
+	const header = $("meta[name='_csrf_header']").attr("content");
 	const video = document.createElement("video");
 	const canvasElement = document.getElementById("qr-canvas");
 	const canvas = canvasElement.getContext("2d");
@@ -95,22 +98,41 @@ h1 {
 	let scanning = false;
 
 	qrcode.callback = res => {
-	  if (res) {
-	    outputData.innerText = res;
-	    // 이 줄에 사용자 그 스캔한 데이터 관련으로 들어갑니다
-	    console.log(res);
-	    location.href = "/order/test";
-	    scanning = false;
-
-	    video.srcObject.getTracks().forEach(track => {
-	      track.stop();
-	    });
-
-	    qrResult.hidden = false;
-	    canvasElement.hidden = true;
-	    btnScanQR.hidden = false;
-	  }
-	};
+		  if (res) {
+		    outputData.innerText = res;
+		    console.log(res); // 전체 객체 출력
+		    
+		    //location.href = "/order/test";
+		    scanning = false;
+		    video.srcObject.getTracks().forEach(track => {
+		      track.stop();
+		    });
+		    qrResult.hidden = false;
+		    canvasElement.hidden = true;
+		    btnScanQR.hidden = false;
+		    pids = [];
+		    pids.push(res);
+		    pamounts = [];
+		    pamounts.push(1);
+		    $.ajax({
+		    	url : '/capi/insert',
+				beforeSend : function(xhr){
+	        		xhr.setRequestHeader(header,token);
+	        	},
+	        	type : 'post',
+	        	contentType : "application/json",
+	        	data : JSON.stringify({
+	        		pids : pids,
+	        		pamounts : pamounts
+	        	}),
+	        	success : function(result){
+	        		console.log(result);
+	        	},error : function(err, xhr, status){
+	        		console.log(err)
+	        	}
+		    })
+		  }
+		};
 
 	btnScanQR.onclick = () => {
 	  console.log(navigator.mediaDevices);
