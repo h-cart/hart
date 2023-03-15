@@ -18,7 +18,7 @@
 	<select id="findByEmail"
 		resultType="com.hart.domain.member.ClubMember2">
 		select
-		mid, mname, mpassword, social,mroles
+		mid, mname, mpassword, social,mroles,csno
 		from members m
 		where m.mid= #{mid} and m.social = #{social}
 	</select>

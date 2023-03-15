@@ -26,6 +26,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getProducts" parameterType="string" resultType="CProductDTO">
 		SELECT pc.pid, pi.pimg, pc.pname, pc.pprice, pc.pdiscount, mcamount
-		FROM pcart pc JOIN product_img pi on pc.pid = pi.pid and pdepth=0
+		FROM pcart pc JOIN product_img pi on pc.pid = pi.pid and pdepth=0 and mid = #{mid}
 	</select>
+	
+	<update id="updateAmount" parameterType="CartInsertDTO">
+		UPDATE my_cart set mcamount = #{cDTO.pamount} WHERE pid = #{cDTO.pid} and mid = #{mid}
+	</update>
+	
+	<delete id="removeCart" parameterType="java.util.List">
+		 DELETE FROM my_cart 
+    <where>
+    	mid = #{mid}
+    <foreach collection="pids" item="item" open="AND" close="" separator="OR">
+        (pid = #{item})
+    </foreach>
+    </where>
+	</delete>
+	
 </mapper>

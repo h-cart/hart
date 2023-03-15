@@ -8,51 +8,123 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.cart.CartDTO;
+import com.hart.domain.cart.CartInsertDTO;
+import com.hart.domain.member.ClubAuthMemberDTO;
+import com.hart.domain.share.ShareDTO;
 import com.hart.service.cart.CartService;
+import com.hart.service.share.ShareService;
+
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/capi")
+@Log4j2
 public class CartRestController {
-	
+
 	@Autowired
 	private CartService cService;
+
+	@Autowired
+	private ShareService sService;
 	
-	
-	@PostMapping(value="/insert", consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Map<String,String>> insertCart(@RequestBody Map<String,List<String>> map){
-		String mid = "skarns23";
-		Map<String,String> result = new HashMap<>();
+	@PostMapping(value = "/insert", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String, String>> insertCart(@RequestBody Map<String, List<String>> map,
+			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+		String mid = mDTO ==null?"skarns23@gmail.com" : mDTO.getMid();
+		Map<String, String> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
 			cService.CartInsert(pids, pamounts, mid);
 			result.put("result", "success");
-			return new ResponseEntity<Map<String,String>>(result,HttpStatus.OK);
-			
-		}catch (Exception e) {
+			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
+
+		} catch (Exception e) {
 			result.put("result", e.getMessage());
-			return new ResponseEntity<Map<String,String>>(result,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@PostMapping(value="/get",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Map<String,CartDTO>> getCarts(){
-		String mid = "skarns23";
-		Map<String,CartDTO> map = new HashMap<>();
+
+	@PostMapping(value = "/get", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String, CartDTO>> getCarts(@AuthenticationPrincipal ClubAuthMemberDTO cDTO) {
+		String mid = cDTO.getMid();
+		Map<String, CartDTO> map = new HashMap<>();
 		try {
 			map.put("result", cService.getCarts(mid));
-			return new ResponseEntity<Map<String,CartDTO>>(map,HttpStatus.OK);
-		}catch (Exception e) {
-			map.put("result",null);
-			return new ResponseEntity<Map<String,CartDTO>>(map,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, CartDTO>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			map.put("result", null);
+			return new ResponseEntity<Map<String, CartDTO>>(map, HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	@PostMapping(value = "/updateAmount", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String, String>> updateAmount(@RequestBody CartInsertDTO cDTO,
+			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+		Map<String, String> map = new HashMap<>();
+		int result = -1;
+		try {
+			result = cService.updateAmount(cDTO, mDTO.getMid());
+		} catch (Exception e) {
+			log.info(e);
+			
+		}
+
+		String msg = result == 1 ? "success" : "fail";
+		map.put("result", msg);
+		return new ResponseEntity<Map<String, String>>(map, result == 1 ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+	}
+
+	@PostMapping(value = "/removes", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String, String>> removes(@RequestBody Map<String, List<String>> map,
+			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+		int count = 0;
+		String msg = "";
+		Map<String, String> result = new HashMap<>();
+		try {
+			// 공유 장바구니 없는 경우 일반 장바구니 삭제 로직 
+			if (mDTO.getCsno() == null) {
+				count = cService.deleteProducts(map.get("pids"), mDTO.getMid());
+				msg = "상품 삭제";
+			} else { // 공유 장바구니 있는 경우 공유 장바구니 삭제 로직 넣기
+				count = -1;
+				msg = "공유 상품 삭제";
+			}
+			result.put("result", msg);
+			return new ResponseEntity<Map<String,String>>(result,HttpStatus.OK);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			result.put("result", e.getMessage());
+			return new ResponseEntity<Map<String, String>>(result,HttpStatus.BAD_REQUEST);
+		}
+
+	}
 	
+	@PostMapping(value="/create",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Map<String,ShareDTO>> createShare (@AuthenticationPrincipal ClubAuthMemberDTO mDTO){
+		if(mDTO == null) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		try {
+			ShareDTO sDTO = sService.createCart(mDTO.getMid());
+			mDTO.setCsno(String.valueOf(sDTO.getCsno()));
+			Map<String,ShareDTO> map = new HashMap<>();
+			map.put("result", sDTO);
+			return new ResponseEntity<>(map,HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 }
