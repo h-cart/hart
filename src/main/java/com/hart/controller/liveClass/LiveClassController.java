@@ -1,0 +1,56 @@
+package com.hart.controller.liveClass;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.service.liveClass.LiveClassService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+/**
+ * @since : 2023. 3. 15.
+ * @FileName: LiveClassController.java
+ * @author : 함세강
+ * @설명 : LiveClass 관련 요청 처리 컨트롤러
+ * 
+ *     <pre>
+ *   수정일         수정자               수정내용
+ * ----------      --------    ---------------------------
+ * 2023. 3. 15.     함세강       LiveClassController 구현
+ *     </pre>
+ */
+@Controller
+@RequestMapping("/liveClass")
+@RequiredArgsConstructor
+@Log4j2
+public class LiveClassController {
+
+	private final LiveClassService service;
+	
+	@GetMapping("/detail")
+	public String getLiveClassListDetail(Model model) {
+		
+		log.info("getLiveClassListDetail 컨트롤러 호출");
+		
+		List<LiveClassListDTO> list = service.getList();
+		
+		return "liveClass/liveClassList";
+	}
+	
+	@GetMapping()
+	public String getLiveClassList(Model model) {
+		
+		log.info("getLiveClassList 컨트롤러 호출");
+		
+		List<LiveClassListDTO> list = service.getList();
+		
+		return "liveClass/liveClassList";
+	}
+	
+}
