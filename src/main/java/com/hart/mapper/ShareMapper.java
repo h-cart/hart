@@ -9,17 +9,19 @@ import org.apache.ibatis.annotations.Param;
 import com.hart.domain.cart.CClassDTO;
 import com.hart.domain.cart.CProductDTO;
 import com.hart.domain.cart.CartInsertDTO;
+import com.hart.domain.share.ShareDTO;
 
 @Mapper
-public interface CartMapper {
+public interface ShareMapper {
 	
-	int insertCarts(@Param("cDTO") CartInsertDTO cDTO,@Param("mid") String mid) throws SQLException;
-	int isExistProduct(String pid)throws SQLException;
-	int isExistClass(String lcid)throws SQLException;
+	int create(ShareDTO sDTO)throws SQLException;
+	ShareDTO getInfo(String mid)throws SQLException;
+	ShareDTO getInfoWithKey(ShareDTO sDTO)throws SQLException;
+	int ShareCsno(ShareDTO sDTO)throws SQLException;
+	
 	List<CProductDTO> getProducts(String mid)throws SQLException;
 	List<CClassDTO> getClasss(String mid)throws SQLException;
-	int updateAmount(@Param("cDTO")CartInsertDTO cDTO, @Param("mid")String mid) throws SQLException;
+	int updateAmount(@Param("cDTO")CartInsertDTO cDTO, @Param("csno")int csno) throws SQLException;
 	int removeCart(@Param("pids")List<String> pids, @Param("mid")String mid) throws SQLException;
-	
 	
 }
