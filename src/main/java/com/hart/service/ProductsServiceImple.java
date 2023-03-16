@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hart.domain.CategoryVO;
 import com.hart.domain.ProductsVO;
+import com.hart.domain.ProductsVO2;
 import com.hart.mapper.ProductsMapper;
 
 import lombok.extern.log4j.Log4j2;
@@ -24,5 +26,22 @@ public class ProductsServiceImple implements ProductsService {
 		
 		return productsmapper.getproductslist(productsVO);
 	}
-
+	
+	
+	
+	
+	@Override
+	public List<CategoryVO> getcategorybar(){
+		
+		return productsmapper.getcategorybar();
+	}
+	
+	
+	
+	@Override
+	public List<ProductsVO2> getcategoryproducts(ProductsVO2 products2){
+		
+		return productsmapper.getcategoryproducts(products2);
+	}
+	
 }

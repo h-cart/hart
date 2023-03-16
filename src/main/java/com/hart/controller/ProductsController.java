@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.annotation.RequestScope;
 
+import com.hart.domain.CategoryVO;
 import com.hart.domain.ProductsVO;
+import com.hart.domain.ProductsVO2;
 import com.hart.service.ProductsService;
 
 import lombok.extern.log4j.Log4j2;
@@ -24,13 +24,44 @@ public class ProductsController {
 	private ProductsService productsservice;
 
 	@GetMapping("/list")
-	public String productlist(@RequestParam(value = "pcno_top",required = false) int pcno_top, 
-								@RequestParam(value ="pcno",required = false) int pcno, 
-								Model model) {
+	public String productlist(Model model, ProductsVO productsVO) {
 
-		
+		List<CategoryVO> category = null;
+		List<ProductsVO> productlist = null;
+
+		try {
+			category = productsservice.getcategorybar();
+			productlist=productsservice.getProductList(productsVO);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		model.addAttribute("category", category);
+		model.addAttribute("productlist", productlist);
 		return "product/productList";
+	}
+	
+	
+	@GetMapping("/listpage")
+	public String productlistpage(Model model, ProductsVO2 cvo) {
+		List<ProductsVO2> category = null;
+		try {
+			category = productsservice.getcategoryproducts(cvo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "category";
+	}
 
+	
+	@GetMapping("productDetail")
+	public String ProductDtail() {
+		
+		
+		
+		
+		
+		return "product/productDetail";
 		
 	}
 	

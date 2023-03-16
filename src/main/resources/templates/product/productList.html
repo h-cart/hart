@@ -6,8 +6,9 @@
 <meta name="keywords" content="Male_Fashion, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Male-Fashion | Template</title>
-
+<title>HART</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
@@ -63,7 +64,7 @@
 					aria-hidden="true" role="menu">
 					<ul>
 						<li><a href="./index.html" role="menuitem">홈</a></li>
-						<li class="active"><a href="./shop.html" role="menuitem">상품</a></li>
+						<li class="active"><a href="./shop.html" role="menuitem">베스트</a></li>
 						<li><a href="./blog.html" role="menuitem">레시피</a></li>
 						<li><a href="./contact.html" role="menuitem">라이브클래스</a></li>
 					</ul>
@@ -210,34 +211,24 @@
 						<a href="./index.html"><img src="img/logo.png" alt=""></a>
 					</div>
 				</div>
-				
+
 				<div class="col-lg-6 col-md-6">
 					<nav class="header__menu mobile-menu">
-					
+
 						<ul>
+							<!-- 카테고리 리스트 목록 타임리프 -->
 							<li><a href="#">카테고리<img src="list.svg" /></a>
-								<ul class="dropdown">
-									<li></li>
-									
-								
-								
-									<li><a href="">과일과 채소</a></li>
-									<li><a href="">곡물과 견과류</a></li>
-									<li><a href="">생선과 해산물</a></li>
-									<li><a href="/product/list?pcategory='육류'">육류</a></li>
-									<li><a href="./shop.html">밥과 국면</a></li>
-									<li><a href="./shop.html">밑반찬과 간식</a></li>
-									<li><a href="./shop.html">양념과 오일, 통조림</a></li>
-									<li><a href="./shop.html">베이커리와 치즈</a></li>
-									<li><a href="./shop.html">밥과 국면</a></li>
-									<li><a href="">과자와 초콜릿</a></li>
-									<li><a href="./shop.html">물과 우유, 커피 음료</a></li>
-									<li><a href="./shop.html">홍삼과 비타민, 영양제</a></li>
-									<li><a href="./shop.html">생활용품</a></li>
+
+								<ul class="dropdown" id="listbig">
+				
+
 								</ul></li>
+
+
 							<li><a href="./index.html">홈</a></li>
 							<li><a href="./shop.html">상품</a></li>
 							<li><a href="./shop.html">레시피</a></li>
+
 						</ul>
 					</nav>
 				</div>
@@ -264,7 +255,9 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb__text">
-						<h4></h4>
+					
+					<h4>카테고리</h4>
+					
 						<div class="breadcrumb__links">
 							<a href="./index.html">Home</a> <span>Shop</span>
 						</div>
@@ -292,9 +285,15 @@
 						<div class="shop__sidebar__accordion">
 							<div class="accordion" id="accordionExample">
 								<div class="card">
-									<div class="card-heading">
+								
+									<div class="card-heading" id="listbig">
+									
 										<a data-toggle="collapse" data-target="#collapseOne">카테고리</a>
+										
 									</div>
+									
+									
+									
 									<div id="collapseOne" class="collapse show"
 										data-parent="#accordionExample">
 										<div class="card-body">
@@ -306,18 +305,14 @@
 													<li><a href="#">돼지고기</a></li>
 													<li><a href="#">닭고기</a></li>
 
-
 													<li></li>
-
-
-
 												</ul>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="card">
-									<div class="card-heading">
+									<!-- <div class="card-heading">
 										<a data-toggle="collapse" data-target="#collapseTwo">브랜드</a>
 									</div>
 									<div id="collapseTwo" class="collapse show"
@@ -332,7 +327,7 @@
 												</ul>
 											</div>
 										</div>
-									</div>
+									</div> -->
 								</div>
 
 
@@ -375,41 +370,41 @@
 
 					<div class="row">
 						<!-- <tr th:each="products : ${products}"> -->
-							<!-- <tr th:if="${not #lists.isEmpty(products)}" th:each="dto,dtostate:${products}"> -->
-							<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item">
-									<div class="product__item__pic set-bg"
-										data-setbg="https://tohomeimage.thehyundai.com/PD/PDImages/S/2/1/1/8803630600112_01.jpg?RS=720x864"
-										style="background-image: url(&quot;https://tohomeimage.thehyundai.com/PD/PDImages/S/2/1/1/8803630600112_01.jpg?RS=720x864&quot;);">
-										<ul class="product__hover">
-											<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-											<li><a href="#"><img src="img/icon/compare.png"
-													alt=""> <span>Compare</span></a></li>
-											<li><a href="#"><img src="img/icon/search.png"
-													alt=""></a></li>
-										</ul>
-									</div>
-									<div class="product__item__text">
-										<h6>
-											한우소</td>
-										</h6>
-										<a href="#" class="add-cart">+ Add To Cart</a>
+						<!-- <tr th:if="${not #lists.isEmpty(products)}" th:each="dto,dtostate:${products}"> -->
 
-										<h5>
-											6666</td>원
-										</h5>
-										<div class="product__color__select">
-											<label for="pc-4"> <input type="radio" id="pc-4">
-											</label> <label class="active black" for="pc-5"> <input
-												type="radio" id="pc-5">
-											</label> <label class="grey" for="pc-6"> <input type="radio"
-												id="pc-6">
-											</label>
-										</div>
+						<div class="col-lg-4 col-md-6 col-sm-6" th:each="productlist : ${productlist}">
+							<div class="product__item" th:each="${}">
+								<div class="product__item__pic set-bg"
+									th:data-setbg="${productlist.pimg}"
+									style="background-image: url(&quot;https://tohomeimage.thehyundai.com/PD/PDImages/S/2/1/1/8803630600112_01.jpg?RS=720x864&quot;);">
+									<ul class="product__hover">
+										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
+										<li><a href="#"><img src="img/icon/compare.png"
+												alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+									</ul>
+								</div>
+								<div class="product__item__text">
+									<h6>
+										<td th:text="${productlist.pname}">
+									</h6>
+									<a href="#" class="add-cart">+ Add To Cart</a>
+
+									<h5>
+										<td th:text="${productlist.pprice}+ '원' ">
+									</h5>
+									<div class="product__color__select">
+										<label for="pc-4"> <input type="radio" id="pc-4">
+										</label> <label class="active black" for="pc-5"> <input
+											type="radio" id="pc-5">
+										</label> <label class="grey" for="pc-6"> <input type="radio"
+											id="pc-6">
+										</label>
 									</div>
 								</div>
 							</div>
-						
+						</div>
+
 					</div>
 
 					<div class="row">
@@ -759,8 +754,36 @@
 		}
 		// ]]>
 	</script>
-
-
+	<!-- csrf -->
+	<script>	
+	$(document).ready(function(){
+		  $.ajax({
+		    type : "get",
+		    url : "/papi/clist",
+		    contentType : "application/json",
+		    success : function(data) {
+		      console.log("성공");
+		      
+		      let str="";
+		      for (var i = 0; i < data.result.length; i++) {
+		        console.log("number" + i + ": " + data.result[i].pcategory);
+		        str += `
+		        	<li>
+		        	  <a href="/product/list?pcno=${data.result[i].pcno}" tableindex="">${data.result[i].pcategory}</a>
+		        	</li>
+					`;
+		      }
+		      console.log(str);
+		      
+		      $("#listbig").append(str);
+		    },
+		    error : function() {
+		      console.log("실패");
+		    }
+		  });
+		});
+		
+	</script>
 </body>
 
 </html>
