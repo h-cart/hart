@@ -860,6 +860,7 @@
 				},
 				success : function(result){
 					console.log(result);
+					location.href = '/cart/share/'+result.result.csno;
 				},error : function(err, xhr, status){
 					console.log(err.status);
 				}

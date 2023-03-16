@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hart.domain.cart.CartInsertDTO;
 import com.hart.domain.share.ShareDTO;
 import com.hart.mapper.ShareMapper;
 
@@ -42,6 +43,27 @@ public class ShareServiceImpl implements ShareService{
 			throw e;
 		}
 	}
+
+	@Override
+	public ShareDTO getInfoWithKey(ShareDTO sDTO) throws Exception {
+		try {
+			return sMapper.getInfoWithKey(sDTO);
+		}catch (Exception e) {
+			throw e;
+		}
+	}
+
+	@Override
+	public int update(CartInsertDTO cDTO, int csno) throws Exception {
+		try {
+			return sMapper.updateAmount(cDTO, csno);
+		}catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	
+	
 	
 
 }

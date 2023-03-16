@@ -4,18 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hart.mapper.ShareMapper">
-<!-- 	<update id="create" parameterType="ShareDTO">
-		begin
-			INSERT INTO cart_share(csno,cskey,mid)
-			VALUES (cs_seq.nextval, #{cskey},#{mid});
-			
-			UPDATE members SET
-			csno = (SELECT csno FROM cart_share WHERE mid=#{mid}) WHERE mid = #{mid};
-		END;
-		
-	</update> -->
-	
-<insert id="create" parameterType="ShareDTO">
+	<!-- <update id="create" parameterType="ShareDTO"> begin INSERT INTO cart_share(csno,cskey,mid) 
+		VALUES (cs_seq.nextval, #{cskey},#{mid}); UPDATE members SET csno = (SELECT 
+		csno FROM cart_share WHERE mid=#{mid}) WHERE mid = #{mid}; END; </update> -->
+
+	<insert id="create" parameterType="ShareDTO">
     <![CDATA[
     BEGIN
         INSERT INTO cart_share (
@@ -33,23 +26,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE mid = #{mid};
     END;
     ]]>
-</insert>
+	</insert>
 
-<select id="getInfo" parameterType="string" resultType="ShareDTO">
-	SELECT csno,cskey,mid
-	FROM cart_share
-	WHERE csno = (SELECT csno FROM members WHERE mid= #{mid})
-</select>
-
-
-
-
-
+	<select id="getInfo" parameterType="string"
+		resultType="ShareDTO">
+		SELECT csno,cskey,mid
+		FROM cart_share
+		WHERE csno = (SELECT
+		csno FROM members WHERE mid= #{mid})
+	</select>
 	
+	<select id="getInfoWithKey" parameterType="ShareDTO"
+		resultType="ShareDTO">
+		SELECT csno,cskey,mid
+		FROM cart_share
+		WHERE csno = #{csno} and cskey = #{cskey}
+	</select>
+
+
 	<update id="ShareCsno" parameterType="ShareDTO">
-		UPDATE members 
-		SET csno = (SELECT csno FROM cart_share WHERE csno = #{csno} AND cskey = #{cskey}) 
+		UPDATE members
+		SET csno =
+		(SELECT csno FROM cart_share WHERE csno = #{csno} AND cskey =
+		#{cskey})
 		WHERE mid = #{mid}
 	</update>
-	
+	<update id="updateAmount" parameterType="CartInsertDTO">
+		UPDATE share_products set
+		camount = #{cDTO.pamount} WHERE pid = #{cDTO.pid} and csno = #{csno}
+	</update>
 </mapper>

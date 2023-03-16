@@ -544,6 +544,7 @@
 	<!-- Search End -->
 
 	<dialog>
+	<input type = 'hidden' th:value="${csno}" id='csno'>
 	<div class="container">
 		<h2>장바구니에 담겼습니다</h2>
 		<div class="shopping__cart__table">
@@ -894,5 +895,20 @@
 		        })
 			};
 	</script>
+	
+	
+	<script type="text/javaScript">
+	const sse = new EventSource("/capi/sse/"+$("#csno").val());
+	sse.addEventListener('connect', (e) => {
+		const { data: receivedConnectData } = e;
+		console.log('connect event data: ',receivedConnectData);  // "connected!"
+	});
+	
+	sse.addEventListener('update', e => {  
+	    const { data: receivedCount } = e;  
+	    console.log("count event data",receivedCount);  
+	    CartList();
+	});
+</script>
 </body>
 </html>
