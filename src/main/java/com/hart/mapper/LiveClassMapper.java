@@ -3,6 +3,7 @@ package com.hart.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.hart.domain.liveClass.LiveClassListDTO;
 
@@ -21,7 +22,9 @@ import com.hart.domain.liveClass.LiveClassListDTO;
 
 @Mapper
 public interface LiveClassMapper {
-
-	List<LiveClassListDTO> getLiveList();
+	//라이브 클래스 목록 불러오기
+	public List<LiveClassListDTO> getLiveList();
+	//라이브 클래스 상세 불러오기
+	public LiveClassListDTO getDetail(@Param("lcid") String lcid);
 	
 }

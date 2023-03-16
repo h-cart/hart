@@ -19,11 +19,18 @@ public class LiveClassServiceImpl implements LiveClassService{
 	
 	@Override
 	public List<LiveClassListDTO> getList() {
-		
 		log.info("getList 서비스 호출");
-		
 		List<LiveClassListDTO> list = mapper.getLiveList();
+		log.info(list);
 		return list;
+	}
+
+	@Override
+	public LiveClassListDTO getClassDetail(String lcid) {
+		log.info("getClassDetail 서비스 호출");
+		LiveClassListDTO dto = mapper.getDetail(lcid);
+		log.info(dto);
+		return dto;
 	}
 
 }

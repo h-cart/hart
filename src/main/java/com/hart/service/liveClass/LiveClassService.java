@@ -19,5 +19,6 @@ import com.hart.domain.liveClass.LiveClassListDTO;
 public interface LiveClassService {
 
 	public List<LiveClassListDTO> getList();
+	public LiveClassListDTO getClassDetail(String lcid);
 	
 }
