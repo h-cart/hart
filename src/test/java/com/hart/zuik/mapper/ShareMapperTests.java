@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.hart.domain.cart.CartInsertDTO;
 import com.hart.domain.share.ShareDTO;
 import com.hart.mapper.ShareMapper;
 
@@ -43,4 +44,17 @@ public class ShareMapperTests {
 		ShareDTO sDTO = sMapper.getInfo("skarns23@gmail.com");
 		log.info(sDTO);
 		}
+	@Test
+	public void getInfoWithKey() throws Exception{
+		ShareDTO sDTO = sMapper.getInfoWithKey(ShareDTO.builder()
+												.csno(24)
+												.cskey("0owuam76ka7kob8VFhqM")
+												.build());
+		log.info(sDTO);
+	}
+	
+	@Test
+	public void update() throws Exception{
+		sMapper.updateAmount(CartInsertDTO.builder().pid("S02006004332").pamount(3).build(), 23);
+	}
 }
