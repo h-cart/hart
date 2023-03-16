@@ -8,10 +8,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-	<select id="getproductslist" resultType="com.hart.domain.ProductsVO">
-	select *from product_category
-	where pcno_top is null;
+	<select id="getproductslist"
+		resultType="com.hart.domain.ProductsVO">
 	
+		 select * from
+        (select p.pname, p.pprice, p.pdiscount, p.pcno, p.pid ,p.stag, pc.pcategory, pcno_top
+		from products p 
+		join product_category pc
+		on p.pcno = pc.pcno
+		where pc.pcno_top= #{pcno}) pd 
+        join product_img pi 
+        on pd.pid = pi.pid 
+        where pdepth = 0
+		
+	</select>
+
+
+	<select id="getcategorybar"
+		resultType="com.hart.domain.CategoryVO">
+		select *
+		from
+		product_category
+	where pcno_top is null 
+
+	</select>
+
+
+	<select id="getcategoryproducts"
+		resultType="com.hart.domain.ProductsVO2">
+
+		select pc.pcno, pc.pcategory ,p.pid,p.pname,p.pprice,p.pdiscount
+		from product_category pc join products p on pc.pcno=p.pcno
+		where pcno_top=#{pcno}
+
 	</select>
 
 </mapper>

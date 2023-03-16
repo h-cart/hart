@@ -19,6 +19,7 @@ public class ProductsVO {
 	int pdiscount;
 	String ptitle;
 	String pcategory;
+	String pimg;
 }
 
 
