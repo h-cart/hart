@@ -8,17 +8,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getproductslist"
 		resultType="com.hart.domain.ProductsVO">
-	
-		 select * from
-        (select p.pname, p.pprice, p.pdiscount, p.pcno, p.pid ,p.stag, pc.pcategory, pcno_top
-		from products p 
+
+		select * from
+		(select p.pname, p.pprice, p.pdiscount, p.pcno, p.pid ,p.stag, pc.pcategory,
+		pcno_top
+		from products p
 		join product_category pc
 		on p.pcno = pc.pcno
-		where pc.pcno_top= #{pcno}) pd 
-        join product_img pi 
-        on pd.pid = pi.pid 
-        where pdepth = 0
-		
+		where pc.pcno_top= #{pcno}) pd
+		join product_img pi
+		on pd.pid = pi.pid
+		where pdepth = 0
+
 	</select>
 
 
@@ -27,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *
 		from
 		product_category
-	where pcno_top is null 
+		where pcno_top is null
 
 	</select>
 
@@ -35,12 +36,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getcategoryproducts"
 		resultType="com.hart.domain.ProductsVO2">
 
-		select pc.pcno, pc.pcategory ,p.pid,p.pname,p.pprice,p.pdiscount
-		from product_category pc join products p on pc.pcno=p.pcno
+		select pc.pcno, pc.pcategory
+		,p.pid,p.pname,p.pprice,p.pdiscount
+		from product_category pc join
+		products p on pc.pcno=p.pcno
 		where pcno_top=#{pcno}
 
 
 	</select>
+
+
+	<select id="getproductDetail"
+		resultType="com.hart.domain.ProductsVO">
+		SELECT pd.pid, pd.porigin, pd.pcount, pd.pdetail, pd.pbname,
+		pd.pbsmall, pd.pbdesc, pd.pname, pd.pprice, pd.pcno,
+		pd.stag, pd.pdiscount, pd.ptitle
+		FROM products pd
+		
+
+		WHERE pd.pid=#{pid}
+
+
+	</select>
+
+	<select id="getproductDetailimg"
+		resultType="com.hart.domain.ProductsVO">
+    select * from product_img
+        where pid = #{pid}
+        order by pdepth;
+        </select>
 
 </mapper>
 
