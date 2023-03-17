@@ -8,7 +8,7 @@
 <meta name="keywords" content="Male_Fashion, unica, creative, html" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Male-Fashion | Template</title>
+<title>공유 장바구니</title>
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -36,19 +36,19 @@
 <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
 <link rel="stylesheet" href="/css/style.css" type="text/css" />
 <style>
-
 .product__cart__item__pic {
-  position: relative;
+	position: relative;
 }
 
 .checkbox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width : 22px;
-  height : 22px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 22px;
+	height: 22px;
 }
+
 .price-box h5, .price-box h6 {
 	display: inline-block;
 	margin: 0;
@@ -64,9 +64,13 @@
 	text-decoration: line-through; /* 선 그어지도록 설정 */
 }
 </style>
+
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 
 <body>
+	<input type='hidden' th:value="${csno}" id="csno">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -158,8 +162,10 @@
 					<div class="header__nav__option">
 						<a href="#" class="search-switch"><img
 							src="/img/icon/search.png" alt="" /></a> <a href="#"><img
-							src="/img/icon/heart.png" alt="" /></a> <a href="#"><img
-							src="/img/icon/cart.png" alt="" /> <span>0</span></a>
+							src="/img/icon/heart.png" alt="" /></a> <a id="kakao-link-btn"
+							href="javascript:kakaoShare()"> <img
+							src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" />
+						</a> </a><a href="#"><img src="/img/icon/cart.png" alt="" /> <span>0</span></a>
 						<div class="price">$0.00</div>
 					</div>
 				</div>
@@ -301,8 +307,8 @@
 												<tr>
 													<td class="product__cart__item">
 														<div class="product__cart__item__pic">
-															<input type="checkbox" class="checkbox">
-															<img src="/img/shopping-cart/cart-2.jpg" alt="" /></label> 
+															<input type="checkbox" class="checkbox"> <img
+																src="/img/shopping-cart/cart-2.jpg" alt="" /></label>
 														</div>
 														<div class="product__cart__item__text">
 															<h6>라이브 클래스 명</h6>
@@ -543,8 +549,7 @@
 	</div>
 	<!-- Search End -->
 
-	<dialog>
-	<input type = 'hidden' th:value="${csno}" id='csno'>
+	<dialog> <input type='hidden' th:value="${csno}" id='csno'>
 	<div class="container">
 		<h2>장바구니에 담겼습니다</h2>
 		<div class="shopping__cart__table">
@@ -767,6 +772,13 @@
 		deleteBtnEvent(pid);
 		
 	})
+	function calTotal(pos,pamount){
+		$("#quantity_"+pos).val(pamount);
+		var tprice = $("#price_"+pos).data('value')*pamount;
+		$("#cprice_"+pos).data('value',tprice);
+		$("#cprice_"+pos).text('₩'+numberWithCommas(tprice));
+		getCheckboxValue();
+	}
 	function updateAmount(pid, pamount,pos){
 		$.ajax({
 			url : '/capi/updateAmount',
@@ -780,12 +792,7 @@
         		xhr.setRequestHeader(header,token);
         	},
         	success : function(result){
-        		console.log(result);
-        		$("#quantity_"+pos).val(pamount);
-        		var tprice = $("#price_"+pos).data('value')*pamount;
-        		$("#cprice_"+pos).data('value',tprice);
-        		$("#cprice_"+pos).text('₩'+numberWithCommas(tprice));
-        		getCheckboxValue();
+				calTotal(pos,pamount);
         	},
         	error : function(err,xhr,status){
         		console.log(err);
@@ -873,8 +880,6 @@
 				for(var i =0;i<pids.length;i++){
 			       	cartDTOList.push(pids[i]);
 				}
-				cartDTOList.push("S02105049300");
-				console.log(cartDTOList);
 		    	
 		    	$.ajax({
 		        	url : '/capi/removes',
@@ -887,7 +892,9 @@
 		        		xhr.setRequestHeader(header,token);
 		        	},success : function(data){
 		        		console.log(data);
-		        		CartList();
+		        		for(var pid of cartDTOList){
+		        			$("#"+pid).remove();
+		        		}
 		        	}, error : function(e){
 		        		console.log(e);
 		        	}
@@ -895,8 +902,8 @@
 		        })
 			};
 	</script>
-	
-	
+
+
 	<script type="text/javaScript">
 	const sse = new EventSource("/capi/sse/"+$("#csno").val());
 	sse.addEventListener('connect', (e) => {
@@ -904,11 +911,68 @@
 		console.log('connect event data: ',receivedConnectData);  // "connected!"
 	});
 	
+	
+	/* 공유 장바구니 수량 변경 발생 시 이벤트를 받아, 화면 처리  */
 	sse.addEventListener('update', e => {  
-	    const { data: receivedCount } = e;  
-	    console.log("count event data",receivedCount);  
-	    CartList();
+	    const { data: receivedUpdate} = e;
+		let json = JSON.parse(receivedUpdate);
+		let uid = json.pid;
+		let amount = json.pamount;
+		let pos = $("[data-value="+uid+"]").prop("id");
+		console.log(uid, amount, pos);
+		$("#quantity_"+pos).val(amount);
+		calTotal(pos,amount);
+	    
+	});
+	
+	/* 공유 장바구니 상품 삭제 시 이벤트를 받아 화면 처리  */
+	sse.addEventListener('remove', e => {  
+	    const { data: receivedRemoves} = e;
+	    console.log(receivedRemoves);
+		let pids = JSON.parse(receivedRemoves);
+		console.log(pids);
+		for(var pid of pids){
+			$("[data-value="+pid+"]").remove();
+		}
+		getCheckboxValue();
+		
+	    
 	});
 </script>
+
+<script type="text/javascript">
+  // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init('26c618ece5bb5f3d4fd7d428c0f0e7d7');
+
+  // SDK 초기화 여부를 판단합니다.
+  console.log(Kakao.isInitialized());
+
+  function kakaoShare() {
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: 'HCART와 함께하는 쇼핑',
+        description: '공유 장바구니로 하나되어 하는 쇼핑',
+        imageUrl: '/img/logo.png',
+        link: {
+            mobileWebUrl: 'https://localhost/cart/mycart',
+            webUrl: 'https://localhost/cart/mycart',
+          },
+      },
+      buttons: [
+        {
+          title: '공유 요청 확인하기',
+          link: {
+            mobileWebUrl: 'https://localhost/cart/mycart',
+            webUrl: 'https://localhost/cart/mycart',
+          },
+        },
+      ],
+      // 카카오톡 미설치 시 카카오톡 설치 경로이동
+      installTalk: true,
+    })
+  }
+</script>
+
 </body>
 </html>

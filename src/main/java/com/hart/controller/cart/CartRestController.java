@@ -48,12 +48,18 @@ public class CartRestController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, String>> insertCart(@RequestBody Map<String, List<String>> map,
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-		String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
+		
 		Map<String, String> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
-			cService.CartInsert(pids, pamounts, mid);
+			if(mDTO.getCsno()!=null) {
+				sService.CartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
+				//sseEmitters.update(mDTO.getCsno(),cDTO);
+			}else {
+				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
+				cService.CartInsert(pids, pamounts, mid);
+			}
 			result.put("result", "success");
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
 
@@ -65,11 +71,12 @@ public class CartRestController {
 
 	@PostMapping(value = "/get", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, CartDTO>> getCarts(@AuthenticationPrincipal ClubAuthMemberDTO cDTO) {
-		String mid = cDTO.getMid();
+	public ResponseEntity<Map<String, CartDTO>> getCarts(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+		
 		Map<String, CartDTO> map = new HashMap<>();
 		try {
-			map.put("result", cService.getCarts(mid));
+			if(mDTO.getCsno()==null) map.put("result", cService.getCarts(mDTO.getMid()));
+			else map.put("result", sService.getCarts(mDTO.getCsno()));
 			return new ResponseEntity<Map<String, CartDTO>>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			map.put("result", null);
@@ -86,12 +93,14 @@ public class CartRestController {
 		try {
 			if(mDTO.getCsno() != null) {
 				result = sService.update(cDTO, Integer.parseInt(mDTO.getCsno()));
-				sseEmitters.update(mDTO.getCsno());
-			}
+				sseEmitters.update(mDTO.getCsno(),cDTO);
+			}else {
 			result = cService.updateAmount(cDTO, mDTO.getMid());
+			}
 		} catch (Exception e) {
 			log.info(e);
 		}
+
 
 		String msg = result == 1 ? "success" : "fail";
 		map.put("result", msg);
@@ -106,13 +115,15 @@ public class CartRestController {
 		String msg = "";
 		Map<String, String> result = new HashMap<>();
 		try {
+			List<String> pids = map.get("pids");
 			// 공유 장바구니 없는 경우 일반 장바구니 삭제 로직
 			if (mDTO.getCsno() == null) {
-				count = cService.deleteProducts(map.get("pids"), mDTO.getMid());
+				count = cService.deleteProducts(pids, mDTO.getMid());
 				msg = "상품 삭제";
 			} else { // 공유 장바구니 있는 경우 공유 장바구니 삭제 로직 넣기
-				count = -1;
+				count = sService.deleteProducts(pids, Integer.parseInt(mDTO.getCsno()));
 				msg = "공유 상품 삭제";
+				sseEmitters.remove(mDTO.getCsno(), pids);
 			}
 			result.put("result", msg);
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
@@ -145,7 +156,7 @@ public class CartRestController {
 	
 	@GetMapping(value = "/sse/{csno}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)  
     public ResponseEntity<SseEmitter> connect(@PathVariable("csno")String csno) {  
-        SseEmitter emitter = new SseEmitter();  
+        SseEmitter emitter = new SseEmitter(60*60*60L);  
         sseEmitters.add(csno,emitter);
         try {  
             emitter.send(SseEmitter.event()  
