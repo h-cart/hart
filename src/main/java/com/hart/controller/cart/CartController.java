@@ -17,58 +17,54 @@ import com.hart.service.share.ShareService;
 @Controller
 @RequestMapping("/cart")
 public class CartController {
-	
+
 	@Autowired
 	private ShareService sService;
-	
-	
+
 	@GetMapping("/mycart")
 	public String getCart(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
 		String url = "";
-		if(mDTO.getCsno()==null) url = "/cart/mycart";
+		if (mDTO.getCsno() == null)
+			url = "/cart/mycart";
 		else {
-			url = "redirect:/cart/share/"+mDTO.getCsno();
+			url = "redirect:/cart/share/" + mDTO.getCsno();
 		}
 		return url;
 	}
-	
 
 	@GetMapping("/group")
-	public void joinShare(@RequestParam("cno")int cno, @RequestParam("key")String key,Model model) {
+	public void joinShare(@RequestParam("cno") int cno, @RequestParam("key") String key, Model model) {
 		try {
 
-			ShareDTO sDTO =  sService.getInfoWithKey(ShareDTO.builder()
-													.cskey(key)
-													.csno(cno)
-													.build());
-			if(sDTO == null) {
-				
+			ShareDTO sDTO = sService.getInfoWithKey(ShareDTO.builder().cskey(key).csno(cno).build());
+			if (sDTO == null) {
+
 			}
 
-		}catch (Exception e) {
-			
+		} catch (Exception e) {
+
 		}
-		
+
 	}
 
-	
 	@GetMapping("/share/{csno}")
-	public String shareCart(@PathVariable("csno") int csno,Model model, @AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+	public String shareCart(@PathVariable("csno") int csno, Model model,
+			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
 		String url = "";
-		if(mDTO.getCsno()==null || Integer.parseInt(mDTO.getCsno())!=csno) {
+		if (mDTO.getCsno() == null || Integer.parseInt(mDTO.getCsno()) != csno) {
 			url = "/error/share";
-			model.addAttribute("msg","허용되지 않은 접근입니다.");
-		}else {
+			model.addAttribute("msg", "허용되지 않은 접근입니다.");
+		} else {
 			url = "/cart/share";
 			model.addAttribute("csno", csno);
 		}
 		return url;
-		
+
 	}
-	
+
 	@GetMapping("/checkout")
 	public void checkout() {
-		
+
 	}
-	
+
 }
