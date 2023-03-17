@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+  
+  	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
   <body style="">
@@ -1347,6 +1349,31 @@
         );
       }
       // ]]>
+    </script>
+    
+    <script>
+   
+ 
+    $(document).ready(function(){
+    	Swal.fire({
+      	  title: 'HART',
+      	  text: "장바구니 공유 요청",
+      	imageUrl: '/img/logo.png',
+      	  showCancelButton: true,
+      	  confirmButtonColor: '#3085d6',
+      	  cancelButtonColor: '#d33',
+      	  confirmButtonText: 'Yes, delete it!'
+      	}).then((result) => {
+      	  if (result.isConfirmed) {
+      	    Swal.fire(
+      	      'Deleted!',
+      	      'Your file has been deleted.',
+      	      'success'
+      	    )
+      	  }
+      	})	
+    })
+    
     </script>
   </body>
 </html>
