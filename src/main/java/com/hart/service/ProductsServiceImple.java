@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hart.domain.CategoryVO;
 import com.hart.domain.ProductimgVO;
+import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
 import com.hart.mapper.ProductsMapper;
 
@@ -15,40 +16,33 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Service
 public class ProductsServiceImple implements ProductsService {
-	
+
 	@Autowired
 	private ProductsMapper productsmapper;
 
 	@Override
 	public List<ProductsVO> getProductList(ProductsVO productsVO) {
-		
-		log.info("#############productVO @@@@@@@@@=" +productsVO );
-		
+
+		log.info("#############productVO @@@@@@@@@=" + productsVO);
+
 		return productsmapper.getproductslist(productsVO);
 	}
-	
-	
-	
-	
+
 	@Override
-	public List<CategoryVO> getcategorybar(){
-		
+	public List<CategoryVO> getcategorybar() {
+
 		return productsmapper.getcategorybar();
 	}
-	
-	
-	/*
-	 * @Override public <ProductsVO> getProductDetail(String pid){
-	 * 
-	 * <ProductsVO> detail=productsmapper.getproductDetail(pid); List<ProductimgVO>
-	 * pimg =productsmapper.getproductDetailimg(pid);
-	 * 
-	 * return ; }
-	 */
 
-	
-	
-	
-	
-	
+	@Override
+	public ProductsDetailVO getProductDetails(String pid) {
+
+		ProductsVO detail = productsmapper.getproductDetail(pid);
+		List<ProductimgVO> pimg = productsmapper.getproductDetailimg(pid);
+		
+
+		return new ProductsDetailVO(detail, pimg);
+
+	}
+
 }

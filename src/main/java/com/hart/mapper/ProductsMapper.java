@@ -17,7 +17,8 @@ public interface ProductsMapper {
 	
 	public List<CategoryVO> getcategorybar();
 	
-	public List<ProductsVO> getproductDetail(String pid);
+	
+	public ProductsVO getproductDetail(String pid);
 	
 	public List<ProductimgVO> getproductDetailimg(String pid);
 

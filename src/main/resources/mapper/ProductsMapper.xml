@@ -52,18 +52,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		pd.pbsmall, pd.pbdesc, pd.pname, pd.pprice, pd.pcno,
 		pd.stag, pd.pdiscount, pd.ptitle
 		FROM products pd
-		
-
 		WHERE pd.pid=#{pid}
 
 
 	</select>
 
 	<select id="getproductDetailimg"
-		resultType="com.hart.domain.ProductsVO">
+		resultType="com.hart.domain.ProductimgVO">
     select * from product_img
         where pid = #{pid}
-        order by pdepth;
+        order by pdepth
         </select>
 
 </mapper>
