@@ -35,12 +35,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE csno = (SELECT
 		csno FROM members WHERE mid= #{mid})
 	</select>
-	
+
 	<select id="getInfoWithKey" parameterType="ShareDTO"
 		resultType="ShareDTO">
 		SELECT csno,cskey,mid
 		FROM cart_share
-		WHERE csno = #{csno} and cskey = #{cskey}
+		WHERE csno = #{csno}
+		and cskey = #{cskey}
 	</select>
 
 
@@ -51,8 +52,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{cskey})
 		WHERE mid = #{mid}
 	</update>
+
 	<update id="updateAmount" parameterType="CartInsertDTO">
-		UPDATE share_products set
-		camount = #{cDTO.pamount} WHERE pid = #{cDTO.pid} and csno = #{csno}
+		UPDATE share_products
+		set
+		camount = #{cDTO.pamount} WHERE pid = #{cDTO.pid} and csno =
+		#{csno}
 	</update>
+
+	<!-- 공유 장바구니 상품 불러오기 기능 -->
+	<select id="getProducts" parameterType="string"
+		resultType="CProductDTO">
+		SELECT pc.pid, pi.pimg, pc.pname, pc.pprice, pc.pdiscount,
+		mcamount
+		FROM pscart pc JOIN product_img pi on pc.pid = pi.pid and
+		pdepth=0 and csno = #{csno}
+	</select>
+	
+	<!-- 공유 장바구니 상품 담기 기능  -->
+	<insert id="insertCarts" parameterType="CartInsertDTO">
+		INSERT INTO
+		share_products(csno,pid,camount) VALUES(#{csno},#{cDTO.pid},#{cDTO.pamount})
+	</insert>
+	
+	<delete id="removeCart" parameterType="java.util.List">
+		 DELETE FROM share_products
+    <where>
+    	csno = #{csno}
+    <foreach collection="pids" item="item" open="AND" close="" separator="OR">
+        (pid = #{item})
+    </foreach>
+    </where>
+	</delete>
 </mapper>

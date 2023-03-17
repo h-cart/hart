@@ -33,9 +33,15 @@ public class CartController {
 	}
 	
 	@GetMapping("/group")
-	public void joinShare(@RequestParam("cno")String cno, @RequestParam("key")String key,Model model) {
+	public void joinShare(@RequestParam("cno")int cno, @RequestParam("key")String key,Model model) {
 		try {
-			ShareDTO sDTO =  sService
+			ShareDTO sDTO =  sService.getInfoWithKey(ShareDTO.builder()
+													.cskey(key)
+													.csno(cno)
+													.build());
+			if(sDTO == null) {
+				
+			}
 		}catch (Exception e) {
 			
 		}
@@ -44,8 +50,15 @@ public class CartController {
 	
 	@GetMapping("/share/{csno}")
 	public String shareCart(@PathVariable("csno") int csno,Model model, @AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-		model.addAttribute("csno", csno);
-		return "/cart/share";
+		String url = "";
+		if(mDTO.getCsno()==null || Integer.parseInt(mDTO.getCsno())!=csno) {
+			url = "/error/share";
+			model.addAttribute("msg","허용되지 않은 접근입니다.");
+		}else {
+			url = "/cart/share";
+			model.addAttribute("csno", csno);
+		}
+		return url;
 		
 	}
 	
