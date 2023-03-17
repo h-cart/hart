@@ -1,26 +1,27 @@
 package com.hart.domain.share;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.management.RuntimeErrorException;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.hart.domain.cart.CartInsertDTO;
+
 import lombok.extern.log4j.Log4j2;
 
 @Component  
 @Log4j2 
 public class SseEmitters {  
-  
-    private final Map<String,List<SseEmitter>> emitters = new ConcurrentHashMap<>();  
+
+    private final ConcurrentHashMap<String,CopyOnWriteArrayList<SseEmitter>> emitters = new ConcurrentHashMap<>();  
   
     public SseEmitter add(String csno,SseEmitter emitter) {
-    	if(!emitters.containsKey(csno))emitters.put(csno, new ArrayList<>());
+    	if(!emitters.containsKey(csno))emitters.put(csno, new CopyOnWriteArrayList<>());
         this.emitters.get(csno).add(emitter);
         log.info("new emitter added: {}", emitter);  
         log.info("emitter list size: {}", emitters.get(csno).size());  
@@ -36,14 +37,29 @@ public class SseEmitters {
         return emitter;  
     }  
     
-    public void update(String csno) {
+    public void update(String csno,CartInsertDTO cDTO) {
     
     	emitters.get(csno).forEach(emitter -> {
     		log.info(emitter);
     		try {
     			emitter.send(SseEmitter.event()
     					.name("update")
-    					.data(""));
+    					.data(cDTO));
+    		}catch (Error e) {
+    			throw new RuntimeErrorException(e);
+    		} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	});
+    }
+    public void remove(String csno, List<String> pids) {
+    	emitters.get(csno).forEach(emitter -> {
+    		log.info(emitter);
+    		try {
+    			emitter.send(SseEmitter.event()
+    					.name("remove")
+    					.data(pids));
     		}catch (Error e) {
     			throw new RuntimeErrorException(e);
     		} catch (IOException e) {

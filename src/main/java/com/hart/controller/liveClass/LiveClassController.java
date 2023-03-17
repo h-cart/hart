@@ -50,6 +50,12 @@ public class LiveClassController {
 		return "liveClass/liveClassDetail";
 	}
 	
+	@GetMapping("/test")
+	public String streamingTest() {
+		log.info("streamingTest 컨트롤러 호출");
+		
+		return "liveClass/liveClassTestStream";
+	}
 	
 	
 }

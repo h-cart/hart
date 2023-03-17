@@ -19,9 +19,10 @@ public interface ShareMapper {
 	ShareDTO getInfoWithKey(ShareDTO sDTO)throws SQLException;
 	int ShareCsno(ShareDTO sDTO)throws SQLException;
 	
-	List<CProductDTO> getProducts(String mid)throws SQLException;
+	int insertCarts(@Param("cDTO") CartInsertDTO cDTO,@Param("csno") int csno) throws SQLException;
+	List<CProductDTO> getProducts(String csno)throws SQLException;
 	List<CClassDTO> getClasss(String mid)throws SQLException;
 	int updateAmount(@Param("cDTO")CartInsertDTO cDTO, @Param("csno")int csno) throws SQLException;
-	int removeCart(@Param("pids")List<String> pids, @Param("mid")String mid) throws SQLException;
+	int removeCart(@Param("pids")List<String> pids, @Param("csno")int csno) throws SQLException;
 	
 }

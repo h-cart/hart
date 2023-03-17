@@ -26,6 +26,19 @@
 </head>
 
 <body style="">
+
+	<script type="text/javascript" defer>
+	
+	function goDetailPage(e){
+		let pid = $(e).data('pid');
+		alert(pid);
+		location.href ="/product/productDetail?pid=" + pid
+				
+	}
+				
+	</script>
+
+
 	<!-- Page Preloder -->
 	<div id="preloder" style="display: none;">
 		<div class="loader" style="display: none;"></div>
@@ -220,7 +233,7 @@
 							<li><a href="#">카테고리<img src="list.svg" /></a>
 
 								<ul class="dropdown" id="listbig">
-				
+
 
 								</ul></li>
 
@@ -255,9 +268,9 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb__text">
-					
-					<h4>카테고리</h4>
-					
+
+						<h4>카테고리</h4>
+
 						<div class="breadcrumb__links">
 							<a href="./index.html">Home</a> <span>Shop</span>
 						</div>
@@ -285,15 +298,15 @@
 						<div class="shop__sidebar__accordion">
 							<div class="accordion" id="accordionExample">
 								<div class="card">
-								
+
 									<div class="card-heading" id="listbig">
-									
+
 										<a data-toggle="collapse" data-target="#collapseOne">카테고리</a>
-										
+
 									</div>
-									
-									
-									
+
+
+
 									<div id="collapseOne" class="collapse show"
 										data-parent="#accordionExample">
 										<div class="card-body">
@@ -372,11 +385,15 @@
 						<!-- <tr th:each="products : ${products}"> -->
 						<!-- <tr th:if="${not #lists.isEmpty(products)}" th:each="dto,dtostate:${products}"> -->
 
-						<div class="col-lg-4 col-md-6 col-sm-6" th:each="productlist : ${productlist}">
-							<div class="product__item" th:each="${}">
-								<div class="product__item__pic set-bg"
+						<div class="col-lg-4 col-md-6 col-sm-6"
+							th:each="productlist : ${productlist}">
+
+							<div class="product__item">
+								<div class="product__item__pic set-bg" id="img"
+									th:data-pid="${productlist.pid}"
+									
 									th:data-setbg="${productlist.pimg}"
-									style="background-image: url(&quot;https://tohomeimage.thehyundai.com/PD/PDImages/S/2/1/1/8803630600112_01.jpg?RS=720x864&quot;);">
+									th:onclick="goDetailPage(this)">
 									<ul class="product__hover">
 										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
 										<li><a href="#"><img src="img/icon/compare.png"

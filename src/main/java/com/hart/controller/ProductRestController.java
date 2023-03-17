@@ -29,10 +29,15 @@ public class ProductRestController {
 	public ResponseEntity<Map<String,List<CategoryVO>>> getCategory(){
 		
 		try {
+			
 			Map<String,List<CategoryVO>> result =new HashMap<>();
+			
 			List<CategoryVO> categorybar = pService.getcategorybar();
+			
 			result.put("result",categorybar);
+			
 			return new ResponseEntity<Map<String,List<CategoryVO>>>(result,HttpStatus.OK);
+			
 		} catch (Exception e) {
 			log.info(e.getMessage());
 			return new ResponseEntity<Map<String,List<CategoryVO>>>(HttpStatus.BAD_REQUEST);

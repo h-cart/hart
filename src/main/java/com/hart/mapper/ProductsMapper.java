@@ -18,5 +18,11 @@ public interface ProductsMapper {
 	
 	public List<ProductsVO2> getcategoryproducts(ProductsVO2 products2);
 	
+	public List<ProductsVO> getproductDetail(String pid);
+	
+	public List<ProductsVO> getproductDetailimg(String pid);
+
+
+	
 	
 }
