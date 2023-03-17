@@ -32,15 +32,15 @@ public class CartController {
 		return url;
 	}
 	
-	@GetMapping("/group")
-	public void joinShare(@RequestParam("cno")String cno, @RequestParam("key")String key,Model model) {
-		try {
-			ShareDTO sDTO =  sService
-		}catch (Exception e) {
-			
-		}
-		
-	}
+	/*
+	 * @GetMapping("/group") public void joinShare(@RequestParam("cno")String
+	 * cno, @RequestParam("key")String key,Model model) { try { ShareDTO sDTO =
+	 * sService }catch (Exception e) {
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 	
 	@GetMapping("/share/{csno}")
 	public String shareCart(@PathVariable("csno") int csno,Model model, @AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
