@@ -59,12 +59,16 @@ public class ProductsController {
 			
 				//System.out.println("Detail ===========>>>" + Detail);
 			log.info("Detail ====" + Detail.size());
+			log.info("Detailimng ====" + Detailimg.size());
 			
-			log.info("Detail ====>>>>" + Detail.get(0));
+			
+			log.info("Detail ====>>>>" + Detail);
+			log.info("Detailimg ====>>>>" + Detailimg);
 			
 			
 			model.addAttribute("product", Detail);
 			model.addAttribute("Detailimg", Detailimg);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
