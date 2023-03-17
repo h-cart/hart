@@ -57,5 +57,13 @@ public class LiveClassController {
 		return "liveClass/liveClassTestStream";
 	}
 	
+	@GetMapping("/testChat")
+	public String streamingTestChat() {
+		log.info("streamingTest 컨트롤러 호출");
+		
+		return "liveClass/liveClassChatTestStream";
+	}
+	
+	
 	
 }
