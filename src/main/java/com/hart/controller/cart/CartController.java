@@ -36,6 +36,7 @@ public class CartController {
 	@GetMapping("/group")
 	public void joinShare(@RequestParam("cno")int cno, @RequestParam("key")String key,Model model) {
 		try {
+
 			ShareDTO sDTO =  sService.getInfoWithKey(ShareDTO.builder()
 													.cskey(key)
 													.csno(cno)
@@ -43,6 +44,7 @@ public class CartController {
 			if(sDTO == null) {
 				
 			}
+
 		}catch (Exception e) {
 			
 		}

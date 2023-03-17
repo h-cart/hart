@@ -1965,7 +1965,7 @@ li {
 
 
       // searchTag의 입력 이벤트에 비동기로 검색하는 코드를 작성합니다.
-      $("#searchTag").on("input change", function () {
+      $("#searchTag").on("input change keyup", function () {
         // 입력값을 가져옵니다.
         var keyword = $(this).val();
 
