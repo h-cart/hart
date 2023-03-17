@@ -1,5 +1,7 @@
 package com.hart.zuik.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
@@ -56,5 +58,25 @@ public class ShareMapperTests {
 	@Test
 	public void update() throws Exception{
 		sMapper.updateAmount(CartInsertDTO.builder().pid("S02006004332").pamount(3).build(), 23);
+	}
+	
+	@Test
+	public void getProducts() throws Exception{
+		log.info(sMapper.getProducts("24"));
+	}
+	
+	@Test
+	public void insertProducts() throws Exception{
+		log.info(sMapper.insertCarts(CartInsertDTO.builder()
+											.pid("S02211132600")
+											.pamount(1).build(), 24));	
+	}
+
+	@Test
+	public void removesCarts() throws Exception {
+		List<String> pids = new ArrayList<>();
+		pids.add("S02006004332");
+		pids.add("S02211132600");
+		log.info(sMapper.removeCart(pids, 24));
 	}
 }
