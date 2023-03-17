@@ -19,4 +19,8 @@ public interface ProductsService {
 	
 	public List<ProductsVO2> getcategoryproducts(ProductsVO2 products2) throws Exception;
 	
+	
+	public List<ProductsVO> getProductDetail(String pid) throws Exception;
+	
+	public List<ProductsVO> getproductDetailimg(String pid) throws Exception;
 }
