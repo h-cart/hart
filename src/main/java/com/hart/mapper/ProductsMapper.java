@@ -6,8 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hart.domain.CategoryVO;
+import com.hart.domain.ProductimgVO;
 import com.hart.domain.ProductsVO;
-import com.hart.domain.ProductsVO2;
+
 
 @Mapper
 public interface ProductsMapper {
@@ -16,11 +17,10 @@ public interface ProductsMapper {
 	
 	public List<CategoryVO> getcategorybar();
 	
-	public List<ProductsVO2> getcategoryproducts(ProductsVO2 products2);
 	
-	public List<ProductsVO> getproductDetail(String pid);
+	public ProductsVO getproductDetail(String pid);
 	
-	public List<ProductsVO> getproductDetailimg(String pid);
+	public List<ProductimgVO> getproductDetailimg(String pid);
 
 
 	

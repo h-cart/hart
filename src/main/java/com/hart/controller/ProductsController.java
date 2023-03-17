@@ -2,15 +2,14 @@ package com.hart.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hart.domain.CategoryVO;
+import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
 import com.hart.service.ProductsService;
 
@@ -54,21 +53,12 @@ public class ProductsController {
 
 		try {
 
-			List<ProductsVO> Detail = productsservice.getProductDetail(pid);
-			List<ProductsVO> Detailimg = productsservice.getProductDetail(pid);
-			
-				//System.out.println("Detail ===========>>>" + Detail);
-			log.info("Detail ====" + Detail.size());
-			log.info("Detailimng ====" + Detailimg.size());
-			
-			
-			log.info("Detail ====>>>>" + Detail);
-			log.info("Detailimg ====>>>>" + Detailimg);
-			
-			
-			model.addAttribute("product", Detail);
-			model.addAttribute("Detailimg", Detailimg);
-			
+			ProductsDetailVO Detail = productsservice.getProductDetails(pid);
+
+			System.out.println("Detail ==================>>>>>>" + Detail);
+
+			model.addAttribute("Detail",Detail);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
