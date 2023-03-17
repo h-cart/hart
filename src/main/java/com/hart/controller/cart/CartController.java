@@ -32,6 +32,7 @@ public class CartController {
 		return url;
 	}
 	
+
 	@GetMapping("/group")
 	public void joinShare(@RequestParam("cno")int cno, @RequestParam("key")String key,Model model) {
 		try {
@@ -47,6 +48,7 @@ public class CartController {
 		}
 		
 	}
+
 	
 	@GetMapping("/share/{csno}")
 	public String shareCart(@PathVariable("csno") int csno,Model model, @AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
