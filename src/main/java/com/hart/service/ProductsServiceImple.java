@@ -44,4 +44,21 @@ public class ProductsServiceImple implements ProductsService {
 		return productsmapper.getcategoryproducts(products2);
 	}
 	
+	
+	@Override
+	public List<ProductsVO> getProductDetail(String pid){
+		
+		
+		return productsmapper.getproductDetail(pid);
+	}
+	
+	
+	@Override
+	public List<ProductsVO> getproductDetailimg(String pid){
+		
+		
+		return productsmapper.getproductDetailimg(pid);
+	}
+	
+	
 }
