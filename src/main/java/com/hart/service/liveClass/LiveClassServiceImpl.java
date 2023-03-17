@@ -29,6 +29,9 @@ public class LiveClassServiceImpl implements LiveClassService{
 	public LiveClassListDTO getClassDetail(String lcid) {
 		log.info("getClassDetail 서비스 호출");
 		LiveClassListDTO dto = mapper.getDetail(lcid);
+		StringBuilder sb = new StringBuilder();
+		sb.append(dto.getLcdate()+"("+dto.getLcday()+") "+dto.getLcstart()+"-"+dto.getLcend());
+		dto.setWholeDate(sb.toString());
 		log.info(dto);
 		return dto;
 	}

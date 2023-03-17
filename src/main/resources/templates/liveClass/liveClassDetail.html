@@ -179,7 +179,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
-                            <h4>깊은 맛의 맛깔스런 얼갈이 <br>열무김치 4.5kg 담아가기</h4>
+                            <h4 th:text="${liveClass.lcname}"></h4>
                             <div class="rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -188,19 +188,19 @@
                                 <i class="fa fa-star-o"></i>
                                 <span> - 5 Reviews</span>
                             </div>
-                            <h3>75,000원 </h3>
+                            <h3 th:text="${#numbers.formatInteger(liveClass.lcprice, 3, 'COMMA') + '원'}"></h3>
                             
                             
                             <div class="product__details__btns__option">
-                                <a href="#"><i class="fa fa-heart"></i> 강사명: 주윤옥</a>
-                                <a href="#"><i class="fa fa-heart"></i> 지점명 : 더현대 서울 CH 1985(009기)</a>
+                                <a href="#"><i class="fa fa-heart"></i> 강사명: <span th:text=${liveClass.lcteacher}></span></a>
+                                <a href="#"><i class="fa fa-heart"></i> 장소 : <span th:text=${liveClass.lcplace}></span></a>
                             </div>
                             <div class="product__details__cart__option">
    
                               <a href="#" class="primary-btn">수강 신청하기</a>
                           </div>
                             <div class="product__details__last__option">
-                                <h5><span>강의 일시 : 2023.03.24(금) 15:00-17:00</span></h5>
+                                <h5><span>강의 일시 : <span th:text=${liveClass.wholeDate}></span></span></h5>
                                 
                             </div>
                         </div>
@@ -220,18 +220,16 @@
                                     <div class="product__details__tab__content">
                                         <div class="product__details__tab__content__item">
                                             <h5>■ 강사 이력</h5>
-                                            <p>- 주윤옥(전통요리연구가)</p>
+                                            <p th:text="'- '+${liveClass.lcteacher}"></p>
                                             
                                         </div>
                                         <div class="product__details__tab__content__item">
                                             <h5>■ 클래스 소개</h5>
-                                            <p>깊은 맛이 나는 맛깔스런 얼갈이 열무김치를 담아보는 수업입니다.
-                                              맛있는 열무김치 하나만 있다면 입맛이 돌아올 수 있는 한끼 반찬으로도 활용하기 좋습니다.</p>
+                                            <p th:text="'- '+${liveClass.lcexplain}"></p>
                                         </div>
                                         <div class="product__details__tab__content__item">
                                           <h5>■ 이런 분들을 위한 클래스에요.</h5>
-                                          <p>- 제철 식재료로 담그는 계절김치를 배우고 싶은 분<br>
-                                            - 김치를 내 손으로 직접 담그고 싶으신 분들</p>
+                                          <p th:text="${liveClass.lcstudent}"></p>
                                       </div>
                                     </div>
                                 </div>

@@ -35,7 +35,7 @@ public class CartController {
 	@GetMapping("/group")
 	public void joinShare(@RequestParam("cno")String cno, @RequestParam("key")String key,Model model) {
 		try {
-			ShareDTO sDTO =  sService
+			/* ShareDTO sDTO = (ShareDTO) sService; */
 		}catch (Exception e) {
 			
 		}

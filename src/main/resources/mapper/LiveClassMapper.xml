@@ -6,14 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.hart.mapper.LiveClassMapper">
 
 	<select id="getLiveList"  resultType="com.hart.domain.liveClass.LiveClassListDTO">
-		select  lc.lcid, to_char(lcday,'YYYY-MM-DD') lcday, lcstart, lcend, lcstatus, lcteacher, lcplace,lcexplain,
+		select  lc.lcid, to_char(lcday,'YYYY-MM-DD') lcdate, lcstart, lcend, lcstatus, lcteacher, lcplace,lcexplain,
 				lcstudent,lckeyword,lcname,lcprice,lccount,lctexplain,lcimg
 		from live_class lc left join live_class_img lci on lc.lcid = lci.lcid
 	</select>
 	
 	<select id="getDetail"  resultType="com.hart.domain.liveClass.LiveClassListDTO">
-		select  lc.lcid, to_char(lcday,'YYYY-MM-DD') lcday, lcstart, lcend, lcstatus, lcteacher, lcplace,lcexplain,
-				lcstudent,lckeyword,lcname,lcprice,lccount,lctexplain,lcimg
+		select  lc.lcid, to_char(lcday,'YYYY-MM-DD') lcdate,to_char(lcday,'dy') lcday
+				, lcstart, lcend, lcstatus, lcteacher, lcplace,lcexplain,lcstudent,
+				lckeyword,lcname,lcprice,lccount,lctexplain,lcimg
 		from live_class lc left join live_class_img lci on lc.lcid = lci.lcid
 		where lc.lcid=#{lcid}
 	</select>
