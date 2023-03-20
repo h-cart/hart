@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<footer
+	th:fragment="footer"
+	class="footer"
+>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="footer__about">
+					<div class="footer__logo">
+						<a href="#"><img
+							src="img/footer-logo.png"
+							alt=""
+						></a>
+					</div>
+					<p>The customer is at the heart of our unique business model, which includes design.</p>
+					<a href="#"><img
+						src="img/payment.png"
+						alt=""
+					></a>
+				</div>
+			</div>
+			<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+				<div class="footer__widget">
+					<h6>Shopping</h6>
+					<ul>
+						<li><a href="#">Clothing Store</a></li>
+						<li><a href="#">Trending Shoes</a></li>
+						<li><a href="#">Accessories</a></li>
+						<li><a href="#">Sale</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-3 col-sm-6">
+				<div class="footer__widget">
+					<h6>Shopping</h6>
+					<ul>
+						<li><a href="#">Contact Us</a></li>
+						<li><a href="#">Payment Methods</a></li>
+						<li><a href="#">Delivary</a></li>
+						<li><a href="#">Return &amp; Exchanges</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+				<div class="footer__widget">
+					<h6>NewLetter</h6>
+					<div class="footer__newslatter">
+						<p>Be the first to know about new arrivals, look books, sales &amp; promos!</p>
+						<form action="#">
+							<input
+								type="text"
+								placeholder="Your email"
+							>
+							<button type="submit">
+								<span class="icon_mail_alt"></span>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<div class="footer__copyright__text">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					<p>
+						Copyright ©
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
+						20232023202320232020 All rights reserved | This template is made with <i
+							class="fa fa-heart-o"
+							aria-hidden="true"
+						></i> by <a
+							href="https://colorlib.com"
+							target="_blank"
+						>Colorlib</a>
+					</p>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.nice-select.min.js"></script>
+	<script src="/js/jquery.nicescroll.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/jquery.countdown.min.js"></script>
+	<script src="/js/jquery.slicknav.js"></script>
+	<script src="/js/mixitup.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/main.js"></script>
+	<script defer>
+		// <![CDATA[  <-- For SVG support
+		if ('WebSocket' in window) {
+			(function() {
+				function refreshCSS() {
+					var sheets = [].slice.call(document
+							.getElementsByTagName("link"));
+					var head = document.getElementsByTagName("head")[0];
+					for (var i = 0; i < sheets.length; ++i) {
+						var elem = sheets[i];
+						var parent = elem.parentElement || head;
+						parent.removeChild(elem);
+						var rel = elem.rel;
+						if (elem.href && typeof rel != "string"
+								|| rel.length == 0
+								|| rel.toLowerCase() == "stylesheet") {
+							var url = elem.href.replace(
+									/(&|\?)_cacheOverride=\d+/, '');
+							elem.href = url
+									+ (url.indexOf('?') >= 0 ? '&' : '?')
+									+ '_cacheOverride='
+									+ (new Date().valueOf());
+						}
+						parent.appendChild(elem);
+					}
+				}
+				var protocol = window.location.protocol === 'http:' ? 'ws://'
+						: 'wss://';
+				var address = protocol + window.location.host
+						+ window.location.pathname + '/ws';
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload')
+						window.location.reload();
+					else if (msg.data == 'refreshcss')
+						refreshCSS();
+				};
+				if (sessionStorage
+						&& !sessionStorage
+								.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+					console.log('Live reload enabled.');
+					sessionStorage.setItem(
+							'IsThisFirstTime_Log_From_LiveServer', true);
+				}
+			})();
+		} else {
+			console
+					.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+		}
+		// ]]>
+	</script>
+	<!-- Code injected by live-server -->
+	<script defer>
+		// <![CDATA[  <-- For SVG support
+		if ('WebSocket' in window) {
+			(function() {
+				function refreshCSS() {
+					var sheets = [].slice.call(document
+							.getElementsByTagName("link"));
+					var head = document.getElementsByTagName("head")[0];
+					for (var i = 0; i < sheets.length; ++i) {
+						var elem = sheets[i];
+						var parent = elem.parentElement || head;
+						parent.removeChild(elem);
+						var rel = elem.rel;
+						if (elem.href && typeof rel != "string"
+								|| rel.length == 0
+								|| rel.toLowerCase() == "stylesheet") {
+							var url = elem.href.replace(
+									/(&|\?)_cacheOverride=\d+/, '');
+							elem.href = url
+									+ (url.indexOf('?') >= 0 ? '&' : '?')
+									+ '_cacheOverride='
+									+ (new Date().valueOf());
+						}
+						parent.appendChild(elem);
+					}
+				}
+				var protocol = window.location.protocol === 'http:' ? 'ws://'
+						: 'wss://';
+				var address = protocol + window.location.host
+						+ window.location.pathname + '/ws';
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload')
+						window.location.reload();
+					else if (msg.data == 'refreshcss')
+						refreshCSS();
+				};
+				if (sessionStorage
+						&& !sessionStorage
+								.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+					console.log('Live reload enabled.');
+					sessionStorage.setItem(
+							'IsThisFirstTime_Log_From_LiveServer', true);
+				}
+			})();
+		} else {
+			console
+					.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+		}
+		// ]]>
+	</script>
+	<!-- Code injected by live-server -->
+	<script defer>
+		// <![CDATA[  <-- For SVG support
+		if ('WebSocket' in window) {
+			(function() {
+				function refreshCSS() {
+					var sheets = [].slice.call(document
+							.getElementsByTagName("link"));
+					var head = document.getElementsByTagName("head")[0];
+					for (var i = 0; i < sheets.length; ++i) {
+						var elem = sheets[i];
+						var parent = elem.parentElement || head;
+						parent.removeChild(elem);
+						var rel = elem.rel;
+						if (elem.href && typeof rel != "string"
+								|| rel.length == 0
+								|| rel.toLowerCase() == "stylesheet") {
+							var url = elem.href.replace(
+									/(&|\?)_cacheOverride=\d+/, '');
+							elem.href = url
+									+ (url.indexOf('?') >= 0 ? '&' : '?')
+									+ '_cacheOverride='
+									+ (new Date().valueOf());
+						}
+						parent.appendChild(elem);
+					}
+				}
+				var protocol = window.location.protocol === 'http:' ? 'ws://'
+						: 'wss://';
+				var address = protocol + window.location.host
+						+ window.location.pathname + '/ws';
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload')
+						window.location.reload();
+					else if (msg.data == 'refreshcss')
+						refreshCSS();
+				};
+				if (sessionStorage
+						&& !sessionStorage
+								.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+					console.log('Live reload enabled.');
+					sessionStorage.setItem(
+							'IsThisFirstTime_Log_From_LiveServer', true);
+				}
+			})();
+		} else {
+			console
+					.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+		}
+		// ]]>
+	</script>
+	<!-- Code injected by live-server -->
+	<script defer>
+		// <![CDATA[  <-- For SVG support
+		if ('WebSocket' in window) {
+			(function() {
+				function refreshCSS() {
+					var sheets = [].slice.call(document
+							.getElementsByTagName("link"));
+					var head = document.getElementsByTagName("head")[0];
+					for (var i = 0; i < sheets.length; ++i) {
+						var elem = sheets[i];
+						var parent = elem.parentElement || head;
+						parent.removeChild(elem);
+						var rel = elem.rel;
+						if (elem.href && typeof rel != "string"
+								|| rel.length == 0
+								|| rel.toLowerCase() == "stylesheet") {
+							var url = elem.href.replace(
+									/(&|\?)_cacheOverride=\d+/, '');
+							elem.href = url
+									+ (url.indexOf('?') >= 0 ? '&' : '?')
+									+ '_cacheOverride='
+									+ (new Date().valueOf());
+						}
+						parent.appendChild(elem);
+					}
+				}
+				var protocol = window.location.protocol === 'http:' ? 'ws://'
+						: 'wss://';
+				var address = protocol + window.location.host
+						+ window.location.pathname + '/ws';
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload')
+						window.location.reload();
+					else if (msg.data == 'refreshcss')
+						refreshCSS();
+				};
+				if (sessionStorage
+						&& !sessionStorage
+								.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+					console.log('Live reload enabled.');
+					sessionStorage.setItem(
+							'IsThisFirstTime_Log_From_LiveServer', true);
+				}
+			})();
+		} else {
+			console
+					.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+		}
+		// ]]>
+	</script>
+	<!-- csrf -->
+	<!-- Search End -->
+	<script>	
+	$(document).ready(function(){
+		  $.ajax({
+		    type : "get",
+		    url : "/papi/clist",
+		    contentType : "application/json",
+		    success : function(data) {
+		      let str="";
+		      for (var i = 0; i < data.result.length; i++) {
+		        console.log("number" + i + ": " + data.result[i].pcategory);
+		        str += `
+		        	<li style="border-bottom: 1px solid lightgray; ">
+		        	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a>
+		        	</li>
+					`;
+		      }
+		      console.log(str);
+		      
+		      $("#listCate").append(str);
+		      $(".slicknav_nav .dropdown").append(str);
+		    },
+		    error : function() {
+		      console.log("실패");
+		    }
+		  });
+		});
+		
+	</script>
+	<!-- Search Begin -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form">
+				<input
+					type="text"
+					id="search-input"
+					placeholder="Search here....."
+				>
+			</form>
+		</div>
+	</div>
+	<!-- Code injected by live-server -->
+</footer>
+<!-- Footer Section End -->
+</html>

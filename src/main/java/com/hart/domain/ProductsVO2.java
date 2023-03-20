@@ -2,20 +2,38 @@ package com.hart.domain;
 
 import lombok.Data;
 
-
-/*
- * s
- */
 @Data
 public class ProductsVO2 {
-	int pcno;
-	String pcategory;
+
 	String pid;
+
+	String porigin;
+
+	int pcount;
+
+	String pdetail;
+
+	String pbname;
+
+	String pbsmall;
+
+	String pbdesc;
+
 	String pname;
+
 	int pprice;
+
+	int pcno;
+
+	String stag;
+
 	int pdiscount;
-	
-	
-}
 
+	String ptitle;
 
+	String pcategory;
+
+	String pimg;
+
+	int pdepth;
+};

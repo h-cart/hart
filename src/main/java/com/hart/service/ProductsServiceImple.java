@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hart.domain.CategoryVO;
+import com.hart.domain.ProductimgVO;
+import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
-import com.hart.domain.ProductsVO2;
 import com.hart.mapper.ProductsMapper;
 
 import lombok.extern.log4j.Log4j2;
@@ -15,50 +16,46 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Service
 public class ProductsServiceImple implements ProductsService {
-	
+
 	@Autowired
 	private ProductsMapper productsmapper;
 
+	
 	@Override
 	public List<ProductsVO> getProductList(ProductsVO productsVO) {
-		
-		log.info("#############productVO @@@@@@@@@=" +productsVO );
-		
+
+		log.info("#############productVO @@@@@@@@@=" + productsVO);
+
 		return productsmapper.getproductslist(productsVO);
 	}
-	
-	
-	
+
 	
 	@Override
-	public List<CategoryVO> getcategorybar(){
+	public List<CategoryVO> getcategorybar() {
+
 		
 		return productsmapper.getcategorybar();
 	}
-	
-	
+
 	
 	@Override
-	public List<ProductsVO2> getcategoryproducts(ProductsVO2 products2){
+	public ProductsDetailVO getProductDetails(String pid) {
+
+		ProductsVO detail = productsmapper.getproductDetail(pid);
+		List<ProductimgVO> pimg = productsmapper.getproductDetailimg(pid);
 		
-		return productsmapper.getcategoryproducts(products2);
+
+		return new ProductsDetailVO(detail, pimg);
+
 	}
 	
 	
-	@Override
-	public List<ProductsVO> getProductDetail(String pid){
-		
-		
-		return productsmapper.getproductDetail(pid);
-	}
-	
-	
-	@Override
-	public List<ProductsVO> getproductDetailimg(String pid){
-		
-		
-		return productsmapper.getproductDetailimg(pid);
-	}
-	
+	/*
+	 * @Override public List<CategoryVO> getcategorysmall(String pid){
+	 * 
+	 * return productsmapper.getcategorysmall(pid); }
+	 */
+
+
 	
 }

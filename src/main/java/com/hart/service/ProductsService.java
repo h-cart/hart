@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.hart.domain.CategoryVO;
+import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
-import com.hart.domain.ProductsVO2;
 
 @Service
 public interface ProductsService {
@@ -17,10 +17,14 @@ public interface ProductsService {
 	
 	public List<CategoryVO> getcategorybar() throws Exception;
 	
-	public List<ProductsVO2> getcategoryproducts(ProductsVO2 products2) throws Exception;
+	
+	//public List<CategoryVO> getcategorysmall(String pid) throws Exception;
+	
+	public ProductsDetailVO getProductDetails(String pid) throws Exception;
+	
+	//public List<ProductimgVO> getProductimg(String pid) throws Exception;
+		
+
 	
 	
-	public List<ProductsVO> getProductDetail(String pid) throws Exception;
-	
-	public List<ProductsVO> getproductDetailimg(String pid) throws Exception;
 }
