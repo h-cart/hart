@@ -18,11 +18,13 @@ public interface ProductsService {
 	public List<CategoryVO> getcategorybar() throws Exception;
 	
 	
+	//public List<CategoryVO> getcategorysmall(String pid) throws Exception;
 	
 	public ProductsDetailVO getProductDetails(String pid) throws Exception;
 	
 	//public List<ProductimgVO> getProductimg(String pid) throws Exception;
 		
 
+	
 	
 }
