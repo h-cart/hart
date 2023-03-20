@@ -20,6 +20,7 @@ public class ProductsServiceImple implements ProductsService {
 	@Autowired
 	private ProductsMapper productsmapper;
 
+	
 	@Override
 	public List<ProductsVO> getProductList(ProductsVO productsVO) {
 
@@ -28,12 +29,15 @@ public class ProductsServiceImple implements ProductsService {
 		return productsmapper.getproductslist(productsVO);
 	}
 
+	
 	@Override
 	public List<CategoryVO> getcategorybar() {
 
+		
 		return productsmapper.getcategorybar();
 	}
 
+	
 	@Override
 	public ProductsDetailVO getProductDetails(String pid) {
 
@@ -44,5 +48,14 @@ public class ProductsServiceImple implements ProductsService {
 		return new ProductsDetailVO(detail, pimg);
 
 	}
+	
+	
+	/*
+	 * @Override public List<CategoryVO> getcategorysmall(String pid){
+	 * 
+	 * return productsmapper.getcategorysmall(pid); }
+	 */
 
+
+	
 }

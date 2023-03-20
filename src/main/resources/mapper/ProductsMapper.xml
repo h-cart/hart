@@ -31,6 +31,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where pcno_top is null
 
 	</select>
+	
+	
+		<select id="getcategorysmall"
+		resultType="com.hart.domain.CategoryVO">
+		  select *
+		from
+		product_category
+		where pcno_top =#{pcno};
+
+		</select>
+	
+	
 
 
 	<select id="getcategoryproducts"
@@ -56,6 +68,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	</select>
+
+	<select id="getproductDetailimg"
+		resultType="com.hart.domain.ProductimgVO">
+ 	   select * from product_img
+        where pid = #{pid}
+        order by pdepth
+        </select>
+        
 
 
 </mapper>

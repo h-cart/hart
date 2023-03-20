@@ -31,6 +31,8 @@ public class ProductsController {
 		try {
 			category = productsservice.getcategorybar();
 			productlist = productsservice.getProductList(productsVO);
+			
+	//		categorysamll=productsservice.getcategorysmall(productsVO);
 		} catch (Exception e) {
 
 			e.printStackTrace();
