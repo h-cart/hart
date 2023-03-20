@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hart.mapper.MemberMapper">
+
+	<insert id="insertClubMember">
+		insert into members (mid, social,mname,mpassword ,
+		mroles)
+		values(#{mid},#{social},#{mname},#{mpassword}, #{mroles})
+	</insert>
+	<insert id="insertClubRoleSet">
+		insert into club_member_role_set
+		(club_member_email,role_set)
+		values(#{club_member_email},#{role_set})
+	</insert>
+
+	<select id="findByEmail"
+		resultType="com.hart.domain.member.ClubMember2">
+		select
+		mid, mname, mpassword, social,mroles,csno
+		from members m
+		where m.mid= #{mid} and m.social = #{social}
+	</select>
+
+</mapper>

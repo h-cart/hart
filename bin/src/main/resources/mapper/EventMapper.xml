@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hart.mapper.EventMapper">
+	<select id="getProducts" parameterType="string"
+		resultType="ProductsVO">
+		<![CDATA[
+		select * from (
+		  select p.pid pid ,p.pname pname
+		  from products p
+		  join
+		  product_category pc on p.PCNO = pc.pcno
+		  where
+		  p.stag like '%' || #{keyword} || '%' or
+		  p.pname like '%' || #{keyword} || '%' or
+		  pc.pcno like '%' || #{keyword} || '%'
+		  ORDER BY UTL_MATCH.JARO_WINKLER_SIMILARITY(pname, #{keyword}) DESC
+		  ) where rownum <= 15 
+		
+	
+		]]>
+	</select>
+
+	<!-- ORDER BY UTL_MATCH.JARO_WINKLER_SIMILARITY(pname, #{keyword}) DESC 
+		ORDER BY SOUNDEX(pname) DESC ORDER BY CASE WHEN pname LIKE #{keyword} THEN 
+		1 ELSE 0 END DESC -->
+
+</mapper>
