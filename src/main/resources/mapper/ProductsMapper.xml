@@ -57,12 +57,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</select>
 
-	<select id="getproductDetailimg"
-		resultType="com.hart.domain.ProductimgVO">
-    select * from product_img
-        where pid = #{pid}
-        order by pdepth
-        </select>
 
 </mapper>
 
