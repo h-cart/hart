@@ -15,4 +15,6 @@ public interface ShareService {
 	
 	int CartInsert(List<String> pids,List<String> pamounts,int csno) throws Exception;
 	int deleteProducts(List<String> pids, int csno) throws Exception;
+	
+	ShareDTO getInfo(String mid) throws Exception;
 }

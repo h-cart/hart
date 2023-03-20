@@ -43,4 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </where>
 	</delete>
 	
+	<select id="getLClass" parameterType="string" resultType="CClassDTO">
+		SELECT lcid,lcday,lcstatus,lcteacher,lcname,lcimg,lcprice FROM lcart
+		WHERE mid = #{mid}
+	</select>
 </mapper>
