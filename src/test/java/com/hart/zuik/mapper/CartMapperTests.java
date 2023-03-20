@@ -22,8 +22,8 @@ public class CartMapperTests {
 	@Test
 	public void insertTest() throws Exception {
 		CartInsertDTO cDTO = CartInsertDTO.builder()
-								.pid("S02006004332")
-								.pamount(3)
+								.pid("L0001")
+								.pamount(1)
 								.build();
 		
 		int result = cMapper.insertCarts(cDTO, "skarns23@gmail.com");
@@ -54,5 +54,10 @@ public class CartMapperTests {
 		pids.add("S02211132600");
 		pids.add("L01");
 		log.info(cMapper.removeCart(pids, "skarns23@gmail.com"));
+	}
+	
+	@Test
+	public void getClasss() throws Exception {
+		log.info(cMapper.getLClass("skarns23@gmail.com"));
 	}
 }

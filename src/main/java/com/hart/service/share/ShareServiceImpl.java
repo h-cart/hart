@@ -58,6 +58,17 @@ public class ShareServiceImpl implements ShareService{
 			throw e;
 		}
 	}
+	
+
+	@Override
+	public ShareDTO getInfo(String mid) throws Exception {
+		try {
+			return sMapper.getInfo(mid);
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			throw e;
+		}
+	}
 
 	@Override
 	public int update(CartInsertDTO cDTO, int csno) throws Exception {

@@ -22,10 +22,22 @@ public class CartController {
 	private ShareService sService;
 
 	@GetMapping("/mycart")
-	public String getCart(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+	public String getCart(@AuthenticationPrincipal ClubAuthMemberDTO mDTO,@RequestParam(value = "csno", required = false)String csno, @RequestParam(value = "cskey", required = false)String cskey,Model model) {
 		String url = "";
-		if (mDTO.getCsno() == null)
-			url = "/cart/mycart";
+		try {
+			if(csno !=null && cskey!= null&& sService.getInfoWithKey(ShareDTO.builder()
+					.csno(Integer.parseInt(csno))
+					.cskey(cskey)
+					.build())!=null) {
+				model.addAttribute("csno", csno);
+				model.addAttribute("cskey", cskey);
+			}
+		}catch (Exception e) {
+			model.addAttribute("msg","fail");
+		}
+		
+		
+		if(mDTO.getCsno()==null) url = "/cart/mycart";
 		else {
 			url = "redirect:/cart/share/" + mDTO.getCsno();
 		}
@@ -61,6 +73,7 @@ public class CartController {
 		return url;
 
 	}
+
 
 	@GetMapping("/checkout")
 	public void checkout() {
