@@ -3,6 +3,8 @@
 
 <head>
   <script src="https://player.live-video.net/1.17.0/amazon-ivs-player.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1338.0/aws-sdk.min.js"></script>
+  
   
   <style type="text/css">
   /* Reset */
@@ -333,6 +335,8 @@ h2 {
     </div>
   </div>
   
+  
+  
   <script type="text/javascript">
   /*
    * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
@@ -451,9 +455,45 @@ h2 {
   })(window.IVSPlayer);
 
   
+  
+  
+  async function createChatToken(params) {
+	 /*  AWS.config.update({
+		  credentials: new AWS.Credentials('AKIAYZP2K4A6456FGNX6', 'T34G8yBsaZjy1OWJkdja5cOgMgzyslo1dhkavDFL'),
+	  }); */
+	  
+	  //const AWS = require('aws-sdk');
+	  
+	  AWS.config.region = 'ap-northeast-2'; // 리전
+	  AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+	      IdentityPoolId: 'ap-northeast-2:24b0320b-5a04-436a-a4b8-4674f40f2dca',
+	  });
+	  
+	  
+	  
+	  const ivs = new AWS.Ivschat();
+	  const result = await ivs.createChatToken(params).promise();
+	  console.log("New token created", result.token);
+	}
+	/*
+	Create a token with provided inputs. Values for user ID and display name are 
+	from your application and refer to the user connected to this chat session.
+	*/
+	const params = {
+	  "attributes": {
+	    "displayName": "DemoUser"
+	  },
+	  "capabilities": ["SEND_MESSAGE"],
+	  "roomIdentifier": "arn:aws:ivschat:ap-northeast-2:604504776765:room/US7fJa92RF0h",
+	  "userId": 11231234
+	};
+	createChatToken(params);
 
   
   </script>
+  
+  
+  
   
 </body>
 </html>

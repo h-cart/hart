@@ -309,19 +309,19 @@
 		    url : "/papi/clist",
 		    contentType : "application/json",
 		    success : function(data) {
-		      
 		      let str="";
 		      for (var i = 0; i < data.result.length; i++) {
 		        console.log("number" + i + ": " + data.result[i].pcategory);
 		        str += `
-		        	<li>
-		        	  <a href="/product/list?pcno=${data.result[i].pcno}" tableindex="">${data.result[i].pcategory}</a>
+		        	<li style="border-bottom: 1px solid lightgray; ">
+		        	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a>
 		        	</li>
 					`;
 		      }
 		      console.log(str);
 		      
-		      $("#listbig").append(str);
+		      $("#listCate").append(str);
+		      $(".slicknav_nav .dropdown").append(str);
 		    },
 		    error : function() {
 		      console.log("실패");
@@ -342,46 +342,6 @@
 				>
 			</form>
 		</div>
-	</div>
-	<div
-		id="ascrail2000"
-		class="nicescroll-rails nicescroll-rails-vr"
-		style="width: 5px; z-index: auto; background: rgb(229, 229, 229); cursor: default; position: absolute; top: 491.714px; left: 1114.36px; height: 225px; display: none; opacity: 0;"
-	>
-		<div
-			class="nicescroll-cursors"
-			style="position: relative; top: 0px; float: right; width: 5px; height: 0px; background-color: rgb(13, 13, 13); background-clip: padding-box; border-radius: 5px;"
-		></div>
-	</div>
-	<div
-		id="ascrail2000"
-		class="nicescroll-rails nicescroll-rails-vr"
-		style="width: 5px; z-index: auto; background: rgb(229, 229, 229); cursor: default; position: absolute; top: 491.134px; left: 291.586px; height: 225px; touch-action: none; opacity: 0; display: none;"
-	>
-		<div
-			class="nicescroll-cursors"
-			style="position: relative; top: 0px; float: right; width: 5px; height: 0px; background-color: rgb(13, 13, 13); background-clip: padding-box; border-radius: 5px; touch-action: none;"
-		></div>
-	</div>
-	<div
-		id="ascrail2000"
-		class="nicescroll-rails nicescroll-rails-vr"
-		style="width: 5px; z-index: auto; background: rgb(229, 229, 229); cursor: default; position: absolute; top: 491.134px; left: 291.586px; height: 225px; touch-action: none; opacity: 0;"
-	>
-		<div
-			class="nicescroll-cursors"
-			style="position: relative; top: 0px; float: right; width: 5px; height: 176px; background-color: rgb(13, 13, 13); background-clip: padding-box; border-radius: 5px; touch-action: none;"
-		></div>
-	</div>
-	<div
-		id="ascrail2000"
-		class="nicescroll-rails nicescroll-rails-vr"
-		style="width: 5px; z-index: auto; background: rgb(229, 229, 229); cursor: default; position: absolute; top: 491.782px; left: 291.586px; height: 225px; touch-action: none; opacity: 0;"
-	>
-		<div
-			class="nicescroll-cursors"
-			style="position: relative; top: 0px; float: right; width: 5px; height: 176px; background-color: rgb(13, 13, 13); background-clip: padding-box; border-radius: 5px; touch-action: none;"
-		></div>
 	</div>
 	<!-- Code injected by live-server -->
 </footer>
