@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="ProductsVO">
 		<![CDATA[
 		select * from (
-		  select p.pid pid ,p.pname pname
+		  select p.pid pid ,p.pname pname, p.pcno pcno
 		  from products p
 		  join
 		  product_category pc on p.PCNO = pc.pcno
@@ -22,9 +22,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		]]>
 	</select>
+	<select id="selectCrid" resultType="int">
+		select crid_seq.nextval from
+		dual
+	</select>
+	<insert id="registerRecipe"
+		parameterType="com.hart.domain.event.CRecipeVO">
 
-	<!-- ORDER BY UTL_MATCH.JARO_WINKLER_SIMILARITY(pname, #{keyword}) DESC 
-		ORDER BY SOUNDEX(pname) DESC ORDER BY CASE WHEN pname LIKE #{keyword} THEN 
-		1 ELSE 0 END DESC -->
+		INSERT INTO CRecipe (crid, crtitle, crimg,
+		crmingredient, crlevel, crtime,
+		crclick, crregdate, crcano,
+		crdetail)VALUES (#{seq}, #{recipe.crtitle},
+		#{recipe.crMimg},
+		#{recipe.crmingredient},
+		#{recipe.crlevel}, #{recipe.crtime},
+		#{recipe.crclick},
+		sysdate, #{recipe.crcano},
+		#{recipe.crdetail})
+	</insert>
+	<insert id="registerContent"
+		parameterType="com.hart.domain.event.CRContentVO">
+		INSERT INTO crecipe_content (crdetail, crimg, crstep,
+		crid)
+		VALUES (#{content.crcdetail}, #{content.crimg}, #{content.step},
+		#{seq})
+	</insert>
+	<insert id="registerIngredient"
+		parameterType="com.hart.domain.event.CRIngredientVO">
+
+		INSERT INTO crecipe_ingredient (cricount, pid, pcno,
+		crid)
+		VALUES (#{ingredient.cricount}, #{ingredient.pid},
+		#{ingredient.pcno}, #{seq})
+
+	</insert>
+
 
 </mapper>

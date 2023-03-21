@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hart.mapper.ShareMapper">
+	<!-- <update id="create" parameterType="ShareDTO"> begin INSERT INTO cart_share(csno,cskey,mid) 
+		VALUES (cs_seq.nextval, #{cskey},#{mid}); UPDATE members SET csno = (SELECT 
+		csno FROM cart_share WHERE mid=#{mid}) WHERE mid = #{mid}; END; </update> -->
+
+	<insert id="create" parameterType="ShareDTO">
+    <![CDATA[
+    BEGIN
+        INSERT INTO cart_share (
+            csno,
+            cskey,
+            mid
+        )VALUES(
+            cs_seq.NEXTVAL,
+            #{cskey},
+            #{mid}
+        );
+
+        UPDATE members 
+        SET csno = (SELECT csno FROM cart_share WHERE mid= #{mid})
+        WHERE mid = #{mid};
+    END;
+    ]]>
+	</insert>
+
+	<select id="getInfo" parameterType="string"
+		resultType="ShareDTO">
+		SELECT csno,cskey,mid
+		FROM cart_share
+		WHERE csno = (SELECT
+		csno FROM members WHERE mid= #{mid})
+	</select>
+
+	<select id="getInfoWithKey" parameterType="ShareDTO"
+		resultType="ShareDTO">
+		SELECT csno,cskey,mid
+		FROM cart_share
+		WHERE csno = #{csno}
+		and cskey = #{cskey}
+	</select>
+
+
+	<update id="ShareCsno" parameterType="ShareDTO">
+		UPDATE members
+		SET csno =
+		(SELECT csno FROM cart_share WHERE csno = #{csno} AND cskey =
+		#{cskey})
+		WHERE mid = #{mid}
+	</update>
+
+	<update id="updateAmount" parameterType="CartInsertDTO">
+		UPDATE share_products
+		set
+		camount = #{cDTO.pamount} WHERE pid = #{cDTO.pid} and csno =
+		#{csno}
+	</update>
+
+	<!-- 공유 장바구니 상품 불러오기 기능 -->
+	<select id="getProducts" parameterType="string"
+		resultType="CProductDTO">
+		SELECT pc.pid, pi.pimg, pc.pname, pc.pprice, pc.pdiscount,
+		mcamount
+		FROM pscart pc JOIN product_img pi on pc.pid = pi.pid and
+		pdepth=0 and csno = #{csno}
+	</select>
+	
+	<!-- 공유 장바구니 상품 담기 기능  -->
+	<insert id="insertCarts" parameterType="CartInsertDTO">
+		INSERT INTO
+		share_products(csno,pid,camount) VALUES(#{csno},#{cDTO.pid},#{cDTO.pamount})
+	</insert>
+	
+	<delete id="removeCart" parameterType="java.util.List">
+		 DELETE FROM share_products
+    <where>
+    	csno = #{csno}
+    <foreach collection="pids" item="item" open="AND" close="" separator="OR">
+        (pid = #{item})
+    </foreach>
+    </where>
+	</delete>
+</mapper>

@@ -12,7 +12,10 @@ public interface ShareService {
 	int update(CartInsertDTO cDTO, int csno) throws Exception;
 	ShareDTO getInfoWithKey(ShareDTO sDTO) throws Exception;
 	CartDTO getCarts(String csno) throws Exception;
-	
-	int CartInsert(List<String> pids,List<String> pamounts,int csno) throws Exception;
+	boolean shareCsno(ShareDTO sDTO,String csno) throws Exception;
+	int cartInsert(List<String> pids,List<String> pamounts,int csno) throws Exception;
 	int deleteProducts(List<String> pids, int csno) throws Exception;
+	
+	ShareDTO getInfo(String mid) throws Exception;
+	boolean cancleShare(String mid,String csno)throws Exception;
 }

@@ -11,5 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CClassDTO {
 	
-	private String hehe;
+	private String lcid;
+	private String lcday;
+	private int lcstatus;
+	private String lcteacher;
+	private String lcname;
+	private String lcimg;
+	private int lcprice;
 }
