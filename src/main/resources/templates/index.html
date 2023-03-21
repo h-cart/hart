@@ -1,4 +1,4 @@
-<html lang="zxx">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Male_Fashion Template" />
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
   
-  	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  	
   </head>
 
   <body style="">
@@ -670,6 +670,7 @@
               </div>
             </div>
           </div>
+          
           <div
             class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales"
           >
@@ -1351,29 +1352,6 @@
       // ]]>
     </script>
     
-    <script>
-   
- 
-    $(document).ready(function(){
-    	Swal.fire({
-      	  title: 'HART',
-      	  text: "장바구니 공유 요청",
-      	imageUrl: '/img/logo.png',
-      	  showCancelButton: true,
-      	  confirmButtonColor: '#3085d6',
-      	  cancelButtonColor: '#d33',
-      	  confirmButtonText: 'Yes, delete it!'
-      	}).then((result) => {
-      	  if (result.isConfirmed) {
-      	    Swal.fire(
-      	      'Deleted!',
-      	      'Your file has been deleted.',
-      	      'success'
-      	    )
-      	  }
-      	})	
-    })
-    
-    </script>
+
   </body>
 </html>

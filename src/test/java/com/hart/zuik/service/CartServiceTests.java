@@ -40,8 +40,9 @@ public class CartServiceTests {
 	@Test
 	public void getCarts() throws Exception{
 		try {
-			CartDTO cDTO = cService.getCarts("skarns23");
+			CartDTO cDTO = cService.getCarts("skarns23@gmail.com");
 			cDTO.getPLists().forEach(item -> log.info(item));
+			cDTO.getCLists().forEach(item -> log.info(item));
 		}catch (Exception e) {
 			log.info(e.getMessage());
 			throw e;
