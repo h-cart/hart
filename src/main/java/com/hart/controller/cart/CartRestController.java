@@ -32,12 +32,13 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/capi")
 @Log4j2
 public class CartRestController {
-	
-	private final SseEmitters sseEmitters;  
-	  
-    public CartRestController(SseEmitters sseEmitters) {  
-        this.sseEmitters = sseEmitters;  
-    }  
+
+	private final SseEmitters sseEmitters;
+
+	public CartRestController(SseEmitters sseEmitters) {
+		this.sseEmitters = sseEmitters;
+	}
+
 	@Autowired
 	private CartService cService;
 
@@ -48,15 +49,15 @@ public class CartRestController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, String>> insertCart(@RequestBody Map<String, List<String>> map,
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-		
+
 		Map<String, String> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
-			if(mDTO.getCsno()!=null) {
+			if (mDTO.getCsno() != null) {
 				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
-				//sseEmitters.update(mDTO.getCsno(),cDTO);
-			}else {
+				sseEmitters.insert(mDTO.getCsno());
+			} else {
 				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
 				cService.CartInsert(pids, pamounts, mid);
 			}
@@ -72,11 +73,13 @@ public class CartRestController {
 	@PostMapping(value = "/get", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, CartDTO>> getCarts(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-		
+
 		Map<String, CartDTO> map = new HashMap<>();
 		try {
-			if(mDTO.getCsno()==null) map.put("result", cService.getCarts(mDTO.getMid()));
-			else map.put("result", sService.getCarts(mDTO.getCsno()));
+			if (mDTO.getCsno() == null)
+				map.put("result", cService.getCarts(mDTO.getMid()));
+			else
+				map.put("result", sService.getCarts(mDTO.getCsno()));
 			return new ResponseEntity<Map<String, CartDTO>>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			map.put("result", null);
@@ -91,16 +94,15 @@ public class CartRestController {
 		Map<String, String> map = new HashMap<>();
 		int result = -1;
 		try {
-			if(mDTO.getCsno() != null) {
+			if (mDTO.getCsno() != null) {
 				result = sService.update(cDTO, Integer.parseInt(mDTO.getCsno()));
-				sseEmitters.update(mDTO.getCsno(),cDTO);
-			}else {
-			result = cService.updateAmount(cDTO, mDTO.getMid());
+				sseEmitters.update(mDTO.getCsno(), cDTO);
+			} else {
+				result = cService.updateAmount(cDTO, mDTO.getMid());
 			}
 		} catch (Exception e) {
 			log.info(e);
 		}
-
 
 		String msg = result == 1 ? "success" : "fail";
 		map.put("result", msg);
@@ -151,34 +153,34 @@ public class CartRestController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	
-	
-	@GetMapping(value = "/sse/{csno}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)  
-    public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @PathVariable("csno")String csno) {  
-        SseEmitter emitter = new SseEmitter(60*60*60L);  
-        sseEmitters.add(csno,emitter,mDTO);
-        try {  
-            emitter.send(SseEmitter.event()  
-                    .name("connect")  
-                    .data("connected!"));  
-        } catch (IOException e) {  
-            throw new RuntimeException(e);  
-        }  
-        return ResponseEntity.ok(emitter);  
-    }  
-	
-	@PostMapping(value="/share",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Map<String,String>> sharePermit(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @RequestBody ShareDTO sDTO) {
-		Map<String,String> map = new HashMap<>();
+
+	@GetMapping(value = "/sse/{csno}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO,
+			@PathVariable("csno") String csno) {
+		SseEmitter emitter = new SseEmitter(60 * 60 * 60L);
+		sseEmitters.add(csno, emitter, mDTO);
+		try {
+			emitter.send(SseEmitter.event().name("connect").data("connected!"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return ResponseEntity.ok(emitter);
+	}
+
+	@PostMapping(value = "/share", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String, String>> sharePermit(@AuthenticationPrincipal ClubAuthMemberDTO mDTO,
+			@RequestBody ShareDTO sDTO) {
+		Map<String, String> map = new HashMap<>();
 		String msg = "";
 		log.info(sDTO);
 		try {
 			sDTO.setMid(mDTO.getMid());
 			log.info(sDTO);
-			if(sService.shareCsno(sDTO,mDTO.getCsno())) {
-				sseEmitters.deleteCarts(mDTO.getCsno());
-			};
+			if (sService.shareCsno(sDTO, mDTO.getCsno())) {
+				sseEmitters.deleteCarts(mDTO.getCsno(), mDTO.getMid());
+			}
+			;
 			mDTO.setCsno(String.valueOf(sDTO.getCsno()));
 			msg = "success";
 		} catch (Exception e) {
@@ -187,29 +189,29 @@ public class CartRestController {
 			msg = "fail";
 		}
 		map.put("result", msg);
-		return new ResponseEntity<>(map,HttpStatus.OK);
+		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
-	
-	@PostMapping(value="/cancle",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Map<String,String>> cancleShare(@AuthenticationPrincipal ClubAuthMemberDTO mDTO){
-		Map<String,String> map = new HashMap<>();
+
+	@PostMapping(value = "/cancle", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String, String>> cancleShare(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+		Map<String, String> map = new HashMap<>();
 		String msg = "";
 		try {
-			if(sService.cancleShare(mDTO.getMid(), mDTO.getCsno())) {
-				sseEmitters.deleteCarts(mDTO.getCsno());
+			if (sService.cancleShare(mDTO.getMid(), mDTO.getCsno())) {
+				sseEmitters.deleteCarts(mDTO.getCsno(), mDTO.getMid());
 				msg = "all";
-			}else {
+			} else {
 				msg = "one";
+				mDTO.setCsno(null);
 			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			map.put("result", e.getMessage());
-			return new ResponseEntity<Map<String,String>>(map,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, String>>(map, HttpStatus.BAD_REQUEST);
 		}
 		map.put("result", msg);
-		return new ResponseEntity<Map<String,String>>(map,HttpStatus.OK);
+		return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
 	}
-
-
 
 }

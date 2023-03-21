@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Male_Fashion Template">
@@ -238,6 +237,7 @@
                                 <h4 class="order__title">Your order</h4>
                                 <div class="checkout__order__products">Product <span>Total</span></div>
                                 <ul class="checkout__total__products">
+                                    <li th:each="list, itemStat : ${oDTO.pLists}">${itemStats.index}</li>
                                     <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
                                     <li>02. German chocolate <span>$ 170.0</span></li>
                                     <li>03. Sweet autumn <span>$ 170.0</span></li>

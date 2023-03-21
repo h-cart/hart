@@ -85,6 +85,7 @@ public class ShareServiceImpl implements ShareService{
 		try {
 			CartDTO cDTO = CartDTO.builder()
 							.pLists(sMapper.getProducts(csno))
+							.cLists(sMapper.getLClass(csno))
 							.build();
 			return cDTO;
 		}catch (Exception e) {
@@ -112,6 +113,18 @@ public class ShareServiceImpl implements ShareService{
 						throw new Exception("pid가 존재하지 않음");
 					}
 				} catch (Exception e) {
+					log.info(e.getMessage());
+					throw e;
+				}
+			}else {
+				try {
+					if(cMapper.isExistClass(pid)==1) {
+						result += sMapper.insertCarts(cDTO, csno);
+					}else {
+						throw new Exception("존재하지 않는 클래스 ");
+						
+					}
+				}catch (Exception e) {
 					log.info(e.getMessage());
 					throw e;
 				}

@@ -27,7 +27,6 @@ public class CartController {
 	@GetMapping("/mycart")
 	public String getCart(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
 		String url = "";
-		System.out.println(mDTO.getCsno());
 		if (mDTO.getCsno() == null)
 			url = "/cart/mycart";
 		else {

@@ -1,40 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta name="_csrf" th:content="${_csrf.token}" />
-<meta name="_csrf_header" th:content="${_csrf.headerName}" />
-<meta charset="UTF-8" />
-<meta name="description" content="Male_Fashion Template" />
-<meta name="keywords" content="Male_Fashion, unica, creative, html" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Male-Fashion | Template</title>
-<!-- CSS only -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-	crossorigin="anonymous"></script>
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-	rel="stylesheet" />
-<link rel="shortcut icon" type="image/png" th:href="@{/img/logo.png}" />
-
-<!-- Css Styles -->
-<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />
-<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css" />
-<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css" />
-<link rel="stylesheet" href="/css/nice-select.css" type="text/css" />
-<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css" />
-<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
-<link rel="stylesheet" href="/css/style.css" type="text/css" />
+<th:block th:replace="/includes/headTag :: head_tag"></th:block>
 <style>
 .product__cart__item__pic {
 	position: relative;
@@ -63,116 +29,35 @@
 	font-size: 0.8em; /* 작게 보이도록 설정 */
 	text-decoration: line-through; /* 선 그어지도록 설정 */
 }
+.empty-basket {
+  text-align: center;
+  font-size: 20px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .empty-basket {
+    font-size: 16px;
+  }
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
-</head>
 
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-
+	
 	<!-- Offcanvas Menu Begin -->
-	<div class="offcanvas-menu-overlay"></div>
-	<div class="offcanvas-menu-wrapper">
-		<div class="offcanvas__option">
-			<div class="offcanvas__links">
-				<a href="#">Sign in</a> <a href="#">FAQs</a>
-			</div>
-			<div class="offcanvas__top__hover">
-				<span>Usd <i class="arrow_carrot-down"></i></span>
-				<ul>
-					<li>USD</li>
-					<li>EUR</li>
-					<li>USD</li>
-				</ul>
-			</div>
-		</div>
-		<div class="offcanvas__nav__option">
-			<a href="#" class="search-switch"><img src="/img/icon/search.png"
-				alt="" /></a> 
-				<a href="#"><img src="/img/icon/heart.png" alt="" /></a>
-			<a href="#"><img src="/img/icon/cart.png" alt="" /> <span>0</span></a>
-			<div class="price">$0.00</div>
-		</div>
-		<div id="mobile-menu-wrap"></div>
-		<div class="offcanvas__text">
-			<p>Free shipping, 30-day return or refund guarantee.</p>
-		</div>
-	</div>
+	<th:block th:replace="/includes/header :: header1"></th:block>
+   <th:block th:replace="/includes/header :: header2"></th:block>
+   <th:block th:replace="/includes/header :: header3"></th:block>
 	<!-- Offcanvas Menu End -->
 
 	<!-- Header Section Begin -->
-	<header class="header">
-		<div class="header__top">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6 col-md-7">
-						<div class="header__top__left">
-							<p>Free shipping, 30-day return or refund guarantee.</p>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-5">
-						<div class="header__top__right">
-							<div class="header__top__links">
-								<a href="#">Sign in</a> <a href="#">FAQs</a>
-							</div>
-							<div class="header__top__hover">
-								<span>Usd <i class="arrow_carrot-down"></i></span>
-								<ul>
-									<li>USD</li>
-									<li>EUR</li>
-									<li>USD</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-3">
-					<div class="header__logo">
-						<a href="./index.html"><img src="/img/logo.png" alt="" /></a>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6">
-					<nav class="header__menu mobile-menu">
-						<ul>
-							<li><a href="./index.html">Home</a></li>
-							<li class="active"><a href="./shop.html">Shop</a></li>
-							<li><a href="#">Pages</a>
-								<ul class="dropdown">
-									<li><a href="./about.html">About Us</a></li>
-									<li><a href="./shop-details.html">Shop Details</a></li>
-									<li><a href="./shopping-cart.html">Shopping Cart</a></li>
-									<li><a href="./checkout.html">Check Out</a></li>
-									<li><a href="./blog-details.html">Blog Details</a></li>
-								</ul></li>
-							<li><a href="./blog.html">Blog</a></li>
-							<li><a href="./contact.html">Contacts</a></li>
-						</ul>
-					</nav>
-				</div>
-				<div class="col-lg-3 col-md-3">
-					<div class="header__nav__option">
-						<a href="#" class="search-switch"><img
-							src="/img/icon/search.png" alt="" /></a> <a id="share_cart" href="#"><img
-							src="/img/icon/heart.png" alt="" /></a> <a href="#"><img
-							src="/img/icon/cart.png" alt="" /> <span>0</span></a>
-						<div class="price">$0.00</div>
-					</div>
-				</div>
-			</div>
-			<div class="canvas__open">
-				<i class="fa fa-bars"></i>
-			</div>
-		</div>
-	</header>
-	<!-- Header Section End -->
-
+	
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-option">
 		<div class="container">
@@ -207,144 +92,12 @@
 								</tr>
 							</thead>
 							<tbody class="pbody">
+								 
+
 							</tbody>
 						</table>
-						<div class="shop__sidebar__accordion" style="margin-top: 50px">
-							<div class="accordion" id="accordionExample">
-								<div class="card">
-									<div class="card-heading active">
-										<a data-toggle="collapse" data-target="#collapseSix" class=""
-											aria-expanded="true">라이브 클래스 추천</a>
-									</div>
-									<div id="collapseSix" class="collapse show"
-										data-parent="#accordionExample" style="">
-										<table>
-											<tbody>
-												<tr>
-													<td class="product__cart__item">
-														<div class="product__cart__item__pic">
-															<input type="checkbox" class="checkbox"> <img
-																src="/img/shopping-cart/cart-2.jpg" alt="" /></label>
-														</div>
-														<div class="product__cart__item__text">
-															<h6>라이브 클래스 명</h6>
-															<h5>더보기</h5>
-														</div>
-													</td>
-													<td class="quantity__item">
-														<div class="quantity">
-															<div class="pro-qty-2">
-																<input type="text" value="1" />
-															</div>
-														</div>
-													</td>
-													<td class="cart__price">$ 32.50</td>
-													<td class="cart__close"><i class="fa fa-close"></i></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="shop__sidebar__accordion" style="margin-top: 50px">
-							<div class="accordion" id="accordionExample">
-								<div class="card">
-									<div class="card-heading active">
-										<a data-toggle="collapse" data-target="#collapseSix" class=""
-											aria-expanded="true">인기있는 레시피</a>
-									</div>
-									<div id="collapseSix" class="collapse show"
-										data-parent="#accordionExample" style="">
-										<div class="card-body">
-											<div class="shop__sidebar__tags">
-												<a href="#">국</a> <a href="#">찌개</a> <a href="#">볶음</a> <a
-													href="#">안주</a>
-											</div>
-										</div>
-										<table>
-											<tbody>
-												<tr>
-													<td class="product__cart__item">
-														<div class="product__cart__item__pic">
-															<img src="/img/shopping-cart/cart-1.jpg" alt="" />
-														</div>
-														<div class="product__cart__item__text">
-															<h6>레시피 설명</h6>
-															<h6>레시피 설명</h6>
-															<h6>레시피 설명</h6>
-														</div>
-													</td>
-													<td class="quantity__item"></td>
-													<td class="cart__price">더보기</td>
-												</tr>
-												<tr>
-													<td class="product__cart__item">
-														<div class="product__cart__item__pic">
-															<img src="/img/shopping-cart/cart-2.jpg" alt="" />
-														</div>
-														<div class="product__cart__item__text">
-															<h6>Diagonal Textured Cap</h6>
-															<h5>$98.49</h5>
-														</div>
-													</td>
-													<td class="quantity__item">
-														<div class="quantity">
-															<div class="pro-qty-2">
-																<input type="text" value="1" />
-															</div>
-														</div>
-													</td>
-													<td class="cart__price">$ 32.50</td>
-													<td class="cart__close"><i class="fa fa-close"></i></td>
-												</tr>
-												<tr>
-													<td class="product__cart__item">
-														<div class="product__cart__item__pic">
-															<img src="/img/shopping-cart/cart-3.jpg" alt="" />
-														</div>
-														<div class="product__cart__item__text">
-															<h6>Basic Flowing Scarf</h6>
-															<h5>$98.49</h5>
-														</div>
-													</td>
-													<td class="quantity__item">
-														<div class="quantity">
-															<div class="pro-qty-2">
-																<input type="text" value="1" />
-															</div>
-														</div>
-													</td>
-													<td class="cart__price">$ 47.00</td>
-													<td class="cart__close"><i class="fa fa-close"></i></td>
-												</tr>
-												<tr>
-													<td class="product__cart__item">
-														<div class="product__cart__item__pic">
-															<img src="/img/shopping-cart/cart-4.jpg" alt="" />
-														</div>
-														<div class="product__cart__item__text">
-															<h6>Basic Flowing Scarf</h6>
-															<h5>$98.49</h5>
-														</div>
-													</td>
-													<td class="quantity__item">
-														<div class="quantity">
-															<div class="pro-qty-2">
-																<input type="text" value="1" />
-															</div>
-														</div>
-													</td>
-													<td class="cart__price">$ 30.00</td>
-													<td class="cart__close"><i class="fa fa-close"></i></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
+					
 
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
@@ -626,93 +379,10 @@
 	<script type="text/javascript" src="/js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>
 
-
-
-	<script>
-	 function numberWithCommas(x) {
-		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
-	 
-	const token = $("meta[name='_csrf']").attr("content");
-	const header = $("meta[name='_csrf_header']").attr("content");
-	function CartList(){
-		$.ajax({
-			url : '/capi/get',
-			type : 'post',
-			contentType : 'application/json',
-			beforeSend : function(xhr){
-        		xhr.setRequestHeader(header,token);
-        	},
-        	success : function(result){
-        		var i =0;
-        		console.log(result.result.plists);
-        		str = "";
-        		var plist = result.result.plists;
-        		for(;i<result.result.plists.length;i++){
-        			var price = plist[i].pprice;
-        			if(plist[i].pdiscount!=0){
-        				price = price - plist[i].pprice*(plist[i].pdiscount/100);
-        			}
-        			str+="<tr id='"+i+"' data-value='"+plist[i].pid+"'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_"+i+"' type='checkbox' class='checkbox'><img class='pimg' src='"+plist[i].pimg+"' alt='' style='width:104px; height:125px;'/></span>"
-        			str+="</div><div class='product__cart__item__text'><h6>"+plist[i].pname+"</h6>"
-        			str+="<span class='price-box'><h5 class='price'id='price_"+i+"'data-value='"+price+"' >₩"+numberWithCommas(price)+"</h5>"
-        			if(plist[i].pdiscount!=0){
-        				str+="    <h6 class='cost' id='discount_"+i+"'data-value='"+plist[i].pprice+"'>₩"+numberWithCommas(plist[i].pprice)+"</h6>";
-        			}
-        			str+="</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'><span data-value="+i+" class='fa fa-angle-left dec qtybtn btn_minus'></span><input id='quantity_"+i+"'type='text' value='"+plist[i].mcamount+"' readonly='readonly' /><span data-value="+i+" class='fa fa-angle-right inc qtybtn btn_plus'></span>"
-        			str+="</div></div></td><td data-value='"+price*plist[i].mcamount+"'class='cart__price' id='cprice_"+i+"'>₩"+numberWithCommas(price*plist[i].mcamount)+"</td>"
-        			str+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
-        		}
-        		$(".pbody").html(str);
-        		if(result.result.clists.length !=0){
-					
-        		var cstr = "";
-        		cstr += "<table style='margin-top : 50px '><thead><tr><th>강좌</th><th>수강형태</th><th>결제 금액</th><th></th></tr></thead>"
-				cstr += "<tbody id='lvclass'class='pbody'>";
-        		var clist = result.result.clists;
-        		console.log(clist);
-        		for(var j=0;j<clist.length;j++){
-				var status = 'LIVE 방송</br>';
-				status += clist[j].lcday.substring(2,10);
-				if(clist[j].lcstatus==1){
-					status = 'VOD';
-				}
-				cstr+="<tr id='"+(i+j+1)+"' data-value='"+clist[j].lcid+"'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_"+(i+j+1)+"' type='checkbox' class='checkbox'><img class='pimg' src='"+clist[j].lcimg+"' alt='' style='width:104px; height:125px;'/></span>"
-cstr+="</div><div class='product__cart__item__text'><h6>"+clist[j].lcname+"</h6>"
-cstr+="<span class='price-box'><h5 class='price'id='price_"+(i+j+1)+"'data-value='"+clist[j].lcprice+"' >"+clist[j].lcteacher+"</h5>"
-cstr+="</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'>"+status+"";
-cstr+="</div></div></td><td data-value='"+clist[j].lcprice+"'class='cart__price' id='cprice_"+(i+j+1)+"'>₩"+numberWithCommas(clist[j].lcprice)+"</td>"
-cstr+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
-}
-				cstr +="</tbody></table>";
-				$("#ptable").after(cstr);				
-}
-        		
-        	},
-        	error : function(err, xhr, status){
-        		console.log(err);
-        	}
-		})
-	}
-
-	$(document).on("click", ".thumb", function(e) {
-  // 이벤트가 발생한 요소가 이미지이면 체크박스를 클릭한 것처럼 동작
-	  if ($(e.target).is("img")) {
-	    $(this).find(".checkbox").click();
-	  }
-  // 이벤트가 발생한 요소가 체크박스이면 클릭 이벤트를 그대로 전파
-	  else if ($(e.target).is(".checkbox")) {
-	    e.stopPropagation();
-	  }
-	  getCheckboxValue();
-	});
+	<script type="text/javascript" src="/js/cart.js"></script>
 	
-	$(document).on("click", ".fa-close",function(){
-		var pid = $(this).closest('tr').data('value');
-		deleteBtnEvent(pid);
-		
-	})
-	function updateAmount(pid, pamount,pos){
+	<script>
+		function updateAmount(pid, pamount,pos){
 		$.ajax({
 			url : '/capi/updateAmount',
 			type : 'post',
@@ -737,58 +407,70 @@ cstr+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
         	}
 		})
 	}
+	function CartList(){
+		$.ajax({
+			url : '/capi/get',
+			type : 'post',
+			contentType : 'application/json',
+			beforeSend : function(xhr){
+        		xhr.setRequestHeader(header,token);
+        	},
+        	success : function(result){
+        		var i =0;
+        		console.log(result.result.plists);
+        		str = "";
+        		var plist = result.result.plists;
+        		var clist = result.result.clists;
+        		console.log(plist.length,clist.length);
+        		if(plist.length!=0||clist.length!=0){
+        		for(;i<result.result.plists.length;i++){
+        			var price = plist[i].pprice;
+        			if(plist[i].pdiscount!=0){
+        				price = price - plist[i].pprice*(plist[i].pdiscount/100);
+        			}
+        			str+="<tr id='"+i+"' data-value='"+plist[i].pid+"'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_"+i+"' type='checkbox' class='checkbox'><img class='pimg' src='"+plist[i].pimg+"' alt='' style='width:90px; height:90px;'/></span>"
+        			str+="</div><div class='product__cart__item__text'><h6>"+plist[i].pname+"</h6>"
+        			str+="<span class='price-box'><h5 class='price'id='price_"+i+"'data-value='"+price+"' >₩"+numberWithCommas(price)+"</h5>"
+        			if(plist[i].pdiscount!=0){
+        				str+="    <h6 class='cost' id='discount_"+i+"'data-value='"+plist[i].pprice+"'>₩"+numberWithCommas(plist[i].pprice)+"</h6>";
+        			}
+        			str+="</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'><span data-value="+i+" class='fa fa-angle-left dec qtybtn btn_minus'></span><input id='quantity_"+i+"'type='text' value='"+plist[i].mcamount+"' readonly='readonly' /><span data-value="+i+" class='fa fa-angle-right inc qtybtn btn_plus'></span>"
+        			str+="</div></div></td><td data-value='"+price*plist[i].mcamount+"'class='cart__price' id='cprice_"+i+"'>₩"+numberWithCommas(price*plist[i].mcamount)+"</td>"
+        			str+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
+        		} 		
+        		if(clist.length !=0){
+        		console.log(clist);
+        		for(var j=0;j<clist.length;j++){
+				var status = 'LIVE 방송</br>';
+				status += clist[j].lcday.substring(2,10);
+				if(clist[j].lcstatus==1){
+					status = 'VOD';
+				}
+				str+="<tr id='"+(i+j+1)+"' data-value='"+clist[j].lcid+"'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_"+(i+j+1)+"' type='checkbox' class='checkbox'><img class='pimg' src='"+clist[j].lcimg+"' alt='' style='width:104px; height:125px;'/></span>"
+str+="</div><div class='product__cart__item__text'><h6>"+clist[j].lcname+"</h6>"
+str+="<span class='price-box'><h5 class='price'id='price_"+(i+j+1)+"'data-value='"+clist[j].lcprice+"' >"+clist[j].lcteacher+"</h5>"
+str+="</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'>"+status+"";
+str+="</div></div></td><td data-value='"+clist[j].lcprice+"'class='cart__price' id='cprice_"+(i+j+1)+"'>₩"+numberWithCommas(clist[j].lcprice)+"</td>"
+str+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
+}
+				
+				}	
+				$(".pbody").html(str);			
+}else {
+	NoItem();
+}
+        		
+        	},
+        	error : function(err, xhr, status){
+        		console.log(err);
+        	}
+		})
+	}
+
+
+
 	
-	
-	function getCheckboxValue() {
-		var result = 0;
-		var count =0;
-		var discount =0;
-		$("input[name=cartlist]:checked").each(function() {
-			var pos = $(this).prop('id').split("_")[1];
-			if($("#discount_"+pos).data('value')>0){
-				discount+=($("#discount_"+pos).data('value')-$("#price_"+pos).data('value'))*$("#quantity_"+pos).val();
-			}
-			count +=1;
-			var price = $("#cprice_"+pos).data('value');
-			result += +price;
-		});
-		
-		$(".gl_check_all").prop("checked",false);
-		var delivery = result>0? result>=50000?0:5000 : 0;
-		var tprice = $(".tprice");
-		var pdiscount = $(".discount");
-		pdiscount.text('₩'+numberWithCommas(discount));
-		pdiscount.data('value',discount);
-		tprice.text('₩'+numberWithCommas(result));
-		tprice.data('value',result);
-	};
-	
-	$(document).on("click",".btn_minus",function(){
-		
-		var pos = $(this).data('value');
-		var quantity = $("#quantity_"+pos).val();
-		if(quantity ==1){
-			alert('1개 이하로 수량을 조절할 수 없습니다.');
-			return;
-		}
-		updateAmount($("#"+pos).data('value'),+quantity-1,pos);
-		
-		
-	})
-	
-		$(document).on("click",".btn_plus",function(){
-		
-		var pos = $(this).data('value');
-		var quantity = $("#quantity_"+pos).val();
-		console.log(pos);
-		if(+quantity+1 >=6){
-			alert('6개 이상 상품 주문 불가능');
-			return;
-		}
-		updateAmount($("#"+pos).data('value'),+quantity+1,pos);
-		
-		
-	})
+
 	$(document).ready(function(){
 			CartList();
 		})
@@ -814,51 +496,11 @@ cstr+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
 		});
 		
 		
-		function selectRemove(entryNumber) {
 		
-		var msgStr = "";
-		msgStr = "선택하신 상품을 쇼핑백에서 삭제하시겠습니까?";
-		var entryNumber = "";
-		$("input:checkbox[name='cartlist']:checked").each(function(){
-			entryNumber += $(this).val() + ",";
-		});
-		entryNumber = entryNumber.substring(0,entryNumber.length-1);
-		deleteBtnEvent(entryNumber);
-		
-	}
-		function deleteBtnEvent(param){
-			console.log(param);
-			if(param.length==""){
-					alert("선택된 상품이 없습니다. <br /> 삭제할 상품을 선택해 주세요.");
-					return false;
-				}
-				var pids = param.split(",");
-				var cartDTOList = [];
-				for(var i =0;i<pids.length;i++){
-			       	cartDTOList.push(pids[i]);
-				}
-				console.log(cartDTOList);
-		    	
-		    	$.ajax({
-		        	url : '/capi/removes',
-		        	type : 'post',
-		        	contentType : "application/json",
-		        	data : JSON.stringify({
-		        		pids : cartDTOList
-		        	}),
-		        	beforeSend : function(xhr){
-		        		xhr.setRequestHeader(header,token);
-		        	},success : function(data){
-		        		console.log(data);
-		        		CartList();
-		        	}, error : function(e){
-		        		console.log(e);
-		        	}
-		        	
-		        })
-			};
 	</script>
 	
+	
+
 	
 </body>
 	<!-- Js Plugins -->
