@@ -56,7 +56,7 @@ public class ShareServiceTests {
 			List<String> pamounts = new ArrayList<>();
 			pamounts.add("2");
 			pamounts.add("3");
-			log.info(sService.CartInsert(pids, pamounts,24));
+			log.info(sService.cartInsert(pids, pamounts,24));
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}

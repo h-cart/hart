@@ -54,7 +54,7 @@ public class CartRestController {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
 			if(mDTO.getCsno()!=null) {
-				sService.CartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
+				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
 				//sseEmitters.update(mDTO.getCsno(),cDTO);
 			}else {
 				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
@@ -155,9 +155,9 @@ public class CartRestController {
 	
 	
 	@GetMapping(value = "/sse/{csno}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)  
-    public ResponseEntity<SseEmitter> connect(@PathVariable("csno")String csno) {  
+    public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @PathVariable("csno")String csno) {  
         SseEmitter emitter = new SseEmitter(60*60*60L);  
-        sseEmitters.add(csno,emitter);
+        sseEmitters.add(csno,emitter,mDTO);
         try {  
             emitter.send(SseEmitter.event()  
                     .name("connect")  
@@ -167,7 +167,48 @@ public class CartRestController {
         }  
         return ResponseEntity.ok(emitter);  
     }  
-
+	
+	@PostMapping(value="/share",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Map<String,String>> sharePermit(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @RequestBody ShareDTO sDTO) {
+		Map<String,String> map = new HashMap<>();
+		String msg = "";
+		log.info(sDTO);
+		try {
+			sDTO.setMid(mDTO.getMid());
+			log.info(sDTO);
+			if(sService.shareCsno(sDTO,mDTO.getCsno())) {
+				sseEmitters.deleteCarts(mDTO.getCsno());
+			};
+			mDTO.setCsno(String.valueOf(sDTO.getCsno()));
+			msg = "success";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			msg = "fail";
+		}
+		map.put("result", msg);
+		return new ResponseEntity<>(map,HttpStatus.OK);
+	}
+	
+	@PostMapping(value="/cancle",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Map<String,String>> cancleShare(@AuthenticationPrincipal ClubAuthMemberDTO mDTO){
+		Map<String,String> map = new HashMap<>();
+		String msg = "";
+		try {
+			if(sService.cancleShare(mDTO.getMid(), mDTO.getCsno())) {
+				sseEmitters.deleteCarts(mDTO.getCsno());
+				msg = "all";
+			}else {
+				msg = "one";
+			}
+			
+		}catch (Exception e) {
+			map.put("result", e.getMessage());
+			return new ResponseEntity<Map<String,String>>(map,HttpStatus.BAD_REQUEST);
+		}
+		map.put("result", msg);
+		return new ResponseEntity<Map<String,String>>(map,HttpStatus.OK);
+	}
 
 
 

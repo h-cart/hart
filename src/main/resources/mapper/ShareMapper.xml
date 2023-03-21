@@ -84,4 +84,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </foreach>
     </where>
 	</delete>
+	<select id="isOwner" resultType="int" >
+		SELECT count(*) FROM cart_share WHERE mid = #{mid}
+	</select>
+	
+	<delete id="deleteAll">
+		begin
+			UPDATE members set csno = null WHERE csno = #{csno};
+			DELETE FROM share_products WHERE csno = #{csno};
+			DELETE FROM cart_share WHERE csno = #{csno} and mid = #{mid};
+			commit;
+		end;
+	</delete>
+	
+	<update id="deleteOne">
+		UPDATE members SET csno = null WHERE mid = #{mid}
+	</update>
 </mapper>

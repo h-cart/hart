@@ -96,7 +96,7 @@ public class ShareServiceImpl implements ShareService{
 
 	@Transactional
 	@Override
-	public int CartInsert(List<String> pids,List<String> pamounts ,int csno) throws Exception {
+	public int cartInsert(List<String> pids,List<String> pamounts ,int csno) throws Exception {
 		int result = 0;
 		for (int i=0;i<pids.size();i++) {
 			String pid = pids.get(i);
@@ -138,6 +138,41 @@ public class ShareServiceImpl implements ShareService{
 			throw e;
 		}
 		
+	}
+	
+	@Transactional
+	@Override
+	public boolean shareCsno(ShareDTO sDTO,String csno) throws Exception {
+		boolean result = false;
+		try {
+			if(sMapper.isOwner(sDTO.getMid())==1&&csno !=null) {
+				result = true;
+				sMapper.deleteAll(sDTO.getMid(), csno);
+			}
+			sMapper.ShareCsno(sDTO);
+			return result;
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			throw e;
+		}
+	}
+
+	@Override
+	public boolean cancleShare(String mid,String csno) throws Exception {
+		boolean result = false;
+		log.info(mid);
+		log.info(csno);
+		try {
+			if(sMapper.isOwner(mid)==1) {
+				result = true;
+				sMapper.deleteAll(mid, csno);
+			}else sMapper.deleteOne(mid);
+			return result;
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			throw e;
+		}
+
 	}
 	
 	

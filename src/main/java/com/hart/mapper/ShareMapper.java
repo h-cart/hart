@@ -24,5 +24,7 @@ public interface ShareMapper {
 	List<CClassDTO> getClasss(String mid)throws SQLException;
 	int updateAmount(@Param("cDTO")CartInsertDTO cDTO, @Param("csno")int csno) throws SQLException;
 	int removeCart(@Param("pids")List<String> pids, @Param("csno")int csno) throws SQLException;
-	
+	int isOwner(String mid) throws SQLException;
+	int deleteAll(@Param("mid")String mid, @Param("csno") String csno);
+	int deleteOne(String mid)throws SQLException;
 }

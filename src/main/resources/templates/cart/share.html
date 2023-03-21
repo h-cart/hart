@@ -70,7 +70,7 @@
 </head>
 
 <body>
-	<input type='hidden' th:value="${csno}" id="csno">
+	<input type='hidden' th:value="${sDTO.csno}" id="csno">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -441,6 +441,11 @@
 								<a href="#"><i class="fa fa-spinner"></i> Update cart</a>
 							</div>
 						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="continue__btn update__btn" id='btn_cancle'>
+								<a href="#"><i class="fa fa-spinner"></i> 공유 취소</a>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-4">
@@ -479,6 +484,8 @@
 						<a href="#"><img src="/img/payment.png" alt="" /></a>
 					</div>
 				</div>
+				<input type='hidden' th:value="${sDTO.csno}" name='csno'>
+				<input type='hidden' th:value="${sDTO.cskey}" name='cskey'>
 				<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
 					<div class="footer__widget">
 						<h6>Shopping</h6>
@@ -935,15 +942,39 @@
 			$("[data-value="+pid+"]").remove();
 		}
 		getCheckboxValue();
-		
-	    
 	});
+	
+	/* 공유 장바구니 삭제 시 이벤트를 받아 화면 처리  */
+	sse.addEventListener('delete', e => {  
+	    const { data: receivedRemoves} = e;
+			alert('장바구니 삭제');
+			console.log('장바구니 삭제됨 ');
+	});
+	
+	$(document).on("click","#btn_cancle",function(){
+		$.ajax({
+		        	url : '/capi/cancle',
+		        	type : 'post',
+		        	contentType : "application/json",
+		        	beforeSend : function(xhr){
+		        		xhr.setRequestHeader(header,token);
+		        	},success : function(data){
+		        		console.log(data);
+		        	}, error : function(e){
+		        		console.log(e);
+		        	}
+		        	
+		        })
+	})
+	
 </script>
 
 <script type="text/javascript">
+	const csno = $("input[name=csno]").val();
+	const cskey = $("input[name=cskey]").val();
   // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
   Kakao.init('26c618ece5bb5f3d4fd7d428c0f0e7d7');
-
+	url = 'https://localhost/cart/group?csno='+csno+'&cskey='+cskey
   // SDK 초기화 여부를 판단합니다.
   console.log(Kakao.isInitialized());
 
@@ -955,16 +986,16 @@
         description: '공유 장바구니로 하나되어 하는 쇼핑',
         imageUrl: 'https://img.freepik.com/premium-vector/sunflower-pot-illustration-cartoon-with-a-shopping-cart-cute-style-design-for-t-shirt-sticker-logo-element_152558-19556.jpg',
         link: {
-            mobileWebUrl: 'https://localhost/cart/mycart?csno=24&cskey=0owuam76ka7kob8VFhqM',
-            webUrl: 'https://localhost/cart/mycart?csno=24&cskey=0owuam76ka7kob8VFhqM',
+            mobileWebUrl: url,
+            webUrl: url,
           },
       },
       buttons: [
         {
           title: '공유 요청 확인하기',
           link: {
-            mobileWebUrl: 'https://localhost/cart/mycart?csno=24&cskey=0owuam76ka7kob8VFhqM',
-            webUrl: 'https://localhost/cart/mycart?csno=24&cskey=0owuam76ka7kob8VFhqM',
+            mobileWebUrl: url,
+            webUrl: url,
           },
         },
       ],
