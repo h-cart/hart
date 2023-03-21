@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hart.mapper.CartMapper">
+	<insert id="insertCarts" parameterType="CartInsertDTO">
+		INSERT INTO
+		my_cart(mid,pid,mcamount) VALUES(#{mid},#{cDTO.pid},#{cDTO.pamount})
+	</insert>
+	<!-- <update id="insertCarts" parameterType="java.util.List"> <foreach collection="cDTO.pids" 
+		item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * 
+		FROM DUAL"> INTO my_cart (mid,pid,mcamount) VALUES(#{mid},#{item},#{cDTO.pamounts[index]}) 
+		</foreach> </update> -->
+	<select id="isExistProduct" parameterType="string" resultType="int">
+		SELECT count(*)
+		FROM products
+		WHERE pid = #{pid}
+	</select>
+	
+	<select id="isExistClass" parameterType="string" resultType="int">
+		SELECT count(*)
+		FROM live_class
+		WHERE lcid = #{lcid}
+	</select>
+	
+	<select id="getProducts" parameterType="string" resultType="CProductDTO">
+		SELECT pc.pid, pi.pimg, pc.pname, pc.pprice, pc.pdiscount, mcamount
+		FROM pcart pc JOIN product_img pi on pc.pid = pi.pid and pdepth=0 and mid = #{mid}
+	</select>
+	
+	<update id="updateAmount" parameterType="CartInsertDTO">
+		UPDATE my_cart set mcamount = #{cDTO.pamount} WHERE pid = #{cDTO.pid} and mid = #{mid}
+	</update>
+	
+	<delete id="removeCart" parameterType="java.util.List">
+		 DELETE FROM my_cart 
+    <where>
+    	mid = #{mid}
+    <foreach collection="pids" item="item" open="AND" close="" separator="OR">
+        (pid = #{item})
+    </foreach>
+    </where>
+	</delete>
+	
+</mapper>

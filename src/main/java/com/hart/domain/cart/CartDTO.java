@@ -14,5 +14,6 @@ import lombok.NoArgsConstructor;
 public class CartDTO {
 	
 	private List<CProductDTO> pLists;
+	private List<CClassDTO> cLists;
 	
 }
