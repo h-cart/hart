@@ -541,7 +541,31 @@
       // ]]>
    </script>
 
-
+<script>
+	const token = $("meta[name='_csrf']").attr("content");
+	const header = $("meta[name='_csrf_header']").attr("content");
+			pids = [];
+		    pids.push(res);
+		    pamounts = [];
+		    pamounts.push(1);
+		    $.ajax({
+		    	url : '/capi/insert',
+				beforeSend : function(xhr){
+	        		xhr.setRequestHeader(header,token);
+	        	},
+	        	type : 'post',
+	        	contentType : "application/json",
+	        	data : JSON.stringify({
+	        		pids : pids,
+	        		pamounts : pamounts
+	        	}),
+	        	success : function(result){
+	        		console.log(result);
+	        	},error : function(err, xhr, status){
+	        		console.log(err)
+	        	}
+		    })
+</script>
 </body>
 
 </html>
