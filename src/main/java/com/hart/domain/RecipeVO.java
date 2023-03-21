@@ -17,4 +17,8 @@ public class RecipeVO {
 	int rcano;
 	String rdetail;
 
-}
+	String rcimg;
+	String rcstep;
+
+
+};

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hart.domain.CategoryVO;
+import com.hart.domain.ProductCategorylistVO;
 import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
 import com.hart.service.ProductsService;
@@ -24,20 +25,33 @@ public class ProductsController {
 	private ProductsService productsservice;
 
 	@GetMapping("/list")
-	public String productlist(Model model, ProductsVO productsVO) {
+	public String productlist(Model model,  int pcno) {
 
 		List<CategoryVO> category = null;
 		List<ProductsVO> productlist = null;
+		//List<CategoryVO> categorypcno = null;
+		List<ProductCategorylistVO> productcategorylist = null;
 		try {
 			category = productsservice.getcategorybar();
-			productlist = productsservice.getProductList(productsVO);
-			
-	//		categorysamll=productsservice.getcategorysmall(productsVO);
-		} catch (Exception e) {
+			//왼쪽 카테고리 리스트 
+			productlist = productsservice.getproductslist(pcno);
 
+			// categorypcno = productsservice.getcategorysmall(pcno);
+
+			productcategorylist = productsservice.getproductcatrogrtlist(pcno);
+
+System.out.println("productcategorylist Controller========="+productcategorylist);
+
+
+			// categorysamll=productsservice.getcategorysmall(productsVO);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		model.addAttribute("productcategorylist", productcategorylist);
+		// model.addAttribute("categorypcno", categorypcno);
 		model.addAttribute("category", category);
+
 		model.addAttribute("productlist", productlist);
 
 		return "product/productList";
@@ -59,7 +73,7 @@ public class ProductsController {
 
 			System.out.println("Detail ==================>>>>>>" + Detail);
 
-			model.addAttribute("Detail",Detail);
+			model.addAttribute("Detail", Detail);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,16 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.CategoryVO;
+import com.hart.domain.ProductsVO;
 import com.hart.service.ProductsService;
 
 import lombok.extern.log4j.Log4j2;
@@ -47,30 +49,24 @@ public class ProductRestController {
 
 	}
 
-	@GetMapping(value = "/clistsamll", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE }
-			)
-	
-			public ResponseEntity<Map<String, List<CategoryVO>>> getCategorysmall() {
+	@PostMapping(value = "/clistsamll", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+	        MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String, List<ProductsVO>>> getProductsList(@RequestBody Map<String, String> data) {
 
-		try {
+	    try {
+	        String pcno = data.get("pcno");
+	        List<ProductsVO> getproductslist = pService.getproductslistajax(Integer.parseInt(pcno));
+	        log.info("getproductslist=>>>"+getproductslist);
+	        
+	        Map<String, List<ProductsVO>> result = new HashMap<>();
+	        result.put("getproductslist", getproductslist);
 
-			Map<String, List<CategoryVO>> result = new HashMap<>();
+	        return new ResponseEntity<Map<String, List<ProductsVO>>>(result, HttpStatus.OK);
 
-	
-			//List<CategoryVO> categorysmall = pService.getcategorysmall(pcno);
-
-			//result.put("categorysmall", categorysmall);
-
-			
-
-			return new ResponseEntity<Map<String, List<CategoryVO>>>(result, HttpStatus.OK);
-
-		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<CategoryVO>>>(HttpStatus.BAD_REQUEST);
-		}
-
+	    } catch (Exception e) {
+	        log.info(e.getMessage());
+	        return new ResponseEntity<Map<String, List<ProductsVO>>>(HttpStatus.BAD_REQUEST);
+	    }
 	}
 
 }

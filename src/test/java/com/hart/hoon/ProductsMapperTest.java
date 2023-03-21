@@ -18,13 +18,12 @@ public class ProductsMapperTest {
 	@Autowired
 	private ProductsService productsservice;
 
-	@Test
-	public void ProductTests() throws Exception {
-
-		ProductsVO productsVO = new ProductsVO();
-		productsVO.setPcategory("계절 과일");
-		log.info("productsVO =" + productsVO);
-		List<ProductsVO> getProductList = productsservice.getProductList(productsVO);
-		log.info("getProductList! :" + getProductList);
-	}
+	/*
+	 * @Test public void ProductTests() throws Exception {
+	 * 
+	 * ProductsVO productsVO = new ProductsVO(); productsVO.setPcategory("계절 과일");
+	 * log.info("productsVO =" + productsVO); //List<ProductsVO> getProductList =
+	 * productsservice.getproductslist(productsVO); log.info("getProductList! :" +
+	 * getProductList); }
+	 */
 }
