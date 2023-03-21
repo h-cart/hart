@@ -5,12 +5,16 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 
 import com.hart.domain.member.ClubAuthMemberDTO;
 
@@ -35,6 +39,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws IOException, ServletException {
 		log.info("------------------------");
 		log.info("onAuthenticationSuccess");
+		
+		HttpSession session = request.getSession();
 		// 인증 객체에서 사용자 정보 저장
 		ClubAuthMemberDTO clubAuthMemberDTO = (ClubAuthMemberDTO) authentication.getPrincipal();
 		log.info(clubAuthMemberDTO);
@@ -42,10 +48,18 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		int fromSocial = clubAuthMemberDTO.getSocial();
 		// 사용자 암호 1111 인지 확인
 		boolean passresult = passwordEncoder.matches("1111", clubAuthMemberDTO.getMpassword());
-
+		
+		RequestCache requestCache = new HttpSessionRequestCache();
+		SavedRequest savedRequest = requestCache.getRequest(request, response); 
+		String targetUrl ="/";
+		if (savedRequest!=null) {
+			 targetUrl = savedRequest.getRedirectUrl();
+		}
 		// 소셜 사용자이고 암호 1111이면 modify.html 페이지로 이동
 		if ((fromSocial == 1) && passresult) {
-			redirectStrategy.sendRedirect(request, response, "/member/modify?social=social");
+			
+			//redirectStrategy.sendRedirect(request, response, "/member/modify?social=social");
+			redirectStrategy.sendRedirect(request, response,targetUrl);
 		} // end if
 
 	}// end onAu…
