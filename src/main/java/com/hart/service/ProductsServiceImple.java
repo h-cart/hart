@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hart.domain.CategoryVO;
+import com.hart.domain.ProductCategorylistVO;
 import com.hart.domain.ProductimgVO;
 import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
@@ -19,43 +20,74 @@ public class ProductsServiceImple implements ProductsService {
 
 	@Autowired
 	private ProductsMapper productsmapper;
-
+	
 	
 	@Override
-	public List<ProductsVO> getProductList(ProductsVO productsVO) {
-
-		log.info("#############productVO @@@@@@@@@=" + productsVO);
-
-		return productsmapper.getproductslist(productsVO);
+	public List<ProductsVO> getproductslist(int pcno) {
+		
+		log.info("#############productVO getProductList @@@@@@@@@=" + pcno);
+		//1제품 목록 가져오기
+		return productsmapper.getproductslist(pcno);
 	}
-
 	
 	@Override
 	public List<CategoryVO> getcategorybar() {
-
-		
+		//2대분류 카테고리 가져오기
 		return productsmapper.getcategorybar();
 	}
-
+	
 	
 	@Override
 	public ProductsDetailVO getProductDetails(String pid) {
-
+		//3 제품 상페 이미지 가져오기
 		ProductsVO detail = productsmapper.getproductDetail(pid);
 		List<ProductimgVO> pimg = productsmapper.getproductDetailimg(pid);
-		
-
+		//4 제품 상세 이미지 가져오기
 		return new ProductsDetailVO(detail, pimg);
 
 	}
+
+	/*
+	 * @Override//5카테고리 소분류 가져오기 public List<CategoryVO> getcategorysmall(int pcno)
+	 * {
+	 * 
+	 * return productsmapper.getcategorysmall(pcno); }
+	 */
 	
+	@Override//6 카테고리 리스트 가져오기
+	public List<ProductCategorylistVO> getproductcatrogrtlist(int pcno){
+		//log.info("===============getproductcatrogrtlist getproductcatrogrtlist Service ============" + pcno);
+		return productsmapper.getproductcatrogrtlist(pcno);
+	}
+	
+	
+	@Override//6 카테고리 리스트 가져오기
+	public List<ProductsVO> getproductslistajax(int pcno){
+		
+		return productsmapper.getproductslistajax(pcno);
+	}
+
 	
 	/*
-	 * @Override public List<CategoryVO> getcategorysmall(String pid){
+	 * @Override public List<ProductlistintegVO> Productlistinteg(int pcno) { //3 제품
+	 * 상페 이미지 가져오기
 	 * 
-	 * return productsmapper.getcategorysmall(pid); }
+	 * List<ProductsVO> productlist = productsmapper.getproductslist(pcno);
+	 * 
+	 * System.out.println("productlistServiceImple ======="+ productlist);
+	 * 
+	 * List<ProductsidesamllVO> smallcategory
+	 * =productsmapper.sideamllcategory(pcno);
+	 * 
+	 * System.out.println("smallcategorytServiceImple ======="+ smallcategory); //4
+	 * 제품 상세 이미지 가져오기 return new ArrayList<>(Arrays.asList(new
+	 * ProductlistintegVO(productlist, smallcategory)));
+	 * 
+	 * 
+	 * }
 	 */
-
-
-	
 }
+
+
+
+

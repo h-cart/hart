@@ -6,21 +6,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.hart.mapper.RecipeMapper">
 
-	<select id="recipelist" resultType="com.hart.domain.RecipeVO">
+	<select id="recipelist" resultType="RecipeVO">
 		select *
 		from recipe
 	</select>
 
 
-<!-- 디테일 조인 -->
-	<select id="recipeDetail" resultType="com.hart.domain.RecipeVO">
-	
-		select * from recipe
-		where rid= #{rid}
+	<select id="recipeDetail" resultType="RecipeVO">
 
+        select * 
+        from recipe
+		where rid= to_number(#{rid})
 
 	</select>
+	
+	
+	 <select id="RecipeContent" resultType="RecipeContentVO">
 
+     select * from recipe_content where rid = to_number(#{rid})
+
+	</select> 
+	
+	
 </mapper>
 
 

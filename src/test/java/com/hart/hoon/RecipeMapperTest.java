@@ -4,26 +4,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.hart.domain.RecipeVO;
 import com.hart.mapper.RecipeMapper;
 
+import lombok.extern.log4j.Log4j2;
+
+@SpringBootApplication
+@Log4j2
 public class RecipeMapperTest {
+    	
+	@Autowired
+	private RecipeMapper rMapper;
     
-    @Test
+	
+	@Test
     void testRecipeDetail() {
-     
+		
+		  //log.info(rMapper.recipeDetail(210105100006001L));
+		 
+    }
+	@Test
+    void test2() {
+		
+		log.info(rMapper.recipelist());
         
-		/*
-		 * try { String rid ="210219100006001"; // RecipeMapper recipeMapper =
-		 * sqlSession.getMapper(RecipeMapper.class); RecipeVO recipe =
-		 * RecipeMapper.recipeDetail(rid); // rid가 210219100006001인 레시피의 상세 정보를 가져옴
-		 * assertNotNull(recipe); assertEquals(1, recipe.getRid("210219100006001")); //
-		 * 레시피 ID가 210219100006001인지 확인 // 상세 정보를 출력하는 코드
-		 * 
-		 * } finally {
-		 * 
-		 * }
-		 */
+	
+	
     }
 }

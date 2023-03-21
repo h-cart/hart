@@ -10,10 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="com.hart.domain.ProductsVO">
 
 		select * from
-		(select p.pname, p.pprice, p.pdiscount, p.pcno, p.pid ,p.stag, pc.pcategory,
+		(select p.pname, p.pprice, p.pdiscount,p.pcno,
+		 p.pid ,p.stag, pc.pcategory,
 		pcno_top
 		from products p
-		join product_category pc
+		join
+		product_category pc
 		on p.pcno = pc.pcno
 		where pc.pcno_top= #{pcno}) pd
 		join product_img pi
@@ -21,7 +23,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where pdepth = 0
 
 	</select>
-
+	
+	
+	<!-- 에이작스로 왼쪽에 카테고리 누르면 상품 가져옴 -->
+	 <select id="getproductslistajax" resultType="com.hart.domain.ProductsVO">
+		
+		 select pname,pprice,pcno,stag,pdiscount from products where
+		pcno=#{pcno}
+	
+	</select> 
 
 	<select id="getcategorybar"
 		resultType="com.hart.domain.CategoryVO">
@@ -31,18 +41,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where pcno_top is null
 
 	</select>
-	
-	
-		<select id="getcategorysmall"
-		resultType="com.hart.domain.CategoryVO">
-		  select *
+
+
+	<!-- <select id="getcategorysmall"
+		resultType="com.hart.domain.productsVO">
+		select *
 		from
 		product_category
-		where pcno_top =#{pcno};
+		where pcno_top =#{pcno}
 
-		</select>
-	
-	
+	</select> -->
+
+
 
 
 	<select id="getcategoryproducts"
@@ -60,7 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getproductDetail"
 		resultType="com.hart.domain.ProductsVO">
-		SELECT pd.pid, pd.porigin, pd.pcount, pd.pdetail, pd.pbname,
+		SELECT pd.pid, pd.porigin, pd.pcount, pd.pdetail,
+		pd.pbname,
 		pd.pbsmall, pd.pbdesc, pd.pname, pd.pprice, pd.pcno,
 		pd.stag, pd.pdiscount, pd.ptitle
 		FROM products pd
@@ -71,13 +82,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getproductDetailimg"
 		resultType="com.hart.domain.ProductimgVO">
- 	   select * from product_img
-        where pid = #{pid}
-        order by pdepth
-        </select>
-        
+		select * from product_img
+		where pid = #{pid}
+		order by pdepth
+	</select>
+	
+	
+	<!-- 왼쪽 카테고리 리스트 가져옴 -->
+	<select id ="getproductcatrogrtlist" resultType="ProductCategorylistVO">
+	  select * from product_category where pcno_top=#{pcno}
+	</select>
+	
+	
 
 
+
+<!-- <select id ="getproductslist" resultType="ProductsVO">
+	 	select * from
+		(select p.pname, p.pprice, p.pdiscount,p.pcno,
+		 p.pid ,p.stag, pc.pcategory,
+		pcno_top
+		from products p
+		join
+		product_category pc
+		on p.pcno = pc.pcno
+		where pc.pcno_top= #{pcno}) pd
+		join product_img pi
+		on pd.pid = pi.pid
+		where pdepth = 0
+	</select> -->
 </mapper>
 
 

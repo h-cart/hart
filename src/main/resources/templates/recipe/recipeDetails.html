@@ -235,12 +235,12 @@
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-9 text-center">
 					<div class="blog__hero__text">
-						 <h2 th:text="${recipeDetail.rtitle}"></h2> 
-						<ul>
-							<li>난이도 : 쉬움</li>
-							<li>조리 시간 : 30분</li>
+						<h2 th:text="${recipeDetail.recipedetailtop.rtitle}"></h2>
+						<b><ul>
+							난이도 : <li th:text="${recipeDetail.recipedetailtop.rlevel}"></li>
+							조리시간 : <li th:text="${recipeDetail.recipedetailtop.rtime}"></li>
 
-						</ul>
+						</ul></b>
 					</div>
 				</div>
 			</div>
@@ -254,9 +254,7 @@
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-12">
 					<div class="blog__details__pic">
-						<img
-							src="https://tohomeimage.thehyundai.com/DP/DP018/2020/11/23/163540/zktdz.jpg"
-							alt="">
+						<img th:src="${recipeDetail.recipedetailtop.rimg}" alt="">
 					</div>
 				</div>
 				<div class="col-lg-8">
@@ -271,8 +269,7 @@
 							</ul>
 						</div>
 						<div class="blog__details__text">
-							<p>도토리를 먹여 키운 베요타 등급 이베리코는 특유의 견과류 같은 향을 갖고 있습니다. 상큼한 사과를 곁들여
-								이색적인 스테이크 요리를 시도해보세요. 사과의 달콤하고 새콤한 맛과 이베리코의 육향이 멋지게 어울립니다.</p>
+							<p th:text="${recipeDetail.recipedetailtop.rdetail}"></p>
 
 						</div>
 						<div class="blog__details__quote">
@@ -291,58 +288,29 @@
 
 
 
+						<th th:each="recipeDetail : ${recipeDetail.Rcontent}">
+							<div class="blog__details__text">
+								<img alt=""
+									th:src="${recipeDetail.rcimg}">
+								<br> </b>
+								 <p ></p>
 
-						<div class="blog__details__text">
-							<img alt=""
-								src="//tohomeimage.thehyundai.com/images/000111/20201123172419931_WEJ6PVR7.jpg">
-							<br> </b>
-							<p>STEP1</p>
+								<p></p>
+							</div>
 
-							<p>이베리코 목심살은 굽기 20분 전 실온에 꺼낸 뒤, 굽기 전에 키친타월로 수분을 제거하고 소금과 후추를
-								고루 뿌려 준비한다. 팬을 뜨겁게 달궈 포도씨유를 두르고 가장 센 불에서 5분간 굽는다..</p>
-						</div>
+							<div class="blog__details__quote">
+								<i class="fa " th:text="${recipeDetail.rcstep}"></i>
 
-						<div class="blog__details__quote">
-							<i class="fa ">Step1</i>
-
-							<p>이베리코 목심살은 굽기 20분 전 실온에 꺼낸 뒤, 굽기 전에 키친타월로 수분을 제거하고 소금과 후추를
-								고루 뿌려 준비한다. 팬을 뜨겁게 달궈 포도씨유를 두르고 가장 센 불에서 5분간 굽는다.</p>
-						</div>
-
+								 <p th:text="${recipeDetail.rcdetail}"></p> 
+							</div>
+						</th>
 
 
-						<div class="blog__details__text">
-							<img alt=""
-								src="https://tohomeimage.thehyundai.com/images/000111/20201123172430160_H0KKEKBZ.jpg">
-							<br> </b>
-							<p>STEP2</p>
-							<b>
 
-								<p>이베리코 목심살은 굽기 20분 전 실온에 꺼낸 뒤, 굽기 전에 키친타월로 수분을 제거하고 소금과 후추를
-									고루 뿌려 준비한다. 팬을 뜨겁게 달궈 포도씨유를 두르고 가장 센 불에서 5분간 굽는다.</p>
-						</div>
 
-						<div class="blog__details__text">
-							<img alt=""
-								src="https://tohomeimage.thehyundai.com/images/000111/20201123172441134_530YIU8N.jpg">
-							<br> </b>
-							<p>STEP3</p>
-							<b>
 
-								<p>이베리코 목심살은 굽기 20분 전 실온에 꺼낸 뒤, 굽기 전에 키친타월로 수분을 제거하고 소금과 후추를
-									고루 뿌려 준비한다. 팬을 뜨겁게 달궈 포도씨유를 두르고 가장 센 불에서 5분간 굽는다.</p>
-						</div>
 
-						<div class="blog__details__text">
-							<img alt=""
-								src="https://tohomeimage.thehyundai.com/images/000111/20201123172451879_ALARBZ4M.jpg">
-							<br> </b>
-							<p>STEP4</p>
-							<b>
 
-								<p>이베리코 목심살은 굽기 20분 전 실온에 꺼낸 뒤, 굽기 전에 키친타월로 수분을 제거하고 소금과 후추를
-									고루 뿌려 준비한다. 팬을 뜨겁게 달궈 포도씨유를 두르고 가장 센 불에서 5분간 굽는다.</p>
-						</div>
 
 
 						<div class="blog__details__option">
@@ -455,8 +423,8 @@
 						<p>
 							Copyright ©
 							<script>
-                                document.write(new Date().getFullYear());
-                            </script>
+								document.write(new Date().getFullYear());
+							</script>
 							2023202320232020 All rights reserved | This template is made with
 							<i class="fa fa-heart-o" aria-hidden="true"></i> by <a
 								href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -493,120 +461,162 @@
 	<script src="/js/main.js"></script>
 	<!-- Code injected by live-server -->
 	<script>
-        // <![CDATA[  <-- For SVG support
-        if ('WebSocket' in window) {
-            (function () {
-                function refreshCSS() {
-                    var sheets = [].slice.call(document.getElementsByTagName("link"));
-                    var head = document.getElementsByTagName("head")[0];
-                    for (var i = 0; i < sheets.length; ++i) {
-                        var elem = sheets[i];
-                        var parent = elem.parentElement || head;
-                        parent.removeChild(elem);
-                        var rel = elem.rel;
-                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-                        }
-                        parent.appendChild(elem);
-                    }
-                }
-                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                var address = protocol + window.location.host + window.location.pathname + '/ws';
-                var socket = new WebSocket(address);
-                socket.onmessage = function (msg) {
-                    if (msg.data == 'reload') window.location.reload();
-                    else if (msg.data == 'refreshcss') refreshCSS();
-                };
-                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                    console.log('Live reload enabled.');
-                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                }
-            })();
-        }
-        else {
-            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-        }
-	// ]]>
-    </script>
+		// <![CDATA[  <-- For SVG support
+		if ('WebSocket' in window) {
+			(function() {
+				function refreshCSS() {
+					var sheets = [].slice.call(document
+							.getElementsByTagName("link"));
+					var head = document.getElementsByTagName("head")[0];
+					for (var i = 0; i < sheets.length; ++i) {
+						var elem = sheets[i];
+						var parent = elem.parentElement || head;
+						parent.removeChild(elem);
+						var rel = elem.rel;
+						if (elem.href && typeof rel != "string"
+								|| rel.length == 0
+								|| rel.toLowerCase() == "stylesheet") {
+							var url = elem.href.replace(
+									/(&|\?)_cacheOverride=\d+/, '');
+							elem.href = url
+									+ (url.indexOf('?') >= 0 ? '&' : '?')
+									+ '_cacheOverride='
+									+ (new Date().valueOf());
+						}
+						parent.appendChild(elem);
+					}
+				}
+				var protocol = window.location.protocol === 'http:' ? 'ws://'
+						: 'wss://';
+				var address = protocol + window.location.host
+						+ window.location.pathname + '/ws';
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload')
+						window.location.reload();
+					else if (msg.data == 'refreshcss')
+						refreshCSS();
+				};
+				if (sessionStorage
+						&& !sessionStorage
+								.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+					console.log('Live reload enabled.');
+					sessionStorage.setItem(
+							'IsThisFirstTime_Log_From_LiveServer', true);
+				}
+			})();
+		} else {
+			console
+					.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+		}
+		// ]]>
+	</script>
 
 
 	<!-- Code injected by live-server -->
 	<script>
-        // <![CDATA[  <-- For SVG support
-        if ('WebSocket' in window) {
-            (function () {
-                function refreshCSS() {
-                    var sheets = [].slice.call(document.getElementsByTagName("link"));
-                    var head = document.getElementsByTagName("head")[0];
-                    for (var i = 0; i < sheets.length; ++i) {
-                        var elem = sheets[i];
-                        var parent = elem.parentElement || head;
-                        parent.removeChild(elem);
-                        var rel = elem.rel;
-                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-                        }
-                        parent.appendChild(elem);
-                    }
-                }
-                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                var address = protocol + window.location.host + window.location.pathname + '/ws';
-                var socket = new WebSocket(address);
-                socket.onmessage = function (msg) {
-                    if (msg.data == 'reload') window.location.reload();
-                    else if (msg.data == 'refreshcss') refreshCSS();
-                };
-                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                    console.log('Live reload enabled.');
-                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                }
-            })();
-        }
-        else {
-            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-        }
-	// ]]>
-    </script>
+		// <![CDATA[  <-- For SVG support
+		if ('WebSocket' in window) {
+			(function() {
+				function refreshCSS() {
+					var sheets = [].slice.call(document
+							.getElementsByTagName("link"));
+					var head = document.getElementsByTagName("head")[0];
+					for (var i = 0; i < sheets.length; ++i) {
+						var elem = sheets[i];
+						var parent = elem.parentElement || head;
+						parent.removeChild(elem);
+						var rel = elem.rel;
+						if (elem.href && typeof rel != "string"
+								|| rel.length == 0
+								|| rel.toLowerCase() == "stylesheet") {
+							var url = elem.href.replace(
+									/(&|\?)_cacheOverride=\d+/, '');
+							elem.href = url
+									+ (url.indexOf('?') >= 0 ? '&' : '?')
+									+ '_cacheOverride='
+									+ (new Date().valueOf());
+						}
+						parent.appendChild(elem);
+					}
+				}
+				var protocol = window.location.protocol === 'http:' ? 'ws://'
+						: 'wss://';
+				var address = protocol + window.location.host
+						+ window.location.pathname + '/ws';
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload')
+						window.location.reload();
+					else if (msg.data == 'refreshcss')
+						refreshCSS();
+				};
+				if (sessionStorage
+						&& !sessionStorage
+								.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+					console.log('Live reload enabled.');
+					sessionStorage.setItem(
+							'IsThisFirstTime_Log_From_LiveServer', true);
+				}
+			})();
+		} else {
+			console
+					.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+		}
+		// ]]>
+	</script>
 	<!-- Code injected by live-server -->
 	<script>
-        // <![CDATA[  <-- For SVG support
-        if ('WebSocket' in window) {
-            (function () {
-                function refreshCSS() {
-                    var sheets = [].slice.call(document.getElementsByTagName("link"));
-                    var head = document.getElementsByTagName("head")[0];
-                    for (var i = 0; i < sheets.length; ++i) {
-                        var elem = sheets[i];
-                        var parent = elem.parentElement || head;
-                        parent.removeChild(elem);
-                        var rel = elem.rel;
-                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-                        }
-                        parent.appendChild(elem);
-                    }
-                }
-                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                var address = protocol + window.location.host + window.location.pathname + '/ws';
-                var socket = new WebSocket(address);
-                socket.onmessage = function (msg) {
-                    if (msg.data == 'reload') window.location.reload();
-                    else if (msg.data == 'refreshcss') refreshCSS();
-                };
-                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                    console.log('Live reload enabled.');
-                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                }
-            })();
-        }
-        else {
-            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-        }
-	// ]]>
-    </script>
+		// <![CDATA[  <-- For SVG support
+		if ('WebSocket' in window) {
+			(function() {
+				function refreshCSS() {
+					var sheets = [].slice.call(document
+							.getElementsByTagName("link"));
+					var head = document.getElementsByTagName("head")[0];
+					for (var i = 0; i < sheets.length; ++i) {
+						var elem = sheets[i];
+						var parent = elem.parentElement || head;
+						parent.removeChild(elem);
+						var rel = elem.rel;
+						if (elem.href && typeof rel != "string"
+								|| rel.length == 0
+								|| rel.toLowerCase() == "stylesheet") {
+							var url = elem.href.replace(
+									/(&|\?)_cacheOverride=\d+/, '');
+							elem.href = url
+									+ (url.indexOf('?') >= 0 ? '&' : '?')
+									+ '_cacheOverride='
+									+ (new Date().valueOf());
+						}
+						parent.appendChild(elem);
+					}
+				}
+				var protocol = window.location.protocol === 'http:' ? 'ws://'
+						: 'wss://';
+				var address = protocol + window.location.host
+						+ window.location.pathname + '/ws';
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload')
+						window.location.reload();
+					else if (msg.data == 'refreshcss')
+						refreshCSS();
+				};
+				if (sessionStorage
+						&& !sessionStorage
+								.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+					console.log('Live reload enabled.');
+					sessionStorage.setItem(
+							'IsThisFirstTime_Log_From_LiveServer', true);
+				}
+			})();
+		} else {
+			console
+					.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+		}
+		// ]]>
+	</script>
 
 </body>
 

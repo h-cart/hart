@@ -7,10 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hart.domain.RecipeContentVO;
+import com.hart.domain.RecipeDetailVO;
 import com.hart.domain.RecipeVO;
 import com.hart.mapper.RecipeMapper;
 
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Service
 public class RecipeServiceImple implements RecipeService{
 
@@ -26,13 +30,16 @@ public class RecipeServiceImple implements RecipeService{
 	
 	
 	@Override
-	public RecipeVO recipeDetail(String rid) {
+	public RecipeDetailVO recipeDetail(String rid) {
 		
-		System.out.println("recipeDetailServiceImple=========" + rid);
-		
-		System.out.println("recipeService 임플 rid>>" +recipemapper.recipeDetail(rid));
-		
-		return recipemapper.recipeDetail(rid);
+			
+			RecipeVO recipedetailtop = recipemapper.recipeDetail(rid);
+			List<RecipeContentVO> Rcontent = recipemapper.RecipeContent(rid);
+			
+
+			return new RecipeDetailVO(recipedetailtop, Rcontent);
 	}
+	
+	
 	
 }
