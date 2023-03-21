@@ -77,41 +77,12 @@
     <link rel="stylesheet" type="text/css" href="https://recipe1.ezmember.co.kr/static/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="https://recipe1.ezmember.co.kr/static/css/ez_recipe_20220629.css" />
     <link rel="stylesheet" type="text/css" href="https://recipe1.ezmember.co.kr/static/css/jquery-ui-1.11.4_201507011.css" />
-    <script>
-      $(document).ready(function () {
-        doRTKeyword();
+    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/jquery-ui-1.11.4.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/tag-it.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/ez_dialog.min_20160430.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/coreutil.min_20170112.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/ui.min_20150609.js" charset="utf-8"></script>
 
-        $("#srhRecipeText")
-          .keypress(function (event) {
-            if (event.which == 13) {
-              event.preventDefault();
-              $("#frmTopRecipeSearch").submit();
-            }
-          })
-          .autocomplete({
-            delay: 200,
-            source: "https://www.10000recipe.com/recipe/ajax.html?q_mode=autoComplete",
-            focus: function (event, ui) {
-              return false;
-            },
-            select: function (event, ui) {
-              this.value = ui.item.label;
-              return false;
-            },
-          })
-          .focus();
-
-        $(".ui-autocomplete").css("z-index", "10000");
-      });
-
-      var curRtword = 2;
-      function doRTKeyword() {
-        var backRtword = curRtword == 1 ? 2 : 1;
-        $("#RtwordDiv_" + curRtword).hide();
-        $("#RtwordDiv_" + backRtword).show();
-        curRtword = backRtword;
-      }
-    </script>
     <a href="#" id="btnGogoTop" class="rmenu_top" style="display: none"><span class="glyphicon glyphicon-menu-up"></span></a>
     <div class="gnb" style="position: relative">
       <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1557771002660658" crossorigin="anonymous"></script>
@@ -196,7 +167,7 @@
                 <img id="mainPhotoHolder" onclick="clickMainImg()" src="https://recipe1.ezmember.co.kr/img/pic_none4.gif" style="width: 250px; height: 250px; cursor: pointer" />
               </div>
             </div>
-            <div class="cont_line">
+            <div class="cont_line" >
               <p class="cont_tit4">레시피 제목</p>
               <input type="text" name="crtitle" id="crtitle" value="" class="form-control" placeholder="예) 사과를 곁들인 이베리코 스테이크" style="width: 610px" />
             </div>
@@ -204,9 +175,9 @@
               <p class="cont_tit4">내 용</p>
               <input name="crdetail" id="crdetail" class="form-control step_cont" placeholder="이 레시피 소개글을 적어주세요. 예) 도토리를 먹여 키운 베요타 등급 이베리코는 특유의 견과류 같은 향을 갖고 있습니다. " style="height: 100px; width: 610px; resize: none" />
             </div>
-            <div class="cont_line">
+            <div class="cont_line" style="display: flex; align-items: center; flex-wrap: wrap;">
               <p class="cont_tit4">카테고리</p>
-              <select name="crcategory" id="crcategory" text="종류별">
+              <select name="crcategory" title="crcategory" id="crcategory" text="종류별" style="margin-left: 20px;">
                 <option value="">종류별</option>
                 <option value="63">밑반찬</option>
                 <option value="56">메인반찬</option>
@@ -226,9 +197,9 @@
                 <option value="59">차/음료/술</option>
                 <option value="62">기타</option>
               </select>
-              <span class="guide" style="margin: -22px 0 0 146px">분류를 바르게 설정해주시면, 이용자들이 쉽게 레시피를 검색할 수 있어요.</span>
+              <span class="guide" style="margin: 0 0 0 146px">분류를 바르게 설정해주시면, 이용자들이 쉽게 레시피를 검색할 수 있어요.</span>
             </div>
-            <div class="cont_line">
+            <div class="cont_line" style="display: flex; align-items: center;">
               <p class="cont_tit4">요리정보</p>
               <select name="crtime" id="crtime" text="요리시간">
                 <option value="">시간</option>
@@ -514,57 +485,7 @@
     </div>
     <input type="hidden" name="isRestrict" value="false" />
     <div id="recentRecipeDiv" class="container"></div>
-    <script type="text/javascript">
-      <!--
-      $(document).ready(function () {
-        $("#appDownLayerBtn").click(function (e) {
-          // Used to stop the event bubbling..
-          e.stopPropagation();
-          if ($(".app_layer").is(":visible")) {
-            $(".app_layer").hide();
-          } else {
-            $(".app_layer").show();
-          }
-        });
-        $(document).click(function () {
-          $(".app_layer").hide();
-        });
-      });
-
-      function customerPropose() {
-        if (!$("#customerSend").val()) {
-          alert("의견을 입력해주세요.");
-          $("#customerSend").focus();
-          return false;
-        }
-
-        $.ajax({
-          type: "POST",
-          url: "https://www.10000recipe.com/customer/insert.html",
-          data: {
-            q_mode: "insert",
-            bid: "4",
-            ref_url: encodeURIComponent(_CURRENT_PAGE_),
-            board_txt: $("#customerSend").val(),
-          },
-          dataType: "json",
-          success: function (result) {
-            if (result.result == "SUCCESS") {
-              alert("의견이 접수되었습니다. 감사합니다.");
-              $("#customerSend").val("");
-            } else if (result.result == "ERROR") {
-              alert(result.msg);
-            }
-          },
-        });
-      }
-      //-->
-    </script>
-    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/jquery-ui-1.11.4.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/tag-it.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/ez_dialog.min_20160430.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/coreutil.min_20170112.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/ui.min_20150609.js" charset="utf-8"></script>
+    
     <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none; z-index: 10000"></ul>
     <span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
     <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content tagit-autocomplete" id="ui-id-2" tabindex="0" style="display: none"></ul>
@@ -958,7 +879,7 @@
         $("#divMaterialArea_1").append(newMaterial);
       });
     </script>
-    <!-- <th:block th:replace="/includes/footer :: footer"></th:block> -->
+    <th:block th:replace="/includes/footer :: footer"></th:block>
   </body>
   <whale-quicksearch translate="no"></whale-quicksearch>
 </html>
