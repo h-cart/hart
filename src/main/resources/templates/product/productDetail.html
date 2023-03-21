@@ -1,29 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="description" content="Male_Fashion Template">
-<meta name="keywords" content="Male_Fashion, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>HART</title>
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Google Font -->
-<link
-   href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-   rel="stylesheet">
-
-<!-- Css Styles -->
-<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="/css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="/css/style.css" type="text/css">
-</head>
+<th:block th:replace="/includes/headTag :: head_tag"></th:block>
 
 <body style="">
 
@@ -32,279 +9,13 @@
    </script>
 
    <!-- Page Preloder -->
-   <div id="preloder" style="display: none;">
+   <div id="preloder" style="display: none;">s
       <div class="loader" style="display: none;"></div>
    </div>
-
-   <!-- Offcanvas Menu Begin -->
-   <div class="offcanvas-menu-overlay"></div>
-   <div class="offcanvas-menu-wrapper">
-      <div class="offcanvas__option">
-         <div class="offcanvas__links">
-            <a href="#">Sign in</a> <a href="#">FAQs</a>
-         </div>
-         <div class="offcanvas__top__hover">
-            <span>Usd <i class="arrow_carrot-down"></i></span>
-            <ul>
-               <li>USD</li>
-               <li>EUR</li>
-               <li>USD</li>
-            </ul>
-         </div>
-      </div>
-      <div class="offcanvas__nav__option">
-         <a href="#" class="search-switch"><img src="img/icon/search.png"
-            alt=""></a> <a href="#"><img src="img/icon/heart.png" alt=""></a>
-         <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-         <div class="price">$0.00</div>
-      </div>
-      <div id="mobile-menu-wrap">
-         <div class="slicknav_menu">
-            <a href="#" aria-haspopup="true" role="button" tabindex="0"
-               class="slicknav_btn slicknav_collapsed"><span
-               class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span
-                  class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span
-                  class="slicknav_icon-bar"></span></span></a>
-            <nav class="slicknav_nav slicknav_hidden" style="display: none;"
-               aria-hidden="true" role="menu">
-               <ul>
-                  <li><a href="./shop.html" role="menuitem">홈</a></li>
-                  <li><a href="./shop.html" role="menuitem">상품</a></li>
-                  <li><a href="./shop.html" role="menuitem">레시피</a></li>
-                  <li class="slicknav_collapsed slicknav_parent"><a href="#"
-                     role="menuitem" aria-haspopup="true" tabindex="-1"
-                     class="slicknav_item slicknav_row"><a href="#">라이브클래스</a> <span
-                        class="slicknav_arrow">►</span></a>
-                     <ul class="dropdown slicknav_hidden" role="menu"
-                        style="display: none;" aria-hidden="true">
-                        <li><a href="./about.html" role="menuitem" tabindex="-1">About
-                              Us</a></li>
-                        <li><a href="./shop-details.html" role="menuitem"
-                           tabindex="-1">Shop Details</a></li>
-                        <li><a href="./shopping-cart.html" role="menuitem"
-                           tabindex="-1">Shopping Cart</a></li>
-                        <li><a href="./checkout.html" role="menuitem" tabindex="-1">Check
-                              Out</a></li>
-                        <li><a href="./blog-details.html" role="menuitem"
-                           tabindex="-1">Blog Details</a></li>
-                     </ul></li>
-                  <li><a href="./blog.html" role="menuitem">Blog</a></li>
-                  <li><a href="./contact.html" role="menuitem">Contacts</a></li>
-               </ul>
-            </nav>
-         </div>
-         <div class="slicknav_menu">
-            <a href="#" aria-haspopup="true" role="button" tabindex="0"
-               class="slicknav_btn slicknav_collapsed" style="outline: none;"><span
-               class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span
-                  class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span
-                  class="slicknav_icon-bar"></span></span></a>
-            <nav class="slicknav_nav slicknav_hidden" style="display: none;"
-               aria-hidden="true" role="menu">
-               <ul>
-                  <li><a href="./shop.html" role="menuitem">홈</a></li>
-                  <li><a href="./shop.html" role="menuitem">상품</a></li>
-                  <li><a href="./shop.html" role="menuitem">레시피</a></li>
-                  <li class="slicknav_collapsed slicknav_parent"><a href="#"
-                     role="menuitem" aria-haspopup="true" tabindex="-1"
-                     class="slicknav_item slicknav_row" style="outline: none;"></a><a
-                     href="#">라이브클래스</a> <span class="slicknav_arrow">►</span>
-                     <ul class="dropdown slicknav_hidden" role="menu"
-                        style="display: none;" aria-hidden="true">
-                        <li><a href="./about.html" role="menuitem" tabindex="-1">About
-                              Us</a></li>
-                        <li><a href="./shop-details.html" role="menuitem"
-                           tabindex="-1">Shop Details</a></li>
-                        <li><a href="./shopping-cart.html" role="menuitem"
-                           tabindex="-1">Shopping Cart</a></li>
-                        <li><a href="./checkout.html" role="menuitem" tabindex="-1">Check
-                              Out</a></li>
-                        <li><a href="./blog-details.html" role="menuitem"
-                           tabindex="-1">Blog Details</a></li>
-                     </ul></li>
-                  <li><a href="./blog.html" role="menuitem">Blog</a></li>
-                  <li><a href="./contact.html" role="menuitem">Contacts</a></li>
-               </ul>
-            </nav>
-         </div>
-         <div class="slicknav_menu">
-            <a href="#" aria-haspopup="true" role="button" tabindex="0"
-               class="slicknav_btn slicknav_collapsed" style="outline: none;"><span
-               class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span
-                  class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span
-                  class="slicknav_icon-bar"></span></span></a>
-            <nav class="slicknav_nav slicknav_hidden" style="display: none;"
-               aria-hidden="true" role="menu">
-               <ul>
-
-                  <li><a href="./shop.html" role="menuitem">상품</a></li>
-                  <li><a href="./shop.html" role="menuitem">레시피</a></li>
-                  <li class="slicknav_collapsed slicknav_parent"><a href="#"
-                     role="menuitem" aria-haspopup="true" tabindex="-1"
-                     class="slicknav_item slicknav_row" style="outline: none;"></a><a
-                     href="#">라이브클래스</a> <span class="slicknav_arrow">►</span>
-                     <ul class="dropdown slicknav_hidden" role="menu"
-                        style="display: none;" aria-hidden="true">
-                        <li><a href="./about.html" role="menuitem" tabindex="-1">About
-                              Us</a></li>
-                        <li><a href="./shop-details.html" role="menuitem"
-                           tabindex="-1">Shop Details</a></li>
-                        <li><a href="./shopping-cart.html" role="menuitem"
-                           tabindex="-1">Shopping Cart</a></li>
-                        <li><a href="./checkout.html" role="menuitem" tabindex="-1">Check
-                              Out</a></li>
-                        <li><a href="./blog-details.html" role="menuitem"
-                           tabindex="-1">Blog Details</a></li>
-                     </ul></li>
-                  <li><a href="./blog.html" role="menuitem">Blog</a></li>
-                  <li><a href="./contact.html" role="menuitem">Contacts</a></li>
-               </ul>
-            </nav>
-         </div>
-         <div class="slicknav_menu">
-            <a href="#" aria-haspopup="true" role="button" tabindex="0"
-               class="slicknav_btn slicknav_collapsed" style="outline: none;"><span
-               class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span
-                  class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span
-                  class="slicknav_icon-bar"></span></span></a>
-            <nav class="slicknav_nav slicknav_hidden" style="display: none;"
-               aria-hidden="true" role="menu">
-               <ul>
-                  <li><a href="./inex.html" role="menuitem">Home</a></li>
-                  <li class="active"><a href="./shop.html" role="menuitem">Shop</a></li>
-                  <li class="slicknav_collapsed slicknav_parent"><a href="#"
-                     role="menuitem" aria-haspopup="true" tabindex="-1"
-                     class="slicknav_item slicknav_row" style="outline: none;"></a><a
-                     href="#">Pages</a> <span class="slicknav_arrow">►</span>
-                     <ul class="dropdown slicknav_hidden" role="menu"
-                        style="display: none;" aria-hidden="true">
-                        <li><a href="./about.html" role="menuitem" tabindex="-1">About
-                              Us</a></li>
-                        <li><a href="./shop-details.html" role="menuitem"
-                           tabindex="-1">Shop Details</a></li>
-                        <li><a href="./shopping-cart.html" role="menuitem"
-                           tabindex="-1">Shopping Cart</a></li>
-                        <li><a href="./checkout.html" role="menuitem" tabindex="-1">Check
-                              Out</a></li>
-                        <li><a href="./blog-details.html" role="menuitem"
-                           tabindex="-1">Blog Details</a></li>
-                     </ul></li>
-                  <li><a href="./blog.html" role="menuitem">Blog</a></li>
-                  <li><a href="./contact.html" role="menuitem">Contacts</a></li>
-               </ul>
-            </nav>
-         </div>
-         <div class="slicknav_menu">
-            <a href="#" aria-haspopup="true" role="button" tabindex="0"
-               class="slicknav_btn slicknav_collapsed" style="outline: none;"><span
-               class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span
-                  class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span
-                  class="slicknav_icon-bar"></span></span></a>
-            <nav class="slicknav_nav slicknav_hidden" style="display: none;"
-               aria-hidden="true" role="menu">
-               <ul>
-                  <li><a href="./inex.html" role="menuitem">Home</a></li>
-                  <li class="active"><a href="./shop.html" role="menuitem">Shop</a></li>
-                  <li class="slicknav_collapsed slicknav_parent"><a href="#"
-                     role="menuitem" aria-haspopup="true" tabindex="-1"
-                     class="slicknav_item slicknav_row" style="outline: none;"></a><a
-                     href="#">Pages</a> <span class="slicknav_arrow">►</span>
-                     <ul class="dropdown slicknav_hidden" role="menu"
-                        style="display: none;" aria-hidden="true">
-                        <li><a href="./about.html" role="menuitem" tabindex="-1">About
-                              Us</a></li>
-                        <li><a href="./shop-details.html" role="menuitem"
-                           tabindex="-1">Shop Details</a></li>
-                        <li><a href="./shopping-cart.html" role="menuitem"
-                           tabindex="-1">Shopping Cart</a></li>
-                        <li><a href="./checkout.html" role="menuitem" tabindex="-1">Check
-                              Out</a></li>
-                        <li><a href="./blog-details.html" role="menuitem"
-                           tabindex="-1">Blog Details</a></li>
-                     </ul></li>
-                  <li><a href="./blog.html" role="menuitem">Blog</a></li>
-                  <li><a href="./contact.html" role="menuitem">Contacts</a></li>
-               </ul>
-            </nav>
-         </div>
-      </div>
-      <div class="offcanvas__text">
-         <p>Free shipping, 30-day return or refund guarantee.</p>
-      </div>
-   </div>
-   <!-- Offcanvas Menu End -->
-
-   <!-- Header Section Begin -->
-   <header class="header">
-      <div class="header__top">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-6 col-md-7">
-                  <div class="header__top__left">
-                     <p>Free shipping, 30-day return or refund guarantee.</p>
-                  </div>
-               </div>
-               <div class="col-lg-6 col-md-5">
-                  <div class="header__top__right">
-                     <div class="header__top__links">
-                        <a href="#">Sign in</a> <a href="#">FAQs</a>
-                     </div>
-                     <div class="header__top__hover">
-                        <span>Usd <i class="arrow_carrot-down"></i></span>
-                        <ul>
-                           <li>USD</li>
-                           <li>EUR</li>
-                           <li>USD</li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-3 col-md-3">
-               <div class="header__logo">
-                  <a href="./inex.html"><img src="img/logo.png" alt=""></a>
-               </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-               <nav class="header__menu mobile-menu">
-                  <ul>
-                     <li><a href="./shop.html">홈</a></li>
-                     <li><a href="./shop.html">상품</a></li>
-                     <li><a href="./shop.html">레시피</a></li>
-                     <li><a href="#">라이브클래스</a>
-                        <ul class="dropdown">
-                           <li><a href="./about.html">About Us</a></li>
-                           <li><a href="./shop-details.html">Shop Details</a></li>
-                           <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                           <li><a href="./checkout.html">Check Out</a></li>
-                           <li><a href="./blog-details.html">Blog Details</a></li>
-                        </ul></li>
-                     <li><a href="./blog.html">Blog</a></li>
-                     <li><a href="./contact.html">Contacts</a></li>
-                  </ul>
-               </nav>
-            </div>
-            <div class="col-lg-3 col-md-3">
-               <div class="header__nav__option">
-                  <a href="#" class="search-switch"><img
-                     src="img/icon/search.png" alt=""></a> <a href="#"><img
-                     src="img/icon/heart.png" alt=""></a> <a href="#"><img
-                     src="img/icon/cart.png" alt=""> <span>0</span></a>
-                  <div class="price">$0.00</div>
-               </div>
-            </div>
-         </div>
-         <div class="canvas__open">
-            <i class="fa fa-bars"></i>
-         </div>
-      </div>
-   </header>
+   <th:block th:replace="/includes/header :: header1"></th:block>
+   <th:block th:replace="/includes/header :: header2"></th:block>
+   <th:block th:replace="/includes/header :: header3"></th:block>
    <!-- Header Section End -->
-
    <!-- Shop Details Section Begin -->
    <section class="shop-details">
       <div class="product__details__pic">
@@ -376,6 +87,8 @@
                            </div>
                         </div>
                         <a href="#" class="primary-btn">장바구니 담기</a>
+                      
+                         <a href="#" class="primary-btn">바로 구매하기</a>
                      </div>
 
                      <div class="product__details__last__option">
@@ -421,7 +134,7 @@
 
                            <div class="product__details__tab__content"
                               style="display: flex; flex-direction: column; align-items: center;">
-
+							
                               <img th:src="${Detail.pimg[1].pimg}" alt="">
 
                               <p class="note"></p>
@@ -445,7 +158,7 @@
                               <p th:text="${Detail.detail.pbdesc}"></p>
                            </div>
 
-                           <img th:src="${Detail.pimg[Detail.pimg.size() - 1].pimg}" />
+                          <!--  <img th:src="${Detail.pimg[Detail.pimg.size() - 1].pimg}" /> -->
 
                         </div>
                      </div>
@@ -828,7 +541,31 @@
       // ]]>
    </script>
 
-
+<script>
+	const token = $("meta[name='_csrf']").attr("content");
+	const header = $("meta[name='_csrf_header']").attr("content");
+			pids = [];
+		    pids.push(res);
+		    pamounts = [];
+		    pamounts.push(1);
+		    $.ajax({
+		    	url : '/capi/insert',
+				beforeSend : function(xhr){
+	        		xhr.setRequestHeader(header,token);
+	        	},
+	        	type : 'post',
+	        	contentType : "application/json",
+	        	data : JSON.stringify({
+	        		pids : pids,
+	        		pamounts : pamounts
+	        	}),
+	        	success : function(result){
+	        		console.log(result);
+	        	},error : function(err, xhr, status){
+	        		console.log(err)
+	        	}
+		    })
+</script>
 </body>
 
 </html>
