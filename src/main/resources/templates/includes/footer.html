@@ -83,7 +83,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/jquery-3.3.1.min.js"></script>
+	<!-- 	<script src="/js/jquery-3.3.1.min.js"></script> -->
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.nice-select.min.js"></script>
 	<script src="/js/jquery.nicescroll.min.js"></script>
@@ -156,6 +156,7 @@
 		    contentType : "application/json",
 		    success : function(data) {
 		      let str="";
+		      let str1="";
 		      for (var i = 0; i < data.result.length; i++) {
 		        console.log("number" + i + ": " + data.result[i].pcategory);
 		        str += `
@@ -163,11 +164,16 @@
 		        	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a>
 		        	</li>
 					`;
+		        str1 += `
+		        	<li style="">
+		        	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 15px; color: gray;">${data.result[i].pcategory}</a>
+		        	</li>
+					`;
 		      }
 		      console.log(str);
 		      
 		      $("#listCate").append(str);
-		      $(".slicknav_nav .dropdown").append(str);
+		      $(".slicknav_nav .dropdown").append(str1);
 		    },
 		    error : function() {
 		      console.log("실패");
