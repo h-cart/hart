@@ -105,4 +105,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT lcid,lcday,lcstatus,lcteacher,lcname,lcimg,lcprice FROM lscart
 		WHERE csno = to_number(#{csno})
 	</select>
+	
+		<select id="sameProducts" resultType='int'>
+		SELECT count(*)
+		FROM share_products
+		WHERE pid = #{pid} AND csno = #{csno}
+	
+	</select>
 </mapper>

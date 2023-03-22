@@ -21,5 +21,6 @@ public interface CartMapper {
 	int updateAmount(@Param("cDTO")CartInsertDTO cDTO, @Param("mid")String mid) throws SQLException;
 	int removeCart(@Param("pids")List<String> pids, @Param("mid")String mid) throws SQLException;
 	
+	int sameProducts(@Param("pid") String pid,@Param("mid") String mid)throws SQLException;
 	
 }

@@ -65,6 +65,9 @@ public class CartRestController {
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
+			if(e.getMessage().equals("-1")) {
+				return new ResponseEntity<Map<String,String>>(HttpStatus.METHOD_NOT_ALLOWED);
+			}
 			result.put("result", e.getMessage());
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
