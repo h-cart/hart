@@ -256,11 +256,20 @@ ul.tagit input[type="text"] {
 	height: 30px;
 }
 </style>
-	<div>
+	<div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
 		<img
 			alt="이벤트 공모전"
 			src="/img/event.jpg"
+			style="width: 50vw;"
 		>
+		<div style="display: flex; width: 50vw; justify-content: space-evenly; margin: 20px;">
+			<div class="continue__btn">
+				<a href="/event/upload"> 참여 하기</a>
+			</div>
+			<div class="continue__btn update__btn">
+				<a href="/event/vote"> 투표 하기</a>
+			</div>
+		</div>
 	</div>
 	<th:block th:replace="/includes/footer :: footer"></th:block>
 </body>

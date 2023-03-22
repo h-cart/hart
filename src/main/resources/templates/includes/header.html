@@ -14,7 +14,13 @@
 >
 	<div class="offcanvas__option">
 		<div class="offcanvas__links">
-			<a href="/member/login">Sign in</a>
+			<a
+				href="/member/login"
+				sec:authorize="!isAuthenticated()"
+			>로그인</a> <a
+				href="/member/login"
+				sec:authorize="isAuthenticated()"
+			>로그아웃</a>
 		</div>
 	</div>
 	<div class="offcanvas__nav__option">
@@ -50,8 +56,17 @@
 				</div>
 				<div class="col-lg-6 col-md-5">
 					<div class="header__top__right">
-						<div class="header__top__links">
-							<a href="/member/login">Sign in</a>
+						<div
+							class="header__top__links"
+							sec:authorize="isAuthenticated()"
+						>
+							<a href="/member/logout">로그 아웃</a>
+						</div>
+						<div
+							class="header__top__links"
+							sec:authorize="!isAuthenticated()"
+						>
+							<a href="/member/login">로그인</a>
 						</div>
 					</div>
 				</div>
@@ -72,10 +87,15 @@
 			<div class="col-lg-6 col-md-6">
 				<nav class="header__menu mobile-menu">
 					<ul>
-						<li>
-                <a href="/product/list?pcno=100571" class="active">상품</a>
-                <ul class="dropdown" id="listCate" style="width: 220px; background: #ffffff;padding: 0px;"></ul>
-              </li>
+						<li><a
+							href="/product/list?pcno=100571"
+							class="active"
+						>상품</a>
+							<ul
+								class="dropdown"
+								id="listCate"
+								style="width: 220px; background: #ffffff; padding: 0px;"
+							></ul></li>
 						<li><a href="/recipe/list">레시피</a></li>
 						<li><a href="/liveClass">Live</a></li>
 						<li><a href="/event/upload">Event</a></li>
@@ -97,7 +117,6 @@
 						src="/img/icon/cart.png"
 						alt=""
 					/></a>
-				
 				</div>
 			</div>
 		</div>
