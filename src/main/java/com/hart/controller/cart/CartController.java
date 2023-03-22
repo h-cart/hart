@@ -81,7 +81,6 @@ public class CartController {
 		} else {
 			url = "/cart/share";
 			try {
-				model.addAttribute("sDTO", sService.getInfo(mDTO.getMid()));
 			} catch (Exception e) {
 				model.addAttribute("msg", "잘못된 장바구니 정보입니다.");
 				e.printStackTrace();
