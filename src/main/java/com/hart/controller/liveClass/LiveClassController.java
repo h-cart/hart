@@ -64,6 +64,11 @@ public class LiveClassController {
 		return "liveClass/liveClassChatTestStream";
 	}
 	
-	
+	@GetMapping("/myPage")
+	public String myPageTest() {
+		log.info("myPageTest 컨트롤러 호출");
+		
+		return "liveClass/test";
+	}
 	
 }
