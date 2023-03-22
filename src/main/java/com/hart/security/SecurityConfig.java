@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.hart.security.handler.LoginSuccessHandler;
 
@@ -54,14 +55,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// /samle/all 모든 사용자 가능
 		// /sample/member USER 롤 사용자만
-		http.authorizeRequests().antMatchers("/cart/**").authenticated().antMatchers("/").permitAll().antMatchers("/member").hasRole("USER")
-				.antMatchers("/admin").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/cart/**").authenticated().antMatchers("/").permitAll()
+				.antMatchers("/member").hasRole("USER").antMatchers("/admin").hasRole("ADMIN");
 		// 인가 인증 문제시 로그인 화면
 		http.formLogin().loginPage("/member/login").defaultSuccessUrl("/");
 		// crsf 비활성화
-		http.csrf();//.disable();
+		http.csrf();// .disable();
 		// 로그 아웃 세팅
-		http.logout();
+		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+				.logoutSuccessUrl("/member/login");
 
 		// 구글 oauth 인증 추가
 		/* http.oauth2Login(); */

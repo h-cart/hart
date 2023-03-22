@@ -1,157 +1,147 @@
 <html xmlns:th="http://www.thymeleaf.org">
-
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
-
 <body style="">
-	<!-- Page Preloder -->
-	<div id="preloder" style="display: none;">
-		<div class="loader" style="display: none;"></div>
-	</div>
-
-	<!-- Offcanvas Menu Begin -->
-	<th:block th:replace="/includes/header :: header1"></th:block>
-	<th:block th:replace="/includes/header :: header2"></th:block>
-	<th:block th:replace="/includes/header :: header3"></th:block>
-
-
-
-
-	<!-- Header Section End -->
-
-	<!-- Blog Details Hero Begin -->
-	<section class="blog-hero spad">
-		<div class="container">
-			<div class="row d-flex justify-content-center">
-				<div class="col-lg-9 text-center">
-					<div class="blog__hero__text">
-						<h2 th:text="${recipeDetail.recipedetailtop.rtitle}"></h2>
-						<b><ul>
-								난이도 :
-								<li th:text="${recipeDetail.recipedetailtop.rlevel}"></li> 조리시간
-								:
-								<li th:text="${recipeDetail.recipedetailtop.rtime}"></li>
-
-							</ul></b>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Blog Details Hero End -->
-
-	<!-- Blog Details Section Begin -->
-	<section class="blog-details spad">
-		<div class="container">
-			<div class="row d-flex justify-content-center">
-				<div class="col-lg-12">
-					<div class="blog__details__pic">
-						<img th:src="${recipeDetail.recipedetailtop.rimg}" alt="">
-					</div>
-				</div>
-				<div class="col-lg-8">
-					<div class="blog__details__content">
-						<div class="blog__details__share">
-
-							<ul>
-								<li></li>
-								<li></li>
-								<li></li>
-
-							</ul>
-						</div>
-						<div class="blog__details__text">
-							<p th:text="${recipeDetail.recipedetailtop.rdetail}"></p>
-
-						</div>
-						<div class="blog__details__quote">
-							<i class="fa fa-quote-left"></i>
-
-							<h6>이렇게 준비해주세요</h6>
-							<br>
-							<p>[설성목장] 한우 1++ 꽃등심구이 200g</p>
-							<p>[새벽시장] 깐 마늘 200g</p>
-							<p>[새벽시장] 사과 3입(1.1kg)</p>
-
-							<p></p>
-							<p></p>
-						</div>
-
-
-
-
-						<th th:each="recipeDetail : ${recipeDetail.Rcontent}">
-							<div class="blog__details__text">
-								<img alt="" th:src="${recipeDetail.rcimg}"> <br> </b>
-								<p></p>
-
-								<p></p>
-							</div>
-
-							<div class="blog__details__quote">
-								<i class="fa " th:text="${recipeDetail.rcstep}"></i>
-
-								<p th:text="${recipeDetail.rcdetail}"></p>
-							</div>
-						</th>
-
-
-						<div class="blog__details__option">
-							<div class="row">
-								<div class="col-lg-6 col-md-6 col-sm-6">
-									<div class="blog__details__author"></div>
-								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6">
-									<div class="blog__details__tags"></div>
-								</div>
-							</div>
-						</div>
-						<div class="blog__details__btns">
-							<div class="row">
-								<div class="col-lg-6 col-md-6 col-sm-6">
-									<a href="" class="blog__details__btns__item">
-										<p>
-											<span class="arrow_left"></span> Previous Pod
-										</p>
-										<h5>It S Classified How To Utilize Free Classified Ad
-											Sites</h5>
-									</a>
-								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6">
-									<a href=""
-										class="blog__details__btns__item blog__details__btns__item--next">
-										<p>
-											Next Pod <span class="arrow_right"></span>
-										</p>
-										<h5>Tips For Choosing The Perfect Gloss For Your Lips</h5>
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="blog__details__comment">
-							<h4>레시피 리뷰</h4>
-							<form action="#">
-								<div class="row">
-
-									<div class="col-lg-12 text-center">
-										<textarea placeholder="Comment"></textarea>
-										<button type="submit" class="site-btn">Post Comment</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Blog Details Section End -->
-
-	<!-- Footer Section Begin -->
-	<th:block th:replace="/includes/footer :: footer"></th:block>
-	<!-- Footer Section End -->
-
-
-
+   <!-- Page Preloder -->
+   <div
+      id="preloder"
+      style="display: none;"
+   >
+      <div
+         class="loader"
+         style="display: none;"
+      ></div>
+   </div>
+   <!-- Offcanvas Menu Begin -->
+   <th:block th:replace="/includes/header :: header1"></th:block>
+   <th:block th:replace="/includes/header :: header2"></th:block>
+   <th:block th:replace="/includes/header :: header3"></th:block>
+   <!-- Blog Details Hero Begin -->
+   <section class="blog-hero spad">
+      <div class="container">
+         <div class="row d-flex justify-content-center">
+            <div class="col-lg-9 text-center">
+               <div class="blog__hero__text">
+                  <h2 th:text="${recipeDetail.recipedetailtop.rtitle}"></h2>
+                  <b><ul>
+                        난이도 :
+                        <li th:text="${recipeDetail.recipedetailtop.rlevel}"></li> 조리시간 :
+                        <li th:text="${recipeDetail.recipedetailtop.rtime}"></li>
+                     </ul></b>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- Blog Details Hero End -->
+   <!-- Blog Details Section Begin -->
+   <section class="blog-details spad">
+      <div class="container">
+         <div class="row d-flex justify-content-center">
+            <div class="col-lg-12">
+               <div class="blog__details__pic">
+                  <img
+                     th:src="${recipeDetail.recipedetailtop.rimg}"
+                     alt=""
+                  >
+               </div>
+            </div>
+            <div class="col-lg-8">
+               <div class="blog__details__content">
+                  <div class="blog__details__share">
+                     <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                     </ul>
+                  </div>
+                  <div class="blog__details__text">
+                     <p th:text="${recipeDetail.recipedetailtop.rdetail}"></p>
+                  </div>
+                  <div class="blog__details__quote">
+                     <i class="fa fa-quote-left"></i>
+                     <h6>이렇게 준비해주세요</h6>
+                     <br>
+                     <p>[설성목장] 한우 1++ 꽃등심구이 200g</p>
+                     <p>[새벽시장] 깐 마늘 200g</p>
+                     <p>[새벽시장] 사과 3입(1.1kg)</p>
+                     <p></p>
+                     <p></p>
+                  </div>
+                  <th th:each="recipeDetail : ${recipeDetail.Rcontent}">
+                     <div class="blog__details__text">
+                        <img
+                           alt=""
+                           th:src="${recipeDetail.rcimg}"
+                        > <br> </b>
+                        <p></p>
+                        <p></p>
+                     </div>
+                     <div class="blog__details__quote">
+                        <i
+                           class="fa "
+                           th:text="${recipeDetail.rcstep}"
+                        ></i>
+                        <p th:text="${recipeDetail.rcdetail}"></p>
+                     </div>
+                  </th>
+                  <div class="blog__details__option">
+                     <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                           <div class="blog__details__author"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                           <div class="blog__details__tags"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="blog__details__btns">
+                     <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                           <a
+                              href=""
+                              class="blog__details__btns__item"
+                           >
+                              <p>
+                                 <span class="arrow_left"></span> Previous Pod
+                              </p>
+                              <h5>It S Classified How To Utilize Free Classified Ad Sites</h5>
+                           </a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                           <a
+                              href=""
+                              class="blog__details__btns__item blog__details__btns__item--next"
+                           >
+                              <p>
+                                 Next Pod <span class="arrow_right"></span>
+                              </p>
+                              <h5>Tips For Choosing The Perfect Gloss For Your Lips</h5>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="blog__details__comment">
+                     <h4>레시피 리뷰</h4>
+                     <form action="#">
+                        <div class="row">
+                           <div class="col-lg-12 text-center">
+                              <textarea placeholder="Comment"></textarea>
+                              <button
+                                 type="submit"
+                                 class="site-btn"
+                              >Post Comment</button>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- Blog Details Section End -->
+   <!-- Footer Section Begin -->
+   <th:block th:replace="/includes/footer :: footer"></th:block>
+   <!-- Footer Section End -->
 </body>
-
 </html>
