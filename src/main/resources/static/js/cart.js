@@ -6,14 +6,12 @@ function NoItem(){
 			str +="</br>장바구니에 담긴 상품이 없습니다.</td></tr>"
 		$(".pbody").html(str);
 		}
-	
 		}
 	 function numberWithCommas(x) {
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
 	 
-	const token = $("meta[name='_csrf']").attr("content");
-	const header = $("meta[name='_csrf_header']").attr("content");
+
 	
 		$(document).on("click", ".thumb", function(e) {
   // 이벤트가 발생한 요소가 이미지이면 체크박스를 클릭한 것처럼 동작
@@ -76,8 +74,6 @@ function NoItem(){
 			return;
 		}
 		updateAmount($("#"+pos).data('value'),+quantity-1,pos);
-		
-		
 	})
 	
 	
@@ -124,7 +120,7 @@ function NoItem(){
 		deleteBtnEvent(entryNumber);
 		
 	}
-		function deleteBtnEvent(param){
+function deleteBtnEvent(param){
 			console.log(param);
 			if(param.length==""){
 					alert("선택된 상품이 없습니다. <br /> 삭제할 상품을 선택해 주세요.");
@@ -135,7 +131,6 @@ function NoItem(){
 				for(var i =0;i<pids.length;i++){
 			       	cartDTOList.push(pids[i]);
 				}
-				console.log(cartDTOList);
 		    	
 		    	$.ajax({
 		        	url : '/capi/removes',
@@ -148,7 +143,10 @@ function NoItem(){
 		        		xhr.setRequestHeader(header,token);
 		        	},success : function(data){
 		        		console.log(data);
-		        		CartList();
+		        		
+		        		for(var pid of cartDTOList){
+		        			$("#"+pid).remove();
+		        		}
 		        	}, error : function(e){
 		        		console.log(e);
 		        	}

@@ -5,8 +5,6 @@
 >
 <head th:fragment="head_tag">
 <meta charset="UTF-8">
-<meta name="_csrf" th:content="${_csrf.token}" />
-<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta
 	name="description"
 	content="HART"
@@ -74,6 +72,7 @@
 
 <meta name="_csrf" th:content="${_csrf.token}" />
 <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 </html>

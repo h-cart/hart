@@ -16,7 +16,8 @@ public class HartApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HartApplication.class, args);
 	}
-
+	
+	
 	@Bean
 	public ServletWebServerFactory servletContainer() {
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
@@ -38,7 +39,7 @@ public class HartApplication {
 	}
 
 
-
+	
 	private Connector httpToHttpsRedirectConnector() {
 		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
 		connector.setScheme("http");
@@ -47,5 +48,6 @@ public class HartApplication {
 		connector.setRedirectPort(443);
 		return connector;
 	}
-
+	
+	
 }

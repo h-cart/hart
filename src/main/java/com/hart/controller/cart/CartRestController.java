@@ -49,13 +49,16 @@ public class CartRestController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, String>> insertCart(@RequestBody Map<String, List<String>> map,
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-
+		
 		Map<String, String> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
+			log.info(pids);
+			log.info(pamounts);
+			log.info(mDTO.getCsno());
 			if (mDTO.getCsno() != null) {
-				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
+				log.info(sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno())));
 				sseEmitters.insert(mDTO.getCsno());
 			} else {
 				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
@@ -65,10 +68,8 @@ public class CartRestController {
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
-			if(e.getMessage().equals("-1")) {
-				return new ResponseEntity<Map<String,String>>(HttpStatus.METHOD_NOT_ALLOWED);
-			}
 			result.put("result", e.getMessage());
+			log.info(e.getMessage());
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -216,5 +217,19 @@ public class CartRestController {
 		map.put("result", msg);
 		return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/getInfo", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String,ShareDTO>> getInfo(@AuthenticationPrincipal ClubAuthMemberDTO mDTO){
+			Map<String,ShareDTO> result = new HashMap<>();
+			try {
+				ShareDTO sDTO = sService.getInfo(mDTO.getMid());
+				result.put("result", sDTO);
+				return new  ResponseEntity<Map<String,ShareDTO>>(result,HttpStatus.OK);
+			}catch (Exception e) {
+				return new ResponseEntity<Map<String,ShareDTO>>(HttpStatus.BAD_REQUEST);
+			}
+	}
+	
 
 }
