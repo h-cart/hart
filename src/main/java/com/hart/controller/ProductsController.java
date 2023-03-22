@@ -25,23 +25,22 @@ public class ProductsController {
 	private ProductsService productsservice;
 
 	@GetMapping("/list")
-	public String productlist(Model model,  int pcno) {
+	public String productlist(Model model, int pcno) {
 
 		List<CategoryVO> category = null;
 		List<ProductsVO> productlist = null;
-		//List<CategoryVO> categorypcno = null;
+		// List<CategoryVO> categorypcno = null;
 		List<ProductCategorylistVO> productcategorylist = null;
 		try {
 			category = productsservice.getcategorybar();
-			//왼쪽 카테고리 리스트 
+			// 왼쪽 카테고리 리스트
 			productlist = productsservice.getproductslist(pcno);
 
 			// categorypcno = productsservice.getcategorysmall(pcno);
 
 			productcategorylist = productsservice.getproductcatrogrtlist(pcno);
 
-System.out.println("productcategorylist Controller========="+productcategorylist);
-
+			System.out.println("productcategorylist Controller=========" + productcategorylist);
 
 			// categorysamll=productsservice.getcategorysmall(productsVO);
 		} catch (Exception e) {
