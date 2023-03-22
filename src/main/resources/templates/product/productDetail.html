@@ -276,6 +276,12 @@
    <script src="/js/main.js"></script>
    <!-- Code injected by live-server -->
    <script>
+		function showModal(){
+			const dialog = document.querySelector("dialog");
+			dialog.showModal();
+		}
+	</script>
+   <script>
       // <![CDATA[  <-- For SVG support
       if ('WebSocket' in window) {
          (function() {
@@ -565,7 +571,7 @@
 	const header = $("meta[name='_csrf_header']").attr("content");
 	
 	function addToCart(){
-				var	pids = [];
+		var	pids = [];
 		var pid = $("input[name=pid]").val();
 		var pamount = $("input[name=quantity]").val();
 			pids.push(pid);
@@ -586,7 +592,7 @@
 	        	success : function(result){
 	        		console.log(result);
 	        		showModal();
-	        		location.href = '/cart/mycart';
+	        		
 	        	},error : function(err, xhr, status){
 	        		
 	        		if(err.status==405){
@@ -594,14 +600,14 @@
 					}
 	        	}
 		    })
-	}
+	};
 	
 	
 	$("#addToCart").on("click",function(){
 		addToCart();
-	})
+	});
 </script>
-<dialog open="">
+<dialog>
 	<div class="container">
 		<h2>장바구니에 담겼습니다</h2>
 		<div class="shopping__cart__table">
@@ -738,12 +744,7 @@
 	</div>
 	</dialog>
 	
-	<script>
-		function showModal(){
-			var modal = $("dialog");
-			modal.showModal();
-		}
-	</script>
+	
 </body>
 
 </html>

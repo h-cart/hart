@@ -216,5 +216,19 @@ public class CartRestController {
 		map.put("result", msg);
 		return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/getInfo", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String,ShareDTO>> getInfo(@AuthenticationPrincipal ClubAuthMemberDTO mDTO){
+			Map<String,ShareDTO> result = new HashMap<>();
+			try {
+				ShareDTO sDTO = sService.getInfo(mDTO.getMid());
+				result.put("result", sDTO);
+				return new  ResponseEntity<Map<String,ShareDTO>>(result,HttpStatus.OK);
+			}catch (Exception e) {
+				return new ResponseEntity<Map<String,ShareDTO>>(HttpStatus.BAD_REQUEST);
+			}
+	}
+	
 
 }
