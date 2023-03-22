@@ -65,6 +65,9 @@ public class CartRestController {
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
+			if(e.getMessage().equals("-1")) {
+				return new ResponseEntity<Map<String,String>>(HttpStatus.METHOD_NOT_ALLOWED);
+			}
 			result.put("result", e.getMessage());
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
@@ -213,5 +216,19 @@ public class CartRestController {
 		map.put("result", msg);
 		return new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/getInfo", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String,ShareDTO>> getInfo(@AuthenticationPrincipal ClubAuthMemberDTO mDTO){
+			Map<String,ShareDTO> result = new HashMap<>();
+			try {
+				ShareDTO sDTO = sService.getInfo(mDTO.getMid());
+				result.put("result", sDTO);
+				return new  ResponseEntity<Map<String,ShareDTO>>(result,HttpStatus.OK);
+			}catch (Exception e) {
+				return new ResponseEntity<Map<String,ShareDTO>>(HttpStatus.BAD_REQUEST);
+			}
+	}
+	
 
 }

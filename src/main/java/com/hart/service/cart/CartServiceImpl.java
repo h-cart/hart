@@ -29,6 +29,9 @@ public class CartServiceImpl implements CartService {
 								.pid(pid)
 								.pamount(Integer.parseInt(pamounts.get(i)))
 								.build();
+			if(cMapper.sameProducts(pid, mid)==1) {
+				throw new Exception("-1");
+			}
 			if (pid.startsWith("S") || pid.startsWith("O")) {
 				try {
 					if (cMapper.isExistProduct(pid) == 1) {
