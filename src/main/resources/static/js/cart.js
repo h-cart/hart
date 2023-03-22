@@ -12,8 +12,7 @@ function NoItem(){
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
 	 
-	const token = $("meta[name='_csrf']").attr("content");
-	const header = $("meta[name='_csrf_header']").attr("content");
+
 	
 		$(document).on("click", ".thumb", function(e) {
   // 이벤트가 발생한 요소가 이미지이면 체크박스를 클릭한 것처럼 동작

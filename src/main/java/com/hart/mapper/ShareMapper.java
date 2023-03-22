@@ -18,7 +18,6 @@ public interface ShareMapper {
 	ShareDTO getInfo(String mid)throws SQLException;
 	ShareDTO getInfoWithKey(ShareDTO sDTO)throws SQLException;
 	int ShareCsno(ShareDTO sDTO)throws SQLException;
-	
 	int insertCarts(@Param("cDTO") CartInsertDTO cDTO,@Param("csno") int csno) throws SQLException;
 	List<CProductDTO> getProducts(String csno)throws SQLException;
 	List<CClassDTO> getLClass(String csno)throws SQLException;
@@ -27,4 +26,5 @@ public interface ShareMapper {
 	int isOwner(String mid) throws SQLException;
 	int deleteAll(@Param("mid")String mid, @Param("csno") String csno);
 	int deleteOne(String mid)throws SQLException;
+	int sameProducts(@Param("pid") String pid,@Param("csno") String csno)throws SQLException;
 }

@@ -12,6 +12,7 @@
    class="offcanvas-menu-wrapper"
    th:fragment="header2"
 >
+<<<<<<< HEAD
    <div class="offcanvas__option">
       <div class="offcanvas__links">
          <a href="/member/login">Sign in</a>
@@ -33,13 +34,44 @@
       /></a>
    </div>
    <div id="mobile-menu-wrap"></div>
+=======
+	<div class="offcanvas__option">
+		<div class="offcanvas__links">
+			      <a
+            href="/member/login"
+            sec:authorize="!isAuthenticated()"
+         >로그인</a> <a
+            href="/member/login"
+            sec:authorize="isAuthenticated()"
+         >로그아웃</a>
+		</div>
+	</div>
+	<div class="offcanvas__nav__option">
+		<a
+			href="#"
+			class="search-switch"
+		><img
+			src="/img/icon/search.png"
+			alt=""
+		/></a> <a href="#"><img
+			src="/img/icon/heart.png"
+			alt=""
+		/></a> <a href="/cart/mycart"><img
+			src="/img/icon/cart.png"
+			alt=""
+		/></a>
+	</div>
+	<div id="mobile-menu-wrap"></div>
+>>>>>>> f77f85167c83b2369ed0eb9aca115326f9302dee
 </div>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!-- Offcanvas Menu End -->
 <!-- Header Section Begin -->
 <header
    class="header"
    th:fragment="header3"
 >
+<<<<<<< HEAD
    <div class="header__top">
       <div class="container">
          <div class="row">
@@ -105,6 +137,137 @@
          <i class="fa fa-bars"></i>
       </div>
    </div>
+=======
+	<div class="header__top">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-7">
+					<div class="header__top__left">
+						<p>HCART와 함께하는 쇼핑, HART에 오신걸 환영합니다.</p>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-5">
+					<div class="header__top__right">
+						         <div
+                     class="header__top__links"
+                     sec:authorize="isAuthenticated()"
+                  >
+                     <a href="/member/logout">로그 아웃</a>
+                  </div>
+                  <div
+                     class="header__top__links"
+                     sec:authorize="!isAuthenticated()"
+                  >
+                     <a href="/member/login">로그인</a>
+                  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-3">
+				<div class="header__logo">
+					<a href="/"><img
+						src="/img/logo.png"
+						alt=""
+						style="height: 23px"
+					/></a>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<nav class="header__menu mobile-menu">
+					<ul>
+						<li>
+                <a href="/product/list?pcno=100571" class="active">상품</a>
+                <ul class="dropdown" id="listCate" style="width: 220px; background: #ffffff;padding: 0px;"></ul>
+              </li>
+						<li><a href="/recipe/list">레시피</a></li>
+						<li><a href="/liveClass">Live</a></li>
+						<li><a href="/event/upload">Event</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-lg-3 col-md-3">
+				<div class="header__nav__option">
+					<a
+						href="#"
+						class="search-switch"
+					><img
+						src="/img/icon/search.png"
+						alt=""
+					/></a> 
+					
+  					<a sec:authorize="isAuthenticated() and principal.csno ==null" 
+  					id='share_cart' href="#"><img
+						src="/img/icon/heart.png"
+						alt=""
+					/></a>
+					
+					<a sec:authorize="isAuthenticated() and principal.csno !=null" Paid="kakao-link-btn"
+							href="javascript:kakaoShare()"> <img
+							src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" />
+						</a> 
+					
+					 <a href="/cart/mycart"><img
+						src="/img/icon/cart.png"
+						alt=""
+					/></a>
+				
+				</div>
+			</div>
+		</div>
+		<div class="canvas__open">
+			<i class="fa fa-bars"></i>
+		</div>
+	</div>
+<script>
+	const token = $("meta[name='_csrf']").attr("content");
+	const header = $("meta[name='_csrf_header']").attr("content");
+	$(document).on("click","#share_cart", function(e){
+			
+			e.preventDefault();
+			Swal.fire({
+  			title: '공유 장바구니를 생성하시겠습니까?',
+ 			 text: "공유 장바구니가 우선적으로 사용됩니다.",
+ 			 icon: 'warning',
+  			showCancelButton: true,
+  			confirmButtonColor: '#3085d6',
+  			cancelButtonText : '아니',
+  			cancelButtonColor: '#d33',
+  			confirmButtonText: '생성'
+			}).then((result) => {
+  			if (result.isConfirmed) {
+				$.ajax({
+				url : '/capi/create',
+				type : 'post',
+				contentType : "application/json",
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(header,token);
+				},
+				success : function(result){
+					console.log(result);
+					    Swal.fire(
+      					'공유 장바구니로 이동합니다.'
+   						 )
+					location.href = '/cart/share/'+result.result.csno;
+				},error : function(err, xhr, status){
+					console.log(err.status);
+				}
+			})
+
+  }else {
+	Swal.fire('공유 장바구니 생성 실패');
+}
+})
+
+			
+		});
+
+</script>
+		<script type="text/javascript" src="/js/share.js"></script>
+>>>>>>> f77f85167c83b2369ed0eb9aca115326f9302dee
 </header>
 <!-- Header Section End -->
 </html>
