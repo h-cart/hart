@@ -206,21 +206,6 @@
 	}
 }
 </style>
-		<script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-			var floatPosition = parseInt($("#floatdiv").css("top"));
-			$(window).scroll(function() {
-				var currentTop = $(window).scrollTop();
-				if (currentTop > 200)
-					var bannerTop = currentTop - 200 + floatPosition + "px";
-				else
-					var bannerTop = floatPosition + "px";
-
-				$("#floatdiv").stop().animate({
-					top : bannerTop,
-				}, 500);
-			}).scroll();
-		</script>
 	</div>
 	<style>
 @media ( max-width : 1400px) {
@@ -228,20 +213,13 @@
 		display: none;
 	}
 }
-</style>
-	<link
-		rel="stylesheet"
-		type="text/css"
-		href="https://recipe1.ezmember.co.kr/static/css/jquery-ui-1.11.4_201507011.css"
-	/>
-	<style>
+
 .tagit {
 	margin: 0 0 0 0 !important;
 	padding: 5px 8px !important;
 	border-radius: 0 !important;
 }
-</style>
-	<style>
+
 .note-editor .note-dropzone {
 	opacity: 0 !important;
 }
@@ -256,79 +234,12 @@ ul.tagit input[type="text"] {
 	height: 30px;
 }
 </style>
-	<!-- Breadcrumb Section Begin -->
-	<section class="breadcrumb-option">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="breadcrumb__text">
-						<h2>내 요리 기술 뽐내기</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Breadcrumb Section End -->
-	<!-- About Section Begin -->
-	<section class="about">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="about__pic">
-						<img
-							src="/img/event.png"
-							alt=""
-							usemap="#imagemap"
-						>
-						<map
-							name="imagemap"
-							id="imagemap"
-						>
-							<area
-								alt="이벤트 참여하기"
-								title="이벤트 참여하기"
-								href="/event/upload"
-								coords="480,508,664,576"
-								shape="rect"
-							>
-							<area
-								alt="투표하기"
-								title="투표하기"
-								href="/event/vote"
-								coords="696,508,888,584"
-								shape="rect"
-							>
-						</map>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="about__item">
-						<h4>기간</h4>
-						<p>- 응모 : 2023년 2월 1일 ~ 2월 28일</p>
-						<p>- 투표 기간 : 2023년 2월 1일 ~ 2월 28일</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="about__item">
-						<h4>선정 기준</h4>
-						<p>주제에 맞는 레시피의 재료계량, 과정 설명, 과정 이미지가 잘 된 레시피와 아이디어가 돋보이는 레시피 대상으로 취합하여 후보를 선정 합니다</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="about__item">
-						<h4>안내사항</h4>
-						<p>- 공모전 요리 주제에 맞는 레시피를 등록해주세요.</p>
-						<p>- 주제와 맞지 않는 레시피는 수상 목록에서 제외될 수 있습니다.</p>
-						<p>- 당첨자 발표는 따로 하지 않습니다.</p>
-						<p>- TV레시피는 수상대상에서 제외됩니다.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- About Section End -->
+	<link
+		rel="stylesheet"
+		type="text/css"
+		href="https://recipe1.ezmember.co.kr/static/css/jquery-ui-1.11.4_201507011.css"
+	/>
+	vote
 	<th:block th:replace="/includes/footer :: footer"></th:block>
 </body>
 <whale-quicksearch translate="no"></whale-quicksearch>
