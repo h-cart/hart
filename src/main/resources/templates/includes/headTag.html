@@ -5,6 +5,8 @@
 >
 <head th:fragment="head_tag">
 <meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta
 	name="description"
 	content="HART"
@@ -25,7 +27,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Google Font -->
 <link
-	href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+	href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900;display=swap"
 	rel="stylesheet"
 >
 <!-- Css Styles -->
@@ -70,6 +72,7 @@
 	type="text/css"
 >
 
-
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 </html>

@@ -40,6 +40,19 @@ public class CartServiceImpl implements CartService {
 					log.info(e.getMessage());
 					throw e;
 				}
+			}else {
+				try {
+					if(cMapper.isExistClass(pid)==1) {
+						result += cMapper.insertCarts(cDTO, mid);
+					}else {
+						throw new Exception("존재하지 않는 클래스 ");
+						
+					}
+				}catch (Exception e) {
+					log.info(e.getMessage());
+					throw e;
+				}
+				
 			}
 		}
 		return result;
@@ -61,6 +74,7 @@ public class CartServiceImpl implements CartService {
 		try {
 			CartDTO cDTO = CartDTO.builder()
 							.pLists(cMapper.getProducts(mid))
+							.cLists(cMapper.getLClass(mid))
 							.build();
 			return cDTO;
 		}catch (Exception e) {

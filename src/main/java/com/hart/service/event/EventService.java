@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.hart.domain.ProductsVO;
+import com.hart.domain.event.CRContentVO;
+import com.hart.domain.event.CRIngredientVO;
+import com.hart.domain.event.CRecipeVO;
 
 /**
  * @since : 2023. 3. 16.
@@ -20,4 +23,5 @@ import com.hart.domain.ProductsVO;
 public interface EventService {
 	List<ProductsVO> getList(String keyword) throws SQLException;
 
+	void register(CRecipeVO recipe, List<CRContentVO> content, List<CRIngredientVO> ingredient);
 }
