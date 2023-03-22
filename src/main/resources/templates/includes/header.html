@@ -99,7 +99,13 @@
 							></ul></li>
 						<li><a href="/recipe/list">레시피</a></li>
 						<li><a href="/liveClass">Live</a></li>
-						<li><a href="/event">Event</a></li>
+						<li><a
+							href="/event"
+							sec:authorize="isAuthenticated()"
+						>Event</a> <a
+							href="/member/login"
+							sec:authorize="!isAuthenticated()"
+						>Event</a></li>
 					</ul>
 				</nav>
 			</div>

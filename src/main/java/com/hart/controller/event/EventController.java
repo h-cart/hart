@@ -33,6 +33,11 @@ public class EventController {
 		return "event/event";
 	}
 
+	@GetMapping("/vote")
+	public String vote() {
+		return "event/vote";
+	}
+
 	@GetMapping("/upload")
 	public void upload(Model model) {
 		model.addAttribute("crecipe", new CRecipeDTO());
