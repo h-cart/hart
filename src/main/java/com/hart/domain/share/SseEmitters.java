@@ -30,6 +30,7 @@ public class SseEmitters {
 		this.emitters.get(csno).add(emitter);
 		this.users.get(csno).add(mDTO);
 		log.info("new emitter added: {}", emitter);
+		log.info(csno);
 		log.info("emitter list size: {}", emitters.get(csno).size());
 		emitter.onCompletion(() -> {
 			log.info("onCompletion callback");

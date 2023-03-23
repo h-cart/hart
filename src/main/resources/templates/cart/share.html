@@ -2,58 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
 <style>
-.product__cart__item__pic {
-	position: relative;
-}
+	.product__cart__item__pic {
+		position: relative;
+	}
 
-.checkbox {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	width: 22px;
-	height: 22px;
-}
+	.checkbox {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		width: 22px;
+		height: 22px;
+	}
 
-.price-box h5, .price-box h6 {
-	display: inline-block;
-	margin: 0;
-}
+	.price-box h5,
+	.price-box h6 {
+		display: inline-block;
+		margin: 0;
+	}
 
-.product__cart__item__text {
-	overflow: hidden;
-}
+	.product__cart__item__text {
+		overflow: hidden;
+	}
 
-.product__cart__item__text .cost {
-	color: #999; /* 회색으로 표시 */
-	font-size: 0.8em; /* 작게 보이도록 설정 */
-	text-decoration: line-through; /* 선 그어지도록 설정 */
-}
+	.product__cart__item__text .cost {
+		color: #999;
+		/* 회색으로 표시 */
+		font-size: 0.8em;
+		/* 작게 보이도록 설정 */
+		text-decoration: line-through;
+		/* 선 그어지도록 설정 */
+	}
 
-.floating-icon {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #4CAF50;
-  color: #FFFFFF;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  text-align: center;
-  box-shadow: 2px 2px 3px #999;
-  cursor: pointer;
-}
-.empty-basket {
-  text-align: center;
-  font-size: 20px;
-  color: #666;
-}
+	.floating-icon {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		background-color: #4CAF50;
+		color: #FFFFFF;
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		text-align: center;
+		box-shadow: 2px 2px 3px #999;
+		cursor: pointer;
+	}
 
-@media (max-width: 768px) {
-  .empty-basket {
-    font-size: 16px;
-  }
-}
+	.empty-basket {
+		text-align: center;
+		font-size: 20px;
+		color: #666;
+	}
+
+	@media (max-width: 768px) {
+		.empty-basket {
+			font-size: 16px;
+		}
+	}
 </style>
 
 
@@ -64,10 +69,10 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-		<!-- Offcanvas Menu Begin -->
+	<!-- Offcanvas Menu Begin -->
 	<th:block th:replace="/includes/header :: header1"></th:block>
-   <th:block th:replace="/includes/header :: header2"></th:block>
-   <th:block th:replace="/includes/header :: header3"></th:block>
+	<th:block th:replace="/includes/header :: header2"></th:block>
+	<th:block th:replace="/includes/header :: header3"></th:block>
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-option">
@@ -103,92 +108,13 @@
 								</tr>
 							</thead>
 							<tbody class="pbody">
-								<tr>
-									<td class="product__cart__item">
-										<div class="product__cart__item__pic">
-											<img src="/img/shopping-cart/cart-1.jpg" alt="" />
-										</div>
-										<div class="product__cart__item__text">
-											<h6>T-shirt Contrast Pocket</h6>
-											<h5>$98.49</h5>
-										</div>
-									</td>
-									<td class="quantity__item">
-										<div class="quantity">
-											<div class="pro-qty-2">
-												<input type="text" value="1" />
-											</div>
-										</div>
-									</td>
-									<td class="cart__price">$ 30.00</td>
-									<td class="cart__close"><i class="fa fa-close"></i></td>
-								</tr>
-								<tr>
-									<td class="product__cart__item">
-										<div class="product__cart__item__pic">
-											<img src="/img/shopping-cart/cart-2.jpg" alt="" />
-										</div>
-										<div class="product__cart__item__text">
-											<h6>Diagonal Textured Cap</h6>
-											<h5>$98.49</h5>
-										</div>
-									</td>
-									<td class="quantity__item">
-										<div class="quantity">
-											<div class="pro-qty-2">
-												<input type="text" value="1" />
-											</div>
-										</div>
-									</td>
-									<td class="cart__price">$ 32.50</td>
-									<td class="cart__close"><i class="fa fa-close"></i></td>
-								</tr>
-								<tr>
-									<td class="product__cart__item">
-										<div class="product__cart__item__pic">
-											<img src="/img/shopping-cart/cart-3.jpg" alt="" />
-										</div>
-										<div class="product__cart__item__text">
-											<h6>Basic Flowing Scarf</h6>
-											<h5>$98.49</h5>
-										</div>
-									</td>
-									<td class="quantity__item">
-										<div class="quantity">
-											<div class="pro-qty-2">
-												<input type="text" value="1" />
-											</div>
-										</div>
-									</td>
-									<td class="cart__price">$ 47.00</td>
-									<td class="cart__close"><i class="fa fa-close"></i></td>
-								</tr>
-								<tr>
-									<td class="product__cart__item">
-										<div class="product__cart__item__pic">
-											<img src="/img/shopping-cart/cart-4.jpg" alt="" />
-										</div>
-										<div class="product__cart__item__text">
-											<h6>Basic Flowing Scarf</h6>
-											<h5>$98.49</h5>
-										</div>
-									</td>
-									<td class="quantity__item">
-										<div class="quantity">
-											<div class="pro-qty-2">
-												<input type="text" value="1" />
-											</div>
-										</div>
-									</td>
-									<td class="cart__price">$ 30.00</td>
-									<td class="cart__close"><i class="fa fa-close"></i></td>
-								</tr>
+
 							</tbody>
 						</table>
-						
-						
-					</div>
 
+
+					</div>
+					<input type='hidden' name='csno' value="sec:authorize=''principal.csno'"> 
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="continue__btn">
@@ -229,357 +155,260 @@
 	</section>
 	<!-- Shopping Cart Section End -->
 
-	<!-- Footer Section Begin -->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-6 col-sm-6">
-					<div class="footer__about">
-						<div class="footer__logo">
-							<a href="#"><img src="/img/footer-logo.png" alt="" /></a>
-						</div>
-						<p>The customer is at the heart of our unique business model,
-							which includes design.</p>
-						<a href="#"><img src="/img/payment.png" alt="" /></a>
-					</div>
-				</div>
-
-				<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
-					<div class="footer__widget">
-						<h6>Shopping</h6>
-						<ul>
-							<li><a href="#">Clothing Store</a></li>
-							<li><a href="#">Trending Shoes</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Sale</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-3 col-sm-6">
-					<div class="footer__widget">
-						<h6>Shopping</h6>
-						<ul>
-							<li><a href="#">Contact Us</a></li>
-							<li><a href="#">Payment Methods</a></li>
-							<li><a href="#">Delivary</a></li>
-							<li><a href="#">Return & Exchanges</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-					<div class="footer__widget">
-						<h6>NewLetter</h6>
-						<div class="footer__newslatter">
-							<p>Be the first to know about new arrivals, look books, sales
-								& promos!</p>
-							<form action="#">
-								<input type="text" placeholder="Your email" />
-								<button type="submit">
-									<span class="icon_mail_alt"></span>
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="footer__copyright__text">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						<p>
-							Copyright ©
-							<script>
-                  document.write(new Date().getFullYear());
-                </script>
-							2020 All rights reserved | This template is made with <i
-								class="fa fa-heart-o" aria-hidden="true"></i> by <a
-								href="https://colorlib.com" target="_blank">Colorlib</a>
-						</p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- Footer Section End -->
-
-	<!-- Search Begin -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here....." />
-			</form>
-		</div>
-	</div>
-	<!-- Search End -->
-
+	<th:block th:replace="/includes/footer :: footer"></th:block>
+	
 	<dialog>
-	<div class="container">
-		<h2>장바구니에 담겼습니다</h2>
-		<div class="shopping__cart__table">
-			<div class="shop__sidebar__accordion" style="margin-top: 50px">
-				<div class="accordion" id="accordionExample">
-					<div class="card">
-						<div class="card-heading active">
-							<a data-toggle="collapse" data-target="#collapseSix" class=""
-								aria-expanded="true">라이브 클래스 추천</a>
-						</div>
-						<div id="collapseSix" class="collapse show"
-							data-parent="#accordionExample" style="">
-							<table>
-								<tbody>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="/img/shopping-cart/cart-2.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>라이브 클래스 명</h6>
-												<h5>더보기</h5>
-											</div>
-										</td>
-										<td class="quantity__item">
-											<div class="quantity">
-												<div class="pro-qty-2">
-													<input type="text" value="1" />
+		<div class="container">
+			<h2>장바구니에 담겼습니다</h2>
+			<div class="shopping__cart__table">
+				<div class="shop__sidebar__accordion" style="margin-top: 50px">
+					<div class="accordion" id="accordionExample">
+						<div class="card">
+							<div class="card-heading active">
+								<a data-toggle="collapse" data-target="#collapseSix" class="" aria-expanded="true">라이브
+									클래스 추천</a>
+							</div>
+							<div id="collapseSix" class="collapse show" data-parent="#accordionExample" style="">
+								<table>
+									<tbody>
+										<tr>
+											<td class="product__cart__item">
+												<div class="product__cart__item__pic">
+													<img src="/img/shopping-cart/cart-2.jpg" alt="" />
 												</div>
-											</div>
-										</td>
-										<td class="cart__price">$ 32.50</td>
-										<td class="cart__close"><i class="fa fa-close"></i></td>
-									</tr>
-								</tbody>
-							</table>
+												<div class="product__cart__item__text">
+													<h6>라이브 클래스 명</h6>
+													<h5>더보기</h5>
+												</div>
+											</td>
+											<td class="quantity__item">
+												<div class="quantity">
+													<div class="pro-qty-2">
+														<input type="text" value="1" />
+													</div>
+												</div>
+											</td>
+											<td class="cart__price">$ 32.50</td>
+											<td class="cart__close"><i class="fa fa-close"></i></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="shop__sidebar__accordion" style="margin-top: 50px">
-				<div class="accordion" id="accordionExample">
-					<div class="card">
-						<div class="card-heading active">
-							<a data-toggle="collapse" data-target="#collapseSix" class=""
-								aria-expanded="true">인기있는 레시피</a>
-						</div>
-						<div id="collapseSix" class="collapse show"
-							data-parent="#accordionExample" style="">
-							<div class="card-body">
-								<div class="shop__sidebar__tags">
-									<a href="#">국</a> <a href="#">찌개</a> <a href="#">볶음</a> <a
-										href="#">안주</a>
-								</div>
+				<div class="shop__sidebar__accordion" style="margin-top: 50px">
+					<div class="accordion" id="accordionExample">
+						<div class="card">
+							<div class="card-heading active">
+								<a data-toggle="collapse" data-target="#collapseSix" class="" aria-expanded="true">인기있는
+									레시피</a>
 							</div>
-							<table>
-								<tbody>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="/img/shopping-cart/cart-1.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>레시피 설명</h6>
-												<h6>레시피 설명</h6>
-												<h6>레시피 설명</h6>
-											</div>
-										</td>
-										<td class="quantity__item"></td>
-										<td class="cart__price">더보기</td>
-									</tr>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="/img/shopping-cart/cart-2.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>Diagonal Textured Cap</h6>
-												<h5>$98.49</h5>
-											</div>
-										</td>
-										<td class="quantity__item">
-											<div class="quantity">
-												<div class="pro-qty-2">
-													<input type="text" value="1" />
+							<div id="collapseSix" class="collapse show" data-parent="#accordionExample" style="">
+								<div class="card-body">
+									<div class="shop__sidebar__tags">
+										<a href="#">국</a> <a href="#">찌개</a> <a href="#">볶음</a> <a href="#">안주</a>
+									</div>
+								</div>
+								<table>
+									<tbody>
+										<tr>
+											<td class="product__cart__item">
+												<div class="product__cart__item__pic">
+													<img src="/img/shopping-cart/cart-1.jpg" alt="" />
 												</div>
-											</div>
-										</td>
-										<td class="cart__price">$ 32.50</td>
-										<td class="cart__close"><i class="fa fa-close"></i></td>
-									</tr>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="/img/shopping-cart/cart-3.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>Basic Flowing Scarf</h6>
-												<h5>$98.49</h5>
-											</div>
-										</td>
-										<td class="quantity__item">
-											<div class="quantity">
-												<div class="pro-qty-2">
-													<input type="text" value="1" />
+												<div class="product__cart__item__text">
+													<h6>레시피 설명</h6>
+													<h6>레시피 설명</h6>
+													<h6>레시피 설명</h6>
 												</div>
-											</div>
-										</td>
-										<td class="cart__price">$ 47.00</td>
-										<td class="cart__close"><i class="fa fa-close"></i></td>
-									</tr>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="/img/shopping-cart/cart-4.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>Basic Flowing Scarf</h6>
-												<h5>$98.49</h5>
-											</div>
-										</td>
-										<td class="quantity__item">
-											<div class="quantity">
-												<div class="pro-qty-2">
-													<input type="text" value="1" />
+											</td>
+											<td class="quantity__item"></td>
+											<td class="cart__price">더보기</td>
+										</tr>
+										<tr>
+											<td class="product__cart__item">
+												<div class="product__cart__item__pic">
+													<img src="/img/shopping-cart/cart-2.jpg" alt="" />
 												</div>
-											</div>
-										</td>
-										<td class="cart__price">$ 30.00</td>
-										<td class="cart__close"><i class="fa fa-close"></i></td>
-									</tr>
-								</tbody>
-							</table>
+												<div class="product__cart__item__text">
+													<h6>Diagonal Textured Cap</h6>
+													<h5>$98.49</h5>
+												</div>
+											</td>
+											<td class="quantity__item">
+												<div class="quantity">
+													<div class="pro-qty-2">
+														<input type="text" value="1" />
+													</div>
+												</div>
+											</td>
+											<td class="cart__price">$ 32.50</td>
+											<td class="cart__close"><i class="fa fa-close"></i></td>
+										</tr>
+										<tr>
+											<td class="product__cart__item">
+												<div class="product__cart__item__pic">
+													<img src="/img/shopping-cart/cart-3.jpg" alt="" />
+												</div>
+												<div class="product__cart__item__text">
+													<h6>Basic Flowing Scarf</h6>
+													<h5>$98.49</h5>
+												</div>
+											</td>
+											<td class="quantity__item">
+												<div class="quantity">
+													<div class="pro-qty-2">
+														<input type="text" value="1" />
+													</div>
+												</div>
+											</td>
+											<td class="cart__price">$ 47.00</td>
+											<td class="cart__close"><i class="fa fa-close"></i></td>
+										</tr>
+										<tr>
+											<td class="product__cart__item">
+												<div class="product__cart__item__pic">
+													<img src="/img/shopping-cart/cart-4.jpg" alt="" />
+												</div>
+												<div class="product__cart__item__text">
+													<h6>Basic Flowing Scarf</h6>
+													<h5>$98.49</h5>
+												</div>
+											</td>
+											<td class="quantity__item">
+												<div class="quantity">
+													<div class="pro-qty-2">
+														<input type="text" value="1" />
+													</div>
+												</div>
+											</td>
+											<td class="cart__price">$ 30.00</td>
+											<td class="cart__close"><i class="fa fa-close"></i></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</dialog>
-	<script>
-      const dialog = document.querySelector("dialog");
-      const button = document.querySelector("#idcheck");
-
-      button.addEventListener("click", () => {
-        console.log("sdfsdf");
-        dialog.showModal();
-      });
-    </script>
-
-	<!-- Js Plugins -->
-	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.nice-select.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.magnific-popup.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.countdown.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.slicknav.js"></script>
-	<script type="text/javascript" src="/js/mixitup.min.js"></script>
-	<script type="text/javascript" src="/js/owl.carousel.min.js"></script>
-	<script type="text/javascript" src="/js/main.js"></script>
+	
 	<script type="text/javascript" src="/js/cart.js"></script>
-	
+	<script type="text/javascript" src="/js/dialog.js"></script>
+	<!-- Js Plugins -->
 	<script>
+		function CartList() {
+			$.ajax({
+				url: '/capi/get',
+				type: 'post',
+				contentType: 'application/json',
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader(header, token);
+				},
+				success: function (result) {
+					console.log(result.result.plists);
+					str = "";
+					var plist = result.result.plists;
+					var clist = result.result.clists;
+					console.log(clist);
+					if (plist.length != 0 || clist.length != 0) {
+						for (var i = 0; i < result.result.plists.length; i++) {
+							var price = plist[i].pprice;
+							if (plist[i].pdiscount != 0) {
+								price = price - plist[i].pprice * (plist[i].pdiscount / 100);
+							}
+							str += "<tr id='" + i + "' data-value='" + plist[i].pid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + i + "' type='checkbox' class='checkbox'><img class='pimg' src='" + plist[i].pimg + "' alt='' style='width:90px; height:90px;'/></span>"
+							str += "</div><div class='product__cart__item__text'><h6>" + plist[i].pname + "</h6>"
+							str += "<span class='price-box'><h5 class='price'id='price_" + i + "'data-value='" + price + "' >₩" + numberWithCommas(price) + "</h5>"
+							if (plist[i].pdiscount != 0) {
+								str += "    <h6 class='cost' id='discount_" + i + "'data-value='" + plist[i].pprice + "'>₩" + numberWithCommas(plist[i].pprice) + "</h6>";
+							}
+							str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'><span data-value=" + i + " class='fa fa-angle-left dec qtybtn btn_minus'></span><input id='quantity_" + i + "'type='text' value='" + plist[i].mcamount + "' readonly='readonly' /><span data-value=" + i + " class='fa fa-angle-right inc qtybtn btn_plus'></span>"
+							str += "</div></div></td><td data-value='" + price * plist[i].mcamount + "'class='cart__price' id='cprice_" + i + "'>₩" + numberWithCommas(price * plist[i].mcamount) + "</td>"
+							str += "<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
+						}
 
-	function CartList(){
-		$.ajax({
-			url : '/capi/get',
-			type : 'post',
-			contentType : 'application/json',
-			beforeSend : function(xhr){
-        		xhr.setRequestHeader(header,token);
-        	},
-        	success : function(result){
-        		console.log(result.result.plists);
-        		str = "";
-        		var plist = result.result.plists;
-        		var clist = result.result.clists;
-        		console.log(clist);
-        		if(plist.length!=0 || clist.length !=0){
-        		for(var i=0;i<result.result.plists.length;i++){
-        			var price = plist[i].pprice;
-        			if(plist[i].pdiscount!=0){
-        				price = price - plist[i].pprice*(plist[i].pdiscount/100);
-        			}
-        			str+="<tr id='"+i+"' data-value='"+plist[i].pid+"'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_"+i+"' type='checkbox' class='checkbox'><img class='pimg' src='"+plist[i].pimg+"' alt='' style='width:90px; height:90px;'/></span>"
-        			str+="</div><div class='product__cart__item__text'><h6>"+plist[i].pname+"</h6>"
-        			str+="<span class='price-box'><h5 class='price'id='price_"+i+"'data-value='"+price+"' >₩"+numberWithCommas(price)+"</h5>"
-        			if(plist[i].pdiscount!=0){
-        				str+="    <h6 class='cost' id='discount_"+i+"'data-value='"+plist[i].pprice+"'>₩"+numberWithCommas(plist[i].pprice)+"</h6>";
-        			}
-        			str+="</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'><span data-value="+i+" class='fa fa-angle-left dec qtybtn btn_minus'></span><input id='quantity_"+i+"'type='text' value='"+plist[i].mcamount+"' readonly='readonly' /><span data-value="+i+" class='fa fa-angle-right inc qtybtn btn_plus'></span>"
-        			str+="</div></div></td><td data-value='"+price*plist[i].mcamount+"'class='cart__price' id='cprice_"+i+"'>₩"+numberWithCommas(price*plist[i].mcamount)+"</td>"
-        			str+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
-        		}
-        		
-        		if(clist.length !=0){
-        		console.log(clist);
-        		for(var j=0;j<clist.length;j++){
-				var status = 'LIVE 방송</br>';
-				status += clist[j].lcday.substring(2,10);
-				if(clist[j].lcstatus==1){
-					status = 'VOD';
-				}
-				str+="<tr id='"+(i+j+1)+"' data-value='"+clist[j].lcid+"'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_"+(i+j+1)+"' type='checkbox' class='checkbox'><img class='pimg' src='"+clist[j].lcimg+"' alt='' style='width:90px; height:90px;'/></span>"
-str+="</div><div class='product__cart__item__text'><h6>"+clist[j].lcname+"</h6>"
-str+="<span class='price-box'><h5 class='price'id='price_"+(i+j+1)+"'data-value='"+clist[j].lcprice+"' >"+clist[j].lcteacher+"</h5>"
-str+="</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'>"+status+"";
-str+="</div></div></td><td data-value='"+clist[j].lcprice+"'class='cart__price' id='cprice_"+(i+j+1)+"'>₩"+numberWithCommas(clist[j].lcprice)+"</td>"
-str+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
-}
-				
-				
-				}
-				$(".pbody").html(str);				
-        		}else {
-					NoItem();
-				}
-        	},
-        	error : function(err, xhr, status){
-        		console.log(err);
-        	}
-		})
-	}
+						if (clist.length != 0) {
+							console.log(clist);
+							for (var j = 0; j < clist.length; j++) {
+								var status = 'LIVE 방송</br>';
+								status += clist[j].lcday.substring(2, 10);
+								if (clist[j].lcstatus == 1) {
+									status = 'VOD';
+								}
+								str += "<tr id='" + (i + j + 1) + "' data-value='" + clist[j].lcid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + (i + j + 1) + "' type='checkbox' class='checkbox'><img class='pimg' src='" + clist[j].lcimg + "' alt='' style='width:90px; height:90px;'/></span>"
+								str += "</div><div class='product__cart__item__text'><h6>" + clist[j].lcname + "</h6>"
+								str += "<span class='price-box'><h5 class='price'id='price_" + (i + j + 1) + "'data-value='" + clist[j].lcprice + "' >" + clist[j].lcteacher + "</h5>"
+								str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'>" + status + "";
+								str += "</div></div></td><td data-value='" + clist[j].lcprice + "'class='cart__price' id='cprice_" + (i + j + 1) + "'>₩" + numberWithCommas(clist[j].lcprice) + "</td>"
+								str += "<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
+							}
 
 
-	function calTotal(pos,pamount){
-		$("#quantity_"+pos).val(pamount);
-		var tprice = $("#price_"+pos).data('value')*pamount;
-		$("#cprice_"+pos).data('value',tprice);
-		$("#cprice_"+pos).text('₩'+numberWithCommas(tprice));
-		getCheckboxValue();
-	}
-	function updateAmount(pid, pamount,pos){
-		$.ajax({
-			url : '/capi/updateAmount',
-			type : 'post',
-			contentType : 'application/json',
-			data : JSON.stringify({
-				pid : pid,
-				pamount : pamount
-			}),
-			beforeSend : function(xhr){
-        		xhr.setRequestHeader(header,token);
-        	},
-        	success : function(result){
-				calTotal(pos,pamount);
-        	},
-        	error : function(err,xhr,status){
-        		console.log(err);
-        	}
-		})
-	}
-	
-	
-	
-	$(document).ready(function(){
+						}
+						$(".pbody").html(str);
+					} else {
+						NoItem();
+					}
+				},
+				error: function (err, xhr, status) {
+					console.log(err);
+				}
+			})
+		}
+
+
+		function calTotal(pos, pamount) {
+			$("#quantity_" + pos).val(pamount);
+			var tprice = $("#price_" + pos).data('value') * pamount;
+			$("#cprice_" + pos).data('value', tprice);
+			$("#cprice_" + pos).text('₩' + numberWithCommas(tprice));
+			getCheckboxValue();
+		}
+		function updateAmount(pid, pamount, pos) {
+			$.ajax({
+				url: '/capi/updateAmount',
+				type: 'post',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					pid: pid,
+					pamount: pamount
+				}),
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader(header, token);
+				},
+				success: function (result) {
+					calTotal(pos, pamount);
+				},
+				error: function (err, xhr, status) {
+					console.log(err);
+				}
+			})
+		}
+
+
+
+		$(document).ready(function () {
 			CartList();
-		})
+		});
 
 	</script>
+	<div class="floating-icon">
+		<i class="fas fa-comment"></i>
+	</div>
+	<script>
+		var icon = document.querySelector('.floating-icon');
 
+		icon.addEventListener('click', function () {
+			// 채팅창을 열거나 다른 동작을 수행하는 코드를 작성합니다.
+		});
 
-	<script type="text/javaScript">
-	const sse = new EventSource("/capi/sse/"+$("#csno").val());
+	</script>
+	<script>
+	const sse = new EventSource("/capi/sse/"+csno);
 	sse.addEventListener('connect', (e) => {
 		const { data: receivedConnectData } = e;
 		console.log('connect event data: ',receivedConnectData);  // "connected!"
@@ -625,37 +454,7 @@ str+="<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
 			location.href='/cart/mycart'
 	});
 	
-	$(document).on("click","#btn_cancle",function(){
-		$.ajax({
-		        	url : '/capi/cancle',
-		        	type : 'post',
-		        	contentType : "application/json",
-		        	beforeSend : function(xhr){
-		        		xhr.setRequestHeader(header,token);
-		        	},success : function(data){
-		        		console.log(data);
-		        		location.href= '/cart/mycart';
-		        	}, error : function(e){
-		        		console.log(e);
-		        	}
-		        	
-		        })
-	})
-	
-</script>
-
-<script type="text/javascript" src="/js/share.js"></script>
-<div class="floating-icon">
-  <i class="fas fa-comment"></i>
-</div>
-<script>
-	var icon = document.querySelector('.floating-icon');
-
-	icon.addEventListener('click', function() {
-  // 채팅창을 열거나 다른 동작을 수행하는 코드를 작성합니다.
-	});
-
-</script>
-	
+	</script>
 </body>
+
 </html>
