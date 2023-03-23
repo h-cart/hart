@@ -63,7 +63,8 @@
                      <div class="rating">
                         <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span> - 5 Reviews</span>
                      </div>
-                     <h3 th:text="${Detail.detail.pprice} + '원'">
+                    <!--  <h3 th:text="${Detail.detail.pprice} + '원'"> -->
+                     <h3 th:text="${#numbers.formatInteger(Detail.detail.pprice, 3, 'COMMA') + '원'}">
                         <span>3233333</span>
                      </h3>
                      <div class="product__details__cart__option">
