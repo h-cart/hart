@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.hart.domain.CategoryVO;
 import com.hart.domain.ProductCategorylistVO;
-import com.hart.domain.ProductlistintegVO;
+import com.hart.domain.ProductlistTopVO;
 import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
 
@@ -36,6 +36,8 @@ public interface ProductsService {
 
 //	public List<ProductlistintegVO> Productlistinteg(int pcno) throws Exception;
 
+	
+	public List<ProductlistTopVO> getproductlisthigh(int pcno) throws Exception;
 	
 	
 }

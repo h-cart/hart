@@ -24,7 +24,7 @@ public class RecipeServiceImple implements RecipeService{
 	@Override
 	public List<RecipeVO> recipelist() {
 		
-		System.out.println("recipe==============");
+		//System.out.println("recipe==============");
 		return recipemapper.recipelist();
 	}
 	

@@ -26,13 +26,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 에이작스로 왼쪽에 카테고리 누르면 상품 가져옴 -->
-	<select id="getproductslistajax" resultType="com.hart.domain.ProductsVO">
+	<select id="getproductslistajax"
+		resultType="com.hart.domain.ProductsVO">
 
-		select pd.pname,pd.pprice,pd.pcno,pd.stag,pd.pdiscount,pd.pid,
+		select
+		pd.pname,pd.pprice,pd.pcno,pd.stag,pd.pdiscount,pd.pid,
 		primg.pimg,primg.pdepth
 		from products pd
 		join product_img primg
-		on pd.pid=primg.pid
+		on
+		pd.pid=primg.pid
 		where pcno=#{pcno} and pdepth=0
 
 	</select>
@@ -92,7 +95,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from product_category where pcno_top=#{pcno}
 	</select>
 
-
+	<select id="getproductlisthigh" resultType="ProductlistTopVO">
+		select pc.pcno, pc.pcategory
+		,p.pid,p.pname,p.pprice,p.pdiscount
+		from
+		product_category pc join
+		products p on pc.pcno=p.pcno
+		where
+		pcno_top=#{pcno}
+		order by pprice
+	</select>
 
 
 

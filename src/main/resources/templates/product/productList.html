@@ -6,15 +6,16 @@
    const token = $("meta[name='_csrf']").attr("content");
    const header = $("meta[name='_csrf_header']").attr("content");
    
-   
+   //상품 디테일 페이지에 pid를 보내줌
       function goDetailPage(e) {
          let pid = $(e).data('pid');
          location.href = "/product/productDetail?pid=" + pid
 
       }
       
+   	//카테고리 소분류를 누르면 ajax 작동하여 해당 카테고리를 불러옴
        function sendpcno(pcno){
-          console.log(pcno);
+         // console.log(pcno);
           let element = {
                pcno : pcno
           };
@@ -73,6 +74,64 @@
               }
           });  
       }
+   	
+   		//가격 높은순
+       function pricehigh(pcno){
+           console.log(pcno);
+           let element = {
+                pcno : pcno
+           };
+          $.ajax({
+               type : "post",
+               url : "/papi/pricehigh",
+               data: JSON.stringify(element),
+               contentType : "application/json",
+               beforeSend : function(xhr){
+                   xhr.setRequestHeader(header,token);
+                },
+               dataType:"json",
+               success : function(result) {
+                   let str=""; 
+                   
+              	   $.each(result.getproductslist, function(index, product) {  
+              		  str += `
+              			 <div class="col-lg-4 col-md-6 col-sm-6">
+              			   <div class="product__item">
+              			     <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)">
+              			       <ul class="product__hover">
+              			         <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
+              			         <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+              			         <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+              			       </ul>
+              			     </div>
+              			     <div class="product__item__text">
+              			       <h6>${product.pname}</h6>
+              			       <a href="#" class="add-cart">+ Add To Cart</a>
+              			       <h5>${product.pprice}원</h5>
+              			       <div class="product__color__select">
+              			         <label for="pc-4"><input type="radio" id="pc-4"></label>
+              			         <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
+              			         <label class="grey" for="pc-6"><input type="radio" id="pc-6"></label>
+              			       </div>
+              			     </div>
+              			   </div>
+              			 </div>
+              			 `;
+
+                      }) 
+                      
+                      $("#productlistajax").html(str);
+	              	   $('.set-bg').each(function () {
+	              	        var bg = $(this).data('setbg');
+	              	        $(this).css('background-image', 'url(' + bg + ')');
+	              	    });
+                 
+               },
+               error : function() {
+                   console.log("실패");
+               }
+           });  
+       }
    </script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -214,10 +273,12 @@
 										<option value="">$55 - $100</option>
 									</select>
 									<div class="nice-select" tabindex="0">
-										<span class="current">추천순</span>
+										<span class="current">선택</span>
 										<ul class="list">
-											<li data-value="" class="option selected focus">추천순</li>
-											<li data-value="" class="option">최신순</li>
+											<li data-value="" class="option selected focus" id="pricehigh" onclick="pricehigh">가격 높은순</li>
+											<li data-value="" class="option">가격 낮은순</li>
+												<li data-value="" class="option">가격 낮은순</li>
+												<li data-value="" class="option">판매량순	</li>
 											<!--    <li data-value="" class="option">$55
                                     - $100</li> -->
 										</ul>

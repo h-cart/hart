@@ -135,7 +135,7 @@
 									<div class="product__details__tab__content"
 										style="display: flex; flex-direction: column; align-items: center;">
 
-										<img th:src="${Detail.pimg[1].pimg}" alt="">
+										<img th:src="${Detail.pimg[1].pimg}" alt=""> 
 
 										<p class="note"></p>
 										<div class="product__details__tab__content__item">
@@ -146,6 +146,7 @@
 										</div>
 
 										<img th:each="detail, i : ${Detail.pimg}"
+										
 											th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg) - 2}"
 											th:src="${detail.pimg}">
 
