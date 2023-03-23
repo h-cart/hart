@@ -38,7 +38,6 @@ public class CartRestController {
 	public CartRestController(SseEmitters sseEmitters) {
 		this.sseEmitters = sseEmitters;
 	}
-
 	@Autowired
 	private CartService cService;
 
@@ -65,13 +64,11 @@ public class CartRestController {
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
-			if(e.getMessage().equals("-1")) {
-				return new ResponseEntity<Map<String,String>>(HttpStatus.METHOD_NOT_ALLOWED);
-			}
 			result.put("result", e.getMessage());
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
+
 
 	@PostMapping(value = "/get", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -162,6 +159,8 @@ public class CartRestController {
 			@PathVariable("csno") String csno) {
 		SseEmitter emitter = new SseEmitter(60 * 60 * 60L);
 		sseEmitters.add(csno, emitter, mDTO);
+		log.info("WHAT'S WRONG");
+		log.info(csno);
 		try {
 			emitter.send(SseEmitter.event().name("connect").data("connected!"));
 		} catch (IOException e) {
@@ -176,7 +175,8 @@ public class CartRestController {
 			@RequestBody ShareDTO sDTO) {
 		Map<String, String> map = new HashMap<>();
 		String msg = "";
-		log.info(sDTO);
+
+		log.info(sDTO.getCsno());
 		try {
 			sDTO.setMid(mDTO.getMid());
 			log.info(sDTO);

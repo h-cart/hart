@@ -1,6 +1,7 @@
 
 package com.hart.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.hart.domain.share.SseEmitters;
 import com.hart.security.handler.LoginSuccessHandler;
 
 import lombok.extern.log4j.Log4j2;
@@ -18,15 +20,18 @@ import lombok.extern.log4j.Log4j2;
 @Configuration
 @Log4j2
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("admin@hart.shop").password("{noop}qwer1234").roles("ADMIN");
 	}
-
+	
+	@Autowired
+	private SseEmitters sseEmitter;
 	// ClubLoginSuccessHandler 등록
 	@Bean
 	public LoginSuccessHandler successHandler() {
-		return new LoginSuccessHandler(passwordEncoder());
+		return new LoginSuccessHandler(passwordEncoder(), sseEmitter);
 	}// end CLu..
 
 	@Bean
