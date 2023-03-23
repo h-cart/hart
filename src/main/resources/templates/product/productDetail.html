@@ -10,7 +10,7 @@
 
 	<!-- Page Preloder -->
 	<div id="preloder" style="display: none;">
-		s
+		
 		<div class="loader" style="display: none;"></div>
 	</div>
 	<th:block th:replace="/includes/header :: header1"></th:block>
@@ -66,7 +66,8 @@
 									class="fa fa-star-o"></i> <span> - 5 Reviews</span>
 							</div>
 
-							<h3 th:text="${Detail.detail.pprice} + '원'">
+							<!-- <h3 th:text="${Detail.detail.pprice} + '원'"> -->
+							<h3 th:text="${#numbers.formatInteger(Detail.detail.pprice, 3, 'COMMA') + '원'}">
 
 								<span>3233333</span>
 							</h3>
