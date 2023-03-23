@@ -7,6 +7,7 @@ function NoItem(){
 		$(".pbody").html(str);
 		}
 		}
+		
 	 function numberWithCommas(x) {
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
@@ -145,8 +146,10 @@ function deleteBtnEvent(param){
 		        		console.log(data);
 		        		
 		        		for(var pid of cartDTOList){
-		        			$("#"+pid).remove();
+		        			$("[data-value="+pid+"]").remove();
+		        			
 		        		}
+		        		NoItem();
 		        	}, error : function(e){
 		        		console.log(e);
 		        	}

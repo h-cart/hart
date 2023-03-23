@@ -38,7 +38,6 @@ public class CartRestController {
 	public CartRestController(SseEmitters sseEmitters) {
 		this.sseEmitters = sseEmitters;
 	}
-
 	@Autowired
 	private CartService cService;
 
@@ -49,16 +48,13 @@ public class CartRestController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, String>> insertCart(@RequestBody Map<String, List<String>> map,
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-		
+
 		Map<String, String> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
-			log.info(pids);
-			log.info(pamounts);
-			log.info(mDTO.getCsno());
 			if (mDTO.getCsno() != null) {
-				log.info(sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno())));
+				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
 				sseEmitters.insert(mDTO.getCsno());
 			} else {
 				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
@@ -69,10 +65,10 @@ public class CartRestController {
 
 		} catch (Exception e) {
 			result.put("result", e.getMessage());
-			log.info(e.getMessage());
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
+
 
 	@PostMapping(value = "/get", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -163,6 +159,8 @@ public class CartRestController {
 			@PathVariable("csno") String csno) {
 		SseEmitter emitter = new SseEmitter(60 * 60 * 60L);
 		sseEmitters.add(csno, emitter, mDTO);
+		log.info("WHAT'S WRONG");
+		log.info(csno);
 		try {
 			emitter.send(SseEmitter.event().name("connect").data("connected!"));
 		} catch (IOException e) {
@@ -177,7 +175,8 @@ public class CartRestController {
 			@RequestBody ShareDTO sDTO) {
 		Map<String, String> map = new HashMap<>();
 		String msg = "";
-		log.info(sDTO);
+
+		log.info(sDTO.getCsno());
 		try {
 			sDTO.setMid(mDTO.getMid());
 			log.info(sDTO);
