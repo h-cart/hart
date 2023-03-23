@@ -94,8 +94,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="ProductCategorylistVO">
 		select * from product_category where pcno_top=#{pcno}
 	</select>
-
-	<select id="getproductlisthigh" resultType="ProductlistTopVO">
+	
+	
+	<!-- 카테고리 상위가격-->
+	<!-- <select id="getproductlisthigh" resultType="ProductlistTopVO">
 		select pc.pcno, pc.pcategory
 		,p.pid,p.pname,p.pprice,p.pdiscount
 		from
@@ -103,16 +105,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		products p on pc.pcno=p.pcno
 		where
 		pcno_top=#{pcno}
-		order by pprice
+		order by pprice desc
+	</select> -->
+
+	<!-- 무한 스크롤 + 필터링 -->
+	<!-- <select id="" resultType="ProductlistbuttonVO">
+
+		SELECT  *
+		FROM(select rownum as page, a.* 
+        from(
+		select p.pid as pid, p.pno as pno, p.pname as pname, p.pprice as pprice,
+		p.pdetail as pdetail, b.bname as bname, p.category_clarge as clarge,
+		p.category_cmedium as cmedium,p.category_csmall as csmall
+		FROM product
+		p INNER JOIN brand b ON b.bno = p.brand_bno
+       <where>
+		    <if test="bname != null">
+				AND b.bname = #{bname}
+			</if>
+			<if test="category.clarge != null">
+				AND p.category_clarge = #{category.cLarge}
+			</if>
+			<if test="category.cmedium != null">
+				AND p.category_cmedium = #{category.cMedium}
+			</if>
+			<if test="category.csmall != null">
+				AND p.category_csmall = #{category.cSmall}
+			</if>
+		</where>					
+            <trim prefix="ORDER BY">
+                        <if test="sort == 'lprice'">  pprice DESC</if>
+                        <if test="sort == 'hprice'">  pprice DESC</if>
+                        <if test="sort == 'lprice'">  pprice DESC</if>
+                        <if test="sort == 'lprice'">  pprice DESC</if>
+                        <if test="sort == 'sales'">  pcount DESC </if>
+           </trim>
+                
+                ) a)
+      WHERE page <![CDATA[ > ]]> 10*(#{page}-1) AND page <![CDATA[ <= ]]> 10*(#{page})   
+              
+
 	</select>
+	 -->
 
 
-
-	<!-- <select id ="getproductslist" resultType="ProductsVO"> select * from 
-		(select p.pname, p.pprice, p.pdiscount,p.pcno, p.pid ,p.stag, pc.pcategory, 
-		pcno_top from products p join product_category pc on p.pcno = pc.pcno where 
-		pc.pcno_top= #{pcno}) pd join product_img pi on pd.pid = pi.pid where pdepth 
-		= 0 </select> -->
 </mapper>
 
 

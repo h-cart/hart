@@ -3,7 +3,7 @@ package com.hart.domain;
 import lombok.Data;
 
 @Data
-public class ProductlistTopVO {
+public class ProductlistbuttonVO {
 
 	String pid;
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.CategoryVO;
-import com.hart.domain.ProductlistTopVO;
+import com.hart.domain.ProductlistbuttonVO;
 import com.hart.domain.ProductsVO;
 import com.hart.service.ProductsService;
 
@@ -57,7 +57,7 @@ public class ProductRestController {
 		try {
 			String pcno = data.get("pcno");
 			List<ProductsVO> getproductslist = pService.getproductslistajax(Integer.parseInt(pcno));
-			//log.info("getproductslist=>>>" + getproductslist);
+			// log.info("getproductslist=>>>" + getproductslist);
 
 			Map<String, List<ProductsVO>> result = new HashMap<>();
 			result.put("getproductslist", getproductslist);
@@ -70,25 +70,30 @@ public class ProductRestController {
 		}
 	}
 
-	
-	
-	@PostMapping(value = "/pricehigh", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+	// 필터 가격 높은순
+
+	@PostMapping(value = "/fillterbutton", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<ProductlistTopVO>>> getproductlisthigh(@RequestBody Map<String, String> data) {
+	public ResponseEntity<Map<String, List<ProductlistbuttonVO>>> fillterbutton(
+			@RequestBody Map<String, String> data) {
 
 		try {
-			String pcno = data.get("pcno");
-			List<ProductlistTopVO> listtop = pService.getproductlisthigh(Integer.parseInt(pcno));
-			//log.info("listtop=>>>" + listtop);
+			String type = data.get("type"); // "sales"
+			String sort = data.get("sort"); // "2"
+			String pcno = data.get("pcno"); // "100571"
+			
+			
+			List<ProductlistbuttonVO> fillter = pService.getproductlisthigh(Integer.parseInt(pcno));
+			log.info("fillter=>>>" + fillter);
 
-			Map<String, List<ProductlistTopVO>> result = new HashMap<>();
-			result.put("listtop", listtop);
+			Map<String, List<ProductlistbuttonVO>> result = new HashMap<>();
+			result.put("fillter", fillter);
 
-			return new ResponseEntity<Map<String, List<ProductlistTopVO>>>(result, HttpStatus.OK);
+			return new ResponseEntity<Map<String, List<ProductlistbuttonVO>>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
 			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<ProductlistTopVO>>>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, List<ProductlistbuttonVO>>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

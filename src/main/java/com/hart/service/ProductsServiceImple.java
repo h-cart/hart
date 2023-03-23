@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hart.domain.CategoryVO;
 import com.hart.domain.ProductCategorylistVO;
 import com.hart.domain.ProductimgVO;
-import com.hart.domain.ProductlistTopVO;
+import com.hart.domain.ProductlistbuttonVO;
 import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
 import com.hart.mapper.ProductsMapper;
@@ -87,7 +87,7 @@ public class ProductsServiceImple implements ProductsService {
 	 * }
 	 */
 	  @Override
-	  public List<ProductlistTopVO> getproductlisthigh (int pcno){
+	  public List<ProductlistbuttonVO> getproductlisthigh (int pcno){
 		  
 		  return productsmapper.getproductlisthigh(pcno);
 	  }

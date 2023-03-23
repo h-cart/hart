@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
 <body style="">
-   <script type="text/javascript" defer>
+	<script type="text/javascript" defer>
    const token = $("meta[name='_csrf']").attr("content");
    const header = $("meta[name='_csrf_header']").attr("content");
    
@@ -16,6 +16,7 @@
    	//카테고리 소분류를 누르면 ajax 작동하여 해당 카테고리를 불러옴
        function sendpcno(pcno){
          // console.log(pcno);
+         $("input[name=pcno]").val(pcno);
           let element = {
                pcno : pcno
           };
@@ -46,6 +47,8 @@
                              <h6>${product.pname}</h6>
                              <a href="#" class="add-cart">+ Add To Cart</a>
                              <h5>${product.pprice}원</h5>
+                             
+                             
                              <div class="product__color__select">
                                <label for="pc-4"><input type="radio" id="pc-4"></label>
                                <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
@@ -57,18 +60,13 @@
                        `;
 
                      }) 
-                     
                      $("#productlistajax").html(str);
                    
                    $('.set-bg').each(function () {
                         var bg = $(this).data('setbg');
                         $(this).css('background-image', 'url(' + bg + ')');
                     });
-                
               },
-              
-          
-              
               error : function() {
                   console.log("실패");
               }
@@ -76,8 +74,8 @@
       }
    	
    		//가격 높은순
-       function pricehigh(pcno){
-           console.log(pcno);
+      /*  function pricehigh(pcno){
+           console.log(pcno +" 가격높은순");
            let element = {
                 pcno : pcno
            };
@@ -128,14 +126,14 @@
                  
                },
                error : function() {
-                   console.log("실패");
+                   console.log("실패가격 높은순");
                }
            });  
-       }
+       } */
    </script>
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-   <!-- <script>
+	<!-- <script>
   $(document).ready(function() {
     $('ul.nice-scroll li').on('click', function() {
       var pcno = $(this).data('pcno');
@@ -161,81 +159,79 @@
 
 
 
-   <script type="text/javascript" defer>
+	<script type="text/javascript" defer>
    
    </script>
-   <!-- Page Preloder -->
-   <div id="preloder" style="display: none;">
-      <div class="loader" style="display: none;"></div>
-   </div>
-   <!-- Offcanvas Menu Begin -->
-   <th:block th:replace="/includes/header :: header1"></th:block>
-   <th:block th:replace="/includes/header :: header2"></th:block>
-   <th:block th:replace="/includes/header :: header3"></th:block>
+	<!-- Page Preloder -->
+	<div id="preloder" style="display: none;">
+		<div class="loader" style="display: none;"></div>
+	</div>
+	<!-- Offcanvas Menu Begin -->
+	<th:block th:replace="/includes/header :: header1"></th:block>
+	<th:block th:replace="/includes/header :: header2"></th:block>
+	<th:block th:replace="/includes/header :: header3"></th:block>
 
-   <!-- Breadcrumb Section Begin -->
-   <section class="breadcrumb-option">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-12">
-               <div class="breadcrumb__text">
-                  <h4>카테고리</h4>
-                  <div class="breadcrumb__links">
-                     <a href="">Home</a><span>Shop</span>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- Breadcrumb Section End -->
-   <!-- Shop Section Begin -->
-   <section class="shop spad">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-3">
-               <div class="shop__sidebar">
-                  <div class="shop__sidebar__search">
-                     <form action="#">
-                        <input type="text" placeholder="Search...">
-                        <button type="submit">
-                           <span class="icon_search"></span>
-                        </button>
-                     </form>
-                  </div>
-                  <div class="shop__sidebar__accordion">
-                     <div class="accordion" id="accordionExample">
-                        <div class="card">
-                           <div class="card-heading" id="listbig">
-                              <a data-toggle="collapse" data-target="#collapseOne">카테고리</a>
-                           </div>
-                           <div id="collapseOne" class="collapse show"
-                              data-parent="#accordionExample">
-
-
-                              <div class="card-body">
-
-                                 <div class="shop__sidebar__categories">
-                                    <!-- <th th:each="categorypcno :${categorypcno}"> -->
-                                    <ul class="nice-scroll"
-                                       style="overflow-y: hidden; outline: none; touch-action: none;"
-                                       tabindex="1">
-                                       <li th:each="productcategorylist :${productcategorylist}">
+	<!-- Breadcrumb Section Begin -->
+	<section class="breadcrumb-option">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb__text">
+						<h4>카테고리</h4>
+						<div class="breadcrumb__links">
+							<a href="">Home</a><span>Shop</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Breadcrumb Section End -->
+	<!-- Shop Section Begin -->
+	<section class="shop spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="shop__sidebar">
+						<div class="shop__sidebar__search">
+							<form action="#">
+								<input type="text" placeholder="Search...">
+								<button type="submit">
+									<span class="icon_search"></span>
+								</button>
+							</form>
+						</div>
+						<div class="shop__sidebar__accordion">
+							<div class="accordion" id="accordionExample">
+								<div class="card">
+									<div class="card-heading" id="listbig">
+										<a data-toggle="collapse" data-target="#collapseOne">카테고리</a>
+									</div>
+									<div id="collapseOne" class="collapse show"
+										data-parent="#accordionExample">
 
 
-                                          <a href="#" th:text="${productcategorylist.pcategory}"
-                                          th:onclick="sendpcno([[${productcategorylist.pcno}]])"></a>
-                                       </li>
-                                    </ul>
+										<div class="card-body">
 
-                                 </div>
+											<div class="shop__sidebar__categories">
+												<!-- <th th:each="categorypcno :${categorypcno}"> -->
+												<ul class="nice-scroll"
+													style="overflow-y: hidden; outline: none; touch-action: none;"
+													tabindex="1">
+													<li th:each="productcategorylist :${productcategorylist}">
+														<a href="#" th:text="${productcategorylist.pcategory}"
+														th:onclick="sendpcno([[${productcategorylist.pcno}]])"></a>
+													</li>
+												</ul>
 
-                              </div>
+											</div>
 
-                           </div>
-                        </div>
-                        <div class="card">
-                           <!-- <div class="card-heading">
+										</div>
+
+									</div>
+								</div>
+								<div class="card">
+									<!-- <div class="card-heading">
                               <a data-toggle="collapse" data-target="#collapseTwo">브랜드</a>
                            </div>
                            <div id="collapseTwo" class="collapse show"
@@ -273,76 +269,145 @@
 										<option value="">$0 - $55</option>
 										<option value="">$55 - $100</option>
 									</select>
+
+
 									<div class="nice-select" tabindex="0">
 										<span class="current">선택</span>
 										<ul class="list">
-											<li data-value="" class="option selected focus" id="pricehigh" onclick="pricehigh">가격 높은순</li>
-											<li data-value="" class="option">가격 낮은순</li>
-												<li data-value="" class="option">가격 낮은순</li>
-												<li data-value="" class="option">판매량순	</li>
-											<!--    <li data-value="" class="option">$55
-                                    - $100</li> -->
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row" id ="productlistajax">
-                  <!-- <tr th:each="products : ${products}"> -->
-                  <!-- <tr th:if="${not #lists.isEmpty(products)}" th:each="dto,dtostate:${products}"> -->
+											<li data-value="1" data-type="price" class="option">가격
+												높은순</li>
+											<li data-value="2" data-type="price" class="option">가격
+												낮은순</li>
+											<li data-value="1" data-type="sales" class="option">판매량
+												높은순</li>
+											<li data-value="2" data-type="sales" class="option">판매량
+												낮은순</li>
+										</ul>
+
+										<input type='hidden' th:value="${pcno}" name="pcno_top"> <!-- ex) 100614들어옴 -->
+										<input type='hidden' value='0' name='pcno' /> 
+
+							<script>
+                              	$(document).on("click",".option",function(){
+                              		var type = $(this).data('type'); /* -> sales */
+                              		var sort = $(this).data('value'); /* -> 2 */
+                              		var pcno = $("input[name=pcno]").val();
+                              		$.ajax({
+                              			url : "papi/fillterbutton",
+                              			type: "post",
+                              			data : JSON.stringify({
+                              				type : type,
+                              				sort : sort,
+                              				pcno : pcno
+                              			}),
+                              			success :function(result) {
+                                            let str=""; 
+                                            
+                                            $.each(result.getproductslist, function(index, product) {  
+                                              str += `
+                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                  <div class="product__item">
+                                                    <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)">
+                                                      <ul class="product__hover">
+                                                        <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
+                                                        <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                                        <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+                                                      </ul>
+                                                    </div>
+                                                    <div class="product__item__text">
+                                                      <h6>${product.pname}</h6>
+                                                      <a href="#" class="add-cart">+ Add To Cart</a>
+                                                      <h5>${product.pprice}원</h5>
+                                                      
+                                                      
+                                                      <div class="product__color__select">
+                                                        <label for="pc-4"><input type="radio" id="pc-4"></label>
+                                                        <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
+                                                        <label class="grey" for="pc-6"><input type="radio" id="pc-6"></label>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                `;
+
+                                              }) 
+                                              $("#productlistajax").html(str);
+                                            
+                                            $('.set-bg').each(function () {
+                                                 var bg = $(this).data('setbg');
+                                                 $(this).css('background-image', 'url(' + bg + ')');
+                                             });
+                                       },
+                                       error : function() {
+                                           console.log("실패 boutton");
+                                       }
+                                   });  
+                              			
+                              	})
+                              	
+                             		 </script> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" id="productlistajax">
+						<!-- <tr th:each="products : ${products}"> -->
+						<!-- <tr th:if="${not #lists.isEmpty(products)}" th:each="dto,dtostate:${products}"> -->
 
 
-                <div class="col-lg-4 col-md-6 col-sm-6"
-                     th:each="productlist : ${productlist}">
-                     <div class="product__item">
-                        <div class="product__item__pic set-bg" id="img"
-                           th:data-pid="${productlist.pid}"
-                           th:data-setbg="${productlist.pimg}"
-                           th:onclick="goDetailPage(this)">
-                           <ul class="product__hover">
-                              <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                              <li><a href="#"><img src="img/icon/compare.png"
-                                    alt=""> <span>Compare</span></a></li>
-                              <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-                           </ul>
-                        </div>
-                        <div class="product__item__text">
-                           <h6>
-                              <td th:text="${productlist.pname}">
-                           </h6>
-                           <a href="#" class="add-cart">+ Add To Cart</a>
-                           <h5>
-                              <td th:text="${productlist.pprice}+ '원' ">
-                           </h5>
-                           <div class="product__color__select">
-                              <label for="pc-4"> <input type="radio" id="pc-4">
-                              </label> <label class="active black" for="pc-5"> <input
-                                 type="radio" id="pc-5">
-                              </label> <label class="grey" for="pc-6"> <input type="radio"
-                                 id="pc-6">
-                              </label>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-lg-12">
-                     <div class="product__pagination">
-                        <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-                        <span>...</span> <a href="#">21</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- Shop Section End -->
-   <!-- Footer Section Begin -->
-   <th:block th:replace="/includes/footer :: footer"></th:block>
-   <!-- Footer Section End -->
+						<div class="col-lg-4 col-md-6 col-sm-6"
+							th:each="productlist : ${productlist}">
+							<div class="product__item">
+								<div class="product__item__pic set-bg" id="img"
+									th:data-pid="${productlist.pid}"
+									th:data-setbg="${productlist.pimg}"
+									th:onclick="goDetailPage(this)">
+									<ul class="product__hover">
+										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
+										<li><a href="#"><img src="img/icon/compare.png"
+												alt=""> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+									</ul>
+								</div>
+								<div class="product__item__text">
+									<h6>
+										<td th:text="${productlist.pname}">
+									</h6>
+									<a href="#" class="add-cart">+ Add To Cart</a>
+									<h5>
+										<!--   <td th:text="${productlist.pprice}+ '원' " pattern="#,###">  -->
+										<td
+											th:text="${#numbers.formatInteger(productlist.pprice, 3, 'COMMA') + '원'}">
+									</h5>
+									<div class="product__color__select">
+										<label for="pc-4"> <input type="radio" id="pc-4">
+										</label> <label class="active black" for="pc-5"> <input
+											type="radio" id="pc-5">
+										</label> <label class="grey" for="pc-6"> <input type="radio"
+											id="pc-6">
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="product__pagination">
+								<a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a>
+								<span>...</span> <a href="#">21</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Shop Section End -->
+	<!-- Footer Section Begin -->
+	<th:block th:replace="/includes/footer :: footer"></th:block>
+	<!-- Footer Section End -->
 
 
 </body>
