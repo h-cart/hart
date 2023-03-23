@@ -40,7 +40,8 @@ public class ProductsController {
 
 			productcategorylist = productsservice.getproductcatrogrtlist(pcno);
 
-			System.out.println("productcategorylist Controller=========" + productcategorylist);
+			// System.out.println("productcategorylist Controller=========" +
+			// productcategorylist);
 
 			// categorysamll=productsservice.getcategorysmall(productsVO);
 		} catch (Exception e) {
@@ -70,7 +71,7 @@ public class ProductsController {
 
 			ProductsDetailVO Detail = productsservice.getProductDetails(pid);
 
-			System.out.println("Detail ==================>>>>>>" + Detail);
+			// System.out.println("Detail ==================>>>>>>" + Detail);
 
 			model.addAttribute("Detail", Detail);
 
