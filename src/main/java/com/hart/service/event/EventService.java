@@ -24,4 +24,6 @@ public interface EventService {
 	List<ProductsVO> getList(String keyword) throws SQLException;
 
 	void register(CRecipeVO recipe, List<CRContentVO> content, List<CRIngredientVO> ingredient);
+	
+	ProductsVO getVoteList();
 }

@@ -35,6 +35,7 @@ public class EventController {
 
 	@GetMapping("/vote")
 	public String vote() {
+		
 		return "event/vote";
 	}
 
