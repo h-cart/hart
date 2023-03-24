@@ -29,12 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication().withUser("admin@hart.shop").password("{noop}qwer1234").roles("ADMIN");
 	}
 	
-	@Autowired
-	private SseEmitters sseEmitter;
 	// ClubLoginSuccessHandler 등록
 	@Bean
 	public LoginSuccessHandler successHandler() {
-		return new LoginSuccessHandler(passwordEncoder(), sseEmitter);
+		return new LoginSuccessHandler(passwordEncoder());
 	}// end CLu..
 	
 

@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -154,13 +153,12 @@ public class CartRestController {
 		}
 	}
 
-	@GetMapping(value = "/sse/{csno}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO,
-			@PathVariable("csno") String csno) {
+	@GetMapping(value = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+		if(mDTO.getCsno()==null) return null; 
 		SseEmitter emitter = new SseEmitter(60 * 60 * 60L);
-		sseEmitters.add(csno, emitter, mDTO);
-		log.info("WHAT'S WRONG");
-		log.info(csno);
+		sseEmitters.add(mDTO.getCsno(), emitter, mDTO);
+
 		try {
 			emitter.send(SseEmitter.event().name("connect").data("connected!"));
 		} catch (IOException e) {

@@ -16,6 +16,6 @@ import lombok.NoArgsConstructor;
 public class OrderTotalDTO {
 	
 	private List<CinfoDTO> cLists;
-	private List<CProductDTO> pLists;
+	private List<PinfoDTO> pLists;
 	
 }
