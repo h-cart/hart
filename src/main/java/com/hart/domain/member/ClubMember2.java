@@ -21,4 +21,5 @@ public class ClubMember2 implements Serializable {
 	private int social;
 	private String mroles;
 	private String csno;
+	private int mpoint;
 }// end class

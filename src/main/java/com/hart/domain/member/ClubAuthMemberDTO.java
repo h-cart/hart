@@ -23,13 +23,15 @@ public class ClubAuthMemberDTO extends User implements OAuth2User {
 	private int social;
 	private Map<String, Object> OA2_attr;
 	private String csno;
+	private int mpoint;
 
 	// ClubOAuth2UserDetailsService 용 구성자
 	public ClubAuthMemberDTO(String username, String password, int fromSocial, List<GrantedAuthority> authorities,
-			Map<String, Object> OA2_attr,String csno) {
+			Map<String, Object> OA2_attr,String csno,int mpoint) {
 		this(username, password, fromSocial, authorities);
 		this.OA2_attr = OA2_attr;
 		this.csno = csno;
+		this.mpoint = mpoint;
 	}// end ClubAuthMemberDTO
 
 	// 구성자 설정
