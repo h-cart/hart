@@ -269,8 +269,6 @@
 										<option value="">$0 - $55</option>
 										<option value="">$55 - $100</option>
 									</select>
-
-
 									<div class="nice-select" tabindex="0">
 										<span class="current">선택</span>
 										<ul class="list">
@@ -282,36 +280,50 @@
 												높은순</li>
 											<li data-value="2" data-type="sales" class="option">판매량
 												낮은순</li>
-										</ul>
 
-										<input type='hidden' th:value="${pcno}" name="pcno_top"> <!-- ex) 100614들어옴 -->
-										<input type='hidden' value='0' name='pcno' /> 
+	
+<!-- 										</ul> -->
+										<input type='hidden' th:value="${pcno}" name="pcno_top">
+										<input type='hidden' id="fil" value='0' name='pcno'/> 
 
 							<script>
-                              	$(document).on("click",".option",function(){
-                              		var type = $(this).data('type'); /* -> sales */
-                              		var sort = $(this).data('value'); /* -> 2 */
-                              		var pcno = $("input[name=pcno]").val();
+							$(document).on("click", ".option", function(){
+							    var type = $(this).data('type'); // sales or price
+							    var sort = $(this).data('value'); // 1 or 2
+							    var pcno_top = $("input[name=pcno_top]").val(); // 상위 카테고리 번호
+							    var pcno = $("input[name=pcno]").val();
+							    
+							   /*  $("input[name=pcno_top]").val(pcnoTop);  */// 상위 카테고리 번호 유지
+                              	    
+							   
                               		$.ajax({
-                              			url : "papi/fillterbutton",
+                              			url : "/papi/fillterbutton",
                               			type: "post",
                               			data : JSON.stringify({
                               				type : type,
                               				sort : sort,
-                              				pcno : pcno
+                              				pcno : pcno,
+                              				pcno_top : pcno_top
                               			}),
+                            			beforeSend : function(xhr){
+                                    		xhr.setRequestHeader(header,token);
+                                    	},
+                              			contentType : "application/json",
                               			success :function(result) {
-                                            let str=""; 
+                              				console.log("성공!");
+                              				console.log(result.getproductslist[0]);
+                                            var str=""; 
                                             
                                             $.each(result.getproductslist, function(index, product) {  
-                                              str += `
+                                            	
+                                             str += `
                                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                                   <div class="product__item">
                                                     <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)">
                                                       <ul class="product__hover">
-                                                        <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                                        <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                                        <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+                                                        <li><a href="#"><img src="/img/icon/heart.png" alt=""></a></li>
+                                                        <li><a href="#"><img src="/img/icon/compare.png" alt=""> <span>Compare</span></a></li>
+                                                        <li><a href="#"><img src="/img/icon/search.png" alt=""></a></li>
                                                       </ul>
                                                     </div>
                                                     <div class="product__item__text">
@@ -336,7 +348,8 @@
                                             $('.set-bg').each(function () {
                                                  var bg = $(this).data('setbg');
                                                  $(this).css('background-image', 'url(' + bg + ')');
-                                             });
+
+                                             }); 
                                        },
                                        error : function() {
                                            console.log("실패 boutton");
@@ -344,7 +357,6 @@
                                    });  
                               			
                               	})
-                              	
                              		 </script> 
 									</div>
 								</div>
@@ -378,8 +390,8 @@
 									<h5>
 
 										<!-- <td th:text="${productlist.pprice}+ '원' "> -->
-										<td th:text="${#numbers.formatInteger(productlist.pprice, 3, 'COMMA') + '원'}">
-
+										<td
+											th:text="${#numbers.formatInteger(productlist.pprice, 3, 'COMMA') + '원'}">
 									</h5>
 									<div class="product__color__select">
 										<label for="pc-4"> <input type="radio" id="pc-4">

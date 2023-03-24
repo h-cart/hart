@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.CategoryVO;
-import com.hart.domain.ProductlistbuttonVO;
+import com.hart.domain.FillterVO;
 import com.hart.domain.ProductsVO;
 import com.hart.service.ProductsService;
 
@@ -70,30 +70,25 @@ public class ProductRestController {
 		}
 	}
 
-	// 필터 가격 높은순
 
 	@PostMapping(value = "/fillterbutton", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<ProductlistbuttonVO>>> fillterbutton(
-			@RequestBody Map<String, String> data) {
+	public ResponseEntity<Map<String, List<ProductsVO>>> getproductlisthigh(
+			@RequestBody FillterVO data) {
 
 		try {
-			String type = data.get("type"); // "sales"
-			String sort = data.get("sort"); // "2"
-			String pcno = data.get("pcno"); // "100571"
-			
-			
-			List<ProductlistbuttonVO> fillter = pService.getproductlisthigh(Integer.parseInt(pcno));
-			log.info("fillter=>>>" + fillter);
+			log.info(data);
+			List<ProductsVO> listtop = pService.fillter(data);
+			// log.info("listtop=>>>" + listtop);
 
-			Map<String, List<ProductlistbuttonVO>> result = new HashMap<>();
-			result.put("fillter", fillter);
+			Map<String, List<ProductsVO>> result = new HashMap<>();
+			result.put("getproductslist", listtop);
 
-			return new ResponseEntity<Map<String, List<ProductlistbuttonVO>>>(result, HttpStatus.OK);
+			return new ResponseEntity<Map<String, List<ProductsVO>>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
 			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<ProductlistbuttonVO>>>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, List<ProductsVO>>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

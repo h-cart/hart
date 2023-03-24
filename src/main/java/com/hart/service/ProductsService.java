@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.hart.domain.CategoryVO;
+import com.hart.domain.FillterVO;
 import com.hart.domain.ProductCategorylistVO;
-import com.hart.domain.ProductlistbuttonVO;
 import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
 
@@ -35,9 +35,9 @@ public interface ProductsService {
 	public List<ProductsVO> getproductslistajax(int pcno) throws Exception;
 
 //	public List<ProductlistintegVO> Productlistinteg(int pcno) throws Exception;
-
 	
-	public List<ProductlistbuttonVO> getproductlisthigh(int pcno) throws Exception;
+
+	public List<ProductsVO> fillter(FillterVO fVO) throws Exception;
 	
 	
 }
