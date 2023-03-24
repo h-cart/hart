@@ -1,0 +1,47 @@
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<body>
+
+<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Offcanvas Menu Begin -->
+	<th:block th:replace="/includes/header :: header1"></th:block>
+	<th:block th:replace="/includes/header :: header2"></th:block>
+	<th:block th:replace="/includes/header :: header3"></th:block>
+
+<button onclick="getMyClass()">나의 수강내역 보기</button>
+
+<a href="http://localhost:3000/">강의 보기</a>
+
+
+<th:block th:replace="/includes/footer :: footer"></th:block>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function getMyClass(){
+		alert("final check");
+	    
+		$.ajax({
+			type: 'POST',
+			url : '/mypage/info',
+			contentType : "application/json; charset=utf-8",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			success : function(result){
+				alert("ajax 성공");
+			},
+			error : function(result){
+				alert("ajax 실패");
+				
+			}
+			
+		});
+	}
+
+</script>
+
+
+</body>
+</html>

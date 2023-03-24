@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+		}
+		img {
+			margin-top: 20%;
+		}
+		.btn-container {
+			margin-top: 20px;
+		}
+		.btn {
+			display: inline-block;
+			padding: 8px 16px;
+			font-size: 16px;
+			cursor: pointer;
+			background-color: #3085d6;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			margin-top: 20px;
+		}
+		.btn.btn-danger {
+			background-color: #d33;
+		}
+	</style>
+</head>
+<body>
+
+	<a href="https://localhost"><img src="/img/logo.png" alt="HART LOGO"></a>
+	<h1>쇼핑이 즐겁다 HART!</h1>
+	<p th:each="msg : ${msgs}"><strong th:text="${msg}"></strong></p>
+	<br>
+	<p class="btn-container" style="color:red;">
+		<button type="button" th:if="${status == -1}" class="btn btn-danger wrong">메인 페이지로 이동하기</button>	
+			<form th:if="${status==2}" th:action="@{/cart/share}" method="post">
+				<input type="hidden" name='csno' th:value="${csno}">
+				<input type='hidden' name='cskey' th:value="${cskey}">
+				<button type='button' class="btn btn-primary">수락</button>
+				<button type="button" class="btn btn-danger wrong">거절</button>
+			</form>
+		
+		<button class="btn btn-danger gocart " th:if="${status==1}" type="button">장바구니로 이동하기</button>
+	</p>
+	
+	
+</body>
+</html>
+
+	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script>
+   		const token = $("meta[name='_csrf']").attr("content");
+		const header = $("meta[name='_csrf_header']").attr("content");
+   		$(document).on("click",".wrong",function(){
+		location.href= "/";
+		})
+		
+		$(document).on("click",".gocart",function(){
+		location.href= "/cart/mycart";
+		})		
+ 	
+		$(document).on("click",".btn-primary",function(){
+		let csno = $("input[name=csno]").val();
+		let cskey = $("input[name=cskey]").val();
+		console.log(csno,cskey);	
+		$.ajax({
+			url : '/capi/share',
+			type : 'post',
+			data : JSON.stringify({
+				csno : csno,
+				cskey :cskey
+			}),
+			contentType : "application/json",
+			beforeSend : function(xhr){
+        		xhr.setRequestHeader(header,token);
+        	},success : function(result){
+				if(result.result == 'success')
+					location.href='/cart/mycart';
+				else{
+					alert('장바구니 공유 실패');
+				}
+			}, error :function(err, xhr, sts){
+				console.log(err);
+			}
+		})
+	})
+
+    </script>
+
+
