@@ -37,26 +37,6 @@
     <link href="https://recipe1.ezmember.co.kr/img/icons/icon-normal.png" rel="icon" sizes="128x128" />
     <script type="text/javascript" src="https://recipe1.ezmember.co.kr/static/js/jquery-1.11.2.min.js" charset="utf-8"></script>
     <script async="" src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-    <script>
-      window.googletag = window.googletag || {
-        cmd: [],
-      };
-      googletag.cmd.push(function () {
-        googletag
-          .defineSlot(
-            "/21842705582/10k_w_recipe_top",
-            [
-              [970, 90],
-              [728, 90],
-            ],
-            "div-gpt-ad-1576827715543-0"
-          )
-          .addService(googletag.pubads());
-        googletag.pubads().enableSingleRequest();
-        googletag.pubads().collapseEmptyDivs();
-        googletag.enableServices();
-      });
-    </script>
     <!-- LOGGER(TM) TRACKING SCRIPT V.40 FOR logger.co.kr / 39580 : COMBINE TYPE / DO NOT ALTER THIS SCRIPT. -->
     <!-- END OF LOGGER TRACKING SCRIPT -->
   </head>
@@ -152,7 +132,7 @@
         height: 30px;
       }
     </style>
-    <form name="insFrm" id="insFrm" method="post" th:action="@{/event/upload}" enctype="multipart/form-data">
+  <form name="insFrm" id="insFrm" method="post" th:action="@{/event/upload}" enctype="multipart/form-data">
       <input type="hidden" name="crmingredient" value="돼지" />
       <div class="container recipe_regi">
         <div class="regi_center">
