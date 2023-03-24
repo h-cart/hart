@@ -5,35 +5,35 @@ import lombok.Data;
 @Data
 public class ProductlistTopVO {
 
-	String pid;
+   String pid;
 
-	String porigin;
+   String porigin;
 
-	int pcount;
+   int pcount;
 
-	String pdetail;
+   String pdetail;
 
-	String pbname;
+   String pbname;
 
-	String pbsmall;
+   String pbsmall;
 
-	String pbdesc;
+   String pbdesc;
 
-	String pname;
+   String pname;
 
-	int pprice;
+   int pprice;
 
-	int pcno;
+   int pcno;
 
-	String stag;
+   String stag;
 
-	int pdiscount;
+   int pdiscount;
 
-	String ptitle;
+   String ptitle;
 
-	String pcategory;
+   String pcategory;
 
-	String pimg;
+   String pimg;
 
-	int pdepth;
+   int pdepth;
 };

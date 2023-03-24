@@ -1,16 +1,21 @@
 package com.hart.controller.liveClass;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.cart.CartDTO;
+import com.hart.domain.liveClass.MyLiveClassInfoDTO;
+import com.hart.domain.member.ClubAuthMemberDTO;
 import com.hart.service.liveClass.LiveClassService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,20 +34,25 @@ import lombok.extern.log4j.Log4j2;
  *     </pre>
  */
 @RestController
-@RequestMapping("/liveClass")
 @RequiredArgsConstructor
+@RequestMapping("/mypage")
 @Log4j2
 public class LiveClassRestController {
 
 	private final LiveClassService service;
 	
-	@GetMapping("/info")
-	public LiveClassListDTO myLiveClassInfo(Principal pr) {
-		LiveClassListDTO dto = new LiveClassListDTO();
-		String id = pr.getName();
-		
-		return dto;
+	@PostMapping("/info")
+	public List<MyLiveClassInfoDTO> myLiveClassInfo(Principal pr) {
+		/* String id = pr.getName(); */
+		String id = "skarns23@gmail.com";
+		log.info("myLiveClassInfo 컨트롤러 호출");
+		List<MyLiveClassInfoDTO> list = service.getMyClassInfo(id);
+		return list;
 		
 	}
+	
+	
+	
+	
 	
 }

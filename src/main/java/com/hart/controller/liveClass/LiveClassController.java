@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j2;
  *     </pre>
  */
 @Controller
-@RequestMapping("/liveClass")
+@RequestMapping("/class")
 @RequiredArgsConstructor
 @Log4j2
 public class LiveClassController {
@@ -67,9 +67,6 @@ public class LiveClassController {
 	@GetMapping("/mypage")
 	public String myPageTest() {
 		log.info("myPageTest 컨트롤러 호출");
-		
-		
-		
 		
 		return "liveClass/test";
 	}
