@@ -15,14 +15,17 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.hart.domain.member.ClubAuthMemberDTO;
+import com.hart.domain.share.SseEmitters;
 
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
-
+	
+	
 	// 구성자 추가 SecurityConfig 에서 사용
 	public LoginSuccessHandler(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;

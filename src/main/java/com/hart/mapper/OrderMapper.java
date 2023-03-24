@@ -4,13 +4,13 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.hart.domain.cart.CProductDTO;
 import com.hart.domain.order.CinfoDTO;
+import com.hart.domain.order.PinfoDTO;
 
 @Mapper
 public interface OrderMapper {
 	
-	CProductDTO pInfos(String pid)throws SQLException;
+	PinfoDTO pInfos(String pid)throws SQLException;
 	CinfoDTO cInfos(String lcid)throws SQLException;
 	
 }

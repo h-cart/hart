@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="pInfos" parameterType="string"
-		resultType="CProductDTO">
-		SELECT pid,pimg, pname,pprice,pdiscount,0
+		resultType="PinfoDTO">
+		SELECT pid,pimg, pname,pprice,pdiscount,0,0
 		FROM porder
 		WHERE
 		pid = #{pid}

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.hart.domain.CategoryVO;
 import com.hart.domain.ProductCategorylistVO;
 import com.hart.domain.ProductimgVO;
+import com.hart.domain.ProductlistTopVO;
 import com.hart.domain.ProductsVO;
 	
 	
@@ -39,7 +40,11 @@ import com.hart.domain.ProductsVO;
 		//합치려다 stop
 		/* public List<ProductsidesamllVO> sideamllcategory(int pcno); */
 	
-	
+		//소카테고리 클릭시 해당 카테고리 제품 부분만 가져오기
 		public List<ProductsVO> getproductslistajax(int pcno);
+		
+		//필터 가격높은순서 가져오기
+		public List<ProductlistTopVO> getproductlisthigh(int pcno);
+	
 		
 	}

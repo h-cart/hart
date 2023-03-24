@@ -27,14 +27,14 @@ import lombok.extern.log4j.Log4j2;
  *     </pre>
  */
 @Controller
-@RequestMapping("/liveClass")
+@RequestMapping("/class")
 @RequiredArgsConstructor
 @Log4j2
 public class LiveClassController {
 
 	private final LiveClassService service;
 	
-	@GetMapping()
+	@GetMapping
 	public String getLiveClassList(Model model) {
 		log.info("getLiveClassList 컨트롤러 호출");
 		List<LiveClassListDTO> list = service.getList();
@@ -57,14 +57,14 @@ public class LiveClassController {
 		return "liveClass/liveClassTestStream";
 	}
 	
-	@GetMapping("/testChat")
+	@GetMapping("/testchat")
 	public String streamingTestChat() {
 		log.info("streamingTest 컨트롤러 호출");
 		
 		return "liveClass/liveClassChatTestStream";
 	}
 	
-	@GetMapping("/myPage")
+	@GetMapping("/mypage")
 	public String myPageTest() {
 		log.info("myPageTest 컨트롤러 호출");
 		

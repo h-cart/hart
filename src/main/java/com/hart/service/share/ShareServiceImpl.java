@@ -130,6 +130,7 @@ public class ShareServiceImpl implements ShareService{
 				}
 			}
 		}
+		log.info(result);
 		return result;
 	}
 	

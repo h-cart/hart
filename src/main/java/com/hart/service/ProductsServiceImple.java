@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hart.domain.CategoryVO;
 import com.hart.domain.ProductCategorylistVO;
 import com.hart.domain.ProductimgVO;
+import com.hart.domain.ProductlistTopVO;
 import com.hart.domain.ProductsDetailVO;
 import com.hart.domain.ProductsVO;
 import com.hart.mapper.ProductsMapper;
@@ -25,7 +26,7 @@ public class ProductsServiceImple implements ProductsService {
 	@Override
 	public List<ProductsVO> getproductslist(int pcno) {
 		
-		log.info("#############productVO getProductList @@@@@@@@@=" + pcno);
+		//log.info("#############productVO getProductList @@@@@@@@@=" + pcno);
 		//1제품 목록 가져오기
 		return productsmapper.getproductslist(pcno);
 	}
@@ -66,7 +67,6 @@ public class ProductsServiceImple implements ProductsService {
 		
 		return productsmapper.getproductslistajax(pcno);
 	}
-
 	
 	/*
 	 * @Override public List<ProductlistintegVO> Productlistinteg(int pcno) { //3 제품
@@ -86,7 +86,14 @@ public class ProductsServiceImple implements ProductsService {
 	 * 
 	 * }
 	 */
+	  @Override
+	  public List<ProductlistTopVO> getproductlisthigh (int pcno){
+		  
+		  return productsmapper.getproductlisthigh(pcno);
+	  }
+	 
 }
+
 
 
 

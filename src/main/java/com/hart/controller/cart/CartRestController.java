@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +37,6 @@ public class CartRestController {
 	public CartRestController(SseEmitters sseEmitters) {
 		this.sseEmitters = sseEmitters;
 	}
-
 	@Autowired
 	private CartService cService;
 
@@ -65,13 +63,11 @@ public class CartRestController {
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
-			if(e.getMessage().equals("-1")) {
-				return new ResponseEntity<Map<String,String>>(HttpStatus.METHOD_NOT_ALLOWED);
-			}
 			result.put("result", e.getMessage());
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
+
 
 	@PostMapping(value = "/get", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -157,11 +153,12 @@ public class CartRestController {
 		}
 	}
 
-	@GetMapping(value = "/sse/{csno}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO,
-			@PathVariable("csno") String csno) {
+	@GetMapping(value = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+		if(mDTO.getCsno()==null) return null; 
 		SseEmitter emitter = new SseEmitter(60 * 60 * 60L);
-		sseEmitters.add(csno, emitter, mDTO);
+		sseEmitters.add(mDTO.getCsno(), emitter, mDTO);
+
 		try {
 			emitter.send(SseEmitter.event().name("connect").data("connected!"));
 		} catch (IOException e) {
@@ -176,7 +173,8 @@ public class CartRestController {
 			@RequestBody ShareDTO sDTO) {
 		Map<String, String> map = new HashMap<>();
 		String msg = "";
-		log.info(sDTO);
+
+		log.info(sDTO.getCsno());
 		try {
 			sDTO.setMid(mDTO.getMid());
 			log.info(sDTO);

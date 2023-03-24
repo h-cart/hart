@@ -1,16 +1,21 @@
 
 package com.hart.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.hart.domain.share.SseEmitters;
 import com.hart.security.handler.LoginSuccessHandler;
 
 import lombok.extern.log4j.Log4j2;
@@ -18,16 +23,18 @@ import lombok.extern.log4j.Log4j2;
 @Configuration
 @Log4j2
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("admin@hart.shop").password("{noop}qwer1234").roles("ADMIN");
 	}
-
+	
 	// ClubLoginSuccessHandler 등록
 	@Bean
 	public LoginSuccessHandler successHandler() {
 		return new LoginSuccessHandler(passwordEncoder());
 	}// end CLu..
+	
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -50,7 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .password("$2a$10$qbTVRGiC8RePIsMz4z/QP.LjBmLOMGXBCkmW2comzfNaoeidd5/aa")
 //                .roles("USER");
 //    }//configure AM
+	
 
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// /samle/all 모든 사용자 가능
@@ -71,5 +80,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.rememberMe() // 7day
 				.tokenValiditySeconds(60 * 60 * 24 * 7).userDetailsService(userDetailsService());
 
+	}
+	@Bean
+	public HttpFirewall defaultHttpFireWall() {
+		return new DefaultHttpFirewall();
+	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.httpFirewall(defaultHttpFireWall());
 	}// end configure http
 }// end class
