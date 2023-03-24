@@ -3,6 +3,7 @@ package com.hart.service.liveClass;
 import java.util.List;
 
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 
 /**
  * @since : 2023. 3. 15.
@@ -20,5 +21,6 @@ public interface LiveClassService {
 
 	public List<LiveClassListDTO> getList();
 	public LiveClassListDTO getClassDetail(String lcid);
+	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid);
 	
 }

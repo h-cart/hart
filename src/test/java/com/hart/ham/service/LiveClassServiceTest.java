@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.service.liveClass.LiveClassService;
 
 import lombok.extern.log4j.Log4j2;
@@ -25,6 +26,16 @@ public class LiveClassServiceTest {
 		List<LiveClassListDTO> list = service.getList();
 		log.info(list);
 		assertThat(list.get(0)).isInstanceOf(LiveClassListDTO.class);
+	}
+	
+	@Test
+	public void getMyClassInfoService() {
+		String mid = "skarns23@gmail.com";
+		List<MyLiveClassInfoDTO> list = service.getMyClassInfo(mid);
+		
+		log.info(list);
+		//assertThat(list.get(0)).isInstanceOf(MyLiveClassInfoDTO.class);
+		assertThat(list.get(0)).isInstanceOf(MyLiveClassInfoDTO.class);
 	}
 	
 }
