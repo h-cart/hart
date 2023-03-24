@@ -95,16 +95,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from product_category where pcno_top=#{pcno}
 	</select>
 
-	<select id="getproductlisthigh" resultType="ProductlistTopVO">
-		select pc.pcno, pc.pcategory
-		,p.pid,p.pname,p.pprice,p.pdiscount
-		from
-		product_category pc join
-		products p on pc.pcno=p.pcno
-		where
-		pcno_top=#{pcno}
-		order by pprice
-	</select>
 
 
 
@@ -113,6 +103,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		pcno_top from products p join product_category pc on p.pcno = pc.pcno where 
 		pc.pcno_top= #{pcno}) pd join product_img pi on pd.pid = pi.pid where pdepth 
 		= 0 </select> -->
+
+
+	<select id="fillter" parameterType="FillterVO"
+		resultType="ProductsVO">
+
+		select * from
+		(select p.pname, p.pprice, p.pdiscount,p.pcno,
+		p.pid ,p.stag, pc.pcategory,
+		pcno_top
+		from products p
+		join
+		product_category pc
+		on p.pcno = pc.pcno
+		where pc.pcno_top= #{pcno_top}) pd
+		join product_img pi
+		on pd.pid = pi.pid
+		<where>
+			pdepth = 0
+
+			<if test="pcno != 0">
+				AND pcno = #{pcno}
+			</if>
+		</where>
+		<trim prefix="ORDER BY">
+			<if test="type == 'price'"> pprice</if>
+			<if test="type == 'sales'"> pcount </if>
+			<if test="sort == '1'">  DESC </if>
+			<if test="sort == '2'">  ASC</if>
+
+		</trim>	
+	</select>
+
+
+
 </mapper>
 
 

@@ -33,11 +33,12 @@ public class ProductsController {
 		List<ProductCategorylistVO> productcategorylist = null;
 		try {
 			category = productsservice.getcategorybar();
-			// 왼쪽 카테고리 리스트
+			
 			productlist = productsservice.getproductslist(pcno);
 
 			// categorypcno = productsservice.getcategorysmall(pcno);
-
+			
+			// 왼쪽 카테고리 리스트
 			productcategorylist = productsservice.getproductcatrogrtlist(pcno);
 
 			// System.out.println("productcategorylist Controller=========" +
@@ -47,11 +48,11 @@ public class ProductsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		model.addAttribute("productcategorylist", productcategorylist);
 		// model.addAttribute("categorypcno", categorypcno);
 		model.addAttribute("category", category);
-
+		model.addAttribute("pcno", pcno);
 		model.addAttribute("productlist", productlist);
 
 		return "product/productList";
