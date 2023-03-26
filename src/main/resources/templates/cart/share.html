@@ -342,7 +342,7 @@
 								str += "<tr id='" + (i + j + 1) + "' data-value='" + clist[j].lcid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + (i + j + 1) + "' type='checkbox' class='checkbox'><img class='pimg' src='" + clist[j].lcimg + "' alt='' style='width:90px; height:90px;'/></span>"
 								str += "</div><div class='product__cart__item__text'><h6>" + clist[j].lcname + "</h6>"
 								str += "<span class='price-box'><h5 class='price'id='price_" + (i + j + 1) + "'data-value='" + clist[j].lcprice + "' >" + clist[j].lcteacher + "</h5>"
-								str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'>" + status + "";
+								str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'>" + status + "<input id='quantity_" + (i+j+1) + "'type='hidden' value='1' readonly='readonly' />";
 								str += "</div></div></td><td data-value='" + clist[j].lcprice + "'class='cart__price' id='cprice_" + (i + j + 1) + "'>₩" + numberWithCommas(clist[j].lcprice) + "</td>"
 								str += "<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
 							}

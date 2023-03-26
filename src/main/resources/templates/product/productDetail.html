@@ -227,8 +227,6 @@
    </script>
    <!-- Code injected by live-server -->
    <script>
-   const token = $("meta[name='_csrf']").attr("content");
-   const header = $("meta[name='_csrf_header']").attr("content");
    
    function addToCart(){
       var   pids = [];
@@ -255,7 +253,7 @@
                  
               },error : function(err, xhr, status){
                  
-                 if(err.status==405){
+                 if(err.status==405 || err.status==400){
                   customConfirm('장바구니에 존재하는 상품입니다.','확인하러 이동하기','장바구니로','아니요');
                }
               }

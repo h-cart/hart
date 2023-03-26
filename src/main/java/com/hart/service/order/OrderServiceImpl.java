@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.hart.domain.cart.CProductDTO;
+import com.hart.domain.member.ClubAuthMemberDTO;
 import com.hart.domain.order.CinfoDTO;
+import com.hart.domain.order.OrderInsertDTO;
 import com.hart.domain.order.OrderTotalDTO;
 import com.hart.domain.order.PinfoDTO;
 import com.hart.mapper.CartMapper;
+import com.hart.mapper.MemberMapper;
 import com.hart.mapper.OrderMapper;
 
 import lombok.extern.log4j.Log4j2;
 
-@org.springframework.stereotype.Service
+@Service
 @Log4j2
 public class OrderServiceImpl implements OrderService{
 	
@@ -24,6 +28,32 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private CartMapper cMapper;
 	
+	@Autowired
+	private MemberMapper mMapper;
+	
+	@Transactional
+	@Override
+	public ClubAuthMemberDTO insertOrder(ClubAuthMemberDTO mDTO, OrderInsertDTO oDTO) throws Exception {
+		oMapper.insertOrder(oDTO.getOinfo());
+		if(oDTO.getPLists()!=null) oMapper.insertProduct(oDTO.getPLists(), oDTO.getOinfo());
+		if(oDTO.getCLists()!=null) {
+			if(oMapper.checkClass(oDTO.getOinfo().getMid(), oDTO.getCLists())==0) 
+			oMapper.insertClass(oDTO.getCLists(), oDTO.getOinfo());
+			else throw new Exception("수강 중인 클래스 존재");
+		};
+		if(oDTO.isSaveAddr()) {
+			mMapper.updateAddress(oDTO.getOinfo());
+			mDTO.setMzipcode(oDTO.getOinfo().getOzipcode());
+			mDTO.setMphone(Integer.parseInt(oDTO.getOinfo().getPhone()));
+			mDTO.setMaddress(oDTO.getOinfo().getOaddress1());
+			mDTO.setMaddressdetail(oDTO.getOinfo().getOaddress2());
+		}
+		int mpoint = mDTO.getMpoint() + (int)(oDTO.getOinfo().getOpayment() * 0.05) - oDTO.getOinfo().getOusedpoint();
+		mDTO.setMpoint(mpoint);
+		return mDTO;
+	
+	}
+
 	@Override
 	public OrderTotalDTO getInfo(List<String> pids, List<Integer> pamounts) throws Exception {
 		List<CinfoDTO> cLists = new ArrayList<>();
