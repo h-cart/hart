@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hart.domain.RecipeDetailVO;
-import com.hart.domain.RecipeVO;
+import com.hart.domain.product.RecipeDetailVO;
+import com.hart.domain.product.RecipeVO;
 import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
