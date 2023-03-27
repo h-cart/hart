@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
-
+<link rel="stylesheet" type="text/css" href="/css/order-complete.css">
 
 <body>
     <!-- Page Preloder -->
@@ -32,9 +32,6 @@
     <div id="wrap">
         <div id="container">
             <div id="contents">
-
-		<h2 th:text="${oinfo}"></h2>
-
                 <form id="frm_order_result" name="frm_order_result" action="" method="post" target="_self"
                     enctype="multipart/form-data">
                     <input id="order_id" name="order_id" value="20230327-0000063" type="hidden">
@@ -55,11 +52,11 @@
                             <ul>
                                 <li>
                                     <label>주문번호</label>
-                                    <span>20230327-0000063</span>
+                                    <span th:text="${oinfo.oid}"></span>
                                 </li>
                                 <li>
                                     <label>결제금액</label>
-                                    <span>33,150</span>
+                                    <span th:text="${#numbers.formatInteger(oinfo.opayment,3,'COMMA')}"></span>
                                 </li>
                             </ul>
                         </div>

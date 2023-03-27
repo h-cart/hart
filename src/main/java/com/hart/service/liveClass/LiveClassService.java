@@ -23,4 +23,5 @@ public interface LiveClassService {
 	public LiveClassListDTO getClassDetail(String lcid);
 	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid);
 	
+	
 }

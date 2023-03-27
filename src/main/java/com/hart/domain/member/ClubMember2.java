@@ -22,7 +22,7 @@ public class ClubMember2 implements Serializable {
 	private String mroles;
 	private String csno;
 	private int mpoint;
-	private int mphone;
+	private String mphone;
 	private int mzipcode;
 	private String maddress;
 	private String maddressdetail;
