@@ -24,6 +24,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/event")
 @Log4j2
 public class EventController {
+	
 	@Value("${com.hart.upload.path}")
 	private String uploadPath;
 
