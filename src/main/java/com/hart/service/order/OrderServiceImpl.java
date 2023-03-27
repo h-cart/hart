@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hart.domain.cart.CProductDTO;
-import com.hart.domain.cart.CartDTO;
 import com.hart.domain.order.CinfoDTO;
 import com.hart.domain.order.OrderTotalDTO;
 import com.hart.mapper.CartMapper;
@@ -14,7 +14,7 @@ import com.hart.mapper.OrderMapper;
 
 import lombok.extern.log4j.Log4j2;
 
-@org.springframework.stereotype.Service
+@Service
 @Log4j2
 public class OrderServiceImpl implements OrderService{
 	
