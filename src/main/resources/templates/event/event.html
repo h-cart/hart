@@ -255,7 +255,7 @@ ul.tagit input[type="text"] {
 					href="/event?evid=${event.evid}"
 					class="on"
 				>공모전 소개 및 지원하기</a></li>
-				<li><a href="/event/vote?evid=1">채식 레시피 투표하기</a></li>
+				<li><a href="/event/vote?evid=1" sec:authorize="isAuthenticated()">레시피 투표하기</a><a href="/member/login" sec:authorize="!isAuthenticated()">레시피 투표하기</a></li>
 			</ul>
 		</div>
 	</div>
@@ -294,6 +294,12 @@ ul.tagit input[type="text"] {
 				<a
 					href="/event/upload"
 					class="aply_btn"
+					sec:authorize="isAuthenticated()"
+				>공모전 참여하기</a>
+				<a
+					href="/member/login"
+					class="aply_btn"
+					sec:authorize="!isAuthenticated()"
 				>공모전 참여하기</a>
 			</div>
 		</div>
