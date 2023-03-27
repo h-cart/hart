@@ -7,10 +7,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.hart.domain.ProductsVO;
 import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
 import com.hart.domain.event.CRecipeVO;
+import com.hart.domain.product.ProductsVO;
 import com.hart.domain.event.EventListVO;
 import com.hart.domain.event.EventVoteVO;
 import com.hart.mapper.EventMapper;

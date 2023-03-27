@@ -3,7 +3,7 @@
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
 <body style="">
 
-	<!-- 잠깐 수정  -->
+	<!-- 수정  -->
 	<script type="text/javascript" defer>
    const token = $("meta[name='_csrf']").attr("content");
    const header = $("meta[name='_csrf_header']").attr("content");
@@ -14,22 +14,66 @@
          location.href = "/product/productDetail?pid=" + pid
 
       }
-      
+      </script>
+
+	<script>
+   	
    	//카테고리 소분류를 누르면 ajax 작동하여 해당 카테고리를 불러옴
-       function sendpcno(pcno){
-         // console.log(pcno);
+   
+ 		let page=0;
+    	//let pcno;
+    	
+   		function resetPageNumber() {
+   		let page = 0;
+   		return page;
+   			} 
+   	
+   		
+    		
+          $(window).scroll(function() { if(Math.round($(window).scrollTop()) >= $(document).height() - $(window).height()){
+ 		   page++;
+ 		console.log("page>>"+page);
+		console.log("pcno>>"+pcno); 	
+		
+ 		sendpcno();
+        	 }
+         });         
+   			 
+         $(window).ready(sendpcno(pcno)); 
+         
+         
+   		function sendpcno(pcno){
+   			
+   			 page=0;
+   			pcno=pcno;
+           console.log("function sendpcno의 펑션작동됨 pcno는 >>"+ pcno);
+           
+          /*  $(window).scroll(function() {
+        	    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        	      // increment page when user scrolls to the bottom
+        	      page++;
+        	      element.page = page;
+        	    }; */
+           
+           
+   			
          $("input[name=pcno]").val(pcno);
           let element = {
-               pcno : pcno
+               pcno : pcno,
+            page :page
+            
           };
-         $.ajax({
+         
+         $.ajax({		
               type : "post",
               url : "/papi/clistsamll",
               data: JSON.stringify(element),
               contentType : "application/json",
+              
               beforeSend : function(xhr){
                   xhr.setRequestHeader(header,token);
                },
+               
               dataType:"json",
               success : function(result) {
                   let str=""; 
@@ -37,7 +81,7 @@
                    $.each(result.getproductslist, function(index, product) {  
                      str += `
                        <div class="col-lg-4 col-md-6 col-sm-6">
-                         <div class="product__item">
+                         <div class="product__item">	
                            <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)">
                              <ul class="product__hover">
                                <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
@@ -62,21 +106,32 @@
                        `;
 
                      }) 
-                     $("#productlistajax").html(str);
-                   
+                    
+   
+      
+      				 $("#productlistajax").html(str); 
+      
+                      
                    $('.set-bg').each(function () {
-                        var bg = $(this).data('setbg');
-                        $(this).css('background-image', 'url(' + bg + ')');
-                    });
-              },
-              error : function() {
-                  console.log("실패");
-              }
-          });  
-      }
-   	
+	                 var bg = $(this).data('setbg');
+	               $(this).css('background-image', 'url(' + bg + ')');
+	                    });
+	              }, error : function() {
+	                  console.log("실패 왼족 카테고리 리스트 ");
+	              }
+              
+          }); 
+         
+        	    } 
+           
+           ///////////////////
+           
+           
+           
+           
+       /*     
    		//가격 높은순
-      /*  function pricehigh(pcno){
+       function pricehigh(pcno){
            console.log(pcno +" 가격높은순");
            let element = {
                 pcno : pcno
@@ -131,7 +186,7 @@
                    console.log("실패가격 높은순");
                }
            });  
-       } */
+       }  */
    </script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -179,7 +234,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb__text">
-						<h4>카테고리</h4>
+						<h4 th:text="${productlist[0].pcategory}"></h4>
+
 						<div class="breadcrumb__links">
 							<a href="">Home</a><span>Shop</span>
 						</div>
@@ -222,7 +278,8 @@
 													tabindex="1">
 													<li th:each="productcategorylist :${productcategorylist}">
 														<a href="#" th:text="${productcategorylist.pcategory}"
-														th:onclick="sendpcno([[${productcategorylist.pcno}]])"></a>
+														th:onclick="resetPageNumber(); sendpcno([[${productcategorylist.pcno}]])">
+													</a>
 													</li>
 												</ul>
 
@@ -283,20 +340,18 @@
 											<li data-value="2" data-type="sales" class="option">판매량
 												낮은순</li>
 
-	
-									</ul>
-										<input type='hidden' th:value="${pcno}" name="pcno_top">
-										<input type='hidden' id="fil" value='0' name='pcno'/> 
 
-							<script>
+										</ul>
+										<input type='hidden' th:value="${pcno}" name="pcno_top">
+										<input type='hidden' id="fil" value='0' name='pcno' />
+
+										<script>
 							$(document).on("click", ".option", function(){
 							    var type = $(this).data('type'); // sales or price
 							    var sort = $(this).data('value'); // 1 or 2
 							    var pcno_top = $("input[name=pcno_top]").val(); // 상위 카테고리 번호
 							    var pcno = $("input[name=pcno]").val();
 							    
-							   /*  $("input[name=pcno_top]").val(pcnoTop);  */// 상위 카테고리 번호 유지
-                              	    
 							   
                               		$.ajax({
                               			url : "/papi/fillterbutton",
@@ -359,7 +414,7 @@
                                    });  
                               			
                               	})
-                             		 </script> 
+                             		 </script>
 									</div>
 								</div>
 							</div>

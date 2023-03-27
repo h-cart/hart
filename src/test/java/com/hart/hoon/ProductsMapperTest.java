@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.hart.domain.ProductsVO;
+import com.hart.domain.product.ProductsVO;
 import com.hart.service.ProductsService;
 
 import lombok.extern.log4j.Log4j2;

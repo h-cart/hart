@@ -1,3 +1,4 @@
+package com.hart.domain.product;
 /*
  * package com.hart.domain;
  * 

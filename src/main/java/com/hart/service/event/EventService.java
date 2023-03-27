@@ -3,10 +3,10 @@ package com.hart.service.event;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.hart.domain.ProductsVO;
 import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
 import com.hart.domain.event.CRecipeVO;
+import com.hart.domain.product.ProductsVO;
 import com.hart.domain.event.EventListVO;
 import com.hart.domain.event.EventVoteVO;
 

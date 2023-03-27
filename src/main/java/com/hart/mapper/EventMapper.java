@@ -6,10 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.hart.domain.ProductsVO;
 import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
 import com.hart.domain.event.CRecipeVO;
+import com.hart.domain.product.ProductsVO;
 import com.hart.domain.event.EventListVO;
 import com.hart.domain.event.EventVoteVO;
 

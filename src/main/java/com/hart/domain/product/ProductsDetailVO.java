@@ -1,4 +1,4 @@
-package com.hart.domain;
+package com.hart.domain.product;
 
 import java.util.List;
 

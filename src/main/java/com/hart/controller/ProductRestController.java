@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hart.domain.CategoryVO;
-import com.hart.domain.FillterVO;
-import com.hart.domain.ProductsVO;
+import com.hart.domain.product.CategoryVO;
+import com.hart.domain.product.FillterVO;
+import com.hart.domain.product.ProductsVO;
 import com.hart.service.ProductsService;
 
 import lombok.extern.log4j.Log4j2;
@@ -50,15 +50,28 @@ public class ProductRestController {
 
 	}
 
-	@PostMapping(value = "/clistsamll", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = "/clistsamll", 
+				produces = { MediaType.APPLICATION_JSON_VALUE }, 
+				consumes = {MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, List<ProductsVO>>> getProductsList(@RequestBody Map<String, String> data) {
 
 		try {
+			
 			String pcno = data.get("pcno");
-			List<ProductsVO> getproductslist = pService.getproductslistajax(Integer.parseInt(pcno));
+			
+		 String page = data.get("page"); 
+			
+			 
+		 log.info("page=>>"+page );
+		 log.info("pcno=>>"+pcno );
+			 
+			List<ProductsVO> getproductslist = pService.getproductslistajax(Integer.parseInt(pcno) ,Integer.parseInt(page));
 			// log.info("getproductslist=>>>" + getproductslist);
 
+			
+			log.info(getproductslist.get(0));
+			
+			
 			Map<String, List<ProductsVO>> result = new HashMap<>();
 			result.put("getproductslist", getproductslist);
 
