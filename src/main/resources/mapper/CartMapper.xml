@@ -47,11 +47,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT lcid,lcday,lcstatus,lcteacher,lcname,lcimg,lcprice FROM lcart
 		WHERE mid = #{mid}
 	</select>
-	
+
 	<select id="sameProducts" resultType='int'>
 		SELECT count(*)
 		FROM my_cart
 		WHERE pid = #{pid} AND mid = #{mid}
 	
 	</select>
+
+	
 </mapper>

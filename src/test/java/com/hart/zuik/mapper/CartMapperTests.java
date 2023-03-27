@@ -60,4 +60,5 @@ public class CartMapperTests {
 	public void getClasss() throws Exception {
 		log.info(cMapper.getLClass("skarns23@gmail.com"));
 	}
+	
 }

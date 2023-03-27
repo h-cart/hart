@@ -32,6 +32,7 @@ public class OrderMapperTests {
 				
 	}
 	
+	
 	@Test
 	public void insertOrder() throws Exception{
 		OinfoDTO oDTO = OinfoDTO.builder()
@@ -46,4 +47,5 @@ public class OrderMapperTests {
 		oMapper.insertOrder(oDTO);
 		
 	}
+
 }

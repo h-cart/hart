@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.hart.mapper.OrderMapper">
 
-
 	<select id="pInfos" parameterType="string" resultType="PinfoDTO">
 		SELECT
 		pid,pimg, pname,pprice,pdiscount,0,0
