@@ -1,6 +1,7 @@
 package com.hart.controller.order;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hart.domain.member.ClubAuthMemberDTO;
+import com.hart.domain.order.OinfoDTO;
 import com.hart.domain.order.OrderInsertDTO;
 import com.hart.domain.order.OrderTotalDTO;
 import com.hart.service.order.OrderService;
@@ -63,9 +65,12 @@ public class OrderController {
 		try {
 			insertDTO.getOinfo().setMid(mDTO.getMid());
 			System.out.println(insertDTO);
-			mDTO = oService.insertOrder(mDTO,insertDTO);
+			Map<String,Object> result = oService.insertOrder(mDTO,insertDTO);
+			mDTO = (ClubAuthMemberDTO)result.get("mDTO");
 			System.out.println(mDTO);
-			url = "/";
+			OinfoDTO oinfo = (OinfoDTO)result.get("oinfo");
+			
+			url = "/order/complete?oid="+oinfo.getOid();
 		}catch (Exception e) {
 			if(e.getMessage().equals("수강 중인 클래스 존재")) {
 				url = "/error";
@@ -75,6 +80,21 @@ public class OrderController {
 			e.printStackTrace();
 		}
 		return "redirect:"+url;
+	}
+	
+	@GetMapping("/complete")
+	public String orderComplete(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @RequestParam("oid") String oid, Model model) {
+		String url = "";
+		try {
+			model.addAttribute("oinfo", oService.getOrder(mDTO.getMid(), Integer.parseInt(oid)));
+			url = "/order/complete";
+		}catch (Exception e) {
+			model.addAttribute("msg", "오류 발생");
+			url = "/error";
+		}
+		
+		return url;
+		
 	}
 
 }

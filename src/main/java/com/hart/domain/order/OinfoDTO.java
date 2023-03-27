@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class OinfoDTO {
-	private String oid;
+	private int oid;
 	private String oname;
 	private int ozipcode;
 	private String oaddress1;

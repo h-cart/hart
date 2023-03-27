@@ -1,17 +1,22 @@
 package com.hart.service.order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hart.domain.member.ClubAuthMemberDTO;
+import com.hart.domain.member.ClubMember2;
 import com.hart.domain.order.CinfoDTO;
+import com.hart.domain.order.OinfoDTO;
 import com.hart.domain.order.OrderInsertDTO;
 import com.hart.domain.order.OrderTotalDTO;
 import com.hart.domain.order.PinfoDTO;
+import com.hart.domain.order.SearchDTO;
 import com.hart.mapper.CartMapper;
 import com.hart.mapper.MemberMapper;
 import com.hart.mapper.OrderMapper;
@@ -33,8 +38,10 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Transactional
 	@Override
-	public ClubAuthMemberDTO insertOrder(ClubAuthMemberDTO mDTO, OrderInsertDTO oDTO) throws Exception {
+	public Map<String,Object> insertOrder(ClubAuthMemberDTO mDTO, OrderInsertDTO oDTO) throws Exception {
+		Map<String,Object> result = new HashMap<>();
 		oMapper.insertOrder(oDTO.getOinfo());
+		result.put("oinfo",oDTO.getOinfo());
 		if(oDTO.getPLists()!=null) oMapper.insertProduct(oDTO.getPLists(), oDTO.getOinfo());
 		if(oDTO.getCLists()!=null) {
 			if(oMapper.checkClass(oDTO.getOinfo().getMid(), oDTO.getCLists())==0) 
@@ -48,12 +55,13 @@ public class OrderServiceImpl implements OrderService{
 			mDTO.setMaddress(oDTO.getOinfo().getOaddress1());
 			mDTO.setMaddressdetail(oDTO.getOinfo().getOaddress2());
 		}
-		int mpoint = mDTO.getMpoint() + (int)(oDTO.getOinfo().getOpayment() * 0.05) - oDTO.getOinfo().getOusedpoint();
-		mDTO.setMpoint(mpoint);
-		return mDTO;
+		mDTO.setMpoint(mMapper.findByEmail(mDTO.getMid(), 1).getMpoint());
+		result.put("mDTO",mDTO);
+		return result;
 	
 	}
 
+	@Transactional
 	@Override
 	public OrderTotalDTO getInfo(List<String> pids, List<Integer> pamounts) throws Exception {
 		List<CinfoDTO> cLists = new ArrayList<>();
@@ -95,6 +103,64 @@ public class OrderServiceImpl implements OrderService{
 		return OrderTotalDTO.builder().pLists(pLists).cLists(cLists).build();
 	}
 	
+	
+	/* *Author : 남승현
+	 * 기능 : 주문 취소 시, 주문서 상태 변경 및 마일리지, 상품 판매량 갱신하는 기능 
+	 * 매개변수 : 사용자 아이디, 주문 번호 
+	 */
+	@Transactional
+	@Override
+	public int orderCancle(String mid, int oid) throws Exception {
+		try {
+			int result = 0;
+			oMapper.orderCancle(oid);
+			ClubMember2 mDTO = mMapper.findByEmail(mid, 1);
+			return mDTO.getMpoint();
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			throw e;
+		}
+	}
+	
+	/* *Author : 남승현
+	 * 기능 : 주문 내역 조회 시, 상품 정보를 불러오는 기능 
+	 * 매개변수 : 사용자 아이디, 조회 시작일, 조회 종료일
+	 */
+	@Transactional
+	@Override
+	public Map<Integer, OrderTotalDTO> getOrders(SearchDTO sDTO) throws Exception {
+		
+		try {
+			Map<Integer, OrderTotalDTO> map = new HashMap<Integer, OrderTotalDTO>();
+//			List<Integer> oids  = oDAO.getOids(sDate, eDate, mid);
+//			for(int oid : oids) {
+//				
+//				OrderInfoDTO oinfo = oDAO.getOrderInfos(oid);
+//				List<CartOptionDTO> lists = oDAO.getOrderItems(oid);
+//				CartOptionListDTO items = CartOptionListDTO.builder()
+//										.					lists(lists).build();
+//				map.put(oid,OrderTotalDTO.builder()
+//											.items(items)
+//											.oinfo(oinfo).build());
+//				
+//			}	
+			return map;
+			}catch (Exception e) {
+				log.info(e.getMessage());
+				throw e;
+			}
+		
+	}
 
-
+	@Override
+	public OinfoDTO getOrder(String mid, int oid) throws Exception {
+		try {
+			return oMapper.getOrder(oid, mid);
+		}catch (Exception e) {
+			log.info(e);
+			throw e;
+		}
+	}
+	
+	
 }

@@ -24,7 +24,7 @@
 	</select>
 	
 	<update id="updateAddress" parameterType="OinfoDTO">
-		UPDATE members set mphone = #{phone}, mzipcode = #{ozipcode},maddress = #{oaddress1}, maddressdetail = #{oaddress2}
+		UPDATE members set mname = #{oname}, mphone = #{phone}, mzipcode = #{ozipcode},maddress = #{oaddress1}, maddressdetail = #{oaddress2}
 		WHERE mid = #{mid}
 	</update>
 </mapper>

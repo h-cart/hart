@@ -22,4 +22,6 @@ public interface OrderMapper {
 	int insertClass(@Param("cLists")List<CinsertDTO> cLists,@Param("oDTO") OinfoDTO oDTO)throws SQLException;
 	int intoMyClass(@Param("cLists")List<CinsertDTO> cLists)throws SQLException;
 	int checkClass(@Param("mid")String mid, @Param("cLists")List<CinsertDTO> cLists)throws SQLException;
+	int orderCancle(int oid)throws SQLException;
+	OinfoDTO getOrder(@Param("oid") int oid,@Param("mid") String mid)throws SQLException;
 }
