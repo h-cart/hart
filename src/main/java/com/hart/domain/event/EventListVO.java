@@ -1,14 +1,17 @@
 package com.hart.domain.event;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class EventListVO {
 	int evid;
 	String evtitle;
-	Data start_date;
-	Data end_date;
-	Data vstart_date;
-	Data vend_date;
+	Date start_date;
+	Date end_date;
+	Date vstart_date;
+	Date vend_date;
+	String crmingredient;
 
 }
