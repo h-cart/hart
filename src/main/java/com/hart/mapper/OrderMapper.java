@@ -24,5 +24,5 @@ public interface OrderMapper {
 	int checkClass(@Param("mid")String mid, @Param("cLists")List<CinsertDTO> cLists)throws SQLException;
 	int orderCancle(int oid)throws SQLException;
 	OinfoDTO getOrder(@Param("oid") int oid,@Param("mid") String mid)throws SQLException;
-	List<Integer> getOids() 
+	
 }
