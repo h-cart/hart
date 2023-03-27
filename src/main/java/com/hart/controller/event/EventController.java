@@ -14,6 +14,8 @@ import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
 import com.hart.domain.event.CRecipeDTO;
 import com.hart.domain.event.CRecipeVO;
+import com.hart.domain.event.EventListVO;
+import com.hart.domain.event.EventVoteVO;
 import com.hart.service.event.EventService;
 
 import lombok.extern.log4j.Log4j2;
@@ -29,12 +31,25 @@ public class EventController {
 	private EventService eventService;
 
 	@GetMapping("")
-	public String event() {
+	public String event(int evid, Model model) {
+
+		EventListVO event = eventService.getEvent(evid);
+		model.addAttribute("event", event);
 		return "event/event";
 	}
 
 	@GetMapping("/vote")
-	public String vote() {
+	public String vote(int evid, Model model) {
+		List<CRecipeVO> recipe = eventService.getVoteList(evid);
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("evid", evid);
+		log.info(recipe);
+		return "event/vote";
+	}
+	
+	@PostMapping("/vote")
+	public String voting(EventVoteVO ev, Model model) {
+		eventService.voteRecipe(ev);
 		return "event/vote";
 	}
 

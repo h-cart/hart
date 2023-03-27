@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hart.domain.ProductsVO;
+import com.hart.domain.product.ProductsVO;
 import com.hart.service.event.EventService;
 
 import lombok.extern.log4j.Log4j2;

@@ -94,7 +94,7 @@
 	<script src="/js/owl.carousel.min.js"></script>
 	<script src="/js/main.js"></script>
 	<script src="/js/share.js"></script>
-	
+	<script src="/js/order.js"></script>
 	<!-- Code injected by live-server -->
 
 	<!-- Code injected by live-server -->
@@ -110,7 +110,6 @@
 		      let str="";
 		      let str1="";
 		      for (var i = 0; i < data.result.length; i++) {
-		        console.log("number" + i + ": " + data.result[i].pcategory);
 		        str += `
 		        	<li style="border-bottom: 1px solid lightgray; ">
 		        	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a>
@@ -122,8 +121,6 @@
 		        	</li>
 					`;
 		      }
-		      console.log(str);
-		      
 		      $("#listCate").append(str);
 		      $(".slicknav_nav .dropdown").append(str1);
 		    },

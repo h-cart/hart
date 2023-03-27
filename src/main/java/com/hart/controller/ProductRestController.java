@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hart.domain.CategoryVO;
-import com.hart.domain.ProductlistTopVO;
-import com.hart.domain.ProductsVO;
+import com.hart.domain.product.CategoryVO;
+import com.hart.domain.product.FillterVO;
+import com.hart.domain.product.ProductsVO;
 import com.hart.service.ProductsService;
 
 import lombok.extern.log4j.Log4j2;
@@ -50,15 +50,28 @@ public class ProductRestController {
 
 	}
 
-	@PostMapping(value = "/clistsamll", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = "/clistsamll", 
+				produces = { MediaType.APPLICATION_JSON_VALUE }, 
+				consumes = {MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, List<ProductsVO>>> getProductsList(@RequestBody Map<String, String> data) {
 
 		try {
+			
 			String pcno = data.get("pcno");
-			List<ProductsVO> getproductslist = pService.getproductslistajax(Integer.parseInt(pcno));
-			//log.info("getproductslist=>>>" + getproductslist);
+			
+		 String page = data.get("page"); 
+			
+			 
+		 log.info("page=>>"+page );
+		 log.info("pcno=>>"+pcno );
+			 
+			List<ProductsVO> getproductslist = pService.getproductslistajax(Integer.parseInt(pcno) ,Integer.parseInt(page));
+			// log.info("getproductslist=>>>" + getproductslist);
 
+			
+			log.info(getproductslist.get(0));
+			
+			
 			Map<String, List<ProductsVO>> result = new HashMap<>();
 			result.put("getproductslist", getproductslist);
 
@@ -70,25 +83,25 @@ public class ProductRestController {
 		}
 	}
 
-	
-	
-	@PostMapping(value = "/pricehigh", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+
+	@PostMapping(value = "/fillterbutton", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<ProductlistTopVO>>> getproductlisthigh(@RequestBody Map<String, String> data) {
+	public ResponseEntity<Map<String, List<ProductsVO>>> getproductlisthigh(
+			@RequestBody FillterVO data) {
 
 		try {
-			String pcno = data.get("pcno");
-			List<ProductlistTopVO> listtop = pService.getproductlisthigh(Integer.parseInt(pcno));
-			//log.info("listtop=>>>" + listtop);
+			log.info(data);
+			List<ProductsVO> listtop = pService.fillter(data);
+			// log.info("listtop=>>>" + listtop);
 
-			Map<String, List<ProductlistTopVO>> result = new HashMap<>();
-			result.put("listtop", listtop);
+			Map<String, List<ProductsVO>> result = new HashMap<>();
+			result.put("getproductslist", listtop);
 
-			return new ResponseEntity<Map<String, List<ProductlistTopVO>>>(result, HttpStatus.OK);
+			return new ResponseEntity<Map<String, List<ProductsVO>>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
 			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<ProductlistTopVO>>>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String, List<ProductsVO>>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

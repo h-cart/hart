@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.hart.domain.order.OinfoDTO;
 import com.hart.mapper.OrderMapper;
 
 import lombok.extern.log4j.Log4j2;
@@ -15,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class OrderMapperTests {
 
-	@Autowired
+	@Autowired(required = false)
 	private OrderMapper oMapper;
 
 	@Test
@@ -31,4 +32,20 @@ public class OrderMapperTests {
 				
 	}
 	
+	
+	@Test
+	public void insertOrder() throws Exception{
+		OinfoDTO oDTO = OinfoDTO.builder()
+						.mid("skarns23@gmail.com")
+						.ozipcode(13524)
+						.oaddress1("경복")
+						.oaddress2("707")
+						.opayment(80000)
+						.odiscount(0)
+						.oname("쥑")
+						.build();
+		oMapper.insertOrder(oDTO);
+		
+	}
+
 }

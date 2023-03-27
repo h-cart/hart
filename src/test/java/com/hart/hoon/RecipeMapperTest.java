@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.hart.domain.RecipeVO;
+import com.hart.domain.product.RecipeVO;
 import com.hart.mapper.RecipeMapper;
 
 import lombok.extern.log4j.Log4j2;

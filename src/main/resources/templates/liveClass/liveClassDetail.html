@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
@@ -78,14 +78,15 @@
                             </div>
                             <h3 th:text="${#numbers.formatInteger(liveClass.lcprice, 3, 'COMMA') + '원'}"></h3>
                             
-                            
+                            <input type="hidden" name="pid" th:value="${liveClass.lcid}"/>
+                            <input type="hidden" name="quantity" value="1"/>
                             <div class="product__details__btns__option">
                                 <a href="#"><i class="fa fa-heart"></i> 강사명: <span th:text=${liveClass.lcteacher}></span></a>
                                 <a href="#"><i class="fa fa-heart"></i> 장소 : <span th:text=${liveClass.lcplace}></span></a>
                             </div>
                             <div class="product__details__cart__option">
    
-                              <a href="#" class="primary-btn">수강 신청하기</a>
+                              <a href="#" id="orderDirect" class="primary-btn">수강 신청하기</a>
                           </div>
                             <div class="product__details__last__option">
                                 <h5><span>강의 일시 : <span th:text=${liveClass.wholeDate}></span></span></h5>

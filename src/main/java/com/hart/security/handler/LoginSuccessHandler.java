@@ -25,12 +25,10 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	
-	private final SseEmitters sseEmitters;
 	
 	// 구성자 추가 SecurityConfig 에서 사용
-	public LoginSuccessHandler(PasswordEncoder passwordEncoder, SseEmitters sseEmitters) {
+	public LoginSuccessHandler(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
-		this.sseEmitters = sseEmitters;
 	}
 
 	// RedirectStrategy 인터페이스 생성 sendRedirect() 메서드 이용
@@ -48,10 +46,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		HttpSession session = request.getSession();
 		// 인증 객체에서 사용자 정보 저장
 		ClubAuthMemberDTO clubAuthMemberDTO = (ClubAuthMemberDTO) authentication.getPrincipal();
-		if(clubAuthMemberDTO.getCsno()!=null) {
-			SseEmitter emitter = new SseEmitter(60 * 60 * 60L);
-			sseEmitters.add(clubAuthMemberDTO.getCsno(),emitter,clubAuthMemberDTO);
-		}
 		log.info(clubAuthMemberDTO);
 		// 소셜 사용자인지 확인
 		int fromSocial = clubAuthMemberDTO.getSocial();

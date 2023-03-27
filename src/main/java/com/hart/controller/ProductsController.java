@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hart.domain.CategoryVO;
-import com.hart.domain.ProductCategorylistVO;
-import com.hart.domain.ProductsDetailVO;
-import com.hart.domain.ProductsVO;
+import com.hart.domain.product.CategoryVO;
+import com.hart.domain.product.ProductCategorylistVO;
+import com.hart.domain.product.ProductsDetailVO;
+import com.hart.domain.product.ProductsVO;
 import com.hart.service.ProductsService;
 
 import lombok.extern.log4j.Log4j2;
@@ -27,32 +27,35 @@ public class ProductsController {
 	@GetMapping("/list")
 	public String productlist(Model model, int pcno) {
 
+		
+	log.info("pcno @@@@@@@@@@@@@@@");
 		List<CategoryVO> category = null;
 		List<ProductsVO> productlist = null;
 		// List<CategoryVO> categorypcno = null;
 		List<ProductCategorylistVO> productcategorylist = null;
 		try {
+			
 			category = productsservice.getcategorybar();
-			// 왼쪽 카테고리 리스트
 			productlist = productsservice.getproductslist(pcno);
-
-			// categorypcno = productsservice.getcategorysmall(pcno);
-
+			// 왼쪽 카테고리 리스트
 			productcategorylist = productsservice.getproductcatrogrtlist(pcno);
-
-			// System.out.println("productcategorylist Controller=========" +
-			// productcategorylist);
-
+			
+			// categorypcno = productsservice.getcategorysmall(pcno);
+			// System.out.println("productcategorylist Controller=========" + productcategorylist);
+			 System.out.println("productlist Controller=========" + productlist);
 			// categorysamll=productsservice.getcategorysmall(productsVO);
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		model.addAttribute("productcategorylist", productcategorylist);
 		// model.addAttribute("categorypcno", categorypcno);
 		model.addAttribute("category", category);
-
+		model.addAttribute("pcno", pcno);
 		model.addAttribute("productlist", productlist);
+		
 
 		return "product/productList";
 	}
@@ -71,7 +74,7 @@ public class ProductsController {
 
 			ProductsDetailVO Detail = productsservice.getProductDetails(pid);
 
-			// System.out.println("Detail ==================>>>>>>" + Detail);
+			//System.out.println("Detail ==================>>>>>>" + Detail);
 
 			model.addAttribute("Detail", Detail);
 
