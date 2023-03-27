@@ -58,4 +58,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 
+	<select id="getEventList" resultType="EventListVO"
+		parameterType="int">
+		SELECT evid, evtitle, start_date, end_date, vstart_date,
+		vend_date,
+		crmingredient FROM
+		event_list WHERE evid = #{evid}
+	</select>
+	<select id="getVoteList"
+		resultType="com.hart.domain.event.CRecipeVO" parameterType="int">
+
+		SELECT
+		CRID,CRTITLE , CRIMG ,CRMINGREDIENT ,CRLEVEL ,CRTIME ,
+		CRCLICK
+		,CRREGDATE ,CRCANO ,CRDETAIL ,CRVOTE ,EVID FROM
+		crecipe
+		WHERE evid =
+		#{evid}
+	</select>
+
+	<insert id="toVote"
+		parameterType="com.hart.domain.event.EventVoteVO">
+		insert into event_vote (evid, mid, crid) values
+		(#{evid}, #{mid}, #{crid})
+	</insert>
+
 </mapper>

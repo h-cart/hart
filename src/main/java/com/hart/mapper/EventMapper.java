@@ -10,6 +10,8 @@ import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
 import com.hart.domain.event.CRecipeVO;
 import com.hart.domain.product.ProductsVO;
+import com.hart.domain.event.EventListVO;
+import com.hart.domain.event.EventVoteVO;
 
 @Mapper
 public interface EventMapper {
@@ -20,5 +22,8 @@ public interface EventMapper {
 	int registerRecipe(@Param("seq")int seq,@Param("recipe")CRecipeVO recipe);
 	int registerContent(@Param("seq")int seq,@Param("content") CRContentVO content);
 	int registerIngredient(@Param("seq")int seq,@Param("ingredient")CRIngredientVO ingredient);
+	EventListVO getEventList(int evid);
+	List<CRecipeVO> getVoteList(int evid);
+	void toVote(EventVoteVO ev);
 
 }

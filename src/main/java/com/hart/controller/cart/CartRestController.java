@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.hart.domain.cart.CartDTO;
 import com.hart.domain.cart.CartInsertDTO;
 import com.hart.domain.member.ClubAuthMemberDTO;
+import com.hart.domain.order.RecommandDTO;
 import com.hart.domain.share.ShareDTO;
 import com.hart.domain.share.SseEmitters;
 import com.hart.service.cart.CartService;
@@ -47,11 +48,13 @@ public class CartRestController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, String>> insertCart(@RequestBody Map<String, List<String>> map,
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-
+		
 		Map<String, String> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
+			System.out.println(pids);
+			System.out.println(pamounts);
 			if (mDTO.getCsno() != null) {
 				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
 				sseEmitters.insert(mDTO.getCsno());
@@ -64,6 +67,7 @@ public class CartRestController {
 
 		} catch (Exception e) {
 			result.put("result", e.getMessage());
+			e.printStackTrace();
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -72,7 +76,6 @@ public class CartRestController {
 	@PostMapping(value = "/get", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, CartDTO>> getCarts(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-
 		Map<String, CartDTO> map = new HashMap<>();
 		try {
 			if (mDTO.getCsno() == null)
@@ -226,6 +229,13 @@ public class CartRestController {
 			}catch (Exception e) {
 				return new ResponseEntity<Map<String,ShareDTO>>(HttpStatus.BAD_REQUEST);
 			}
+	}
+	
+	@GetMapping(value="/getRecommand", consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Map<String,RecommandDTO>> getRecommand(@RequestBody Map<String,String> map){
+		
+		
+		return null;
 	}
 	
 

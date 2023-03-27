@@ -6,19 +6,94 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.hart.mapper.OrderMapper">
 
 
-	<select id="pInfos" parameterType="string"
-		resultType="PinfoDTO">
-		SELECT pid,pimg, pname,pprice,pdiscount,0,0
+	<select id="pInfos" parameterType="string" resultType="PinfoDTO">
+		SELECT
+		pid,pimg, pname,pprice,pdiscount,0,0
 		FROM porder
 		WHERE
 		pid = #{pid}
 	</select>
-	<select id="cInfos" parameterType="string"
-		resultType="CinfoDTO">
-		SELECT lcid,lcday,lcstatus,lcteacher,lcname,lcimg,lcprice, 0 as pamount FROM corder
+	<select id="cInfos" parameterType="string" resultType="CinfoDTO">
+		SELECT
+		lcid,lcday,lcstatus,lcteacher,lcname,lcimg,lcprice, 0 as pamount FROM
+		corder
 		WHERE
 		lcid = #{lcid}
 	</select>
+	<insert id='insertOrder' parameterType='OinfoDTO'>
+		<selectKey resultType="int" keyProperty="oid" order="BEFORE">
+			SELECT order_seq.nextVAL FROM dual
+		</selectKey>
+		INSERT INTO orders
+		VALUES(#{oid},#{oname},#{ozipcode},#{oaddress1},#{oaddress2},
+		#{opayment},#{ousedpoint},0,#{odiscount},sysdate,#{mid})
+	</insert>
 
+	<update id="insertProduct" parameterType="java.util.List">
+		<selectKey resultType="int" keyProperty="oid" order="BEFORE">
+			SELECT order_seq.CURRVAL FROM dual
+		</selectKey>
+
+		<foreach collection="pLists" item="item" open="INSERT ALL"
+			close="SELECT * FROM DUAL" separator=" ">
+			INTO order_detail (oid, pid,
+			oamount, rvcheck)
+			VALUES (#{oid},
+			#{item.pid}, #{item.pamount}, 0)
+		</foreach>
+	</update>
+
+	<update id="insertClass" parameterType="java.util.List">
+		<selectKey resultType="int" keyProperty="oid" order="BEFORE">
+			SELECT order_seq.CURRVAL FROM dual
+		</selectKey>
+
+		<foreach collection="cLists" item="item" open="INSERT ALL"
+			close="SELECT * FROM DUAL" separator=" ">
+			INTO order_detail (oid, pid,
+			oamount, rvcheck)
+			VALUES (#{oid},
+			#{item.lcid}, #{item.pamount}, 0)
+		</foreach>
+	</update>
+	<update id="intoMyClass" parameterType="java.util.List">
+		<foreach collection="cLists" item="item" separator=";">
+			INSERT INTO
+			class_list (mid,lcid,alert_phone)
+			VALUES
+			(#{oDTO.mid},#{item.lcid},#{oDTO.phone})
+		</foreach>
+	</update>
+
+	<select id="checkClass" parameterType="java.util.List"
+		resultType="int">
+		SELECT count(*) FROM class_list
+		WHERE mid = #{mid} AND lcid in
+		<foreach collection="cLists" item="item" open="(" close=")"
+			separator=",">
+			#{item.lcid}
+		</foreach>
+	</select>
+
+	<update id="orderCancle" parameterType="int">
+		UPDATE orders
+		set
+		ostatus =
+		-1
+		WHERE oid = #{oid}
+	</update>
+
+	<select id="getOids" resultType="int">
+	<![CDATA[
+	select  oid from orderlist 
+	where mid=#{mid} and (#{sDate} <=odate and odate <=#{eDate}) order by oid desc
+	]]>
+	</select>
+	
+	<select id="getOrder" resultType="OinfoDTO">
+		SELECT * 
+		FROM orders
+		WHERE oid = #{oid} AND mid = #{mid}
+	</select>
 
 </mapper>
