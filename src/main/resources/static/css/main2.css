@@ -6,11 +6,6 @@
     padding: 0 var(--wrap-padding);
 }
 
-@media (max-width: 1280px) {
-    .header-banner-block {
-        padding:0 var(--wrap-padding-md);
-    }
-}
 
 .header-banner-block .inner {
     width: 100%;
@@ -512,12 +507,6 @@ body.product-detail footer {
     align-items: center;
     padding-bottom: 24px;
     border-bottom: 1px solid #E5E5E5;
-}
-
-.language-select-block .header h2 {
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 1.1;
 }
 
 .language-select-block .header .btn-close {
@@ -1774,32 +1763,6 @@ sup {
     z-index: 100;
 }
 
-header {
-    padding: 0 var(--wrap-padding);
-    height: 70px;
-    width: auto;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    background: #fff;
-    -webkit-box-shadow: rgb(249,249,249) 0px -1px 0px 0px inset;
-    box-shadow: rgb(249,249,249) 0px -1px 0px 0px inset;
-}
-
-@media (max-width: 1280px) {
-    header {
-        padding:0 var(--wrap-padding-md);
-    }
-}
 
 header[data-bordered=true] {
     -webkit-box-shadow: rgb(229,229,229) 0px -1px 0px 0px inset;

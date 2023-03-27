@@ -52,5 +52,9 @@ public class MemberController {
 	public String history() {
 		return "member/mypage_order_history";
 	}
+	@GetMapping("/orderlist")
+	public void getOrderList() {
+	}
+	
 
 }

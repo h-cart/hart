@@ -86,6 +86,7 @@ public class OrderController {
 	public String orderComplete(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @RequestParam("oid") String oid, Model model) {
 		String url = "";
 		try {
+			
 			model.addAttribute("oinfo", oService.getOrder(mDTO.getMid(), Integer.parseInt(oid)));
 			url = "/order/complete";
 		}catch (Exception e) {
