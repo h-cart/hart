@@ -51,12 +51,14 @@ public class OrderServiceImpl implements OrderService{
 		if(oDTO.isSaveAddr()) {
 			mMapper.updateAddress(oDTO.getOinfo());
 			mDTO.setMzipcode(oDTO.getOinfo().getOzipcode());
-			mDTO.setMphone(Integer.parseInt(oDTO.getOinfo().getPhone()));
+			mDTO.setMphone(oDTO.getOinfo().getPhone());
 			mDTO.setMaddress(oDTO.getOinfo().getOaddress1());
 			mDTO.setMaddressdetail(oDTO.getOinfo().getOaddress2());
+			
 		}
 		mDTO.setMpoint(mMapper.findByEmail(mDTO.getMid(), 1).getMpoint());
 		result.put("mDTO",mDTO);
+		System.out.println(mDTO);
 		return result;
 	
 	}
