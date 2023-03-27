@@ -50,13 +50,17 @@ public class LiveClassController {
 		return "liveClass/liveClassDetail";
 	}
 	
-	@GetMapping("/test")
-	public String streamingTest() {
-		log.info("streamingTest 컨트롤러 호출");
+	@GetMapping("/video/{lcid}")
+	public String getVideoDetail(@PathVariable String lcid) {
+		log.info("videoDetail 컨트롤러 호출");
 		
-		return "liveClass/liveClassTestStream";
+		
+		
+		return "liveClass/liveClassVideo";
 	}
 	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@테스트용
 	@GetMapping("/testchat")
 	public String streamingTestChat() {
 		log.info("streamingTest 컨트롤러 호출");
