@@ -50,7 +50,6 @@ public class OrderController {
 		try {
 			OrderTotalDTO oDTO = oService.getInfo(pids, pamounts);
 			model.addFlashAttribute("oDTO",oDTO);
-			System.out.println(oDTO);
 		}catch (Exception e) {
 			model.addFlashAttribute("msg", "ERROR");
 			System.out.println(e.getMessage());
@@ -64,10 +63,8 @@ public class OrderController {
 		String url = "";
 		try {
 			insertDTO.getOinfo().setMid(mDTO.getMid());
-			System.out.println(insertDTO);
 			Map<String,Object> result = oService.insertOrder(mDTO,insertDTO);
 			mDTO = (ClubAuthMemberDTO)result.get("mDTO");
-			System.out.println(mDTO);
 			OinfoDTO oinfo = (OinfoDTO)result.get("oinfo");
 			
 			url = "/order/complete?oid="+oinfo.getOid();

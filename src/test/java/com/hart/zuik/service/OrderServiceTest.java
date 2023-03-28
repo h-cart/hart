@@ -6,14 +6,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hart.domain.order.OinfoDTO;
 import com.hart.domain.order.OrderInsertDTO;
 import com.hart.service.order.OrderService;
 
 import lombok.extern.log4j.Log4j2;
-
-@SpringBootApplication
+@SpringBootTest
 @Log4j2
 public class OrderServiceTest {
 	
