@@ -1,0 +1,60 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "graphik";
+  src: local("Graphik Light"), url("/layout/basic/fonts/Graphik-Light.woff") format("woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "graphik";
+  src: local("Graphik Regular"), url("/layout/basic/fonts/Graphik-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "graphik";
+  src: local("Graphik Medium"), url("/layout/basic/fonts/Graphik-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue Light"), url("/layout/basic/fonts/helveticaneue-light.woff2") format("woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue Regular"), url("/layout/basic/fonts/helveticaneue.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue Medium"), url("/layout/basic/fonts/helveticaneue-medium.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue Bold"), url("/layout/basic/fonts/helveticaneue-bold.woff2") format("woff2");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "NotoSansKR";
+  font-weight: 300;
+  src: url("/layout/basic/fonts/notosanskr_v2/NotoSansKR-Light.eot");
+  src: local(※), url("/layout/basic/fonts/notosanskr_v2/NotoSansKR-Light.woff") format("woff");
+}
+@font-face {
+  font-family: "NotoSansKR";
+  font-weight: 400;
+  src: url("/layout/basic/fonts/notosanskr_v2/NotoSansKR-Regular.eot");
+  src: local(※), url("/layout/basic/fonts/notosanskr_v2/NotoSansKR-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "NotoSansKR";
+  font-weight: 500;
+  src: url("/layout/basic/fonts/notosanskr_v2/NotoSansKR-Medium.eot");
+  src: local(※), url("/layout/basic/fonts/notosanskr_v2/NotoSansKR-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: "NotoSansKR";
+  font-weight: 700;
+  src: url("/layout/basic/fonts/notosanskr_v2/NotoSansKR-Bold.eot");
+  src: local(※), url("/layout/basic/fonts/notosanskr_v2/NotoSansKR-Bold.woff") format("woff");
+}
