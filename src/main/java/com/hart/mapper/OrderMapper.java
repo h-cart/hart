@@ -11,6 +11,8 @@ import com.hart.domain.order.CinsertDTO;
 import com.hart.domain.order.OinfoDTO;
 import com.hart.domain.order.PinfoDTO;
 import com.hart.domain.order.PinsertDTO;
+import com.hart.domain.order.SearchDTO;
+import com.hart.domain.order.SearchResultDTO;
 
 @Mapper
 public interface OrderMapper {
@@ -24,5 +26,6 @@ public interface OrderMapper {
 	int checkClass(@Param("mid")String mid, @Param("cLists")List<CinsertDTO> cLists)throws SQLException;
 	int orderCancle(int oid)throws SQLException;
 	OinfoDTO getOrder(@Param("oid") int oid,@Param("mid") String mid)throws SQLException;
+	List<SearchResultDTO> getOrders(SearchDTO sDTo) throws SQLException;
 	
 }

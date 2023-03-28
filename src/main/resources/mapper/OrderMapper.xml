@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id='insertOrder' parameterType='OinfoDTO'>
 		<selectKey resultType="int" keyProperty="oid" order="BEFORE">
-			SELECT order_seq.nextVAL FROM dual
+			SELECT
+			order_seq.nextVAL FROM dual
 		</selectKey>
 		INSERT INTO orders
 		VALUES(#{oid},#{oname},#{ozipcode},#{oaddress1},#{oaddress2},
@@ -30,7 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="insertProduct" parameterType="java.util.List">
 		<selectKey resultType="int" keyProperty="oid" order="BEFORE">
-			SELECT order_seq.CURRVAL FROM dual
+			SELECT
+			order_seq.CURRVAL FROM dual
 		</selectKey>
 
 		<foreach collection="pLists" item="item" open="INSERT ALL"
@@ -44,7 +46,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="insertClass" parameterType="java.util.List">
 		<selectKey resultType="int" keyProperty="oid" order="BEFORE">
-			SELECT order_seq.CURRVAL FROM dual
+			SELECT
+			order_seq.CURRVAL FROM dual
 		</selectKey>
 
 		<foreach collection="cLists" item="item" open="INSERT ALL"
@@ -85,14 +88,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getOids" resultType="int">
 	<![CDATA[
 	select  oid from orderlist 
-	where mid=#{mid} and (#{sDate} <=odate and odate <=#{eDate}) order by oid desc
+	where mid=#{mid} and (#{sDate} <=odate and odate <=#{eDate}+1) order by oid desc
 	]]>
 	</select>
-	
+
 	<select id="getOrder" resultType="OinfoDTO">
-		SELECT * 
+		SELECT *
 		FROM orders
 		WHERE oid = #{oid} AND mid = #{mid}
 	</select>
-
+	
+	<resultMap id="orderResult" type="SearchResultDTO">
+		<result property="oid" column="OID" />
+		<result property="odate" column="ODATE" />
+		<result property="opayment" column="OPAYMENT" />
+		<result property="ostatus" column="OSTATUS" />
+		<result property="ousedpoint" column="OUSEDPOINT" />
+		<collection property="oitems" column="OID"
+			javaType="java.util.ArrayList" ofType="OitemDTO"
+			select="getOrderItems" />
+	</resultMap>
+	<select id="getOrders" parameterType="SearchDTO" resultMap="orderResult">
+		<![CDATA[
+			SELECT * FROM orders WHERE mid = #{mid} AND (#{sdate}<=odate AND odate <=to_date(#{edate},'YY/MM/DD')+1)
+		]]>
+	</select>
+	<select id="getOrderItems"
+			resultType="OitemDTO">
+	SELECT oid,tti.pid,pname,pimg,rvcheck,oamount FROM order_detail odt JOIN totalItem tti on odt.pid = tti.pid and odt.oid = #{oid}
+</select>
 </mapper>
+
+

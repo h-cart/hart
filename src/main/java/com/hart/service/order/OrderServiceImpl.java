@@ -17,6 +17,7 @@ import com.hart.domain.order.OrderInsertDTO;
 import com.hart.domain.order.OrderTotalDTO;
 import com.hart.domain.order.PinfoDTO;
 import com.hart.domain.order.SearchDTO;
+import com.hart.domain.order.SearchResultDTO;
 import com.hart.mapper.CartMapper;
 import com.hart.mapper.MemberMapper;
 import com.hart.mapper.OrderMapper;
@@ -128,29 +129,10 @@ public class OrderServiceImpl implements OrderService{
 	 * 기능 : 주문 내역 조회 시, 상품 정보를 불러오는 기능 
 	 * 매개변수 : 사용자 아이디, 조회 시작일, 조회 종료일
 	 */
-	@Transactional
 	@Override
-	public Map<Integer, OrderTotalDTO> getOrders(SearchDTO sDTO) throws Exception {
+	public List<SearchResultDTO> searchOrders(SearchDTO sDTO) throws Exception {
 		
-		try {
-			Map<Integer, OrderTotalDTO> map = new HashMap<Integer, OrderTotalDTO>();
-//			List<Integer> oids  = oDAO.getOids(sDate, eDate, mid);
-//			for(int oid : oids) {
-//				
-//				OrderInfoDTO oinfo = oDAO.getOrderInfos(oid);
-//				List<CartOptionDTO> lists = oDAO.getOrderItems(oid);
-//				CartOptionListDTO items = CartOptionListDTO.builder()
-//										.					lists(lists).build();
-//				map.put(oid,OrderTotalDTO.builder()
-//											.items(items)
-//											.oinfo(oinfo).build());
-//				
-//			}	
-			return map;
-			}catch (Exception e) {
-				log.info(e.getMessage());
-				throw e;
-			}
+		return oMapper.getOrders(sDTO);
 		
 	}
 
@@ -163,6 +145,7 @@ public class OrderServiceImpl implements OrderService{
 			throw e;
 		}
 	}
-	
+
+
 	
 }

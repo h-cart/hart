@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.google.gson.Gson;
+import com.hart.domain.order.SearchDTO;
 
 
 @SpringBootTest
@@ -41,6 +42,24 @@ public class OrderApiControllerTests {
     requestBody.put("oid", "48");
     String json = new Gson().toJson(requestBody);
     MvcResult result = mockMvc.perform(post("/oapi/cancle")
+    		.with(csrf())
+    		.content(json)
+    		.contentType(MediaType.APPLICATION_JSON_VALUE))
+    .andExpect(status().isOk()).andReturn();
+    String responseJson = result.getResponse().getContentAsString();
+    System.out.println(responseJson);
+  }
+  
+  @Test
+  public void searchOrder() throws Exception  {
+    
+    SearchDTO sDTO = SearchDTO.builder()
+    				.sdate("23/03/26")
+    				.edate("23/03/28")
+    				.mid("skarns23@gmail.com")
+    				.build();
+    String json = new Gson().toJson(sDTO);
+    MvcResult result = mockMvc.perform(post("/oapi/search")
     		.with(csrf())
     		.content(json)
     		.contentType(MediaType.APPLICATION_JSON_VALUE))

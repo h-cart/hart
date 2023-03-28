@@ -9,9 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SearchDTO {
+public class OitemDTO {
 	
-	private String mid;
-	private String sdate;
-	private String edate;
+	private int oid;
+	private String pid;
+	private String pname;
+	private String pimg;
+	private int rvcheck;
+	private int oamount;
 }

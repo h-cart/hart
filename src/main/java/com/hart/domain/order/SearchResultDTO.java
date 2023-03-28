@@ -1,5 +1,7 @@
 package com.hart.domain.order;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SearchDTO {
+public class SearchResultDTO {
 	
-	private String mid;
-	private String sdate;
-	private String edate;
+	private int oid;
+	private String odate;
+	private int opayment;
+	private int ostatus;
+	private int ousedpoint;
+	private List<OitemDTO> oitems;
 }
