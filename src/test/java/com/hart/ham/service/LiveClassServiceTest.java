@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.service.liveClass.LiveClassService;
@@ -22,14 +23,14 @@ public class LiveClassServiceTest {
 	private LiveClassService service;
 	
 	@Test
-	public void getListService() {
+	public void getListServiceTest() {
 		List<LiveClassListDTO> list = service.getList();
 		log.info(list);
 		assertThat(list.get(0)).isInstanceOf(LiveClassListDTO.class);
 	}
 	
 	@Test
-	public void getMyClassInfoService() {
+	public void getMyClassInfoServiceTest() {
 		String mid = "skarns23@gmail.com";
 		List<MyLiveClassInfoDTO> list = service.getMyClassInfo(mid);
 		
@@ -37,5 +38,14 @@ public class LiveClassServiceTest {
 		//assertThat(list.get(0)).isInstanceOf(MyLiveClassInfoDTO.class);
 		assertThat(list.get(0)).isInstanceOf(MyLiveClassInfoDTO.class);
 	}
+	
+	@Test
+	public void getLiveClassDetailSetvideTest() {
+		LiveClassDetailInfoDTO dto = service.getClassDetail("L0003");
+		log.info(dto);
+		assertThat(dto).isInstanceOf(LiveClassDetailInfoDTO.class);
+		
+	}
+	
 	
 }

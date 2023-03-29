@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
 import com.hart.service.liveClass.LiveClassService;
 
@@ -45,8 +46,11 @@ public class LiveClassController {
 	@GetMapping("/{lcid}")
 	public String getLiveClassListDetail(Model model, @PathVariable String lcid) {
 		log.info("getLiveClassListDetail 컨트롤러 호출");
-		LiveClassListDTO dto = service.getClassDetail(lcid);
+		LiveClassDetailInfoDTO dto = service.getClassDetail(lcid);
+		
+		
 		model.addAttribute("liveClass",dto);
+		log.info(model);
 		return "liveClass/liveClassDetail";
 	}
 	

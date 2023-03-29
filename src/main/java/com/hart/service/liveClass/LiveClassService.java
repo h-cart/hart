@@ -2,6 +2,7 @@ package com.hart.service.liveClass;
 
 import java.util.List;
 
+import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 
@@ -20,7 +21,7 @@ import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 public interface LiveClassService {
 
 	public List<LiveClassListDTO> getList();
-	public LiveClassListDTO getClassDetail(String lcid);
+	public LiveClassDetailInfoDTO getClassDetail(String lcid);
 	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid);
 	
 	
