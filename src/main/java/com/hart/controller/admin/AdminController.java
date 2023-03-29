@@ -25,10 +25,17 @@ public class AdminController {
 	@GetMapping("")
 	public String home(@RequestParam(required = false) AdminEventVO event, Model model) {
 		List<AdminEventVO> lists = eService.getList(event);
-		model.addAttribute("lists",lists);
+		model.addAttribute("lists", lists);
 		log.info(lists);
 
 		return "admin/main";
+	}
+
+	@GetMapping("/votelist")
+	public String votelist(AdminEventVO event) {
+		log.info(event);
+		eService.voteList(event);
+		return "redirect:/admin";
 	}
 
 }

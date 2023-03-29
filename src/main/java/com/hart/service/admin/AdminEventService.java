@@ -26,6 +26,8 @@ import com.hart.domain.event.EventVoteVO;
 public interface AdminEventService {
 
 	List<AdminEventVO> getList(AdminEventVO event);
+
+	void voteList(AdminEventVO event);
 	
 
 	

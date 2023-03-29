@@ -41,6 +41,12 @@
 />
 </head>
 <body id="page-top">
+	<script>
+		function Voting(v, e) {
+			location.href = "/admin/votelist?crid=" + e + "&crvote=" + v;
+
+		}
+	</script>
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 		<!-- Sidebar -->
@@ -488,7 +494,8 @@
 											<th>레시피 제목</th>
 											<th>이메일</th>
 											<th>등록일</th>
-											<th>레시피 등록</th>
+											<th>투표개시</th>
+											<th>투표 등록</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -497,10 +504,16 @@
 											<td th:text="${list.crtitle}"></td>
 											<td th:text="${list.mid}"></td>
 											<td th:text="${#dates.format(list.crregdate, 'yyyy.MM.dd')}"></td>
+											<td
+												th:text="${list.crvote == 1 ? 'Y' : 'N'}"
+												style="text-align: center;"
+											></td>
 											<td>
 												<button
 													type="button"
-													class="btn btn-outline-primary"
+													th:class="${list.crvote == 1 ? 'btn btn-outline-danger' : 'btn btn-outline-primary'}"
+													th:onclick="Voting([[${list.crvote == 1 ? '0' : '1'}]],[[${list.crid}]]);"
+													th:text="${list.crvote == 1 ? '취소' : '등록'}"
 												>등록</button>
 												<button
 													type="button"
@@ -587,7 +600,7 @@
 	<!-- Custom scripts for all pages-->
 	<script src="/admin/js/sb-admin-2.min.js"></script>
 	<!-- Page level plugins -->
-	<script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+	<!-- <script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script> -->
 	<script src="/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 	<!-- Page level custom scripts -->
 	<script src="/admin/js/demo/datatables-demo.js"></script>

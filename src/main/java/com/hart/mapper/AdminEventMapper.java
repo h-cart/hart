@@ -11,4 +11,6 @@ public interface AdminEventMapper {
 
 	List<AdminEventVO> getEventList(AdminEventVO event);
 
+	void voteList(AdminEventVO event);
+
 }

@@ -25,4 +25,10 @@ public class AdminEventServiceImpl implements AdminEventService {
 		return mapper.getEventList(event);
 	}
 
+	@Override
+	public void voteList(AdminEventVO event) {
+		mapper.voteList(event);
+		
+	}
+
 }

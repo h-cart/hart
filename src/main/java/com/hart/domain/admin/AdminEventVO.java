@@ -11,6 +11,7 @@ public class AdminEventVO {
 	String crid;
 	String mid;
 	String crtitle;
-	Date crregdate;	
+	Date crregdate;
+	int crvote;
 	
 }

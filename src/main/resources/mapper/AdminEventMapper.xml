@@ -12,7 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				evid = #{evid}
 			</if>
 		</where>
-		order by crregdate DESC
+		order by crvote desc, crregdate DESC
 	</select>
-
+	<update id="voteList" parameterType="AdminEventVO">
+		update crecipe
+		set crvote =#{crvote}
+		where crid = #{crid}
+	</update>
 </mapper>
