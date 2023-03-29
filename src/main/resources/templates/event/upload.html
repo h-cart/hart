@@ -133,7 +133,10 @@
       }
     </style>
   <form name="insFrm" id="insFrm" method="post" th:action="@{/event/upload}" enctype="multipart/form-data">
-      <input type="hidden" name="crmingredient" value="돼지" />
+      <input type="hidden" name="crmingredient" th:value="${event.crmingredient}" />
+       <input type="hidden" name="evid" th:value="${event.evid}" />
+       <input type="hidden" name="mid" id="mid" th:value="${#authentication.principal.mid}" />
+  
       <div class="container recipe_regi">
         <div class="regi_center">
           <div class="regi_title">레시피 등록</div>

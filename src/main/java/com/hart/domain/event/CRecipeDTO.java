@@ -28,6 +28,8 @@ public class CRecipeDTO {
 	int crclick;
 	Date crregdate;
 	String crdetail;
+	String mid;
+	int evid;
 
 	String[] crstep;
 	String[] crcdetail;
@@ -46,7 +48,8 @@ public class CRecipeDTO {
 		cr.setCrtime(crtime);
 		cr.setCrregdate(crregdate);
 		cr.setCrdetail(crdetail);
-
+		cr.setMid(mid);
+		cr.setEvid(evid);
 		String originalMName = crMimg.getOriginalFilename();
 		String fileMName = originalMName.substring(originalMName.lastIndexOf("\\") + 1);
 		String folderPath = makeFolder(uploadPath);

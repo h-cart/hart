@@ -32,13 +32,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO CRecipe (crid, crtitle, crimg,
 		crmingredient, crlevel, crtime,
 		crclick, crregdate, crcano,
-		crdetail)VALUES (#{seq}, #{recipe.crtitle},
+		crdetail,
+		mid, evid)VALUES (#{seq}, #{recipe.crtitle},
 		#{recipe.crMimg},
 		#{recipe.crmingredient},
 		#{recipe.crlevel}, #{recipe.crtime},
 		#{recipe.crclick},
 		sysdate, #{recipe.crcano},
-		#{recipe.crdetail})
+		#{recipe.crdetail},
+		#{recipe.mid}, #{recipe.evid})
 	</insert>
 	<insert id="registerContent"
 		parameterType="com.hart.domain.event.CRContentVO">

@@ -24,7 +24,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/event")
 @Log4j2
 public class EventController {
-	
+
 	@Value("${com.hart.upload.path}")
 	private String uploadPath;
 
@@ -35,6 +35,7 @@ public class EventController {
 	public String event(int evid, Model model) {
 
 		EventListVO event = eventService.getEvent(evid);
+		log.info(event);
 		model.addAttribute("event", event);
 		return "event/event";
 	}
@@ -47,7 +48,7 @@ public class EventController {
 		log.info(recipe);
 		return "event/vote";
 	}
-	
+
 	@PostMapping("/vote")
 	public String voting(EventVoteVO ev, Model model) {
 		eventService.voteRecipe(ev);
@@ -55,12 +56,15 @@ public class EventController {
 	}
 
 	@GetMapping("/upload")
-	public void upload(Model model) {
+	public void upload(Model model, int evid) {
+		EventListVO event = eventService.getEvent(evid);
+		model.addAttribute("event", event);
 		model.addAttribute("crecipe", new CRecipeDTO());
 	}
 
 	@PostMapping("/upload")
 	public String register(CRecipeDTO crecipe) {
+		log.info(crecipe);
 		if (crecipe.getCrMimg().getContentType().startsWith("image") == false) {
 			return "event/upload";
 		}
@@ -70,7 +74,7 @@ public class EventController {
 		List<CRContentVO> content = crecipe.toCRContentVO(uploadPath);
 		List<CRIngredientVO> ingredient = crecipe.toCRIngredientVO();
 		eventService.register(recipe, content, ingredient);
-		return "event/event";
+		return "redirect:/event?evid=" + crecipe.getEvid();
 	}
 
 }// end class

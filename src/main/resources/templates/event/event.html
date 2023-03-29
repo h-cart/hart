@@ -252,10 +252,10 @@ ul.tagit input[type="text"] {
 			<h2 class="eland_font">레시피 공모전</h2>
 			<ul>
 				<li><a
-					href="/event?evid=${event.evid}"
+					th:href="@{/event(evid=${event.evid})}"
 					class="on"
 				>공모전 소개 및 지원하기</a></li>
-				<li><a href="/event/vote?evid=1" sec:authorize="isAuthenticated()">레시피 투표하기</a><a href="/member/login" sec:authorize="!isAuthenticated()">레시피 투표하기</a></li>
+				<li><a th:href="@{/event/vote(evid=${event.evid})}" sec:authorize="isAuthenticated()">레시피 투표하기</a><a href="/member/login" sec:authorize="!isAuthenticated()">레시피 투표하기</a></li>
 			</ul>
 		</div>
 	</div>
@@ -292,7 +292,7 @@ ul.tagit input[type="text"] {
 				<p>- 당첨자 발표는 따로 하지 않습니다.</p>
 				<p>- TV레시피는 수상대상에서 제외됩니다.</p>
 				<a
-					href="/event/upload"
+					th:href="@{/event/upload(evid=${event.evid})}"
 					class="aply_btn"
 					sec:authorize="isAuthenticated()"
 				>공모전 참여하기</a>
