@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.product.CategoryVO;
-import com.hart.domain.product.FillterVO;
+import com.hart.domain.product.ListVO;
 import com.hart.domain.product.ProductsVO;
 import com.hart.service.ProductsService;
 
@@ -28,6 +28,7 @@ public class ProductRestController {
 
 	@Autowired
 	private ProductsService pService;
+	private List<ListVO> productlist;
 
 	@GetMapping(value = "/clist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -50,59 +51,59 @@ public class ProductRestController {
 
 	}
 
-	@PostMapping(value = "/clistsamll", 
+	
+	
+	
+	@PostMapping(value = "/productlist", 
 				produces = { MediaType.APPLICATION_JSON_VALUE }, 
 				consumes = {MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<ProductsVO>>> getProductsList(@RequestBody Map<String, String> data) {
+	public ResponseEntity<Map<String, List<ListVO>>> getProductsList(@RequestBody ListVO data) {
 
 		try {
-			
-			String pcno = data.get("pcno");
-			
-		 String page = data.get("page"); 
-			
-			 
-		 log.info("page=>>"+page );
-		 log.info("pcno=>>"+pcno );
-			 
-			List<ProductsVO> getproductslist = pService.getproductslistajax(Integer.parseInt(pcno) ,Integer.parseInt(page));
-			// log.info("getproductslist=>>>" + getproductslist);
 
+			 
+			List<ListVO> Productlist = pService.Productlist(data);
 			
-			log.info(getproductslist.get(0));
+			  log.info("data=====>>>>"+data); log.info("getproductslis컨트롤러에서 찍힘>>>" +  Productlist); log.info(Productlist);
+			 
+			
+			log.info("Productlist.get(0)>>"+Productlist.get(0));
 			
 			
-			Map<String, List<ProductsVO>> result = new HashMap<>();
-			result.put("getproductslist", getproductslist);
-
-			return new ResponseEntity<Map<String, List<ProductsVO>>>(result, HttpStatus.OK);
+			Map<String, List<ListVO>> result = new HashMap<>();
+			result.put("productlist", Productlist);
+			
+			
+			log.info("result--->>"+result);
+			
+			
+			return new ResponseEntity<Map<String, List<ListVO>>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<ProductsVO>>>(HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+			return new ResponseEntity<Map<String, List<ListVO>>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
 
-	@PostMapping(value = "/fillterbutton", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<ProductsVO>>> getproductlisthigh(
-			@RequestBody FillterVO data) {
-
-		try {
-			log.info(data);
-			List<ProductsVO> listtop = pService.fillter(data);
-			// log.info("listtop=>>>" + listtop);
-
-			Map<String, List<ProductsVO>> result = new HashMap<>();
-			result.put("getproductslist", listtop);
-
-			return new ResponseEntity<Map<String, List<ProductsVO>>>(result, HttpStatus.OK);
-
-		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<ProductsVO>>>(HttpStatus.BAD_REQUEST);
-		}
-	}
+	/*
+	 * @PostMapping(value = "/fillterbutton", produces = {
+	 * MediaType.APPLICATION_JSON_VALUE }, consumes = {
+	 * MediaType.APPLICATION_JSON_VALUE }) public ResponseEntity<Map<String,
+	 * List<ListVO>>> getproductlisthigh(
+	 * 
+	 * @RequestBody ListVO data) {
+	 * 
+	 * try { log.info(data); List<ListVO> listtop = pService.List(data); //
+	 * log.info("listtop=>>>" + listtop);
+	 * 
+	 * Map<String, List<ListVO>> result = new HashMap<>();
+	 * result.put("getproductslist", listtop);
+	 * 
+	 * return new ResponseEntity<>(result, HttpStatus.OK);
+	 * 
+	 * } catch (Exception e) { log.info(e.getMessage()); return new
+	 * ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
+	 */
 
 }

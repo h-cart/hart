@@ -2,85 +2,95 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
 <body style="">
-
 	<!-- 수정  -->
 	<script type="text/javascript" defer>
-   const token = $("meta[name='_csrf']").attr("content");
-   const header = $("meta[name='_csrf_header']").attr("content");
-   
-   //상품 디테일 페이지에 pid를 보내줌
-      function goDetailPage(e) {
-         let pid = $(e).data('pid');
-         location.href = "/product/productDetail?pid=" + pid
 
+      //상품 디테일 페이지에 pid를 보내줌
+      function goDetailPage(e) {
+        let pid = $(e).data("pid");
+        location.href = "/product/productDetail?pid=" + pid;
       }
-      </script>
+    </script>
+
+
 
 	<script>
-   	
-   	//카테고리 소분류를 누르면 ajax 작동하여 해당 카테고리를 불러옴
-   
- 		let page=0;
-    	//let pcno;
-    	
-   		function resetPageNumber() {
-   		let page = 0;
-   		return page;
-   			} 
-   	
-   		
-    		
-          $(window).scroll(function() { if(Math.round($(window).scrollTop()) >= $(document).height() - $(window).height()){
- 		   page++;
- 		console.log("page>>"+page);
-		console.log("pcno>>"+pcno); 	
+	let page = 0;
+	$(document).ready(function(){
 		
- 		sendpcno();
-        	 }
-         });         
-   			 
-         $(window).ready(sendpcno(pcno)); 
-         
-         
-   		function sendpcno(pcno){
-   			
-   			 page=0;
-   			pcno=pcno;
-           console.log("function sendpcno의 펑션작동됨 pcno는 >>"+ pcno);
-           
-          /*  $(window).scroll(function() {
-        	    if($(window).scrollTop() + $(window).height() == $(document).height()) {
-        	      // increment page when user scrolls to the bottom
-        	      page++;
-        	      element.page = page;
-        	    }; */
-           
-           
-   			
-         $("input[name=pcno]").val(pcno);
+		//pcno 처음에 초기화를 어떻게 해야 s
+		/* var pcno = 0; */
+		let pcno = $("input[name=pcno]").val();
+		console.info(pcno);
+		
+		
+		
+		$(window).scroll(function() {
+			console.log("hello");
+								//창남은 길이          	// 내가 보는 창의 길이 - 창의 전체 길이 			
+			if(($(window).scrollTop()) >= $(document).height()+ - $(window).height()){ 
+    	    /*  if($(window).scrollTop() + $(window).height() == $(document).height()) {  */
+    	   
+    	      console.log("들어오니?" + page);
+    	      
+    	      //element.page = page;
+    	      
+    	      sendpcno(pcno);
+    	   
+    	  }
+		}); 
+	});
+/* 		$(window).ready(sendpcno(pcno, page)); */
+	
+	
+ 	
+	 
+	
+      function sendpcno(pcno) {
+	 
+    	//let page=0;
+    	  let pcno_top = $("input[name=pcno_top]").val();
+    	 
+    	  let page = $("input[name=page]").val();
+    	  
+      console.log("function sendpcno의 펑션작동됨2 pcno는 >>" + pcno +"@@" + "pcno_top>>" + pcno_top);
+          
+		
+        	    let sort_option = document.querySelector('.option.selected');
+        	    let sort = sort_option.dataset.value;
+        	    if (sort == null || sort== 0) {
+        	     sort =1;
+        	    } else {
+        	      console.log('sort 가 null이 아니다.good');
+        	    }
+        	    
+      console.log("sort 콘솔>>"+ sort);
+      console.log("page ---------->>"+ page);
+     
+        	
           let element = {
-               pcno : pcno,
-            page :page
-            
+            pcno: pcno,
+            page: page,
+            pcno_top: pcno_top,
+            sort : sort
           };
-         
-         $.ajax({		
-              type : "post",
-              url : "/papi/clistsamll",
-              data: JSON.stringify(element),
-              contentType : "application/json",
-              
-              beforeSend : function(xhr){
-                  xhr.setRequestHeader(header,token);
-               },
-               
-              dataType:"json",
-              success : function(result) {
-                  let str=""; 
-                  
-                   $.each(result.getproductslist, function(index, product) {  
-                     str += `
-                       <div class="col-lg-4 col-md-6 col-sm-6">
+      console.table("엘리먼트 >>>>>>>>>"+element);
+          $.ajax({
+            type: "post",
+            url: "/papi/productlist",
+            data: JSON.stringify(element),
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader(header, token);
+            },
+            dataType: "json",
+            success: function (result) {
+              let str = "";
+				/* console.log(result); */
+              $.each(result.productlist, function (index, product) {
+            	 /*  console.log(product); */
+            	  str += `
+                         <div class="col-lg-4 col-md-6 col-sm-6">
                          <div class="product__item">	
                            <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)">
                              <ul class="product__hover">
@@ -94,7 +104,6 @@
                              <a href="#" class="add-cart">+ Add To Cart</a>
                              <h5>${product.pprice}원</h5>
                              
-                             
                              <div class="product__color__select">
                                <label for="pc-4"><input type="radio" id="pc-4"></label>
                                <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
@@ -102,126 +111,52 @@
                              </div>
                            </div>
                          </div>
-                       </div>
-                       `;
+                       </div>`; 
+              });
 
-                     }) 
-                    
-   
-      
-      				 $("#productlistajax").html(str); 
-      
-                      
-                   $('.set-bg').each(function () {
-	                 var bg = $(this).data('setbg');
-	               $(this).css('background-image', 'url(' + bg + ')');
-	                    });
-	              }, error : function() {
-	                  console.log("실패 왼족 카테고리 리스트 ");
-	              }
+            /*  $("#productlistajax").html(str); */
+          
+            	         
+            console.log("page------------"+ page)
+            if (page === 0) {
+        	  $("#productlistajax").html(str);
+        	  
+        	} else {
+        	  $("#productlistajax").append(str);
+        	}
+            
+            if(result.length < 9){
+          		
+            }else{
+             console.log(result.length)
+          	  page++;
+             	$("input[name=page]").val(page);
+            }
+
               
-          }); 
+              $(".set-bg").each(function () {
+                var bg = $(this).data("setbg");
+                $(this).css("background-image", "url(" + bg + ")");
+              });
+              
+            },
+            error: function (err,xhr,status) {
+              console.log("실패 카테고리 리스트 에이작스 ");
+            },
+            
+          });
+          
+        }  //function sendpcno(pcno)
+   
+        
          
-        	    } 
-           
-           ///////////////////
-           
-           
-           
-           
-       /*     
-   		//가격 높은순
-       function pricehigh(pcno){
-           console.log(pcno +" 가격높은순");
-           let element = {
-                pcno : pcno
-           };
-          $.ajax({
-               type : "post",
-               url : "/papi/pricehigh",
-               data: JSON.stringify(element),
-               contentType : "application/json",
-               beforeSend : function(xhr){
-                   xhr.setRequestHeader(header,token);
-                },
-               dataType:"json",
-               success : function(result) {
-                   let str=""; 
-                   
-              	   $.each(result.getproductslist, function(index, product) {  
-              		  str += `
-              			 <div class="col-lg-4 col-md-6 col-sm-6">
-              			   <div class="product__item">
-              			     <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)">
-              			       <ul class="product__hover">
-              			         <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-              			         <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-              			         <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
-              			       </ul>
-              			     </div>
-              			     <div class="product__item__text">
-              			       <h6>${product.pname}</h6>
-              			       <a href="#" class="add-cart">+ Add To Cart</a>
-              			       <h5>${product.pprice}원</h5>
-              			       <div class="product__color__select">
-              			         <label for="pc-4"><input type="radio" id="pc-4"></label>
-              			         <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
-              			         <label class="grey" for="pc-6"><input type="radio" id="pc-6"></label>
-              			       </div>
-              			     </div>
-              			   </div>
-              			 </div>
-              			 `;
-
-                      }) 
-                      
-                      $("#productlistajax").html(str);
-	              	   $('.set-bg').each(function () {
-	              	        var bg = $(this).data('setbg');
-	              	        $(this).css('background-image', 'url(' + bg + ')');
-	              	    });
-                 
-               },
-               error : function() {
-                   console.log("실패가격 높은순");
-               }
-           });  
-       }  */
-   </script>
+    </script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-	<!-- <script>
-  $(document).ready(function() {
-    $('ul.nice-scroll li').on('click', function() {
-      var pcno = $(this).data('pcno');
-      
-      $.ajax({
-        type: 'POST',
-        url: '/your-api-url',
-        data: { pcno: pcno },
-        success: function(response) {
-          // 서버로부터 응답이 왔을 때 실행할 코드
-          console.log(response);
-        },
-        error: function(xhr, status, error) {
-          // 에러 발생시 실행할 코드
-          console.log(xhr.responseText);
-        }
-      });
-    });
-  });
-</script>
-    -->
-
-
-
-
-	<script type="text/javascript" defer>
-   
-   </script>
+	<script type="text/javascript" defer></script>
 	<!-- Page Preloder -->
-	<div id="preloder" style="display: none;">
-		<div class="loader" style="display: none;"></div>
+	<div id="preloder" style="display: none">
+		<div class="loader" style="display: none"></div>
 	</div>
 	<!-- Offcanvas Menu Begin -->
 	<th:block th:replace="/includes/header :: header1"></th:block>
@@ -234,7 +169,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb__text">
-						<h4 th:text="${productlist[0].pcategory}"></h4>
+						<h4></h4>
 
 						<div class="breadcrumb__links">
 							<a href="">Home</a><span>Shop</span>
@@ -253,7 +188,7 @@
 					<div class="shop__sidebar">
 						<div class="shop__sidebar__search">
 							<form action="#">
-								<input type="text" placeholder="Search...">
+								<input type="text" placeholder="Search..." />
 								<button type="submit">
 									<span class="icon_search"></span>
 								</button>
@@ -267,30 +202,25 @@
 									</div>
 									<div id="collapseOne" class="collapse show"
 										data-parent="#accordionExample">
-
-
 										<div class="card-body">
-
 											<div class="shop__sidebar__categories">
 												<!-- <th th:each="categorypcno :${categorypcno}"> -->
 												<ul class="nice-scroll"
 													style="overflow-y: hidden; outline: none; touch-action: none;"
 													tabindex="1">
-													<li th:each="productcategorylist :${productcategorylist}">
-														<a href="#" th:text="${productcategorylist.pcategory}"
-														th:onclick="resetPageNumber(); sendpcno([[${productcategorylist.pcno}]])">
-													</a>
-													</li>
+													<li th:each="cList:${cList}"><a href="#"
+														th:text="${cList.pcategory}"
+														th:onclick="sendpcno([[${cList.pcno}]],0);">
+														
+													</a></li>
+													<input type="hidden" name="page" value="0"/>
 												</ul>
-
 											</div>
-
 										</div>
-
 									</div>
 								</div>
 								<div class="card">
-									<!-- <div class="card-heading">
+							<!-- <div class="card-heading">
                               <a data-toggle="collapse" data-target="#collapseTwo">브랜드</a>
                            </div>
                            <div id="collapseTwo" class="collapse show"
@@ -299,14 +229,10 @@
                                  <div class="shop__sidebar__brand">
                                     <ul>
                                        <li><a href="#">현대그린푸드(정육)</a></li>
-
-
-
                                     </ul>
                                  </div>
                               </div>
                            </div> -->
-
 								</div>
 							</div>
 						</div>
@@ -323,7 +249,7 @@
 							<div class="col-lg-6 col-md-6 col-sm-6">
 								<div class="shop__product__option__right">
 									<p>필터 :</p>
-									<select style="display: none;">
+									<select style="display: none">
 										<option value="">Low To High</option>
 										<option value="">$0 - $55</option>
 										<option value="">$55 - $100</option>
@@ -331,100 +257,26 @@
 									<div class="nice-select" tabindex="0">
 										<span class="current">선택</span>
 										<ul class="list">
-											<li data-value="1" data-type="price" class="option">가격
-												높은순</li>
-											<li data-value="2" data-type="price" class="option">가격
+											<li data-value="1" data-type="sort" class="option selected">가격
 												낮은순</li>
-											<li data-value="1" data-type="sales" class="option">판매량
+											<li data-value="2" data-type="sort" class="option" >가격
 												높은순</li>
-											<li data-value="2" data-type="sales" class="option">판매량
+											<li data-value="3" data-type="sort" class="option" >판매량
+												높은순</li>
+											<li data-value="4" data-type="sort" class="option" >판매량
 												낮은순</li>
-
-
 										</ul>
-										<input type='hidden' th:value="${pcno}" name="pcno_top">
-										<input type='hidden' id="fil" value='0' name='pcno' />
 
-										<script>
-							$(document).on("click", ".option", function(){
-							    var type = $(this).data('type'); // sales or price
-							    var sort = $(this).data('value'); // 1 or 2
-							    var pcno_top = $("input[name=pcno_top]").val(); // 상위 카테고리 번호
-							    var pcno = $("input[name=pcno]").val();
-							    
-							   
-                              		$.ajax({
-                              			url : "/papi/fillterbutton",
-                              			type: "post",
-                              			data : JSON.stringify({
-                              				type : type,
-                              				sort : sort,
-                              				pcno : pcno,
-                              				pcno_top : pcno_top
-                              			}),
-                            			beforeSend : function(xhr){
-                                    		xhr.setRequestHeader(header,token);
-                                    	},
-                              			contentType : "application/json",
-                              			success :function(result) {
-                              				console.log("성공!");
-                              				console.log(result.getproductslist[0]);
-                                            var str=""; 
-                                            
-                                            $.each(result.getproductslist, function(index, product) {  
-                                            	
-                                             str += `
-                                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                                  <div class="product__item">
-                                                    <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)">
-                                                      <ul class="product__hover">
-                                                        <li><a href="#"><img src="/img/icon/heart.png" alt=""></a></li>
-                                                        <li><a href="#"><img src="/img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                                        <li><a href="#"><img src="/img/icon/search.png" alt=""></a></li>
-                                                      </ul>
-                                                    </div>
-                                                    <div class="product__item__text">
-                                                      <h6>${product.pname}</h6>
-                                                      <a href="#" class="add-cart">+ Add To Cart</a>
-                                                      <h5>${product.pprice}원</h5>
-                                                      
-                                                      
-                                                      <div class="product__color__select">
-                                                        <label for="pc-4"><input type="radio" id="pc-4"></label>
-                                                        <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
-                                                        <label class="grey" for="pc-6"><input type="radio" id="pc-6"></label>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                `;
+										<input type="hidden" th:value="${pcno_top}" name="pcno_top" />
+										<input type="hidden" id="fil" value="0" name="valuenum" />
 
-                                              }) 
-                                              $("#productlistajax").html(str);
-                                            
-                                            $('.set-bg').each(function () {
-                                                 var bg = $(this).data('setbg');
-                                                 $(this).css('background-image', 'url(' + bg + ')');
-
-                                             }); 
-                                       },
-                                       error : function() {
-                                           console.log("실패 boutton");
-                                       }
-                                   });  
-                              			
-                              	})
-                             		 </script>
+										
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row" id="productlistajax">
-						<!-- <tr th:each="products : ${products}"> -->
-						<!-- <tr th:if="${not #lists.isEmpty(products)}" th:each="dto,dtostate:${products}"> -->
-
-
 						<div class="col-lg-4 col-md-6 col-sm-6"
 							th:each="productlist : ${productlist}">
 							<div class="product__item">
@@ -433,29 +285,31 @@
 									th:data-setbg="${productlist.pimg}"
 									th:onclick="goDetailPage(this)">
 									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
+										<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
+										</li>
 										<li><a href="#"><img src="img/icon/compare.png"
-												alt=""> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+												alt="" /> <span>Compare</span></a></li>
+										<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
+										</li>
 									</ul>
 								</div>
 								<div class="product__item__text">
 									<h6>
-										<td th:text="${productlist.pname}">
+										<td th:text="${productlist.pname}"></td>
 									</h6>
+
 									<a href="#" class="add-cart">+ Add To Cart</a>
 									<h5>
-
 										<!-- <td th:text="${productlist.pprice}+ '원' "> -->
-										<td
-											th:text="${#numbers.formatInteger(productlist.pprice, 3, 'COMMA') + '원'}">
+										<td th:text="${#numbers.formatInteger(productlist.pprice, 3, 'COMMA') + '원'}"></td>
 									</h5>
+
 									<div class="product__color__select">
-										<label for="pc-4"> <input type="radio" id="pc-4">
+										<label for="pc-4"> <input type="radio" id="pc-4" />
 										</label> <label class="active black" for="pc-5"> <input
-											type="radio" id="pc-5">
+											type="radio" id="pc-5" />
 										</label> <label class="grey" for="pc-6"> <input type="radio"
-											id="pc-6">
+											id="pc-6" />
 										</label>
 									</div>
 								</div>
@@ -463,12 +317,6 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-12">
-							<div class="product__pagination">
-								<a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-								<span>...</span> <a href="#">21</a>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -478,7 +326,5 @@
 	<!-- Footer Section Begin -->
 	<th:block th:replace="/includes/footer :: footer"></th:block>
 	<!-- Footer Section End -->
-
-
 </body>
 </html>

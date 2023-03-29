@@ -1,13 +1,16 @@
 package com.hart.service;
 
+
+
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hart.domain.product.CategoryVO;
-import com.hart.domain.product.FillterVO;
-import com.hart.domain.product.ProductCategorylistVO;
+import com.hart.domain.product.ListVO;
 import com.hart.domain.product.ProductimgVO;
 import com.hart.domain.product.ProductsDetailVO;
 import com.hart.domain.product.ProductsVO;
@@ -25,7 +28,7 @@ public class ProductsServiceImple implements ProductsService {
 	@Override
 	public List<ProductsVO> getproductslist(int pcno) {
 
-		// log.info("#############productVO getProductList @@@@@@@@@=" + pcno);
+		//log.info("#############productVO getProductListImple @@@@@@@@@=" + pcno);
 		// 1제품 목록 가져오기
 		return productsmapper.getproductslist(pcno);
 	}
@@ -46,52 +49,33 @@ public class ProductsServiceImple implements ProductsService {
 
 	}
 
-	/*
-	 * @Override//5카테고리 소분류 가져오기 public List<CategoryVO> getcategorysmall(int pcno)
-	 * {
-	 * 
-	 * return productsmapper.getcategorysmall(pcno); }
-	 */
-
-	@Override // 6 카테고리 리스트 가져오기
-	public List<ProductCategorylistVO> getproductcatrogrtlist(int pcno) {
-		// log.info("===============getproductcatrogrtlist getproductcatrogrtlist
-		// Service ============" + pcno);
+	
+	
+	@Override
+	public List<ListVO> getproductcatrogrtlist(int pcno) throws Exception {
+		//log.info("===============getproductcatrogrtlist  ServiceImple ============>" + pcno);
+		
+		
 		return productsmapper.getproductcatrogrtlist(pcno);
 	}
 
 	
-	@Override // 6 카테고리 리스트 가져오기
-	public List<ProductsVO> getproductslistajax(int pcno,int page) {
+	
 
-		return productsmapper.getproductslistajax(pcno,page);
-	}
-
-	/*
-	 * @Override public List<ProductlistintegVO> Productlistinteg(int pcno) { //3 제품
-	 * 상페 이미지 가져오기
-	 * 
-	 * List<ProductsVO> productlist = productsmapper.getproductslist(pcno);
-	 * 
-	 * System.out.println("productlistServiceImple ======="+ productlist);
-	 * 
-	 * List<ProductsidesamllVO> smallcategory
-	 * =productsmapper.sideamllcategory(pcno);
-	 * 
-	 * System.out.println("smallcategorytServiceImple ======="+ smallcategory); //4
-	 * 제품 상세 이미지 가져오기 return new ArrayList<>(Arrays.asList(new
-	 * ProductlistintegVO(productlist, smallcategory)));
-	 * 
-	 * 
-	 * }
-	 */
-
-
+	// 
 	@Override
-	public List<ProductsVO> fillter(FillterVO fVO) {
-		List<ProductsVO> result = productsmapper.fillter(fVO);
-		return result;
+	public List<ListVO> Productlist(ListVO list) {
+		// log.info("===============getproductcatrogrtlist Service ServiceImple ============>" + list);
+		 //log.info("===============getproductcatrogrtlist Service ServiceImple ============>" + productsmapper.Productlist(list));
+		 
+		return productsmapper.Productlist(list);
 	}
+
+	
+
+
+
+	
 
 
 }
