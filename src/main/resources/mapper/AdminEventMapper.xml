@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hart.mapper.AdminEventMapper">
+	<select id="getEventList" parameterType="AdminEventVO"
+		resultType="AdminEventVO">
+		SELECT * FROM crecipe
+		<where>
+			<if test="evid != null">
+				evid = #{evid}
+			</if>
+		</where>
+		order by crvote desc, crregdate DESC
+	</select>
+	<update id="voteList" parameterType="AdminEventVO">
+		update crecipe
+		set crvote =#{crvote}
+		where crid = #{crid}
+	</update>
+</mapper>
