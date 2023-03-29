@@ -27,7 +27,7 @@ public class OrderRestController {
 	private OrderService oService;
 	
 	
-	@PostMapping(value="/cancle", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(value="/cancel", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Map<String,String>> cancle(@RequestBody Map<String,String> map, @AuthenticationPrincipal ClubAuthMemberDTO mDTO){
 		String msg ="";
 		int status = 200;

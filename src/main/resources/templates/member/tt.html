@@ -1,0 +1,66 @@
+
+
+var searchbody = "";
+searchbody +="<div class='items-block xans-record-'><div class='item-header '><ul class='info-block'>";
+searchbody +="<li class='first'><ul><li class='sub-title'>주문일</li><li class='value'>"+result[i].odate+"</li>";
+searchbody +="<li class='sub-title'>주문번호</li><li class='value'>"+result[i].oid+"</li>";
+searchbody +="<li class='sub-title'>결제금액</li><li class='value'>"+numberWithCommas(result[i].opayment)+"</li></ul></li>";
+if (status == 0){
+	searchbody += "<li><a class='btn btn-sm btn-gray btn-pd16' href='#none'onclick='cancelOrder(" + result[i].oid + ")'><span>주문취소</span></a></li>"
+}
+else {
+    searchbody += "<li class='sub-title'>주문상태</li><li class='value'>" + (status == 1 ? '구매확정' : '주문취소') + "</li>";
+	}
+searchbody +="</ul></div>";
+
+
+searchbody +="
+    <div class='item-prod'>
+        <div class='block'>
+            <div class='thumb'><img src='" + result[i].oitems[j].pimg + "' alt=''></div>
+            <div class='item-desc'>
+                <div class='detail'>
+                    <div class='name'>" + result[i].oitems[j].pname + "</div>"
+                    <div class='quantity text-center'>수량 : " + result[i].oitems[j].oamount + "</div>
+                    <div class='order-price text-right'>가격 : " + numberWithCommas(result[i].oitems[j].pprice) + "</div>";
+searchbody +="
+                </div>
+            </div>
+        </div>
+        <div class='status'>";
+            입금전취소                                <p class=''><a href='#none' class='line' onclick=''>[]</a></p>
+            <button type='button' class='btn btn-sm btn-gray btn-pd16 displaynone' onclick='OrderHistory.withdraw('C','20230327-0000437|3339|000C|542336','F', 'F', 'F', 'T' , 'T')'><span>취소철회</span></button>
+            <button type='button' class='btn btn-sm btn-gray btn-pd16 displaynone' onclick='OrderHistory.withdraw('E','20230327-0000437|3339|000C|542336','F', 'F', 'F', 'T' , 'T')'><span>교환철회</span></button>
+            <button type='button' class='btn btn-sm btn-gray btn-pd16 displaynone' onclick='OrderHistory.withdraw('R','20230327-0000437|3339|000C|542336','F', 'F', 'F', 'T' , 'T')'><span>반품철회</span></button>
+            <button type='button' class='btn btn-sm btn-gray btn-pd16 displaynone' onclick='OrderHistory.getDetailInfo('?product_no=3339&amp;cate_no=86&amp;order_id=20230327-0000437&amp;ord_item_code=20230327-0000437-01');'><span>상세정보</span></button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class='btn-block only-mobile'>
+    <ul>
+<li class='displaynone'><a class='btn btn-sm btn-gray btn-pd16' href='#none' onclick='OrderHistory.orderCancel('20230327-0000437')'><span>주문취소</span></a></li>
+        <li class='displaynone'><a class='btn btn-sm btn-gray btn-pd16' href='/myshop/order/cancel.html?order_id=20230327-0000437'><span>취소신청</span></a></li>
+        <li class='displaynone'><a class='btn btn-sm btn-gray btn-pd16' href='/myshop/order/exchange.html?order_id=20230327-0000437'><span>교환신청</span></a></li>
+        <li class='displaynone'><a class='btn btn-sm btn-gray btn-pd16' href='/myshop/order/return.html?order_id=20230327-0000437'><span>반품신청</span></a></li>
+    </ul>
+</div>
+
+
+searchbody += "<button type='button' class='btn btn-sm btn-gray btn-pd16 displaynone'onclick='OrderHistory.getDetailInfo('?product_no=3363&amp;cate_no=26&amp;order_id=20221229-0003219&amp;ord_item_code=20221229-0003219-01');'>";

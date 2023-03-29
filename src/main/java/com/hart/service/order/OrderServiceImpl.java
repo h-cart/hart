@@ -131,9 +131,14 @@ public class OrderServiceImpl implements OrderService{
 	 */
 	@Override
 	public List<SearchResultDTO> searchOrders(SearchDTO sDTO) throws Exception {
+		List<SearchResultDTO> result = oMapper.getOrders(sDTO);
+		result.forEach(item -> item.setOdate(dateFormatter(item.getOdate())));
+		return result;
 		
-		return oMapper.getOrders(sDTO);
-		
+	}
+	
+	public String dateFormatter(String odate) {
+		return odate.split(" ")[0].substring(2).replace("-","/");
 	}
 
 	@Override
