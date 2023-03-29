@@ -101,8 +101,9 @@
 	<!-- Code injected by live-server -->
 	<!-- csrf -->
 	<!-- Search End -->
-	<script>	
+	<script th:inline="javascript">
 	$(document).ready(function(){
+		
 		  $.ajax({
 		    type : "get",
 		    url : "/papi/clist",
@@ -110,17 +111,20 @@
 		    success : function(data) {
 		      let str="";
 		      let str1="";
+		     
 		      for (var i = 0; i < data.result.length; i++) {
-		        str += `
+		    	  console.log(data.result[i].pcno_top);
+		    	  console.log(data.result[i].pcno);
+		    	    str += `
 		        	<li style="border-bottom: 1px solid lightgray; ">
-		        	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a>
+		        	  <a href="/product/list?pcno_top=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a>
 		        	</li>
 					`;
-		        str1 += `
+		       str1 += `
 		        	<li style="">
-		        	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 15px; color: gray;">${data.result[i].pcategory}</a>
+		        	  <a href="/product/list?pcno_top=${data.result[i].pcno}" style="font-size: 15px; color: gray;">${data.result[i].pcategory}</a>
 		        	</li>
-					`;
+					`; 
 		      }
 		      $("#listCate").append(str);
 		      $(".slicknav_nav .dropdown").append(str1);
