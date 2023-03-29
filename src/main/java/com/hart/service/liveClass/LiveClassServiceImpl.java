@@ -1,10 +1,13 @@
 package com.hart.service.liveClass;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.hart.domain.liveClass.LiveClassDetailDTO;
+import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.mapper.LiveClassMapper;
@@ -28,14 +31,24 @@ public class LiveClassServiceImpl implements LiveClassService{
 	}
 
 	@Override
-	public LiveClassListDTO getClassDetail(String lcid) {
+	public LiveClassDetailInfoDTO getClassDetail(String lcid) {
 		log.info("getClassDetail 서비스 호출");
 		LiveClassListDTO dto = mapper.getLiveClassDetail(lcid);
-		StringBuilder sb = new StringBuilder();
-		sb.append(dto.getLcdate()+"("+dto.getLcday()+") "+dto.getLcstart()+"-"+dto.getLcend());
-		dto.setWholeDate(sb.toString());
 		log.info(dto);
-		return dto;
+		LiveClassDetailInfoDTO infoDTO = new LiveClassDetailInfoDTO();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(dto.getLcdate()+" ("+dto.getLcday()+") "+dto.getLcstart()+"-"+dto.getLcend());
+		infoDTO.setWholeDate(sb.toString());
+		infoDTO.setIngredientList(dto.getLcingredient().replaceAll(", ","@").split("@"));
+		//infoDTO.setLctExplainList(dto.getLctexplain().split("-"));
+		infoDTO.setLctExplainList(dto.getLctexplain().replaceAll(" - ","@").substring(1).split("@"));
+		infoDTO.setLcStudentList(dto.getLcstudent().replaceAll(" - ", "@").substring(1).split("@"));
+		infoDTO.setLiveClassListDTO(dto);
+		
+		log.info(infoDTO);
+		
+		return infoDTO;
 	}
 
 	@Override
@@ -75,7 +88,5 @@ public class LiveClassServiceImpl implements LiveClassService{
 		return list;
 		
 	}
-
-	
 
 }

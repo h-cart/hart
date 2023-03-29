@@ -14,10 +14,10 @@
 	<th:block th:replace="/includes/header :: header2"></th:block>
 	<th:block th:replace="/includes/header :: header3"></th:block>
 	<!-- Header Section End -->
-
-	<link rel="icon" th:href="@{/img/logo.png}" href="https://preview.keenthemes.com/jet-html-free/assets/media/logos/favicon.ico" />
+	
 	<!-- 	<link th:href="@{/css/liveclass2.css}" rel="stylesheet"> -->
 	<!-- <link th:href="@{/css/main2.css}" rel="stylesheet"> -->
+	<link rel="icon" th:href="@{/img/logo.png}" href="https://preview.keenthemes.com/jet-html-free/assets/media/logos/favicon.ico" />
 	<link th:href="@{/css/main1.css}" rel="stylesheet">
 	<link th:href="@{/css/liveclass1.css}" rel="stylesheet">
 	<link th:href="@{/css/liveclass-detail1.css}" rel="stylesheet">
@@ -31,40 +31,34 @@
 				<div class="product-detail-wrap">
 
 					<!-- detail-block -->
-					<div
-						class="xans-element- xans-product xans-product-detail detail-block">
-						<!-- 재입고 알림 데이터용 -->
-
-						<!-- // 재입고 알림 데이터용 -->
-
+					<div class="xans-element- xans-product xans-product-detail detail-block">
 						<!-- product-imagees -->
 						<div class="product-imagees">
 							<div class="xans-element- xans-product xans-product-image ">
 								<!-- 이 부분은 상품정보의 서비스문의/안내를 활용 함 -->
-								<div
-									class="xans-element- xans-product xans-product-additional product-video displaynone displaynone ">
-
-								</div>
+								<div class="xans-element- xans-product xans-product-additional product-video displaynone displaynone "></div>
 								<div class="only-pc">
-									<ul
-										class="xans-element- xans-product xans-product-image prdImages first ">
-										<li><a href="javascript:void(0);"> <img
-												th:src="${liveClass.lcimg}" alt="">
-										</a></li>
+									<ul class="xans-element- xans-product xans-product-image prdImages first ">
+										<li>
+											<a href="javascript:void(0);">
+												<img th:src="${liveClass.liveClassListDTO.lcimg}" alt="">
+											</a>
+										</li>
 									</ul>
-									<ul
-										class="xans-element- xans-product xans-product-addimage prdImages add">
-										<li class="displaynone xans-record-"><a
-											href="javascript:void(0);"> <img
-												th:src="${liveClass.lcimg}" alt="">
-										</a></li>
-										<li class="xans-record-"><a href="javascript:void(0);"></a></li>
-
+									<ul class="xans-element- xans-product xans-product-addimage prdImages add">
+										<li class="displaynone xans-record-">
+											<a href="javascript:void(0);">
+												<img th:src="${liveClass.liveClassListDTO.lcimg}" alt="">
+											</a>
+										</li>
+										<li class="xans-record-">
+											<a href="javascript:void(0);"></a>
+										</li>
 									</ul>
 								</div>
 								<div class="only-mobile">
 									<ul class="mobil-slider prdImages">
-										<li><img th:src="${liveClass.lcimg}" alt=""></li>
+										<li><img th:src="${liveClass.liveClassListDTO.lcimg}" alt=""></li>
 										<li></li>
 									</ul>
 								</div>
@@ -74,122 +68,50 @@
 						<!-- form -->
 						<div class="product-form" style="top: 0px;">
 							<div class="header" style="padding-top: 0px; padding-bottom: 0px;" >
-								<div
-									class="xans-element- xans-product xans-product-headcategory ">
+								<div class="xans-element- xans-product xans-product-headcategory ">
 									<ul class="category">
 										<li><a href="/" th:text=${liveClass.wholeDate}>Shop</a></li>
 										<li class="displaynone"><em>/</em><a href=""></a></li>
-										<li class="displaynone"><em>/</em><strong><a
-												href=""></a></strong></li>
+										<li class="displaynone"><em>/</em><strong><a href=""></a></strong></li>
 									</ul>
 								</div>
 
-								<div
-									class="xans-element- xans-product xans-product-detaildesign product-detail-block">
+								<div class="xans-element- xans-product xans-product-detaildesign product-detail-block">
 									<p class="product_name_css xans-record-">
-										<span class="title"><span
-											style="font-size: 18px; color: #000000; font-weight: bold;">상품명</span></span>
-										<span class="value"><span
-											style="font-size: 18px; color: #000000; font-weight: bold;" th:text="${liveClass.lcname}">CIRCLE
-												LOGO CROP TOP IN BROWN</span></span>
+										<span class="title"><span style="font-size: 18px; color: #000000; font-weight: bold;">상품명</span></span>
+										<span class="value"><span style="font-size: 18px; color: #000000; font-weight: bold;" th:text="${liveClass.liveClassListDTO.lcname}">강의명</span></span>
 									</p>
 									<p class="ma_product_code_css xans-record-">
-										<span class="title"><span
-											style="font-size: 12px; color: #555555;">자체상품코드</span></span> <span
-											class="value"><span style="font-size: 12px; color: #555555;" th:text=${liveClass.wholeDate}>MK2311TS003M0BR</span></span>
+										<span class="title">
+											<span style="font-size: 12px; color: #555555;">자체상품코드</span>
+										</span>
+										<span class="value">
+											<span style="font-size: 12px; color: #555555;" th:text=${liveClass.liveClassListDTO.lcplace}>장소</span>
+										</span>
 									</p>
 									<p class="summary_desc_css xans-record-">
-										<span class="title"><span
-											style="font-size: 12px; color: #555555;">상품요약정보</span></span> <span
-											class="value"><span
-											style="font-size: 12px; color: #555555;" th:text="${liveClass.lcexplain}">강의소개</span></span>
+										<span class="title"><span style="font-size: 12px; color: #555555;">상품요약정보</span></span> 
+										<span class="value">&nbsp<span style="font-size: 12px; color: #555555;" th:text="${liveClass.liveClassListDTO.lcexplain}">강의소개</span></span>
 									</p>
 									<p class="prd_price_sale_css xans-record-">
-										<span class="title"><span
-											style="font-size: 14px; color: #000000; font-weight: bold;">할인판매가</span></span>
-										<span class="value"><span><span
-												style="font-size: 14px; color: #000000; font-weight: bold;"><span
-													id="span_product_price_sale" th:text="${#numbers.formatInteger(liveClass.lcprice, 3, 'COMMA') + '원'}">52,200 </span></span></span></span>
+										<span class="title">
+											<span style="font-size: 14px; color: #000000; font-weight: bold;">할인판매가</span>
+										</span>
+										<span class="value">
+											<span>
+												<span style="font-size: 14px; color: #000000; font-weight: bold;">
+													<span id="span_product_price_sale" th:text="${#numbers.formatInteger(liveClass.liveClassListDTO.lcprice, 3, 'COMMA') + '원'}">강의 가격 </span>
+												</span>
+											</span>
+										</span>
 									</p>
-									<!-- 
-									<ul class="discountMember">
-										<li><a href="#"><img
-												class="ec-front-product-show-benefit-icon" product-no="3488"
-												benefit="DP"
-												src="//img.echosting.cafe24.com/skin/admin_ko_KR/product/btn_disc_period.gif"
-												alt="기간할인"></a></li>
-									</ul>
-									 -->
-									<!-- <p></p>
-									<p class="product_price_css xans-record-">
-										<span class="title"><span
-											style="font-size: 14px; color: #000000;">판매가</span></span> <span
-											class="value"><span
-											style="font-size: 14px; color: #000000;"><strong
-												id="span_product_price_text"
-												style="text-decoration: line-through;">58,000</strong><input
-												id="product_price" name="product_price" value=""
-												type="hidden"></span></span>
-									</p>
-									 -->
-									<!--  
-									<p class="product_custom_css xans-record-">
-										<span class="title"><span
-											style="font-size: 13px; color: #555555;">소비자가</span></span> <span
-											class="value"><span
-											style="font-size: 13px; color: #555555;"><span
-												id="span_product_price_custom" class="displaynone"><strike>58,000</strike></span></span></span>
-									</p>
-									 -->
-									<p class="simple_desc_css xans-record-">
-										<span class="title"><span
-											style="font-size: 12px; color: #555555;">상품간략설명</span></span> <span
-											class="value"><span
-											style="font-size: 12px; color: #555555;"><strong>3/8,
-													AM10:00 OPEN - 2~5일 소요</strong><br>무통장 입금 결제 건의 경우, 추가 오픈 시간
-												이전까지 입금 완료되지 않을 경우 자동으로 다음 차수의 주문 건과 함께 배송됩니다.<br>*추가
-												오픈될 경우에 해당, 모든 재 오픈 차수 동일</span></span>
-									</p>
+									
 									<p class="made_in_css xans-record-">
-										<span class="title"><span
-											style="font-size: 12px; color: #555555;">원산지</span></span> <span
-											class="value"><span
-											style="font-size: 12px; color: #555555;">중국 </span></span>
+										<span class="title"><span style="font-size: 12px; color: #555555;">원산지</span></span> <span class="value"><span style="font-size: 12px; color: #555555;">중국 </span></span>
 									</p>
 									<p class="print_date_css xans-record-">
-										<span class="title"><span
-											style="font-size: 12px; color: 555555;">제조일자</span></span> <span
-											class="value"><span
-											style="font-size: 12px; color: 555555;">2023-02</span></span>
+										<span class="title"><span style="font-size: 12px; color: 555555;">제조일자</span></span> <span class="value"><span style="font-size: 12px; color: 555555;">2023-02</span></span>
 									</p>
-									<p class="quantity_css xans-record-">
-										<span class="title"><span
-											style="font-size: 12px; color: #555555;">수량</span></span> <span
-											class="value"><span
-											style="font-size: 12px; color: #555555;"><span
-												id="NewProductQuantityDummy"><span class="quantity"><input
-														id="quantity" name="quantity_name"
-														style="width: 30px; height: 18px; border: 1px solid #BCBCBC;"
-														value="" type="text"><img
-														src="//img.echosting.cafe24.com/design/skin/mono/product/btn_basketUp.gif"
-														class="QuantityUp" alt="수량증가"><img
-														src="//img.echosting.cafe24.com/design/skin/mono/product/btn_basketDown.gif"
-														class="QuantityDown" alt="수량감소"></span></span></span></span>
-									</p>
-								</div>
-
-								<!-- TODO: 일단 숨김처리. 문제없으면 오픈시 삭제 -->
-								<div class="displaynone">
-									<h2>CIRCLE LOGO CROP TOP IN BROWN</h2>
-									<h3 id="self-maPcode">MK2311TS003M0BR</h3>
-									<div
-										class="xans-element- xans-product xans-product-additional simple-desc-block ">
-										마뗑킴 시그니처 원형 자수 디테일이 포인트인 텐션감 좋은 소재의 크롭 탑</div>
-									<div class="price-block">
-										<span id="span_product_price_text"
-											style="text-decoration: line-through;">58,000</span> <s
-											class="price58,000">58,000</s> <span class="dc-price">52,200</span>
-									</div>
 								</div>
 							</div>
 
@@ -198,9 +120,7 @@
 							<!-- option-block -->
 							<div
 								class="xans-element- xans-product xans-product-option xans-record-">
-								<!--
-                $use_per_add_option = yes
-                -->
+								
 								<div
 									class="xans-element- xans-product xans-product-option xans-record-">
 									<div class="option-block">
@@ -215,27 +135,12 @@
 											<li class="" option_value="P0000FEE000A" link_image=""
 												title="FREE"></li>
 										</ul>
-										<select required="true"
-											product_option_area_select="product_option_3488_0"
-											id="product_option_id1" name="option1" option_title="SIZE"
-											option_type="T" item_listing_type="C"
-											class="ProductOption0 displaynone"><option value="*">empty</option>
-											<option value="P0000FEE000A">FREE</option></select>
+										
 									</div>
 								</div>
 							</div>
 							<!-- // option-block -->
 
-
-							<div style="display: none;">
-								<label>Quantity</label>
-								<div class="option-value">
-									<input id="quantity" name="quantity_name"
-										class="product-quantity" value="1" type="text"> &nbsp;<span
-										class="QuantityUp quantity-button">up</span> <span
-										class="QuantityDown quantity-button">down</span>
-								</div>
-							</div>
 
 
 							<!-- product-action-block -->
@@ -252,235 +157,68 @@
 										<span>장바구니 담기</span>
 									</button>
 								</div>
-								<div class="displaynone ">
-									<button type="button" class="btn btn-order btn-dark btn-full "
-										onclick="product_submit_action(1, '/exec/front/order/basket/', this)">
-										<span id="btnReserve">PREORDER</span>
-									</button>
-								</div>
-								<button type="button"
-									class="btn btn-order btn-dark-disabled btn-full btn-soldout displaynone">
-									<span>SOLD OUT</span>
-								</button>
-								<div class="option-soldout-restock-block displaynone ">
-									<button type="button"
-										class="btn btn-order btn-dark btn-full btn-loading btn-resotck displaynone"
-										sms_restock_login_display="" onclick="smsRestockAct()">
-										<span>재입고 알림</span>
-									</button>
-									<!--
-                    <button type="button" class="btn btn-order btn-dark btn-full displaynone"
-                        sms_restock_login_display=""
-                        onClick=""><span>재입고
-                            알림2</span></button> -->
-								</div>
-								<!-- 재입고 페이지 -->
-								<div class="sms-restock-block"></div>
-								<div class="sms-restock-block2"></div>
-								<iframe class="sms-restock-iframe" id="smsRestockIframe"
-									name="smsRestockIframe" frameborder="0" scrolling="no"
-									src="/blank.html"></iframe>
-
-								<!-- 네이버 체크아웃 구매 버튼 -->
-								<div id="NaverChk_Button"></div>
-								<!-- //네이버 체크아웃 구매 버튼 -->
-								<!-- 상품상세페이지에 추가되는 앱 관련 결제버튼's div -->
-								<div id="appPaymentButtonBox">
-									<div id="kakao-checkout-button"></div>
-								</div>
 							</div>
 							<!-- // product-action-block -->
-
-							
-
 
 							<!-- info-block -->
 							<div
 								class="xans-element- xans-product xans-product-additional info-block">
 								<ul class="info-tab">
-									<li class="js-delivery active"><a
-										href="javascript:infoAct('delivery');"><span>DELIVERY</span></a>
-									</li>
-									<li class="js-details"><a
-										href="javascript:infoAct('details');"><span>DETAILS</span></a></li>
-									<li class="js-size"><a href="javascript:infoAct('size');"><span>SIZE
-												GUIDE</span></a></li>
+									<li class="js-delivery active" data-tab="tab-1"><a><span>필요 재료</span></a></li>
+									<li class="js-details" data-tab="tab-2"><a><span>강사이력</span></a></li>
+									<li class="js-size" data-tab="tab-3"><a><span>수강대상</span></a></li>
 								</ul>
-								<div id="delivery" class="info-desc active"
-									style="height: 413.893px;">
-									<strong>3/8, AM10:00 OPEN - 2~5일 소요</strong><br>무통장 입금 결제
-									건의 경우, 추가 오픈 시간 이전까지 입금 완료되지 않을 경우 자동으로 다음 차수의 주문 건과 함께 배송됩니다.<br>*추가
-									오픈될 경우에 해당, 모든 재 오픈 차수 동일
+								<div id="tab-1" class="info active" style="height: 413.893px;">
+									<div th:each="ingredient : ${liveClass.ingredientList}">
+										<h6 th:text="'- '+${ingredient}" style="font-size:13px;">필요재료 설명</h6>
+									</div>
 								</div>
-								<div id="details" class="info-desc" style="height: 413.893px;">
-									코튼 95%, 폴리우레탄 5% <br>단독 손세탁 권장 <br> <br>-비침 없음 <br>-신축성
-									좋음 <br>-안감 없음 <br>-두께감 보통 <br> <br>*단독
-									손세탁하여 주십시오. <br>*열과 수축에 주의하여 주십시오. <br>*이염에 주의하여
-									주십시오. <br>*건조기 사용을 지양해 주십시오. <br>*모니터에 따라 컬러의 오차가 있을
-									수 있습니다. <br> <br>*모든 예약 배송 상품은 상품의 재고가 있을 경우 안내된 기간보다
-									빠르게 배송될 수 있습니다.
-									<p style="margin-top: 24px;"></p>
-									<p class=" ">제조일자: 2023-02</p>
-									<p class=" ">제조국: 중국</p>
-
+								<div id="tab-2" class="info" style="height: 413.893px; display:none;" >
+									<div th:each="lctExplain : ${liveClass.lctExplainList}">
+										<h6 th:text="'- '+${liveClass.liveClassListDTO.lcteacher}" style="font-size:13px;">강사이력 설명</h6>
+										<h6 th:text="'- '+${lctExplain}" style="font-size:13px;">강사이력 설명</h6>
+										<!-- <h6 th:text="'- '+${lctExplain}"></h6> -->
+									</div>
 								</div>
-								<div id="size" class="info-desc" style="height: 413.893px;">
-									<table>
-										<thead>
-											<tr>
-												<th>SIZE</th>
-												<th>FREE</th>
-											</tr>
-										</thead>
-
-										<tbody>
-											<tr>
-												<td>어깨</td>
-												<td>34</td>
-											</tr>
-
-											<tr>
-												<td>가슴</td>
-												<td>41</td>
-											</tr>
-											<tr>
-												<td>암홀</td>
-												<td>19</td>
-											</tr>
-											<tr>
-												<td>소매단</td>
-												<td>15</td>
-											</tr>
-											<tr>
-												<td>소매길이</td>
-												<td>13.5</td>
-											</tr>
-											<tr>
-												<td>밑단</td>
-												<td>42</td>
-											</tr>
-											<tr>
-												<td>총장</td>
-												<td>47</td>
-											</tr>
-										</tbody>
-									</table>
-									<br> (상세 사이즈 치수는 측정 방법과 위치에 따라 1-2cm 오차가 있을 수 있습니다) <br>
-									MODEL IS 175CM WEARING A SIZE FREE, SHOES SIZE 260MM
+								<div id="tab-3" class="info" style="height: 413.893px; display:none;" >
+									<div th:each="lcStudent : ${liveClass.lcStudentList}">
+										<h6 th:text="'-'+${lcStudent}" style="font-size:13px;">수강대상</h6>
+									</div>
 								</div>
 							</div>
 							<!-- // info-block -->
-
 						</div>
 						<!-- // form -->
 					</div>
 
-					<!-- detail-info-block -->
-					<div class="detail-info-block only-mobile">
-						<ul
-							class="xans-element- xans-product xans-product-image prdImages first ">
-							<li></li>
-						</ul>
-						<ul
-							class="xans-element- xans-product xans-product-addimage prdImages add">
-							<li class="displaynone xans-record-"><img
-								src="//matinkim.com/web/product/small/202303/f42cae5fd842e8548e283d89dad3b44b.jpg"
-								class="ThumbImage" alt=""></li>
-							<li class="xans-record-"></li>
-							<li class="xans-record-"></li>
-							<li class="xans-record-"></li>
-							<li class="xans-record-"></li>
-							<li class="xans-record-"></li>
-							<li class="xans-record-"></li>
-							<li class="xans-record-"></li>
-							<li class="xans-record-"></li>
-						</ul>
-					</div>
-					<!-- // detail-info-block -->
-
-
 				</div>
-
-
-				<div class="xans-element- xans-product xans-product-image ">
-					<div class="img-zoom">
-						<div class="header">
-							<h2 class="title">CIRCLE LOGO CROP TOP IN BROWN</h2>
-							<button type="button" class="btn btn-close"
-								onclick="imgZoomClose();">
-								<span>close</span>
-							</button>
-						</div>
-
-						<div
-							class="xans-element- xans-product xans-product-addimage img-zoom-slider">
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/medium/202303/e2576d78247b14691140fba22eea18a0.jpg"
-									class="ThumbImage" alt="">
-							</div>
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/extra/small/202303/7e576ef2fdc59647ad5e8d23bed38a96.jpg"
-									class="ThumbImage" alt="">
-							</div>
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/extra/small/202303/87fb90e146b3506369a3238b2e595b06.jpg"
-									class="ThumbImage" alt="">
-							</div>
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/extra/small/202303/13596b80d5f9cab9a5b493066efe4313.jpg"
-									class="ThumbImage" alt="">
-							</div>
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/extra/small/202303/4af3d633878cf559bddcbaaf7367314a.jpg"
-									class="ThumbImage" alt="">
-							</div>
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/extra/small/202303/d0dbf105d61dbb3273894c4bc6b35296.jpg"
-									class="ThumbImage" alt="">
-							</div>
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/extra/small/202303/3b6623752d513e6832cc9c52872f6993.jpg"
-									class="ThumbImage" alt="">
-							</div>
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/extra/small/202303/eb848ed7d1a521bda55300362a9b7187.jpg"
-									class="ThumbImage" alt="">
-							</div>
-							<div class="item-img xans-record-">
-								<img
-									src="//matinkim.com/web/product/extra/small/202303/7f779a5291b2a8657fb55a00b668465b.jpg"
-									class="ThumbImage" alt="">
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-				<iframe
-					src="/exec/front/eclog/main/?product_no=3488&amp;cate_no=27&amp;isplay_group=1&amp;rloc=https%3A//matinkim.com/product/detail.html%3Fproduct_no%3D3488%26cate_no%3D27%26display_group%3D1&amp;rref=https%3A//matinkim.com/product/list.html%3Fcate_no%3D27&amp;udim=1463*915&amp;rserv=elg-db-svcm-265.cafe24.com&amp;cid=CID98c85ac78307b99700cfd38db7321fb3&amp;role_path=PRODUCT_DETAIL&amp;stype=e&amp;shop_no=1&amp;lang=ko_KR&amp;ver=2"
-					id="log_realtime" style="display: none;"></iframe>
-				<script type="text/javascript" id="bigdata_log"
-					src="/exec/front/External/Save?referer=https%3A%2F%2Fmatinkim.com%2Fproduct%2Flist.html%3Fcate_no%3D27&amp;href=https%3A%2F%2Fmatinkim.com%2Fproduct%2Fdetail.html%3Fproduct_no%3D3488%26cate_no%3D27%26display_group%3D1"></script>
-				<script
-					src="https://widgets.cre.ma/cafe24/init.js?vs=20230120124000.1&amp;client_id=SdksuzSDEpyhy6OLNQpKXC"
-					integrity="sha384-WDAJpSw3zUhpJD5ZenKaoJ5rcaUpCGj02Qgj7ZL2wzXbp+GRRDZgJIpeGnZxE4GF"
-					crossorigin="anonymous">
-					
-				</script>
-				<iframe height="0" width="0" title="Criteo DIS iframe"
-					style="display: none;"></iframe>
-
 				<!-- Footer Section Begin -->
 				<th:block th:replace="/includes/footer :: footer"></th:block>
 				<!-- Footer Section End -->
+				
+<script type="text/javascript">
+	$('ul.info-tab li').click(function(){
+		
+		var tab_id = $(this).attr('data-tab');
+		$('ul.info-tab li').removeClass('active');
+		$(this).addClass('active');
+		//$('ul.info-tab li').removeClass('current');
+		//$('ul.info-tab li').css('display','none');
+		
+		
+		//$('.tab-content').removeClass('current');
+		//$(this).children("info").css('display','none')
+		$(".info").css('display','none');
+
+		//$(this).css('display', 'block');
+		$("#"+tab_id).css('display', 'block');
+		
+	});
+	
+
+</script>
+				
+				
 </body>
 
 </html>

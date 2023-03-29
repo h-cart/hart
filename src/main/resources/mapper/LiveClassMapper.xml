@@ -14,10 +14,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getLiveClassDetail"  resultType="com.hart.domain.liveClass.LiveClassListDTO">
 		select  lc.lcid, to_char(lcday,'YYYY-MM-DD') lcdate,to_char(lcday,'dy') lcday
 				, lcstart, lcend, lcstatus, lcteacher, lcplace,lcexplain,lcstudent,
-				lckeyword,lcname,lcprice,lccount,lctexplain,lcimg
+				lckeyword,lcname,lcprice,lccount,lctexplain,lcimg,lcingredient
 		from live_class lc left join live_class_img lci on lc.lcid = lci.lcid
 		where lc.lcid=#{lcid}
 	</select>
+	
 	
 	<select id="getMyLiveClassInfo"  resultType="com.hart.domain.liveClass.MyLiveClassInfoDTO">
 		select lc.lcid ,lcday, lcstart,lcend, lcstatus,lcname,lcimg
