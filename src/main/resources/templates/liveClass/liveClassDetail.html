@@ -64,6 +64,8 @@
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="pid" th:value="${liveClass.liveClassListDTO.lcid}"/>
+						<input type="hidden" name="quantity" value="1"/>
 						<!-- // product-imagees -->
 						<!-- form -->
 						<div class="product-form" style="top: 0px;">
@@ -148,18 +150,18 @@
 								class="xans-element- xans-product xans-product-action product-action-block">
 								<div class="buy-block ">
 									<button type="button" class="btn btn-order btn-dark btn-full "
-										onclick="product_submit_action(1, '/exec/front/order/basket/', this)">
+										id="orderDirect">
 										<span id="btnBuy">수강 신청하기</span>
 									</button>
 									<button type="button"
 										class="btn btn-order btn-gray btn-basket "
-										onclick="product_submit_action(2, '/exec/front/order/basket/', this)">
+										id="addToCart">
 										<span>장바구니 담기</span>
 									</button>
 								</div>
 							</div>
 							<!-- // product-action-block -->
-
+							
 							<!-- info-block -->
 							<div
 								class="xans-element- xans-product xans-product-additional info-block">

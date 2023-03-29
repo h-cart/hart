@@ -101,13 +101,13 @@ function getCheckboxValue() {
 		result += +price;
 	});
 
-	$(".gl_check_all").prop("checked", false);
+	$("#allCheck").prop("checked", false);
 	var delivery = result > 0 ? result >= 50000 ? 0 : 5000 : 0;
 	var tprice = $(".tprice");
 	var pdiscount = $(".discount");
-	pdiscount.text('₩' + numberWithCommas(discount));
+	pdiscount.text(numberWithCommas(discount)+"원");
 	pdiscount.data('value', discount);
-	tprice.text('₩' + numberWithCommas(result));
+	tprice.text(numberWithCommas(result)+"원");
 	tprice.data('value', result);
 };
 
