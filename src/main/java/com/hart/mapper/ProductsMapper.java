@@ -6,7 +6,7 @@
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hart.domain.product.CategoryVO;
-import com.hart.domain.product.FillterVO;
+import com.hart.domain.product.ListVO;
 import com.hart.domain.product.ProductCategorylistVO;
 import com.hart.domain.product.ProductimgVO;
 import com.hart.domain.product.ProductsVO;
@@ -18,7 +18,7 @@ import com.hart.domain.product.ProductsVO;
 		//1제품 목록 가져오기
 		public List<ProductsVO> getproductslist(int pcno);
 		
-		//2대분류 카테고리 가져오기
+		//2대분류 헤더 카테고리 가져오기 
 		public List<CategoryVO> getcategorybar();
 		
 		//public List<CategoryVO> getcategorysmall(String pid);
@@ -34,20 +34,26 @@ import com.hart.domain.product.ProductsVO;
 		//5카테고리 소분류 가져오기
 		//public List<CategoryVO> getcategorysmall(int pcno);
 		
-		//6 카테고리 리스트 가
-		public List<ProductCategorylistVO> getproductcatrogrtlist(int pcno);
+		//6 왼쪽카테고리 리스트 가져오기
+		public List<ListVO> getproductcatrogrtlist(int pcno);
 		
 		//합치려다 stop
 		/* public List<ProductsidesamllVO> sideamllcategory(int pcno); */
 	
 		//소카테고리 클릭시 해당 카테고리 제품 부분만 가져오기
-		public List<ProductsVO> getproductslistajax(int pcno, int page);
+		//public List<ProductsVO> getproductslistajax(int pcno, int page);
 
 		
-		//필터 
-		public List<ProductsVO> fillter(FillterVO fVO);
+		//합친것 
+		//public List<ListVO> List(ListVO ListVO);
+
+
+		public List<ListVO> Productlist(ListVO list);
+
 		
-		//필터 가격높은순서 가져오기
+
+		//public List<ProductsVO> List(ListVO ListVO);
+		
 
 	
 		

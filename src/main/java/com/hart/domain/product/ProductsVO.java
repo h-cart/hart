@@ -20,9 +20,13 @@ public class ProductsVO {
 	String ptitle;
 	String pcategory;
 	String pimg;
+	String primg;
 	int pdepth;
 	int page;
 	int end;
+	
+	
+	
 	
 	/*---
 	 * pd.pname,pd.pprice,pd.pcno,pd.stag,pd.pdiscount,pd.pid,
@@ -37,6 +41,7 @@ public class ProductsVO {
 	 * and a.rownumber <=   9* ${page} + 9  	
 	 * ---
 	 * where pcno_top=#{pcno} // 왼쪽 카테고리 목록이름 불러옴 
+	 * 
 	 * where pc.pcno_top= #{pcno_top} 카테고리 필터
 	 * 
 	 * --
@@ -45,6 +50,7 @@ public class ProductsVO {
 	 *  products p join product_category
 	 * <where>
 		pdepth = 0
+		
 		<if test="pcno != 0">
 				AND pcno = #{pcno}
 		</if>
