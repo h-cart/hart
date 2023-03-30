@@ -247,82 +247,110 @@ ul.tagit input[type="text"] {
 			</ul>
 		</div>
 	</div>
-	<div
-		id="bo_gall"
+	<article
+		id="bo_v"
 		class="full_container sub_section"
 		style="width: 100%"
 	>
 		<div class="inner_container">
 			<h3 class="title">레시피 투표하기</h3>
-			<form
-				name="votelist"
-				id="votelist"
-				th:action="@{/event/vote}"
-				method="post"
-			>
-				<input
-					type="hidden"
-					name="mid"
-					id="mid"
-					th:value="${#authentication.principal.mid}"
-				/> <input
-					type="hidden"
-					name="evid"
-					id="evid"
-					th:value="${evid}"
-				/> <input
-					type="hidden"
-					name="crid"
-					id="crid"
-				/>
-			</form>
-			<script>
-				function voting(e) {
-					let crid = $(e).data('crid');
-					$("#crid").val(crid);
-					$("#votelist").submit();
-
-				}
-			</script>
-			<ul
-				id="gall_ul"
-				class="gall_row"
-			>
-				<!--   <li class="gall_li col-gn-4 box_clear"> -->
-				<li
-					class="gall_li col-gn-4"
-					th:each="item : ${recipe}"
+			<!--동영상 영역-->
+			<div class="video_area">
+				<div
+					class="video_inner"
+					style="text-align: center; padding-top: 0;"
 				>
-					<div class="gall_box">
-						<div class="gall_con">
-							<div class="gall_img">
-								<a th:href="@{${'/event/voteDetail?crid='+item.crid}}"> <img th:src="@{${'/event/api/display?imgName='+item.crMimg}}" />
-								</a>
-							</div>
-							<div class="
-								gall_text_href">
-								<a
-									href=""
-									class="bo_tit"
-									th:text="${item.crtitle}"
-								> </a> <span
-									class="bo_cnt"
-									th:text="${item.crdetail}"
-								></span>
-								<!--////투표하기 버튼////-->
-								<button
-									class="vote_btn"
-									th:data-crid="${item.crid}"
-									onclick="voting(this)"
-								>투표하기</button>
-								<!--////투표하기 버튼////-->
+					<img
+						th:src="@{${'/event/api/display?imgName='+detail.crMimg}}"
+						alt=""
+					>
+				</div>
+			</div>
+			<!--//동영상 영역-->
+			<!--본문 영역 커스텀-->
+			<div class="content_area">
+				<div class="content_inner">
+					<h2 th:text="${detail.crtitle}"></h2>
+					<div>
+						<div th:text="${detail.crdetail}"></div>
+						<br> <br> [난이도] <br> <br>
+						<div th:text="${detail.crlevel==1 ? '쉬움' : '보통'}"></div>
+						<br> [예상 조리 시간]<br>
+						<br>
+						<div th:text="${detail.crtime==30 ? '30분 이내' : '90분 이내'}"></div>
+						<br> [준비 재료]<br>
+						<br>
+						<div th:each="item : ${detail.crecipeIngredientVo}">
+							<div style="display: flex">
+								<div th:text="${item}">제품 이름</div>
+								<div th:text="${item.cricount}">수량</div>
 							</div>
 						</div>
+						<br> <br> [요리 순서]
+						<div th:each="item, idx: ${detail.crecipeContent}">
+							<br>
+							<div style="display: flex">
+								<div th:text="${item.step + '. '}"></div>
+								<div th:text="${item.crcdetail}"></div>
+							</div>
+							<br> <img
+								th:src="@{${'/event/api/display?imgName='+item.crimg}}"
+								alt=""
+							> <br> <br>
+						</div>
 					</div>
-				</li>
-			</ul>
+				</div>
+				<a
+					href="javascript:void(0);"
+					class="vote_btn"
+					th:data-crid="${detail.crid}"
+					onclick="voting(this)"
+				>투표하기</a>
+			</div>
+			<!-- 게시판 버튼-->
+			<div id="bo_V_bottom">
+				<ul class="btn_bo_user bo_v_com">
+					<li><a
+						th:href="@{${'/event/vote?evid='+detail.evid}}"
+						class="btn_b01 btn"
+						title="목록"
+					>목록으로</a></li>
+					<!--  -->
+				</ul>
+			</div>
+			<!-- 게시판 버튼 끝-->
 		</div>
-	</div>
+	</article>
+	<form
+		name="votelist"
+		id="votelist"
+		th:action="@{/event/vote}"
+		method="post"
+	>
+		<input
+			type="hidden"
+			name="mid"
+			id="mid"
+			th:value="${#authentication.principal.mid}"
+		/> <input
+			type="hidden"
+			name="evid"
+			id="evid"
+			th:value="${detail.evid}"
+		/> <input
+			type="hidden"
+			name="crid"
+			id="crid"
+		/>
+	</form>
+	<script>
+		function voting(e) {
+			let crid = $(e).data('crid');
+			$("#crid").val(crid);
+			$("#votelist").submit();
+
+		}
+	</script>
 	<th:block th:replace="/includes/footer :: footer"></th:block>
 </body>
 </html>

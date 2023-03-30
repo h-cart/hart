@@ -32,4 +32,6 @@ public interface EventService {
 	List<CRecipeVO> getVoteList(int evid);
 
 	void voteRecipe(EventVoteVO ev);
+
+	CRecipeVO getRecipeDetail(EventVoteVO ev);
 }

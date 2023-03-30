@@ -8,10 +8,11 @@ import org.apache.ibatis.annotations.Param;
 
 import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
+import com.hart.domain.event.CRecipeDTO;
 import com.hart.domain.event.CRecipeVO;
-import com.hart.domain.product.ProductsVO;
 import com.hart.domain.event.EventListVO;
 import com.hart.domain.event.EventVoteVO;
+import com.hart.domain.product.ProductsVO;
 
 @Mapper
 public interface EventMapper {
@@ -25,5 +26,6 @@ public interface EventMapper {
 	EventListVO getEventList(int evid);
 	List<CRecipeVO> getVoteList(int evid);
 	void toVote(EventVoteVO ev);
+	CRecipeVO getDetail(EventVoteVO ev);
 
 }
