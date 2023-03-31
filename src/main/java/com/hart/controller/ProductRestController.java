@@ -64,10 +64,9 @@ public class ProductRestController {
 			 
 			List<ListVO> Productlist = pService.Productlist(data);
 			
-			  log.info("data=====>>>>"+data); log.info("getproductslis컨트롤러에서 찍힘>>>" +  Productlist); log.info(Productlist);
+			  log.info("data=====>>>>"+data); 
+			  log.info("getproductslis컨트롤러에서 찍힘>>>" +  Productlist); log.info(Productlist);
 			 
-			
-			log.info("Productlist.get(0)>>"+Productlist.get(0));
 			
 			
 			Map<String, List<ListVO>> result = new HashMap<>();

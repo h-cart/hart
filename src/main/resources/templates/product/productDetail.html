@@ -98,7 +98,7 @@
                               th:value="${Detail.detail.pid}"
                            />
                            <li><span>Categories:</span> <b><span
-                                 th:text="${Detail.detail.stag}"
+                                 th:text="${Detail.detail.pcategory}"
                                  style="color: #111111"
                               ></span></b></li>
                            <li><span>원산지:</span><span
@@ -165,7 +165,7 @@
                               </div>
                               <img
                                  th:each="detail, i : ${Detail.pimg}"
-                                 th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg) - 2}"
+                                 th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg) - 1}"
                                  th:src="${detail.pimg}"
                               >
                               <p th:src="${Detail.detail.pbdesc}"></p>
