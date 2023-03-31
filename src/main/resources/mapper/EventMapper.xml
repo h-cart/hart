@@ -71,12 +71,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="com.hart.domain.event.CRecipeVO" parameterType="int">
 
 		SELECT
-		CRID,CRTITLE , CRIMG ,CRMINGREDIENT ,CRLEVEL ,CRTIME ,
+		CRID,CRTITLE , CRIMG as crMimg ,CRMINGREDIENT ,CRLEVEL ,CRTIME ,
 		CRCLICK
 		,CRREGDATE ,CRCANO ,CRDETAIL ,CRVOTE ,EVID FROM
 		crecipe
-		WHERE evid =
-		#{evid}
+		WHERE
+		evid =
+		#{evid} and crvote=1
 	</select>
 
 	<insert id="toVote"
@@ -84,5 +85,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into event_vote (evid, mid, crid) values
 		(#{evid}, #{mid}, #{crid})
 	</insert>
+
+
+	<resultMap id="CRecipe" type="CRecipeVO">
+		<result property="crid" column="CRID" />
+		<result property="crtitle" column="CRTITLE" />
+		<result property="crMimg" column="CRIMG" />
+		<result property="crmingredient" column="CRMINGREDIENT" />
+		<result property="crlevel" column="CRLEVEL" />
+		<result property="crtime" column="CRTIME" />
+		<result property="crclick" column="CRCLICK" />
+		<result property="crregdate" column="CRREGDATE" />
+		<result property="crcano" column="CRCANO" />
+		<result property="crdetail" column="CRDETAIL" />
+		<result property="evid" column="EVID" />
+		<result property="mid" column="MID" />
+		<collection column="crid=CRID" property="crecipeContent"
+			javaType="List" ofType="CRContentVO" select="getCrecipeContent" />
+		<collection column="crid = CRID"
+			property="crecipeIngredientVo" javaType="List"
+			ofType="CRIngredientVO" select="getCrecipeIngredientVo" />
+	</resultMap>
+
+	<select id="getDetail" parameterType="EventVoteVO"
+		resultMap="CRecipe">
+		select * from crecipe c
+		where c.crid = #{crid}
+	</select>
+
+
+	<select id="getCrecipeContent" resultType="CRContentVO">
+		select
+		crid,crstep
+		step,crdetail crcdetail,crimg
+		from
+		crecipe_content
+		where crid
+		=
+		#{crid}
+	</select>
+	<select id="getCrecipeIngredientVo" resultType="CRIngredientVO">
+		select * from
+		crecipe_ingredient c
+		where c.crid = #{crid}
+	</select>
+
 
 </mapper>

@@ -15,9 +15,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 
 @Data
 @Component
+@Log4j2
 public class CRecipeDTO {
 	String crid;
 	String crtitle;
@@ -56,7 +58,7 @@ public class CRecipeDTO {
 
 		// UUID
 		String uuid = UUID.randomUUID().toString();
-		String saveName = folderPath + File.separator + uuid + "_" + fileMName;
+		String saveName = folderPath + uuid + "_" + fileMName;
 		Path savePath = Paths.get(uploadPath + File.separator + saveName);
 		try {
 			crMimg.transferTo(savePath);
@@ -84,8 +86,9 @@ public class CRecipeDTO {
 
 			// UUID
 			String uuid = UUID.randomUUID().toString();
-			String saveName = folderPath + File.separator + uuid + "_" + fileMName;
+			String saveName = folderPath + uuid + "_" + fileMName;
 			Path savePath = Paths.get(uploadPath + File.separator + saveName);
+
 			try {
 				crimg[i].transferTo(savePath);
 			} catch (Exception e) {
@@ -120,8 +123,8 @@ public class CRecipeDTO {
 
 	private String makeFolder(String uploadPath) {
 		String str = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-		String folderPath = str.replace("/", File.separator);
-
+		/* String folderPath = str.replace("/", File.separator); */
+		String folderPath = str;
 		File uploadPathFolder = new File(uploadPath, folderPath);
 		if (uploadPathFolder.exists() == false) {
 			uploadPathFolder.mkdirs();

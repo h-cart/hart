@@ -53,16 +53,21 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<CRecipeVO> getVoteList(int evid) {
-		
+
 		return mapper.getVoteList(evid);
 	}
 
 	@Override
 	public void voteRecipe(EventVoteVO ev) {
 		mapper.toVote(ev);
-		
+
 	}
 
-
+	@Override
+	public CRecipeVO getRecipeDetail(EventVoteVO ev) {
+		CRecipeVO cr = mapper.getDetail(ev);
+		log.info("service cr ========="+cr);
+		return cr;
+	}
 
 }

@@ -43,16 +43,25 @@ public class EventController {
 	@GetMapping("/vote")
 	public String vote(int evid, Model model) {
 		List<CRecipeVO> recipe = eventService.getVoteList(evid);
+
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("evid", evid);
-		log.info(recipe);
+
 		return "event/vote";
 	}
 
 	@PostMapping("/vote")
 	public String voting(EventVoteVO ev, Model model) {
 		eventService.voteRecipe(ev);
-		return "event/vote";
+		return "redirect:/event?evid=" + ev.getEvid();
+	}
+
+	@GetMapping("/voteDetail")
+	public String voteDetail(EventVoteVO ev, Model model) {
+		CRecipeVO cr = eventService.getRecipeDetail(ev);
+
+		model.addAttribute("detail", cr);
+		return "event/voteDetail";
 	}
 
 	@GetMapping("/upload")
