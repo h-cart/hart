@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.hart.domain.cart.CartDTO;
 import com.hart.domain.cart.CartInsertDTO;
 import com.hart.domain.member.ClubAuthMemberDTO;
-import com.hart.domain.order.RecommandDTO;
+import com.hart.domain.recommand.RecommandDTO;
 import com.hart.domain.share.ShareDTO;
 import com.hart.domain.share.SseEmitters;
 import com.hart.service.cart.CartService;
