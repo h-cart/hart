@@ -19,10 +19,14 @@ import com.hart.domain.liveClass.MyLiveClassInfoDTO;
  *     </pre>
  */
 public interface LiveClassService {
-
+	
+	//liveClass 목록 불러오기
 	public List<LiveClassListDTO> getList();
+	//liveClass 상세 불러오기
 	public LiveClassDetailInfoDTO getClassDetail(String lcid);
+	//myPage liveClass 목록 불러오기
 	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid);
+	
 	
 	
 }

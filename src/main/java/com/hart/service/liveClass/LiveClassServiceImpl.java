@@ -38,12 +38,13 @@ public class LiveClassServiceImpl implements LiveClassService{
 		LiveClassDetailInfoDTO infoDTO = new LiveClassDetailInfoDTO();
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(dto.getLcdate()+" ("+dto.getLcday()+") "+dto.getLcstart()+"-"+dto.getLcend());
+		sb.append(dto.getLcdate()+" ("+dto.getLcdayofweek()+") "+dto.getLcstart()+"-"+dto.getLcend());
 		infoDTO.setWholeDate(sb.toString());
 		infoDTO.setIngredientList(dto.getLcingredient().replaceAll(", ","@").split("@"));
-		//infoDTO.setLctExplainList(dto.getLctexplain().split("-"));
 		infoDTO.setLctExplainList(dto.getLctexplain().replaceAll(" - ","@").substring(1).split("@"));
 		infoDTO.setLcStudentList(dto.getLcstudent().replaceAll(" - ", "@").substring(1).split("@"));
+		//infoDTO.setLctExplainList(dto.getLctexplain().split("-"));
+		//infoDTO.setLcStudentList(dto.getLcstudent().split(" - "));
 		infoDTO.setLiveClassListDTO(dto);
 		
 		log.info(infoDTO);
@@ -53,12 +54,17 @@ public class LiveClassServiceImpl implements LiveClassService{
 
 	@Override
 	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid) {
+		log.info("getMyClassInfo 서비스 호출");
 		List<MyLiveClassInfoDTO> list = mapper.getMyLiveClassInfo(mid);
 		Calendar startTime = Calendar.getInstance(); 
 		Calendar endTime = Calendar.getInstance(); 
 		long now = System.currentTimeMillis();
 		
 		for(MyLiveClassInfoDTO dto : list) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(dto.getLcdate()+" ("+dto.getLcdayofweek()+") "+dto.getLcstart()+"-"+dto.getLcend());
+			dto.setWholeDate(sb.toString());
+			
 			startTime.set(Calendar.YEAR, Integer.parseInt(dto.getLcday().substring(0, 4)));
 			startTime.set(Calendar.MONTH, Integer.parseInt(dto.getLcday().substring(5, 7))-1);
 			startTime.set(Calendar.DATE, Integer.parseInt(dto.getLcday().substring(8,10)));

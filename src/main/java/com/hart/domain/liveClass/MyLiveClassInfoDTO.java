@@ -17,4 +17,7 @@ public class MyLiveClassInfoDTO {
 	private String lcimg;
 	private String lcdate;
 	private String wholeDate;
+	private String lcteacher;
+	private String lcdayofweek;
+	
 }

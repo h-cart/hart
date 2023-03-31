@@ -25,4 +25,5 @@ public class LiveClassListDTO {
 	private String lcimg;
 	private String lcdate;
 	private String lcingredient;
+	private String lcdayofweek;
 }

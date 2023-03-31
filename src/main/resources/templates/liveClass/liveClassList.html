@@ -37,7 +37,7 @@
 						<div class="blog__item__text">
 							<span th:text="${liveClass.lcday}"><img th:src="${liveClass.lcimg}" alt="이미지 안불러짐"></span>
 							<h5 th:text="${liveClass.lcname}"></h5>
-							<a th:href="@{/class/{lcid}(lcid=${liveClass.lcid})}">상세보기</a>
+							<a th:href="@{/class/detail/{lcid}(lcid=${liveClass.lcid})}">상세보기</a>
 						</div>
 					</div>
 				</div>
