@@ -1,4 +1,6 @@
-package com.hart.domain.order;
+package com.hart.domain.recommand;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,13 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OitemDTO {
+public class RecommandDTO {
 	
-	private int oid;
 	private String pid;
 	private String pname;
 	private String pimg;
-	private int rvcheck;
-	private int oamount;
-	private int pprice;
+	private List<RrecipeDTO> recipes;
+	
 }

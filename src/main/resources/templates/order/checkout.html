@@ -302,7 +302,8 @@
     $(document).on("click", "#order", function () {
         var pointTag = $("#point");
         pointTag.val(pointTag.val().length == 0 ? 0 : pointTag.val());
-        requestPay();
+        //requestPay();
+        $("form[name=orderform]").submit();
 
     })
 </script>

@@ -11,3 +11,4 @@ $(document).on("click","#orderDirect",function(e){
 	form.appendTo('body');
 	form.submit();
 })
+
