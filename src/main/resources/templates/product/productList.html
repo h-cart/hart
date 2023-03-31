@@ -21,39 +21,41 @@
 		//pcno 처음에 초기화를 어떻게 해야 s
 		/* var pcno = 0; */
 		let pcno = $("input[name=pcno]").val();
-		console.info(pcno);
 		
+		
+		console.log("pcno********>>"+pcno);
+		sendpcno(pcno,page);
 		
 		
 		$(window).scroll(function() {
-			console.log("hello");
+			console.log("scroll(function()==");
+			
 								//창남은 길이          	// 내가 보는 창의 길이 - 창의 전체 길이 			
-			if(($(window).scrollTop()) >= $(document).height()+ - $(window).height()){ 
-    	    /*  if($(window).scrollTop() + $(window).height() == $(document).height()) {  */
+		if(($(window).scrollTop()) >= $(document).height()- $(window).height()-1  ){ 
     	   
-    	      console.log("들어오니?" + page);
-    	      
-    	      //element.page = page;
-    	      
-    	      sendpcno(pcno);
-    	   
+    	    console.log("페이지들어오니?->" + page);
+			/* let pcno = $("input[name=pcno]").val();  */
+    	       sendpcno($("input[name=pcno]").val()); 
+    	     /*sendpcno(pcno); */
     	  }
 		}); 
 	});
 /* 		$(window).ready(sendpcno(pcno, page)); */
-	
-	
- 	
-	 
-	
-      function sendpcno(pcno) {
-	 
-    	//let page=0;
-    	  let pcno_top = $("input[name=pcno_top]").val();
-    	 
-    	  let page = $("input[name=page]").val();
+
+      function sendpcno(pcno,pnum) {
+		console.log(pnum);
+		if(pnum==0) {
+			page = pnum;
+			$("input[name=pcno]").val(pcno);
+           	$("input[name=page]").val(pnum);
+		}
+	    let pcno_top = $("input[name=pcno_top]").val();
+		
+	   /*  let page = $("input[name=page]").val();  */
+	    
+  
     	  
-      console.log("function sendpcno의 펑션작동됨2 pcno는 >>" + pcno +"@@" + "pcno_top>>" + pcno_top);
+        console.log("function sendpcno의 펑션작동됨2 pcno=" + pcno +"<<       >>" + "pcno_top=" + pcno_top);
           
 		
         	    let sort_option = document.querySelector('.option.selected');
@@ -64,7 +66,8 @@
         	      console.log('sort 가 null이 아니다.good');
         	    }
         	    
-      console.log("sort 콘솔>>"+ sort);
+        	    
+      console.log("sort 콘솔----->>"+ sort);
       console.log("page ---------->>"+ page);
      
         	
@@ -74,7 +77,9 @@
             pcno_top: pcno_top,
             sort : sort
           };
+          
       console.table("엘리먼트 >>>>>>>>>"+element);
+      
           $.ajax({
             type: "post",
             url: "/papi/productlist",
@@ -89,6 +94,7 @@
 				/* console.log(result); */
               $.each(result.productlist, function (index, product) {
             	 /*  console.log(product); */
+            	 let pprice =product.pprice.toLocaleString('ko-KR');
             	  str += `
                          <div class="col-lg-4 col-md-6 col-sm-6">
                          <div class="product__item">	
@@ -102,7 +108,8 @@
                            <div class="product__item__text">
                              <h6>${product.pname}</h6>
                              <a href="#" class="add-cart">+ Add To Cart</a>
-                             <h5>${product.pprice}원</h5>
+                             
+                             <h5>${pprice}원</h5>
                              
                              <div class="product__color__select">
                                <label for="pc-4"><input type="radio" id="pc-4"></label>
@@ -117,8 +124,9 @@
             /*  $("#productlistajax").html(str); */
           
             	         
-            console.log("page------------"+ page)
-            if (page === 0) {
+            console.log("if 쪽 page------------>>"+ page);
+            
+            if (page == 0) {
         	  $("#productlistajax").html(str);
         	  
         	} else {
@@ -208,19 +216,24 @@
 												<ul class="nice-scroll"
 													style="overflow-y: hidden; outline: none; touch-action: none;"
 													tabindex="1">
-													<li th:each="cList:${cList}"><a href="#"
-														th:text="${cList.pcategory}"
-														th:onclick="sendpcno([[${cList.pcno}]],0);">
-														
-													</a></li>
-													<input type="hidden" name="page" value="0"/>
+													<li th:each="cList:${cList}">
+														<a href="#"
+															th:text="${cList.pcategory}"
+															th:onclick="sendpcno([[${cList.pcno}]] ,0);">
+															
+														</a>
+												<input type="hidden" th:value="${cList.pcno}" name="pcno" />
+													</li>
 												</ul>
+
+
+
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="card">
-							<!-- <div class="card-heading">
+									<!-- <div class="card-heading">
                               <a data-toggle="collapse" data-target="#collapseTwo">브랜드</a>
                            </div>
                            <div id="collapseTwo" class="collapse show"
@@ -255,69 +268,33 @@
 										<option value="">$55 - $100</option>
 									</select>
 									<div class="nice-select" tabindex="0">
-										<span class="current">선택</span>
+										<span class="current">가격 낮은순</span>
 										<ul class="list">
 											<li data-value="1" data-type="sort" class="option selected">가격
 												낮은순</li>
-											<li data-value="2" data-type="sort" class="option" >가격
+											<li data-value="2" data-type="sort" class="option">가격
 												높은순</li>
-											<li data-value="3" data-type="sort" class="option" >판매량
+											<li data-value="3" data-type="sort" class="option">판매량
 												높은순</li>
 											<li data-value="4" data-type="sort" class="option" >판매량
 												낮은순</li>
 										</ul>
 
 										<input type="hidden" th:value="${pcno_top}" name="pcno_top" />
-										<input type="hidden" id="fil" value="0" name="valuenum" />
+										<input type="hidden" id="fil" value="0" name="page" /> 
+										 
+									  	<input type="hidden" id="fil" value="0" name="pcno" /> 
 
-										
+
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row" id="productlistajax">
-						<div class="col-lg-4 col-md-6 col-sm-6"
-							th:each="productlist : ${productlist}">
-							<div class="product__item">
-								<div class="product__item__pic set-bg" id="img"
-									th:data-pid="${productlist.pid}"
-									th:data-setbg="${productlist.pimg}"
-									th:onclick="goDetailPage(this)">
-									<ul class="product__hover">
-										<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
-										</li>
-										<li><a href="#"><img src="img/icon/compare.png"
-												alt="" /> <span>Compare</span></a></li>
-										<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
-										</li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<td th:text="${productlist.pname}"></td>
-									</h6>
-
-									<a href="#" class="add-cart">+ Add To Cart</a>
-									<h5>
-										<!-- <td th:text="${productlist.pprice}+ '원' "> -->
-										<td th:text="${#numbers.formatInteger(productlist.pprice, 3, 'COMMA') + '원'}"></td>
-									</h5>
-
-									<div class="product__color__select">
-										<label for="pc-4"> <input type="radio" id="pc-4" />
-										</label> <label class="active black" for="pc-5"> <input
-											type="radio" id="pc-5" />
-										</label> <label class="grey" for="pc-6"> <input type="radio"
-											id="pc-6" />
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 					</div>
-					<div class="row">
-					</div>
+					<div class="row"></div>
 				</div>
 			</div>
 		</div>

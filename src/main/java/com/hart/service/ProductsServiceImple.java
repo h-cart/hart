@@ -62,7 +62,7 @@ public class ProductsServiceImple implements ProductsService {
 	
 	
 
-	// 
+	//에이작스 및 소 카테고리 및 필터적용 Mapper 
 	@Override
 	public List<ListVO> Productlist(ListVO list) {
 		// log.info("===============getproductcatrogrtlist Service ServiceImple ============>" + list);

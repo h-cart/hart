@@ -50,11 +50,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getproductDetail"
 		resultType="com.hart.domain.product.ProductsVO">
-		SELECT pd.pid, pd.porigin, pd.pcount, pd.pdetail,
-		pd.pbname,
-		pd.pbsmall, pd.pbdesc, pd.pname, pd.pprice, pd.pcno,
-		pd.stag, pd.pdiscount, pd.ptitle
-		FROM products pd
+		    		SELECT pd.pid, pd.porigin, pd.pcount, pd.pdetail,
+		pd.pbname,pd.pbsmall, pd.pbdesc, pd.pname, pd.pprice, pd.pcno,
+		pd.stag, pd.pdiscount, pd.ptitle ,pc.pcategory
+		FROM products pd join product_category pc on pd.pcno =pc.pcno
 		WHERE pd.pid=#{pid}
 
 
@@ -87,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="Productlist"
 		resultType="com.hart.domain.product.ListVO"
 		parameterType="com.hart.domain.product.ListVO">
-		SELECT *
+		SELECT * 
 		FROM (
 		select pi.pimg,p.pname, p.pprice, p.pdiscount,p.pcno,p.pid ,p.stag
 		,pc.pcategory,pc.pcno_top,rownum as rn
@@ -100,7 +99,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="pcno != 0">
 				p.pcno = #{pcno}
 			</if>
-
 		</where>
 		<trim prefix="ORDER BY">
 			<if test="sort == 1 "> pprice desc</if>
@@ -108,11 +106,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="sort == 3 "> pcount desc </if>
 			<if test="sort == 4 "> pcount asc </if>
 		</trim>
+		) pa
+	WHERE rn BETWEEN ((#{page} * 9) + 1) AND ((#{page} * 9) + 9)
 
-		) pa 
-	 	<![CDATA[
-	WHERE (#{page}*9 < rn) AND (rn <= #{page}*9 +9)
-		]]>
 	</select>
 </mapper>
 
