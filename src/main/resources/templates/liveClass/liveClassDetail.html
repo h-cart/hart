@@ -144,16 +144,12 @@
 
 
 							<!-- product-action-block -->
-							<div
-								class="xans-element- xans-product xans-product-action product-action-block">
+							<div class="xans-element- xans-product xans-product-action product-action-block">
 								<div class="buy-block ">
-									<button type="button" class="btn btn-order btn-dark btn-full "
-										onclick="product_submit_action(1, '/exec/front/order/basket/', this)">
+									<button type="button" class="btn btn-order btn-dark btn-full " onclick="product_submit_action(1, '/exec/front/order/basket/', this)" style="width: 50%;">
 										<span id="btnBuy">수강 신청하기</span>
 									</button>
-									<button type="button"
-										class="btn btn-order btn-gray btn-basket "
-										onclick="product_submit_action(2, '/exec/front/order/basket/', this)">
+									<button type="button" class="btn btn-order btn-gray btn-basket " onclick="product_submit_action(2, '/exec/front/order/basket/', this)" style="width: 50%;">
 										<span>장바구니 담기</span>
 									</button>
 								</div>
@@ -164,9 +160,9 @@
 							<div
 								class="xans-element- xans-product xans-product-additional info-block">
 								<ul class="info-tab">
-									<li class="js-delivery active" data-tab="tab-1"><a><span>필요 재료</span></a></li>
-									<li class="js-details" data-tab="tab-2"><a><span>강사이력</span></a></li>
-									<li class="js-size" data-tab="tab-3"><a><span>수강대상</span></a></li>
+									<li class="js-delivery active" data-tab="tab-1" style="cursor: pointer;"><a><span>필요 재료</span></a></li>
+									<li class="js-details" data-tab="tab-2" style="cursor: pointer;"><a><span>강사이력</span></a></li>
+									<li class="js-size" data-tab="tab-3" style="cursor: pointer;"><a><span>수강대상</span></a></li>
 								</ul>
 								<div id="tab-1" class="info active" style="height: 413.893px;">
 									<div th:each="ingredient : ${liveClass.ingredientList}">

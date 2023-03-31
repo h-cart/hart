@@ -385,10 +385,11 @@ table tr.vertical-middle th,table tr.vertical-middle td {
 }
 
 .myshop-wrap .myshop-layout .contents-block .order-list .items-block .item-prod .status {
-  display: -webkit-box;
-  display: -webkit-flex;
+  /* 마이페이지 우측 버튼 크기 미디어 쿼리 조정 */
+  /* display: -webkit-box; */
+  /* display: -webkit-flex; */
   display: -ms-flexbox;
-  display: flex;
+  /* display: flex; */
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -723,6 +724,7 @@ table tr.vertical-middle th,table tr.vertical-middle td {
       color: #9A9A9A;
       padding: 8px 16px;
       text-decoration: none;
+      width: 100% !important;
   }
 
   .myshop-wrap .myshop-layout .contents-block .order-list .items-block .item-prod .status button span {
@@ -5177,4 +5179,7 @@ body.product-detail footer {
   	solid: red;
   	color: red;
   }
+  
+  
+  
 }

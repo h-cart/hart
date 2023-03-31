@@ -1,5 +1,6 @@
 package com.hart.controller.liveClass;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.service.liveClass.LiveClassService;
 
 import lombok.RequiredArgsConstructor;
@@ -43,11 +45,10 @@ public class LiveClassController {
 		return "liveClass/liveClassList";
 	}
 	
-	@GetMapping("/{lcid}")
+	@GetMapping("/detail/{lcid}")
 	public String getLiveClassListDetail(Model model, @PathVariable String lcid) {
 		log.info("getLiveClassListDetail 컨트롤러 호출");
 		LiveClassDetailInfoDTO dto = service.getClassDetail(lcid);
-		
 		
 		model.addAttribute("liveClass",dto);
 		log.info(model);
@@ -63,6 +64,19 @@ public class LiveClassController {
 		return "liveClass/liveClassVideo";
 	}
 	
+	@GetMapping("/mypage")
+	public String myPageTest(Principal pr,Model model) {
+		log.info("myPage 컨트롤러 호출");
+		//String mid = pr.getName();
+		String mid = "skarns23@yu.ac.kr";
+		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
+		log.info(list);
+		model.addAttribute("classList",list);
+		
+		return "liveClass/liveClassMypage";
+	}
+	
+	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@테스트용
 	@GetMapping("/testchat")
@@ -72,11 +86,6 @@ public class LiveClassController {
 		return "liveClass/liveClassChatTestStream";
 	}
 	
-	@GetMapping("/mypage")
-	public String myPageTest() {
-		log.info("myPageTest 컨트롤러 호출");
-		
-		return "liveClass/test";
-	}
+	
 	
 }
