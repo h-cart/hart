@@ -110,11 +110,20 @@
                         </h5>
                         <ul style="padding-top: 0;">
                            <li><span>상품번호 : </span>[[${Detail.detail.pid}]]</li>
+                           <input
+                              type="hidden"
+                              name='pid'
+                              th:value="${Detail.detail.pid}"
+                           />
+                           <li><span>Categories:</span> <b><span
+                                 th:text="${Detail.detail.pcategory}"
+                                 style="color: #111111"
+                              ></span></b></li>
+                           <li><span>원산지:</span><span
+                              th:text="${Detail.detail.porigin}"
+                              style="color: #111111"
+                           ></span></li>
 
-                           <li><span>Categories:</span> <b><span th:text="${Detail.detail.stag}"
-                                    style="color: #111111"></span></b></li>
-                           <li><span>원산지:</span><span th:text="${Detail.detail.porigin}" style="color: #111111"></span>
-                           </li>
                            <br>
                            <li><span></span> &lt; 배송형태&gt;</li>
                            <li><span></span> 새벽배송 / 밤 11시까지 결제 시</li>
@@ -144,9 +153,12 @@
                                  <h5 th:text="${Detail.detail.ptitle}"></h5>
                                  <p th:text="${Detail.detail.pdetail}"></p>
                               </div>
-                              <img th:each="detail, i : ${Detail.pimg}"
-                                 th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg) - 2}"
-                                 th:src="${detail.pimg}">
+                              <img
+                                 th:each="detail, i : ${Detail.pimg}"
+                                 th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg) - 1}"
+                                 th:src="${detail.pimg}"
+                              >
+
                               <p th:src="${Detail.detail.pbdesc}"></p>
                               <br>
                               <h5 th:text="${Detail.detail.pbname}"></h5>
