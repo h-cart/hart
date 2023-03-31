@@ -25,13 +25,13 @@ $(document).on("click", ".thumb", function (e) {
 });
 
 
-$(document).on("click", ".fa-close", function () {
+$(document).on("click", ".cart__close", function () {
 	var pid = $(this).closest('tr').data('value');
 	deleteBtnEvent(pid);
 
 })
 
-$(".primary-btn").on("click", function () {
+$(".orderDirect").on("click", function () {
 	var form = $('<form></form>');
 	form.attr('method', 'post');
 	form.attr('action', '/order/list');
@@ -46,9 +46,9 @@ $(".primary-btn").on("click", function () {
 		form.append($('<input/>', { type: 'hidden', name: 'pamounts', value: quantity }));
 
 	});
-	if(!notSelect) {
+	if (!notSelect) {
 		alert("한개 이상의 상품을 선택해주세용");
-		return ;
+		return;
 	}
 	form.append($('<input/>', { type: 'hidden', name: '_csrf', value: token }));
 	form.appendTo('body');
@@ -85,12 +85,21 @@ $(document).on("click", ".btn_minus", function () {
 
 
 
+var allCheck = $("#allCheck");
+allCheck.on("click", function (e) {
+	var list = $("input[type='checkbox']");
+	var flag = $(this).prop("checked");
+	list.prop("checked", flag);
+
+	getCheckboxValue();
+});
 
 
 function getCheckboxValue() {
 	var result = 0;
 	var count = 0;
 	var discount = 0;
+	var totalLength = $(".checkbox").length;
 	$("input[name=cartlist]:checked").each(function () {
 		var pos = $(this).prop('id').split("_")[1];
 		if ($("#discount_" + pos).data('value') > 0) {
@@ -100,14 +109,13 @@ function getCheckboxValue() {
 		var price = $("#cprice_" + pos).data('value');
 		result += +price;
 	});
-
-	$("#allCheck").prop("checked", false);
+	$("#allCheck").prop("checked",(totalLength!=count || totalLength==0)?false:true);
 	var delivery = result > 0 ? result >= 50000 ? 0 : 5000 : 0;
 	var tprice = $(".tprice");
 	var pdiscount = $(".discount");
-	pdiscount.text(numberWithCommas(discount)+"원");
+	pdiscount.text(numberWithCommas(discount) + "원");
 	pdiscount.data('value', discount);
-	tprice.text(numberWithCommas(result)+"원");
+	tprice.text(numberWithCommas(result) + "원");
 	tprice.data('value', result);
 };
 
@@ -119,9 +127,10 @@ function selectRemove(entryNumber) {
 	msgStr = "선택하신 상품을 쇼핑백에서 삭제하시겠습니까?";
 	var entryNumber = "";
 	$("input:checkbox[name='cartlist']:checked").each(function () {
-		entryNumber += $(this).val() + ",";
+		entryNumber += $(this).closest("tr").data('value')+ ",";
 	});
 	entryNumber = entryNumber.substring(0, entryNumber.length - 1);
+	console.log(entryNumber);
 	deleteBtnEvent(entryNumber);
 
 }
@@ -136,6 +145,8 @@ function deleteBtnEvent(param) {
 	for (var i = 0; i < pids.length; i++) {
 		cartDTOList.push(pids[i]);
 	}
+	console.log(param);
+	console.log(cartDTOList);
 
 	$.ajax({
 		url: '/capi/removes',

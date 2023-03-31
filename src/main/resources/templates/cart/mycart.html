@@ -91,15 +91,15 @@
 									<th style="padding : 0; margin : 0">
 										<div class="select-all">
 											<label><input  id="allCheck" type="checkbox"
-													onclick="Basket.setCheckBasketList('basket_product_normal_type_normal', this);">
+													>
 												&nbsp;<span>전체선택 
 												</span></label>
 										</div>
 									</th>
 
 									<th colspan="3" style="padding : 0;text-align :right;">
-										<div><span href="javascript:void(0);"
-												onclick="Basket.deleteBasket()">선택삭제</span>
+										<div><span onclick="selectRemove();"
+												>선택삭제</span>
 										</div>
 									</th>
 								</tr>
@@ -127,19 +127,15 @@
 				</div>
 				<div class="col-lg-4">
 					<div class="cart__discount">
-						<h6>Discount codes</h6>
-						<form action="#">
-							<input type="text" placeholder="Coupon code" />
-							<button type="submit" id="idcheck">Apply</button>
-						</form>
+						
 					</div>
 					<div class="cart__total">
-						<h6>Cart total</h6>
+						<h6>예상금액</h6>
 						<ul>
-							<li>Discount <span class='discount' data-value='0'>0</span></li>
-							<li>Total <span class='tprice' data-value='0'>0</span></li>
+							<li>총 할인금액 <span class='discount' data-value='0'>0원</span></li>
+							<li>총 상품금액 <span class='tprice' data-value='0'>0원</span></li>
 						</ul>
-						<a href="#" class="primary-btn">Proceed to checkout</a>
+						<a href="#" class="primary-btn orderDirect">주문하기 </a>
 					</div>
 				</div>
 			</div>
@@ -342,13 +338,13 @@
 							}
 							str += "<tr id='" + i + "' data-value='" + plist[i].pid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + i + "' type='checkbox' class='checkbox'><img class='pimg' src='" + plist[i].pimg + "' alt='' style='width:90px; height:90px;'/></span>"
 							str += "</div><div class='product__cart__item__text'><h6>" + plist[i].pname + "</h6>"
-							str += "<span class='price-box'><h5 class='price'id='price_" + i + "'data-value='" + price + "' >₩" + numberWithCommas(price) + "</h5>"
+							str += "<span class='price-box'><h5 class='price'id='price_" + i + "'data-value='" + price + "' >" + numberWithCommas(price) + "원</h5>"
 							if (plist[i].pdiscount != 0) {
-								str += "    <h6 class='cost' id='discount_" + i + "'data-value='" + plist[i].pprice + "'>₩" + numberWithCommas(plist[i].pprice) + "</h6>";
+								str += "    <h6 class='cost' id='discount_" + i + "'data-value='" + plist[i].pprice + "'>" + numberWithCommas(plist[i].pprice) + "원</h6>";
 							}
 							str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'><span data-value=" + i + " class='fa fa-angle-left dec qtybtn btn_minus'></span><input id='quantity_" + i + "'type='text' value='" + plist[i].mcamount + "' readonly='readonly' /><span data-value=" + i + " class='fa fa-angle-right inc qtybtn btn_plus'></span>"
-							str += "</div></div></td><td data-value='" + price * plist[i].mcamount + "'class='cart__price' id='cprice_" + i + "'>₩" + numberWithCommas(price * plist[i].mcamount) + "</td>"
-							str += "<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
+							str += "</div></div></td><td data-value='" + price * plist[i].mcamount + "'class='cart__price' id='cprice_" + i + "'>" + numberWithCommas(price * plist[i].mcamount) + "원</td>"
+							str += "<td class='cart__close'><i class='fa-solid fa-x fa-xl' style='color: #000000;'></i></td></tr>"
 						}
 						if (clist.length != 0) {
 							console.log(clist);
@@ -362,8 +358,8 @@
 								str += "</div><div class='product__cart__item__text'><h6>" + clist[j].lcname + "</h6>"
 								str += "<span class='price-box'><h5 class='price'id='price_" + (i + j + 1) + "'data-value='" + clist[j].lcprice + "' >" + clist[j].lcteacher + "</h5>"
 								str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'>" + status + "<input id='quantity_" + (i + j + 1) + "'type='hidden' value='1' readonly='readonly' />";
-								str += "</div></div></td><td data-value='" + clist[j].lcprice + "'class='cart__price' id='cprice_" + (i + j + 1) + "'>₩" + numberWithCommas(clist[j].lcprice) + "</td>"
-								str += "<td class='cart__close'><i class='fa fa-close'></i></td></tr>"
+								str += "</div></div></td><td data-value='" + clist[j].lcprice + "'class='cart__price' id='cprice_" + (i + j + 1) + "'>" + numberWithCommas(clist[j].lcprice) + "원</td>"
+								str += "<td class='cart__close'><i class='fa-solid fa-x fa-xl' style='color: #000000;'></i></td></tr>"
 							}
 
 						}
@@ -384,20 +380,7 @@
 		})
 	</script>
 
-	<script>
-			var allCheck = $("#allCheck");
-	$(document).on("click","input[name='cartlist']",function(){
-		console.log()
-		getCheckboxValue();
-	})
-  	allCheck.on("click", function(e) {	
-		var list = $("input[type='checkbox']");
-			var flag = $(this).prop("checked");
-			list.prop("checked", flag);
-			getCheckboxValue();
-		});
-
-	</script>
+	
 
 
 </body>
