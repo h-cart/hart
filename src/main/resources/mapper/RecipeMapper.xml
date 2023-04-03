@@ -14,20 +14,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="recipeDetail" resultType="RecipeVO">
 
-        select * 
-        from recipe
-		where rid= to_number(#{rid})
-
+		select *
+		from recipe
+		where rid= #{rid}
 	</select>
-	
-	
-	 <select id="RecipeContent" resultType="RecipeContentVO">
 
-     select * from recipe_content where rid = to_number(#{rid})
 
-	</select> 
-	
-	
+	<select id="RecipeContent" resultType="RecipeContentVO">
+
+			select * from recipe_content where rid= #{rid}
+		
+	</select>
+
+
 </mapper>
 
 

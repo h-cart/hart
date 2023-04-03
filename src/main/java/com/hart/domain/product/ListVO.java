@@ -3,7 +3,6 @@ package com.hart.domain.product;
 import lombok.Data;
 
 @Data
-
 public class ListVO {
 
 	String pid;
@@ -16,15 +15,7 @@ public class ListVO {
 	String pcategory;
 	String pimg;
 	int page;
-	 String type;
+	String type;
 	int sort;
-
-	/*
-	 * public ListVO(){ this(0,0); }
-	 * 
-	 * public ListVO(int page,int pcno_top){
-	 * 
-	 * this.page=page; this.pcno_top=pcno_top; }
-	 */
 
 };
