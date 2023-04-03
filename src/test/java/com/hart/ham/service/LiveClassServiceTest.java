@@ -47,5 +47,12 @@ public class LiveClassServiceTest {
 		
 	}
 	
+	@Test
+	public void getClassVideoServiceTset() {
+		log.info(service.getClassVideo("L0001"));
+		//다른 걸 써보자!
+		
+	}
+	
 	
 }

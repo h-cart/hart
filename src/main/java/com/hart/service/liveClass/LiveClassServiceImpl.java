@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hart.domain.liveClass.LiveClassDetailDTO;
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.LiveClassVideoDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.mapper.LiveClassMapper;
 
@@ -93,6 +94,16 @@ public class LiveClassServiceImpl implements LiveClassService{
 		
 		return list;
 		
+	}
+
+	@Override
+	public LiveClassVideoDTO getClassVideo(String lcid) {
+		log.info("getClassVideo 서비스 호출");
+		LiveClassVideoDTO dto = mapper.getMyVideo(lcid);
+		
+		dto.setIngredientList(dto.getLcingredient().replaceAll(", ","@").split("@"));
+		
+		return dto;
 	}
 
 }

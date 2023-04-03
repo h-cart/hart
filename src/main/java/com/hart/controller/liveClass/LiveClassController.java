@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.LiveClassVideoDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.service.liveClass.LiveClassService;
 
@@ -49,32 +50,32 @@ public class LiveClassController {
 	public String getLiveClassListDetail(Model model, @PathVariable String lcid) {
 		log.info("getLiveClassListDetail 컨트롤러 호출");
 		LiveClassDetailInfoDTO dto = service.getClassDetail(lcid);
-		
 		model.addAttribute("liveClass",dto);
 		log.info(model);
 		return "liveClass/liveClassDetail";
 	}
 	
 	@GetMapping("/video/{lcid}")
-	public String getVideoDetail(@PathVariable String lcid) {
+	public String getVideoDetail(@PathVariable String lcid, Model model) {
 		log.info("videoDetail 컨트롤러 호출");
-		
-		
-		
+		LiveClassVideoDTO videoInfo =  service.getClassVideo(lcid);
+		log.info(videoInfo);
+		model.addAttribute("videoInfo",videoInfo);
 		return "liveClass/liveClassVideo";
 	}
 	
 	@GetMapping("/mypage")
 	public String myPageTest(Principal pr,Model model) {
 		log.info("myPage 컨트롤러 호출");
+		//수정해야한다.
 		//String mid = pr.getName();
 		String mid = "skarns23@yu.ac.kr";
 		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
 		log.info(list);
 		model.addAttribute("classList",list);
-		
 		return "liveClass/liveClassMypage";
 	}
+	
 	
 	
 	
