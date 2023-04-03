@@ -12,10 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RrecipeDTO {
-	private String pid;
-	private String ptitle;
-	private String level;
+	private String rid;
+	private String rtitle;
+	private String rlevel;
 	private String rtime;
+	private String rimg;
+	private String rcano;
+	private String rccategory;
 	private List<IngredientDTO> items;
 	
 }

@@ -13,14 +13,13 @@ import com.hart.domain.cart.CartInsertDTO;
 @Mapper
 public interface CartMapper {
 	
-	int insertCarts(@Param("cDTO") CartInsertDTO cDTO,@Param("mid") String mid) throws SQLException;
-	int isExistProduct(String pid)throws SQLException;
-	int isExistClass(String lcid)throws SQLException;
-	List<CProductDTO> getProducts(String mid)throws SQLException;
-	List<CClassDTO> getLClass(String mid)throws SQLException;
-	int updateAmount(@Param("cDTO")CartInsertDTO cDTO, @Param("mid")String mid) throws SQLException;
-	int removeCart(@Param("pids")List<String> pids, @Param("mid")String mid) throws SQLException;
-	
-	int sameProducts(@Param("pid") String pid,@Param("mid") String mid)throws SQLException;
+	public int insertCarts(@Param("cDTO") CartInsertDTO cDTO,@Param("mid") String mid) throws SQLException;
+	public int isExistProduct(String pid)throws SQLException;
+	public int isExistClass(String lcid)throws SQLException;
+	public List<CProductDTO> getProducts(String mid)throws SQLException;
+	public List<CClassDTO> getLClass(String mid)throws SQLException;
+	public int updateAmount(@Param("cDTO")CartInsertDTO cDTO, @Param("mid")String mid) throws SQLException;
+	public int removeCart(@Param("pids")List<String> pids, @Param("mid")String mid) throws SQLException;	
+	public int sameProducts(@Param("pid") String pid,@Param("mid") String mid)throws SQLException;
 	
 }

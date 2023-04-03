@@ -24,7 +24,6 @@ public class SseEmitters {
 
 	private final ConcurrentHashMap<String, CopyOnWriteArrayList<SseEmitter>> emitters = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<String, CopyOnWriteArrayList<ClubAuthMemberDTO>> users = new ConcurrentHashMap<>();
-	private final Set<String> mids = Collections.synchronizedSet(new HashSet<>());
 	public SseEmitter add(String csno, SseEmitter emitter, ClubAuthMemberDTO mDTO) {
 		if (!emitters.containsKey(csno)) {
 			emitters.put(csno, new CopyOnWriteArrayList<>());
@@ -32,8 +31,7 @@ public class SseEmitters {
 		}
 		this.emitters.get(csno).add(emitter);
 		this.users.get(csno).add(mDTO);
-		if(mids.contains(mDTO.getMid())) return null;
-		mids.add(mDTO.getMid());
+
 		log.info("new emitter added: {}", emitter);
 		log.info(csno);
 		log.info("emitter list size: {}", emitters.get(csno).size());

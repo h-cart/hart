@@ -17,15 +17,15 @@ import com.hart.domain.order.SearchResultDTO;
 @Mapper
 public interface OrderMapper {
 	
-	PinfoDTO pInfos(String pid)throws SQLException;
-	CinfoDTO cInfos(String lcid)throws SQLException;
-	int insertOrder(OinfoDTO oDTO) throws SQLException;
-	int insertProduct(@Param("pLists") List<PinsertDTO> pLists,@Param("oDTO") OinfoDTO oDTO)throws SQLException;
-	int insertClass(@Param("cLists")List<CinsertDTO> cLists,@Param("oDTO") OinfoDTO oDTO)throws SQLException;
-	int intoMyClass(@Param("cLists")List<CinsertDTO> cLists)throws SQLException;
-	int checkClass(@Param("mid")String mid, @Param("cLists")List<CinsertDTO> cLists)throws SQLException;
-	int orderCancle(int oid)throws SQLException;
-	OinfoDTO getOrder(@Param("oid") int oid,@Param("mid") String mid)throws SQLException;
-	List<SearchResultDTO> getOrders(SearchDTO sDTo) throws SQLException;
+	public PinfoDTO pInfos(String pid)throws SQLException;
+	public CinfoDTO cInfos(String lcid)throws SQLException;
+	public int insertOrder(OinfoDTO oDTO) throws SQLException;
+	public int insertProduct(@Param("pLists") List<PinsertDTO> pLists,@Param("oDTO") OinfoDTO oDTO)throws SQLException;
+	public int insertClass(@Param("cLists")List<CinsertDTO> cLists,@Param("oDTO") OinfoDTO oDTO)throws SQLException;
+	public int intoMyClass(@Param("cLists")List<CinsertDTO> cLists)throws SQLException;
+	public int checkClass(@Param("mid")String mid, @Param("cLists")List<CinsertDTO> cLists)throws SQLException;
+	public int orderCancle(int oid)throws SQLException;
+	public OinfoDTO getOrder(@Param("oid") int oid,@Param("mid") String mid)throws SQLException;
+	public List<SearchResultDTO> getOrders(SearchDTO sDTo) throws SQLException;
 	
 }
