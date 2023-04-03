@@ -24,6 +24,7 @@ import com.hart.domain.recommand.RecommandDTO;
 import com.hart.domain.share.ShareDTO;
 import com.hart.domain.share.SseEmitters;
 import com.hart.service.cart.CartService;
+import com.hart.service.recommand.RecommandService;
 import com.hart.service.share.ShareService;
 
 import lombok.extern.log4j.Log4j2;
@@ -43,13 +44,16 @@ public class CartRestController {
 
 	@Autowired
 	private ShareService sService;
+	
+	@Autowired
+	private RecommandService rService;
 
 	@PostMapping(value = "/insert", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, String>> insertCart(@RequestBody Map<String, List<String>> map,
+	public ResponseEntity<Map<String, RecommandDTO>> insertCart(@RequestBody Map<String, List<String>> map,
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
 		
-		Map<String, String> result = new HashMap<>();
+		Map<String, RecommandDTO> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
@@ -62,13 +66,12 @@ public class CartRestController {
 				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
 				cService.CartInsert(pids, pamounts, mid);
 			}
-			result.put("result", "success");
-			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
+			result.put("result", rService.getRecommand(mDTO.getMid(), mDTO.getCsno()));
+			return new ResponseEntity<>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
-			result.put("result", e.getMessage());
 			e.printStackTrace();
-			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

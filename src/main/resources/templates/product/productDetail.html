@@ -85,7 +85,7 @@
                         <input type="checkbox" checked style="display : none;" name="cartlist" id="chk_-1">
                         <div class="quantity">
                            <div class="pro-qty">
-                              
+
                               <span class="fa fa-angle-up dec qtybtn"></span><span
                                  class="fa fa-angle-up dec qtybtn"></span><span
                                  class="fa fa-angle-up dec qtybtn"></span><span
@@ -98,10 +98,10 @@
                                  class="fa fa-angle-down inc qtybtn"></span> <span
                                  class="fa fa-angle-down inc qtybtn"></span>
                            </div>
-                           
+
                         </div>
                         <input class="item" id="pid-1" type="hidden" name='pid' th:value="${Detail.detail.pid}" />
-                        <a href="#" id='addToCart' class="primary-btn">장바구니 담기</a> <a href="#" 
+                        <a href="#" id='addToCart' class="primary-btn">장바구니 담기</a> <a href="#"
                            class="primary-btn orderDirect">바로구매 하기</a>
                      </div>
                      <div class="product__details__last__option">
@@ -110,19 +110,11 @@
                         </h5>
                         <ul style="padding-top: 0;">
                            <li><span>상품번호 : </span>[[${Detail.detail.pid}]]</li>
-                           <input
-                              type="hidden"
-                              name='pid'
-                              th:value="${Detail.detail.pid}"
-                           />
-                           <li><span>Categories:</span> <b><span
-                                 th:text="${Detail.detail.pcategory}"
-                                 style="color: #111111"
-                              ></span></b></li>
-                           <li><span>원산지:</span><span
-                              th:text="${Detail.detail.porigin}"
-                              style="color: #111111"
-                           ></span></li>
+                           <input type="hidden" name='pid' th:value="${Detail.detail.pid}" />
+                           <li><span>Categories:</span> <b><span th:text="${Detail.detail.pcategory}"
+                                    style="color: #111111"></span></b></li>
+                           <li><span>원산지:</span><span th:text="${Detail.detail.porigin}" style="color: #111111"></span>
+                           </li>
 
                            <br>
                            <li><span></span> &lt; 배송형태&gt;</li>
@@ -153,11 +145,9 @@
                                  <h5 th:text="${Detail.detail.ptitle}"></h5>
                                  <p th:text="${Detail.detail.pdetail}"></p>
                               </div>
-                              <img
-                                 th:each="detail, i : ${Detail.pimg}"
+                              <img th:each="detail, i : ${Detail.pimg}"
                                  th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg) - 1}"
-                                 th:src="${detail.pimg}"
-                              >
+                                 th:src="${detail.pimg}">
 
                               <p th:src="${Detail.detail.pbdesc}"></p>
                               <br>
@@ -186,13 +176,7 @@
    <th:block th:replace="/includes/footer :: footer"></th:block>
    <!-- Footer Section End -->
    <!-- Code injected by live-server -->
-   <script>
-      function showModal() {
-         const dialog = document.querySelector("dialog");
-         $("#insertImg").prop("src", $("#mainImg").prop("src"));
-         dialog.showModal();
-      }
-   </script>
+	<script src="/js/dialog.js"></script>
    <!-- Code injected by live-server -->
    <script>
       function customConfirm(title, text, confirm, cancle) {
@@ -237,14 +221,14 @@
             return;
          }
          var pamounts = [];
-         var pids = [];         
+         var pids = [];
          $("input[name=cartlist]:checked").each(function () {
-            $(this).prop("checked",false);
+            $(this).prop("checked", false);
             var pos = $(this).prop('id').split('_')[1];
-            var pid = $('#pid'+pos).val();
-            var quantity = $("#quantity"+pos).val();
+            var pid = $('#pid' + pos).val();
+            var quantity = $("#quantity" + pos).val();
             pids.push(pid);
-            console.log(pos,pid,quantity);
+            console.log(pos, pid, quantity);
             pamounts.push(quantity);
          })
 
@@ -254,7 +238,7 @@
                title: '수량을 선택해주세요.',
                text: '수량을 0개 이상으로 선택 해주세요.'
             })
-            return ;
+            return;
 
          }
          $.ajax({
@@ -270,7 +254,7 @@
             }),
             success: function (result) {
                console.log(result);
-               showModal();
+               showModal(result);
 
             }, error: function (err, xhr, status) {
 
@@ -287,142 +271,5 @@
       });
    /*]]>*/
    </script>
-   <dialog>
-      <div class="container">
-         <h2 style="text-align=center;">장바구니에 담겼습니다</h2>
-         <div class="shopping__cart__table">
-            <div class="shop__sidebar__accordion" style="margin-top: 50px">
-               <div class="accordion" id="accordionExample">
-                  <div class="card">
-                     <div class="card-heading active">
-                        <a data-toggle="collapse" data-target="#collapseSix" class="" aria-expanded="true">라이브
-                           클래스 추천</a>
-                     </div>
-                     <div id="collapseSix" class="collapse show" data-parent="#accordionExample" style="">
-                        <table>
-                           <tbody>
-                              <tr>
-                                 <td class="product__cart__item">
-                                    <div class="product__cart__item__pic">
-                                       <img src="/img/shopping-cart/cart-2.jpg" alt="" />
-                                    </div>
-                                    <div class="product__cart__item__text">
-                                       <h6>라이브 클래스 명</h6>
-                                       <h5>더보기</h5>
-                                    </div>
-                                 </td>
-                                 <td class="quantity__item">
-                                    <div class="quantity">
-                                       <div class="pro-qty-2">
-                                          <input type="text" value="1" />
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td class="cart__price">$ 32.50</td>
-                                 <td class="cart__close"><i class="fa fa-close"></i></td>
-                              </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="shop__sidebar__accordion" style="margin-top: 50px">
-               <div class="accordion" id="accordionExample">
-                  <div class="card">
-                     <div class="card-heading active">
-                        <a data-toggle="collapse" data-target="#collapseSix" class="" aria-expanded="true">인기있는
-                           레시피</a>
-                     </div>
-                     <div id="collapseSix" class="collapse show" data-parent="#accordionExample" style="">
-                        <div class="card-body">
-                           <div class="shop__sidebar__tags">
-                              <a href="#">국</a> <a href="#">찌개</a> <a href="#">볶음</a> <a href="#">안주</a>
-                           </div>
-                        </div>
-                        <table>
-                           <tbody>
-                              <tr>
-                                 <td class="product__cart__item">
-                                    <div class="product__cart__item__pic">
-                                       <img src="/img/shopping-cart/cart-1.jpg" alt="" />
-                                    </div>
-                                    <div class="product__cart__item__text">
-                                       <h6>레시피 설명</h6>
-                                       <h6>레시피 설명</h6>
-                                       <h6>레시피 설명</h6>
-                                    </div>
-                                 </td>
-                                 <td class="quantity__item"></td>
-                                 <td class="cart__price">더보기</td>
-                              </tr>
-                              <tr>
-                                 <td class="product__cart__item">
-                                    <div class="product__cart__item__pic">
-                                       <img src="/img/shopping-cart/cart-2.jpg" alt="" />
-                                    </div>
-                                    <div class="product__cart__item__text">
-                                       <h6>Diagonal Textured Cap</h6>
-                                       <h5>$98.49</h5>
-                                    </div>
-                                 </td>
-                                 <td class="quantity__item">
-                                    <div class="quantity">
-                                       <div class="pro-qty-2">
-                                          <input type="text" value="1" />
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td class="cart__price">$ 32.50</td>
-                                 <td class="cart__close"><i class="fa fa-close"></i></td>
-                              </tr>
-                              <tr>
-                                 <td class="product__cart__item">
-                                    <div class="product__cart__item__pic">
-                                       <img src="/img/shopping-cart/cart-3.jpg" alt="" />
-                                    </div>
-                                    <div class="product__cart__item__text">
-                                       <h6>Basic Flowing Scarf</h6>
-                                       <h5>$98.49</h5>
-                                    </div>
-                                 </td>
-                                 <td class="quantity__item">
-                                    <div class="quantity">
-                                       <div class="pro-qty-2">
-                                          <input type="text" value="1" />
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td class="cart__price">$ 47.00</td>
-                                 <td class="cart__close"><i class="fa fa-close"></i></td>
-                              </tr>
-                              <tr>
-                                 <td class="product__cart__item">
-                                    <div class="product__cart__item__pic">
-                                       <img src="/img/shopping-cart/cart-4.jpg" alt="" />
-                                    </div>
-                                    <div class="product__cart__item__text">
-                                       <h6>Basic Flowing Scarf</h6>
-                                       <h5>$98.49</h5>
-                                    </div>
-                                 </td>
-                                 <td class="quantity__item">
-                                    <div class="quantity">
-                                       <div class="pro-qty-2">
-                                          <input type="text" value="1" />
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td class="cart__price">$ 30.00</td>
-                                 <td class="cart__close"><i class="fa fa-close"></i></td>
-                              </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </dialog>
+
 </body>

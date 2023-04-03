@@ -14,9 +14,10 @@ import lombok.NoArgsConstructor;
 public class RliveClassDTO {
 	
 	private String lcid;
-	private int status;
-	private String ltitle;
+	private int lcstatus;
+	private String lcname;
 	private String lcteacher;
-	private int price;
+	private int lcprice;
+	private String lcimg;
 	private List<IngredientDTO> items;
 }
