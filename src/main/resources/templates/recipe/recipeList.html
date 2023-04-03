@@ -2,89 +2,101 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
 <body>
-   <!-- Page Preloder -->
-   <div id="preloder">
-      <div class="loader"></div>
-   </div>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
 
-   <!-- Offcanvas Menu Begin -->
-   <th:block th:replace="/includes/header :: header1"></th:block>
-   <th:block th:replace="/includes/header :: header2"></th:block>
-   <th:block th:replace="/includes/header :: header3"></th:block>
+	<!-- Offcanvas Menu Begin -->
+	<th:block th:replace="/includes/header :: header1"></th:block>
+	<th:block th:replace="/includes/header :: header2"></th:block>
+	<th:block th:replace="/includes/header :: header3"></th:block>
 
-   <!-- Offcanvas Menu End -->
-
-   
-
-   <!-- Breadcrumb Section Begin -->
-   <section class="breadcrumb-blog set-bg"
-      data-setbg="https://tohomeimage.thehyundai.com/DP/DP018/2023/03/14/105207/sgbhm.jpg?RS=1204&CS=1204x300">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-12">
-               <h2>레시피</h2>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- Breadcrumb Section End -->
-
-   <!-- Blog Section Begin -->
-   <section class="blog spad">
-      <div class="container">
-         <div class="row">
+	<!-- Offcanvas Menu End -->
 
 
-            <!-- <div class="col-lg-4 col-md-6 col-sm-6">
-               <div class="blog__item">
-                  <div class="blog__item__pic set-bg"
-                     data-setbg="https://tohomeimage.thehyundai.com/DP/DP018/2020/11/23/163540/iwjuu.jpg?RS=388g"></div>
-                  <div class="blog__item__text">
-                     <span><img src="" alt="" /> 16 February 2020</span>
-                     <h5>사과를 곁들인 리베리 코스테이크</h5>
-                     <a href="#">Read More</a>
-                  </div>
-               </div>
-            </div> -->
+
+	<!-- Breadcrumb Section Begin -->
+	<section class="breadcrumb-blog set-bg"
+		data-setbg="https://tohomeimage.thehyundai.com/DP/DP018/2023/03/14/105207/sgbhm.jpg?RS=1204&CS=1204x300">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>RECIPE</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Breadcrumb Section End -->
+
+	<!-- Blog Section Begin -->
+	<section class="blog spad">
+		<div class="col-lg-6 col-md-6 col-sm-6"
+			style="padding: 20px; max-width: 90%;">
+			<div class="shop__product__option__right">
+				<p>필터 :</p>
+				<select style="display: none">
+					<option value="">Low To High</option>
+					<option value="">$0 - $55</option>
+					<option value="">$55 - $100</option>
+				</select>
+				<div class="nice-select" tabindex="0">
+					<span class="current">최신순</span>
+					<ul class="list">
+						<li data-value="1" data-type="sort" class="option selected">최신순</li>
+						<li data-value="2" data-type="sort" class="option">난이도 순</li>
+						<li data-value="3" data-type="sort" class="option">조리 시간순</li>
+					</ul>
+
+					<input type="hidden" th:value="${pcno_top}" name="pcno_top" /> <input
+						type="hidden" id="fil" value="0" name="page" />
 
 
-            <div class="col-lg-4 col-md-6 col-sm-6"
-               th:each="recipelist : ${recipelist}">
+				</div>
+			</div>
+		</div>
 
-               <div class="blog__item">
-
-                  <div class="product__item__pic set-bg" id="img"
-                     th:data-setbg="${recipelist.rimg}"
-                     th:data-rid="${recipelist.rid}"
-                     th:onclick="gorecipeDetailPage(this)"></div>
-                     
-                  <div class="blog__item__text">
-                     <span th:text="${recipelist.rregdate}"></span>
-                     <h5 th:text="${recipelist.rtitle}"></h5>
-                     <a href="#">레시피 보러가기</a>
-                  </div>
-               </div>
-            </div>
-         
+		<div class="container">
+			<div class="row">
 
 
-         </div>
-      </div>
-   </section>
-      <script type="text/javascript" defer>
-      
-               function gorecipeDetailPage(e) {
-                  let rid = $(e).data('rid');
-                  
-                  location.href = "/recipe/recipeDetail?rid=" + rid
-               }
-      </script>
-            
-   <!-- Blog Section End -->
+				<div class="col-lg-4 col-md-6 col-sm-6"
+					th:each="recipelist : ${recipelist}">
 
-   
-   <!-- Footer Section End -->
+					<div class="blog__item">
 
-   <th:block th:replace="/includes/footer :: footer"></th:block>
+						<div class="product__item__pic set-bg" id="img"
+							th:data-setbg="${recipelist.rimg}"
+							th:data-rid="${recipelist.rid}"
+							th:onclick="gorecipeDetailPage(this)"></div>
+
+						<div class="blog__item__text">
+							<span th:text="${recipelist.rregdate}">등록날짜</span>
+							<h5 th:text="${recipelist.rtitle}"></h5>
+
+							<a href="#">레시피 보러가기</a>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript" defer>
+		function gorecipeDetailPage(e) {
+			let rid = $(e).data('rid');
+
+			location.href = "/recipe/recipeDetail?rid=" + rid
+		}
+	</script>
+
+	<!-- Blog Section End -->
+
+
+	<!-- Footer Section End -->
+
+	<th:block th:replace="/includes/footer :: footer"></th:block>
 </body>
 </html>

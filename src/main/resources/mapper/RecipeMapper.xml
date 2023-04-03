@@ -27,6 +27,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+
+	<select id="recipelists" resultType="RecipeVO">
+		select *
+		from recipe
+		<trim prefix="ORDER BY">
+			<if test="sort == 1 "> rregdate desc</if>
+			<if test="sort == 2 "> rlevel desc</if>
+			<if test="sort == 3 "> rtime desc</if>
+		</trim>
+		
+	</select>
+
+
+
 </mapper>
 
 

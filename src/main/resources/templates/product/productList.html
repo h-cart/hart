@@ -19,8 +19,6 @@
 	let sort = 1;
 	$(document).ready(function(){
 
-		//pcno 처음에 초기화를 어떻게 해야 s
-		/* var pcno = 0; */
 		let pcno = $("input[name=pcno]").val();
 		
 		
@@ -31,17 +29,13 @@
 		$(window).scroll(function() {
 			console.log("scroll(function()==");
 			
-								//창남은 길이          	// 내가 보는 창의 길이 - 창의 전체 길이 			
 		if(($(window).scrollTop()) >= $(document).height()- $(window).height()-1  ){ 
     	   
     	    console.log("페이지들어오니?->" + page);
-			/* let pcno = $("input[name=pcno]").val();  */
     	       sendpcno($("input[name=pcno]").val(),page,sort); 
-    	     /*sendpcno(pcno); */
     	  }
 		}); 
 	});
-/* 		$(window).ready(sendpcno(pcno, page)); */
 
       function sendpcno(pcno,pnum,order) {
 		console.log("pnum>>"+pnum);
@@ -58,24 +52,6 @@
 		console.log(pcno,pnum,order);
 	    let pcno_top = $("input[name=pcno_top]").val();
 		
-	   /*  let page = $("input[name=page]").val();  */
-	    
-  
-    /* 	  
-        console.log("function sendpcno의 펑션작동됨2 pcno=" + pcno +"<<       >>" + "pcno_top=" + pcno_top);
-          
-        	    let sort_option = $('.selected');
-        	    
-        	    let sort = sort_option.data('value');
-        	    console.log(sort_option, sort);
-        	    if (sort == null || sort== 0) {
-        	     sort =1;
-        	    } else {
-        	      console.log('sort 가 null이 아니다.good');
-        	    }    
-      console.log("sort 콘솔----->>"+ sort);
-      console.log("page ---------->>"+ page); */
-        	
           let element = {
             pcno: pcno,
             page: page,
@@ -127,9 +103,6 @@
                        </div>`; 
               });
 
-            /*  $("#productlistajax").html(str); */
-          
-            	         
             console.log("if 쪽 page------------>>"+ page);
             
            if (page == 0) {
@@ -138,15 +111,7 @@
         	} else {
         	  $("#productlistajax").append(str);
         	} 
-        	/*  $("#productlistajax").html(str); */
-            
-       /*      if(result.length < 9){
-          		
-            }else{
-             console.log(result.length)
-          	  page++;
-             	$("input[name=page]").val(page);
-            } */
+       
             console.log(result.length)
         	  page++;
            	$("input[name=page]").val(page);
@@ -231,14 +196,10 @@
 												<ul class="nice-scroll"
 													style="overflow-y: hidden; outline: none; touch-action: none;"
 													tabindex="1">
-													<li th:each="cList:${cList}">
-														<a href="#"
-															th:text="${cList.pcategory}"
-															th:onclick="sendpcno([[${cList.pcno}]] ,0,1);">
-															
-														</a>
-												<input type="hidden" th:value="${cList.pcno}" name="pcno" />
-													</li>
+													<li th:each="cList:${cList}"><a href="#"
+														th:text="${cList.pcategory}"
+														th:onclick="sendpcno([[${cList.pcno}]] ,0,1);"> </a> <input
+														type="hidden" th:value="${cList.pcno}" name="pcno" /></li>
 												</ul>
 
 
@@ -271,10 +232,11 @@
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6">
 								<div class="shop__product__option__left">
-									<p>Showing 1–9 of 9    results</p>
+									<p>Showing 1–9 of 9 results</p>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="shop__product__option__right">
 									<p>필터 :</p>
 									<select style="display: none">
 										<option value="">Low To High</option>
@@ -290,14 +252,14 @@
 												낮은순</li>
 											<li data-value="3" data-type="sort" class="option">판매량
 												높은순</li>
-											<li data-value="4" data-type="sort" class="option" >판매량
+											<li data-value="4" data-type="sort" class="option">판매량
 												낮은순</li>
 										</ul>
 
 										<input type="hidden" th:value="${pcno_top}" name="pcno_top" />
-										<input type="hidden" id="fil" value="0" name="page" /> 
-										 
-									  	<!-- <input type="hidden" id="fil" value="0" name="pcno" />  -->
+										<input type="hidden" id="fil" value="0" name="page" />
+
+										<!-- <input type="hidden" id="fil" value="0" name="pcno" />  -->
 
 
 									</div>
@@ -305,12 +267,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="row" id="productlistajax">
-						
-					</div>
-					<div class="row"></div>
+					<div class="row" id="productlistajax"></div>
 				</div>
+
+				<div class="row"></div>
 			</div>
+		</div>
 		</div>
 	</section>
 	<!-- Shop Section End -->
