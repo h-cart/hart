@@ -4,19 +4,72 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hart.mapper.AdminEventMapper">
-	<select id="getEventList" parameterType="AdminEventVO"
+	<select id="getEventList" parameterType="Criteria"
 		resultType="AdminEventVO">
-		SELECT * FROM crecipe
+
+		SELECT * FROM (
+		SELECT evid, crid,mid, crtitle,crregdate,crvote ,
+		rownum rn
+		FROM crecipe
 		<where>
-			<if test="evid != null">
-				evid = #{evid}
+ 			<![CDATA[
+			rownum <= #{pageNum} * #{amount}
+			]]>
+			<if test="evid != 0">
+				and evid = #{evid}
 			</if>
 		</where>
-		order by crvote desc, crregdate DESC
+		order by evid desc, crregdate DESC )
+		<![CDATA[
+		where rn > (#{pageNum}-1) * #{amount}
+		]]>
 	</select>
+
+	<select id="getVoteList" parameterType="Criteria"
+		resultType="AdminEventVO">
+
+		SELECT evid, crid,mid, crtitle,crregdate,crvote
+		FROM crecipe
+		<where>
+			crvote=1
+			<if test="evid != 0">
+				and evid = #{evid}
+			</if>
+		</where>
+		order by evid desc, crregdate DESC
+	</select>
+
+	<select id="getEventCateList" resultType="AdminEventVO">
+
+		SELECT evid, evtitle
+		FROM
+		event_list
+		order by evid desc
+
+	</select>
+
+
+	<select id="getTotalCount" resultType="int">
+
+		SELECT count(*) FROM (
+		SELECT *
+		FROM crecipe
+		<where>
+
+			<if test="evid != 0">
+				and evid = #{evid}
+			</if>
+		</where>
+		)
+
+	</select>
+
+
+
 	<update id="voteList" parameterType="AdminEventVO">
 		update crecipe
-		set crvote =#{crvote}
+		set crvote
+		=#{crvote}
 		where crid = #{crid}
 	</update>
 </mapper>

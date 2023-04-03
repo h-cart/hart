@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.hart.domain.admin.AdminEventVO;
+import com.hart.domain.admin.Criteria;
 import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
 import com.hart.domain.event.CRecipeVO;
@@ -25,9 +26,15 @@ import com.hart.domain.event.EventVoteVO;
  */
 public interface AdminEventService {
 
-	List<AdminEventVO> getList(AdminEventVO event);
-
 	void voteList(AdminEventVO event);
+
+	List<AdminEventVO> getList(Criteria cri);
+
+	int getTotalCount(Criteria cri);
+
+	List<AdminEventVO> getEventList();
+
+	List<AdminEventVO> getVoteList(Criteria cri);
 	
 
 	

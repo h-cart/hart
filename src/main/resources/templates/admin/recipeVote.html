@@ -436,8 +436,14 @@
 										</tr>
 									</thead>
 									<tbody>
+										<tr th:if="${#lists.isEmpty(lists)}">
+											<td
+												colspan="6"
+												style="text-align: center;"
+											>No</td>
+										</tr>
 										<tr
-											th:if="${lists != null}"
+									
 											th:each="list : ${lists}"
 										>
 											<td th:text="${list.crid}"></td>
@@ -611,7 +617,7 @@
 	</div>
 	<form
 		id="pageForm"
-		action="/admin"
+		action="/admin/recipeVote"
 		method="get"
 	>
 		<input
@@ -636,7 +642,7 @@
 
 		function Voting(v, e) {
 			let evid = $("input[name='evid']").val();
-			location.href = "/admin/votelist?crid=" + e + "&crvote=" + v
+			location.href = "/admin/recipeVotelist?crid=" + e + "&crvote=" + v
 					+ "&evid=" + evid;
 
 		}
