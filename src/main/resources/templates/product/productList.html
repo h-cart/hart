@@ -16,15 +16,16 @@
 
 	<script>
 	let page = 0;
+	let sort = 1;
 	$(document).ready(function(){
-		
+
 		//pcno 처음에 초기화를 어떻게 해야 s
 		/* var pcno = 0; */
 		let pcno = $("input[name=pcno]").val();
 		
 		
 		console.log("pcno********>>"+pcno);
-		sendpcno(pcno,page);
+		sendpcno(pcno,page,sort);
 		
 		
 		$(window).scroll(function() {
@@ -35,47 +36,51 @@
     	   
     	    console.log("페이지들어오니?->" + page);
 			/* let pcno = $("input[name=pcno]").val();  */
-    	       sendpcno($("input[name=pcno]").val()); 
+    	       sendpcno($("input[name=pcno]").val(),page,sort); 
     	     /*sendpcno(pcno); */
     	  }
 		}); 
 	});
 /* 		$(window).ready(sendpcno(pcno, page)); */
 
-      function sendpcno(pcno,pnum) {
-		console.log(pnum);
+      function sendpcno(pcno,pnum,order) {
+		console.log("pnum>>"+pnum);
 		if(pnum==0) {
 			page = pnum;
 			$("input[name=pcno]").val(pcno);
            	$("input[name=page]").val(pnum);
+           	$(".selected").removeClass("selected");
+           	$(".focus").removeClass("focus");
+           	$('[data-value="1"]').addClass("selected focus");
+           	$(".current").text("가격 높은순");
+
 		}
+		console.log(pcno,pnum,order);
 	    let pcno_top = $("input[name=pcno_top]").val();
 		
 	   /*  let page = $("input[name=page]").val();  */
 	    
   
-    	  
+    /* 	  
         console.log("function sendpcno의 펑션작동됨2 pcno=" + pcno +"<<       >>" + "pcno_top=" + pcno_top);
           
-		
-        	    let sort_option = document.querySelector('.option.selected');
-        	    let sort = sort_option.dataset.value;
+        	    let sort_option = $('.selected');
+        	    
+        	    let sort = sort_option.data('value');
+        	    console.log(sort_option, sort);
         	    if (sort == null || sort== 0) {
         	     sort =1;
         	    } else {
         	      console.log('sort 가 null이 아니다.good');
-        	    }
-        	    
-        	    
+        	    }    
       console.log("sort 콘솔----->>"+ sort);
-      console.log("page ---------->>"+ page);
-     
+      console.log("page ---------->>"+ page); */
         	
           let element = {
             pcno: pcno,
             page: page,
             pcno_top: pcno_top,
-            sort : sort
+            sort : order
           };
           
       console.table("엘리먼트 >>>>>>>>>"+element);
@@ -90,6 +95,7 @@
             },
             dataType: "json",
             success: function (result) {
+            	console.log("버튼누르면 들어온다==")
               let str = "";
 				/* console.log(result); */
               $.each(result.productlist, function (index, product) {
@@ -126,21 +132,24 @@
             	         
             console.log("if 쪽 page------------>>"+ page);
             
-            if (page == 0) {
+           if (page == 0) {
         	  $("#productlistajax").html(str);
-        	  
+
         	} else {
         	  $("#productlistajax").append(str);
-        	}
+        	} 
+        	/*  $("#productlistajax").html(str); */
             
-            if(result.length < 9){
+       /*      if(result.length < 9){
           		
             }else{
              console.log(result.length)
           	  page++;
              	$("input[name=page]").val(page);
-            }
-
+            } */
+            console.log(result.length)
+        	  page++;
+           	$("input[name=page]").val(page);
               
               $(".set-bg").each(function () {
                 var bg = $(this).data("setbg");
@@ -156,7 +165,13 @@
           
         }  //function sendpcno(pcno)
    
-        
+        //클릭 옵션 하면 function작동함 ->0넣기
+         $(document).on("click",".option", function(){
+        	 sort = $(this).data('value');
+        	 console.log(sort);
+        	 sendpcno($("input[name=pcno]").val(),0,sort);
+         })
+
          
     </script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -219,7 +234,7 @@
 													<li th:each="cList:${cList}">
 														<a href="#"
 															th:text="${cList.pcategory}"
-															th:onclick="sendpcno([[${cList.pcno}]] ,0);">
+															th:onclick="sendpcno([[${cList.pcno}]] ,0,1);">
 															
 														</a>
 												<input type="hidden" th:value="${cList.pcno}" name="pcno" />
@@ -256,11 +271,10 @@
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6">
 								<div class="shop__product__option__left">
-									<p>Showing 1–12 of 126 results</p>
+									<p>Showing 1–9 of 9    results</p>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="shop__product__option__right">
 									<p>필터 :</p>
 									<select style="display: none">
 										<option value="">Low To High</option>
@@ -268,12 +282,12 @@
 										<option value="">$55 - $100</option>
 									</select>
 									<div class="nice-select" tabindex="0">
-										<span class="current">가격 낮은순</span>
+										<span class="current">가격 높은순</span>
 										<ul class="list">
 											<li data-value="1" data-type="sort" class="option selected">가격
-												낮은순</li>
-											<li data-value="2" data-type="sort" class="option">가격
 												높은순</li>
+											<li data-value="2" data-type="sort" class="option">가격
+												낮은순</li>
 											<li data-value="3" data-type="sort" class="option">판매량
 												높은순</li>
 											<li data-value="4" data-type="sort" class="option" >판매량
@@ -283,7 +297,7 @@
 										<input type="hidden" th:value="${pcno_top}" name="pcno_top" />
 										<input type="hidden" id="fil" value="0" name="page" /> 
 										 
-									  	<input type="hidden" id="fil" value="0" name="pcno" /> 
+									  	<!-- <input type="hidden" id="fil" value="0" name="pcno" />  -->
 
 
 									</div>

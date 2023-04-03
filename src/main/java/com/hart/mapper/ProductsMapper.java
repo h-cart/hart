@@ -19,7 +19,6 @@ public interface ProductsMapper {
 	// 2대분류 헤더 카테고리 가져오기
 	public List<CategoryVO> getcategorybar();
 
-	// public List<CategoryVO> getcategorysmall(String pid);
 
 	// 3 제품 상페 이미지 가져오기
 	public ProductsVO getproductDetail(String pid);
@@ -33,18 +32,6 @@ public interface ProductsMapper {
 	//에이작스 및 소 카테고리 및 필터적용 Mapper
 	public List<ListVO> Productlist(ListVO list);
 
-	// public List<ProductsVO> List(ListVO ListVO);
-	// 합치려다 stop
-	/* public List<ProductsidesamllVO> sideamllcategory(int pcno); */
 
-	// 소카테고리 클릭시 해당 카테고리 제품 부분만 가져오기
-	// public List<ProductsVO> getproductslistajax(int pcno, int page);
-
-	// 합친것
-	// public List<ListVO> List(ListVO ListVO);
-	// public RecipeVO recipelist();
-
-	// 5카테고리 소분류 가져오기
-	// public List<CategoryVO> getcategorysmall(int pcno);
 
 }

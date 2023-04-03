@@ -8,4 +8,6 @@ public class RecipeContentVO {
 	String rcimg;
 	String rcstep;
 	String rid;
+	String serving;
+	String rreadyingredient;
 }

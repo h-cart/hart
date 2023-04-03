@@ -86,13 +86,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="Productlist"
 		resultType="com.hart.domain.product.ListVO"
 		parameterType="com.hart.domain.product.ListVO">
-		SELECT * 
+		select * from
+		(
+		SELECT pa.* , rownum rn
 		FROM (
-		select pi.pimg,p.pname, p.pprice, p.pdiscount,p.pcno,p.pid ,p.stag
-		,pc.pcategory,pc.pcno_top,rownum as rn
+		select pi.pimg,p.pname, p.pprice, p.pdiscount,p.pcno,p.pid ,p.stag,pc.pcategory,pc.pcno_top
 		from products p
-		join (select
-		pimg, pid from product_img where pdepth =0 ) pi on pi.pid=p.pid
+		join (select pimg, pid from product_img where pdepth =0 ) pi 
+		on pi.pid=p.pid
+		
 		join product_category pc on p.pcno = pc.pcno and pc.pcno_top = #{pcno_top}
 		<where>
 
@@ -107,7 +109,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="sort == 4 "> pcount asc </if>
 		</trim>
 		) pa
-	WHERE rn BETWEEN ((#{page} * 9) + 1) AND ((#{page} * 9) + 9)
+		)
+	 	where rn between (#{page} * 9 + 1) AND (#{page} * 9 + 9)
+
 
 	</select>
 </mapper>
