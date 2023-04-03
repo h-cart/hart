@@ -49,8 +49,7 @@ public class RecipeController {
 			// log.info("++++"+model);
 			// model.getAttribute(recipeDetail);
 
-			// System.out.println( "recipeDetail
-			// controller========>>>>>>>>>>"+recipeDetail);
+			System.out.println( "recipeDetail controller========>>>>>>>>>>"+recipeDetail);
 
 		} catch (Exception e) {
 			e.printStackTrace();

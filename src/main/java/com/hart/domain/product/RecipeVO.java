@@ -19,6 +19,9 @@ public class RecipeVO {
 
 	String rcimg;
 	String rcstep;
+	String serving;
+	String rreadyingredient;
+		   
 
 
 };
