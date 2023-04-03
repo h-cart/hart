@@ -402,7 +402,7 @@
 									<a
 										class="navbar-brand"
 										href="#"
-									>이벤트 참여 관리</a>
+									>레시피 투표 리스트</a>
 								</div>
 								<select
 									class="mb-3"
@@ -413,8 +413,8 @@
 										th:each="list : ${eventLists}"
 										th:value="${list.evid}"
 										th:text="${list.evtitle}"
-										th:class="${lists[0].evid}"
-										th:selected="${lists[0].evid==list.evid? 'true':'false'}"
+										th:class="${evid}"
+										th:selected="${evid==list.evid? 'true':'false'}"
 									>전체</option>
 								</select>
 							</nav>
@@ -440,75 +440,41 @@
 											<td
 												colspan="6"
 												style="text-align: center;"
-											>No</td>
+											>레시피 투표 리스트에 추가된 레시피가 없습니다.</td>
 										</tr>
-										<tr
-									
-											th:each="list : ${lists}"
-										>
-											<td th:text="${list.crid}"></td>
-											<td th:text="${list.crtitle}"></td>
-											<td th:text="${list.mid}"></td>
-											<td
-												th:text="${#dates.format(list.crregdate, 'yyyy.MM.dd')}"
-												style="text-align: center;"
-											></td>
-											<td
-												th:text="${list.crvote == 1 ? 'Y' : 'N'}"
-												style="text-align: center;"
-											></td>
-											<td style="display: flex; justify-content: space-around;">
-												<button
-													type="button"
-													th:class="${list.crvote == 1 ? 'btn btn-outline-danger' : 'btn btn-outline-primary'}"
-													th:onclick="Voting([[${list.crvote == 1 ? '0' : '1'}]],[[${list.crid}]]);"
-													th:text="${list.crvote == 1 ? '취소' : '등록'}"
-												>등록</button>
-												<button
-													type="button"
-													class="btn btn-outline-info"
-													th:onclick="ViewDetail([[${list.crid}]])"
-													data-bs-toggle="modal"
-													data-bs-target="#exampleModal"
-												>상세보기</button>
-											</td>
-										</tr>
+										<th:block th:if="${not #lists.isEmpty(lists)}">
+											<tr th:each="list : ${lists}">
+												<td th:text="${list.crid}"></td>
+												<td th:text="${list.crtitle}"></td>
+												<td th:text="${list.mid}"></td>
+												<td
+													th:text="${#dates.format(list.crregdate, 'yyyy.MM.dd')}"
+													style="text-align: center;"
+												></td>
+												<td
+													th:text="${list.crvote == 1 ? 'Y' : 'N'}"
+													style="text-align: center;"
+												></td>
+												<td style="display: flex; justify-content: space-around;">
+													<button
+														type="button"
+														th:class="${list.crvote == 1 ? 'btn btn-outline-danger' : 'btn btn-outline-primary'}"
+														th:onclick="Voting([[${list.crvote == 1 ? '0' : '1'}]],[[${list.crid}]]);"
+														th:text="${list.crvote == 1 ? '취소' : '등록'}"
+													>등록</button>
+													<button
+														type="button"
+														class="btn btn-outline-info"
+														th:onclick="ViewDetail([[${list.crid}]])"
+														data-bs-toggle="modal"
+														data-bs-target="#exampleModal"
+													>상세보기</button>
+												</td>
+											</tr>
+										</th:block>
 									</tbody>
 								</table>
 							</div>
-							<nav>
-								<ul
-									class="pagination"
-									style="justify-content: center;"
-								>
-									<li
-										th:if="${pageMaker.prev}"
-										class="page-item"
-									><a
-										class="page-link"
-										href="#"
-										aria-label="Previous"
-									> <span aria-hidden="true">&laquo;</span>
-									</a></li>
-									<li
-										class="page-item"
-										th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}"
-									><a
-										class="page-link"
-										th:href="${num}"
-										th:text="${num}"
-									>1</a></li>
-									<li
-										th:if="${pageMaker.next}"
-										class="page-item"
-									><a
-										class="page-link"
-										href="#"
-										aria-label="Next"
-									> <span aria-hidden="true">&raquo;</span>
-									</a></li>
-								</ul>
-							</nav>
 						</div>
 					</div>
 				</div>
@@ -622,17 +588,9 @@
 	>
 		<input
 			type="hidden"
-			name="pageNum"
-			th:value="${pageMaker.cri.pageNum}"
-		> <input
-			type="hidden"
-			name="amount"
-			th:value="${pageMaker.cri.amount}"
-		> <input
-			type="hidden"
 			id="evid"
 			name="evid"
-			th:value="${pageMaker.cri.evid}"
+			th:value="${evid}"
 		>
 	</form>
 	<script>

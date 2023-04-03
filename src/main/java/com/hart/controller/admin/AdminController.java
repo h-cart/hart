@@ -50,22 +50,13 @@ public class AdminController {
 		log.info(cri);
 		if (cri.getEvid() == 0) {
 			cri.setEvid(eventList.get(0).getEvid());
-			log.info("여기 실행:");
 		}
-		int totalCnt = eService.getTotalCount(cri);
 
 		List<AdminEventVO> lists = eService.getVoteList(cri);
-		if (lists.isEmpty()) {
-			AdminEventVO ad = new AdminEventVO();
-			ad.setEvid(cri.getEvid());
-			ad.setEvtitle("없습니다.");
-			lists.add(ad);
 
-		}
-
+		model.addAttribute("evid", cri.getEvid());
 		model.addAttribute("lists", lists);
 		model.addAttribute("eventLists", eventList);
-		model.addAttribute("pageMaker", new PageDTO(cri, totalCnt));
 
 		return "admin/recipeVote";
 	}
