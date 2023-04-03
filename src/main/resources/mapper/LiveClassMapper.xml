@@ -27,5 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where mid = #{mid}  
 	</select>
 	
+	<select id="getMyVideo"  resultType="com.hart.domain.liveClass.LiveClassVideoDTO">
+		select lcname,vpath,lcexplain,lcingredient,lcteacher
+		from live_class lc left join videos v on lc.lcid = v.lcid
+		where lc.lcid = #{lcid}
+	</select>
+	
 	 
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.LiveClassVideoDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 
 /**
@@ -26,6 +27,10 @@ public interface LiveClassService {
 	public LiveClassDetailInfoDTO getClassDetail(String lcid);
 	//myPage liveClass 목록 불러오기
 	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid);
+	//liveClass video 불러오기
+	public LiveClassVideoDTO getClassVideo(String lcid);
+	
+	
 	
 	
 	
