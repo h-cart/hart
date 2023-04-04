@@ -29,13 +29,7 @@ public class ProductRestController {
 
    @Autowired
    private ProductsService pService;
-<<<<<<< HEAD
 
-
-=======
-   
-  
->>>>>>> 8f1c25e5e68f58ab3f394779b61c4606e9da5f9a
    @Autowired
    private RecipeService recipeservice;
 
