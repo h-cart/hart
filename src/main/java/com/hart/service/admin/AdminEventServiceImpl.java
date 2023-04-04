@@ -2,11 +2,14 @@ package com.hart.service.admin;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hart.domain.admin.AdminEventVO;
 import com.hart.domain.admin.Criteria;
+import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
 import com.hart.domain.event.CRecipeVO;
 import com.hart.domain.event.EventVoteVO;
@@ -55,32 +58,30 @@ public class AdminEventServiceImpl implements AdminEventService {
 	}
 
 	@Override
+	@Transactional
 	public void recipeRegister(AdminEventVO event) {
 		EventVoteVO ev = new EventVoteVO();
 		ev.setCrid(event.getCrid());
+
 		CRecipeVO recipe = eventService.getRecipeDetail(ev);
+		RecipeVO re = new RecipeVO(recipe);
+		mapper.insertCRecipe(re.getRid(), re);
 
-		RecipeVO re = new RecipeVO();
-		re.setRid("CR" + recipe.getCrid());
-		re.setRtitle(recipe.getCrtitle());
-		re.setRimg(recipe.getCrMimg());
-		re.setRmingredient(recipe.getCrmingredient());
-		re.setRlevel(recipe.getCrlevel());
-		re.setRtime(recipe.getCrtime());
-		re.setRclick(0);
-		re.setRcano(recipe.getCrcano());
-		re.setRdetail(recipe.getCrdetail());
-
-		List<CRIngredientVO> cList = recipe.getCrecipeIngredientVo();
-
-		String tmp = "";
-		for (CRIngredientVO a : cList) {
-
-			tmp += a.getIname() + " " + a.getCricount() + " \n";
+		int s = 1;
+		for (CRContentVO content : re.getRecipeContent()) {
+			content.setStep("Step" + s++);
+			content.setCrimg("'/event/api/display?imgName='" + content.getCrimg());
+			mapper.insertCRContent(re.getRid(), content);
 
 		}
-		re.setRreadyingredient(tmp);
-		log.info(re);
+		for (CRIngredientVO ingredient : recipe.getCrecipeIngredientVo()) {
+			if (!ingredient.getPid().equals("undefined")) {
+				log.info("여기 동작1---------" + ingredient);
+				mapper.insertCRIngredient(re.getRid(), ingredient);
+
+			}
+
+		}
 
 	}
 
