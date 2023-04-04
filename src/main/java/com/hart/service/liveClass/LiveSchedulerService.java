@@ -62,6 +62,7 @@ public class LiveSchedulerService {
 	}
 	
 	/*@@@@@@@@@@@@@@@@@@@@@@@@@테스트용 코드@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+	/*
 	@Scheduled(cron = "10 * * * * *")
 	public void firstAlarmService() {
 		
@@ -93,6 +94,6 @@ public class LiveSchedulerService {
 		alarmMapper.addApplicantTodayAlarm();
 		
 	}
-	
+	*/
 	
 }
