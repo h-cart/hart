@@ -194,7 +194,7 @@
                                  <p th:text="${Detail.detail.pdetail}"></p>
                               </div>
                               <img th:each="detail, i : ${Detail.pimg}"
-                                 th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg) - 1}"
+                                 th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg)}"
                                  th:src="${detail.pimg}">
 
                               <p th:src="${Detail.detail.pbdesc}"></p>
