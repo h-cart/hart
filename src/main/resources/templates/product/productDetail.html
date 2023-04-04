@@ -29,7 +29,53 @@
       flex-wrap: wrap;
    }
 </style>
+<style>
+	.product__cart__item__pic {
+		position: relative;
+	}
 
+	.checkbox {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+
+	}
+
+	.price-box h5,
+	.price-box h6 {
+		display: inline-block;
+		margin: 0;
+	}
+
+	.product__cart__item__text {
+		overflow: hidden;
+	}
+   .pimg {
+      width : 90px;
+      height: 90px;
+   }
+	.product__cart__item__text .cost {
+		color: #999;
+		/* 회색으로 표시 */
+		font-size: 0.8em;
+		/* 작게 보이도록 설정 */
+		text-decoration: line-through;
+		/* 선 그어지도록 설정 */
+	}
+
+	.empty-basket {
+		text-align: center;
+		font-size: 20px;
+		color: #666;
+	}
+
+	@media (max-width: 768px) {
+		.empty-basket {
+			font-size: 16px;
+		}
+	}
+</style>
 <body style="">
    <script type="text/javascript" defer>
 
@@ -91,7 +137,7 @@
                                  class="fa fa-angle-up dec qtybtn"></span><span
                                  class="fa fa-angle-up dec qtybtn"></span><span
                                  class="fa fa-angle-up dec qtybtn"></span>
-                              <input class="item" id="quantity-1" name='quantity' type="text" value="1">
+                              <input class="item" id="quantity_-1" name='quantity' type="text" value="1">
                               <span class="fa fa-angle-down inc qtybtn"></span> <span
                                  class="fa fa-angle-down inc qtybtn"></span> <span
                                  class="fa fa-angle-down inc qtybtn"></span><span
@@ -100,8 +146,8 @@
                            </div>
 
                         </div>
-                        <input class="item" id="pid-1" type="hidden" name='pid' th:value="${Detail.detail.pid}" />
-                        <a href="#" id='addToCart' class="primary-btn">장바구니 담기</a> <a href="#"
+                        <input class="item" id="-1" type="hidden" th:data-value="${Detail.detail.pid}" name='pid' th:value="${Detail.detail.pid}" />
+                        <a href="#"  class="primary-btn addToCart">장바구니 담기</a> <a href="#"
                            class="primary-btn orderDirect">바로구매 하기</a>
                      </div>
                      <div class="product__details__last__option">
@@ -225,10 +271,10 @@
          var pamounts = [];
          var pids = [];
          $("input[name=cartlist]:checked").each(function () {
-            $(this).prop("checked", false);
+            $(this).prop("checked",false);
             var pos = $(this).prop('id').split('_')[1];
-            var pid = $('#pid' + pos).val();
-            var quantity = $("#quantity" + pos).val();
+            var pid = $('#' + pos).data('value');
+            var quantity = $("#quantity_" + pos).val();
             pids.push(pid);
             console.log(pos, pid, quantity);
             pamounts.push(quantity);
@@ -268,7 +314,7 @@
       };
 
 
-      $("#addToCart").on("click", function () {
+      $(".addToCart").on("click", function () {
          addToCart();
       });
    /*]]>*/

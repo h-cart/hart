@@ -42,8 +42,11 @@ public class LiveClassServiceImpl implements LiveClassService{
 		sb.append(dto.getLcdate()+" ("+dto.getLcdayofweek()+") "+dto.getLcstart()+"-"+dto.getLcend());
 		infoDTO.setWholeDate(sb.toString());
 		infoDTO.setIngredientList(dto.getLcingredient().replaceAll(", ","@").split("@"));
-		infoDTO.setLctExplainList(dto.getLctexplain().replaceAll(" - ","@").substring(1).split("@"));
-		infoDTO.setLcStudentList(dto.getLcstudent().replaceAll(" - ", "@").substring(1).split("@"));
+		infoDTO.setLctExplainList(dto.getLctexplain().substring(1).split("-"));
+		infoDTO.setLcStudentList(dto.getLcstudent().substring(1).split("-"));
+		
+		//infoDTO.setLcStudentList(dto.getLcstudent().replaceAll(" - ", "@").substring(1).split("@"));
+		
 		//infoDTO.setLctExplainList(dto.getLctexplain().split("-"));
 		//infoDTO.setLcStudentList(dto.getLcstudent().split(" - "));
 		infoDTO.setLiveClassListDTO(dto);

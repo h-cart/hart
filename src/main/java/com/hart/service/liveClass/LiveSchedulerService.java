@@ -62,33 +62,41 @@ public class LiveSchedulerService {
 		alarmMapper.addApplicantTodayAlarm();
 	}
 
+	
+	/*@@@@@@@@@@@@@@@@@@@@@@@@@테스트용 코드@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 	/*
-	 * @@@@@@@@@@@@@@@@@@@@@@@@@테스트용 코드@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	 * 
-	 * @Scheduled(cron = "10 * * * * *") public void firstAlarmService() {
-	 * 
-	 * log.info("테스트용 10초마다 호출하는 코드"); Map<String,Object> map = new HashMap<>();
-	 * alarmMapper.getApplicantInfoCall(map); List<LiveClassApplicantDTO> list =
-	 * (List<LiveClassApplicantDTO>)map.get("key"); log.info(list);
-	 * 
-	 * Message message = new Message(); message.setFrom("01096202055");
-	 * 
-	 * StringBuilder sb = new StringBuilder(); for(LiveClassApplicantDTO dto : list)
-	 * { sb.append(dto.getLcday()+" "+dto.getLcstart()+" ~ "+dto.getLcend());
-	 * message.setTo(dto.getAlertPhone());
-	 * message.setText("[알람] 내일은 '"+dto.getLcname()+"' 수업 예정일입니다."+sb.toString()
-	 * +" 강의 시간에 잊지말고 참석해 주세요!"); this.messageService.sendOne(new
-	 * SingleMessageSendingRequest(message)); sb.setLength(0); }
-	 * 
-	 * System.out.println("hello Alarm Service");
-	 * 
-	 * }
-	 * 
-	 * @Scheduled(cron = "20 * * * * *") public void alarmService() {
-	 * log.info("테스트용 alarmService 20초 마다 호출");
-	 * alarmMapper.addApplicantTodayAlarm();
-	 * 
-	 * }
-	 */
+	@Scheduled(cron = "10 * * * * *")
+	public void firstAlarmService() {
+		
+		log.info("테스트용 10초마다 호출하는 코드");
+		Map<String,Object> map = new HashMap<>();
+		alarmMapper.getApplicantInfoCall(map);
+		List<LiveClassApplicantDTO> list = (List<LiveClassApplicantDTO>)map.get("key");
+		log.info(list);
+		
+		Message message = new Message();
+		message.setFrom("01096202055");
+
+		StringBuilder sb = new StringBuilder();
+		for(LiveClassApplicantDTO dto : list) {
+			sb.append(dto.getLcday()+" "+dto.getLcstart()+" ~ "+dto.getLcend());
+			message.setTo(dto.getAlertPhone());
+			message.setText("[알람] 내일은 '"+dto.getLcname()+"' 수업 예정일입니다."+sb.toString()+" 강의 시간에 잊지말고 참석해 주세요!");
+			this.messageService.sendOne(new SingleMessageSendingRequest(message));
+			sb.setLength(0);
+		}
+		
+		System.out.println("hello Alarm Service");
+		
+	}
+	
+	@Scheduled(cron = "20 * * * * *")
+	public void alarmService() {
+		log.info("테스트용 alarmService 20초 마다 호출");
+		alarmMapper.addApplicantTodayAlarm();
+		
+	}
+	*/
+	
 
 }

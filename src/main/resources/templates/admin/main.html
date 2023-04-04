@@ -402,7 +402,7 @@
 									<a
 										class="navbar-brand"
 										href="#"
-									>이벤트 참여 관리</a>
+									>참여 레시피 리스트</a>
 								</div>
 								<select
 									class="mb-3"
@@ -436,37 +436,42 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr
-											th:if="${lists != null}"
-											th:each="list : ${lists}"
-										>
-											<td th:text="${list.crid}"></td>
-											<td th:text="${list.crtitle}"></td>
-											<td th:text="${list.mid}"></td>
+										<tr th:if="${#lists.isEmpty(lists)}">
 											<td
-												th:text="${#dates.format(list.crregdate, 'yyyy.MM.dd')}"
+												colspan="6"
 												style="text-align: center;"
-											></td>
-											<td
-												th:text="${list.crvote == 1 ? 'Y' : 'N'}"
-												style="text-align: center;"
-											></td>
-											<td style="display: flex; justify-content: space-around;">
-												<button
-													type="button"
-													th:class="${list.crvote == 1 ? 'btn btn-outline-danger' : 'btn btn-outline-primary'}"
-													th:onclick="Voting([[${list.crvote == 1 ? '0' : '1'}]],[[${list.crid}]]);"
-													th:text="${list.crvote == 1 ? '취소' : '등록'}"
-												>등록</button>
-												<button
-													type="button"
-													class="btn btn-outline-info"
-													th:onclick="ViewDetail([[${list.crid}]])"
-													data-bs-toggle="modal"
-													data-bs-target="#exampleModal"
-												>상세보기</button>
-											</td>
+											>레시피 투표 리스트에 추가된 레시피가 없습니다.</td>
 										</tr>
+										<th:block th:if="${not #lists.isEmpty(lists)}">
+											<tr th:each="list : ${lists}">
+												<td th:text="${list.crid}"></td>
+												<td th:text="${list.crtitle}"></td>
+												<td th:text="${list.mid}"></td>
+												<td
+													th:text="${#dates.format(list.crregdate, 'yyyy.MM.dd')}"
+													style="text-align: center;"
+												></td>
+												<td
+													th:text="${list.crvote == 1 ? 'Y' : 'N'}"
+													style="text-align: center;"
+												></td>
+												<td style="display: flex; justify-content: space-around;">
+													<button
+														type="button"
+														th:class="${list.crvote == 1 ? 'btn btn-outline-danger' : 'btn btn-outline-primary'}"
+														th:onclick="Voting([[${list.crvote == 1 ? '0' : '1'}]],[[${list.crid}]]);"
+														th:text="${list.crvote == 1 ? '취소' : '등록'}"
+													>등록</button>
+													<button
+														type="button"
+														class="btn btn-outline-info"
+														th:onclick="ViewDetail([[${list.crid}]])"
+														data-bs-toggle="modal"
+														data-bs-target="#exampleModal"
+													>상세보기</button>
+												</td>
+											</tr>
+										</th:block>
 									</tbody>
 								</table>
 							</div>
