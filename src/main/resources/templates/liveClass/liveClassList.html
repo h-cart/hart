@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<style>
+		#myMsgDialog {
+			width:40%; 
+			background-color: white; 
+			border:1px solid black; 
+			border-radius: 7px;
+		}		
+
+		#mButton {
+			padding: 7px 30px;
+			background-color: #66ccff;
+			color: white;
+			font-size: 15px;
+			border: 0;
+			outline: 0;
+		}
+	</style>
+
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -70,6 +88,70 @@
     <!-- Blog Section End -->
 
 
+	<!-- 알람 버튼 만들기 테스트  -->
+
+	<dialog id="favDialog">
+  <form method="dialog">
+    <p><label>좋아하는 동물:
+      <select>
+        <option></option>
+        <option>아르테미아</option>
+        <option>레서판다</option>
+        <option>거미원숭이</option>
+      </select>
+    </label></p>
+    <menu>
+      <button value="cancel">취소</button>
+      <button id="confirmBtn" value="default">확인</button>
+    </menu>
+  </form>
+</dialog>
+
+<menu>
+  <button id="updateDetails">상세정보 업데이트</button>
+</menu>
+
+<output aria-live="polite"></output>
+	
+    
+    
+    <button onclick="showMsg()">메시지 띄우기</button>
+
+	<div>
+		<!-- 아래 dialog 태그 영역이 메시지 창 -->
+		<dialog id="myMsgDialog">
+			<h3>알람</h3>
+			<hr>
+			<table id="alarmContent">
+			  <tr>
+			    <th>공지번호</th>
+			    <th>내용</th>
+			  </tr>
+			  <tr >
+			    <td>1번 공지</td>
+			    <td>나는 지금 너무 졸립다!</td>
+			  </tr>
+			</table>
+			<input type="button" id="mButton" onclick="closeMsg()" value=" 확 인 " >
+		</dialog>
+	</div>
+	<script>
+		function showMsg(){
+			var dialog = document.getElementById("myMsgDialog");
+			//$("#myMsgDialog").append("테스트 중입니다.");
+			$("#alarmContent").append("<tr><td>3번 공지</td><td>테스트 중입니다(1)</td></tr>");
+			$("#alarmContent").append("<tr><td>4번 공지</td><td>테스트 중입니다(2)</td></tr>");
+			dialog.showModal();
+		}
+		
+		function closeMsg(){
+			var dialog = document.getElementById("myMsgDialog");
+			dialog.close();
+		}
+	</script>
+	
+	
+
 
     <!-- Footer Section Begin -->
     <th:block th:replace="/includes/footer :: footer"></th:block>
@@ -81,6 +163,34 @@
 
     <!-- Js Plugins -->
     
+    
+    <script type="text/javascript">
+    var updateButton = document.getElementById('updateDetails');
+    var favDialog = document.getElementById('favDialog');
+    var outputBox = document.getElementsByTagName('output')[0];
+    var selectEl = document.getElementsByTagName('select')[0];
+    var confirmBtn = document.getElementById('confirmBtn');
+
+    // “Update details” button opens the <dialog> modally
+    updateButton.addEventListener('click', function onOpen() {
+      if (typeof favDialog.showModal === "function") {
+        favDialog.showModal();
+      } else {
+        alert("The <dialog> API is not supported by this browser");
+      }
+    });
+    // "Favorite animal" input sets the value of the submit button
+    selectEl.addEventListener('change', function onSelect(e) {
+      confirmBtn.value = selectEl.value;
+    });
+    // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
+    favDialog.addEventListener('close', function onClose() {
+      outputBox.value = favDialog.returnValue + " button clicked - " + (new Date()).toString();
+    });
+    
+    </script>
+    
+ 
 </body>
 
 </html>
