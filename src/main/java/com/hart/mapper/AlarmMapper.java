@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.hart.domain.alarm.AlarmDTO;
 import com.hart.domain.alarm.LiveClassApplicantDTO;
+import com.hart.domain.liveClass.LiveClassListDTO;
 
 /**
  * @since : 2023. 3. 15.
@@ -26,5 +28,7 @@ public interface AlarmMapper {
 	public void getApplicantInfoCall(Map<String,Object> map);
 	//강의 당일날 알림 추가
 	public void addApplicantTodayAlarm();
+	//헤더 알람 목록 가져오기
+	public List<AlarmDTO> getAlarmList(String mid);
 	
 }
