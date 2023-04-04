@@ -28,7 +28,6 @@ $(document).on("click","#btn_cancle",function(){
 });
 
 
-  
   // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
   Kakao.init('26c618ece5bb5f3d4fd7d428c0f0e7d7');
   // SDK 초기화 여부를 판단합니다.
@@ -42,7 +41,7 @@ $(document).on("click","#btn_cancle",function(){
 		console.log(result);
 		csno = result.result.csno;
 		cskey = result.result.cskey;
-					var url = 'https://localhost/cart/group?csno='+csno+'&cskey='+cskey;
+					var url = 'https://urlopen.link/hcart.shop:50022/cart/group?csno='+csno+'&cskey='+cskey;
 		console.log(csno,cskey);
 		console.log(url);
 		    Kakao.Link.sendDefault({

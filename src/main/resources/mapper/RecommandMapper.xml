@@ -45,13 +45,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'%'||#{stag}||'%' OR
 		rtitle like '%'||#{stag}||'%'
 	</select>
-
 	<resultMap id="RecommandRecipe" type="RrecipeDTO">
 		<result property="rid" column="RID" />
 		<result property="rtitle" column="RTITLE" />
 		<result property="rimg" column="RIMG" />
 		<result property="rlevel" column="RLEVEL" />
 		<result property="rtime" column="RTIME" />
+		<!-- <result property="rcano" column="RCANO" /> -->
+		<!-- <result property="rccategory" column="RCCATEGORY" /> -->
+		<result property="rccategory" column="RTIME" />
 		<collection property="items" column="rid"
 			ofType="IngredientDTO" javaType="java.util.ArrayList"
 			select="getIngredients" />
