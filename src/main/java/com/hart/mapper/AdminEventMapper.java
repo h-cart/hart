@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.intellij.lang.annotations.PrintFormat;
 
 import com.hart.domain.admin.AdminEventVO;
 import com.hart.domain.admin.Criteria;
+import com.hart.domain.event.CRContentVO;
+import com.hart.domain.event.CRIngredientVO;
+import com.hart.domain.product.RecipeVO;
 
 @Mapper
 public interface AdminEventMapper {
@@ -17,11 +21,14 @@ public interface AdminEventMapper {
 
 	int getTotalCount(Criteria cri);
 
-
 	List<AdminEventVO> getEventCateList();
 
 	List<AdminEventVO> getVoteList(Criteria cri);
 
-	void recipeRegister(AdminEventVO event);
+	void insertCRecipe(@Param("rid") String rid, @Param("re") RecipeVO re);
+
+	void insertCRContent(@Param("rid") String rid, @Param("content") CRContentVO content);
+
+	void insertCRIngredient(@Param("rid") String rid, @Param("ingredient") CRIngredientVO ingredient);
 
 }
