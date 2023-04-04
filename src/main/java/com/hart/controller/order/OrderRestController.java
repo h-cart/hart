@@ -33,6 +33,7 @@ public class OrderRestController {
 		int status = 200;
 		Map<String,String> result = new HashMap<>();
 		try {
+			System.out.println(map.get("oid"));
 			int oid = Integer.parseInt(map.get("oid"));
 			int mpoint = oService.orderCancle(mDTO.getMid(), oid);
 			mDTO.setMpoint(mpoint);
