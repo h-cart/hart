@@ -64,6 +64,7 @@ public class AlarmServiceImpl implements AlarmService{
 		log.info("todayAlarmService 호출");
 		alarmMapper.addApplicantTodayAlarm();
 	}
+
 	
 	
 	/*@@@@@@@@@@@@@@@@@@@@@@@@@테스트용 코드@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/

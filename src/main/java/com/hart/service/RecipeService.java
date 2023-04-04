@@ -11,10 +11,11 @@ import com.hart.domain.product.RecipeVO;
 public interface RecipeService {
 
 	
-	public List<RecipeVO> recipelist() throws Exception;
+	public List<RecipeVO> recipelist(RecipeVO recipelist) throws Exception;
 		
 	
-	
 	public RecipeDetailVO recipeDetail(String rid) throws Exception;
+
+
 
 }
