@@ -16,7 +16,9 @@ function NoItem() {
 $(document).on("click", ".thumb", function (e) {
 	// 이벤트가 발생한 요소가 이미지이면 체크박스를 클릭한 것처럼 동작
 	if ($(e.target).is("img")) {
-		$(this).find(".checkbox").click();
+		let thumbCheck = $(this).find(".checkbox");
+		let isCheck = thumbCheck.prop("checked");
+		thumbCheck.prop("checked",!isCheck);
 	}
 	// 이벤트가 발생한 요소가 체크박스이면 클릭 이벤트를 그대로 전파
 	else if ($(e.target).is(".checkbox")) {

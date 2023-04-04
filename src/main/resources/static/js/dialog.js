@@ -42,9 +42,8 @@ function showModal(result) {
                </div>
             </td>
             <td data-value="${value.lcprice}" class="cart__price" id="cprice_4">${numberWithCommas(value.lcprice)}원</td>
-            <td class="cart__close"><i class="fa-solid fa-x fa-xl" style="color: #000000;"></i></td>
+            
          </tr>`;
-         console.log(idx,lives.items);
          $.each(value.items, function(lindex,item){
 			console.log(idx);
             idx++;
@@ -68,7 +67,6 @@ function showModal(result) {
                </div>
             </td>
             <td data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
-           
          </tr>`
          })
          idx++;
@@ -93,11 +91,11 @@ function showModal(result) {
                               <a href="#">국</a> <a href="#">찌개</a> <a href="#">볶음</a> <a href="#">안주</a>
                            </div>
                         </div>
-                        <table>
-                           <tbody>
+                        
                            `;
       $.each(recipes, function (index, value) {
-         str += `<tr>
+         
+         str +=`<div id="collapse${idx}" class="collapse" data-parent="#accordionRecipe" style=""><table><tbody><tr>
          <td class="product__cart__item">
             <div class="product__cart__item__pic"><span ><img class="pimg"
                      src="${value.rimg}" alt=""
@@ -113,12 +111,38 @@ function showModal(result) {
                <div class="pro-qty-2"><span>조리시간 : ${value.rtime}</span></div>
             </div>
          </td>
-         <td data-value="9000" class="cart__price" id="cprice_0">메인 재료 : <span>${result.result.stag}</span></td>
+         <td ><a data-toggle="collapse" data-target="#collapse${idx}" class="" aria-expanded="false">재료보기</a></span></td>
          </td>
       </tr>`
+      ;
+      $.each(recipes[index].items,function(rindex,item){
+         idx++;
+         str +=`<tr id="${idx}" data-value="${item.pid}">
+            <td class="product__cart__item">
+               <div class="product__cart__item__pic"><span class="thumb"><input name="cartlist" id="check_${idx}" type="checkbox"
+                        class="checkbox"><img class="pimg"
+                        src="${item.pimg}" alt=""
+                        style="width:90px; height:90px;"></span></div>
+               <div class="product__cart__item__text">
+                  <h6>${item.pname}</h6><span class="price-box">
+                     <h5 class="price" id="price_${idx}" data-value="${item.pprice}">${numberWithCommas(item.pprice)}원</h5>
+                  </span>
+               </div>
+            </td>
+            <td class="quantity__item">
+               <div class="quantity">
+                  <div class="pro-qty-2"><span data-value="${idx}" class="fa fa-angle-left dec qtybtn rbtn_minus"
+                        aria-hidden="true"></span><input id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
+                        data-value="${idx}" class="fa fa-angle-right inc qtybtn rbtn_plus" aria-hidden="true"></span></div>
+               </div>
+            </td>
+            <td data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
+         </tr>`;
+         
       });
-      str += ` </tbody>
-                        </table>
+      str+=`</tbody></table></div>`;
+      });
+      str += `
                      </div>
                   </div>
                </div>

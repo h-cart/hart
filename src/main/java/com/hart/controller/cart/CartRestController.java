@@ -162,7 +162,7 @@ public class CartRestController {
 	@GetMapping(value = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
 		if(mDTO.getCsno()==null) return null; 
-		SseEmitter emitter = new SseEmitter(60 * 60 * 60L);
+		SseEmitter emitter = new SseEmitter(120 * 1000L);
 		sseEmitters.add(mDTO.getCsno(), emitter, mDTO);
 
 		try {

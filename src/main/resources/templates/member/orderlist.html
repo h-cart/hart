@@ -447,7 +447,7 @@
 					type: 'post',
 					contentType: "application/json",
 					data: JSON.stringify({
-						oid: oid
+						oid: oid.toString()
 					}),
 					beforeSend: function (xhr) {
 						xhr.setRequestHeader(header, token);
