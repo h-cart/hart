@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.product.CategoryVO;
 import com.hart.domain.product.ListVO;
-import com.hart.domain.product.ProductsVO;
+import com.hart.domain.product.RecipeVO;
 import com.hart.service.ProductsService;
+import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -28,7 +29,10 @@ public class ProductRestController {
 
 	@Autowired
 	private ProductsService pService;
+
 	private List<ListVO> productlist;
+	@Autowired
+	private RecipeService recipeservice;
 
 	@GetMapping(value = "/clist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -51,31 +55,23 @@ public class ProductRestController {
 
 	}
 
-	
-	
-	
-	@PostMapping(value = "/productlist", 
-				produces = { MediaType.APPLICATION_JSON_VALUE }, 
-				consumes = {MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = "/productlist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, List<ListVO>>> getProductsList(@RequestBody ListVO data) {
 
 		try {
 
-			 
 			List<ListVO> Productlist = pService.Productlist(data);
-			
-			  log.info("data=====>>>>"+data); 
-			  log.info("getproductslis컨트롤러에서 찍힘>>>" +  Productlist); log.info(Productlist);
-			 
-			
-			
+
+			log.info("data=====>>>>" + data);
+			log.info("getproductslis컨트롤러에서 찍힘>>>" + Productlist);
+			log.info(Productlist);
+
 			Map<String, List<ListVO>> result = new HashMap<>();
 			result.put("productlist", Productlist);
-			
-			
-			log.info("result--->>"+result);
-			
-			
+
+			log.info("result--->>" + result);
+
 			return new ResponseEntity<Map<String, List<ListVO>>>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -83,7 +79,6 @@ public class ProductRestController {
 			return new ResponseEntity<Map<String, List<ListVO>>>(HttpStatus.BAD_REQUEST);
 		}
 	}
-
 
 	/*
 	 * @PostMapping(value = "/fillterbutton", produces = {
@@ -104,5 +99,29 @@ public class ProductRestController {
 	 * } catch (Exception e) { log.info(e.getMessage()); return new
 	 * ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
 	 */
+
+	@PostMapping(value = "/recipelist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Map<String, List<RecipeVO>>> recipelist(@RequestBody RecipeVO data) {
+
+		
+		try {
+			System.out.println("data>>" + data);
+			List<RecipeVO> recipelist = recipeservice.recipelist(data);
+
+			
+			
+			System.out.println("recipelist>>" + recipelist);
+			Map<String, List<RecipeVO>> result = new HashMap<>();
+			result.put("recipelist", recipelist);
+
+
+			return new ResponseEntity<Map<String, List<RecipeVO>>>(result, HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Map<String, List<RecipeVO>>>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
 }

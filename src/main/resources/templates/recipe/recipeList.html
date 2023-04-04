@@ -48,8 +48,7 @@
 						<li data-value="3" data-type="sort" class="option">조리 시간순</li>
 					</ul>
 
-					<input type="hidden" th:value="${pcno_top}" name="pcno_top" /> <input
-						type="hidden" id="fil" value="0" name="page" />
+					<input type="hidden" id="fil" value="0" name="fillter" />
 
 
 				</div>
@@ -58,11 +57,11 @@
 
 		<div class="container">
 			<div class="row">
-
-
-				<div class="col-lg-4 col-md-6 col-sm-6"
+<div class="row" id="recipeajax">
+				<!-- 반복 시점 -->
+					<div class="row" id="recipeajax">
+		<!-- 		<div class="col-lg-4 col-md-6 col-sm-6"
 					th:each="recipelist : ${recipelist}">
-
 					<div class="blog__item">
 
 						<div class="product__item__pic set-bg" id="img"
@@ -77,8 +76,9 @@
 							<a href="#">레시피 보러가기</a>
 						</div>
 					</div>
+				</div> -->
 				</div>
-
+				<!-- 반복 시점 -->
 
 
 			</div>
@@ -91,7 +91,110 @@
 			location.href = "/recipe/recipeDetail?rid=" + rid
 		}
 	</script>
+	
+	
+	<script>
+	let page = 0;
+	let sort = 1; 
+	
+ 	$(document).ready(function(){
+		
+ 		scroll(page,sort);
+		
 
+		$(window).scroll(function() {
+			
+	
+			
+			
+		if(($(window).scrollTop()) >= $(document).height()- $(window).height()-1  ){ 
+			page++;
+    	    console.log("page==>" + page + "sort>>"+sort);
+    	    scroll(page,sort);  
+    	  }
+		});  
+	}); 
+
+      function scroll(nPage,sort) {
+    	  if(sort ==0 || null){
+    		  sort=1;
+    	  }
+          let element = {
+            page: nPage,
+            sort :sort
+          };
+          
+      console.table("엘리먼트 >>>>>>>>>"+element);
+      
+          $.ajax({
+            type: "post",
+            url: "/papi/recipelist",
+            data: JSON.stringify(element),
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader(header, token);
+            },
+            dataType: "json",
+            success: function (result) {
+            	console.log("펑션(success: function) 쪽 들어온다==>"+ result)
+              let str = "";
+				
+            	$.each(result.recipelist, function (index, recipelist) {
+            		  str += `
+            		    <div class="col-lg-4 col-md-6 col-sm-6">
+            		      <div class="blog__item">
+            		        <div class="product__item__pic set-bg"
+            		             id="img"
+            		             data-setbg="${recipelist.rimg}"
+            		             data-rid="${recipelist.rid}"
+            		             onclick="gorecipeDetailPage(this)">
+            		        </div>
+            		        <div class="blog__item__text">
+            		          <span>${recipelist.rregdate}  등록날짜</span>
+            		          <h5>${recipelist.rtitle}</h5>
+            		          <a href="">레시피 보러가기</a>
+            		        </div>
+            		      </div>
+            		    </div>`;
+            		});
+
+            console.log(" page------------>>"+ page);
+            
+           if (page == 0) {
+        	  $("#recipeajax").html(str);
+        	} else {
+        	  $("#recipeajax").append(str);
+        	} 
+       
+            console.log("result.length>>"+result.length);
+            
+            $(".set-bg").each(function () {
+            	
+                var bg = $(this).data("setbg");
+                $(this).css("background-image", "url(" + bg + ")");
+                
+              });
+            
+              
+            },
+            error: function (err,xhr,status) {
+              console.log("실패 카테고리 리스트 에이작스 ");
+            },
+            
+            
+          });
+          
+        }  //function 
+        //클릭 옵션 하면 function작동함 ->0넣기
+        $(document).on("click",".option", function(){
+       	 sort = $(this).data('value');
+       	 console.log(sort);
+       	 page = 0;
+       	 scroll(page,sort);
+        })  
+
+         
+    </script>
 	<!-- Blog Section End -->
 
 

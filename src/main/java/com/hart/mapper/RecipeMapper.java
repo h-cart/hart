@@ -10,10 +10,12 @@ import com.hart.domain.product.RecipeVO;
 @Mapper
 public interface RecipeMapper {
 
-	public List<RecipeVO> recipelist();
+	public List<RecipeVO> recipelist(RecipeVO recipelist);
 
 	RecipeVO recipeDetail(String rid);
 	
 	List<RecipeContentVO> RecipeContent(String rid);
+
+	
 
 }

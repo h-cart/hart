@@ -21,7 +21,7 @@ public class RecipeVO {
 	String rcstep;
 	String serving;
 	String rreadyingredient;
-		   
-
+	int page;
+	int sort;
 
 };

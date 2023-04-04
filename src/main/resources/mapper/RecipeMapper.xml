@@ -6,37 +6,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.hart.mapper.RecipeMapper">
 
-	<select id="recipelist" resultType="RecipeVO">
-		select *
-		from recipe
-	</select>
+	<!-- <select id="recipelist" resultType="RecipeVO"> select * from recipe 
+		</select> -->
 
 
 	<select id="recipeDetail" resultType="RecipeVO">
 
 		select *
 		from recipe
-		where rid= #{rid}
+		where
+		rid= #{rid}
 	</select>
 
 
 	<select id="RecipeContent" resultType="RecipeContentVO">
 
-			select * from recipe_content where rid= #{rid}
-		
+		select * from recipe_content where rid= #{rid}
+
 	</select>
 
 
 
-	<select id="recipelists" resultType="RecipeVO">
-		select *
-		from recipe
+	<select id="recipelist" resultType="RecipeVO"
+		parameterType="com.hart.domain.product.RecipeVO">
+
+		select * from
+		(
+		select rownum as rn ,rc.*
+		from
+		(
+		select * from recipe
 		<trim prefix="ORDER BY">
 			<if test="sort == 1 "> rregdate desc</if>
 			<if test="sort == 2 "> rlevel desc</if>
 			<if test="sort == 3 "> rtime desc</if>
 		</trim>
-		
+		) rc
+		) where rn between (#{page} * 9 + 1) AND (#{page} * 9 + 9)
 	</select>
 
 

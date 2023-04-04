@@ -111,7 +111,9 @@
                         <ul style="padding-top: 0;">
                            <li><span>상품번호 : </span>[[${Detail.detail.pid}]]</li>
                            <input type="hidden" name='pid' th:value="${Detail.detail.pid}" />
-                           <li><span>Categories:</span> <b><span th:text="${Detail.detail.pcategory}"
+                           <li><span>카테고리 : </span> <b><span th:text="${Detail.detail.pcategory}"
+                                    style="color: #111111"></span></b></li>
+                                     <li><span>분류 : </span> <b><span th:text="${Detail.detail.stag}"
                                     style="color: #111111"></span></b></li>
                            <li><span>원산지:</span><span th:text="${Detail.detail.porigin}" style="color: #111111"></span>
                            </li>

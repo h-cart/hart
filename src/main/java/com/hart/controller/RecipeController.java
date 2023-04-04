@@ -22,20 +22,19 @@ public class RecipeController {
 	@Autowired
 	RecipeService recipeservice;
 
-	@GetMapping("/list")
-	public String recipelist(Model model) {
-		try {
-
-			List<RecipeVO> recipelist = recipeservice.recipelist();
-			// log.info("recipelist===" +recipelist);
-			model.addAttribute("recipelist", recipelist);
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-		return "/recipe/recipeList";
-	}
+	
+	  @GetMapping("/list") public String recipelist(Model model) { try {
+	  
+				/*
+				 * List<RecipeVO> recipelist = recipeservice.recipelist(); //
+				 * log.info("recipelist===" +recipelist); model.addAttribute("recipelist",
+				 * recipelist);
+				 */
+	  
+	  } catch (Exception e) {
+	  
+	  e.printStackTrace(); } return "/recipe/recipeList"; }
+	 
 
 	@GetMapping("/recipeDetail")
 	public String recipedetail(String rid, Model model) {
@@ -49,7 +48,7 @@ public class RecipeController {
 			// log.info("++++"+model);
 			// model.getAttribute(recipeDetail);
 
-			System.out.println( "recipeDetail controller========>>>>>>>>>>"+recipeDetail);
+			System.out.println("recipeDetail controller========>>>>>>>>>>" + recipeDetail);
 
 		} catch (Exception e) {
 			e.printStackTrace();

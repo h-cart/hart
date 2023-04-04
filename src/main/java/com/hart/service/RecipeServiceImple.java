@@ -22,10 +22,12 @@ public class RecipeServiceImple implements RecipeService{
 	RecipeMapper recipemapper;
 	
 	@Override
-	public List<RecipeVO> recipelist() {
+	public List<RecipeVO> recipelist(RecipeVO recipelist) {
 		
-		//System.out.println("recipe==============");
-		return recipemapper.recipelist();
+		System.out.println("recipe==============>" + recipelist);
+		System.out.println("recipe=====mapper?>" + recipemapper.recipelist(recipelist));
+		
+		return recipemapper.recipelist(recipelist);
 	}
 	
 	

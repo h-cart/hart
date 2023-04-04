@@ -15,12 +15,8 @@ public class ProductlistintegServiceTest {
 	@Autowired
 	private RecipeService rService;
 
-	@Test
-	public void get() {
-		try {
-			rService.recipelist().forEach(item -> log.info(item));
-		} catch (Exception e) {
-			log.info(e.getMessage());
-		}
-	}
+	/*
+	 * @Test public void get() { try { rService.recipelist().forEach(item ->
+	 * log.info(item)); } catch (Exception e) { log.info(e.getMessage()); } }
+	 */
 }

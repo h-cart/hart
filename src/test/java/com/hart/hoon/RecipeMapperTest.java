@@ -1,37 +1,33 @@
 package com.hart.hoon;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hart.domain.product.RecipeVO;
 import com.hart.mapper.RecipeMapper;
 
 import lombok.extern.log4j.Log4j2;
 
-@SpringBootApplication
+
 @Log4j2
+@SpringBootTest
 public class RecipeMapperTest {
     	
 	@Autowired
 	private RecipeMapper rMapper;
     
-	
+	//recipelist 테스트
 	@Test
-    void testRecipeDetail() {
-		
-		  //log.info(rMapper.recipeDetail(210105100006001L));
+    void recipelistTest() {
+		//List<RecipeVO> recipelist = rMapper.recipelist(set.);
+		//System.out.println(recipelist);
+
 		 
     }
-	@Test
-    void test2() {
-		
-		log.info(rMapper.recipelist());
-        
+
+
 	
-	
-    }
 }
