@@ -1,9 +1,5 @@
 package com.hart.service;
 
-
-
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +24,9 @@ public class ProductsServiceImple implements ProductsService {
 	@Override
 	public List<ProductsVO> getproductslist(int pcno) {
 
-		//log.info("#############productVO getProductListImple @@@@@@@@@=" + pcno);
+		// log.info("#############productVO getProductListImple @@@@@@@@@=" + pcno);
 		// 1제품 목록 가져오기
-				
-		/*
-		 * List<ProductsVO> list =productsmapper.getproductslist(pcno); list.g
-		 */
-		
+
 		return productsmapper.getproductslist(pcno);
 	}
 
@@ -54,35 +46,22 @@ public class ProductsServiceImple implements ProductsService {
 
 	}
 
-	
-	
 	@Override
 	public List<ListVO> getproductcatrogrtlist(int pcno) throws Exception {
-		//log.info("===============getproductcatrogrtlist  ServiceImple ============>" + pcno);
-		
+		// log.info("===============getproductcatrogrtlist ServiceImple ============>" +
+		// pcno);
+
 		return productsmapper.getproductcatrogrtlist(pcno);
 	}
 
-	
-	
-
-	//에이작스 및 소 카테고리 및 필터적용 Mapper 
+	// 에이작스 및 소 카테고리 및 필터적용 Mapper
 	@Override
 	public List<ListVO> Productlist(ListVO list) {
-		 log.info("===============getproductcatrogrtlist Service ServiceImple ============>" + list);
-		 log.info("===============getproductcatrogrtlist Service ServiceImple ============>" + productsmapper.Productlist(list));
-		
-		
-		 
+		log.info("===============getproductcatrogrtlist Service ServiceImple ============>" + list);
+		log.info("===============getproductcatrogrtlist Service ServiceImple ============>"
+				+ productsmapper.Productlist(list));
+
 		return productsmapper.Productlist(list);
 	}
 
-	
-
-
-
-	
-
-
 }
-
