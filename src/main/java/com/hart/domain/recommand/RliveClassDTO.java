@@ -19,5 +19,6 @@ public class RliveClassDTO {
 	private String lcteacher;
 	private int lcprice;
 	private String lcimg;
+	private String lcday;
 	private List<IngredientDTO> items;
 }

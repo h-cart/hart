@@ -20,41 +20,42 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 @Service
 @Log4j2
 public class LiveSchedulerService {
-	
+
 	@Autowired
 	AlarmMapper alarmMapper;
 
 	DefaultMessageService messageService;
-	
+
 	public LiveSchedulerService() {
-        // 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
-        this.messageService = NurigoApp.INSTANCE.initialize("NCSWJKPFH3HYX5YC", "QNFZQZLRSK7MOZDYDPMVAU9ABDANEQ43", "https://api.coolsms.co.kr");
-    }
-	
+		// 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
+		this.messageService = NurigoApp.INSTANCE.initialize("NCSWJKPFH3HYX5YC", "QNFZQZLRSK7MOZDYDPMVAU9ABDANEQ43",
+				"https://api.coolsms.co.kr");
+	}
+
 	@Scheduled(cron = "0 0 9 * * *")
 	public void yesterdayAlarmService() {
 		log.info("yesterdayAlarmService 호출");
-		Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		alarmMapper.getApplicantInfoCall(map);
-		List<LiveClassApplicantDTO> list = (List<LiveClassApplicantDTO>)map.get("key");
+		List<LiveClassApplicantDTO> list = (List<LiveClassApplicantDTO>) map.get("key");
 		log.info(list);
-		
+
 		Message message = new Message();
 		message.setFrom("01096202055");
 
 		StringBuilder sb = new StringBuilder();
-		for(LiveClassApplicantDTO dto : list) {
-			sb.append(dto.getLcday()+" "+dto.getLcstart()+" ~ "+dto.getLcend());
+		for (LiveClassApplicantDTO dto : list) {
+			sb.append(dto.getLcday() + " " + dto.getLcstart() + " ~ " + dto.getLcend());
 			message.setTo(dto.getAlertPhone());
-			message.setText("[알람] 내일은 "+dto.getLcname()+" 수업 예정일입니다."+sb.toString()+" 강의 시간에 잊지말고 참석해 주세요!");
+			message.setText("[알람] 내일은 " + dto.getLcname() + " 수업 예정일입니다." + sb.toString() + " 강의 시간에 잊지말고 참석해 주세요!");
 			this.messageService.sendOne(new SingleMessageSendingRequest(message));
 			sb.setLength(0);
 		}
-		
+
 		System.out.println("hello Alarm Service");
-		
+
 	}
-	
+
 	@Scheduled(cron = "2 0 0 * * *")
 	public void todayAlarmService() {
 		log.info("todayAlarmService 호출");

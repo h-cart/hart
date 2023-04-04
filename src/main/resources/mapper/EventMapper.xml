@@ -53,9 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="com.hart.domain.event.CRIngredientVO">
 
 		INSERT INTO crecipe_ingredient (cricount, pid, pcno,
-		crid)
+		crid,iname)
 		VALUES (#{ingredient.cricount}, #{ingredient.pid},
-		#{ingredient.pcno}, #{seq})
+		#{ingredient.pcno}, #{seq},#{ingredient.iname})
 
 	</insert>
 

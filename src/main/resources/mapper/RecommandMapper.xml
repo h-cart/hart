@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getRecommandClass" resultMap="RecommandClass">
 		SELECT
-		lc.lcid,lcstatus,lcname, lcteacher,lcprice,lcimg
+		lc.lcid,lcstatus,lcname, lcteacher,lcprice,lcimg,TO_CHAR(TO_DATE(lcday, 'YYYY-MM-DD HH24:MI:SS'), 'YY/MM/DD')as lcday
 		FROM live_class lc JOIN live_class_img lci ON lc.lcid = lci.lcid
 		WHERE lckeyword
 		like '%' ||#{stag}||'%' OR

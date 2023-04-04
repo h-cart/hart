@@ -1,6 +1,7 @@
 
 function NoItem() {
 	var emptyBasket = $('.pbody');
+	getCheckboxValue();
 	if (emptyBasket.children().length === 0) {
 		var str = '';
 		str += "<tr class='empty-basket'><td colspan='6'><img src='/img/icon.png' style='width:80px; height :80px; margin :0 auto 15px;'alt='icon' />"
@@ -31,29 +32,6 @@ $(document).on("click", ".cart__close", function () {
 
 })
 
-$(".orderDirect").on("click", function () {
-	var form = $('<form></form>');
-	form.attr('method', 'post');
-	form.attr('action', '/order/list');
-	var notSelect = false;
-	$("input[name=cartlist]:checked").each(function () {
-		notSelect = true;
-		var pos = $(this).prop('id').split('_')[1];
-		var pid = $('#' + pos).data('value');
-		var quantity = $('#quantity_' + pos).val();
-
-		form.append($('<input/>', { type: 'hidden', name: 'pids', value: pid }));
-		form.append($('<input/>', { type: 'hidden', name: 'pamounts', value: quantity }));
-
-	});
-	if (!notSelect) {
-		alert("한개 이상의 상품을 선택해주세용");
-		return;
-	}
-	form.append($('<input/>', { type: 'hidden', name: '_csrf', value: token }));
-	form.appendTo('body');
-	form.submit();
-});
 
 
 $(document).on("click", ".btn_plus", function () {
@@ -171,3 +149,38 @@ function deleteBtnEvent(param) {
 
 	})
 };
+
+$(document).on("click", ".rbtn_plus", function () {
+
+	var pos = $(this).data('value');
+	var quantity = $("#quantity_" + pos).val();
+	console.log(pos);
+	if (+quantity + 1 >= 6) {
+		alert('6개 이상 상품 주문 불가능');
+		return;
+	}
+	$("#quantity_"+pos).val(+quantity+1);
+	calPrice(pos);
+});
+
+$(document).on("click", ".rbtn_minus", function () {
+
+	var pos = $(this).data('value');
+	var quantity = $("#quantity_" + pos).val();
+	console.log(pos);
+	if (+quantity - 1 <0) {
+		alert('1개 이상 선택해주십시오.');
+		return;
+	}
+	$("#quantity_"+pos).val(+quantity-1);
+	calPrice(pos);
+});
+
+function calPrice(pos){
+	var totalPrice = $("#cprice_"+pos);
+	var price = $("#price_"+pos).data('value');
+	var quantity = $("#quantity_"+pos).val();
+	console.log(totalPrice,price,quantity);
+	totalPrice.text(numberWithCommas(+price*+quantity)+"원");
+	
+}

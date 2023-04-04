@@ -1399,7 +1399,7 @@ ol {
 
 .shop__sidebar__accordion .card-heading a:after,
 .shop__sidebar__accordion .card-heading>a.active[aria-expanded=false]:after {
-	content: "�꼪";
+	content: "\f078";
 	font-family: "FontAwesome";
 	font-size: 24px;
 	font-weight: 700;
@@ -1411,7 +1411,7 @@ ol {
 }
 
 .shop__sidebar__accordion .card-heading.active a:after {
-	content: "�꼪";
+	content: "\f077";
 	font-family: "FontAwesome";
 	font-size: 24px;
 	font-weight: 700;
@@ -1580,7 +1580,7 @@ ol {
 	position: absolute;
 	right: -14px;
 	top: 0;
-	content: "�꼨";
+	content: "\f054";
 	font-family: "FontAwesome";
 }
 
@@ -2082,7 +2082,7 @@ ol {
 	position: absolute;
 	right: -14px;
 	top: 0;
-	content: "�꼨";
+	content: "\f054";
 	font-family: "FontAwesome";
 }
 

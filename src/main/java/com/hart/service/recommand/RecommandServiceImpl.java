@@ -27,5 +27,8 @@ public class RecommandServiceImpl  implements RecommandService{
 		return result;
 	}
 	
+	public String dateFormatter(String odate) {
+		return odate.split(" ")[0].substring(2).replace("-","/");
+	}
 	
 }
