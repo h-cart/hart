@@ -35,6 +35,8 @@ public interface AdminEventService {
 	List<AdminEventVO> getEventList();
 
 	List<AdminEventVO> getVoteList(Criteria cri);
+
+	void recipeRegister(AdminEventVO event);
 	
 
 	

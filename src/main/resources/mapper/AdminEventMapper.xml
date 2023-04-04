@@ -7,19 +7,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getEventList" parameterType="Criteria"
 		resultType="AdminEventVO">
 
-		SELECT * FROM (
-		SELECT evid, crid,mid, crtitle,crregdate,crvote ,
-		rownum rn
+		select * from(
+		select * from (
+		SELECT evid, crid,mid, crtitle,crregdate,crvote, rownum rn FROM (
+		SELECT evid, crid,mid, crtitle,crregdate,crvote
 		FROM crecipe
 		<where>
- 			<![CDATA[
-			rownum <= #{pageNum} * #{amount}
-			]]>
 			<if test="evid != 0">
 				and evid = #{evid}
 			</if>
 		</where>
-		order by evid desc, crregdate DESC )
+		order by crregdate DESC
+		)
+		)
+		<![CDATA[
+		where rownum <= #{pageNum} * #{amount}
+		]]>
+				)
 		<![CDATA[
 		where rn > (#{pageNum}-1) * #{amount}
 		]]>
@@ -28,7 +32,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getVoteList" parameterType="Criteria"
 		resultType="AdminEventVO">
 
-		SELECT evid, crid,mid, crtitle,crregdate,crvote
+		<!-- SELECT evid, crid,mid, crtitle,crregdate,crvote FROM crecipe <where> 
+			crvote=1 <if test="evid != 0"> and evid = #{evid} </if> </where> order by 
+			evid desc, crregdate DESC -->
+		SELECT A.evid, A.crid, A.count, B.mid, B.crtitle, B.crregdate,
+		B.crvote
+		FROM
+		(SELECT evid, crid, COUNT(*) AS count
+		FROM event_vote
+		<where>
+			<if test="evid != 0">
+				evid = #{evid}
+			</if>
+		</where>
+		GROUP BY evid, crid
+		ORDER BY count DESC) A
+		INNER JOIN
+		(SELECT evid,
+		crid,mid, crtitle,crregdate,crvote
 		FROM crecipe
 		<where>
 			crvote=1
@@ -36,7 +57,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and evid = #{evid}
 			</if>
 		</where>
-		order by evid desc, crregdate DESC
+		ORDER BY evid DESC, crregdate DESC) B
+		ON A.evid = B.evid AND A.crid =
+		B.crid
+
 	</select>
 
 	<select id="getEventCateList" resultType="AdminEventVO">
