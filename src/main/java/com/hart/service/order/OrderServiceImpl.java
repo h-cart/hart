@@ -115,7 +115,6 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public int orderCancle(String mid, int oid) throws Exception {
 		try {
-			int result = 0;
 			oMapper.orderCancle(oid);
 			ClubMember2 mDTO = mMapper.findByEmail(mid, 1);
 			return mDTO.getMpoint();

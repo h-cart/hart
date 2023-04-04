@@ -1,4 +1,4 @@
-package com.hart.service.liveClass;
+package com.hart.service.alarm;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,19 +19,21 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Service
 @Log4j2
-public class LiveSchedulerService {
+public class AlarmServiceImpl implements AlarmService{
 
 	@Autowired
 	AlarmMapper alarmMapper;
-
+	
 	DefaultMessageService messageService;
-
-	public LiveSchedulerService() {
+	
+	public AlarmServiceImpl() {
 		// 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
 		this.messageService = NurigoApp.INSTANCE.initialize("NCSWJKPFH3HYX5YC", "QNFZQZLRSK7MOZDYDPMVAU9ABDANEQ43",
 				"https://api.coolsms.co.kr");
 	}
-
+	
+	
+	@Override
 	@Scheduled(cron = "0 0 9 * * *")
 	public void yesterdayAlarmService() {
 		log.info("yesterdayAlarmService 호출");
@@ -53,15 +55,17 @@ public class LiveSchedulerService {
 		}
 
 		System.out.println("hello Alarm Service");
-
+		
 	}
 
+	@Override
 	@Scheduled(cron = "2 0 0 * * *")
 	public void todayAlarmService() {
 		log.info("todayAlarmService 호출");
 		alarmMapper.addApplicantTodayAlarm();
 	}
 
+	
 	
 	/*@@@@@@@@@@@@@@@@@@@@@@@@@테스트용 코드@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 	/*
