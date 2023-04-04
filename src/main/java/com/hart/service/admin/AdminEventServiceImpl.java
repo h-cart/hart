@@ -70,13 +70,14 @@ public class AdminEventServiceImpl implements AdminEventService {
 		int s = 1;
 		for (CRContentVO content : re.getRecipeContent()) {
 			content.setStep("Step" + s++);
-			content.setCrimg("'/event/api/display?imgName='" + content.getCrimg());
+			content.setCrimg("/event/api/display?imgName=" + content.getCrimg());
+			log.info("여기 동작1---------" + content);
 			mapper.insertCRContent(re.getRid(), content);
 
 		}
 		for (CRIngredientVO ingredient : recipe.getCrecipeIngredientVo()) {
 			if (!ingredient.getPid().equals("undefined")) {
-				log.info("여기 동작1---------" + ingredient);
+				
 				mapper.insertCRIngredient(re.getRid(), ingredient);
 
 			}

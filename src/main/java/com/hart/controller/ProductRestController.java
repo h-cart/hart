@@ -30,7 +30,7 @@ public class ProductRestController {
    @Autowired
    private ProductsService pService;
 
-   private List<ListVO> productlist;
+
    @Autowired
    private RecipeService recipeservice;
 

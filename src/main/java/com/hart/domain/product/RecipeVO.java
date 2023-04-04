@@ -29,6 +29,9 @@ public class RecipeVO {
 	String serving;
 	String rreadyingredient;
 
+	int sort;
+	int page;
+
 	List<CRContentVO> recipeContent;
 
 	public RecipeVO(CRecipeVO recipe) {
