@@ -275,14 +275,13 @@ ul.tagit input[type="text"] {
 						<div th:text="${detail.crdetail}"></div>
 						<br> <br> [난이도] <br> <br>
 						<div th:text="${detail.crlevel==1 ? '쉬움' : '보통'}"></div>
-						<br> [예상 조리 시간]<br>
-						<br>
+						<br> [예상 조리 시간]<br> <br>
 						<div th:text="${detail.crtime==30 ? '30분 이내' : '90분 이내'}"></div>
-						<br> [준비 재료]<br>
-						<br>
+						<br> [준비 재료]<br> <br>
 						<div th:each="item : ${detail.crecipeIngredientVo}">
 							<div style="display: flex">
-								<div th:text="${item}">제품 이름</div>
+								<div th:text="${item.iname}">제품 이름</div>
+								<div>&nbsp;</div>
 								<div th:text="${item.cricount}">수량</div>
 							</div>
 						</div>

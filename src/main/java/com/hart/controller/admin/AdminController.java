@@ -75,4 +75,11 @@ public class AdminController {
 		return "redirect:/admin/recipeVote?evid=" + event.getEvid();
 	}
 
+	@GetMapping("/recipeRegister")
+	public String recipeRegister(AdminEventVO event) {
+		log.info("1. 여기 들어옴 " + event);
+		eService.recipeRegister(event);
+		return "redirect:/admin/recipeVote?evid=" + event.getEvid();
+	}
+
 }

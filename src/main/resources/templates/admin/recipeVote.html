@@ -431,7 +431,7 @@
 											<th style="text-align: center;">레시피 제목</th>
 											<th style="text-align: center;">이메일</th>
 											<th style="text-align: center;">등록일</th>
-											<th style="text-align: center;">투표개시</th>
+											<th style="text-align: center;">투표 수</th>
 											<th style="text-align: center;">투표 등록</th>
 										</tr>
 									</thead>
@@ -452,7 +452,7 @@
 													style="text-align: center;"
 												></td>
 												<td
-													th:text="${list.crvote == 1 ? 'Y' : 'N'}"
+													th:text="${list.count}"
 													style="text-align: center;"
 												></td>
 												<td style="display: flex; justify-content: space-around;">
@@ -465,10 +465,8 @@
 													<button
 														type="button"
 														class="btn btn-outline-info"
-														th:onclick="ViewDetail([[${list.crid}]])"
-														data-bs-toggle="modal"
-														data-bs-target="#exampleModal"
-													>상세보기</button>
+														th:onclick="RecipeRegister([[${list.crid}]])"
+													>레시피 등록</button>
 												</td>
 											</tr>
 										</th:block>
@@ -594,8 +592,8 @@
 		>
 	</form>
 	<script>
-		function ViewDetail(id) {
-			console.log(id);
+		function RecipeRegister(id) {
+			location.href = "/admin/recipeRegister?&crid=" + id	;
 		}
 
 		function Voting(v, e) {

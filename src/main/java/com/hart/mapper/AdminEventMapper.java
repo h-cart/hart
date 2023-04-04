@@ -22,4 +22,6 @@ public interface AdminEventMapper {
 
 	List<AdminEventVO> getVoteList(Criteria cri);
 
+	void recipeRegister(AdminEventVO event);
+
 }

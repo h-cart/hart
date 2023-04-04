@@ -37,9 +37,10 @@ public class CRecipeDTO {
 	String[] crcdetail;
 	MultipartFile[] crimg;
 
-	int[] cricount;
+	String[] cricount;
 	String[] pid;
-	int[] pcno;
+	String[] pcno;
+	String[] iname;
 
 	public CRecipeVO toCRecipeVO(String uploadPath) {
 		CRecipeVO cr = new CRecipeVO();
@@ -79,6 +80,7 @@ public class CRecipeDTO {
 			cr.setCrcdetail(crcdetail[i]);
 			cr.setCrid(crid);
 			cr.setStep(crstep[i]);
+	
 
 			String originalMName = crimg[i].getOriginalFilename();
 			String fileMName = originalMName.substring(originalMName.lastIndexOf("\\") + 1);
@@ -112,6 +114,8 @@ public class CRecipeDTO {
 			cr.setCricount(cricount[i]);
 			cr.setPid(pid[i]);
 			cr.setPcno(pcno[i]);
+			cr.setIname(iname[i]);
+			
 
 			CRIngredients.add(cr);
 
