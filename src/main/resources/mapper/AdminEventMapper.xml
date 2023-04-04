@@ -9,8 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		select * from(
 		select * from (
-		SELECT evid, crid,mid, crtitle,crregdate,crvote, rownum rn FROM (
-		SELECT evid, crid,mid, crtitle,crregdate,crvote
+		SELECT evid, crid,mid,
+		crtitle,crregdate,crvote, rownum rn FROM (
+		SELECT evid, crid,mid,
+		crtitle,crregdate,crvote
 		FROM crecipe
 		<where>
 			<if test="evid != 0">
@@ -23,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[
 		where rownum <= #{pageNum} * #{amount}
 		]]>
-				)
+		)
 		<![CDATA[
 		where rn > (#{pageNum}-1) * #{amount}
 		]]>
@@ -47,9 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		GROUP BY evid, crid
 		ORDER BY count DESC) A
-		INNER JOIN
+		JOIN
 		(SELECT evid,
-		crid,mid, crtitle,crregdate,crvote
+		crid,mid,
+		crtitle,crregdate,crvote
 		FROM crecipe
 		<where>
 			crvote=1
@@ -96,4 +99,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		=#{crvote}
 		where crid = #{crid}
 	</update>
+
+	<insert id="insertCRecipe" parameterType="RecipeVO">
+
+		INSERT INTO Recipe
+		(rid, rtitle,
+		rimg,rmingredient,rlevel,rtime,rclick,rregdate,rcano,rdetail,serving,rreadyingredient)
+		VALUES (#{rid}, #{re.rtitle}, #{re.rimg},
+		#{re.rmingredient},
+		#{re.rlevel},
+		#{re.rtime},
+		#{re.rclick}, sysdate, #{re.rcano},
+		#{re.rdetail},
+		#{re.serving},
+		#{re.rreadyingredient})
+	</insert>
+	<insert id="insertCRContent" parameterType="CRContentVO">
+		INSERT INTO
+		recipe_content (rcdetail, rcimg, rcstep,
+		rid)
+		VALUES
+		(#{content.crcdetail}, #{content.crimg}, #{content.step},
+		#{rid})
+	</insert>
+	<insert id="insertCRIngredient" parameterType="CRIngredientVO">
+
+		INSERT INTO
+		recipe_ingredient ( pid,
+		rid)
+		VALUES ( #{ingredient.pid}, #{rid})
+
+	</insert>
+
+
 </mapper>
