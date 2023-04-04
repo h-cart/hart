@@ -27,101 +27,101 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class ProductRestController {
 
-	@Autowired
-	private ProductsService pService;
+   @Autowired
+   private ProductsService pService;
 
-	private List<ListVO> productlist;
-	@Autowired
-	private RecipeService recipeservice;
+   private List<ListVO> productlist;
+   @Autowired
+   private RecipeService recipeservice;
 
-	@GetMapping(value = "/clist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<CategoryVO>>> getCategory() {
+   @GetMapping(value = "/clist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+         MediaType.APPLICATION_JSON_VALUE })
+   public ResponseEntity<Map<String, List<CategoryVO>>> getCategory() {
 
-		try {
+      try {
 
-			Map<String, List<CategoryVO>> result = new HashMap<>();
+         Map<String, List<CategoryVO>> result = new HashMap<>();
 
-			List<CategoryVO> categorybar = pService.getcategorybar();
+         List<CategoryVO> categorybar = pService.getcategorybar();
 
-			result.put("result", categorybar);
+         result.put("result", categorybar);
 
-			return new ResponseEntity<Map<String, List<CategoryVO>>>(result, HttpStatus.OK);
+         return new ResponseEntity<Map<String, List<CategoryVO>>>(result, HttpStatus.OK);
 
-		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<CategoryVO>>>(HttpStatus.BAD_REQUEST);
-		}
+      } catch (Exception e) {
+         log.info(e.getMessage());
+         return new ResponseEntity<Map<String, List<CategoryVO>>>(HttpStatus.BAD_REQUEST);
+      }
 
-	}
+   }
 
-	@PostMapping(value = "/productlist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<ListVO>>> getProductsList(@RequestBody ListVO data) {
+   @PostMapping(value = "/productlist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+         MediaType.APPLICATION_JSON_VALUE })
+   public ResponseEntity<Map<String, List<ListVO>>> getProductsList(@RequestBody ListVO data) {
 
-		try {
+      try {
 
-			List<ListVO> Productlist = pService.Productlist(data);
+         List<ListVO> Productlist = pService.Productlist(data);
 
-			log.info("data=====>>>>" + data);
-			log.info("getproductslis컨트롤러에서 찍힘>>>" + Productlist);
-			log.info(Productlist);
+         log.info("data=====>>>>" + data);
+         log.info("getproductslis컨트롤러에서 찍힘>>>" + Productlist);
+         log.info(Productlist);
 
-			Map<String, List<ListVO>> result = new HashMap<>();
-			result.put("productlist", Productlist);
+         Map<String, List<ListVO>> result = new HashMap<>();
+         result.put("productlist", Productlist);
 
-			log.info("result--->>" + result);
+         log.info("result--->>" + result);
 
-			return new ResponseEntity<Map<String, List<ListVO>>>(result, HttpStatus.OK);
+         return new ResponseEntity<Map<String, List<ListVO>>>(result, HttpStatus.OK);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<Map<String, List<ListVO>>>(HttpStatus.BAD_REQUEST);
-		}
-	}
+      } catch (Exception e) {
+         e.printStackTrace();
+         return new ResponseEntity<Map<String, List<ListVO>>>(HttpStatus.BAD_REQUEST);
+      }
+   }
 
-	/*
-	 * @PostMapping(value = "/fillterbutton", produces = {
-	 * MediaType.APPLICATION_JSON_VALUE }, consumes = {
-	 * MediaType.APPLICATION_JSON_VALUE }) public ResponseEntity<Map<String,
-	 * List<ListVO>>> getproductlisthigh(
-	 * 
-	 * @RequestBody ListVO data) {
-	 * 
-	 * try { log.info(data); List<ListVO> listtop = pService.List(data); //
-	 * log.info("listtop=>>>" + listtop);
-	 * 
-	 * Map<String, List<ListVO>> result = new HashMap<>();
-	 * result.put("getproductslist", listtop);
-	 * 
-	 * return new ResponseEntity<>(result, HttpStatus.OK);
-	 * 
-	 * } catch (Exception e) { log.info(e.getMessage()); return new
-	 * ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
-	 */
+   /*
+    * @PostMapping(value = "/fillterbutton", produces = {
+    * MediaType.APPLICATION_JSON_VALUE }, consumes = {
+    * MediaType.APPLICATION_JSON_VALUE }) public ResponseEntity<Map<String,
+    * List<ListVO>>> getproductlisthigh(
+    * 
+    * @RequestBody ListVO data) {
+    * 
+    * try { log.info(data); List<ListVO> listtop = pService.List(data); //
+    * log.info("listtop=>>>" + listtop);
+    * 
+    * Map<String, List<ListVO>> result = new HashMap<>();
+    * result.put("getproductslist", listtop);
+    * 
+    * return new ResponseEntity<>(result, HttpStatus.OK);
+    * 
+    * } catch (Exception e) { log.info(e.getMessage()); return new
+    * ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
+    */
 
-	@PostMapping(value = "/recipelist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<RecipeVO>>> recipelist(@RequestBody RecipeVO data) {
+   @PostMapping(value = "/recipelist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+         MediaType.APPLICATION_JSON_VALUE })
+   public ResponseEntity<Map<String, List<RecipeVO>>> recipelist(@RequestBody RecipeVO data) {
 
-		
-		try {
-			System.out.println("data>>" + data);
-			List<RecipeVO> recipelist = recipeservice.recipelist(data);
+      
+      try {
+         System.out.println("data>>" + data);
+         List<RecipeVO> recipelist = recipeservice.recipelist(data);
 
-			
-			
-			System.out.println("recipelist>>" + recipelist);
-			Map<String, List<RecipeVO>> result = new HashMap<>();
-			result.put("recipelist", recipelist);
+         
+         
+         System.out.println("recipelist>>" + recipelist);
+         Map<String, List<RecipeVO>> result = new HashMap<>();
+         result.put("recipelist", recipelist);
 
 
-			return new ResponseEntity<Map<String, List<RecipeVO>>>(result, HttpStatus.OK);
+         return new ResponseEntity<Map<String, List<RecipeVO>>>(result, HttpStatus.OK);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<Map<String, List<RecipeVO>>>(HttpStatus.BAD_REQUEST);
-		}
-	}
+      } catch (Exception e) {
+         e.printStackTrace();
+         return new ResponseEntity<Map<String, List<RecipeVO>>>(HttpStatus.BAD_REQUEST);
+      }
+   }
 
 }

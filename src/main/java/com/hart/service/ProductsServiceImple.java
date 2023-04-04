@@ -30,6 +30,11 @@ public class ProductsServiceImple implements ProductsService {
 
 		//log.info("#############productVO getProductListImple @@@@@@@@@=" + pcno);
 		// 1제품 목록 가져오기
+				
+		/*
+		 * List<ProductsVO> list =productsmapper.getproductslist(pcno); list.g
+		 */
+		
 		return productsmapper.getproductslist(pcno);
 	}
 
@@ -54,7 +59,6 @@ public class ProductsServiceImple implements ProductsService {
 	@Override
 	public List<ListVO> getproductcatrogrtlist(int pcno) throws Exception {
 		//log.info("===============getproductcatrogrtlist  ServiceImple ============>" + pcno);
-		
 		
 		return productsmapper.getproductcatrogrtlist(pcno);
 	}
@@ -81,3 +85,4 @@ public class ProductsServiceImple implements ProductsService {
 
 
 }
+
