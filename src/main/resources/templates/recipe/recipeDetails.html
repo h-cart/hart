@@ -17,10 +17,9 @@
 					<div class="blog__hero__text">
 						<h2 th:text="${recipeDetail.recipedetailtop.rtitle}"></h2>
 						<b><ul>
-								난이도 :
-								<li th:text="${recipeDetail.recipedetailtop.rlevel}"></li> 조리시간
-								:
-								<li th:text="${recipeDetail.recipedetailtop.rtime}"></li>
+								난이도 : <li th:text="${recipeDetail.recipedetailtop.rlevel}"></li>
+								 조리시간 : <li th:text="${recipeDetail.recipedetailtop.rtime}"></li>
+								 메인재료 : <li th:text="${recipeDetail.recipedetailtop.rmingredient}"></li>
 							</ul></b>
 					</div>
 				</div>
@@ -53,9 +52,11 @@
 							<i class="fa fa-quote-left"></i>
 							<h6>이렇게 준비해주세요</h6>
 							<br>
+							<h2 th:text="${recipeDetail.recipedetailtop.serving}" ></h2>
+								<br>
+								<p th:text="${recipeDetail.recipedetailtop.rreadyingredient}"></p>
+						
 							
-							<br>
-							 <p th:text="${recipeDetail.Rcontent.rreadyingredient}">@g</p>
 						
 							<p></p>
 							<p></p>
@@ -129,5 +130,8 @@
 	<!-- Footer Section Begin -->
 	<th:block th:replace="/includes/footer :: footer"></th:block>
 	<!-- Footer Section End -->
+	<script>
+	
+	</script>
 </body>
 </html>

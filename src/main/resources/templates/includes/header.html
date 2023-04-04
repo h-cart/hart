@@ -37,7 +37,7 @@
 				<div class="col-lg-6 col-md-5">
 					<div class="header__top__right">
 						<div class="header__top__links" sec:authorize="isAuthenticated()">
-							<a href="/member/logout">로그 아웃</a>
+							<a href="/member/logout">로그아웃</a>
 						</div>
 						<div class="header__top__links" sec:authorize="!isAuthenticated()">
 							<a href="/member/login">로그인</a>
@@ -58,14 +58,20 @@
 				<nav class="header__menu mobile-menu">
 					<ul>
 						<li>
-							<a href="/product/list?pcno_top=100571" class="active">상품</a>
+							<a href="/product/list?pcno_top=100571" class="active">Product</a>
 							<ul class="dropdown" id="listCate" style="width: 220px; background: #ffffff;padding: 0px;">
 							</ul>
 						</li>
+<<<<<<< Updated upstream
 						<li><a href="/recipe/list">레시피</a></li>
 
 						<li><a href="/class">Live</a></li>
 						<li><a href="/event?evid=1">Event</a></li>
+=======
+						<li><a href="/recipe/list">Recipe</a></li>
+						<li><a href="/liveClass">Live</a></li>
+						<li><a href="/event/upload">Event</a></li>
+>>>>>>> Stashed changes
 					</ul>
 				</nav>
 			</div>
