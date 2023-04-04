@@ -3,207 +3,222 @@
 
 <th:block th:replace="/includes/headTag :: head_tag"></th:block>
 
-<body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<body class="product-detail">
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
 
-
-
-    <!-- Header Section Begin -->
-    <th:block th:replace="/includes/header :: header1"></th:block>
+	<!-- Header Section Begin -->
+	<th:block th:replace="/includes/header :: header1"></th:block>
 	<th:block th:replace="/includes/header :: header2"></th:block>
 	<th:block th:replace="/includes/header :: header3"></th:block>
-    <!-- Header Section End -->
+	<!-- Header Section End -->
+	
+	<!-- 	<link th:href="@{/css/liveclass2.css}" rel="stylesheet"> -->
+	<!-- <link th:href="@{/css/main2.css}" rel="stylesheet"> -->
+	<link rel="icon" th:href="@{/img/logo.png}" href="https://preview.keenthemes.com/jet-html-free/assets/media/logos/favicon.ico" />
+	<link th:href="@{/css/main1.css}" rel="stylesheet">
+	<link th:href="@{/css/liveclass1.css}" rel="stylesheet">
+	<link th:href="@{/css/liveclass-detail1.css}" rel="stylesheet">
+	<link th:href="@{/css/liveclass-detail2.css}" rel="stylesheet">
+	<link href="@{/css/font.css}" rel="stylesheet">
+	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
 
-    <!-- Shop Details Section Begin -->
-    <section class="shop-details">
-        <div class="product__details__pic" style="margin-bottom: 30px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="product__details__breadcrumb">
-                            <a href="./index.html">Home</a>
-                            <a href="./shop.html">Shop</a>
-                            <span>Product Details</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="
-                justify-content: center;
-            ">
-                
-                    <div class="col-lg-6 col-md-9">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img th:src="${liveClass.lcimg}" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="img/shop-details/product-big-3.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="img/shop-details/product-big.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-4" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="img/shop-details/product-big-4.png" alt="">
-                                    <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1" class="video-popup"><i class="fa fa-play"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product__details__content">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="product__details__text">
-                            <h4 th:text="${liveClass.lcname}"></h4>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <span> - 5 Reviews</span>
-                            </div>
-                            <h3 th:text="${#numbers.formatInteger(liveClass.lcprice, 3, 'COMMA') + '원'}"></h3>
-                            
-                            
-                            <div class="product__details__btns__option">
-                                <a href="#"><i class="fa fa-heart"></i> 강사명: <span th:text=${liveClass.lcteacher}></span></a>
-                                <a href="#"><i class="fa fa-heart"></i> 장소 : <span th:text=${liveClass.lcplace}></span></a>
-                            </div>
-                            <div class="product__details__cart__option">
-   
-                              <a href="#" class="primary-btn">수강 신청하기</a>
-                          </div>
-                            <div class="product__details__last__option">
-                                <h5><span>강의 일시 : <span th:text=${liveClass.wholeDate}></span></span></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="product__details__tab">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#tabs-5"
-                                    role="tab">강의 개요</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tabs-5" role="tabpanel">
-                                    <div class="product__details__tab__content">
-                                        <div class="product__details__tab__content__item">
-                                            <h5>■ 강사 이력</h5>
-                                            <p th:text="'- '+${liveClass.lcteacher}"></p>
-                                            
-                                        </div>
-                                        <div class="product__details__tab__content__item">
-                                            <h5>■ 클래스 소개</h5>
-                                            <p th:text="'- '+${liveClass.lcexplain}"></p>
-                                        </div>
-                                        <div class="product__details__tab__content__item">
-                                          <h5>■ 이런 분들을 위한 클래스에요.</h5>
-                                          <p th:text="${liveClass.lcstudent}"></p>
-                                      </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="tabs-6" role="tabpanel">
-                                    <div class="product__details__tab__content">
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Products Infomation</h5>
-                                            <p>A Pocket PC is a handheld computer, which features many of the same
-                                                capabilities as a modern PC. These handy little devices allow
-                                                individuals to retrieve and store e-mail messages, create a contact
-                                                file, coordinate appointments, surf the internet, exchange text messages
-                                                and more. Every product that is labeled as a Pocket PC must be
-                                                accompanied with specific software to operate the unit and must feature
-                                            a touchscreen and touchpad.</p>
-                                            <p>As is the case with any new technology product, the cost of a Pocket PC
-                                                was substantial during it’s early release. For approximately $700.00,
-                                                consumers could purchase one of top-of-the-line Pocket PCs in 2003.
-                                                These days, customers are finding that prices have become much more
-                                                reasonable now that the newness is wearing off. For approximately
-                                            $350.00, a new Pocket PC can now be purchased.</p>
-                                        </div>
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Material used</h5>
-                                            <p>Polyester is deemed lower quality due to its none natural quality’s. Made
-                                                from synthetic materials, not natural like wool. Polyester suits become
-                                                creased easily and are known for not being breathable. Polyester suits
-                                                tend to have a shine to them compared to wool and cotton suits, this can
-                                                make the suit look cheap. The texture of velvet is luxurious and
-                                                breathable. Velvet is a great choice for dinner party jacket and can be
-                                            worn all year round.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="tabs-7" role="tabpanel">
-                                    <div class="product__details__tab__content">
-                                        <p class="note">Nam tempus turpis at metus scelerisque placerat nulla deumantos
-                                            solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis
-                                            ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo
-                                        pharetras loremos.</p>
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Products Infomation</h5>
-                                            <p>A Pocket PC is a handheld computer, which features many of the same
-                                                capabilities as a modern PC. These handy little devices allow
-                                                individuals to retrieve and store e-mail messages, create a contact
-                                                file, coordinate appointments, surf the internet, exchange text messages
-                                                and more. Every product that is labeled as a Pocket PC must be
-                                                accompanied with specific software to operate the unit and must feature
-                                            a touchscreen and touchpad.</p>
-                                            <p>As is the case with any new technology product, the cost of a Pocket PC
-                                                was substantial during it’s early release. For approximately $700.00,
-                                                consumers could purchase one of top-of-the-line Pocket PCs in 2003.
-                                                These days, customers are finding that prices have become much more
-                                                reasonable now that the newness is wearing off. For approximately
-                                            $350.00, a new Pocket PC can now be purchased.</p>
-                                        </div>
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Material used</h5>
-                                            <p>Polyester is deemed lower quality due to its none natural quality’s. Made
-                                                from synthetic materials, not natural like wool. Polyester suits become
-                                                creased easily and are known for not being breathable. Polyester suits
-                                                tend to have a shine to them compared to wool and cotton suits, this can
-                                                make the suit look cheap. The texture of velvet is luxurious and
-                                                breathable. Velvet is a great choice for dinner party jacket and can be
-                                            worn all year round.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Shop Details Section End -->
+	<div id="wrap" >
+		<div id="container">
+			<div id="contents">
+				<div class="product-detail-wrap">
 
-    <!-- Related Section Begin -->
-    <section class="related spad">
+					<!-- detail-block -->
+					<div class="xans-element- xans-product xans-product-detail detail-block">
+						<!-- product-imagees -->
+						<div class="product-imagees">
+							<div class="xans-element- xans-product xans-product-image ">
+								<!-- 이 부분은 상품정보의 서비스문의/안내를 활용 함 -->
+								<div class="xans-element- xans-product xans-product-additional product-video displaynone displaynone "></div>
+								<div class="only-pc">
+									<ul class="xans-element- xans-product xans-product-image prdImages first ">
+										<li>
+											<a href="javascript:void(0);">
+												<img th:src="${liveClass.liveClassListDTO.lcimg}" alt="">
+											</a>
+										</li>
+									</ul>
+									<ul class="xans-element- xans-product xans-product-addimage prdImages add">
+										<li class="displaynone xans-record-">
+											<a href="javascript:void(0);">
+												<img th:src="${liveClass.liveClassListDTO.lcimg}" alt="">
+											</a>
+										</li>
+										<li class="xans-record-">
+											<a href="javascript:void(0);"></a>
+										</li>
+									</ul>
+								</div>
+								<div class="only-mobile">
+									<ul class="mobil-slider prdImages">
+										<li><img th:src="${liveClass.liveClassListDTO.lcimg}" alt=""></li>
+										<li></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<input type="hidden" name="pid" th:value="${liveClass.liveClassListDTO.lcid}"/>
+						<input type="hidden" name="quantity" value="1"/>
+						<!-- // product-imagees -->
+						<!-- form -->
+						<div class="product-form" style="top: 0px;">
+							<div class="header" style="padding-top: 0px; padding-bottom: 0px;" >
+								<div class="xans-element- xans-product xans-product-headcategory ">
+									<ul class="category">
+										<li><a href="/" th:text=${liveClass.wholeDate}>Shop</a></li>
+										<li class="displaynone"><em>/</em><a href=""></a></li>
+										<li class="displaynone"><em>/</em><strong><a href=""></a></strong></li>
+									</ul>
+								</div>
 
-    </section>
-    <!-- Related Section End -->
+								<div class="xans-element- xans-product xans-product-detaildesign product-detail-block">
+									<p class="product_name_css xans-record-">
+										<span class="title"><span style="font-size: 18px; color: #000000; font-weight: bold;">상품명</span></span>
+										<span class="value"><span style="font-size: 18px; color: #000000; font-weight: bold;" th:text="${liveClass.liveClassListDTO.lcname}">강의명</span></span>
+									</p>
+									<p class="ma_product_code_css xans-record-">
+										<span class="title">
+											<span style="font-size: 12px; color: #555555;">자체상품코드</span>
+										</span>
+										<span class="value">
+											<span style="font-size: 12px; color: #555555;" th:text=${liveClass.liveClassListDTO.lcplace}>장소</span>
+										</span>
+									</p>
+									<p class="summary_desc_css xans-record-">
+										<span class="title"><span style="font-size: 12px; color: #555555;">상품요약정보</span></span> 
+										<span class="value">&nbsp<span style="font-size: 12px; color: #555555;" th:text="${liveClass.liveClassListDTO.lcexplain}">강의소개</span></span>
+									</p>
+									<p class="prd_price_sale_css xans-record-">
+										<span class="title">
+											<span style="font-size: 14px; color: #000000; font-weight: bold;">할인판매가</span>
+										</span>
+										<span class="value">
+											<span>
+												<span style="font-size: 14px; color: #000000; font-weight: bold;">
+													<span id="span_product_price_sale" th:text="${#numbers.formatInteger(liveClass.liveClassListDTO.lcprice, 3, 'COMMA') + '원'}">강의 가격 </span>
+												</span>
+											</span>
+										</span>
+									</p>
+									
+									<p class="made_in_css xans-record-">
+										<span class="title"><span style="font-size: 12px; color: #555555;">원산지</span></span> <span class="value"><span style="font-size: 12px; color: #555555;">중국 </span></span>
+									</p>
+									<p class="print_date_css xans-record-">
+										<span class="title"><span style="font-size: 12px; color: 555555;">제조일자</span></span> <span class="value"><span style="font-size: 12px; color: 555555;">2023-02</span></span>
+									</p>
+								</div>
+							</div>
 
-    <!-- Footer Section Begin -->
-    <th:block th:replace="/includes/footer :: footer"></th:block>
-    <!-- Footer Section End -->
-  
+
+
+							<!-- option-block -->
+							<div
+								class="xans-element- xans-product xans-product-option xans-record-">
+								
+								<div
+									class="xans-element- xans-product xans-product-option xans-record-">
+									<div class="option-block">
+										<ul option_product_no="3488"
+											option_select_element="ec-option-select-finder"
+											option_sort_no="1" option_type="T" item_listing_type="C"
+											option_title="SIZE" product_type="product_option"
+											product_option_area="product_option_3488_0"
+											option_style="button" ec-dev-id="product_option_id1"
+											ec-dev-name="option1" ec-dev-class="ProductOption0"
+											class="ec-product-button" required="true">
+											<li class="" option_value="P0000FEE000A" link_image=""
+												title="FREE"></li>
+										</ul>
+										
+									</div>
+								</div>
+							</div>
+							<!-- // option-block -->
+
+
+
+							<!-- product-action-block -->
+							<div class="xans-element- xans-product xans-product-action product-action-block">
+								<div class="buy-block ">
+									<button type="button" class="btn btn-order btn-dark btn-full orderDirect">
+										<span id="btnBuy">수강 신청하기</span>
+									</button>
+									<button type="button"
+										class="btn btn-order btn-gray btn-basket "
+										id="addToCart">
+										<span>장바구니 담기</span>
+									</button>
+								</div>
+							</div>
+							<!-- // product-action-block -->
+							
+							<!-- info-block -->
+							<div
+								class="xans-element- xans-product xans-product-additional info-block">
+								<ul class="info-tab">
+									<li class="js-delivery active" data-tab="tab-1" style="cursor: pointer;"><a><span>필요 재료</span></a></li>
+									<li class="js-details" data-tab="tab-2" style="cursor: pointer;"><a><span>강사이력</span></a></li>
+									<li class="js-size" data-tab="tab-3" style="cursor: pointer;"><a><span>수강대상</span></a></li>
+								</ul>
+								<div id="tab-1" class="info active" style="height: 413.893px;">
+									<div th:each="ingredient : ${liveClass.ingredientList}">
+										<h6 th:text="'- '+${ingredient}" style="font-size:13px;">필요재료 설명</h6>
+									</div>
+								</div>
+								<div id="tab-2" class="info" style="height: 413.893px; display:none;" >
+									<div th:each="lctExplain : ${liveClass.lctExplainList}">
+										<h6 th:text="'- '+${liveClass.liveClassListDTO.lcteacher}" style="font-size:13px;">강사이력 설명</h6>
+										<h6 th:text="'- '+${lctExplain}" style="font-size:13px;">강사이력 설명</h6>
+										<!-- <h6 th:text="'- '+${lctExplain}"></h6> -->
+									</div>
+								</div>
+								<div id="tab-3" class="info" style="height: 413.893px; display:none;" >
+									<div th:each="lcStudent : ${liveClass.lcStudentList}">
+										<h6 th:text="'-'+${lcStudent}" style="font-size:13px;">수강대상</h6>
+									</div>
+								</div>
+							</div>
+							<!-- // info-block -->
+						</div>
+						<!-- // form -->
+					</div>
+
+				</div>
+				<!-- Footer Section Begin -->
+				<th:block th:replace="/includes/footer :: footer"></th:block>
+				<!-- Footer Section End -->
+				
+<script type="text/javascript">
+	$('ul.info-tab li').click(function(){
+		
+		var tab_id = $(this).attr('data-tab');
+		$('ul.info-tab li').removeClass('active');
+		$(this).addClass('active');
+		//$('ul.info-tab li').removeClass('current');
+		//$('ul.info-tab li').css('display','none');
+		
+		
+		//$('.tab-content').removeClass('current');
+		//$(this).children("info").css('display','none')
+		$(".info").css('display','none');
+
+		//$(this).css('display', 'block');
+		$("#"+tab_id).css('display', 'block');
+		
+	});
+	
+
+</script>
+				
+				
 </body>
 
 </html>

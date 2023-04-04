@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class CRIngredientVO {
-	int cricount;
+	String cricount;
 	String pid;
-	int pcno;
+	String pcno;
 	String crid;
+	String iname;
 }

@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hart.domain.CategoryVO;
-import com.hart.domain.FillterVO;
-import com.hart.domain.ProductsVO;
+import com.hart.domain.product.CategoryVO;
+import com.hart.domain.product.ListVO;
+import com.hart.domain.product.RecipeVO;
 import com.hart.service.ProductsService;
+import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -26,70 +27,101 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class ProductRestController {
 
-	@Autowired
-	private ProductsService pService;
+   @Autowired
+   private ProductsService pService;
 
-	@GetMapping(value = "/clist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<CategoryVO>>> getCategory() {
+   private List<ListVO> productlist;
+   @Autowired
+   private RecipeService recipeservice;
 
-		try {
+   @GetMapping(value = "/clist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+         MediaType.APPLICATION_JSON_VALUE })
+   public ResponseEntity<Map<String, List<CategoryVO>>> getCategory() {
 
-			Map<String, List<CategoryVO>> result = new HashMap<>();
+      try {
 
-			List<CategoryVO> categorybar = pService.getcategorybar();
+         Map<String, List<CategoryVO>> result = new HashMap<>();
 
-			result.put("result", categorybar);
+         List<CategoryVO> categorybar = pService.getcategorybar();
 
-			return new ResponseEntity<Map<String, List<CategoryVO>>>(result, HttpStatus.OK);
+         result.put("result", categorybar);
 
-		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<CategoryVO>>>(HttpStatus.BAD_REQUEST);
-		}
+         return new ResponseEntity<Map<String, List<CategoryVO>>>(result, HttpStatus.OK);
 
-	}
+      } catch (Exception e) {
+         log.info(e.getMessage());
+         return new ResponseEntity<Map<String, List<CategoryVO>>>(HttpStatus.BAD_REQUEST);
+      }
 
-	@PostMapping(value = "/clistsamll", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<ProductsVO>>> getProductsList(@RequestBody Map<String, String> data) {
+   }
 
-		try {
-			String pcno = data.get("pcno");
-			List<ProductsVO> getproductslist = pService.getproductslistajax(Integer.parseInt(pcno));
-			// log.info("getproductslist=>>>" + getproductslist);
+   @PostMapping(value = "/productlist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+         MediaType.APPLICATION_JSON_VALUE })
+   public ResponseEntity<Map<String, List<ListVO>>> getProductsList(@RequestBody ListVO data) {
 
-			Map<String, List<ProductsVO>> result = new HashMap<>();
-			result.put("getproductslist", getproductslist);
+      try {
 
-			return new ResponseEntity<Map<String, List<ProductsVO>>>(result, HttpStatus.OK);
+         List<ListVO> Productlist = pService.Productlist(data);
 
-		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<ProductsVO>>>(HttpStatus.BAD_REQUEST);
-		}
-	}
+         log.info("data=====>>>>" + data);
+         log.info("getproductslis컨트롤러에서 찍힘>>>" + Productlist);
+         log.info(Productlist);
+
+         Map<String, List<ListVO>> result = new HashMap<>();
+         result.put("productlist", Productlist);
+
+         log.info("result--->>" + result);
+
+         return new ResponseEntity<Map<String, List<ListVO>>>(result, HttpStatus.OK);
+
+      } catch (Exception e) {
+         e.printStackTrace();
+         return new ResponseEntity<Map<String, List<ListVO>>>(HttpStatus.BAD_REQUEST);
+      }
+   }
+
+   /*
+    * @PostMapping(value = "/fillterbutton", produces = {
+    * MediaType.APPLICATION_JSON_VALUE }, consumes = {
+    * MediaType.APPLICATION_JSON_VALUE }) public ResponseEntity<Map<String,
+    * List<ListVO>>> getproductlisthigh(
+    * 
+    * @RequestBody ListVO data) {
+    * 
+    * try { log.info(data); List<ListVO> listtop = pService.List(data); //
+    * log.info("listtop=>>>" + listtop);
+    * 
+    * Map<String, List<ListVO>> result = new HashMap<>();
+    * result.put("getproductslist", listtop);
+    * 
+    * return new ResponseEntity<>(result, HttpStatus.OK);
+    * 
+    * } catch (Exception e) { log.info(e.getMessage()); return new
+    * ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
+    */
+
+   @PostMapping(value = "/recipelist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+         MediaType.APPLICATION_JSON_VALUE })
+   public ResponseEntity<Map<String, List<RecipeVO>>> recipelist(@RequestBody RecipeVO data) {
+
+      
+      try {
+         System.out.println("data>>" + data);
+         List<RecipeVO> recipelist = recipeservice.recipelist(data);
+
+         
+         
+         System.out.println("recipelist>>" + recipelist);
+         Map<String, List<RecipeVO>> result = new HashMap<>();
+         result.put("recipelist", recipelist);
 
 
-	@PostMapping(value = "/fillterbutton", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, List<ProductsVO>>> getproductlisthigh(
-			@RequestBody FillterVO data) {
+         return new ResponseEntity<Map<String, List<RecipeVO>>>(result, HttpStatus.OK);
 
-		try {
-			log.info(data);
-			List<ProductsVO> listtop = pService.fillter(data);
-			// log.info("listtop=>>>" + listtop);
-
-			Map<String, List<ProductsVO>> result = new HashMap<>();
-			result.put("getproductslist", listtop);
-
-			return new ResponseEntity<Map<String, List<ProductsVO>>>(result, HttpStatus.OK);
-
-		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<Map<String, List<ProductsVO>>>(HttpStatus.BAD_REQUEST);
-		}
-	}
+      } catch (Exception e) {
+         e.printStackTrace();
+         return new ResponseEntity<Map<String, List<RecipeVO>>>(HttpStatus.BAD_REQUEST);
+      }
+   }
 
 }

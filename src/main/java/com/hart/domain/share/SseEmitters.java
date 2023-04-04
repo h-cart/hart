@@ -1,7 +1,10 @@
 package com.hart.domain.share;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -21,7 +24,6 @@ public class SseEmitters {
 
 	private final ConcurrentHashMap<String, CopyOnWriteArrayList<SseEmitter>> emitters = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<String, CopyOnWriteArrayList<ClubAuthMemberDTO>> users = new ConcurrentHashMap<>();
-
 	public SseEmitter add(String csno, SseEmitter emitter, ClubAuthMemberDTO mDTO) {
 		if (!emitters.containsKey(csno)) {
 			emitters.put(csno, new CopyOnWriteArrayList<>());
@@ -29,6 +31,7 @@ public class SseEmitters {
 		}
 		this.emitters.get(csno).add(emitter);
 		this.users.get(csno).add(mDTO);
+
 		log.info("new emitter added: {}", emitter);
 		log.info(csno);
 		log.info("emitter list size: {}", emitters.get(csno).size());
@@ -101,8 +104,9 @@ public class SseEmitters {
 			}
 
 		});
+		
 		users.get(csno).forEach(mDTO -> {
-				mDTO.setCsno(null);
+			mDTO.setCsno(null);
 		});
 		emitters.remove(csno);
 

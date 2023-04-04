@@ -17,6 +17,8 @@ public class CRecipeVO {
 	Date crregdate;
 	int crcano;
 	String crdetail;
+	String mid;
+	int evid;
 	
 	List<CRContentVO> crecipeContent;
 	List<CRIngredientVO> crecipeIngredientVo;

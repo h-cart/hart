@@ -1,0 +1,185 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<link rel="stylesheet" type="text/css" href="/css/main1.css">
+<link rel="stylesheet" type="text/css" href="/css/main2.css">
+<link rel="stylesheet" type="text/css" href="/css/mypage.css">
+<script type="text/javascript">
+	$(document).ready(function () {
+		$(".tab_class_cs").on("click", function () {
+			$(".tab_class").removeClass("selected");
+			$(this).addClass("selected");
+		});
+
+		$(".tab_class").on("click", function () {
+			$(".tab_class_cs").removeClass("selected");
+			$(this).addClass("selected");
+		});
+	});
+</script>
+
+
+<body>
+
+	<th:block th:replace="/includes/header :: header1"></th:block>
+	<th:block th:replace="/includes/header :: header2"></th:block>
+	<th:block th:replace="/includes/header :: header3"></th:block>
+
+	<div id="wrap">
+		<div id="container">
+			<div id="contents">
+				<div class="myshop-wrap">
+
+					<div class="xans-element- xans-myshop xans-myshop-asyncbenefit header ">
+					</div>
+
+					<!-- myshop-layout -->
+					<div class="myshop-layout">
+						<!-- menu-block -->
+						<div class="menu-block">
+							<ul>
+								<li class="js-order active"><a href="/mypage/myorder">주문내역</a></li>
+								<li><a href="/mypage/myResell">수강 내역</a></li>
+								<li class="js-board"><a href="/mypage/myarticle">내가 쓴 글</a></li>
+								<li class="js-modify"><a href="/mypage/modify">내 계정</a></li>
+								<li onclick="logoutSubmit();"><a href="javascript:void(0)">로그아웃</a></li>
+							</ul>
+
+							<form id="logoutFrm" action="/member/logout" method="post">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							</form>
+						</div>
+
+
+						<!-- contents-block -->
+						<div class="contents-block">
+
+							<div class="title-block">
+								<h2>나의 수강내역</h2>
+							</div>
+
+							<nav id=tab-button-nav>
+               
+							</nav>
+						
+							<!-- 날짜 검색 -->
+
+							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
+								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead order-search-block " style="margin-top: 15px; margin-bottom: 15px;">
+									<ul class="period-rage">
+										<li><a href="#" onclick="dateCal('1');" days="00" style="border-radius: 20px;">전체</a></li>
+										<li><a href="#" onclick="dateCal('2');" days="07" style="border-radius: 20px;">학습중</a></li>
+										<li><a href="#" onclick="dateCal('3');" days="30" style="border-radius: 20px;">강의 예정</a></li>
+									</ul>
+								</div>
+								<input id="mode" name="mode" value="" type="hidden"> <input id="term" name="term" value="" type="hidden">
+							</form>
+
+							<section id="tab-section-1" class="tab-section">
+								<div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem order-list">
+											<div class="">
+												<div class="items-block xans-record- itemlist">
+													<div class="item-header ">
+														<ul class="info-block">
+															<li class="first">
+																<ul>
+																	<li>나의 수강내역</li>
+																</ul>
+															</li>
+															<li class="last only-pc"></li>
+														</ul>
+													</div>
+													<!--반복 시작  -->
+													<div class="item-prod" th:each="list : ${classList}">
+														<div class="block">
+															<div class="thumb">
+																<a href="#"><img th:src="${list.lcimg}" alt=""></a>
+															</div>
+															<div class="item-desc">
+																<div class="detail">
+                                  									<div class="option" th:text="${list.wholeDate}">강의 날짜</div>
+																	<div class="quantity text-center" th:text="${list.lcname}" style="font-weight: bold; padding-top: 5px;">주윤옥(전통요리연구가)</div>
+																</div>
+															</div>
+														</div>
+														<div class="status">
+															<!--@@수정중  -->
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
+																	<div th:if=${list.lcstatus}==0><span>강의 예정</span></div>
+																	<div th:if=${list.lcstatus}==1 th:onclick="moveVideo(1,[[${list.lcid}]])"><span>방송중</span></div>
+																	<div th:if=${list.lcstatus}==2 th:onclick="moveVideo(2,[[${list.lcid}]])"><span>강의 보기</span></div>
+																</button>
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
+																	<a href="http://192.168.0.5:3000"></a><span>상세 보기</span></a>
+																</button>
+															<button type="button"
+																class="btn btn-sm btn-gray btn-pd16 displaynone"
+																onclick="OrderHistory.getDetailInfo('?product_no=3363&amp;cate_no=26&amp;order_id=20221229-0003219&amp;ord_item_code=20221229-0003219-01');">
+																<span>상세정보</span>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+									</div>
+								</section>
+							</div>
+						<!-- // contents-block -->
+					</div>
+					<!-- // myshop-layout -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<th:block th:replace="/includes/footer :: footer"></th:block>
+
+	
+	<script>
+		const $nav = document.querySelector('#tab-button-nav')
+		const $sections = document.querySelectorAll('.tab-section');
+
+		$nav.addEventListener('click', (e) => {
+			if (!e.target.classList.contains('tab-button')) {
+				return;
+			}
+
+			const selectedTab = e.target.dataset.tabSection;
+
+			$sections.forEach(($section) => {
+				if ($section.id === selectedTab) {
+					$section.removeAttribute('hidden');
+				} else {
+					$section.setAttribute('hidden', true);
+				}
+			});
+		});
+	</script>
+
+<script type="text/javascript">
+	function moveVideo(lcstatus,lcid) {
+		
+		alert(lcstatus)
+		alert(lcid)
+		
+		
+		if(lcstatus=='1'){//라이브 서버로 연결
+			alert("check");
+			location.href='라이브 클래스 방송 페이지';
+		}else if(lcstatus =='2'){//vod 서비스로 연결
+			location.href='/class/video/'+lcid;
+		}
+		
+		
+		
+		
+		
+		
+	}
+
+</script>
+
+
+</body>
+
+
+</html>

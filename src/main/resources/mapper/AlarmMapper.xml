@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hart.mapper.AlarmMapper">
+	
+	<resultMap id="alramResultMap" type="com.hart.domain.alarm.LiveClassApplicantDTO">
+	  <result property="mid" column="MID"/>
+	  <result property="lcname" column="LCNAME"/>
+	  <result property="lcday" column="LCDAY"/>
+	  <result property="lcstart" column="LCSTART"/>
+	  <result property="lcend" column="LCEND"/>
+	  <result property="alertPhone" column="ALERT_PHONE"/>
+	</resultMap>
+
+	<select id="getApplicantInfoCall" statementType="CALLABLE" parameterType="java.util.Map">
+		 { call live_alarm_procedure(
+		 	#{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet,resultMap=alramResultMap}
+		 )}
+	</select>
+	
+	<select id="addApplicantTodayAlarm" statementType="CALLABLE" >
+		 { call today_add_alarm_procedure}
+	</select>
+	
+	
+	
+	
+</mapper>

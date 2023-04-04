@@ -22,6 +22,7 @@ public class MemberController {
 	public String home() {
 		return "member/test";
 	}
+	
 
 	@GetMapping("/login")
 	public String login() {
@@ -42,5 +43,18 @@ public class MemberController {
 		model.addAttribute("roles", ((UsernamePasswordAuthenticationToken) clubAuthMemberDTO.getAuthorities()).getAuthorities());
 		return "/admin";                                                                                                                                                                                                      
 	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "member/mypage";
+	}
+	@GetMapping("/order-history")
+	public String history() {
+		return "member/mypage_order_history";
+	}
+	@GetMapping("/orderlist")
+	public void getOrderList() {
+	}
+	
 
 }

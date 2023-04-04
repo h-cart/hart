@@ -1,5 +1,6 @@
 package com.hart.controller.liveClass;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.LiveClassVideoDTO;
+import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.service.liveClass.LiveClassService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,7 +31,7 @@ import lombok.extern.log4j.Log4j2;
  *     </pre>
  */
 @Controller
-@RequestMapping("/liveClass")
+@RequestMapping("/class")
 @RequiredArgsConstructor
 @Log4j2
 public class LiveClassController {
@@ -42,21 +46,40 @@ public class LiveClassController {
 		return "liveClass/liveClassList";
 	}
 	
-	@GetMapping("/{lcid}")
+	@GetMapping("/detail/{lcid}")
 	public String getLiveClassListDetail(Model model, @PathVariable String lcid) {
 		log.info("getLiveClassListDetail 컨트롤러 호출");
-		LiveClassListDTO dto = service.getClassDetail(lcid);
+		LiveClassDetailInfoDTO dto = service.getClassDetail(lcid);
 		model.addAttribute("liveClass",dto);
+		log.info(model);
 		return "liveClass/liveClassDetail";
 	}
 	
-	@GetMapping("/test")
-	public String streamingTest() {
-		log.info("streamingTest 컨트롤러 호출");
-		
-		return "liveClass/liveClassTestStream";
+	@GetMapping("/video/{lcid}")
+	public String getVideoDetail(@PathVariable String lcid, Model model) {
+		log.info("videoDetail 컨트롤러 호출");
+		LiveClassVideoDTO videoInfo =  service.getClassVideo(lcid);
+		log.info(videoInfo);
+		model.addAttribute("videoInfo",videoInfo);
+		return "liveClass/liveClassVideo";
 	}
 	
+	@GetMapping("/mypage")
+	public String myPageTest(Principal pr,Model model) {
+		log.info("myPage 컨트롤러 호출");
+		//수정해야한다.
+		//String mid = pr.getName();
+		String mid = "skarns23@yu.ac.kr";
+		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
+		log.info(list);
+		model.addAttribute("classList",list);
+		return "liveClass/liveClassMypage";
+	}
+	
+	
+	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@테스트용
 	@GetMapping("/testchat")
 	public String streamingTestChat() {
 		log.info("streamingTest 컨트롤러 호출");
@@ -64,14 +87,6 @@ public class LiveClassController {
 		return "liveClass/liveClassChatTestStream";
 	}
 	
-	@GetMapping("/mypage")
-	public String myPageTest() {
-		log.info("myPageTest 컨트롤러 호출");
-		
-		
-		
-		
-		return "liveClass/test";
-	}
+	
 	
 }

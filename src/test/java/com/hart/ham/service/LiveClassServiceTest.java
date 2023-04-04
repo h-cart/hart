@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.service.liveClass.LiveClassService;
 
 import lombok.extern.log4j.Log4j2;
@@ -21,10 +23,36 @@ public class LiveClassServiceTest {
 	private LiveClassService service;
 	
 	@Test
-	public void getListService() {
+	public void getListServiceTest() {
 		List<LiveClassListDTO> list = service.getList();
 		log.info(list);
 		assertThat(list.get(0)).isInstanceOf(LiveClassListDTO.class);
 	}
+	
+	@Test
+	public void getMyClassInfoServiceTest() {
+		String mid = "skarns23@gmail.com";
+		List<MyLiveClassInfoDTO> list = service.getMyClassInfo(mid);
+		
+		log.info(list);
+		//assertThat(list.get(0)).isInstanceOf(MyLiveClassInfoDTO.class);
+		assertThat(list.get(0)).isInstanceOf(MyLiveClassInfoDTO.class);
+	}
+	
+	@Test
+	public void getLiveClassDetailSetvideTest() {
+		LiveClassDetailInfoDTO dto = service.getClassDetail("L0003");
+		log.info(dto);
+		assertThat(dto).isInstanceOf(LiveClassDetailInfoDTO.class);
+		
+	}
+	
+	@Test
+	public void getClassVideoServiceTset() {
+		log.info(service.getClassVideo("L0001"));
+		//다른 걸 써보자!
+		
+	}
+	
 	
 }

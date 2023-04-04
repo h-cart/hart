@@ -4,17 +4,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.hart.domain.RecipeDetailVO;
-import com.hart.domain.RecipeVO;
+import com.hart.domain.product.RecipeDetailVO;
+import com.hart.domain.product.RecipeVO;
 
 @Service
 public interface RecipeService {
 
 	
-	public List<RecipeVO> recipelist() throws Exception;
+	public List<RecipeVO> recipelist(RecipeVO recipelist) throws Exception;
 		
 	
-	
 	public RecipeDetailVO recipeDetail(String rid) throws Exception;
+
+
 
 }

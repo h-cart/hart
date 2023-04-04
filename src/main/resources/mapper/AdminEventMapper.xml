@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hart.mapper.AdminEventMapper">
+	<select id="getEventList" parameterType="Criteria"
+		resultType="AdminEventVO">
+
+		select * from(
+		select * from (
+		SELECT evid, crid,mid, crtitle,crregdate,crvote, rownum rn FROM (
+		SELECT evid, crid,mid, crtitle,crregdate,crvote
+		FROM crecipe
+		<where>
+			<if test="evid != 0">
+				and evid = #{evid}
+			</if>
+		</where>
+		order by crregdate DESC
+		)
+		)
+		<![CDATA[
+		where rownum <= #{pageNum} * #{amount}
+		]]>
+				)
+		<![CDATA[
+		where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+
+	<select id="getVoteList" parameterType="Criteria"
+		resultType="AdminEventVO">
+
+		<!-- SELECT evid, crid,mid, crtitle,crregdate,crvote FROM crecipe <where> 
+			crvote=1 <if test="evid != 0"> and evid = #{evid} </if> </where> order by 
+			evid desc, crregdate DESC -->
+		SELECT A.evid, A.crid, A.count, B.mid, B.crtitle, B.crregdate,
+		B.crvote
+		FROM
+		(SELECT evid, crid, COUNT(*) AS count
+		FROM event_vote
+		<where>
+			<if test="evid != 0">
+				evid = #{evid}
+			</if>
+		</where>
+		GROUP BY evid, crid
+		ORDER BY count DESC) A
+		INNER JOIN
+		(SELECT evid,
+		crid,mid, crtitle,crregdate,crvote
+		FROM crecipe
+		<where>
+			crvote=1
+			<if test="evid != 0">
+				and evid = #{evid}
+			</if>
+		</where>
+		ORDER BY evid DESC, crregdate DESC) B
+		ON A.evid = B.evid AND A.crid =
+		B.crid
+
+	</select>
+
+	<select id="getEventCateList" resultType="AdminEventVO">
+
+		SELECT evid, evtitle
+		FROM
+		event_list
+		order by evid desc
+
+	</select>
+
+
+	<select id="getTotalCount" resultType="int">
+
+		SELECT count(*) FROM (
+		SELECT *
+		FROM crecipe
+		<where>
+
+			<if test="evid != 0">
+				and evid = #{evid}
+			</if>
+		</where>
+		)
+
+	</select>
+
+
+
+	<update id="voteList" parameterType="AdminEventVO">
+		update crecipe
+		set crvote
+		=#{crvote}
+		where crid = #{crid}
+	</update>
+</mapper>

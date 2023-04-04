@@ -1,5 +1,8 @@
 var csno;
 var cskey;
+function numberWithCommas(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
 
 function cart_connect(csno){
 
