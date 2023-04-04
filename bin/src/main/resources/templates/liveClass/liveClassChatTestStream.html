@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <script src="https://player.live-video.net/1.11.0/amazon-ivs-player.min.js"></script>
+  <style type="text/css">
+  body {
+  padding: 10px;
+	}
+	video {
+	    height: 250px;
+	}
+  
+  </style>
+</head>
+<body>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="w-100 text-center">
+        <video id="video-player" controls autoplay playsinline></video>
+      </div>
+        
+      <div class="card">
+          <div class="card-header bg-dark text-white">
+            Chat
+          </div>
+          <div class="card-body">
+            
+            <form id="settings-form" class="needs-validation" novalidate>
+              <div class="mb-3 row">
+                <label for="chat-token" class="col-sm-2 col-form-label">Chat Token</label>
+                <div class="col-sm-10">
+                  <input type="text" class="col-sm-10 form-control" id="chat-token" required />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="chat-endpoint" class="col-sm-2 col-form-label">Endpoint</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="chat-endpoint" placeholder="Begins with: wss://" required />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-10 offset-sm-2">
+                  <button type="submit" class="btn btn-dark" id="submit-settings" disabled>Submit</button>  
+                </div>
+              </div>
+            </form>
+            
+            <div id="chat-container" class="d-none">
+              <div id="chat" class="border rounded mb-3 p-3" style="height: 300px; overflow-y: auto;"></div>
+              <div id="chat-input-container">
+                <div class="input-group">
+                  <input id="chat-input" placeholder="Message" maxlength="500" type="text" class="form-control" />
+                  <button id="submit-chat" class="btn btn-outline-secondary">Send</button>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript">
+const username = `User${new Date().getTime()}`;
+
+const init = () => {
+  if(!IVSPlayer.isPlayerSupported) {
+    alert('Your browser does not support the IVS video player. Please try a different browser.')
+  }
+  
+  const videoEl = document.getElementById('video-player');
+  const streamUrl = 'https://94bf77b631a2.ap-northeast-2.playback.live-video.net/api/video/v1/ap-northeast-2.604504776765.channel.ZODYS32xw3rz.m3u8';
+  const ivsPlayer = IVSPlayer.create();
+  ivsPlayer.attachHTMLVideoElement(videoEl);
+  ivsPlayer.load(streamUrl);
+  ivsPlayer.play();
+
+  ivsPlayer.addEventListener(IVSPlayer.PlayerState.PLAYING, () => {
+    document.getElementById('submit-settings').removeAttribute('disabled')
+  });
+  
+  const form = document.getElementById('settings-form');
+  form.addEventListener('submit', (e) => {
+    if (form.checkValidity()) {
+      document.getElementById('settings-form').classList.add('d-none');
+      document.getElementById('chat-container').classList.remove('d-none');
+      initChat();
+    }
+    form.classList.add('was-validated')
+    e.preventDefault();
+    e.stopPropagation();
+  })
+  
+  document.getElementById('submit-chat').addEventListener('click', () => {
+    const msgInput = document.getElementById('chat-input');
+    const payload = {
+      "action": "SEND_MESSAGE",
+      "content": stripHtml(msgInput.value),
+      "attributes": {
+        "username": username
+      }
+    }
+    try {
+      window.chatConnection.send(JSON.stringify(payload));
+    }
+    catch(e) {
+      console.error(e);
+    }
+    msgInput.value = '';
+    msgInput.focus();
+  });
+}
+
+const initChat = () => {
+  //get endpoint and token
+  const endpoint = document.getElementById('chat-endpoint').value;
+  const token = document.getElementById('chat-token').value;
+  
+  // create connection
+  window.chatConnection = new WebSocket(endpoint, token); 
+
+  // listen for incoming messages
+  window.chatConnection.onmessage = (event) => {
+    // parse the event data
+    const data = JSON.parse(event.data);
+
+    // append the incoming msg to the chat
+    const msgHtml = `<div class="mb-2"><b class="text-primary">${data.Attributes.username}</b>: ${data.Content}</div>`;
+    const chatContainer = document.getElementById('chat');
+    chatContainer.innerHTML += msgHtml;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  };
+}
+
+const stripHtml = (html) => {
+  let doc = new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent || '';
+};
+
+document.addEventListener('DOMContentLoaded', init);
+
+
+</script>
+
+
+<script type="text/javascript">
+  async function createChatToken(params) {
+	  const ivs = new AWS.Ivschat();
+	  const result = await ivs.createChatToken(params).promise();
+	  console.log("New token created", result.token);
+	}
+	/*
+	Create a token with provided inputs. Values for user ID and display name are 
+	from your application and refer to the user connected to this chat session.
+	*/
+	const params = {
+	  "attributes": {
+	    "displayName": "DemoUser"
+	  },
+	  "capabilities": ["SEND_MESSAGE"],
+	  "roomIdentifier": "arn:aws:ivschat:ap-northeast-2:604504776765:room/US7fJa92RF0h",
+	  "userId": 11231234
+	};
+	createChatToken(params);
+  
+  </script>
+
+
+</html>

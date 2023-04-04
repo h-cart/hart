@@ -1,10 +1,16 @@
 package com.hart.service.liveClass;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.hart.domain.liveClass.LiveClassDetailDTO;
+import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.LiveClassVideoDTO;
+import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.mapper.LiveClassMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -26,13 +32,80 @@ public class LiveClassServiceImpl implements LiveClassService{
 	}
 
 	@Override
-	public LiveClassListDTO getClassDetail(String lcid) {
+	public LiveClassDetailInfoDTO getClassDetail(String lcid) {
 		log.info("getClassDetail 서비스 호출");
-		LiveClassListDTO dto = mapper.getDetail(lcid);
-		StringBuilder sb = new StringBuilder();
-		sb.append(dto.getLcdate()+"("+dto.getLcday()+") "+dto.getLcstart()+"-"+dto.getLcend());
-		dto.setWholeDate(sb.toString());
+		LiveClassListDTO dto = mapper.getLiveClassDetail(lcid);
 		log.info(dto);
+		LiveClassDetailInfoDTO infoDTO = new LiveClassDetailInfoDTO();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(dto.getLcdate()+" ("+dto.getLcdayofweek()+") "+dto.getLcstart()+"-"+dto.getLcend());
+		infoDTO.setWholeDate(sb.toString());
+		infoDTO.setIngredientList(dto.getLcingredient().replaceAll(", ","@").split("@"));
+		infoDTO.setLctExplainList(dto.getLctexplain().substring(1).split("-"));
+		infoDTO.setLcStudentList(dto.getLcstudent().substring(1).split("-"));
+		
+		//infoDTO.setLcStudentList(dto.getLcstudent().replaceAll(" - ", "@").substring(1).split("@"));
+		
+		//infoDTO.setLctExplainList(dto.getLctexplain().split("-"));
+		//infoDTO.setLcStudentList(dto.getLcstudent().split(" - "));
+		infoDTO.setLiveClassListDTO(dto);
+		
+		log.info(infoDTO);
+		
+		return infoDTO;
+	}
+
+	@Override
+	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid) {
+		log.info("getMyClassInfo 서비스 호출");
+		List<MyLiveClassInfoDTO> list = mapper.getMyLiveClassInfo(mid);
+		Calendar startTime = Calendar.getInstance(); 
+		Calendar endTime = Calendar.getInstance(); 
+		long now = System.currentTimeMillis();
+		
+		for(MyLiveClassInfoDTO dto : list) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(dto.getLcdate()+" ("+dto.getLcdayofweek()+") "+dto.getLcstart()+"-"+dto.getLcend());
+			dto.setWholeDate(sb.toString());
+			
+			startTime.set(Calendar.YEAR, Integer.parseInt(dto.getLcday().substring(0, 4)));
+			startTime.set(Calendar.MONTH, Integer.parseInt(dto.getLcday().substring(5, 7))-1);
+			startTime.set(Calendar.DATE, Integer.parseInt(dto.getLcday().substring(8,10)));
+			startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(dto.getLcstart().substring(0, 2)));
+			startTime.set(Calendar.MINUTE, Integer.parseInt(dto.getLcstart().substring(3)));
+			startTime.set(Calendar.SECOND, 0);
+			
+			endTime.set(Calendar.YEAR, Integer.parseInt(dto.getLcday().substring(0, 4)));
+			endTime.set(Calendar.MONTH, Integer.parseInt(dto.getLcday().substring(5, 7))-1);
+			endTime.set(Calendar.DATE, Integer.parseInt(dto.getLcday().substring(8,10)));
+			endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(dto.getLcend().substring(0, 2)));
+			endTime.set(Calendar.MINUTE, Integer.parseInt(dto.getLcend().substring(3)));
+			endTime.set(Calendar.SECOND, 0);
+			
+			long startDateMillis = startTime.getTimeInMillis();
+			long endDateMillis = endTime.getTimeInMillis();
+			if(startDateMillis<=now && now<=endDateMillis) {
+				dto.setLcstatus(1);//방송 중
+			} else if(endDateMillis<now) {
+				dto.setLcstatus(2);//지난 방송
+			}
+			
+		}
+		log.info(list);
+		
+		
+		return list;
+		
+	}
+
+	@Override
+	public LiveClassVideoDTO getClassVideo(String lcid) {
+		log.info("getClassVideo 서비스 호출");
+		LiveClassVideoDTO dto = mapper.getMyVideo(lcid);
+		
+		dto.setIngredientList(dto.getLcingredient().replaceAll(", ","@").split("@"));
+		
 		return dto;
 	}
 

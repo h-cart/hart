@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +20,11 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.hart.domain.cart.CartDTO;
 import com.hart.domain.cart.CartInsertDTO;
 import com.hart.domain.member.ClubAuthMemberDTO;
+import com.hart.domain.recommand.RecommandDTO;
 import com.hart.domain.share.ShareDTO;
 import com.hart.domain.share.SseEmitters;
 import com.hart.service.cart.CartService;
+import com.hart.service.recommand.RecommandService;
 import com.hart.service.share.ShareService;
 
 import lombok.extern.log4j.Log4j2;
@@ -43,16 +44,21 @@ public class CartRestController {
 
 	@Autowired
 	private ShareService sService;
+	
+	@Autowired
+	private RecommandService rService;
 
 	@PostMapping(value = "/insert", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, String>> insertCart(@RequestBody Map<String, List<String>> map,
+	public ResponseEntity<Map<String, RecommandDTO>> insertCart(@RequestBody Map<String, List<String>> map,
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-
-		Map<String, String> result = new HashMap<>();
+		
+		Map<String, RecommandDTO> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
+			System.out.println(pids);
+			System.out.println(pamounts);
 			if (mDTO.getCsno() != null) {
 				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
 				sseEmitters.insert(mDTO.getCsno());
@@ -60,12 +66,12 @@ public class CartRestController {
 				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
 				cService.CartInsert(pids, pamounts, mid);
 			}
-			result.put("result", "success");
-			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
+			result.put("result", rService.getRecommand(mDTO.getMid(), mDTO.getCsno()));
+			return new ResponseEntity<>(result, HttpStatus.OK);
 
 		} catch (Exception e) {
-			result.put("result", e.getMessage());
-			return new ResponseEntity<Map<String, String>>(result, HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -73,7 +79,6 @@ public class CartRestController {
 	@PostMapping(value = "/get", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, CartDTO>> getCarts(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-
 		Map<String, CartDTO> map = new HashMap<>();
 		try {
 			if (mDTO.getCsno() == null)
@@ -154,13 +159,12 @@ public class CartRestController {
 		}
 	}
 
-	@GetMapping(value = "/sse/{csno}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO,
-			@PathVariable("csno") String csno) {
+	@GetMapping(value = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
+		if(mDTO.getCsno()==null) return null; 
 		SseEmitter emitter = new SseEmitter(60 * 60 * 60L);
-		sseEmitters.add(csno, emitter, mDTO);
-		log.info("WHAT'S WRONG");
-		log.info(csno);
+		sseEmitters.add(mDTO.getCsno(), emitter, mDTO);
+
 		try {
 			emitter.send(SseEmitter.event().name("connect").data("connected!"));
 		} catch (IOException e) {
@@ -228,6 +232,13 @@ public class CartRestController {
 			}catch (Exception e) {
 				return new ResponseEntity<Map<String,ShareDTO>>(HttpStatus.BAD_REQUEST);
 			}
+	}
+	
+	@GetMapping(value="/getRecommand", consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Map<String,RecommandDTO>> getRecommand(@RequestBody Map<String,String> map){
+		
+		
+		return null;
 	}
 	
 

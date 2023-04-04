@@ -6,8 +6,8 @@
 
 	<insert id="insertClubMember">
 		insert into members (mid, social,mname,mpassword ,
-		mroles)
-		values(#{mid},#{social},#{mname},#{mpassword}, #{mroles})
+		mroles,mpoint)
+		values(#{mid},#{social},#{mname},#{mpassword}, #{mroles},0)
 	</insert>
 	<insert id="insertClubRoleSet">
 		insert into club_member_role_set
@@ -18,9 +18,13 @@
 	<select id="findByEmail"
 		resultType="com.hart.domain.member.ClubMember2">
 		select
-		mid, mname, mpassword, social,mroles,csno
+		mid, mname, mpassword, social,mroles,csno,mpoint,mphone,mzipcode,maddress,maddressdetail
 		from members m
 		where m.mid= #{mid} and m.social = #{social}
 	</select>
-
+	
+	<update id="updateAddress" parameterType="OinfoDTO">
+		UPDATE members set mname = #{oname}, mphone = #{phone}, mzipcode = #{ozipcode},maddress = #{oaddress1}, maddressdetail = #{oaddress2}
+		WHERE mid = #{mid}
+	</update>
 </mapper>

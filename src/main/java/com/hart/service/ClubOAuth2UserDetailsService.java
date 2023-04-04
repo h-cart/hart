@@ -102,7 +102,8 @@ public class ClubOAuth2UserDetailsService extends DefaultOAuth2UserService {
 			log.info(clubMember2.getMpassword());
 			// OAuth2User 를 clubAuthMemberDTO 로 변환
 			ClubAuthMemberDTO clubAuthMemberDTO = new ClubAuthMemberDTO(clubMember2.getMid(),
-					clubMember2.getMpassword(), 1, authorities, oAuth2User.getAttributes(),clubMember2.getCsno());
+					clubMember2.getMpassword(), 1, authorities, oAuth2User.getAttributes(),clubMember2.getCsno(),clubMember2.getMpoint()
+					,clubMember2.getMphone(),clubMember2.getMzipcode(),clubMember2.getMaddress(),clubMember2.getMaddressdetail());
 			clubAuthMemberDTO.setMname(clubMember2.getMname());
 			clubAuthMemberDTO.setMpassword(clubMember2.getMpassword());
 			// clubAuthMemberDTO --> UserDetails 반환

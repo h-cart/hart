@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head th:fragment="head_tag">
+<meta charset="UTF-8">
+<meta
+	name="description"
+	content="HART"
+>
+<meta
+	name="keywords"
+	content="HART, HCART"
+>
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1.0"
+>
+<meta
+	http-equiv="X-UA-Compatible"
+	content="ie=edge"
+>
+<title>HART</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
+<!-- Css Styles -->
+<link
+	rel="stylesheet"
+	href="/css/bootstrap.min.css"
+	type="text/css"
+>
+<link
+	rel="stylesheet"
+	href="/css/font-awesome.min.css"
+	type="text/css"
+>
+<link
+	rel="stylesheet"
+	href="/css/elegant-icons.css"
+	type="text/css"
+>
+<link
+	rel="stylesheet"
+	href="/css/magnific-popup.css"
+	type="text/css"
+>
+<link
+	rel="stylesheet"
+	href="/css/nice-select.css"
+	type="text/css"
+>
+<link
+	rel="stylesheet"
+	href="/css/owl.carousel.min.css"
+	type="text/css"
+>
+<link
+	rel="stylesheet"
+	href="/css/slicknav.min.css"
+	type="text/css"
+>
+<link
+	rel="stylesheet"
+	href="/css/style.css"
+	type="text/css"
+>
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+</head>
+</html>

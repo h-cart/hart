@@ -15,9 +15,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 
 @Data
 @Component
+@Log4j2
 public class CRecipeDTO {
 	String crid;
 	String crtitle;
@@ -28,14 +30,17 @@ public class CRecipeDTO {
 	int crclick;
 	Date crregdate;
 	String crdetail;
+	String mid;
+	int evid;
 
 	String[] crstep;
 	String[] crcdetail;
 	MultipartFile[] crimg;
 
-	int[] cricount;
+	String[] cricount;
 	String[] pid;
-	int[] pcno;
+	String[] pcno;
+	String[] iname;
 
 	public CRecipeVO toCRecipeVO(String uploadPath) {
 		CRecipeVO cr = new CRecipeVO();
@@ -46,14 +51,15 @@ public class CRecipeDTO {
 		cr.setCrtime(crtime);
 		cr.setCrregdate(crregdate);
 		cr.setCrdetail(crdetail);
-
+		cr.setMid(mid);
+		cr.setEvid(evid);
 		String originalMName = crMimg.getOriginalFilename();
 		String fileMName = originalMName.substring(originalMName.lastIndexOf("\\") + 1);
 		String folderPath = makeFolder(uploadPath);
 
 		// UUID
 		String uuid = UUID.randomUUID().toString();
-		String saveName = folderPath + File.separator + uuid + "_" + fileMName;
+		String saveName = folderPath + uuid + "_" + fileMName;
 		Path savePath = Paths.get(uploadPath + File.separator + saveName);
 		try {
 			crMimg.transferTo(savePath);
@@ -74,6 +80,7 @@ public class CRecipeDTO {
 			cr.setCrcdetail(crcdetail[i]);
 			cr.setCrid(crid);
 			cr.setStep(crstep[i]);
+	
 
 			String originalMName = crimg[i].getOriginalFilename();
 			String fileMName = originalMName.substring(originalMName.lastIndexOf("\\") + 1);
@@ -81,8 +88,9 @@ public class CRecipeDTO {
 
 			// UUID
 			String uuid = UUID.randomUUID().toString();
-			String saveName = folderPath + File.separator + uuid + "_" + fileMName;
+			String saveName = folderPath + uuid + "_" + fileMName;
 			Path savePath = Paths.get(uploadPath + File.separator + saveName);
+
 			try {
 				crimg[i].transferTo(savePath);
 			} catch (Exception e) {
@@ -106,6 +114,8 @@ public class CRecipeDTO {
 			cr.setCricount(cricount[i]);
 			cr.setPid(pid[i]);
 			cr.setPcno(pcno[i]);
+			cr.setIname(iname[i]);
+			
 
 			CRIngredients.add(cr);
 
@@ -117,8 +127,8 @@ public class CRecipeDTO {
 
 	private String makeFolder(String uploadPath) {
 		String str = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-		String folderPath = str.replace("/", File.separator);
-
+		/* String folderPath = str.replace("/", File.separator); */
+		String folderPath = str;
 		File uploadPathFolder = new File(uploadPath, folderPath);
 		if (uploadPathFolder.exists() == false) {
 			uploadPathFolder.mkdirs();

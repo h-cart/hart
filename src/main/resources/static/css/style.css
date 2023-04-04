@@ -1399,7 +1399,7 @@ ol {
 
 .shop__sidebar__accordion .card-heading a:after,
 .shop__sidebar__accordion .card-heading>a.active[aria-expanded=false]:after {
-	content: "�꼪";
+	content: "\f078";
 	font-family: "FontAwesome";
 	font-size: 24px;
 	font-weight: 700;
@@ -1411,7 +1411,7 @@ ol {
 }
 
 .shop__sidebar__accordion .card-heading.active a:after {
-	content: "�꼪";
+	content: "\f077";
 	font-family: "FontAwesome";
 	font-size: 24px;
 	font-weight: 700;
@@ -1580,7 +1580,7 @@ ol {
 	position: absolute;
 	right: -14px;
 	top: 0;
-	content: "�꼨";
+	content: "\f054";
 	font-family: "FontAwesome";
 }
 
@@ -2082,7 +2082,7 @@ ol {
 	position: absolute;
 	right: -14px;
 	top: 0;
-	content: "�꼨";
+	content: "\f054";
 	font-family: "FontAwesome";
 }
 
@@ -2395,7 +2395,6 @@ ol {
 	color: #111111;
 	height: 40px;
 	width: 40px;
-	background: #f3f2ee;
 	border-radius: 50%;
 	line-height: 40px;
 	text-align: center;
@@ -2427,7 +2426,7 @@ ol {
 }
 
 .cart__discount {
-	margin-bottom: 60px;
+	margin-bottom: 30px;
 }
 
 .cart__discount h6 {
@@ -2569,7 +2568,6 @@ ol {
 	width: 100%;
 	border: 1px solid #e1e1e1;
 	font-size: 14px;
-	color: #b7b7b7;
 	padding-left: 20px;
 	margin-bottom: 20px;
 }

@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hart.domain.RecipeContentVO;
-import com.hart.domain.RecipeDetailVO;
-import com.hart.domain.RecipeVO;
+import com.hart.domain.product.RecipeContentVO;
+import com.hart.domain.product.RecipeDetailVO;
+import com.hart.domain.product.RecipeVO;
 import com.hart.mapper.RecipeMapper;
 
 import lombok.extern.log4j.Log4j2;
@@ -22,10 +22,12 @@ public class RecipeServiceImple implements RecipeService{
 	RecipeMapper recipemapper;
 	
 	@Override
-	public List<RecipeVO> recipelist() {
+	public List<RecipeVO> recipelist(RecipeVO recipelist) {
 		
-		//System.out.println("recipe==============");
-		return recipemapper.recipelist();
+		System.out.println("recipe==============>" + recipelist);
+		System.out.println("recipe=====mapper?>" + recipemapper.recipelist(recipelist));
+		
+		return recipemapper.recipelist(recipelist);
 	}
 	
 	
