@@ -314,10 +314,12 @@
       };
 
 
-      $(".addToCart").on("click", function () {
-         addToCart();
-      });
    /*]]>*/
-   </script>
+      $(document).on("click",".addToCart",function(){
+         console.log("클");
+         addToCart();
+      })
+</script>
+
 
 </body>
