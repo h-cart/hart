@@ -3853,3 +3853,6 @@ ol {
 		height: 250px;
 	}
 }
+dialog {
+	border-radius: 15px;
+}
