@@ -76,5 +76,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		where rn between (#{page} * 9 + 1) AND (#{page} * 9 + 9)
 	</select>
-</mapper>
 
+</mapper>
