@@ -105,4 +105,10 @@ public class AdminEventServiceImpl implements AdminEventService {
 		
 	}
 
+	@Override
+	public void eventModify(EventListVO event) {
+		mapper.eventModify(event);
+		
+	}
+
 }

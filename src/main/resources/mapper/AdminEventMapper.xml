@@ -165,26 +165,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</select>
 
-	<update id="updateEventManage" parameterType="AdminEventVO">
+	<update id="eventModify" parameterType="EventListVO">
 		update event_list
-		set evtitle = #{evtitle},
+		set
+		evtitle = #{evtitle},
 		start_date = #{start_date},
 		end_date =
 		#{end_date},
 		vstart_date = #{vstart_date},
 		vend_date = #{vend_date},
-		ev_img = #{ev_img},
 		crmingredient = #{crmingredient}
 		where evid =
 		#{evid}
 	</update>
 
-<!-- event_list에 데이터를 insert 하는 쿼리를 만들어줘 evid는 EVID_SEQ 시퀀스로 만들어줘 -->
+	<!-- event_list에 데이터를 insert 하는 쿼리를 만들어줘 evid는 EVID_SEQ 시퀀스로 만들어줘 -->
 
 	<insert id="eventRegister" parameterType="EventListVO">
 		INSERT INTO
-		event_list (evid,evtitle, start_date, end_date, vstart_date, vend_date,  crmingredient)
-		VALUES (evid_seq.NEXTVAL,#{evtitle}, #{start_date}, #{end_date}, #{vstart_date}, #{vend_date}, #{crmingredient})	
+		event_list
+		(evid,evtitle, start_date, end_date, vstart_date, vend_date,
+		crmingredient)
+		VALUES (evid_seq.NEXTVAL,#{evtitle}, #{start_date},
+		#{end_date}, #{vstart_date}, #{vend_date}, #{crmingredient})
 	</insert>
 
 

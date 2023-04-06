@@ -2,16 +2,19 @@ package com.hart.domain.event;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
 public class EventListVO {
 	int evid;
+	
 	String evtitle;
-	String start_date;
-	String end_date;
-	String vstart_date;
-	String vend_date;
+	Date start_date;
+	Date end_date;
+	Date vstart_date;
+	Date vend_date;
 	String crmingredient;
 
 }
