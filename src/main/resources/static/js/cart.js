@@ -170,7 +170,7 @@ $(document).on("click", ".rbtn_minus", function () {
 	var pos = $(this).data('value');
 	var quantity = $("#quantity_" + pos).val();
 	console.log(pos);
-	if (+quantity - 1 <0) {
+	if (+quantity - 1 <=0) {
 		alert('1개 이상 선택해주십시오.');
 		return;
 	}

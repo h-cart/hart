@@ -41,7 +41,7 @@ $(document).on("click","#btn_cancle",function(){
 		console.log(result);
 		csno = result.result.csno;
 		cskey = result.result.cskey;
-					var url = 'https://urlopen.link/hcart.shop:50022/cart/group?csno='+csno+'&cskey='+cskey;
+					var url = 'https://hcart.shop:50021/cart/group?csno='+csno+'&cskey='+cskey;
 		console.log(csno,cskey);
 		console.log(url);
 		    Kakao.Link.sendDefault({

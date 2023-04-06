@@ -1,7 +1,6 @@
 
 package com.hart.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
@@ -13,9 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.hart.domain.share.SseEmitters;
 import com.hart.security.handler.LoginSuccessHandler;
 
 import lombok.extern.log4j.Log4j2;
@@ -91,4 +91,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.httpFirewall(defaultHttpFireWall());
 	}// end configure http
+	
+	@Bean
+    public RequestCache requestCache() {
+        return new HttpSessionRequestCache();
+    }
+
 }// end class
