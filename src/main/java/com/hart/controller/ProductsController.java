@@ -19,6 +19,8 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/product")
 public class ProductsController {
 
+	//private ChatGPT bot;
+	
    @Autowired
    private ProductsService productsservice;
    private Object cList;
@@ -28,7 +30,10 @@ public class ProductsController {
    public String productlist(Model model, ListVO list) {
 
       log.info("pcno Productcontroller @@@@@@@@@@@@@@@=");
-
+      
+     //asd =gpt.chatGPT("text");
+      
+      
          //List<ListVO> cList = new ArrayList<>();
       // List<CategoryVO> categorypcno = null;
       
