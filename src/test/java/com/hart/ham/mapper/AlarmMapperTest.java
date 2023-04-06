@@ -1,5 +1,7 @@
 package com.hart.ham.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,16 +57,29 @@ public class AlarmMapperTest {
 		log.info(list);
 	}
 
-	@Test
-	public void test2() {
-		mapper.addApplicantTodayAlarm();
-		
-	}
-	
+
 	@Test
 	public void testAlarm() {
 		mapper.addApplicantTodayAlarm();
 		
+	}
+
+	@Test
+	public void noticeTest() {
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("mid", "skarns23@yu.ac.kr");
+		map.put("alarmCount", null);
+		mapper.noticeListCall(map);
+		log.info(map);
+		assertThat(Integer.parseInt((String)map.get("alarmCount"))).isEqualTo(2);
+		
+	}
+	
+	@Test
+	public void alarmUpdateTest() {
+		String mid = "skarns23@yu.ac.kr";
+		
+		assertThat(mapper.updateNoticeList(mid)).isEqualTo(3);
 	}
 	
 }

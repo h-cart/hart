@@ -1,14 +1,10 @@
 package com.hart.controller.alarm;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hart.domain.alarm.AlarmDTO;
+import com.hart.domain.alarm.NoticeDTO;
 import com.hart.service.alarm.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,13 +30,23 @@ public class AlarmRestController {
 	private final NoticeService service;
 	
 	@PostMapping
-	public List<AlarmDTO> getalarm(){
+	public NoticeDTO getalarm(){
 		//Principal pr
 		//String mid = pr.getName();
 		String mid = "skarns23@yu.ac.kr";
-		List<AlarmDTO> list = service.getNoticeService(mid);
-		log.info(list);
-		return list;
+		NoticeDTO dto = service.getNoticeService(mid);
+		log.info(dto);
+		return dto;
+	}
+	
+	@PostMapping("/update")
+	public void alarmStatusUpdate(){
+		//Principal pr
+		//String mid = pr.getName();
+		log.info("alarmStatusUpdate 컨트롤러 호출");
+		String mid = "skarns23@yu.ac.kr";
+		service.noticeUpdateService(mid);
+		
 	}
 	
 }
