@@ -103,14 +103,14 @@
     <ul class="navbar-nav ml-auto">
   
         <!-- Nav Item - Alerts -->
-        <li class="nav-item dropdown no-arrow mx-1 show">
+        <li class="nav-item dropdown no-arrow mx-1" onclick="updateCheckAlarm()">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">2+</span>
+                <span class="badge badge-danger badge-counter" id="alarmCnt">2+</span>
             </a>
             <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="alertsDropdown" id="alarmlist">
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="alarmlist">
                 <h6 class="dropdown-header">
                     알림
                 </h6>
@@ -170,59 +170,36 @@
 </nav>
 <!-- End of Topbar -->
 
-<script type="text/javascript">
-	$(document).ready(function() {
 
+<!--이거 헤더에 가져다가 붙이면됨  -->
+<script type="text/javascript">
+	
+	
+	
+	function updateCheckAlarm(){
+		
 		$.ajax({
 			type: 'POST',
-			url : '/alarm',
+			url : '/alarm/update',
 			contentType : "application/json; charset=utf-8",
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader(header, token);
 			},
-			success : function(result){
-				for (let i = 0; i < result.length; i++) {
-
-					let date = result[i].alarm_date;
-					let content = result[i].alarm_content;
-					
-					let str="";
-					
-					str+=`
-						<a class="dropdown-item d-flex align-items-center" href="#">
-		                    <div class="mr-3">
-		                        <div class="icon-circle bg-primary">
-		                            <i class="fas fa-file-alt text-white"></i>
-		                        </div>
-		                    </div>
-		                    <div style="word-break: keep-all;">
-		                        <div class="small text-gray-500">${date}</div>
-		                        <span>${content}</span>
-		                    </div>
-		                </a>
-					`
-					
-					$("#alarmlist").append(str);
-					
-					  
-				}
-				let laststr='';
-				laststr+=`<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
-				$("#alarmlist").append(laststr);
-				
-				
+			success : function(){
+				console.log("ajax 성공");
+				$("#alarmCnt").html("");
 			},
-			error : function(result){
-				alert("ajax 실패");
+			error : function(){
+				consoel.log("ajax 실패");
 				
 			}
 			
-		});  
+		});
 		
 		
-	});
-
-
+	}
+	
+	
 </script>
 
 
