@@ -17,7 +17,16 @@
 			border: 0;
 			outline: 0;
 		}
+
 	</style>
+
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="/css/alarm.css" rel="stylesheet">
 
 <body>
     <!-- Page Preloder -->
@@ -54,7 +63,7 @@
 						<div class="blog__item__pic set-bg2" th:style="'background-image:url(' + ${liveClass.lcimg} + ');'"></div>
 						<div class="blog__item__text">
 							<span th:text="${liveClass.lcday}"><img th:src="${liveClass.lcimg}" alt="이미지 안불러짐"></span>
-							<h5 th:text="${liveClass.lcname}"></h5>
+							<h5 th:text="${liveClass.lcname}" style="word-break: keep-all;"></h5>
 							<a th:href="@{/class/detail/{lcid}(lcid=${liveClass.lcid})}">상세보기</a>
 						</div>
 					</div>
@@ -87,108 +96,162 @@
     </section>
     <!-- Blog Section End -->
 
+	<!-- 버튼 테스트-->
+	<!-- Topbar -->
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+  
+        <!-- Nav Item - Alerts -->
+        <li class="nav-item dropdown no-arrow mx-1 show">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">2+</span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="alertsDropdown" id="alarmlist">
+                <h6 class="dropdown-header">
+                    알림
+                </h6>
+                <!-- 
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                            <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 12, 2019</div>
+                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-success">
+                            <i class="fas fa-donate text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 7, 2019</div>
+                        $290.29 has been deposited into your account!
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-warning">
+                            <i class="fas fa-exclamation-triangle text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 2, 2019</div>
+                        Spending Alert: We've noticed unusually high spending for your account.
+                    </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                 -->
+                
+            </div>
+        </li>
 
-	<!-- 알람 버튼 만들기 테스트  -->
 
-	<dialog id="favDialog">
-  <form method="dialog">
-    <p><label>좋아하는 동물:
-      <select>
-        <option></option>
-        <option>아르테미아</option>
-        <option>레서판다</option>
-        <option>거미원숭이</option>
-      </select>
-    </label></p>
-    <menu>
-      <button value="cancel">취소</button>
-      <button id="confirmBtn" value="default">확인</button>
-    </menu>
-  </form>
-</dialog>
 
-<menu>
-  <button id="updateDetails">상세정보 업데이트</button>
-</menu>
+        
+        <!-- Nav Item - Messages -->
+        
 
-<output aria-live="polite"></output>
-	
-    
-    
-    <button onclick="showMsg()">메시지 띄우기</button>
+        <div class="topbar-divider d-none d-sm-block"></div>
 
-	<div>
-		<!-- 아래 dialog 태그 영역이 메시지 창 -->
-		<dialog id="myMsgDialog">
-			<h3>알람</h3>
-			<hr>
-			<table id="alarmContent">
-			  <tr>
-			    <th>공지번호</th>
-			    <th>내용</th>
-			  </tr>
-			  <tr >
-			    <td>1번 공지</td>
-			    <td>나는 지금 너무 졸립다!</td>
-			  </tr>
-			</table>
-			<input type="button" id="mButton" onclick="closeMsg()" value=" 확 인 " >
-		</dialog>
-	</div>
-	<script>
-		function showMsg(){
-			var dialog = document.getElementById("myMsgDialog");
-			//$("#myMsgDialog").append("테스트 중입니다.");
-			$("#alarmContent").append("<tr><td>3번 공지</td><td>테스트 중입니다(1)</td></tr>");
-			$("#alarmContent").append("<tr><td>4번 공지</td><td>테스트 중입니다(2)</td></tr>");
-			dialog.showModal();
-		}
+        <!-- Nav Item - User Information -->
+        
+
+    </ul>
+
+</nav>
+<!-- End of Topbar -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$.ajax({
+			type: 'POST',
+			url : '/alarm',
+			contentType : "application/json; charset=utf-8",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			success : function(result){
+				for (let i = 0; i < result.length; i++) {
+
+					let date = result[i].alarm_date;
+					let content = result[i].alarm_content;
+					
+					let str="";
+					
+					str+=`
+						<a class="dropdown-item d-flex align-items-center" href="#">
+		                    <div class="mr-3">
+		                        <div class="icon-circle bg-primary">
+		                            <i class="fas fa-file-alt text-white"></i>
+		                        </div>
+		                    </div>
+		                    <div style="word-break: keep-all;">
+		                        <div class="small text-gray-500">${date}</div>
+		                        <span>${content}</span>
+		                    </div>
+		                </a>
+					`
+					
+					$("#alarmlist").append(str);
+					
+					  
+				}
+				let laststr='';
+				laststr+=`<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
+				$("#alarmlist").append(laststr);
+				
+				
+			},
+			error : function(result){
+				alert("ajax 실패");
+				
+			}
+			
+		});  
 		
-		function closeMsg(){
-			var dialog = document.getElementById("myMsgDialog");
-			dialog.close();
-		}
-	</script>
-	
-	
+		
+	});
 
+
+</script>
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+<script src="js/demo/chart-bar-demo.js"></script>
+
+<!-- 버튼 테스트 끝-->
 
     <!-- Footer Section Begin -->
     <th:block th:replace="/includes/footer :: footer"></th:block>
     <!-- Footer Section End -->
 
-    <!-- Search Begin -->
-    
-    <!-- Search End -->
-
-    <!-- Js Plugins -->
     
     
-    <script type="text/javascript">
-    var updateButton = document.getElementById('updateDetails');
-    var favDialog = document.getElementById('favDialog');
-    var outputBox = document.getElementsByTagName('output')[0];
-    var selectEl = document.getElementsByTagName('select')[0];
-    var confirmBtn = document.getElementById('confirmBtn');
-
-    // “Update details” button opens the <dialog> modally
-    updateButton.addEventListener('click', function onOpen() {
-      if (typeof favDialog.showModal === "function") {
-        favDialog.showModal();
-      } else {
-        alert("The <dialog> API is not supported by this browser");
-      }
-    });
-    // "Favorite animal" input sets the value of the submit button
-    selectEl.addEventListener('change', function onSelect(e) {
-      confirmBtn.value = selectEl.value;
-    });
-    // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
-    favDialog.addEventListener('close', function onClose() {
-      outputBox.value = favDialog.returnValue + " button clicked - " + (new Date()).toString();
-    });
-    
-    </script>
     
  
 </body>

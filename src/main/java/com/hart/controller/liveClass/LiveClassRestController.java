@@ -43,8 +43,7 @@ public class LiveClassRestController {
 	
 	@PostMapping("/info")
 	public List<MyLiveClassInfoDTO> myLiveClassInfo(Principal pr) {
-		/* String id = pr.getName(); */
-		String id = "skarns23@gmail.com";
+		String id = pr.getName();
 		log.info("myLiveClassInfo 컨트롤러 호출");
 		List<MyLiveClassInfoDTO> list = service.getMyClassInfo(id);
 		return list;

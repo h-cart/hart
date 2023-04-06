@@ -4,10 +4,12 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.alarm.AlarmDTO;
+import com.hart.service.alarm.NoticeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -29,16 +31,15 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class AlarmRestController {
 
+	private final NoticeService service;
 	
-	
-	
-	public List<AlarmDTO> getalarm(Principal pr){
-		
-		List<AlarmDTO> list = new ArrayList<>();
-		
-		
-		
-		
+	@PostMapping
+	public List<AlarmDTO> getalarm(){
+		//Principal pr
+		//String mid = pr.getName();
+		String mid = "skarns23@yu.ac.kr";
+		List<AlarmDTO> list = service.getNoticeService(mid);
+		log.info(list);
 		return list;
 	}
 	
