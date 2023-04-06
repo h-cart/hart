@@ -33,42 +33,16 @@ public class ProductsController {
       // List<CategoryVO> categorypcno = null;
       
       try {
-          
-         //list.setPage(0);
-         /* list.setSort(1); */
-         /* list.setType("price"); */
-         
-         // 왼쪽 카테고리 리스트
-         //System.out.println(list + "<<list");//
          
          List<ListVO> cList = productsservice.getproductcatrogrtlist(list.getPcno_top());
          
-         /* List<ListVO> productlist = productsservice.Productlist(list); */
-         
          //System.out.println(cList + "<<Clist 카테고리 리스트");//
-         //System.out.println(productlist + "<<products 프로덕트 리스트");//
-
          
          model.addAttribute("cList",cList); //왼족 카테고리 리스트\
          
           log.info("cList>>>>>"+cList);
-         
-            /*
-             * model.addAttribute("productlist",productlist);//제품 목록 뿌리느
-             */         
          model.addAttribute("pcno_top",list.getPcno_top());// input으로 넣어줌pcno_top을 히든으로 
          
-         //model.addAttribute("list",list.getPcno());//pcno가 0 나옴?
-         //model.addAttribute("pcno_",list.getPcno_top());
-      
-            /*
-             * log.info("list.getPcno & list>>"+list.getPcno() +" ////list>> " +list);
-             * log.info("productlist>>>>>"+productlist);
-             */
-          
-         
-         
-            
       } catch (Exception e) {
          e.printStackTrace();
       }
