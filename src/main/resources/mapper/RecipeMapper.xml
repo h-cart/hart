@@ -41,8 +41,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="sort == 2 "> rlevel desc</if>
 			<if test="sort == 3 "> rtime desc</if>
 		</trim>
+
 		) rc
 		) where rn between (#{page} * 6 + 1) AND (#{page} * 6 + 6)
+
+
 	</select>
 
 </mapper>

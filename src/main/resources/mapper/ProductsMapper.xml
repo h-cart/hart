@@ -53,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="Productlist"
 		resultType="com.hart.domain.product.ListVO"
 		parameterType="com.hart.domain.product.ListVO">
+		
 		select * from
 		(
 		SELECT pa.* , rownum rn
@@ -80,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</trim>
 		) pa
 		)
-		where rn between (#{page} * 9 + 1) AND (#{page} * 9 + 9)
+		where rn between (#{page} * 6 + 1) AND (#{page} * 6 + 6)
 	</select>
 
 </mapper>
