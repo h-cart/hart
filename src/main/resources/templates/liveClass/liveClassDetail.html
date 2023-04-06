@@ -64,8 +64,8 @@
 								</div>
 							</div>
 						</div>
-						<input type="hidden" name="pid" th:value="${liveClass.liveClassListDTO.lcid}"/>
-						<input type="hidden" name="quantity" value="1"/>
+						<input type="hidden" id="-1" name="pid" th:data-value="${liveClass.liveClassListDTO.lcid}"/>
+						<input type="hidden" id="quantity_-1" value="1"/>
 						<!-- // product-imagees -->
 						<!-- form -->
 						<div class="product-form" style="top: 0px;">
@@ -143,7 +143,7 @@
 							</div>
 							<!-- // option-block -->
 
-
+							<input type="checkbox" id="checkbox_-1"name="cartlist" style="display:none;" checked/>
 
 							<!-- product-action-block -->
 							<div class="xans-element- xans-product xans-product-action product-action-block">
@@ -152,8 +152,8 @@
 										<span id="btnBuy">수강 신청하기</span>
 									</button>
 									<button type="button"
-										class="btn btn-order btn-gray btn-basket "
-										id="addToCart">
+										class="btn btn-order btn-gray btn-basket addToCart"
+										>
 										<span>장바구니 담기</span>
 									</button>
 								</div>
@@ -194,6 +194,7 @@
 				</div>
 				<!-- Footer Section Begin -->
 				<th:block th:replace="/includes/footer :: footer"></th:block>
+				<script src="/js/dialog.js"></script>
 				<!-- Footer Section End -->
 				
 <script type="text/javascript">
@@ -217,7 +218,72 @@
 	
 
 </script>
-				
+<script type="text/javascript"th:inline="javascript">
+      /*<![CDATA[*/
+      function addToCart(flag) {
+         var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
+         console.log(isAdmin);
+         if (!isAdmin) {
+            Swal.fire({
+               title: '로그인이 필요한 활동입니다.',
+               text: "로그인 페이지로 이동하시겠습니까?",
+               icon: 'info',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               confirmButtonText: '네',
+               cancelButtonText: '아니요'
+            }).then((result) => {
+               if (result.isConfirmed) {
+                  location.href = "/member/login";
+               }
+            })
+            return;
+         }
+         var pamounts = [];
+         var pids = [];
+         let ckItem = $("input[name=cartlist]:checked");
+         $(ckItem).each(function () {
+            $(this).prop("checked",false);
+            var pos = $(this).prop('id').split('_')[1];
+            var pid = $('#' + pos).data('value');
+            var quantity = $("#quantity_" + pos).val();
+            pids.push(pid);
+            console.log(pos, pid, quantity);
+            pamounts.push(quantity);
+         })
+
+         $.ajax({
+            url: '/capi/insert',
+            beforeSend: function (xhr) {
+               xhr.setRequestHeader(header, token);
+            },
+            type: 'post',
+            contentType: "application/json",
+            data: JSON.stringify({
+               pids: pids,
+               pamounts: pamounts
+            }),
+            success: function (result) {
+               console.log(result);
+               showModal(result);
+
+            }, error: function (err, xhr, status) {
+
+               if (err.status == 405 || err.status == 400) {
+                  customConfirm('장바구니에 존재하는 상품입니다.', '확인하러 이동하기', '장바구니로', '아니요');
+               }
+            }
+         })
+      };
+
+
+   /*]]>*/
+      $(document).on("click",".addToCart",function(){
+         console.log("클");
+         addToCart();
+      })
+</script>	
 				
 </body>
 

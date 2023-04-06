@@ -108,6 +108,9 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a
 							class="collapse-item"
+							href="/admin/eventManage"
+						>이벤트 관리</a> <a
+							class="collapse-item"
 							href="/admin"
 						>참여 레시피 리스트</a> <a
 							class="collapse-item"
@@ -413,8 +416,8 @@
 										th:each="list : ${eventLists}"
 										th:value="${list.evid}"
 										th:text="${list.evtitle}"
-										th:class="${lists[0].evid}"
-										th:selected="${lists[0].evid==list.evid? 'true':'false'}"
+										th:class="${evid}"
+										th:selected="${evid==list.evid? 'true':'false'}"
 									>전체</option>
 								</select>
 							</nav>
@@ -475,39 +478,41 @@
 									</tbody>
 								</table>
 							</div>
-							<nav>
-								<ul
-									class="pagination"
-									style="justify-content: center;"
-								>
-									<li
-										th:if="${pageMaker.prev}"
-										class="page-item"
-									><a
-										class="page-link"
-										href="#"
-										aria-label="Previous"
-									> <span aria-hidden="true">&laquo;</span>
-									</a></li>
-									<li
-										class="page-item"
-										th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}"
-									><a
-										class="page-link"
-										th:href="${num}"
-										th:text="${num}"
-									>1</a></li>
-									<li
-										th:if="${pageMaker.next}"
-										class="page-item"
-									><a
-										class="page-link"
-										href="#"
-										aria-label="Next"
-									> <span aria-hidden="true">&raquo;</span>
-									</a></li>
-								</ul>
-							</nav>
+							<th:block th:if="${pageMaker.startPage!=1}">
+								<nav>
+									<ul
+										class="pagination"
+										style="justify-content: center;"
+									>
+										<li
+											th:if="${pageMaker.prev}"
+											class="page-item"
+										><a
+											class="page-link"
+											href="#"
+											aria-label="Previous"
+										> <span aria-hidden="true">&laquo;</span>
+										</a></li>
+										<li
+											class="page-item"
+											th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}"
+										><a
+											class="page-link"
+											th:href="${num}"
+											th:text="${num}"
+										></a></li>
+										<li
+											th:if="${pageMaker.next}"
+											class="page-item"
+										><a
+											class="page-link"
+											href="#"
+											aria-label="Next"
+										> <span aria-hidden="true">&raquo;</span>
+										</a></li>
+									</ul>
+								</nav>
+							</th:block>
 						</div>
 					</div>
 				</div>

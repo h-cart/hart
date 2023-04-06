@@ -30,7 +30,6 @@ public class RecipeVO {
 	String rreadyingredient;
 	int sort;
 	int page;
-	
 
 	List<CRContentVO> recipeContent;
 

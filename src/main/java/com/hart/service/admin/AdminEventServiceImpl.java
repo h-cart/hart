@@ -12,6 +12,7 @@ import com.hart.domain.admin.Criteria;
 import com.hart.domain.event.CRContentVO;
 import com.hart.domain.event.CRIngredientVO;
 import com.hart.domain.event.CRecipeVO;
+import com.hart.domain.event.EventListVO;
 import com.hart.domain.event.EventVoteVO;
 import com.hart.domain.product.RecipeVO;
 import com.hart.mapper.AdminEventMapper;
@@ -70,19 +71,38 @@ public class AdminEventServiceImpl implements AdminEventService {
 		int s = 1;
 		for (CRContentVO content : re.getRecipeContent()) {
 			content.setStep("Step" + s++);
-			content.setCrimg("'/event/api/display?imgName='" + content.getCrimg());
+			content.setCrimg("/event/api/display?imgName=" + content.getCrimg());
+			log.info("여기 동작1---------" + content);
 			mapper.insertCRContent(re.getRid(), content);
 
 		}
 		for (CRIngredientVO ingredient : recipe.getCrecipeIngredientVo()) {
 			if (!ingredient.getPid().equals("undefined")) {
-				log.info("여기 동작1---------" + ingredient);
+
 				mapper.insertCRIngredient(re.getRid(), ingredient);
 
 			}
 
 		}
 
+	}
+
+
+
+	@Override
+	public List<EventListVO> getEventManageList(Criteria cri) {
+		return mapper.getEventManageList(cri);
+	}
+
+	@Override
+	public int getEventTotalCount() {
+		return mapper.getEventTotalCount();
+	}
+
+	@Override
+	public void eventRegister(EventListVO event) {
+		mapper.eventRegister(event);
+		
 	}
 
 }

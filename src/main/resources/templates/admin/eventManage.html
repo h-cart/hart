@@ -56,9 +56,7 @@
 ></script>
 </head>
 <body id="page-top">
-	<script>
-		
-	</script>
+	<script></script>
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 		<!-- Sidebar -->
@@ -386,9 +384,7 @@
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-					<script type="text/javascript">
-						
-					</script>
+					<script type="text/javascript"></script>
 					<!-- Page Heading -->
 					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
 					<p class="mb-4">
@@ -400,26 +396,21 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-body">
-							<nav class="navbar navbar-expand-lg  ">
+							<nav class="navbar navbar-expand-lg">
 								<div class="container-fluid">
 									<a
 										class="navbar-brand"
 										href="#"
-									>레시피 투표 리스트</a>
+									>이벤트 관리</a>
 								</div>
-								<select
-									class="mb-3"
-									id="eventSort"
-									aria-label=""
-								>
-									<option
-										th:each="list : ${eventLists}"
-										th:value="${list.evid}"
-										th:text="${list.evtitle}"
-										th:class="${evid}"
-										th:selected="${evid==list.evid? 'true':'false'}"
-									>전체</option>
-								</select>
+								<button
+									type="button"
+									class="btn btn-primary"
+									th:onclick="ViewDetail([[${list}]])"
+									data-bs-toggle="modal"
+									data-bs-target="#exampleModal"
+									style="width: 20%"
+								>이벤트 등록하기</button>
 							</nav>
 							<div class="table-responsive">
 								<table
@@ -430,52 +421,86 @@
 								>
 									<thead>
 										<tr>
-											<th style="text-align: center;">번호</th>
-											<th style="text-align: center;">레시피 제목</th>
-											<th style="text-align: center;">이메일</th>
-											<th style="text-align: center;">등록일</th>
-											<th style="text-align: center;">투표 수</th>
-											<th style="text-align: center;">투표 등록</th>
+											<th style="text-align: center">번호</th>
+											<th style="text-align: center">제목</th>
+											<th style="text-align: center">응모 기간</th>
+											<th style="text-align: center">투표 기간</th>
+											<th style="text-align: center">주 재료</th>
+											<th style="text-align: center">비고</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:if="${#lists.isEmpty(lists)}">
 											<td
 												colspan="6"
-												style="text-align: center;"
+												style="text-align: center"
 											>레시피 투표 리스트에 추가된 레시피가 없습니다.</td>
 										</tr>
 										<th:block th:if="${not #lists.isEmpty(lists)}">
 											<tr th:each="list : ${lists}">
-												<td th:text="${list.crid}"></td>
-												<td th:text="${list.crtitle}"></td>
-												<td th:text="${list.mid}"></td>
 												<td
-													th:text="${#dates.format(list.crregdate, 'yyyy.MM.dd')}"
-													style="text-align: center;"
+													th:text="${list.evid}"
+													style="text-align: center"
 												></td>
 												<td
-													th:text="${list.count}"
-													style="text-align: center;"
+													th:text="${list.evtitle}"
+													style="text-align: center"
 												></td>
-												<td style="display: flex; justify-content: space-around;">
-													<button
-														type="button"
-														th:class="${list.crvote == 1 ? 'btn btn-outline-danger' : 'btn btn-outline-primary'}"
-														th:onclick="Voting([[${list.crvote == 1 ? '0' : '1'}]],[[${list.crid}]]);"
-														th:text="${list.crvote == 1 ? '취소' : '등록'}"
-													>등록</button>
+												<!-- <td style="text-align: center">[[${#dates.format(list.start_date, 'yyyy.MM.dd')+ '~'+ #dates.format(list.end_date, 'yyyy.MM.dd')}]]</td>
+												<td style="text-align: center">[[${#dates.format(list.vstart_date, 'yyyy.MM.dd') +'~'+ #dates.format(list.vend_date, 'yyyy.MM.dd')}]]</td>
+												 --><td
+													th:text="${list.crmingredient}"
+													style="text-align: center"
+												></td>
+												<td style="display: flex; justify-content: space-around">
 													<button
 														type="button"
 														class="btn btn-outline-info"
-														th:onclick="RecipeRegister([[${list.crid}]])"
-													>레시피 등록</button>
+														th:onclick="ViewDetail([[${list}]])"
+														data-bs-toggle="modal"
+														data-bs-target="#exampleModal"
+													>수정</button>
 												</td>
 											</tr>
 										</th:block>
 									</tbody>
 								</table>
 							</div>
+							<th:block th:if="${pageMaker.startPage!=1}">
+								<nav>
+									<ul
+										class="pagination"
+										style="justify-content: center"
+									>
+										<li
+											th:if="${pageMaker.prev}"
+											class="page-item"
+										><a
+											class="page-link"
+											href="#"
+											aria-label="Previous"
+										> <span aria-hidden="true">&laquo;</span>
+										</a></li>
+										<li
+											class="page-item"
+											th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}"
+										><a
+											class="page-link"
+											th:href="${num}"
+											th:text="${num}"
+										>1</a></li>
+										<li
+											th:if="${pageMaker.next}"
+											class="page-item"
+										><a
+											class="page-link"
+											href="#"
+											aria-label="Next"
+										> <span aria-hidden="true">&raquo;</span>
+										</a></li>
+									</ul>
+								</nav>
+							</th:block>
 						</div>
 					</div>
 				</div>
@@ -505,7 +530,77 @@
 								aria-label="Close"
 							></button>
 						</div>
-						<div class="modal-body"></div>
+						<div class="modal-body">
+							<form
+								id="enrollEvent"
+								method="get"
+								th:action="@{/admin/eventRegister}"
+							>
+								<div class="mb-3">
+									<label for="exampleFormControlInput1">번호</label> <input
+										class="form-control form-control-solid"
+										name="evid"
+										type="text"
+										text=""
+										readonly
+									/>
+								</div>
+								<div class="mb-3">
+									<label for="exampleFormControlInput1">제목</label> <input
+										class="form-control form-control-solid"
+										id="evtitle"
+										name="evtitle"
+										type="text"
+									/>
+								</div>
+								<div class="mb-3">
+									<label for="exampleFormControlInput1">응모 기간</label>
+									<!-- Date Range Picker Example-->
+									<div style="display: flex; justify-content: space-between">
+										<input
+											class="form-control form-control-solid"
+											style="width: 49%"
+											id="start_date"
+											name="start_date"
+											type="date"
+										/><input
+											class="form-control form-control-solid"
+											id="end_date"
+											name="end_date"
+											type="date"
+											style="width: 49%"
+										/> 
+									</div>
+								</div>
+								<div class="mb-3">
+									<label for="exampleFormControlInput1">투표 기간</label>
+									<div style="display: flex; justify-content: space-between">
+										<input
+											class="form-control form-control-solid"
+											style="width: 49%"
+											id="vstart_date"
+											name="vstart_date"
+											type="date"
+										/><input
+											class="form-control form-control-solid"
+											id="vend_date"
+											name="vend_date"
+											type="date"
+											style="width: 49%"
+										/>
+									</div>
+								</div>
+								<div class="mb-3">
+									<label for="exampleFormControlInput1">주 재료</label> <input
+										class="form-control form-control-solid"
+										id="crmingredient"
+										name="crmingredient"
+										type="text"
+										placeholder="계란"
+									/>
+								</div>
+							</form>
+						</div>
 						<div class="modal-footer">
 							<button
 								type="button"
@@ -513,9 +608,10 @@
 								data-bs-dismiss="modal"
 							>Close</button>
 							<button
-								type="button"
-								class="btn "
-							>다운로드</button>
+								type="submit"
+								form="enrollEvent"
+								class="btn"
+							>수정</button>
 						</div>
 					</div>
 				</div>
@@ -539,71 +635,30 @@
 		href="#page-top"
 	> <i class="fas fa-angle-up"></i>
 	</a>
-	<!-- Logout Modal-->
-	<div
-		class="modal fade"
-		id="logoutModal"
-		tabindex="-1"
-		role="dialog"
-		aria-labelledby="exampleModalLabel"
-		aria-hidden="true"
-	>
-		<div
-			class="modal-dialog"
-			role="document"
-		>
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5
-						class="modal-title"
-						id="exampleModalLabel"
-					>Ready to Leave?</h5>
-					<button
-						class="close"
-						type="button"
-						data-dismiss="modal"
-						aria-label="Close"
-					>
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-				<div class="modal-footer">
-					<button
-						class="btn btn-secondary"
-						type="button"
-						data-dismiss="modal"
-					>Cancel</button>
-					<a
-						class="btn btn-primary"
-						href="login.html"
-					>Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
 	<form
 		id="pageForm"
-		action="/admin/recipeVote"
-		method="get"
+		th:action="@{/admin/eventManage}"
+		th:method="get"
 	>
 		<input
 			type="hidden"
-			id="evid"
-			name="evid"
-			th:value="${evid}"
-		>
+			name="pageNum"
+			th:value="${pageMaker.cri.pageNum}"
+		/> <input
+			type="hidden"
+			name="amount"
+			th:value="${pageMaker.cri.amount}"
+		/>
 	</form>
 	<script>
-		function RecipeRegister(id) {
-			location.href = "/admin/recipeRegister?&crid=" + id;
+		function ViewDetail(id) {
+			console.log(id);
 		}
 
 		function Voting(v, e) {
 			let evid = $("input[name='evid']").val();
-			location.href = "/admin/recipeVotelist?crid=" + e + "&crvote=" + v
+			location.href = "/admin/votelist?crid=" + e + "&crvote=" + v
 					+ "&evid=" + evid;
-
 		}
 		$("#eventSort").change(function() {
 			let evidselect = $(this).val();
@@ -611,14 +666,24 @@
 			pageForm.find("input[name='pageNum']").val("1");
 			pageForm.find("input[name='evid']").val(evidselect);
 			$("#pageForm").submit();
-		})
+		});
 		$(".pagination li a").on("click", function(e) {
 			e.preventDefault();
 			let pageForm = $("#pageForm");
 			pageForm.find("input[name='pageNum']").val($(this).attr("href"));
 			pageForm.submit();
-
-		})
+		});
+	</script>
+	<script>
+		function enrollEvent() {
+			let evid = $("input[name='evid']").val();
+			let evtitle = $("#evtitle").val();
+			let start_date = $("#start_date").val();
+			let end_date = $("#end_date").val();
+			let vstart_date = $("#vstart_date").val();
+			let vend_date = $("#vend_date").val();
+			let crmingredient = $("#crmingredient").val();
+		}
 	</script>
 	<!-- Bootstrap core JavaScript-->
 	<script src="/admin/vendor/jquery/jquery.min.js"></script>

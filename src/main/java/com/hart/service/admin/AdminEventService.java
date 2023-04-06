@@ -1,16 +1,10 @@
 package com.hart.service.admin;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.hart.domain.admin.AdminEventVO;
 import com.hart.domain.admin.Criteria;
-import com.hart.domain.event.CRContentVO;
-import com.hart.domain.event.CRIngredientVO;
-import com.hart.domain.event.CRecipeVO;
-import com.hart.domain.product.ProductsVO;
 import com.hart.domain.event.EventListVO;
-import com.hart.domain.event.EventVoteVO;
 
 /**
  * @since : 2023. 3. 28.
@@ -37,7 +31,11 @@ public interface AdminEventService {
 	List<AdminEventVO> getVoteList(Criteria cri);
 
 	void recipeRegister(AdminEventVO event);
-	
 
-	
+	List<EventListVO> getEventManageList(Criteria cri);
+
+	int getEventTotalCount();
+
+  void eventRegister(EventListVO event);
+
 }
