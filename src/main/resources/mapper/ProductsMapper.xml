@@ -18,18 +18,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</select>
 
-
+	<!-- 상품 상세 설명정보 가져옴 -->
 	<select id="getproductDetail"
 		resultType="com.hart.domain.product.ProductsVO">
 		SELECT pd.pid, pd.porigin, pd.pcount, pd.pdetail,
 		pd.pbname,pd.pbsmall, pd.pbdesc, pd.pname, pd.pprice, pd.pcno,
 		pd.stag, pd.pdiscount, pd.ptitle ,pc.pcategory
-		FROM products pd join product_category pc on pd.pcno =pc.pcno
+		FROM products pd join
+		product_category pc on pd.pcno =pc.pcno
 		WHERE pd.pid=#{pid}
 
 
 	</select>
-
+	<!-- 상품 상세 사진정보 가져옴 -->
 	<select id="getproductDetailimg"
 		resultType="com.hart.domain.product.ProductimgVO">
 		select * from product_img
@@ -41,8 +42,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 왼쪽 카테고리 리스트 가져옴 소카테고리 -->
 	<select id="getproductcatrogrtlist"
 		resultType="com.hart.domain.product.ListVO">
-		select * from product_category
-		where pcno_top=#{pcno}
+		select pc.pcno, pc.pcategory, pc.pcno_top, pc2.pcategory as pcat
+		from product_category pc join product_category pc2 on pc.pcno_top =
+		pc2.pcno
+		where pc.pcno_top=#{pcno}
 	</select>
 
 
@@ -54,12 +57,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(
 		SELECT pa.* , rownum rn
 		FROM (
-		select pi.pimg,p.pname, p.pprice, p.pdiscount,p.pcno,p.pid
+		select pi.pimg,p.pname,
+		p.pprice, p.pdiscount,p.pcno,p.pid
 		,p.stag,pc.pcategory,pc.pcno_top
 		from products p
-		join (select pimg, pid from product_img where pdepth =0 ) pi
+		join (select pimg, pid from product_img where pdepth =0
+		) pi
 		on pi.pid=p.pid
-		join product_category pc on p.pcno = pc.pcno and pc.pcno_top = #{pcno_top}
+		join product_category pc on p.pcno = pc.pcno and
+		pc.pcno_top = #{pcno_top}
 
 		<where>
 			<if test="pcno != 0">
