@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -101,10 +102,16 @@ public class AdminController {
 
 	//이벤트 등록하는 페이지
 	@GetMapping("/eventRegister")
-	public String eventRegister(EventListVO event) {
-		log.info("이벤트 등록 페이지");
+	public String eventRegister(@ModelAttribute EventListVO event) {
 		eService.eventRegister(event);
-	
-		return "admin/eventRegister";
+		return "redirect:/admin/eventManage";
+	}
+
+	// 이벤트 수정하는 페이지
+	@GetMapping("/eventModify")
+	public String eventModify(@ModelAttribute EventListVO event) {
+		log.info(event);
+		eService.eventModify(event);
+		return "redirect:/admin/eventManage";
 	}
 }

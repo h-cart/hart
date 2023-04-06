@@ -38,4 +38,6 @@ public interface AdminEventService {
 
   void eventRegister(EventListVO event);
 
+  void eventModify(EventListVO event);
+
 }

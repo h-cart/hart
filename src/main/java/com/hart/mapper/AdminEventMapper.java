@@ -36,4 +36,6 @@ public interface AdminEventMapper {
 
   void eventRegister(EventListVO event);
 
+	void eventModify(EventListVO event);
+
 }
