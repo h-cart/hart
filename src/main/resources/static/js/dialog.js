@@ -1,15 +1,23 @@
+let flag = false;
 
 function showModal(result) {
    $("dialog").remove();
    var idx = 0;
    var lives = result.result.lives;
-   var recipes = result.result.recipes;
+   var recipes = result.result.recipes
+   if(!flag&&(lives.length==0 &&recipes.length==0)){
+      flag = !flag;
+   }
+   console.log(lives.length);
+   console.log(recipes.length);
    var str = `
 	<dialog>
       <div class="container">
-         <h2 style="text-align=center;">장바구니에 담겼습니다</h2>
+         <h2 style="text-align=center;">장바구니에 담겼습니다 <i class="fa-solid fa-x fa-xs dialog-close" style="color: #000000;"></i></h2>
          <div class="shopping__cart__table">`;
-   if (lives.length != 0) {
+
+         if(!flag){      
+         if (lives.length != 0) {
       str += ` <div class="shop__sidebar__accordion" style="margin-top: 50px">
                <div class="accordion" id="accordionClass">
                   <div class="card">
@@ -21,8 +29,9 @@ function showModal(result) {
                         <table>
                            <tbody>`;
       $.each(lives, function (index, value) {
+         idx++;
          var status = value.lcstatus == 0 ? value.lcday + "방송예정" : value.lcstatus == 1 ? "LIVE 방송 중" : "VOD로 수강하기";
-         str += `
+         str += `<tbody id="accordion${idx}"  class="accordion" data-parent="#accordionClass" style=">
          <tr id="${idx}" data-value="${value.lcid}">
             <td class="product__cart__item">
                <div class="product__cart__item__pic"><span class="thumb"><input name="cartlist" id="check_${idx}" type="checkbox"
@@ -42,8 +51,8 @@ function showModal(result) {
                </div>
             </td>
             <td data-value="${value.lcprice}" class="cart__price" id="cprice_4">${numberWithCommas(value.lcprice)}원</td>
-            
-         </tr>`;
+            <td data-toggle="collapse" data-target="#collapse${idx}" class="" aria-expanded="true"><span>관련상품</span></td>
+         </tr></tbody><tbody id="collapse${idx}" class="collapse" data-parent="#accordion${idx}" style="">`;
          $.each(value.items, function(lindex,item){
 			console.log(idx);
             idx++;
@@ -69,7 +78,7 @@ function showModal(result) {
             <td data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
          </tr>`
          })
-         idx++;
+         str+=`</tbody>`
       })
       str += `</tbody></table>
                      </div>
@@ -91,11 +100,11 @@ function showModal(result) {
                               <a href="#">국</a> <a href="#">찌개</a> <a href="#">볶음</a> <a href="#">안주</a>
                            </div>
                         </div>
-                        
+                        <table>
                            `;
       $.each(recipes, function (index, value) {
-         
-         str +=`<div id="collapse${idx}" class="collapse" data-parent="#accordionRecipe" style=""><table><tbody><tr>
+         idx++;
+         str +=`<tr id="accordion${idx}"  class="accordion" data-parent="#accordionRecipe" style="">
          <td class="product__cart__item">
             <div class="product__cart__item__pic"><span ><img class="pimg"
                      src="${value.rimg}" alt=""
@@ -111,11 +120,11 @@ function showModal(result) {
                <div class="pro-qty-2"><span>조리시간 : ${value.rtime}</span></div>
             </div>
          </td>
-         <td ><a data-toggle="collapse" data-target="#collapse${idx}" class="" aria-expanded="false">재료보기</a></span></td>
-         </td>
-      </tr>`
+         <td data-toggle="collapse" data-target="#collapse${idx}" class="" aria-expanded="true"><span>관련상품</span></td>
+         
+      </tr><tbody id="collapse${idx}" class="collapse" data-parent="#accordion${idx}" style="">`
       ;
-      $.each(recipes[index].items,function(rindex,item){
+      $.each(value.items,function(rindex,item){
          idx++;
          str +=`<tr id="${idx}" data-value="${item.pid}">
             <td class="product__cart__item">
@@ -140,23 +149,32 @@ function showModal(result) {
          </tr>`;
          
       });
-      str+=`</tbody></table></div>`;
+      str+=`</tbody>`;
       });
-      str += `
+      str += `</table>
                      </div>
                   </div>
                </div>
             </div>`;
    }
-   str += `
-         </div>
+   str += `<div class="addToCart" style="
+   background-color: black;
+   text-align: center;
+"><a href="#" class="primary-btn">장바구니 담기</a></div>`;
+   flag = !flag;
+   console.log(flag);
+}  
+str +=`</div>
       </div>
    </dialog>`;
    $("body").append(str);
    const dialog = document.querySelector("dialog");
 
-   console.log("여기에요 여기", result);
    dialog.showModal();
 }
+$(document).on("click",".dialog-close",function(){
+   $("dialog").remove();
+})
 
 
+   
