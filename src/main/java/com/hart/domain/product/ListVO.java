@@ -17,5 +17,6 @@ public class ListVO {
 	int page;
 	String type;
 	int sort;
+	String pcat;
 
 };

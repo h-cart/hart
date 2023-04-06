@@ -90,13 +90,11 @@
                            <div class="product__item__text">
                              <h6>${product.pname}</h6>
                              <a href="#" class="add-cart">+ Add To Cart</a>
-                             <strike><h5>${pprice}원</h5></strike>  
+                            <h5>${pprice}원</h5>
                              	
                              
                              <div class="product__color__select">
-                               <label for="pc-4"><input type="radio" id="pc-4"></label>
-                               <label class="active black" for="pc-5"><input type="radio" id="pc-5"></label>
-                               <label class="grey" for="pc-6"><input type="radio" id="pc-6"></label>
+                             
                              </div>
                            </div>
                          </div>
@@ -157,7 +155,7 @@
          <div class="row">
             <div class="col-lg-12">
                <div class="breadcrumb__text">
-                  <h4></h4>
+                  <h4 th:text="${cList[0].pcat}"></h4> 
 
                   <div class="breadcrumb__links">
                      <a href="">Home</a><span>Shop</span>
@@ -197,7 +195,7 @@
                                        style="overflow-y: hidden; outline: none; touch-action: none;"
                                        tabindex="1">
                                        <li th:each="cList:${cList}"><a href="#"
-                                          th:text="${cList.pcategory}"
+                                          th:text="${cList.pcategory}" 
                                           th:onclick="sendpcno([[${cList.pcno}]] ,0,1);"> </a> <input
                                           type="hidden" th:value="${cList.pcno}" name="pcno" /></li>
                                     </ul>
