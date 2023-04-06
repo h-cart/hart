@@ -67,9 +67,7 @@ public class LiveClassController {
 	@GetMapping("/mypage")
 	public String myPageTest(Principal pr,Model model) {
 		log.info("myPage 컨트롤러 호출");
-		//수정해야한다.
-		//String mid = pr.getName();
-		String mid = "skarns23@yu.ac.kr";
+		String mid = pr.getName();
 		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
 		log.info(list);
 		model.addAttribute("classList",list);

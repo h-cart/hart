@@ -61,4 +61,10 @@ public class AlarmMapperTest {
 		
 	}
 	
+	@Test
+	public void testAlarm() {
+		mapper.addApplicantTodayAlarm();
+		
+	}
+	
 }

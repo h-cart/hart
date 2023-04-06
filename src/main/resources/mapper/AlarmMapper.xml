@@ -25,11 +25,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id="getNoticeService"  resultType="com.hart.domain.alarm.AlarmDTO">
+	
+	
+	
+	<select id="getAlarmList"  resultType="com.hart.domain.alarm.AlarmDTO">
 		select alarm_content, alarm_date
 		from(
 		    select * from alarm
-		    where mid = 'skarns23@yu.ac.kr'
+		    where mid = #{mid}
 		    order by alarm_date_detail desc
 		)
 		<![CDATA[
