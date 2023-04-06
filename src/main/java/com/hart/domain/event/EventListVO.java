@@ -8,10 +8,10 @@ import lombok.Data;
 public class EventListVO {
 	int evid;
 	String evtitle;
-	Date start_date;
-	Date end_date;
-	Date vstart_date;
-	Date vend_date;
+	String start_date;
+	String end_date;
+	String vstart_date;
+	String vend_date;
 	String crmingredient;
 
 }

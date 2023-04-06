@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- SELECT evid, crid,mid, crtitle,crregdate,crvote FROM crecipe <where> 
 			crvote=1 <if test="evid != 0"> and evid = #{evid} </if> </where> order by 
 			evid desc, crregdate DESC -->
-		SELECT A.evid, A.crid, A.count, B.mid, B.crtitle, B.crregdate,
+		SELECT A.evid, B.crid, A.count, B.mid, B.crtitle, B.crregdate,
 		B.crvote
 		FROM
 		(SELECT evid, crid, COUNT(*) AS count
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		GROUP BY evid, crid
 		ORDER BY count DESC) A
-		JOIN
+		Right outer JOIN
 		(SELECT evid,
 		crid,mid,
 		crtitle,crregdate,crvote
@@ -130,6 +130,71 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES ( #{ingredient.pid}, #{rid})
 
 	</insert>
+
+	<!-- page 에 따라 수량이 10개씩 evid를 기준으로 내림차순인 EventListVO를 가져오는 쿼리문 -->
+	<select id="getEventManageList" parameterType="Criteria"
+		resultType="EventListVO">
+		select * from(
+		select * from (
+		SELECT evid, evtitle, start_date,
+		end_date, vstart_date,
+		vend_date, ev_img, crmingredient, rownum rn FROM
+		(
+		SELECT evid, evtitle, start_date, end_date, vstart_date,
+		vend_date,
+		ev_img, crmingredient
+		FROM event_list
+		order by evid desc
+		)
+		)
+		<![CDATA[
+		where rownum <= #{pageNum} * #{amount}
+		]]>
+		)
+		<![CDATA[
+		where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+
+	<!-- event_list 테이블에 있는 데이터 row의 갯수를 출력하는 쿼리문 -->
+	<select id="getEventTotalCount" resultType="int">
+		SELECT count(*) FROM
+		(
+		SELECT *
+		FROM event_list
+		)
+	</select>
+
+	<update id="updateEventManage" parameterType="AdminEventVO">
+		update event_list
+		set evtitle = #{evtitle},
+		start_date = #{start_date},
+		end_date =
+		#{end_date},
+		vstart_date = #{vstart_date},
+		vend_date = #{vend_date},
+		ev_img = #{ev_img},
+		crmingredient = #{crmingredient}
+		where evid =
+		#{evid}
+	</update>
+
+<!-- event_list에 데이터를 insert 하는 쿼리를 만들어줘 evid는 EVID_SEQ 시퀀스로 만들어줘 -->
+
+	<insert id="eventRegister" parameterType="EventListVO">
+		INSERT INTO
+		event_list (evid,evtitle, start_date, end_date, vstart_date, vend_date,  crmingredient)
+		VALUES (evid_seq.NEXTVAL,#{evtitle}, #{start_date}, #{end_date}, #{vstart_date}, #{vend_date}, #{crmingredient})	
+	</insert>
+
+
+
+
+
+
+
+
+
 
 
 </mapper>
