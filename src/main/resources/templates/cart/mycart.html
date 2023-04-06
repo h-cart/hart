@@ -341,7 +341,7 @@
 							if (plist[i].pdiscount != 0) {
 								str += "    <h6 class='cost' id='discount_" + i + "'data-value='" + plist[i].pprice + "'>" + numberWithCommas(plist[i].pprice) + "원</h6>";
 							}
-							str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'><span data-value=" + i + " class='fa fa-angle-left dec qtybtn btn_minus'></span><input id='quantity_" + i + "'type='text' value='" + plist[i].mcamount + "' readonly='readonly' /><span data-value=" + i + " class='fa fa-angle-right inc qtybtn btn_plus'></span>"
+							str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'><span data-value=" + i + " class='dec qtybtn btn_minus'><i class='fa-solid fa-minus fa-lg'></i></span><input id='quantity_" + i + "'type='text' value='" + plist[i].mcamount + "' readonly='readonly' /><span data-value=" + i + " class='inc qtybtn btn_plus'><i class='fa-solid fa-plus fa-lg'></i></span>"
 							str += "</div></div></td><td data-value='" + price * plist[i].mcamount + "'class='cart__price' id='cprice_" + i + "'>" + numberWithCommas(price * plist[i].mcamount) + "원</td>"
 							str += "<td class='cart__close'><i class='fa-solid fa-x fa-xl' style='color: #000000;'></i></td></tr>"
 						}

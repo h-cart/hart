@@ -70,9 +70,9 @@ function showModal(result) {
             </td>
             <td class="quantity__item">
                <div class="quantity">
-                  <div class="pro-qty-2"><span data-value="${idx}" class="fa fa-angle-left dec qtybtn rbtn_minus"
-                        aria-hidden="true"></span><input id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
-                        data-value="${idx}" class="fa fa-angle-right inc qtybtn rbtn_plus" aria-hidden="true"></span></div>
+                  <div class="pro-qty-2"><span data-value="${idx}" class="dec qtybtn rbtn_minus"
+                        aria-hidden="true"><i class='fa-solid fa-minus fa-lg'></i></span><input id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
+                        data-value="${idx}" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-lg'></i></span></div>
                </div>
             </td>
             <td data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
@@ -117,7 +117,7 @@ function showModal(result) {
          </td>
          <td class="quantity__item">
             <div class="quantity">
-               <div class="pro-qty-2"><span>조리시간 : ${value.rtime}</span></div>
+               <div class="pro-qty-2"><span>조리시간</br>${value.rtime}</span></div>
             </div>
          </td>
          <td data-toggle="collapse" data-target="#collapse${idx}" class="" aria-expanded="true"><span>관련상품</span></td>
@@ -140,9 +140,9 @@ function showModal(result) {
             </td>
             <td class="quantity__item">
                <div class="quantity">
-                  <div class="pro-qty-2"><span data-value="${idx}" class="fa fa-angle-left dec qtybtn rbtn_minus"
-                        aria-hidden="true"></span><input id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
-                        data-value="${idx}" class="fa fa-angle-right inc qtybtn rbtn_plus" aria-hidden="true"></span></div>
+                  <div class="pro-qty-2"><span data-value="${idx}" class="dec qtybtn rbtn_minus"
+                        aria-hidden="true"><i class='fa-solid fa-minus fa-lg'></i></span><input id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
+                        data-value="${idx}" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-lg'></i></span></div>
                </div>
             </td>
             <td data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
