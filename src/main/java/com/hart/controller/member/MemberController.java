@@ -71,5 +71,7 @@ public class MemberController {
 	public void getOrderList() {
 	}
 	
+	
+	
 
 }

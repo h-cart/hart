@@ -88,7 +88,7 @@
 											<span style="font-size: 12px; color: #555555;">자체상품코드</span>
 										</span>
 										<span class="value">
-											<span style="font-size: 12px; color: #555555;" th:text=${liveClass.liveClassListDTO.lcplace}>장소</span>
+											<span style="font-size: 12px; color: #555555; font-family: ui-serif;" th:text=${liveClass.liveClassListDTO.lcplace}>장소</span>
 										</span>
 									</p>
 									<p class="summary_desc_css xans-record-">
@@ -170,7 +170,7 @@
 								</ul>
 								<div id="tab-1" class="info active" style="height: 413.893px;">
 									<div th:each="ingredient : ${liveClass.ingredientList}">
-										<h6 th:text="'- '+${ingredient}" style="font-size:13px;">필요재료 설명</h6>
+										<h6 th:text="'- '+${ingredient}" style="font-size:13px; font-family: none;">필요재료 설명</h6>
 									</div>
 								</div>
 								<div id="tab-2" class="info" style="height: 413.893px; display:none;" >

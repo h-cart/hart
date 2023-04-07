@@ -46,7 +46,7 @@ h6 {
 	margin: 0;
 	color: #111111;
 	font-weight: 400;
-	font-family: "Nunito Sans", sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 h1 {
@@ -75,7 +75,7 @@ h6 {
 
 p {
 	font-size: 15px;
-	font-family: "Nunito Sans", sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
 	color: #3d3d3d;
 	font-weight: 400;
 	line-height: 25px;
@@ -326,7 +326,7 @@ ol {
 }
 
 .header__top {
-	background: #111111;
+	background: #f3f3f3;
 	padding: 10px 0;
 }
 
