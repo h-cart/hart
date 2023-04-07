@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+	<th:block th:replace="includes/headTag :: head_tag"></th:block>
 <script
 	src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
 <style>
@@ -68,9 +68,9 @@ video {
 </head>
 
 <body>
-	<th:block th:replace="/includes/header :: header1"></th:block>
-	<th:block th:replace="/includes/header :: header2"></th:block>
-	<th:block th:replace="/includes/header :: header3"></th:block>
+	<th:block th:replace="includes/header :: header1"></th:block>
+	<th:block th:replace="includes/header :: header2"></th:block>
+	<th:block th:replace="includes/header :: header3"></th:block>
 	<script>
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 			console.log('사용가능');
@@ -91,7 +91,7 @@ video {
 			<b>Data:</b> <span id="outputData"></span>
 		</div>
 	</div>
-	<th:block th:replace="/includes/footer :: footer"></th:block>
+	<th:block th:replace="includes/footer :: footer"></th:block>
 	<!-- Footer Section End -->
 	<!-- Code injected by live-server -->
 	<script src="/js/dialog.js"></script>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<th:block th:replace="includes/headTag :: head_tag"></th:block>
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -8,9 +8,9 @@
 	</div>
 
 	<!-- Offcanvas Menu Begin -->
-	<th:block th:replace="/includes/header :: header1"></th:block>
-	<th:block th:replace="/includes/header :: header2"></th:block>
-	<th:block th:replace="/includes/header :: header3"></th:block>
+	<th:block th:replace="includes/header :: header1"></th:block>
+	<th:block th:replace="includes/header :: header2"></th:block>
+	<th:block th:replace="includes/header :: header3"></th:block>
 
 	<!-- Offcanvas Menu End -->
 
@@ -230,6 +230,6 @@
 
 	<!-- Footer Section End -->
 
-	<th:block th:replace="/includes/footer :: footer"></th:block>
+	<th:block th:replace="includes/footer :: footer"></th:block>
 </body>
 </html>
