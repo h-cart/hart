@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<th:block th:replace="includes/headTag :: head_tag"></th:block>
 <style>
    .product-container {
       display: flex;
@@ -85,9 +85,9 @@
       s
       <div class="loader" style="display: none;"></div>
    </div>
-   <th:block th:replace="/includes/header :: header1"></th:block>
-   <th:block th:replace="/includes/header :: header2"></th:block>
-   <th:block th:replace="/includes/header :: header3"></th:block>
+   <th:block th:replace="includes/header :: header1"></th:block>
+   <th:block th:replace="includes/header :: header2"></th:block>
+   <th:block th:replace="includes/header :: header3"></th:block>
    <!-- Header Section End -->
    <!-- Shop Details Section Begin -->
    <section class="shop-details">
@@ -222,7 +222,7 @@
    <section class="related spad"></section>
    <!-- Related Section End -->
    <!-- Footer Section Begin -->
-   <th:block th:replace="/includes/footer :: footer"></th:block>
+   <th:block th:replace="includes/footer :: footer"></th:block>
    <!-- Footer Section End -->
    <!-- Code injected by live-server -->
    <script src="/js/dialog.js"></script>
