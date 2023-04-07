@@ -45,6 +45,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 html {
@@ -165,8 +166,8 @@ a {
 }
 
 a:hover {
-  color: #224abe;
-  text-decoration: underline;
+  color: #000;
+  text-decoration: none;
 }
 
 a:not([href]):not([class]) {
@@ -3015,13 +3016,13 @@ input[type="button"].btn-block {
 
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 62px;
   left: 0;
   z-index: 1000;
   display: none;
   float: left;
   min-width: 10rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.5rem;
   margin: 0.125rem 0 0;
   font-size: 0.85rem;
   color: #858796;
@@ -11278,4 +11279,8 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+
+.header__top__links a:hover{
+	color: #fff;
 }

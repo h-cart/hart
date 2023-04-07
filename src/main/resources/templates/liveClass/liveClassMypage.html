@@ -27,9 +27,9 @@
 	<div id="wrap">
 		<div id="container">
 			<div id="contents">
-				<div class="myshop-wrap">
+				<div class="myshop-wrap" style=" padding-top:0px;">
 
-					<div class="xans-element- xans-myshop xans-myshop-asyncbenefit header ">
+					<div class="xans-element- xans-myshop xans-myshop-asyncbenefit header" style="padding-bottom: 0px;">
 					</div>
 
 					<!-- myshop-layout -->
@@ -37,10 +37,8 @@
 						<!-- menu-block -->
 						<div class="menu-block">
 							<ul>
-								<li class="js-order active"><a href="/mypage/myorder">주문내역</a></li>
-								<li><a href="/mypage/myResell">수강 내역</a></li>
-								<li class="js-board"><a href="/mypage/myarticle">내가 쓴 글</a></li>
-								<li class="js-modify"><a href="/mypage/modify">내 계정</a></li>
+								<li class="js-order active"><a href="/mypage/myorder" style="color: #9A9A9A;">주문내역</a></li>
+								<li><a href="/mypage/class" style="color: black;font-weight: bold;">수강 내역</a></li>
 								<li onclick="logoutSubmit();"><a href="javascript:void(0)">로그아웃</a></li>
 							</ul>
 
@@ -92,7 +90,7 @@
 													<div class="item-prod" th:each="list : ${classList}">
 														<div class="block">
 															<div class="thumb">
-																<a href="#"><img th:src="${list.lcimg}" alt=""></a>
+																<a href="#"><img th:src="${list.lcimg}" alt=""  style="height: 76px; width: 102px"></a>
 															</div>
 															<div class="item-desc">
 																<div class="detail">
@@ -103,11 +101,28 @@
 														</div>
 														<div class="status">
 															<!--@@수정중  -->
+																<div th:if=${list.lcstatus}==0>
 																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
 																	<div th:if=${list.lcstatus}==0><span>강의 예정</span></div>
-																	<div th:if=${list.lcstatus}==1 th:onclick="moveVideo(1,[[${list.lcid}]])"><span>방송중</span></div>
+																</button>
+																</div>
+																<div th:if=${list.lcstatus}==2>
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
 																	<div th:if=${list.lcstatus}==2 th:onclick="moveVideo(2,[[${list.lcid}]])"><span>강의 보기</span></div>
 																</button>
+																</div>
+																<div th:if=${list.lcstatus}==1>
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16" style="background-color: #E82E2E;">
+																	<div th:if=${list.lcstatus}==1 th:onclick="moveVideo(1,[[${list.lcid}]])"><span style=" color: white; font-weight: bold;">ON - AIR</span></div>
+																</button>
+																</div>
+																<!-- 
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
+																	<div th:if=${list.lcstatus}==0><span>강의 예정</span></div>
+																	<div th:if=${list.lcstatus}==1 th:onclick="moveVideo(1,[[${list.lcid}]])"><span style=" color: white; font-weight: bold;">ON - AIR</span></div>
+																	<div th:if=${list.lcstatus}==2 th:onclick="moveVideo(2,[[${list.lcid}]])"><span>강의 보기</span></div>
+																</button>
+																 -->
 																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
 																	<a href="http://192.168.0.5:3000"></a><span>상세 보기</span></a>
 																</button>

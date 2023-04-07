@@ -543,6 +543,7 @@ table tr.vertical-middle th,table tr.vertical-middle td {
 @media (max-width: 767px) {
   .myshop-wrap {
       padding:32px var(--wrap-padding-mobile);
+      margin-top : 90px;
   }
 
   .myshop-wrap .header {
