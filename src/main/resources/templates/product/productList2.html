@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<th:block th:replace="includes/headTag :: head_tag"></th:block>
 <body>
 	<!-- 수정  -->
 	<script type="text/javascript" defer>
@@ -145,9 +145,9 @@
 		<div class="loader" style="display: none"></div>
 	</div>
 	<!-- Offcanvas Menu Begin -->
-	<th:block th:replace="/includes/header :: header1"></th:block>
-	<th:block th:replace="/includes/header :: header2"></th:block>
-	<th:block th:replace="/includes/header :: header3"></th:block>
+	<th:block th:replace="includes/header :: header1"></th:block>
+	<th:block th:replace="includes/header :: header2"></th:block>
+	<th:block th:replace="includes/header :: header3"></th:block>
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-option">
@@ -273,7 +273,7 @@
 	</section>
 	<!-- Shop Section End -->
 	<!-- Footer Section Begin -->
-	<th:block th:replace="/includes/footer :: footer"></th:block>
+	<th:block th:replace="includes/footer :: footer"></th:block>
 	<!-- Footer Section End -->
 </body>
 </html>

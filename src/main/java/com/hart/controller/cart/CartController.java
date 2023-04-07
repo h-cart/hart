@@ -28,7 +28,7 @@ public class CartController {
 	public String getCart(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
 		String url = "";
 		if (mDTO.getCsno() == null)
-			url = "/cart/mycart";
+			url = "cart/mycart";
 		else {
 			url = "redirect:/cart/share/" + mDTO.getCsno();
 		}
@@ -75,11 +75,11 @@ public class CartController {
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
 		String url = "";
 		if (mDTO.getCsno() == null || Integer.parseInt(mDTO.getCsno()) != csno) {
-			url = "/error/share";
+			url = "error/share";
 
 			model.addAttribute("msg", "허용되지 않은 접근입니다.");
 		} else {
-			url = "/cart/share";
+			url = "cart/share";
 			try {
 			} catch (Exception e) {
 				model.addAttribute("msg", "잘못된 장바구니 정보입니다.");

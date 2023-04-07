@@ -149,8 +149,7 @@
                       <tr>
                         <td th:if="${Detail.detail.pdiscount != 0}"><h4 th:text="${Detail.detail.pdiscount} + '%'"></h4></td>
                         <style>
-                          /* 첫번째 td에만 적용되는 css
-													첫번째 span에는 글자 크기 20px, 두번째 span에는 글자 크기 15px */
+
                         </style>
                         <td th:if="${Detail.detail.pdiscount != 0}">
                           <span id="discontPrice" th:text="${#numbers.formatInteger(Detail.detail.pprice - (Detail.detail.pdiscount * Detail.detail.pprice /100), 3, 'COMMA') + '원'}" style="font-size: 30px"></span>
@@ -164,6 +163,7 @@
                           <span id="originPrice" th:text="${#numbers.formatInteger(Detail.detail.pprice, 3, 'COMMA') + '원'}" style="font-size: 30px"></span>
                         </td>
                       </tr>
+
 
                       <tr>
                         <td>상품번호</td>
