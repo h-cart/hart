@@ -72,7 +72,7 @@ public class ProductsController {
          e.printStackTrace();
       }
 
-      return "/product/productDetail";
+      return "product/productDetail";
 
    }
 
