@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<th:block th:replace="includes/headTag :: head_tag"></th:block>
 <link rel="stylesheet" type="text/css" href="/css/order-complete.css">
 
 <body>
@@ -8,9 +8,9 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-    <th:block th:replace="/includes/header :: header1"></th:block>
-    <th:block th:replace="/includes/header :: header2"></th:block>
-    <th:block th:replace="/includes/header :: header3"></th:block>
+    <th:block th:replace="includes/header :: header1"></th:block>
+    <th:block th:replace="includes/header :: header2"></th:block>
+    <th:block th:replace="includes/header :: header3"></th:block>
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <th:block th:replace="/includes/footer :: footer"></th:block>
+    <th:block th:replace="includes/footer :: footer"></th:block>
     <script src="/js/cart.js"></script>
 </body>
 <script>
