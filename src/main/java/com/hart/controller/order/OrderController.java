@@ -53,7 +53,7 @@ public class OrderController {
 		}catch (Exception e) {
 			model.addFlashAttribute("msg", "ERROR");
 			System.out.println(e.getMessage());
-			url = "/error";
+			url = "error";
 		}
 		return "redirect:"+url;
 	}
@@ -67,12 +67,12 @@ public class OrderController {
 			mDTO = (ClubAuthMemberDTO)result.get("mDTO");
 			OinfoDTO oinfo = (OinfoDTO)result.get("oinfo");
 			
-			url = "/order/complete?oid="+oinfo.getOid();
+			url = "order/complete?oid="+oinfo.getOid();
 		}catch (Exception e) {
 			if(e.getMessage().equals("수강 중인 클래스 존재")) {
-				url = "/error";
+				url = "error";
 			}else
-				url = "/cart/mycart";
+				url = "cart/mycart";
 			
 			e.printStackTrace();
 		}
@@ -85,10 +85,10 @@ public class OrderController {
 		try {
 			
 			model.addAttribute("oinfo", oService.getOrder(mDTO.getMid(), Integer.parseInt(oid)));
-			url = "/order/complete";
+			url = "order/complete";
 		}catch (Exception e) {
 			model.addAttribute("msg", "오류 발생");
-			url = "/error";
+			url = "error";
 		}
 		
 		return url;
