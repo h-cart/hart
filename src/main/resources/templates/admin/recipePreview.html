@@ -138,9 +138,6 @@
 <script src="https://gsshopecorecipe.com/theme/basic/js/aos/dist/aos.js?ver=210618"></script>
 </head>
 <body class="subpage">
-	<th:block th:replace="/includes/header :: header1"></th:block>
-	<th:block th:replace="/includes/header :: header2"></th:block>
-	<th:block th:replace="/includes/header :: header3"></th:block>
 	<link
 		rel="stylesheet"
 		href="/css/bootstrap.min.css"
@@ -230,31 +227,27 @@ ul.tagit input[type="text"] {
 	height: 30px;
 }
 
+.content_area .content_inner {
+	padding-right: 0px;
+}
+
+
 </style>
 	<link
 		rel="stylesheet"
 		type="text/css"
 		href="https://recipe1.ezmember.co.kr/static/css/jquery-ui-1.11.4_201507011.css"
 	/>
-	<div class="full_container sub_visual">
-		<div class="inner_container">
-			<h2 class="eland_font">레시피 공모전</h2>
-			<ul>
-				<li><a href="/event?evid=1">공모전 소개 및 지원하기</a></li>
-				<li><a
-					href="/event/vote?evid=1"
-					class="on"
-				>레시피 투표하기</a></li>
-			</ul>
-		</div>
-	</div>
 	<article
 		id="bo_v"
 		class="full_container sub_section"
 		style="width: 100%"
 	>
 		<div class="inner_container">
-			<h3 class="title">레시피 투표하기</h3>
+			<h3
+				class="title"
+				th:text="${detail.crid+'번 레시피'}"
+			>레시피 투표하기</h3>
 			<!--동영상 영역-->
 			<div class="video_area">
 				<div
@@ -292,7 +285,7 @@ ul.tagit input[type="text"] {
 							<div style="display: flex">
 								<div
 									th:text="${item.step }"
-									style="margin-right: 30px;"
+									style="margin-right: 30px"
 								></div>
 								<div th:text="${item.crcdetail}"></div>
 							</div>
@@ -303,22 +296,21 @@ ul.tagit input[type="text"] {
 						</div>
 					</div>
 				</div>
-				<a
-					href="javascript:void(0);"
-					class="vote_btn"
-					th:data-crid="${detail.crid}"
-					onclick="voting(this)"
-				>투표하기</a>
 			</div>
 			<!-- 게시판 버튼-->
 			<div id="bo_V_bottom">
 				<ul class="btn_bo_user bo_v_com">
 					<li><a
-						th:href="@{${'/event/vote?evid='+detail.evid}}"
-						class="btn_b01 btn"
-						title="목록"
-					>목록으로</a></li>
-					<!--  -->
+						href="javascript:void(0)"
+						class="btn_b01"
+						onclick="PrintDiv($('body'));"
+					>이미지 저장</a></li>
+					<!-- 이미지를 프린트 할 수 있는 버튼 -->
+					<li><a
+						href="javascript:void(0)"
+						class="btn_b01"
+						onclick="window.print();"
+					>프린트</a></li>
 				</ul>
 			</div>
 			<!-- 게시판 버튼 끝-->
@@ -331,11 +323,6 @@ ul.tagit input[type="text"] {
 		method="post"
 	>
 		<input
-			type="hidden"
-			name="mid"
-			id="mid"
-			th:value="${#authentication.principal.mid}"
-		/> <input
 			type="hidden"
 			name="evid"
 			id="evid"
@@ -352,7 +339,26 @@ ul.tagit input[type="text"] {
 			$("#crid").val(crid);
 			$("#votelist").submit();
 		}
+
+		function PrintDiv(div) {
+			div = div[0];
+			html2canvas(div).then(function(canvas) {
+				// <h3 class="title" th:text="${detail.crid+'번 레시피'}">레시피 투표하기</h3> 이 태그를 선택하는 제이쿼리
+				var title = $(".title").text();
+				console.log(title);
+				var myImage = canvas.toDataURL();
+				downloadURI(myImage, title);
+			});
+		}
+
+		function downloadURI(uri, name) {
+			var link = document.createElement("a");
+			link.download = name;
+			link.href = uri;
+			document.body.appendChild(link);
+			link.click();
+		}
 	</script>
-	<th:block th:replace="/includes/footer :: footer"></th:block>
+	<script src="/js/html2canvas.js"></script>
 </body>
 </html>

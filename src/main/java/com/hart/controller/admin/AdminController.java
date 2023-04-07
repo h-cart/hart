@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hart.domain.admin.AdminEventVO;
 import com.hart.domain.admin.Criteria;
 import com.hart.domain.admin.PageDTO;
+import com.hart.domain.event.CRecipeVO;
 import com.hart.domain.event.EventListVO;
+import com.hart.domain.event.EventVoteVO;
 import com.hart.service.admin.AdminEventService;
+import com.hart.service.event.EventService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -25,6 +28,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminEventService eService;
+	
+	@Autowired
+	private EventService eventService;
 	
 	
 	// 관리자가 이벤트를 등록, 관리하는 페이지
@@ -113,5 +119,13 @@ public class AdminController {
 		log.info(event);
 		eService.eventModify(event);
 		return "redirect:/admin/eventManage";
+	}
+	
+	// 이벤트 미리보기 (새창 열기)
+	@GetMapping("/recipePreview")
+	public String recipePreview(EventVoteVO ev, Model model) {
+		CRecipeVO cr = eventService.getRecipeDetail(ev);
+		model.addAttribute("detail", cr);
+		return "admin/recipePreview";
 	}
 }
