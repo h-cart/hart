@@ -80,7 +80,7 @@
 														<ul class="info-block">
 															<li class="first">
 																<ul>
-																	<li>나의 수강내역</li>
+																	<li>수업 목록</li>
 																</ul>
 															</li>
 															<li class="last only-pc"></li>
@@ -102,13 +102,13 @@
 														<div class="status">
 															<!--@@수정중  -->
 																<div th:if=${list.lcstatus}==0>
-																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16" >
 																	<div th:if=${list.lcstatus}==0><span>강의 예정</span></div>
 																</button>
 																</div>
 																<div th:if=${list.lcstatus}==2>
-																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
-																	<div th:if=${list.lcstatus}==2 th:onclick="moveVideo(2,[[${list.lcid}]])"><span>강의 보기</span></div>
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16" style="background-color: #116530;border: 1px solid #116530;">
+																	<div th:if=${list.lcstatus}==2 th:onclick="moveVideo(2,[[${list.lcid}]])"><span style="color: white;">강의 보기</span></div>
 																</button>
 																</div>
 																<div th:if=${list.lcstatus}==1>
@@ -172,10 +172,6 @@
 
 <script type="text/javascript">
 	function moveVideo(lcstatus,lcid) {
-		
-		alert(lcstatus)
-		alert(lcid)
-		
 		
 		if(lcstatus=='1'){//라이브 서버로 연결
 			alert("check");

@@ -218,8 +218,8 @@ table tr.vertical-middle th,table tr.vertical-middle td {
 
 .myshop-wrap .myshop-layout .contents-block .order-list .items-block .item-header {
   margin-top: 40px;
-  padding: 20px 24px;
-  background-color: #F9F9F9;
+  padding: 10px 24px;
+  background-color: #f3f2ee5e;
   border-top: 1px solid #1e1e1e;
   border-bottom: 1px solid #E5E5E5;
 }
@@ -632,7 +632,7 @@ table tr.vertical-middle th,table tr.vertical-middle td {
   }
 
   .myshop-wrap .myshop-layout .contents-block .order-list .items-block .item-header {
-      padding: 20px 12px;
+      padding: 9px 12px;
   }
 
   .myshop-wrap .myshop-layout .contents-block .order-list .items-block .item-header .info-block .first ul,.myshop-wrap .myshop-layout .contents-block .order-list .items-block .item-header .info-block .last ul {
@@ -853,7 +853,7 @@ html {
 
 body,code {
   font-size: 12px;
-  font-family: 'Helvetica Neue','NotoSansKR',sans-serif;
+  font-family: 'Noto Sans KR','NotoSansKR',sans-serif;
   color: #1E1E1E;
   background: #fff;
 }
@@ -900,7 +900,7 @@ button {
 }
 
 button span,textarea {
-  font-family: 'Helvetica Neue','NotoSansKR',sans-serif;
+  font-family: 'Noto Sans KR'
 }
 
 textarea {
@@ -3120,14 +3120,14 @@ button {
 }
 
 .btn-gray {
-  background-color: #fff;
+  background-color: #f3f2ee5e;
   border: 1px solid #9A9A9A;
 }
 
 .btn-gray span {
   position: relative;
   z-index: 2;
-  color: #9A9A9A;
+  color: black;
   -webkit-text-fill-color: inherit;
   -webkit-transition: color 0.6s cubic-bezier(0.19,1,0.22,1) 0s;
   -o-transition: color 0.6s cubic-bezier(0.19,1,0.22,1) 0s;
@@ -3138,7 +3138,7 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: #9A9A9A;
+  background: #00ff0000;
   z-index: 1;
   -webkit-transform: scaleY(0);
   -o-transform: scaleY(0);
@@ -3154,7 +3154,7 @@ button {
 }
 
 .btn-gray:hover span {
-  color: #fff;
+  color: black;
   -webkit-text-fill-color: inherit;
 }
 
