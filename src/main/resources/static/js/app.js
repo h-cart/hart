@@ -44,7 +44,7 @@ function showMessage(message) {
     $("#communicate").append("<tr><td>" + message + "</td></tr>");
 }
 
-$(function () {
+(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
