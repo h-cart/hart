@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getProducts" parameterType="string" resultType="CProductDTO">
 		SELECT pc.pid, pi.pimg, pc.pname, pc.pprice, pc.pdiscount, mcamount
-		FROM pcart pc JOIN product_img pi on pc.pid = pi.pid and pdepth=0 and mid = #{mid}
+		FROM pcart pc JOIN product_img pi on pc.pid = pi.pid and pdepth=0 and mid = #{mid} order by cdate desc
 	</select>
 	
 	<update id="updateAmount" parameterType="CartInsertDTO">
@@ -45,13 +45,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getLClass" parameterType="string" resultType="CClassDTO">
 		SELECT lcid,lcday,lcstatus,lcteacher,lcname,lcimg,lcprice FROM lcart
-		WHERE mid = #{mid}
+		WHERE mid = #{mid} order by cdate desc
 	</select>
-	
+
 	<select id="sameProducts" resultType='int'>
 		SELECT count(*)
 		FROM my_cart
 		WHERE pid = #{pid} AND mid = #{mid}
 	
 	</select>
+
+	
 </mapper>

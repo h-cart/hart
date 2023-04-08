@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hart.mapper.AlarmMapper">
+	
+	<resultMap id="alarmResultMap" type="com.hart.domain.alarm.LiveClassApplicantDTO">
+	  <result property="mid" column="MID"/>
+	  <result property="lcname" column="LCNAME"/>
+	  <result property="lcday" column="LCDAY"/>
+	  <result property="lcstart" column="LCSTART"/>
+	  <result property="lcend" column="LCEND"/>
+	  <result property="alertPhone" column="ALERT_PHONE"/>
+	</resultMap>
+
+	<select id="getApplicantInfoCall" statementType="CALLABLE" parameterType="java.util.Map">
+		 { call live_alarm_procedure(
+		 	#{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet,resultMap=alarmResultMap}
+		 )}
+	</select>
+	
+	<select id="addApplicantTodayAlarm" statementType="CALLABLE" >
+		 { call today_add_alarm_procedure}
+	</select>
+	
+	
+	<select id="getAlarmList"  resultType="com.hart.domain.alarm.AlarmDTO">
+		select alarm_content, alarm_date
+		from(
+		    select * from alarm
+		    where mid = #{mid}
+		    order by alarm_date_detail desc
+		)
+		<![CDATA[
+		where rownum<=3
+		]]>
+	</select>
+	
+	
+	<!-- <resultMap id="noticeCnt" type="hashmap"></resultMap> -->
+	
+	<resultMap id="noticeResulttMap" type="com.hart.domain.alarm.AlarmDTO">
+	  <result property="alarm_content" column="alarm_content"/>
+	  <result property="alarm_date" column="alarm_date"/>
+	</resultMap>
+	
+	<select id="noticeListCall" statementType="CALLABLE" parameterType="java.util.Map">
+		 { call notice_list_procedure(
+		 	#{mid, mode=IN},
+		 	#{alarmCount, mode=OUT, jdbcType=VARCHAR, resultMap=noticeResulttMap},
+		 	#{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet,resultMap=noticeResulttMap}
+		 )}
+	</select>
+	
+	
+	<update id="updateNoticeList" parameterType="String">
+		UPDATE alarm
+		SET alarm_status = '1'
+		WHERE alarm_id IN (
+			    SELECT alarm_id
+			    FROM (
+			        SELECT alarm_date_detail,alarm_id
+			        FROM alarm
+			        WHERE mid = #{mid}
+			        ORDER BY alarm_date_detail DESC
+			    )
+			    <![CDATA[
+			    WHERE rownum <= 3
+			    ]]>
+			)
+	</update>
+	
+	
+</mapper>
