@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hart.mapper.RecommandMapper">
+
+	<select id="getMyRecommand" resultMap="RecommandMap">
+		<![CDATA[
+		SELECT pid,pname,pimg, stag 
+		FROM (SELECT pc.pid,pname,stag,pimg 
+			FROM pcart pc join product_img pi on pc.pid = pi.pid and pdepth=0
+			WHERE mid = #{mid} order by cdate desc) j WHERE rownum <=1
+			]]>
+	</select>
+
+	<select id="getShareRecommand" resultMap="RecommandMap">
+		<![CDATA[
+		SELECT pid,pname,pimg, stag 
+		FROM (SELECT pc.pid,pname,stag,pimg 
+			FROM pscart pc join product_img pi on pc.pid = pi.pid and pdepth=0
+			WHERE csno = #{csno} order by cdate desc) j WHERE rownum <=1
+			]]>
+	</select>
+
+
+	<resultMap id="RecommandMap" type="RecommandDTO">
+		<result property="pid" column="PID" />
+		<result property="pname" column="PNAME" />
+		<result property="pimg" column="PIMG" />
+		<result property="stag" column="STAG" />
+		<collection property="recipes" column="stag"
+			ofType="RrecipeDTO" javaType="java.util.ArrayList"
+			select="getRecommandRecipe" />
+		<collection property="lives" column="stag"
+			ofType="RliveClassDTO" javaType="java.util.ArrayList"
+			select="getRecommandClass" />
+	</resultMap>
+
+	<select id="getRecommandRecipe" resultMap="RecommandRecipe">
+		SELECT
+		rid,rtitle,rimg, rlevel,rtime
+		FROM recipe
+		WHERE rmingredient like
+		'%'||#{stag}||'%' OR
+		rtitle like '%'||#{stag}||'%'
+	</select>
+	<resultMap id="RecommandRecipe" type="RrecipeDTO">
+		<result property="rid" column="RID" />
+		<result property="rtitle" column="RTITLE" />
+		<result property="rimg" column="RIMG" />
+		<result property="rlevel" column="RLEVEL" />
+		<result property="rtime" column="RTIME" />
+		<!-- <result property="rcano" column="RCANO" /> -->
+		<!-- <result property="rccategory" column="RCCATEGORY" /> -->
+		<result property="rccategory" column="RTIME" />
+		<collection property="items" column="rid"
+			ofType="IngredientDTO" javaType="java.util.ArrayList"
+			select="getIngredients" />
+	</resultMap>
+
+
+	<resultMap id="RecommandClass" type="RliveClassDTO">
+		<result property="lcid" column="LCID" />
+		<result property="lcstatus" column="LCSTATUS" />
+		<result property="lcname" column="LCNAME" />
+		<result property="rlevel" column="RLEVEL" />
+		<result property="lcprice" column="LCPRICE" />
+		<collection property="items" column="LCID"
+			ofType="IngredientDTO" javaType="java.util.ArrayList"
+			select="getIngredients" />
+	</resultMap>
+
+
+
+
+	<select id="getIngredients" resultType="IngredientDTO">
+		SELECT
+		pd.pid,pname,pimg,pprice,pdiscount
+		FROM products pd join product_img pi
+		on pd.pid = pi.pid AND pdepth=0
+		WHERE pd.pid in (SELECT pid
+		FROM total_ingredient
+		WHERE rid =#{rid} OR rid=#{lcid})
+	</select>
+
+
+	<select id="getRecommandClass" resultMap="RecommandClass">
+		SELECT
+		lc.lcid,lcstatus,lcname, lcteacher,lcprice,lcimg,TO_CHAR(TO_DATE(lcday, 'YYYY-MM-DD HH24:MI:SS'), 'YY/MM/DD')as lcday
+		FROM live_class lc JOIN live_class_img lci ON lc.lcid = lci.lcid
+		WHERE lckeyword
+		like '%' ||#{stag}||'%' OR
+		lcname like '%' ||#{stag}||'%'
+	</select>
+
+</mapper>
+
+

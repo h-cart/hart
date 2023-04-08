@@ -1,5 +1,5 @@
-<html lang="zxx">
-<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<html xmlns:th="http://www.thymeleaf.org" lang="zxx">
+<th:block th:replace="includes/headTag :: head_tag"></th:block>
 <body style="">
 	<!-- Page Preloder -->
 	<div
@@ -11,10 +11,13 @@
 			style="display: none"
 		></div>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/main.js"></script>
 	<!-- Header Section Begin -->
-	<th:block th:replace="/includes/header :: header1"></th:block>
-	<th:block th:replace="/includes/header :: header2"></th:block>
-	<th:block th:replace="/includes/header :: header3"></th:block>
+	<th:block th:replace="includes/header :: header1"></th:block>
+	<th:block th:replace="includes/header :: header2"></th:block>
+	<th:block th:replace="includes/header :: header3"></th:block>
 	<!-- Header Section End -->
 	<!-- Hero Section Begin -->
 	<section class="hero">
@@ -958,7 +961,7 @@
 	<!-- Latest Blog Section End -->
 	<!-- Footer Section Begin -->
 	<!-- Footer Section Begin -->
-	<th:block th:replace="/includes/footer :: footer"></th:block>
+	<th:block th:replace="includes/footer :: footer"></th:block>
 	<!-- Footer Section End -->
 	<!-- Footer Section End -->
 	<!-- Search Begin -->
