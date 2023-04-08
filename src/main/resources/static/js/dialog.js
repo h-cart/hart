@@ -14,7 +14,48 @@ function showModal(result) {
    dialog::-webkit-scrollbar {
       display: none;
    }
-   
+   .product__cart__item__pic {
+		position: relative;
+	}
+
+	.checkbox {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+
+	}
+
+	.price-box h5,
+	.price-box h6 {
+		display: inline-block;
+		margin: 0;
+	}
+
+	.product__cart__item__text {
+		overflow: hidden;
+	}
+
+	.product__cart__item__text .cost {
+		color: #999;
+		/* 회색으로 표시 */
+		font-size: 0.8em;
+		/* 작게 보이도록 설정 */
+		text-decoration: line-through;
+		/* 선 그어지도록 설정 */
+	}
+
+	.empty-basket {
+		text-align: center;
+		font-size: 20px;
+		color: #666;
+	}
+
+	@media (max-width: 768px) {
+		.empty-basket {
+			font-size: 16px;
+		}
+	}
 
   #cart_product_img {
     width: 150px;
@@ -38,7 +79,7 @@ function showModal(result) {
 	<dialog>
       <div class="container">
       <div>
-      <h4 style="text-align: center" style="word-break: keep-all;">장바구니에 담겼습니다 <i class="fa-solid fa-x fa-xs " style="color: #000000"></i></h4>
+      <h4 style="text-align: center" style="word-break: keep-all;">장바구니에 담겼습니다 <i class="fa-solid fa-x fa-xs dialog-close" style="color: #000000"></i></h4>
       <img id="cart_product_img" src="https://tohomeimage.thehyundai.com/DP/DP018/2023/02/02/153935/lgjsv.jpg" alt="" />
       <h4 id="cart_item" style="text-align: center; word-break: keep-all; margin-bottom: 20px" ></h4>
 
@@ -192,9 +233,9 @@ function showModal(result) {
                </div>
             </div>`;
     }
-    str += `<div class="addToCart" style="
+    str += `<div onclick="addToCart" class="addToCart" style="
    background-color: black;
-   text-align: center;
+   text-align: center; 
 "><a href="#" class="primary-btn">장바구니 담기</a></div>`;
     flag = !flag;
     console.log(flag);

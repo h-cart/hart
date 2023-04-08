@@ -70,8 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// /samle/all 모든 사용자 가능
 		// /sample/member USER 롤 사용자만
 		http.authorizeRequests().antMatchers("/cart/**").authenticated()
-		.antMatchers("/").permitAll().antMatchers("/order").authenticated()
-				.antMatchers("/member").hasRole("USER");
+		.antMatchers("/").permitAll().antMatchers("/order/**").authenticated()
+				.antMatchers("/mypage/**").authenticated()
+				.antMatchers("/member/**").hasRole("USER");
 //				.antMatchers("/admin").hasRole("ADMIN");
 		// 인가 인증 문제시 로그인 화면
 

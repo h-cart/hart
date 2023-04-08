@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <th:block th:replace="/includes/headTag :: head_tag"></th:block>
+  <th:block th:replace="includes/headTag :: head_tag"></th:block>
   <style>
     .product-container {
       display: flex;
@@ -97,7 +97,7 @@
       margin-bottom: 20px;
     }
     td:nth-child(1) span:nth-child(1) {
-      font-size: 30px;
+      font-size: 15px;
     }
     td:nth-child(1) span:nth-child(2) {
       font-size: 25px;
@@ -118,9 +118,9 @@
     <div id="preloder" style="display: none">
       <div class="loader" style="display: none"></div>
     </div>
-    <th:block th:replace="/includes/header :: header1"></th:block>
-    <th:block th:replace="/includes/header :: header2"></th:block>
-    <th:block th:replace="/includes/header :: header3"></th:block>
+    <th:block th:replace="includes/header :: header1"></th:block>
+    <th:block th:replace="includes/header :: header2"></th:block>
+    <th:block th:replace="includes/header :: header3"></th:block>
     <!-- Header Section End -->
     <!-- Shop Details Section Begin -->
     <section class="shop-details">
@@ -191,12 +191,11 @@
                 </div>
 
                 <div class="product__details__cart__option row row-cols-sm-12">
-                  <input type="checkbox" checked style="display: none" name="cartlist" id="chk_-1" />
                   <input class="item" id="-1" type="hidden" th:data-value="${Detail.detail.pid}" name="pid" th:value="${Detail.detail.pid}" />
                   <div class="quantity" style="width: 100%; margin: 10px">
                     <div class="pro-qty" style="display: flex; align-items: center"><input class="item" id="quantity_-1" name="quantity" type="text" value="1" style="width: 100%" /></div>
                   </div>
-                  <a href="#" class="primary-btn addToCart col" style="margin: 10px; width: -webkit-fill-available">장바구니</a>
+                  <a href="#" class="primary-btn col" th:onclick="'addToCart(false,-1)'"style="margin: 10px; width: -webkit-fill-available">장바구니</a>
 
                   <a href="#" class="primary-btn orderDirect col" style="margin: 10px; width: -webkit-fill-available">바로구매</a>
                 </div>
@@ -298,7 +297,7 @@
     <section class="related spad"></section>
     <!-- Related Section End -->
     <!-- Footer Section Begin -->
-    <th:block th:replace="/includes/footer :: footer"></th:block>
+    <th:block th:replace="includes/footer :: footer"></th:block>
     <!-- Footer Section End -->
     <!-- Code injected by live-server -->
     <script src="/js/dialog.js"></script>
@@ -306,9 +305,8 @@
     <!-- Code injected by live-server -->
     <script th:inline="javascript">
       /*<![CDATA[*/
-      function addToCart(flag) {
+      function addToCart(flag,idx) {
         var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
-        console.log(isAdmin);
         if (!isAdmin) {
           Swal.fire({
             title: "로그인이 필요한 활동입니다.",
@@ -328,6 +326,8 @@
         }
         var pamounts = [];
         var pids = [];
+        console.log(flag);
+        if(flag){
         $("input[name=cartlist]:checked").each(function () {
           $(this).prop("checked", false);
           var pos = $(this).prop("id").split("_")[1];
@@ -337,15 +337,14 @@
           console.log(pos, pid, quantity);
           pamounts.push(quantity);
         });
-
-        if (pamounts.length == 0) {
-          Swal.fire({
-            icon: "error",
-            title: "수량을 선택해주세요.",
-            text: "수량을 0개 이상으로 선택 해주세요.",
-          });
-          return;
-        }
+        
+		}else {
+			
+			 var pid = $("#" + idx).data("value");
+          	var quantity = $("#quantity_" + idx).val();
+          	pids.push(pid);
+         	 pamounts.push(quantity);
+		}
         $.ajax({
           url: "/capi/insert",
           beforeSend: function (xhr) {
@@ -370,10 +369,7 @@
       }
 
       /*]]>*/
-      $(document).on("click", ".addToCart", function () {
-        console.log("클");
-        addToCart();
-      });
+
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   </body>

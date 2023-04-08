@@ -130,6 +130,7 @@ public class OrderServiceImpl implements OrderService{
 	 */
 	@Override
 	public List<SearchResultDTO> searchOrders(SearchDTO sDTO) throws Exception {
+		log.info(sDTO);
 		List<SearchResultDTO> result = oMapper.getOrders(sDTO);
 		result.forEach(item -> item.setOdate(dateFormatter(item.getOdate())));
 		return result;

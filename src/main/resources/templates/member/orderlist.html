@@ -8,11 +8,13 @@
 		$(".tab_class_cs").on("click", function () {
 			$(".tab_class").removeClass("selected");
 			$(this).addClass("selected");
+			searchPeriod();
 		});
 
 		$(".tab_class").on("click", function () {
 			$(".tab_class_cs").removeClass("selected");
 			$(this).addClass("selected");
+			searchPeriod();
 		});
 	});
 </script>
@@ -151,119 +153,8 @@
                         $login_url = /member/login.html
                         $count = 10
                     -->
-									<c:if test="${fn:length(allList) > 0}">
+									
 
-										<c:forEach var="List" items="${allList }" varStatus="count">
-											<div class="">
-												<div class="items-block xans-record- itemlist">
-													<div class="item-header ">
-														<ul class="info-block">
-															<li class="first">
-																<ul>
-																	<c:if test="${List.re_price != null}">
-																		<span
-																			style="color:#E00000; border:1px solid #E00000; padding: 0 3px;">
-																			RESELL </span>
-																	</c:if>
-
-																	<li class="sub-title">주문일</li>
-																	<li class="value">${List.order_date }</li>
-
-																	<!-- <li class="sub-title">주문번호</li>
-													<li class="value"><a
-														href="/myshop/order/detail.html?order_id=20221229-0003219&amp;page=1&amp;history_start_date=2022-09-30&amp;history_end_date=2022-12-29"
-														class="line">20221229-0003219</a></li> -->
-																	<li class="sub-title">결제금액</li>
-																	<c:if test="${List.re_price == null }">
-																		<li class="value only-pc">
-																			<fmt:formatNumber value="${List.pro_price }"
-																				type="number" />
-																		</li>
-																	</c:if>
-																	<c:if test="${List.re_price != null}">
-																		<li class="value only-pc">
-																			<fmt:formatNumber value="${List.re_price }"
-																				type="number" />
-																		</li>
-																	</c:if>
-																</ul>
-															</li>
-															<li class="last only-pc">
-
-															</li>
-														</ul>
-													</div>
-
-													<div class="item-prod">
-														<div class="block">
-															<div class="thumb">
-																<a href="#"><img src="${List.pro_loc }" alt=""></a>
-															</div>
-															<div class="item-desc">
-																<div class="detail">
-																	<div class="name">
-																		<a href="#">
-																			${List.pro_name }</a>
-																	</div>
-																	<div class="option ">[옵션: ${List.pro_opt_size }]
-																	</div>
-																	<div class="quantity text-center">수량:
-																		${List.order_detail_amount }</div>
-																	<c:if test="${List.re_price == null }">
-																		<div class="order-price text-right"></div>
-																		<fmt:formatNumber value="${List.pro_price }"
-																			type="number" />
-																	</c:if>
-																	<c:if test="${List.re_price != null }">
-																		<div class="order-price text-right"></div>
-																		<fmt:formatNumber value="${List.re_price }"
-																			type="number" />
-																	</c:if>
-
-																</div>
-															</div>
-														</div>
-														<div class="status">
-
-															<c:if test="${List.order_reg_resell_check == '0' }">
-																<button type="button"
-																	class="btn btn-sm btn-gray btn-pd16"
-																	onclick="regProduct(${List.pro_opt_id}, ${List.order_no });">
-																	<span>판매 등록</span>
-																</button>
-
-
-
-																<li class=""><a class="btn btn-sm btn-gray btn-pd16" href="#none" onclick="cancelOrder(${List.pro_opt_id}, ${List.order_no })"><span>주문취소</span></a>
-																</li>
-															</c:if>
-
-															<c:if test="${List.order_reg_resell_check == '1' }">
-																<p> 판매 등록 완료 </p>
-
-																<li class="">
-																	<p>주문 취소 불가</p>
-																</li>
-															</c:if>
-
-
-
-
-															<button type="button"
-																class="btn btn-sm btn-gray btn-pd16 displaynone"
-																onclick="OrderHistory.getDetailInfo('?product_no=3363&amp;cate_no=26&amp;order_id=20221229-0003219&amp;ord_item_code=20221229-0003219-01');">
-																<span>상세정보</span>
-															</button>
-														</div>
-													</div>
-												</div>
-
-											</div>
-
-										</c:forEach>
-									</c:if>
-
-									<c:if test="${fn:length(allList) == 0}">
 
 										<div class="empty-block mt40">
 											<div class="empty-icon-block line">
@@ -272,129 +163,27 @@
 												</div>
 											</div>
 										</div>
-									</c:if>
 
-									<!-- 
-							<div
-								class="xans-element- xans-myshop xans-myshop-orderhistorypaging paginate">
-								<a
-									href="?page=1&amp;history_start_date=2022-09-30&amp;history_end_date=2022-12-29&amp;past_year=2021">&lt;&lt;</a>
-								<a
-									href="?page=1&amp;history_start_date=2022-09-30&amp;history_end_date=2022-12-29&amp;past_year=2021">&lt;</a>
-								<a
-									href="?page=1&amp;history_start_date=2022-09-30&amp;history_end_date=2022-12-29&amp;past_year=2021"
-									class="this xans-record-">1</a> <a
-									href="?page=1&amp;history_start_date=2022-09-30&amp;history_end_date=2022-12-29&amp;past_year=2021">&gt;</a>
-								<a
-									href="?page=1&amp;history_start_date=2022-09-30&amp;history_end_date=2022-12-29&amp;past_year=2021">&gt;&gt;</a>
-							</div>
-							 -->
 								</div>
 							</section>
 
 							<!-- 취소 목록 section -->
-							<section id="tab-section-2" class="tab-section" hidden>
+							<section id="tab-section-2" hidden="true" class="tab-section">
 								<div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem order-list">
 									<!--
                         $login_url = /member/login.html
                         $count = 10
                     -->
+									
 
-									<c:if test="${fn:length(cancelList) > 0}">
-
-										<c:forEach var="List" items="${cancelList }" varStatus="count">
-											<div class="">
-												<div class="items-block xans-record- itemlist">
-													<div class="item-header ">
-														<ul class="info-block">
-															<li class="first">
-																<ul>
-																	<li class="sub-title">주문일</li>
-																	<li class="value">${List.order_date }</li>
-
-																	<!-- <li class="sub-title">주문번호</li>
-													<li class="value"><a
-														href="/myshop/order/detail.html?order_id=20221229-0003219&amp;page=1&amp;history_start_date=2022-09-30&amp;history_end_date=2022-12-29"
-														class="line">20221229-0003219</a></li> -->
-																	<li class="sub-title">결제금액</li>
-																	<c:if test="${List.re_price == null }">
-																		<li class="value only-pc">
-																			<fmt:formatNumber value="${List.pro_price }"
-																				type="number" />
-																		</li>
-																	</c:if>
-																	<c:if test="${List.re_price != null}">
-																		<li class="value only-pc">
-																			<fmt:formatNumber value="${List.re_price }"
-																				type="number" />
-																		</li>
-																		<span class="showResell"> 리셀 상품 </span>
-																	</c:if>
-																</ul>
-															</li>
-															<li class="last only-pc">
-
-															</li>
-														</ul>
-													</div>
-
-													<div class="item-prod">
-														<div class="block">
-															<div class="thumb">
-																<a href="#"><img src="${List.pro_loc }" alt=""></a>
-															</div>
-															<div class="item-desc">
-																<div class="detail">
-																	<div class="name">
-																		<a href="#">
-																			${List.pro_name }</a>
-																	</div>
-																	<div class="option ">[옵션: ${List.pro_opt_size }]
-																	</div>
-																	<div class="quantity text-center">수량:
-																		${List.order_detail_amount }</div>
-																	<c:if test="${List.re_price == null }">
-																		<div class="order-price text-right"></div>
-																		<fmt:formatNumber value="${List.pro_price }"
-																			type="number" />
-																	</c:if>
-																	<c:if test="${List.re_price != null }">
-																		<div class="order-price text-right"></div>
-																		<fmt:formatNumber value="${List.re_price }"
-																			type="number" />
-																	</c:if>
-
-
-																</div>
-															</div>
-														</div>
-														<div class="status">
-
-
-															<p> 환불 완료 </p>
-
-
-
-
-														</div>
-													</div>
-												</div>
-
-											</div>
-
-										</c:forEach>
-									</c:if>
-
-									<c:if test="${fn:length(cancelList) == 0}">
 
 										<div class="empty-block mt40">
 											<div class="empty-icon-block line">
 												<div class="inner">
-													<p>취소 내역이 없습니다.</p>
+													<p>주문 내역이 없습니다.</p>
 												</div>
 											</div>
 										</div>
-									</c:if>
 
 								</div>
 							</section>
@@ -584,20 +373,28 @@
 
 	<script>
 		function searchPeriod() {
-
+			let flag = $(".selected").hasClass("tab_class")? 1 : -1;
+			let emptyOrder = flag==1?"주문 내역이 없습니다." : "취소 내역이 없습니다.";
+			let intoBody = flag==1 ? $("#tab-section-1 div") :$("#tab-section-2 div");
+			console.log(flag,emptyOrder);
+			console.log(intoBody);
 			let startDate = $('#history_start_date').val();
 			let endDate = $('#history_end_date').val();
+			console.log(startDate,endDate);
 			$.ajax({
 				url: "/oapi/search",
 				type: 'post',
 				data: JSON.stringify({
 					sdate: startDate,
-					edate: endDate
+					edate: endDate,
+					isCancel :flag
 				}),
 				contentType: "application/json",
 				beforeSend: function (xhr) {
 					xhr.setRequestHeader(header, token);
 				}, success: function (data) {
+					console.log(data.result.length);
+					if(data.result.length!=0){
 					var searchbody = "<div class>";
 					console.log(data.result);
 					for (var i = 0; i < data.result.length; i++) {
@@ -637,11 +434,18 @@
 							searchbody += "</li></div>";
 							searchbody += "</div>";
 						}
-
-						
+					}
+					}else {
+						var searchbody = `<div class="empty-block mt40">
+											<div class="empty-icon-block line">
+												<div class="inner">
+													<p>${emptyOrder}</p>
+												</div>
+											</div>
+										</div>`
 					}
 					searchbody +="</div>";
-					$("#tab-section-1 div").html(searchbody);
+					intoBody.html(searchbody);
 				}, error: function (err, xhr, status) {
 					console.log(err);
 				}

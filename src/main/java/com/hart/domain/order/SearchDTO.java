@@ -14,4 +14,5 @@ public class SearchDTO {
 	private String mid;
 	private String sdate;
 	private String edate;
+	private int isCancel;
 }

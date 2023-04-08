@@ -17,7 +17,9 @@
 			<a
 				href="/member/login"
 				sec:authorize="!isAuthenticated()"
-			>로그인</a> <a
+			>로그인</a> 
+			<a sec:authorize="isAuthenticated()" href="/mypage/order">마이페이지</a>
+			<a
 				href="/member/login"
 				sec:authorize="isAuthenticated()"
 			>로그아웃</a>

@@ -57,8 +57,6 @@ public class CartRestController {
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
-			System.out.println(pids);
-			System.out.println(pamounts);
 			if (mDTO.getCsno() != null) {
 				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
 				sseEmitters.insert(mDTO.getCsno());
