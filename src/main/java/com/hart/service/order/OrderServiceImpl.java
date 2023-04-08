@@ -57,7 +57,7 @@ public class OrderServiceImpl implements OrderService{
 			mDTO.setMaddressdetail(oDTO.getOinfo().getOaddress2());
 			
 		}
-		mDTO.setMpoint(mMapper.findByEmail(mDTO.getMid(), 1).getMpoint());
+		mDTO.setMpoint(mMapper.findByEmail(mDTO.getMid(), mDTO.getSocial()).getMpoint());
 		result.put("mDTO",mDTO);
 		System.out.println(mDTO);
 		return result;
@@ -113,10 +113,10 @@ public class OrderServiceImpl implements OrderService{
 	 */
 	@Transactional
 	@Override
-	public int orderCancle(String mid, int oid) throws Exception {
+	public int orderCancle(String mid, int oid,int social) throws Exception {
 		try {
 			oMapper.orderCancle(oid);
-			ClubMember2 mDTO = mMapper.findByEmail(mid, 1);
+			ClubMember2 mDTO = mMapper.findByEmail(mid, social);
 			return mDTO.getMpoint();
 		}catch (Exception e) {
 			log.info(e.getMessage());
