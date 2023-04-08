@@ -1,227 +1,144 @@
 <html lang="en">
-<!--begin::Head-->
-<th:block th:replace="includes/headTag :: head_tag"></th:block>
-<!--end::Head-->
-<!--begin::Body-->
-<body
-	id="kt_body"
-	class=""
->
-	<link
-		rel="canonical"
-		href="https://preview.keenthemes.com/jet-html-pro"
-	>
-	<link
-		rel="icon"
-		th:href="@{/img/logo.png}"
-		href="https://preview.keenthemes.com/jet-html-free/assets/media/logos/favicon.ico"
-	>
-	<!--begin::Fonts-->
-	<link
-		rel="stylesheet"
-		href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
-	>
-	<!--end::Fonts-->
-	<!--begin::Global Stylesheets Bundle(used by all pages)-->
-	<link
-		href="https://preview.keenthemes.com/jet-html-free/assets/plugins/global/plugins.bundle.css"
-		rel="stylesheet"
-		type="text/css"
-	>
-	<link
-		href="https://preview.keenthemes.com/jet-html-free/assets/css/style.bundle.css"
-		rel="stylesheet"
-		type="text/css"
-	>
-	<style>
-.header {
-	display: flex;
-	flex-direction: column;
-}
-</style>
-	<!--begin::Main-->
-	<th:block th:replace="includes/header :: header1"></th:block>
-	<th:block th:replace="includes/header :: header2"></th:block>
-	<th:block th:replace="includes/header :: header3"></th:block>
-	<div class="d-flex flex-column flex-root">
-		<!--begin::Authentication - Sign-in -->
-		<div
-			class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed"
-			style="background-image: url(https://preview.keenthemes.com/jet-html-free/assets/media/illustrations/sigma-1/14.png)"
-		>
-			<!--begin::Content-->
-			<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
-				<!--begin::Wrapper-->
-				<div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
-					<!--begin::Form-->
-					<form
-						class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
-						novalidate="novalidate"
-						id=""
-						action="/member/admin"
-					>
-	<!-- 					begin::Heading
-						<div class="text-center mb-10">
-							begin::Title
-							<h1 class="text-dark mb-3"></h1>
-							end::Title
-							begin::Link
-							<div class="text-gray-400 fw-bold fs-4">
-								New Here? <a
-									href="https://preview.keenthemes.com/jet-html-free/authentication/base/sign-up.html"
-									class="link-primary fw-bolder"
-								> Create an Account </a>
-							</div>
-							end::Link
-						</div>
-						begin::Heading -->
-						<!--begin::Input group-->
-						<div class="fv-row mb-10 fv-plugins-icon-container">
-							<!--begin::Label-->
-							<label class="form-label fs-6 fw-bolder text-dark">Email</label>
-							<!--end::Label-->
-							<!--begin::Input-->
-							<input
-								class="form-control form-control-lg form-control-solid"
-								type="text"
-								name="mid"
-								autocomplete="off"
-							>
-							<!--end::Input-->
-							<div class="fv-plugins-message-container invalid-feedback"></div>
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="fv-row mb-10 fv-plugins-icon-container">
-							<!--begin::Wrapper-->
-							<div class="d-flex flex-stack mb-2">
-								<!--begin::Label-->
-								<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
-								<!--end::Label-->
-								<!--begin::Link-->
-					<!-- 			<a
+  <!--begin::Head-->
+  <th:block th:replace="includes/headTag :: head_tag"></th:block>
+  <!--end::Head-->
+  <!--begin::Body-->
+  <body id="kt_body" class="">
+    <link rel="canonical" href="https://preview.keenthemes.com/jet-html-pro" />
+    <link rel="icon" th:href="@{/img/logo.png}" href="https://preview.keenthemes.com/jet-html-free/assets/media/logos/favicon.ico" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="https://preview.keenthemes.com/jet-html-free/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="https://preview.keenthemes.com/jet-html-free/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <style>
+      .header {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <!--begin::Main-->
+    <th:block th:replace="includes/header :: header1"></th:block>
+    <th:block th:replace="includes/header :: header2"></th:block>
+    <th:block th:replace="includes/header :: header3"></th:block>
+    <div class="d-flex flex-column flex-root">
+      <!--begin::Authentication - Sign-in -->
+      <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(https://preview.keenthemes.com/jet-html-free/assets/media/illustrations/sigma-1/14.png)">
+        <!--begin::Content-->
+        <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+          <!--begin::Wrapper-->
+          <div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
+            <!--begin::Form-->
+            <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" method="post" id="" th:action="@{/member/login_form}">
+              <!--begin::Input group-->
+              <div class="fv-row mb-10 fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="form-label fs-6 fw-bolder text-dark">이메일</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input class="form-control form-control-lg form-control-solid" type="email" id="username" name="username" placeholder="이메일을 입력하세요." />
+                <!--end::Input-->
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+              </div>
+              <!--end::Input group-->
+              <!--begin::Input group-->
+              <div class="fv-row mb-10 fv-plugins-icon-container">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-stack mb-2">
+                  <!--begin::Label-->
+                  <label class="form-label fw-bolder text-dark fs-6 mb-0">비밀번호</label>
+                  <!--end::Label-->
+                  <!--begin::Link-->
+                  <!-- 			<a
 									href="https://preview.keenthemes.com/jet-html-free/authentication/base/password-reset.html"
 									class="link-primary fs-6 fw-bolder"
 								> Forgot Password ? </a> -->
-								<!--end::Link-->
-							</div>
-							<!--end::Wrapper-->
-							<!--begin::Input-->
-							<input
-								class="form-control form-control-lg form-control-solid"
-								type="password"
-								name="mpassword"
-								autocomplete="off"
-							>
-							<!--end::Input-->
-							<div class="fv-plugins-message-container invalid-feedback"></div>
-						</div>
-						<!--end::Input group-->
-						<!--begin::Actions-->
-						<div class="text-center">
-							<!--begin::Submit button-->
-							<button
-								type="submit"
-								id="kt_sign_in_submit"
-								class="btn btn-lg btn-primary w-100 mb-5"
-							>
-								<span class="indicator-label"> Continue </span> <span class="indicator-progress"> Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-								</span>
-							</button>
-							<!--end::Submit button-->
-							<!--begin::Separator-->
-							<div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
-							<!--end::Separator-->
-							<!--begin::Google link-->
-							<a
-								href="/oauth2/authorization/google"
-								class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5"
-							> <img
-								alt="Logo"
-								src="https://preview.keenthemes.com/jet-html-free/assets/media/svg/brand-logos/google-icon.svg"
-								class="h-20px me-3"
-							> Continue with Google
-							</a>
-							<!--end::Google link-->
-						</div>
-						<!--end::Actions-->
-						<div></div>
-					</form>
-					<!--end::Form-->
-				</div>
-				<!--end::Wrapper-->
-			</div>
-		</div>
-		<!--end::Authentication - Sign-in-->
-	</div>
-	<!--end::Main-->
-	<!--begin::Javascript-->
-	<th:block th:replace="includes/footer :: footer"></th:block>
-	<script>
-		var hostUrl = "https://preview.keenthemes.com/jet-html-free/assets/";
-	</script>
-	<!--begin::Global Javascript Bundle(used by all pages)-->
-	<script src="https://preview.keenthemes.com/jet-html-free/assets/plugins/global/plugins.bundle.js"></script>
-	<script src="https://preview.keenthemes.com/jet-html-free/assets/js/scripts.bundle.js"></script>
-	<!--end::Global Javascript Bundle-->
-	<!--begin::Page Custom Javascript(used by this page)-->
-	<script src="https://preview.keenthemes.com/jet-html-free/assets/js/custom/authentication/sign-in/general.js"></script>
-	<!--end::Page Custom Javascript-->
-	<!--end::Javascript-->
-	<svg
-		id="SvgjsSvg1001"
-		width="2"
-		height="0"
-		xmlns="http://www.w3.org/2000/svg"
-		version="1.1"
-		xmlns:xlink="http://www.w3.org/1999/xlink"
-		xmlns:svgjs="http://svgjs.dev"
-		style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"
-	>
-		<defs id="SvgjsDefs1002"></defs>
-		<polyline
-			id="SvgjsPolyline1003"
-			points="0,0"
-		></polyline>
-		<path
-			id="SvgjsPath1004"
-			d="M0 0 "
-		></path></svg>
-			<input id="targetUrl" th:value="${targetUrl}" type="hidden"/>
-</body>
-<!--end::Body-->
-<whale-quicksearch translate="no"></whale-quicksearch>
-<script>
-	/*<![CDATA[*/
-	/* [브라우저 ready 상태 정의 : 최초 호출 상태] */
-	document.addEventListener("DOMContentLoaded", ready);
-	function ready(){
-
-		// [현재 접속된 url 정보 및 접속 브라우저 확인]
-		// [카카오톡 인앱 브라우저 >> 안드로이드 모바일 기종 인 경우 >> 크롬 브라우저 이동 실시]
-		var Url = location.href;
-		var Agent = navigator.userAgent.toLowerCase();
-		let hasTarget = $("#targetUrl").val();
-
-		//alert(Agent);
-		if(Agent.includes("kakao")){ // 카카오 브라우저로 실행 시킨 경우
-			// 먼저, 카카오 인앱 브라우저 닫기
-			location.href = 'kakaotalk://inappbrowser/close';
-			if(navigator.userAgent.match(/iPhone|iPad/i)){ // 아이폰 접속 경우
-				console.log("");
-				console.log("[window ready] : [접속 모바일] : " + "[아이폰]");
-				console.log("");
-			}
-			else { // 안드로이드 접속 경우
-				// 크롬으로 새창 열기
-				if(hasTarget.length!=0) Url = hasTarget;
-				location.href='intent://'+Url.replace(/https?:\/\//i,'')+'#Intent;scheme=https;package=com.android.chrome;end';
-			}
-		}
-
-	};
-	/*]]>*/
-
-</script>
-
+                  <!--end::Link-->
+                </div>
+                <!--end::Wrapper-->
+                <!--begin::Input-->
+                <input class="form-control form-control-lg form-control-solid" type="password" id="password" name="password" placeholder="비밀번호를 입력하세요." />
+                <!--end::Input-->
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+              </div>
+              <!--end::Input group-->
+              <!--begin::Actions-->
+              <div class="text-center">
+                <!--begin::Submit button-->
+                <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+                  <span class="indicator-label"> Continue </span> <span class="indicator-progress"> Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span> </span>
+                </button>
+                <!--end::Submit button-->
+                <!--begin::Separator-->
+                <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
+                <!--end::Separator-->
+                <!--begin::Google link-->
+                <a href="/oauth2/authorization/google" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5"> <img alt="Logo" src="https://preview.keenthemes.com/jet-html-free/assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-3" /> Continue with Google </a>
+                <!--end::Google link-->
+              </div>
+              <!--end::Actions-->
+              <div></div>
+            </form>
+            <!--end::Form-->
+          </div>
+          <!--end::Wrapper-->
+        </div>
+      </div>
+      <!--end::Authentication - Sign-in-->
+    </div>
+    <!--end::Main-->
+    <!--begin::Javascript-->
+    <th:block th:replace="includes/footer :: footer"></th:block>
+    <script>
+      var hostUrl = "https://preview.keenthemes.com/jet-html-free/assets/";
+    </script>
+    <!--begin::Global Javascript Bundle(used by all pages)-->
+    <script src="https://preview.keenthemes.com/jet-html-free/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="https://preview.keenthemes.com/jet-html-free/assets/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Page Custom Javascript(used by this page)-->
+    <script src="https://preview.keenthemes.com/jet-html-free/assets/js/custom/authentication/sign-in/general.js"></script>
+    <!--end::Page Custom Javascript-->
+    <!--end::Javascript-->
+    <svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0">
+      <defs id="SvgjsDefs1002"></defs>
+      <polyline id="SvgjsPolyline1003" points="0,0"></polyline>
+      <path id="SvgjsPath1004" d="M0 0 "></path>
+    </svg>
+    <input id="targetUrl" th:value="${targetUrl}" type="hidden" />
+  </body>
+  <!--end::Body-->
+  <whale-quicksearch translate="no"></whale-quicksearch>
+  <script>
+    /*<![CDATA[*/
+    /* [브라우저 ready 상태 정의 : 최초 호출 상태] */
+    document.addEventListener("DOMContentLoaded", ready);
+    function ready() {
+      // [현재 접속된 url 정보 및 접속 브라우저 확인]
+      // [카카오톡 인앱 브라우저 >> 안드로이드 모바일 기종 인 경우 >> 크롬 브라우저 이동 실시]
+      var Url = location.href;
+      var Agent = navigator.userAgent.toLowerCase();
+      let hasTarget = $("#targetUrl").val();
+	
+      //alert(Agent);
+      if (Agent.includes("kakao")) {
+        // 카카오 브라우저로 실행 시킨 경우
+        // 먼저, 카카오 인앱 브라우저 닫기
+        location.href = "kakaotalk://inappbrowser/close";
+        if (navigator.userAgent.match(/iPhone|iPad/i)) {
+          // 아이폰 접속 경우
+          console.log("");
+          console.log("[window ready] : [접속 모바일] : " + "[아이폰]");
+          console.log("");
+        } else {
+          // 안드로이드 접속 경우
+          // 크롬으로 새창 열기
+          if (hasTarget.length != 0) Url = hasTarget;
+          location.href = "intent://" + Url.replace(/https?:\/\//i, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+        }
+      }
+    }
+    /*]]>*/
+  </script>
 </html>

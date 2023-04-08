@@ -128,4 +128,10 @@ public class AdminController {
 		model.addAttribute("detail", cr);
 		return "admin/recipePreview";
 	}
+
+	@GetMapping("/dialog")
+	public String getMethodName(){
+		return "admin/dialog";
+	}
+	
 }

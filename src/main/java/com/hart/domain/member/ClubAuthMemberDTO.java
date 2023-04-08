@@ -41,7 +41,19 @@ public class ClubAuthMemberDTO extends User implements OAuth2User {
 		this.maddress = maddress;
 		this.maddressdetail = maddressdetail;
 	}// end ClubAuthMemberDTO
+	
+	public ClubAuthMemberDTO(String username, String password, int fromSocial, List<GrantedAuthority> authorities,
+			String csno,int mpoint, String mphone, int mzipcode, String maddress, String maddressdetail) {
+		this(username, password, fromSocial, authorities);
+		this.csno = csno;
+		this.mpoint = mpoint;
+		this.mphone = mphone;
+		this.mzipcode = mzipcode;
+		this.maddress = maddress;
+		this.maddressdetail = maddressdetail;
+	}// end ClubAuthMemberDTO
 
+	
 	// 구성자 설정
 	public ClubAuthMemberDTO(String username, String password, int fromSocial, List<GrantedAuthority> authorities) {
 		// password는 부모클래스 사용
