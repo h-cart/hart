@@ -81,11 +81,11 @@ public class OrderController {
 	
 	@GetMapping("/complete")
 	public String orderComplete(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @RequestParam("oid") String oid, Model model) {
-		String url = "";
+		String url = "order/complete";
 		try {
 			
 			model.addAttribute("oinfo", oService.getOrder(mDTO.getMid(), Integer.parseInt(oid)));
-			url = "order/complete";
+			
 		}catch (Exception e) {
 			model.addAttribute("msg", "오류 발생");
 			url = "error";
