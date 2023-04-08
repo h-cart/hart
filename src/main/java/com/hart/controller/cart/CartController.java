@@ -26,12 +26,12 @@ public class CartController {
 
 	@GetMapping("/mycart")
 	public String getCart(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-		String url = "redirect:/cart/share/"+"168";
-//		if (mDTO.getCsno() == null || mDTO==null)
-//			url = "cart/mycart";
-//		else {
-//			url = "redirect:/cart/share/" + mDTO.getCsno();
-//		}
+		String url = "";
+		if (mDTO.getCsno() == null)
+			url = "cart/mycart";
+		else {
+			url = "redirect:/cart/share/" + mDTO.getCsno();
+		}
 		return url;
 	}
 
@@ -73,19 +73,19 @@ public class CartController {
 	@GetMapping("/share/{csno}")
 	public String shareCart(@PathVariable("csno") int csno, Model model,
 			@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
-		String url = "cart/share";
-//		if (mDTO.getCsno() == null || Integer.parseInt(mDTO.getCsno()) != csno) {
-//			url = "error/share";
-//
-//			model.addAttribute("msg", "허용되지 않은 접근입니다.");
-//		} else {
-//			url = "cart/share";
-//			try {
-//			} catch (Exception e) {
-//				model.addAttribute("msg", "잘못된 장바구니 정보입니다.");
-//				e.printStackTrace();
-//			}
-//		}
+		String url = "";
+		if (mDTO.getCsno() == null || Integer.parseInt(mDTO.getCsno()) != csno) {
+			url = "error/share";
+
+			model.addAttribute("msg", "허용되지 않은 접근입니다.");
+		} else {
+			url = "cart/share";
+			try {
+			} catch (Exception e) {
+				model.addAttribute("msg", "잘못된 장바구니 정보입니다.");
+				e.printStackTrace();
+			}
+		}
 		return url;
 
 	}
