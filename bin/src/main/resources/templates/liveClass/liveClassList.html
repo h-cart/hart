@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="/includes/headTag :: head_tag"></th:block>
+<th:block th:replace="includes/headTag :: head_tag"></th:block>
+<style>
+		#myMsgDialog {
+			width:40%; 
+			background-color: white; 
+			border:1px solid black; 
+			border-radius: 7px;
+		}		
+
+		#mButton {
+			padding: 7px 30px;
+			background-color: #66ccff;
+			color: white;
+			font-size: 15px;
+			border: 0;
+			outline: 0;
+		}
+
+	</style>
+
+
+
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -9,13 +30,13 @@
 
 
     <!-- Header Section Begin -->
-    <th:block th:replace="/includes/header :: header1"></th:block>
-	<th:block th:replace="/includes/header :: header2"></th:block>
-	<th:block th:replace="/includes/header :: header3"></th:block>
+    <th:block th:replace="includes/header :: header1"></th:block>
+	<th:block th:replace="includes/header :: header2"></th:block>
+	<th:block th:replace="includes/header :: header3"></th:block>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-blog set-bg" data-setbg="img/breadcrumb-bg.jpg">
+    <section class="breadcrumb-blog set-bg" data-setbg="img/classmain2.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -36,8 +57,8 @@
 						<div class="blog__item__pic set-bg2" th:style="'background-image:url(' + ${liveClass.lcimg} + ');'"></div>
 						<div class="blog__item__text">
 							<span th:text="${liveClass.lcday}"><img th:src="${liveClass.lcimg}" alt="이미지 안불러짐"></span>
-							<h5 th:text="${liveClass.lcname}"></h5>
-							<a th:href="@{/liveClass/{lcid}(lcid=${liveClass.lcid})}">상세보기</a>
+							<h5 th:text="${liveClass.lcname}" style="word-break: keep-all;"></h5>
+							<a th:href="@{/class/detail/{lcid}(lcid=${liveClass.lcid})}">상세보기</a>
 						</div>
 					</div>
 				</div>
@@ -71,16 +92,35 @@
 
 
 
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+<script src="js/demo/chart-bar-demo.js"></script>
+
+<!-- 버튼 테스트 끝-->
+
     <!-- Footer Section Begin -->
-    <th:block th:replace="/includes/footer :: footer"></th:block>
+    <th:block th:replace="includes/footer :: footer"></th:block>
     <!-- Footer Section End -->
 
-    <!-- Search Begin -->
     
-    <!-- Search End -->
-
-    <!-- Js Plugins -->
     
+    
+ 
 </body>
 
 </html>
