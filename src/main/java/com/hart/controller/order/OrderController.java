@@ -67,12 +67,13 @@ public class OrderController {
 			mDTO = (ClubAuthMemberDTO)result.get("mDTO");
 			OinfoDTO oinfo = (OinfoDTO)result.get("oinfo");
 			
-			url = "order/complete?oid="+oinfo.getOid();
+			url = "/order/complete?oid="+oinfo.getOid();
 		}catch (Exception e) {
+		
 			if(e.getMessage().equals("수강 중인 클래스 존재")) {
-				url = "error";
+				url = "/error";
 			}else
-				url = "cart/mycart";
+				url = "/cart/mycart";
 			
 			e.printStackTrace();
 		}

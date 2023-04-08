@@ -39,7 +39,6 @@ public class MemberController {
 		if (savedRequest != null) {
 			String targetUrl = savedRequest.getRedirectUrl();
 			model.addAttribute("targetUrl", targetUrl);
-			System.out.println(">>>>>>>>>>>>>>" + targetUrl);
 		}
 		return "member/login";
 	}
