@@ -16,24 +16,36 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.hart.security.handler.LoginFailureHandler;
 import com.hart.security.handler.LoginSuccessHandler;
+import com.hart.service.ClubUserDetailsService;
+import com.nimbusds.jose.crypto.opts.UserAuthenticationRequired;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+@RequiredArgsConstructor
 @Configuration
 @Log4j2
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	private final ClubUserDetailsService memberService;
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin@hart.shop").password("{noop}qwer1234").roles("ADMIN");
+		auth.userDetailsService(memberService);
+		super.configure(auth);
 	}
 	
-	// ClubLoginSuccessHandler 등록
+
 	@Bean
 	public LoginSuccessHandler successHandler() {
 		return new LoginSuccessHandler(passwordEncoder());
-	}// end CLu..
+	}// 
+
+	@Bean
+	LoginFailureHandler getFailureHandler() {
+		return new LoginFailureHandler();
+	}
 	
 
 	@Bean
@@ -49,14 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return roleHierarchyImpl;
 	}
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        //사용자 계정 세팅 user1//패스워드 1111
-//        auth.inMemoryAuthentication()
-//                .withUser("user1")
-//                .password("$2a$10$qbTVRGiC8RePIsMz4z/QP.LjBmLOMGXBCkmW2comzfNaoeidd5/aa")
-//                .roles("USER");
-//    }//configure AM
+
 	
 
 	
@@ -68,7 +73,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/member").hasRole("USER");
 //				.antMatchers("/admin").hasRole("ADMIN");
 		// 인가 인증 문제시 로그인 화면
-		http.formLogin().loginPage("/member/login").defaultSuccessUrl("/");
+
+
+
+
+		http.formLogin().loginPage("/member/login").loginProcessingUrl("/member/login_form").defaultSuccessUrl("/").failureHandler(getFailureHandler()).successHandler(successHandler())
+				.permitAll();
+
+
+
+
+
 		// crsf 비활성화
 		http.csrf();// .disable();
 		// 로그 아웃 세팅

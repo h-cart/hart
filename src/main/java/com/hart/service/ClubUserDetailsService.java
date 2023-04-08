@@ -30,7 +30,6 @@ public class ClubUserDetailsService implements UserDetailsService {
 		// 입력한 이메일로 ClubMember 찾음
 		ClubMember2 result = null;
 		try {
-			log.info(username);
 			result = clubMemberRepository.findByEmail(username, 0);
 		} catch (SQLException e) {
 			throw new UsernameNotFoundException("Check Email or Social!!");
@@ -46,9 +45,7 @@ public class ClubUserDetailsService implements UserDetailsService {
 			// clubMember 생성
 
 		ClubMember2 clubMember2 = result;
-		log.info("-------------------");
-		log.info(clubMember2);
-		log.info(clubMember2.getMroles().toString());
+
 
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + clubMember2.getMroles()));
