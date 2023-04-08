@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <th:block th:replace="/includes/headTag :: head_tag"></th:block>
+  <body style="">
+    <style>
+   dialog::-webkit-scrollbar {
+      display: none;
+   }
+   
+   .dialog-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  #cart_product_img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 30px auto;
+
+  }
+  .row{
+	justify-content: center;
+  }
+    </style>
+    <dialog open="">
+      <div class="container">
+      <div>
+      <h4 style="text-align: center" style="word-break: keep-all;">장바구니에 담겼습니다 <i class="fa-solid fa-x fa-xs dialog-close" style="color: #000000"></i></h4>
+      <img id="cart_product_img" src="https://tohomeimage.thehyundai.com/DP/DP018/2023/02/02/153935/lgjsv.jpg" alt="" />
+
+      <div class="row row-col-lg-2">
+        <div class="col-5">
+          <button class="btn btn-primary btn-block" type="button" style="word-break: keep-all;">쇼핑 계속하기</button>
+        </div>
+        <div class="col-5">
+          <button class="btn btn-primary btn-block" type="button" style="word-break: keep-all;">장바구니 가기</button>
+        </div>
+      </div>
+    </div>
+        <div class="shopping__cart__table">
+          <div class="shop__sidebar__accordion" style="margin-top: 50px">
+            <div class="accordion" id="accordionRecipe">
+              <div class="card">
+                <div class="card-heading active">
+                  <a data-toggle="collapse" data-target="#collapseRecipe" class="" aria-expanded="true">인기있는 레시피</a>
+                </div>
+                <div id="collapseRecipe" class="collapse show" data-parent="#accordionRecipe" style="">
+                  <div class="card-body">
+                    <div class="shop__sidebar__tags"><a href="#">국</a> <a href="#">찌개</a> <a href="#">볶음</a> <a href="#">안주</a></div>
+                  </div>
+                  <table>
+                    <tbody>
+                      <tr id="accordion1" class="accordion" data-parent="#accordionRecipe" style="">
+                        <td class="product__cart__item">
+                          <div class="product__cart__item__pic">
+                            <span><img class="pimg" src="https://tohomeimage.thehyundai.com/DP/DP018/2023/02/02/153935/lgjsv.jpg" alt="" style="width: 90px; height: 90px" /></span>
+                          </div>
+                          <div class="product__cart__item__text">
+                            <h6>김형석 셰프의 만년설 딸기 샐러드</h6>
+                            <span class="price-box">
+                              <span>난이도 : 쉬움</span>
+                            </span>
+                          </div>
+                        </td>
+                        <td class="quantity__item">
+                          <div class="quantity">
+                            <div class="pro-qty-2">
+                              <span>조리시간<br />30분 이내</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-toggle="collapse" data-target="#collapse1" class="" aria-expanded="true"><span>관련상품</span></td>
+                      </tr>
+                    </tbody>
+                    <tbody id="collapse1" class="collapse" data-parent="#accordion1" style="">
+                      <tr id="2" data-value="S02006002016">
+                        <td class="product__cart__item">
+                          <div class="product__cart__item__pic">
+                            <span class="thumb"><input name="cartlist" id="check_2" type="checkbox" class="checkbox" /><img class="pimg" src="https://tohomeimage.thehyundai.com/PD/PDImages/S/5/2/3/8809619441325_00.jpg?RS=720x864" alt="" style="width: 90px; height: 90px" /></span>
+                          </div>
+                          <div class="product__cart__item__text">
+                            <h6>[착한습관] 유기농 구운 아몬드 200g</h6>
+                            <span class="price-box">
+                              <h5 class="price" id="price_2" data-value="15000">15,000원</h5>
+                            </span>
+                          </div>
+                        </td>
+                        <td class="quantity__item">
+                          <div class="quantity">
+                            <div class="pro-qty-2">
+                              <span data-value="2" class="dec qtybtn rbtn_minus" aria-hidden="true"><i class="fa-solid fa-minus fa-lg"></i></span><input id="quantity_2" type="text" value="1" readonly="readonly" data-siid="si_input_2" /><span data-value="2" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class="fa-solid fa-plus fa-lg"></i></span>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-value="15000" class="cart__price" id="cprice_2">15,000원</td>
+                      </tr>
+                      <tr id="3" data-value="S02006002247">
+                        <td class="product__cart__item">
+                          <div class="product__cart__item__pic">
+                            <span class="thumb"><input name="cartlist" id="check_3" type="checkbox" class="checkbox" /><img class="pimg" src="https://tohomeimage.thehyundai.com/PD/PDImages/S/9/9/7/8806079405799_00.jpg?RS=720x864" alt="" style="width: 90px; height: 90px" /></span>
+                          </div>
+                          <div class="product__cart__item__text">
+                            <h6>[명인명촌] 한상준 제주감귤초 420ml</h6>
+                            <span class="price-box">
+                              <h5 class="price" id="price_3" data-value="22000">22,000원</h5>
+                            </span>
+                          </div>
+                        </td>
+                        <td class="quantity__item">
+                          <div class="quantity">
+                            <div class="pro-qty-2">
+                              <span data-value="3" class="dec qtybtn rbtn_minus" aria-hidden="true"><i class="fa-solid fa-minus fa-lg"></i></span><input id="quantity_3" type="text" value="1" readonly="readonly" data-siid="si_input_3" /><span data-value="3" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class="fa-solid fa-plus fa-lg"></i></span>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-value="22000" class="cart__price" id="cprice_3">22,000원</td>
+                      </tr>
+                      <tr id="4" data-value="S02006002726">
+                        <td class="product__cart__item">
+                          <div class="product__cart__item__pic">
+                            <span class="thumb"><input name="cartlist" id="check_4" type="checkbox" class="checkbox" /><img class="pimg" src="https://tohomeimage.thehyundai.com/PD/PDImages/S/7/9/4/8004995614497_00.jpg?RS=720x864" alt="" style="width: 90px; height: 90px" /></span>
+                          </div>
+                          <div class="product__cart__item__text">
+                            <h6>[셀렉티아] 화이트 트러플 올리브오일 (100ml)</h6>
+                            <span class="price-box">
+                              <h5 class="price" id="price_4" data-value="19000">19,000원</h5>
+                            </span>
+                          </div>
+                        </td>
+                        <td class="quantity__item">
+                          <div class="quantity">
+                            <div class="pro-qty-2">
+                              <span data-value="4" class="dec qtybtn rbtn_minus" aria-hidden="true"><i class="fa-solid fa-minus fa-lg"></i></span><input id="quantity_4" type="text" value="1" readonly="readonly" data-siid="si_input_4" /><span data-value="4" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class="fa-solid fa-plus fa-lg"></i></span>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-value="19000" class="cart__price" id="cprice_4">19,000원</td>
+                      </tr>
+                      <tr id="5" data-value="S02012024250">
+                        <td class="product__cart__item">
+                          <div class="product__cart__item__pic">
+                            <span class="thumb"><input name="cartlist" id="check_5" type="checkbox" class="checkbox" /><img class="pimg" src="https://tohomeimage.thehyundai.com/PD/PDImages/S/3/9/0/8806079860093_00.jpg?RS=720x864" alt="" style="width: 90px; height: 90px" /></span>
+                          </div>
+                          <div class="product__cart__item__text">
+                            <h6>[새벽시장] 만년설딸기 350g (1팩)</h6>
+                            <span class="price-box">
+                              <h5 class="price" id="price_5" data-value="18000">18,000원</h5>
+                            </span>
+                          </div>
+                        </td>
+                        <td class="quantity__item">
+                          <div class="quantity">
+                            <div class="pro-qty-2">
+                              <span data-value="5" class="dec qtybtn rbtn_minus" aria-hidden="true"><i class="fa-solid fa-minus fa-lg"></i></span><input id="quantity_5" type="text" value="1" readonly="readonly" data-siid="si_input_5" /><span data-value="5" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class="fa-solid fa-plus fa-lg"></i></span>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-value="18000" class="cart__price" id="cprice_5">18,000원</td>
+                      </tr>
+                      <tr id="6" data-value="S02211129961">
+                        <td class="product__cart__item">
+                          <div class="product__cart__item__pic">
+                            <span class="thumb"><input name="cartlist" id="check_6" type="checkbox" class="checkbox" /><img class="pimg" src="https://tohomeimage.thehyundai.com/PD/PDImages/S/1/9/7/8801037040791_00.jpg?RS=720x864" alt="" style="width: 90px; height: 90px" /></span>
+                          </div>
+                          <div class="product__cart__item__text">
+                            <h6>[포스트] 그래놀라 크랜베리아몬드 (350g)</h6>
+                            <span class="price-box">
+                              <h5 class="price" id="price_6" data-value="6050">6,050원</h5>
+                            </span>
+                          </div>
+                        </td>
+                        <td class="quantity__item">
+                          <div class="quantity">
+                            <div class="pro-qty-2">
+                              <span data-value="6" class="dec qtybtn rbtn_minus" aria-hidden="true"><i class="fa-solid fa-minus fa-lg"></i></span><input id="quantity_6" type="text" value="1" readonly="readonly" data-siid="si_input_6" /><span data-value="6" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class="fa-solid fa-plus fa-lg"></i></span>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-value="6050" class="cart__price" id="cprice_6">6,050원</td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr id="accordion7" class="accordion" data-parent="#accordionRecipe" style="">
+                        <td class="product__cart__item">
+                          <div class="product__cart__item__pic">
+                            <span><img class="pimg" src="https://tohomeimage.thehyundai.com/DP/DP018/2021/01/07/173913/kmqlt.jpg" alt="" style="width: 90px; height: 90px" /></span>
+                          </div>
+                          <div class="product__cart__item__text">
+                            <h6>딸기 콩포트를 곁들인 프렌치 토스트</h6>
+                            <span class="price-box">
+                              <span>난이도 : 쉬움</span>
+                            </span>
+                          </div>
+                        </td>
+                        <td class="quantity__item">
+                          <div class="quantity">
+                            <div class="pro-qty-2">
+                              <span>조리시간<br />1시간 이내</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-toggle="collapse" data-target="#collapse7" class="" aria-expanded="true"><span>관련상품</span></td>
+                      </tr>
+                    </tbody>
+                    <tbody id="collapse7" class="collapse" data-parent="#accordion7" style=""></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="addToCart" style="background-color: black; text-align: center"><a href="#" class="primary-btn">장바구니 담기</a></div>
+        </div>
+      </div>
+    </dialog>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  </body>
+</html>
