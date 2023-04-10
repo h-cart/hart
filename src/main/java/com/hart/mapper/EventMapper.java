@@ -27,5 +27,6 @@ public interface EventMapper {
 	List<CRecipeVO> getVoteList(int evid);
 	void toVote(EventVoteVO ev);
 	CRecipeVO getDetail(EventVoteVO ev);
+  Integer checkVote(EventVoteVO event);
 
 }

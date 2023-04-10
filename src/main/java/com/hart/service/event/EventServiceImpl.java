@@ -70,6 +70,11 @@ public class EventServiceImpl implements EventService {
 		return cr;
 	}
 
+	@Override
+	public Integer checkVote(EventVoteVO event) {
+		return mapper.checkVote(event);
+	}
+
 
 
 }
