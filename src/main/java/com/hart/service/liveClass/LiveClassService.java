@@ -2,6 +2,7 @@ package com.hart.service.liveClass;
 
 import java.util.List;
 
+import com.hart.domain.admin.AdminLiveClassDTO;
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
 import com.hart.domain.liveClass.LiveClassVideoDTO;
@@ -29,6 +30,8 @@ public interface LiveClassService {
 	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid);
 	//liveClass video 불러오기
 	public LiveClassVideoDTO getClassVideo(String lcid);
+	//adminliveClass 목록 불러오는 서비스 
+	public List<AdminLiveClassDTO> getClassAdminList();
 	
 	
 	

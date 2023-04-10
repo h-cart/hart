@@ -6412,7 +6412,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #4e73df !important;
+  background-color: #116530 !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -11280,7 +11280,7 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
-
+/* ham 수정 */
 .header__top__links a:hover{
-	color: #fff;
+	
 }
