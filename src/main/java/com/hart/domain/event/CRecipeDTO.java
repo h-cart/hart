@@ -112,8 +112,11 @@ public class CRecipeDTO {
 			CRIngredientVO cr = new CRIngredientVO();
 			cr.setCrid(crid);
 			cr.setCricount(cricount[i]);
-			cr.setPid(pid[i]);
-			cr.setPcno(pcno[i]);
+			if(pid[i].equals("")){
+				cr.setPid("null");
+			}else{
+				cr.setPid(pid[i]);
+			}
 			cr.setIname(iname[i]);
 			
 

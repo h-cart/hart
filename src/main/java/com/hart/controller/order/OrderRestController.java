@@ -50,6 +50,7 @@ public class OrderRestController {
 	public ResponseEntity<Map<String,List<SearchResultDTO>>> searchOrder(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @RequestBody SearchDTO sDTO){
 		Map<String,List<SearchResultDTO>> result = new HashMap<String, List<SearchResultDTO>>();
 		try {
+			System.out.println(sDTO);
 			sDTO.setMid(mDTO.getMid());
 			result.put("result",oService.searchOrders(sDTO));
 			return new ResponseEntity<>(result,HttpStatus.OK);

@@ -19,7 +19,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.hart.security.handler.LoginFailureHandler;
 import com.hart.security.handler.LoginSuccessHandler;
 import com.hart.service.ClubUserDetailsService;
-import com.nimbusds.jose.crypto.opts.UserAuthenticationRequired;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -70,8 +69,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// /samle/all 모든 사용자 가능
 		// /sample/member USER 롤 사용자만
 		http.authorizeRequests().antMatchers("/cart/**").authenticated()
-		.antMatchers("/").permitAll().antMatchers("/order").authenticated()
-				.antMatchers("/member").hasRole("USER");
+		.antMatchers("/").permitAll().antMatchers("/order/**").authenticated()
+				.antMatchers("/mypage/**").authenticated()
+				.antMatchers("/member/**").hasRole("USER");
 //				.antMatchers("/admin").hasRole("ADMIN");
 		// 인가 인증 문제시 로그인 화면
 
