@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-messages"></div>
+    <div id="chat-input-container">
+      <input type="text" id="chat-input" placeholder="Type your message here...">
+      <button id="chat-send-button">Send</button>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      // Set up the chatbot URL and secret key
+      /* var apiUrl = "https://ex9av8bv0e.apigw.ntruss.com/custom_chatbot/prod/";
+      var secretKey = "<your-secret-key>"; */
+      var secretKey = "bkdVdGZTVERtTHdKd3ZFSWJQdVZyTU9IaGVVaVpDUFk=";
+      var apiUrl = "https://keepk4k7pu.apigw.ntruss.com/custom/v1/10080/6113693b24230d2699b8f0cacd34281fa09355ef64fccf83c71d0bec7dcb3a1b";
+
+      
+      // Send a message to the chatbot and display the response
+      function sendMessage(message) {
+        $.ajax({
+          type: "POST",
+          url: apiUrl,
+          headers: {
+            "Content-Type": "application/json;UTF-8",
+            "X-NCP-CHATBOT_SIGNATURE": makeSignature(message, secretKey)
+          },
+          data: message,
+          success: function(response) {
+            // Handle the chatbot response here
+            var chatMessages = $("#chat-messages");
+            chatMessages.append("<div>" + response + "</div>");
+            chatMessages.scrollTop(chatMessages.prop("scrollHeight"));
+          },
+          error: function(xhr, status, error) {
+            // Handle errors here
+            console.log("Error:", error);
+          }
+        });
+      }
+
+      // Create a signature for the chatbot message using the secret key
+      function makeSignature(message, secretKey) {
+        var secrete_key_bytes = utf8.encode(secretKey);
+        var message_bytes = utf8.encode(message);
+        var signature_bytes = CryptoJS.HmacSHA256(message_bytes, secrete_key_bytes);
+        var signature = CryptoJS.enc.Base64.stringify(signature_bytes);
+        return signature;
+      }
+
+      // Send the user's message to the chatbot when they press the Enter key
+      $("#chat-input").keypress(function(event) {
+        if (event.which == 13) {
+          event.preventDefault();
+          var message = {
+            version: "v2",
+            userId: "U47b00b58c90f8e47428af8b7bddc1231heo2",
+            timestamp: new Date().getTime(),
+            bubbles: [{
+              type: "text",
+              data: { description: $("#chat-input").val() }
+            }],
+            event: "send"
+          };
+          sendMessage(JSON.stringify(message));
+          $("#chat-input").val("");
+        }
+      });
+
+      // Send the user's message to the chatbot when they click the Send button
+      $("#chat-send-button").click(function() {
+        var message = {
+          version: "v2",
+          userId: "U47b00b58c90f8e47428af8b7bddc1231heo2",
+          timestamp: new Date().getTime(),
+          bubbles: [{
+            type: "text",
+            data: { description: $("#chat-input").val() }
+          }],
+          event: "send"
+        };
+        sendMessage(JSON.stringify(message));
+        $("#chat-input").val("");
+      });
+    });
+  </script>
+</body>
+</html>
