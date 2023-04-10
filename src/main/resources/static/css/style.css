@@ -3063,7 +3063,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 }
 
 .blog__details__quote i {
-  font-size: 16px;
+  font-size: 12px;
   color: white;
   height: 50px;
   width: 50px;
@@ -3080,7 +3080,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
   color: #111111;
   font-size: 18px;
   font-weight: 600;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 20px;
 }
 
