@@ -51,13 +51,17 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		int fromSocial = clubAuthMemberDTO.getSocial();
 		// 사용자 암호 1111 인지 확인
 		boolean passresult = passwordEncoder.matches("1111", clubAuthMemberDTO.getMpassword());
-		
+		System.out.println("여기1");
 		RequestCache requestCache = new HttpSessionRequestCache();
-		SavedRequest savedRequest = requestCache.getRequest(request, response); 
+		SavedRequest savedRequest = requestCache.getRequest(request, response);
+		System.out.println("여기2");
+		
 		String targetUrl ="/";
 		if (savedRequest!=null) {
 			 targetUrl = savedRequest.getRedirectUrl();
 		}
+		System.out.println("타겟 : "+targetUrl);
+		System.out.println(passresult);
 		// 소셜 사용자이고 암호 1111이면 modify.html 페이지로 이동
 		if ((fromSocial == 1) && passresult) {
 			
