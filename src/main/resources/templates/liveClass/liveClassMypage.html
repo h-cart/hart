@@ -27,7 +27,7 @@
 	<div id="wrap">
 		<div id="container">
 			<div id="contents">
-				<div class="myshop-wrap" style=" padding-top:0px;">
+				<div class="myshop-wrap" style=" padding-top:12px;">
 
 					<div class="xans-element- xans-myshop xans-myshop-asyncbenefit header" style="padding-bottom: 0px;">
 					</div>
@@ -37,7 +37,7 @@
 						<!-- menu-block -->
 						<div class="menu-block">
 							<ul>
-								<li class="js-order active"><a href="/mypage/myorder" style="color: #9A9A9A;">주문내역</a></li>
+								<li class="js-order active"><a href="/mypage/order" style="color: #9A9A9A;">주문내역</a></li>
 								<li><a href="/mypage/class" style="color: black;font-weight: bold;">수강 내역</a></li>
 								<li onclick="logoutSubmit();"><a href="javascript:void(0)">로그아웃</a></li>
 							</ul>
@@ -87,6 +87,9 @@
 														</ul>
 													</div>
 													<!--반복 시작  -->
+													<div th:if="${#lists.isEmpty(classList)}" class="block" >
+															<div style="padding: 150px;text-align: center;"><p style="word-break: keep-all;">수강한 수업 내역이 없습니다.</p></div>
+													</div>
 													<div class="item-prod" th:each="list : ${classList}">
 														<div class="block">
 															<div class="thumb">
