@@ -325,7 +325,7 @@ ol {
 -----------------------*/
 
 .header {
-  background: #ffffff;
+  
 }
 
 .header__top {
@@ -3512,6 +3512,8 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
     transition: all, 0.5s;
     visibility: hidden;
   }
+  
+  
   .offcanvas-menu-overlay.active {
     visibility: visible;
   }
@@ -3523,7 +3525,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
     background: #ffffff;
     padding: 50px 20px 30px 30px;
     display: block;
-    z-index: 99;
+    z-index: 120;
     overflow-y: auto;
     -webkit-transition: all, 0.5s;
     -o-transition: all, 0.5s;

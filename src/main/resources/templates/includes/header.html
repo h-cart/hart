@@ -131,8 +131,8 @@
 	class="header header-wrap"
 	th:fragment="header3"
 >
-	<div class="header__top">
-		<div class="container">
+	<div class="header__top" >
+		<div class="container" >
 			<div class="row">
 				<div class="col-lg-6 col-md-7">
 					<div class="header__top__left">
@@ -158,40 +158,31 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="padding-left: 0px;padding-right: 0px;background: white;">
 		<div class="row">
 			<div class="col-lg-3 col-md-3">
-				<div class="header__logo" style="padding-top: 27px;">
+				<div class="header__logo" style="padding-top: 17px;">
 					<a href="/"><img
 						src="/img/hartlogo.jpg"
 						alt=""
-						style="height: 36px "
+						style="height: 50px "
 					/></a>
 				</div>
 			</div>
 			<div class="col-lg-6 col-md-6">
 				<nav class="header__menu mobile-menu">
 					<ul style="margin-top: 0px; margin-bottom: 1rem;">
-						<li><a
-							href="/product/list?pcno_top=100571"
-							class="active"
-						>Product</a>
-							<ul
-								class="dropdown"
-								id="listCate"
-								style="width: 220px; background: #ffffff; padding: 0px;"
-							>
+						<li><a href="/product/list?pcno_top=100571"class="active">상품</a><ul class="dropdown" id="listCate" style="width: 220px; background: #ffffff; padding: 0px;" >
 							</ul></li>
-						<li><a href="/recipe/list">Recipe</a></li>
+						<li><a href="/recipe/list">레시피</a></li>
 						<li><a href="/class">Live</a></li>
-						<li><a href="/event?evid=1">Event</a></li>
+						<li><a href="/event?evid=1">공모전</a></li>
 					</ul>
 				</nav>
 			</div>
 			<div class="col-lg-3 col-md-3">
 
 				<div class="header__nav__option" style="width: 217px;">
-
 					<a href="#" class="search-switch"><i
 						class="fa-solid fa-magnifying-glass fa-xl" style="color: #000000;"></i></a>
 					<a sec:authorize="isAuthenticated() and principal.csno ==null"
@@ -236,7 +227,7 @@
 			</div>
 		</div>
 		<div class="canvas__open">
-			<i class="fa fa-bars"></i>
+			<i class="fa fa-bars" style="margin-top: 7px;"></i>
 		</div>
 	</div>
 	<script

@@ -7,10 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.LiveClassRegisterDTO;
 import com.hart.domain.liveClass.LiveClassVideoDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.service.liveClass.LiveClassService;
@@ -74,7 +76,14 @@ public class LiveClassController {
 		return "liveClass/liveClassMypage";
 	}
 	
-	
+	@PostMapping("/register")
+	public String registerVOD(Model model, LiveClassRegisterDTO dto) {
+		
+		log.info(dto);
+		
+		
+		return "redirect:/admin/class";
+	}
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@테스트용
