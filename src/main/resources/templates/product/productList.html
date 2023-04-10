@@ -33,6 +33,7 @@
       if(($(window).scrollTop()) >= $(document).height()- $(window).height()-50  ){ 
     	  console.log($(window).height()-50 );
            console.log("페이지들어오니?->" + page);
+           page++;
               sendpcno($("input[name=pcno]").val(),page,sort); 
          }
       }); 
@@ -111,7 +112,7 @@
            } 
        
             console.log(result.length)
-             page++;
+             //page++;
               $("input[name=page]").val(page);
               
               $(".set-bg").each(function () {
