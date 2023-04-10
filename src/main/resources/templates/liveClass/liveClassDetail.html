@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <th:block th:replace="/includes/headTag :: head_tag"></th:block>
+  <th:block th:replace="includes/headTag :: head_tag"></th:block>
   <style>
     .product-container {
       display: flex;
@@ -89,7 +89,7 @@
     }
     .product__details__pic {
       margin-bottom: 0px;
-      padding-bottom: 0px;
+      padding-bottom: 25px;
       
     }
     .product__details__text {
@@ -155,9 +155,9 @@
     <div id="preloder" style="display: none">
       <div class="loader" style="display: none"></div>
     </div>
-    <th:block th:replace="/includes/header :: header1"></th:block>
-    <th:block th:replace="/includes/header :: header2"></th:block>
-    <th:block th:replace="/includes/header :: header3"></th:block>
+    <th:block th:replace="includes/header :: header1"></th:block>
+    <th:block th:replace="includes/header :: header2"></th:block>
+    <th:block th:replace="includes/header :: header3"></th:block>
     <!-- Header Section End -->
     <!-- Shop Details Section Begin -->
     <section class="shop-details">
@@ -291,14 +291,14 @@
                   <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tabs-5" role="tab">필요재료</a></li>
                   <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">수강대상</a></li>
                 </ul>
-                <div class="tab-content" style="display: flex; justify-content: center">
+                <div class="tab-content" style="display: flex; justify-content: center; min-height: 460px;">
                   <div class="tab-pane active" id="tabs-5" role="tabpanel" style="width: 800px; margin-top:20px;">
-                    <div th:each="ingredient : ${liveClass.ingredientList}">
+                    <div th:each="ingredient : ${liveClass.ingredientList}" style="margin-bottom: 20px;">
 						<h6 th:text="'- '+${ingredient}" style="margin-top: 0px;">필요재료 설명</h6>
 					</div>
                   </div>
                   <div class="tab-pane" id="tabs-6" role="tabpanel" style="width: 800px; margin-top:20px;">
-                    <div th:each="lcStudent : ${liveClass.lcStudentList}">
+                    <div th:each="lcStudent : ${liveClass.lcStudentList}" style="margin-bottom: 9px;">
 						<h6 th:text="'-'+${lcStudent}" style="margin-top: 0px;">수강대상</h6>
 					</div>
                   </div>
@@ -316,7 +316,7 @@
     <section class="related spad" style="padding-bottom: 0px"></section>
     <!-- Related Section End -->
     <!-- Footer Section Begin -->
-    <th:block th:replace="/includes/footer :: footer"></th:block>
+    <th:block th:replace="includes/footer :: footer"></th:block>
     <!-- Footer Section End -->
     <!-- Code injected by live-server -->
     <script src="/js/dialog.js"></script>
