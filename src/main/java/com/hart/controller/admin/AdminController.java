@@ -145,8 +145,9 @@ public class AdminController {
 		log.info("무섭도록 코딩중");
 		
 		List<AdminLiveClassDTO> list = classService.getClassAdminList();
-		
-		
+		model.addAttribute("classList",list);
+		log.info("무섭도록 코딩완료");
+		log.info(list);
 		return "admin/classManage";
 	}
 	

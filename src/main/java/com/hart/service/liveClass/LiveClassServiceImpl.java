@@ -110,8 +110,7 @@ public class LiveClassServiceImpl implements LiveClassService{
 
 	@Override
 	public List<AdminLiveClassDTO> getClassAdminList() {
-		
-		List<AdminLiveClassDTO> list = new ArrayList<>();
+		List<AdminLiveClassDTO> list = mapper.getAdminLiveClass();
 		
 		return list;
 	}

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="includes/headTag :: head_tag"></th:block>
 <body>
-	
+
 	<script type="text/javascript" defer>
 
       //상품 디테일 페이지에 pid를 보내줌
@@ -82,29 +82,39 @@
                console.log("버튼누르면 들어온다==")
               let str = "";
             /* console.log(result); */
-              $.each(result.productlist, function (index, product) {
-                /*  console.log(product); */
-                let pprice =product.pprice.toLocaleString('ko-KR');
-                 str += `
-                         <div class="col-lg-4 col-md-6 col-sm-6">
-                         <div class="product__item">   
-                           <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)">
-                   
-                           </div>
-                           <div class="product__item__text">
-                             <h6>${product.pname}</h6>
-                             <a href="#" onclick='addToCart(false,-${pidx})'class="add-cart">+ Add To Cart</a>
-                            <h5>${pprice}원</h5>
+           $.each(result.productlist, function (index, product) {
+    if (index == 0) {
+        $('.shop__product__option__left').find('span').text(product.totalcount);
+    }
+    console.log(product);
+    let pprice = product.pprice.toLocaleString('ko-KR');
+    let pdiscount = product.pdiscount;
+    originalprice = ((1 - (pdiscount / 100)) * (product.pprice)).toLocaleString('ko-KR');
+    if (pdiscount !== 0) {
+        let pdiscount = product.pdiscount;
+    }
 
-          					
-                             <input type="hidden" id="-${pidx}" data-value="${product.pid}"/>
-                             <input type="hidden" id="quantity_-${pidx}" value="1"/>
-                             <div class="product__color__select">
-                             
-                             </div>
-                           </div>
-                         </div>
-                       </div>`; 
+    let pdiscountTag = pdiscount !== 0 ? `<h5 style="display: inline; color: #f61a62; margin-right:8px;">${pdiscount}%</h5>` : '';
+    let ppriceTag = pdiscount === 0 ? '' : `<del><p style="display: inline;">${pprice}</p></del>`;
+
+    str += `
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item">
+                <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)" style="cursor: pointer"></div>
+                <div class="product__item__text">
+                    <h6>${product.pname}</h6>
+                    <a href="#" onclick='addToCart(false,-${pidx})'class="add-cart">+ Add To Cart</a>
+                    <div>
+                        ${pdiscountTag}
+                        <h5 style="display: inline; ">${originalprice}원</h5>
+                        ${ppriceTag}
+                    </div>
+                    <input type="hidden" id="-${pidx}" data-value="${product.pid}"/>
+                    <input type="hidden" id="quantity_-${pidx}" value="1"/>
+                    <div class="product__color__select"></div>
+                </div>
+            </div>
+        </div>`;
                        pidx++;
               });
 
@@ -156,6 +166,8 @@
 	<th:block th:replace="includes/header :: header2"></th:block>
 	<th:block th:replace="includes/header :: header3"></th:block>
 
+
+
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-blog set-bg" data-setbg="https://tohomeimage.thehyundai.com/DP/DP018/2023/03/14/105207/sgbhm.jpg?RS=1204&amp;CS=1204x300" style="background-image: url(&quot;https://tohomeimage.thehyundai.com/DP/DP018/2023/03/14/105207/sgbhm.jpg?RS=1204&amp;CS=1204x300&quot;);">
       <div class="container">
@@ -166,6 +178,7 @@
          </div>
       </div>
    </section>
+
 	<!-- Breadcrumb Section End -->
 	<!-- Shop Section Begin -->
 	<section class="shop spad">
@@ -192,33 +205,28 @@
 										<div class="card-body">
 											<div class="shop__sidebar__categories">
 												<!-- <th th:each="categorypcno :${categorypcno}"> -->
+
+
 												<ul class="nice-scroll"
 													style="overflow-y: hidden; outline: none; touch-action: none;"
 													tabindex="1">
 													<li th:each="cList:${cList}"><a href="#"
 														th:text="${cList.pcategory}"
+
 														th:id ="${cList.pcno}"
-														th:onclick="sendpcno([[${cList.pcno}]] ,0,1,true);"></a></li>
+														th:onclick="sendpcno([[${cList.pcno}]] ,0,1,true); changeColor(this);"></a></li>
+
 												</ul>
+
+
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="card">
-									<!-- <div class="card-heading">
-                              <a data-toggle="collapse" data-target="#collapseTwo">브랜드</a>
-                           </div>
-                           <div id="collapseTwo" class="collapse show"
-                              data-parent="#accordionExample">
-                              <div class="card-body">
-                                 <div class="shop__sidebar__brand">
-                                    <ul>
-                                       <li><a href="#">현대그린푸드(정육)</a></li>
-                                    </ul>
-                                 </div>
-                              </div>
-                           </div> -->
-								</div>
+
+
+
+								<div class="card"></div>
 							</div>
 						</div>
 					</div>
@@ -228,7 +236,13 @@
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6">
 								<div class="shop__product__option__left">
-									<p>Showing 1–9 of 9 results</p>
+									<!-- <p>Showing 1–9 of 9 results</p> -->
+									<p>
+										Showing 1 – of <span th:text="${cList[5].totalcount}"></span>
+										results
+									</p>
+
+
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6">
@@ -266,7 +280,7 @@
 					<div class="row" id="productlistajax"></div>
 				</div>
 
-				
+
 			</div>
 		</div>
 		</div>
@@ -276,15 +290,15 @@
 	<th:block th:replace="includes/footer :: footer"></th:block>
 	<!-- Footer Section End -->
 	<script src="/js/dialog.js"></script>
-	
-	    <script th:inline="javascript">
+
+	<script th:inline="javascript">
       /*<![CDATA[*/
       function addToCart(flag,idx) {
         var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
         if (!isAdmin) {
           Swal.fire({
             title: "로그인이 필요한 활동입니다.",
-            text: "로그인 페이지로 이동하시겠습니까?",
+            text: "로그인 페이지로 이동하시겠습니까?", 
             icon: "info",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -342,5 +356,15 @@
       /*]]>*/
 
     </script>
+	<script>
+		function changeColor(link) {
+		  link.style.color = "black";
+		  document.addEventListener("click", function(event) {
+		    if (event.target !== link) {
+		      link.style.color = "";
+		    }
+		  });
+		}
+</script>
 </body>
 </html>

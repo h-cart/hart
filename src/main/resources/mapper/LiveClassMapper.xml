@@ -35,14 +35,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="getAdminLiveClass"  resultType="com.hart.domain.admin.AdminLiveClassDTO">
-	
-		select lcname,vpath,lcexplain,lcingredient,lcteacher
-		from live_class lc left join videos v on lc.lcid = v.lcid
-		where lc.lcid = #{lcid}
-		
-		
-		
-		
+		select lc.lcid,lcname, to_char(lcday,'YYYY-MM-DD') lcdate,lcstart,lcend,substr(lcteacher,0,3) lcteacher, lckeyword, nvl2(vpath,'1','0') classreg
+		from live_class lc left join videos v on lc.lcid= v.lcid
+		order by lcid desc
 	</select>
 	
 	 

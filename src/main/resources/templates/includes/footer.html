@@ -1,97 +1,145 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<footer th:fragment="footer" class="footer">
-<style>
-.footer {
-    background: #111111;
-    padding-top: 0px;
-}
-</style>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<div class="footer__copyright__text">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					<p>
-						Copyright ©
-						<script>
-							document.write(new Date().getFullYear());
-						</script>
-						 HCART
-					</p>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 	<script src="/js/jquery-3.3.1.min.js"></script> -->
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/jquery.nice-select.min.js"></script>
-	<script src="/js/jquery.nicescroll.min.js"></script>
-	<script src="/js/jquery.magnific-popup.min.js"></script>
-	<script src="/js/jquery.countdown.min.js"></script>
-	<script src="/js/jquery.slicknav.js"></script>
-	<script src="/js/mixitup.min.js"></script>
-	<script src="/js/customAlert.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
-	<script src="/js/main.js"></script>
-	<script src="/js/share.js"></script>
-	<script src="/js/order.js"></script>
-	<script src="/js/cart.js"></script>
+  <footer th:fragment="footer" class="footer">
+    <style>
+      .footer {
+        background: #111111;
+        padding-top: 0px;
+      }
+    </style>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="footer__copyright__text">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <p>
+              Copyright ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              HCART
+            </p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 	<script src="/js/jquery-3.3.1.min.js"></script> -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <script src="/js/jquery.nicescroll.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/jquery.countdown.min.js"></script>
+    <script src="/js/jquery.slicknav.js"></script>
+    <script src="/js/mixitup.min.js"></script>
+    <script src="/js/customAlert.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/share.js"></script>
+    <script src="/js/order.js"></script>
+    <script src="/js/cart.js"></script>
 
-	<script src="https://kit.fontawesome.com/d53451190f.js" ></script>
-	
+    <script src="https://kit.fontawesome.com/d53451190f.js"></script>
 
-	<!-- Code injected by live-server -->
+    <!-- Code injected by live-server -->
 
-	<!-- Code injected by live-server -->
-	<!-- csrf -->
-	<!-- Search End -->
-	<script th:inline="javascript">
-	$(document).ready(function(){
-		
-		  $.ajax({
-		    type : "get",
-		    url : "/papi/clist",
-		    contentType : "application/json",
-		    success : function(data) {
-		      let str="";
-		      let str1="";
-		     
-		      for (var i = 0; i < data.result.length; i++) {
-		    	  console.log(data.result[i].pcno_top);
-		    	  console.log(data.result[i].pcno);
-		    	    str += `
-		        	<li style="border-bottom: 1px solid lightgray; ">
-		        	  <a href="/product/list?pcno_top=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a>
-		        	</li>
-					`;
-		       str1 += `
-		        	<li style="">
-		        	  <a href="/product/list?pcno_top=${data.result[i].pcno}" style="font-size: 15px; color: gray;">${data.result[i].pcategory}</a>
-		        	</li>
-					`; 
-		      }
-		      $("#listCate").append(str);
-		      $(".slicknav_nav .dropdown").append(str1);
-		    },
-		    error : function() {
-		      console.log("실패");
-		    }
-		  });
-		});
-		
-	</script>
-	<!-- Search Begin -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Code injected by live-server -->
-</footer>
-<!-- Footer Section End -->
+    <!-- Code injected by live-server -->
+    <!-- csrf -->
+    <!-- Search End -->
+
+    <style>
+      #depth2 {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 220px;
+        bottom: 0;
+        width: 219.99px;
+        height: 100%;
+        overflow-y: auto;
+        background: lightgrey;
+      }
+
+      #listCate li:hover > #depth2 {
+        display: block;
+      }
+    </style>
+    <script th:inline="javascript">
+      $(document).ready(function () {
+        $.ajax({
+          type: "get",
+          url: "/papi/clist",
+          contentType: "application/json",
+          success: function (data) {
+            let str = "";
+            let str1 = "";
+
+            for (var i = 0; i < data.result.length; i++) {
+              console.log(data.result[i].pcno_top);
+              console.log(data.result[i].pcno);
+              str += `
+             	<li style="border-bottom: 1px solid lightgray; ">
+             	  <a href="/product/list?pcno_top=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a><ul id="depth2">
+       					</ul>
+             	</li>
+       	`;
+              str1 += `
+             	<li style="">
+             	  <a href="/product/list?pcno_top=${data.result[i].pcno}" style="font-size: 15px; color: gray;">${data.result[i].pcategory}</a>
+             	</li>
+       	`;
+            }
+            $("#listCate").append(str);
+            $(".slicknav_nav .dropdown").append(str1);
+          },
+          error: function () {
+            console.log("실패");
+          },
+        });
+
+        $("#listCate li").on("mouseenter", function () {
+          let pcno_top = $(this).find("a").attr("href").split("=")[1];
+          alert(pcno_top);
+          $.ajax({
+            type: "get",
+            url: "/papi/clist",
+            contentType: "application/json",
+            success: function (data) {
+              let str = "";
+              for (var i = 0; i < data.result.length; i++) {
+                if (pcno_top == data.result[i].pcno_top) {
+                  str += `
+             		<li style="border-bottom: 1px solid lightgray; ">
+             	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 15px; color: gray;">${data.result[i].pcategory}</a>
+             		</li>`;
+                }
+              }
+              $("#depth2").empty();
+              $("#depth2").append(str);
+            },
+            error: function () {
+              console.log("실패");
+            },
+          });
+        });
+        $(function () {
+          // listCate li 호버시 에이젝스 작동
+          $("#listCate").mouseenter(function () {
+            alert("호버");
+          });
+        });
+      });
+    </script>
+    <!-- Search Begin -->
+    <div class="search-model">
+      <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+          <input type="text" id="search-input" placeholder="Search here....." />
+        </form>
+      </div>
+    </div>
+    <!-- Code injected by live-server -->
+  </footer>
+  <!-- Footer Section End -->
 </html>
