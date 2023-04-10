@@ -95,9 +95,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getOrder" resultType="OinfoDTO">
 		SELECT *
 		FROM orders
-		WHERE oid = #{oid} AND mid = #{mid}
+		WHERE oid =
+		#{oid} AND mid = #{mid}
 	</select>
-	
+
 	<resultMap id="orderResult" type="SearchResultDTO">
 		<result property="oid" column="OID" />
 		<result property="odate" column="ODATE" />
@@ -108,15 +109,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			javaType="java.util.ArrayList" ofType="OitemDTO"
 			select="getOrderItems" />
 	</resultMap>
-	<select id="getOrders" parameterType="SearchDTO" resultMap="orderResult">
-		<![CDATA[
-			SELECT * FROM orders WHERE mid = #{mid} AND (#{sdate}<=odate AND odate <=to_date(#{edate},'YY/MM/DD')+1) order by oid desc
-		]]>
+	<select id="getOrders" parameterType="SearchDTO"
+		resultMap="orderResult">
+		SELECT *
+		FROM orders
+		WHERE mid = #{mid}
+<![CDATA[
+AND (TO_DATE(#{sdate}, 'YY/MM/DD') <= odate AND odate <= TO_DATE(#{edate}, 'YY/MM/DD') + INTERVAL '1' DAY)
+]]>
+		<if test="isCancel == -1">
+			AND ostatus = -1
+		</if>
+		<if test="isCancel != -1">
+			AND ostatus >= 0
+		</if>
+		ORDER BY oid DESC
+
 	</select>
-	<select id="getOrderItems"
-			resultType="OitemDTO">
-	SELECT oid,tti.pid,pname,pimg,rvcheck,oamount,tti.pprice FROM order_detail odt JOIN totalItem tti on odt.pid = tti.pid and odt.oid = #{oid}
-</select>
+
+	<select id="getOrderItems" resultType="OitemDTO">
+		SELECT
+		oid,tti.pid,pname,pimg,rvcheck,oamount,tti.pprice FROM order_detail
+		odt JOIN totalItem tti on odt.pid = tti.pid and odt.oid = #{oid}
+	</select>
 </mapper>
 
 
