@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hart.domain.event.EventVoteVO;
 import com.hart.domain.product.ProductsVO;
 import com.hart.service.event.EventService;
 
@@ -70,5 +71,12 @@ public class UploadController {
 			result = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return result;
+	}
+
+	// 투표 했는지 확인
+	@GetMapping("/checkVote")
+	public ResponseEntity<Integer> checkVote(EventVoteVO event )
+			throws SQLException {
+		return ResponseEntity.ok(eventService.checkVote(event));
 	}
 }// end class

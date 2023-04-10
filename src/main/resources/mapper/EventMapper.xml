@@ -52,10 +52,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="registerIngredient"
 		parameterType="com.hart.domain.event.CRIngredientVO">
 
-		INSERT INTO crecipe_ingredient (cricount, pid, pcno,
+		INSERT INTO crecipe_ingredient (cricount, pid, 
 		crid,iname)
 		VALUES (#{ingredient.cricount}, #{ingredient.pid},
-		#{ingredient.pcno}, #{seq},#{ingredient.iname})
+		 #{seq},#{ingredient.iname})
 
 	</insert>
 
@@ -130,5 +130,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where c.crid = #{crid}
 	</select>
 
+	<select id="checkVote" parameterType="EventVoteVO"
+		resultType="Integer">
+		select * from event_vote where evid = #{evid} and mid = #{mid}
+	</select>
 
 </mapper>

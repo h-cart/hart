@@ -34,4 +34,6 @@ public interface EventService {
 	void voteRecipe(EventVoteVO ev);
 
 	CRecipeVO getRecipeDetail(EventVoteVO ev);
+
+  Integer checkVote(EventVoteVO event);
 }
