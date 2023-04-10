@@ -53,7 +53,7 @@
             <div class="row">
             	<div class="col-lg-4 col-md-6 col-sm-6"
 					th:each="liveClass : ${liveClassList}">
-					<div class="blog__item">
+					<div class="blog__item" th:onclick="classdetail([[${liveClass.lcid}]])" style="cursor:pointer">
 						<div class="blog__item__pic set-bg2" th:style="'background-image:url(' + ${liveClass.lcimg} + ');'"></div>
 						<div class="blog__item__text">
 							<span th:text="${liveClass.lcday}"><img th:src="${liveClass.lcimg}" alt="이미지 안불러짐"></span>
@@ -90,7 +90,12 @@
     </section>
     <!-- Blog Section End -->
 
+<script type="text/javascript">
+	function classdetail(lcid){
+		location.href='/class/detail/'+lcid;
+	}
 
+</script>
 
 
 <!-- Bootstrap core JavaScript-->
@@ -117,7 +122,6 @@
     <th:block th:replace="includes/footer :: footer"></th:block>
     <!-- Footer Section End -->
 
-    
     
     
  

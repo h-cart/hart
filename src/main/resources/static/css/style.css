@@ -164,7 +164,7 @@ ol {
 }
 
 /* buttons */
-
+/*ham 수정  */
 .primary-btn {
   display: inline-block;
   font-size: 13px;
@@ -172,7 +172,8 @@ ol {
   text-transform: uppercase;
   padding: 14px 30px;
   color: #ffffff;
-  background: #000000;
+  background: #116530;
+  border: 1px solid #116530;
   letter-spacing: 4px;
 }
 
@@ -1513,7 +1514,7 @@ ol {
 
 .product__details__pic {
   text-align: center;
-  background: #f3f2ee;
+  background: #f3f2ee5e;
   padding: 40px 0 60px;
   margin-bottom: 100px;
 }
@@ -1570,6 +1571,7 @@ ol {
 
 .product__details__breadcrumb {
   margin-bottom: 30px;
+  text-align: left;
 }
 
 .product__details__breadcrumb a {
@@ -2805,13 +2807,14 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
   position: relative;
 }
 
+/*ham 수정  */
 .blog__item__text a:after {
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: #111111;
+  background: #116530;
   content: "";
   -webkit-transition: all, 0.3s;
   -o-transition: all, 0.3s;

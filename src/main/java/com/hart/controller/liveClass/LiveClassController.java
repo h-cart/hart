@@ -85,6 +85,16 @@ public class LiveClassController {
 		return "liveClass/liveClassChatTestStream";
 	}
 	
+	@GetMapping("/testdetail/{lcid}")
+	public String liveClassDetailTest(Model model, @PathVariable String lcid) {
+		LiveClassDetailInfoDTO dto = service.getClassDetail(lcid);
+		model.addAttribute("liveClass",dto);
+		log.info(model);
+		
+		
+		return "liveClass/testdetail";
+	}
+	
 	
 	
 }
