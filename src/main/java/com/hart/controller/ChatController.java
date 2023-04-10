@@ -101,6 +101,7 @@ public class ChatController {
 			//Mac 개체는 비밀 키를 사용하여 메시지 바이트 배열의 HMAC-SHA256 해시를 계산하고 이를 원시 바이트 배열로 반환합니다.
 			mac.init(signingKey);
 
+
 			byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
 			encodeBase64String = Base64.encodeBase64String(rawHmac);
 			//원시 바이트 배열은 Base64.NO_WRAP 플래그와 함께 Base64 클래스의 encodeToString() 메서드를 사용하여 Base64 문자열로 인코딩됩니다. 
@@ -108,6 +109,7 @@ public class ChatController {
 
 
 			return encodeBase64String;
+
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -118,6 +120,7 @@ public class ChatController {
 	}
 
 	public static String getReqMessage(String voiceMessage) {
+
 
 
 		// voiceMessage라는 문자열 매개변수를 사용합니다. 여기에는 사용자가 보내려는 메시지 내용이 포함되어 있을 것으로 추정됩니다
@@ -167,6 +170,7 @@ public class ChatController {
 		return requestBody;
 
 	}
+
 
 
 }

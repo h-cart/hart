@@ -17,6 +17,7 @@ public class RecommandDTO {
 	private String pname;
 	private String pimg;
 	private String stag;
+	private List<RecipeCategoryDTO> rcates;
 	private List<RrecipeDTO> recipes;
 	private List<RliveClassDTO> lives;
 }

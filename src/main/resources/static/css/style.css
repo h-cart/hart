@@ -2358,6 +2358,7 @@ ol {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 10px;
+  word-break: keep-all;
 }
 
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text h5 {
@@ -2398,7 +2399,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
   width: 100px;
 }
 .accordion > td:nth-child(3) {
-  width: 100px;
+  width: 110px;
   text-align: center;
 }
 .shopping__cart__table table tbody tr td.cart__close i {
@@ -3874,7 +3875,6 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
   }
 }
 dialog {
-  border-radius: 15px;
   height: 70vh;
 }
 .quantity {
