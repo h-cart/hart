@@ -72,6 +72,7 @@
     }
 
     @media (max-width: 768px) {
+    
       .empty-basket {
         font-size: 16px;
       }
@@ -264,18 +265,51 @@
                 <div class="tab-content" style="display: flex; justify-content: center">
                   <div class="tab-pane active" id="tabs-5" role="tabpanel" style="width: 800px">
                     <div class="product__details__tab__content" style="display: flex; flex-direction: column; align-items: center">
+                    <br>
+                    	<div class="blog__details__quote" style="user-select: auto;">
+							<i class="fa fa-quote-left" aria-hidden="true" style="user-select: auto;"></i>
+							   <h5 th:text="${Detail.detail.pbname}"></h5>
+                      <p th:text="${Detail.detail.pbsmall}"></p>
+                      <p th:text="${Detail.detail.pbdesc}"></p>
+							
+							<!-- <h6 style="user-select: auto;">이렇게 준비해주세요</h6>
+							<br style="user-select: auto;">
+							<h2 style="user-select: auto;">2인분</h2>
+							<br style="user-select: auto;">
+							<p style="user-select: auto;"> </p> -->
+
+						</div>
+                    
+                    
+                     <!--  <h5 th:text="${Detail.detail.pbname}"></h5>
+                      <p th:text="${Detail.detail.pbsmall}"></p>
+                      <p th:text="${Detail.detail.pbdesc}"></p> -->
                       <img th:src="${Detail.pimg[1].pimg}" alt="" />
                       <p class="note"></p>
                       <div class="product__details__tab__content__item">
                         <h5 th:text="${Detail.detail.ptitle}"></h5>
                         <p th:text="${Detail.detail.pdetail}"></p>
                       </div>
+                      
                       <img th:each="detail, i : ${Detail.pimg}" th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg)}" th:src="${detail.pimg}" />
                       <p th:src="${Detail.detail.pbdesc}"></p>
                       <br />
-                      <h5 th:text="${Detail.detail.pbname}"></h5>
+                   <!--    <h5 th:text="${Detail.detail.pbname}"></h5>
+                      <p th:text="${Detail.detail.pbsmall}"></p>
+                      <p th:text="${Detail.detail.pbdesc}"></p> -->
+                      <div class="blog__details__quote" style="user-select: auto;">
+							<i class="fa fa-quote-left" aria-hidden="true" style="user-select: auto;"></i>
+							   <h5 th:text="${Detail.detail.pbname}"></h5>
                       <p th:text="${Detail.detail.pbsmall}"></p>
                       <p th:text="${Detail.detail.pbdesc}"></p>
+							
+							<!-- <h6 style="user-select: auto;">이렇게 준비해주세요</h6>
+							<br style="user-select: auto;">
+							<h2 style="user-select: auto;">2인분</h2>
+							<br style="user-select: auto;">
+							<p style="user-select: auto;"> </p> -->
+
+						</div>
                     </div>
                     <!--  <img th:src="${Detail.pimg[Detail.pimg.size() - 1].pimg}" /> -->
                   </div>
