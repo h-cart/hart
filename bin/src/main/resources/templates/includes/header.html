@@ -1,33 +1,100 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <!-- Offcanvas Menu Begin -->
 <div class="offcanvas-menu-overlay" th:fragment="header1"></div>
 <div class="offcanvas-menu-wrapper" th:fragment="header2">
 	<div class="offcanvas__option">
 		<div class="offcanvas__links">
-			<a href="/member/login" sec:authorize="!isAuthenticated()">로그인</a> <a href="/member/login"
-				sec:authorize="isAuthenticated()">로그아웃</a>
+
+			<a href="/member/login" sec:authorize="!isAuthenticated()">로그인</a> <a
+				href="/member/login" sec:authorize="isAuthenticated()">로그아웃</a>
 		</div>
 	</div>
-	<div class="offcanvas__nav__option">
-		<a href="#" class="search-switch"><img src="/img/icon/search.png" alt="" /></a>
+	<div class="offcanvas__nav__option" style="width: 266px;">
+		<a href="#" class="search-switch"><i
+			class="fa-solid fa-magnifying-glass fa-xl" style="color: #000000;"></i></a>
+		<a sec:authorize="isAuthenticated() and principal.csno ==null"
+			class='share_cart' href="#"><i class="fa-solid fa-users fa-xl"
+			style="color: #000000;"></i></a> <a
+			sec:authorize="isAuthenticated() and principal.csno !=null"
+			Paid="kakao-link-btn" href="javascript:kakaoShare()"> <i
+			class="fa-solid fa-up-right-from-square fa-xl"
+			style="color: #000000;"></i>
+		</a> <a href="/cart/mycart"><i class="fa-solid fa-cart-shopping fa-xl"
+			style="color: #000000;"></i></a><a href="/order/qr"><i
+			class="fa-solid fa-qrcode fa-beat fa-xl" style="color: #000000;"></i></a>
+			
+		<a href="javascript: alarmToggle();" onclick="updateCheckAlarm()" id="mobile_alarm">
+		
+		<!--좌측 배너 알림내용 시작  -->
+		
+		
+		<i class="fa-solid fa-bell fa-xl" style="color: #000000;"></i>
+			<span class="badge badge-danger badge-counter" id="alarmCnt2" style="left: 15px; color:white"></span>
+		<!--좌측 배너 알림내용 시작  -->
+		<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="alertsDropdown" id="alarmlist1" style="width: 360px;top: 145px;left: 10px;" >
+						<h6 class="dropdown-header">알림</h6>
+					<!-- 
+						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
+						<div class="">
+							<div class="icon-circle bg-primary">
+								<i class="fa-solid fa-alarm-clock"></i>
+								<i class="fas fa-file-alt text-white" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div style="word-break: break-all; margin-left: 15px;">
+							<div class="small text-gray-500">04.02(일)</div>
+							<p style="font-size: 13px;">[알람test] 금일은 깊은 맛의 맛깔스런 얼갈이 열무김치 4.5kg 담아가기 수업 당일입니다. 잊지말고 참석해주세요!</p>
+						</div>
+					</a>
+					
+					
+						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
+						<div class="">
+							<div class="icon-circle bg-primary">
+								<i class="fa-solid fa-alarm-clock"></i>
+								<i class="fas fa-file-alt text-white" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div style="word-break: break-all; margin-left: 15px;">
+							<div class="small text-gray-500">04.03(월)</div>
+							<p style="font-size: 13px;">[알람] 금일은 깊은 맛의 맛깔스런 얼갈이 열무김치 4.5kg 담아가기 수업 당일입니다. 잊지말고 참석해주세요!</p>
+						</div>
+					</a>
+					
+					
+						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
+						<div class="">
+							<div class="icon-circle bg-primary">
+								<i class="fa-solid fa-alarm-clock"></i>
+								<i class="fas fa-file-alt text-white" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div style="word-break: break-all; margin-left: 15px;">
+							<div class="small text-gray-500">04.04(화)</div>
+							<p style="font-size: 13px;">[알람] 내일은 깊은 맛의 맛깔스런 얼갈이 열무김치 4.5kg 담아가기 수업 예정일입니다.</p>
+						</div>
+					</a>
+					 -->
+					<a class="dropdown-item text-center small text-gray-500" href="#"></a>
+					</div>
+		
 
-		<a sec:authorize="isAuthenticated() and principal.csno ==null" class='share_cart' href="#"><img
-				src="/img/icon/heart.png" alt="" /></a>
-		<a sec:authorize="isAuthenticated() and principal.csno !=null" Paid="kakao-link-btn"
-			href="javascript:kakaoShare()"> <img
-				src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" />
-		</a>
-		<a href="/cart/mycart"><img src="/img/icon/cart.png" alt="" /></a>
-
+		<!--좌측 배너 알림내용 끝  -->
+		
+		
+		<!-- </a> -->
+			
 
 	</div>
 	<div id="mobile-menu-wrap"></div>
 </div>
-
 <!-- Offcanvas Menu End -->
 <!-- Header Section Begin -->
-<header class="header" th:fragment="header3">
+<header class="header header-wrap" th:fragment="header3">
 	<div class="header__top">
 		<div class="container">
 			<div class="row">
@@ -39,7 +106,8 @@
 				<div class="col-lg-6 col-md-5">
 					<div class="header__top__right">
 						<div class="header__top__links" sec:authorize="isAuthenticated()">
-							<a href="/member/logout">로그 아웃</a>
+							<a href="/mypage/order">마이페이지</a>
+							<a href="/member/logout">로그아웃</a>
 						</div>
 						<div class="header__top__links" sec:authorize="!isAuthenticated()">
 							<a href="/member/login">로그인</a>
@@ -53,46 +121,209 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-3">
 				<div class="header__logo">
-					<a href="/"><img src="/img/logo.png" alt="" style="height: 23px" /></a>
+					<a href="/"><img src="/img/logo.png" alt="" style="height: 36px" /></a>
 				</div>
 			</div>
 			<div class="col-lg-6 col-md-6">
 				<nav class="header__menu mobile-menu">
 					<ul>
-						<li>
-							<a href="/product/list?pcno=100571" class="active">상품</a>
-							<ul class="dropdown" id="listCate" style="width: 220px; background: #ffffff;padding: 0px;">
-							</ul>
-						</li>
-						<li><a href="/recipe/list">레시피</a></li>
-						<li><a href="/liveClass">Live</a></li>
-						<li><a href="/event/upload">Event</a></li>
+
+						<li><a href="/product/list?pcno_top=100571" class="active">Product</a>
+							<ul class="dropdown" id="listCate"
+								style="width: 220px; background: #ffffff; padding: 0px;">
+							</ul></li>
+						<li><a href="/recipe/list">Recipe</a></li>
+
+						<li><a href="/class">Live</a></li>
+						<li><a href="/event?evid=1">Event</a></li>
+
 					</ul>
 				</nav>
 			</div>
 			<div class="col-lg-3 col-md-3">
-				<div class="header__nav__option">
-					<a href="#" class="search-switch"><img src="/img/icon/search.png" alt="" /></a>
+				<div class="header__nav__option" style="width: 217px;">
 
-					<a sec:authorize="isAuthenticated() and principal.csno ==null" class='share_cart' href="#"><img
-							src="/img/icon/heart.png" alt="" /></a>
-
-					<a sec:authorize="isAuthenticated() and principal.csno !=null" Paid="kakao-link-btn"
-						href="javascript:kakaoShare()"> <img
-							src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" />
+					<a href="#" class="search-switch"><i
+						class="fa-solid fa-magnifying-glass fa-xl" style="color: #000000;"></i></a>
+					<a sec:authorize="isAuthenticated() and principal.csno ==null"
+						class='share_cart' href="#"><i class="fa-solid fa-users fa-xl"
+						style="color: #000000;"></i></a> <a
+						sec:authorize="isAuthenticated() and principal.csno !=null"
+						Paid="kakao-link-btn" href="javascript:kakaoShare()"> <i
+						class="fa-solid fa-up-right-from-square fa-xl"
+						style="color: #000000;"></i>
+					</a> <a href="/cart/mycart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i></a>
+					<a href="javascript: alarmToggle();" onclick="updateCheckAlarm()"><i class="fa-regular fa-bell fa-xl" style="color: #000000;"></i>
+						<span class="badge badge-danger badge-counter" id="alarmCnt" style="left: 15px; color:white"></span>
 					</a>
-
-					<a href="/cart/mycart"><img src="/img/icon/cart.png" alt="" /></a>
+					
+					<div
+						class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+						aria-labelledby="alertsDropdown" id="alarmlist"
+						style="width: 360px">
+						<h6 class="dropdown-header" >알림</h6>
+						<!-- <a class="d-flex align-items-center" href="#" style="margin: 10px; border-bottom: solid lightgray;">
+							<div class="">
+								<div class="icon-circle bg-primary">
+									<i class="fas fa-file-alt text-white" aria-hidden="true"></i>
+								</div>
+							</div>
+							<div style="word-break: break-all; margin-left: 15px;">
+								<div class="small text-gray-500">04.02(일)</div>
+								<p style="font-size: 13px;">[알람test] 금일은 깊은 맛의 맛깔스런 얼갈이 열무김치
+									4.5kg 담아가기 수업 당일입니다. 잊지말고 참석해주세요!</p>
+							</div>
+						</a> 
+						 -->
+					</div>
 
 				</div>
 			</div>
 		</div>
+					
 		<div class="canvas__open">
 			<i class="fa fa-bars"></i>
 		</div>
 	</div>
-		<script sec:authorize="isAuthenticated() and principal.csno !=null" src="/js/sse.js"></script>
+
+	<script sec:authorize="isAuthenticated() and principal.csno !=null"
+		src="/js/sse.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+
+		$.ajax({
+			type: 'POST',
+			url : '/alarm',
+			contentType : "application/json; charset=utf-8",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			success : function(result){
+				
+				for (let i = 0; i < result.list.length; i++) {
+
+					let date = result.list[i].alarm_date;
+					let content = result.list[i].alarm_content;
+					//let date = result[i].alarm_date;
+					//let content = result[i].alarm_content;
+					//console.log(cnt);
+					let str="";
+					
+					str+=`
+						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
+						<div class="">
+							<div class="icon-circle bg-primary">
+								<i class="fa-solid fa-alarm-clock"></i>
+								<i class="fas fa-file-alt text-white" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div style="word-break: break-all; margin-left: 15px;">
+							<div class="small text-gray-500">${date}</div>
+							<p style="font-size: 13px;">${content}</p>
+						</div>
+					</a>
+					
+					`
+					
+					$(".dropdown-list").append(str);
+					
+					  
+				}
+				
+				let laststr='';
+				laststr+=`<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
+				//$("#alarmlist").append(laststr);
+				$(".dropdown-list").append(laststr);
+				
+				
+				let cnt = result.alarmCount;
+				
+				if(cnt==0){
+					//$("#alarmCnt").html("");
+					$(".badge").html("");
+				}else{
+					//$("#alarmCnt").html(cnt+"+");	
+					$(".badge").html(cnt+"+");	
+				}
+	
+			},
+			error : function(result){
+				consoel.log("ajax 실패");
+				
+			}
+			
+		});  
+		
+		
+	});
+	
+	
+	function updateCheckAlarm(){
+			
+			$.ajax({
+				type: 'POST',
+				url : '/alarm/update',
+				contentType : "application/json; charset=utf-8",
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader(header, token);
+				},
+				success : function(){
+					console.log("ajax 성공");
+					$(".badge").html("");
+				},
+				error : function(){
+					consoel.log("ajax 실패");
+					
+				}
+				
+			});
+			
+			
+		}
+	</script>
+
+
 	<script>
+		/*
+		function alarmToggle(){
+			if($("#alarmlist").hasClass("show")){
+				$("#alarmlist").removeClass("show");
+			}else{
+				$("#alarmlist").addClass("show");
+			}
+			
+		}
+		*/
+		function alarmToggle(){
+			if($(".dropdown-list").hasClass("show")){
+				$(".dropdown-list").removeClass("show");
+			}else{
+				$(".dropdown-list").addClass("show");
+			}
+			
+		}
+		
+		/*
+		$(document).mouseup(function (e){
+			$("#alarmlist").removeClass("show");
+		});
+		*/
+		
+		
+		
+		/* 
+		$(document).ready(function(){
+			$("body").on("click",function(){
+				$("#alarmlist").removeClass("show");
+			})
+		})
+		 */
+		
+		
+		
+		
+		
 		const token = $("meta[name='_csrf']").attr("content");
 		const header = $("meta[name='_csrf_header']").attr("content");
 		$(document).on("click", ".share_cart", function (e) {
@@ -133,11 +364,8 @@
 			})
 		});
 	</script>
-
-
-
+	<script src="https://kit.fontawesome.com/41611c5120.js" crossorigin="anonymous"></script>
 
 </header>
 <!-- Header Section End -->
-
 </html>

@@ -35,7 +35,7 @@ public class OrderRestController {
 		try {
 			System.out.println(map.get("oid"));
 			int oid = Integer.parseInt(map.get("oid"));
-			int mpoint = oService.orderCancle(mDTO.getMid(), oid);
+			int mpoint = oService.orderCancle(mDTO.getMid(), oid,mDTO.getSocial());
 			mDTO.setMpoint(mpoint);
 			msg = "success";
 		}catch (Exception e) {

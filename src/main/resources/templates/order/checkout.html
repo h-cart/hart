@@ -44,8 +44,7 @@
                                     <div class="checkout__input">
                                         <p>수령인<span>*</span></p>
                                         <input name='oinfo.oname' placeholder='수령받을 사람의 이름을 적어주세요.' required type="text"
-                                            th:value="${#authentication.principal.mname.matches('^[^@\\p{Alpha}]*$') != null ? #authentication.principal.mname : ''}">
-
+       th:value="${#authentication.principal.mname.matches('^[\uAC00-\uD7AF]*$') ? '' : #authentication.principal.mname}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -302,8 +301,8 @@
     $(document).on("click", "#order", function () {
         var pointTag = $("#point");
         pointTag.val(pointTag.val().length == 0 ? 0 : pointTag.val());
-        //requestPay();
-        $("form[name=orderform]").submit();
+        requestPay();
+        //$("form[name=orderform]").submit();
 
     })
 </script>

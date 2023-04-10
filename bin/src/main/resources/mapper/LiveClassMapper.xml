@@ -12,18 +12,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getLiveClassDetail"  resultType="com.hart.domain.liveClass.LiveClassListDTO">
-		select  lc.lcid, to_char(lcday,'YYYY-MM-DD') lcdate,to_char(lcday,'dy') lcday
+		select  lc.lcid, to_char(lcday,'YYYY-MM-DD') lcdate,to_char(lcday,'dy') lcdayofweek
 				, lcstart, lcend, lcstatus, lcteacher, lcplace,lcexplain,lcstudent,
-				lckeyword,lcname,lcprice,lccount,lctexplain,lcimg
+				lckeyword,lcname,lcprice,lccount,lctexplain,lcimg,lcingredient
 		from live_class lc left join live_class_img lci on lc.lcid = lci.lcid
 		where lc.lcid=#{lcid}
 	</select>
 	
+	
 	<select id="getMyLiveClassInfo"  resultType="com.hart.domain.liveClass.MyLiveClassInfoDTO">
-		select lc.lcid ,lcday, lcstart,lcend, lcstatus,lcname,lcimg
+		select lc.lcid , lcstart,lcend, lcday,lcstatus,lcname,lcimg,to_char(lcday,'YYYY-MM-DD') lcdate,lcteacher,to_char(lcday,'dy') lcdayofweek
 		from live_class lc right join class_list cl on lc.lcid = cl.lcid
 		                   left join live_class_img lci on lci.lcid = cl.lcid
 		where mid = #{mid}  
 	</select>
+	
+	<select id="getMyVideo"  resultType="com.hart.domain.liveClass.LiveClassVideoDTO">
+		select lcname,vpath,lcexplain,lcingredient,lcteacher
+		from live_class lc left join videos v on lc.lcid = v.lcid
+		where lc.lcid = #{lcid}
+	</select>
+	
 	 
 </mapper>

@@ -43,10 +43,10 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  color: #111111;
-  font-weight: 400;
-  font-family: "Nunito Sans", sans-serif;
+	margin: 0;
+	color: #111111;
+	font-weight: 400;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 h1 {
@@ -74,12 +74,14 @@ h6 {
 }
 
 p {
-  font-size: 15px;
-  font-family: "Nunito Sans", sans-serif;
-  color: #3d3d3d;
-  font-weight: 400;
-  line-height: 25px;
-  margin: 0 0 15px 0;
+
+	font-size: 15px;
+	font-family: 'Noto Sans KR', sans-serif;
+	color: #3d3d3d;
+	font-weight: 400;
+	line-height: 25px;
+	margin: 0 0 15px 0;
+
 }
 
 img {
@@ -326,8 +328,10 @@ ol {
 }
 
 .header__top {
-  background: #111111;
-  padding: 10px 0;
+
+	background: white;
+	padding: 10px 0 0 0;
+
 }
 
 .header__top__left p {
@@ -345,7 +349,7 @@ ol {
 }
 
 .header__top__links a {
-  color: #ffffff;
+  color: black;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -499,7 +503,7 @@ ol {
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: #e53637;
+  background: #116530;
   content: "";
   -webkit-transition: all, 0.5s;
   -o-transition: all, 0.5s;
@@ -2930,7 +2934,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 -----------------------*/
 
 .blog-hero {
-  background: #f3f2ee;
+  background: #f3f2ee5e;
   padding-top: 125px;
   padding-bottom: 190px;
 }
@@ -3048,7 +3052,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 }
 
 .blog__details__quote {
-  background: #f3f2ee;
+  background: #f3f2ee5e;
   padding: 50px 40px 35px;
   border-radius: 5px;
   position: relative;
@@ -3057,10 +3061,10 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 
 .blog__details__quote i {
   font-size: 16px;
-  color: #ffffff;
+  color: white;
   height: 50px;
   width: 50px;
-  background: #e53637;
+  background: #116530;
   border-radius: 50%;
   line-height: 50px;
   text-align: center;
@@ -3470,6 +3474,12 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 /* Wide Mobile = 480px */
 
 @media only screen and (max-width: 767px) {
+  /*ham 수정  */
+  .blog-hero{
+  	padding-top: 35px;
+    padding-bottom: 145px;
+  }
+	
   .canvas__open {
     display: block;
     font-size: 22px;

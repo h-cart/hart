@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="includes/headTag :: head_tag"></th:block>
+<link rel="stylesheet" type="text/css" href="/css/order-complete.css">
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <th:block th:replace="includes/header :: header1"></th:block>
+    <th:block th:replace="includes/header :: header2"></th:block>
+    <th:block th:replace="includes/header :: header3"></th:block>
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Check Out</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <a href="./shop.html">Shop</a>
+                            <span>Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="wrap">
+        <div id="container">
+            <div id="contents">
+                <form id="frm_order_result" name="frm_order_result" action="" method="post" target="_self"
+                    enctype="multipart/form-data">
+                    <input id="order_id" name="order_id" value="20230327-0000063" type="hidden">
+                    <input id="bank_url_hidden" name="bank_url_hidden" value="www.ibk.co.kr" type="hidden">
+                    <div class="xans-element- xans-order xans-order-result order-result-block xans-record-">
+                        <div class="header">
+                            <h2>Thank you</h2>
+                            <p>주문해 주셔서 고맙습니다.</p>
+                        </div>
+                        <div class="msg-block">
+                            <div class="title-block">
+                                <h2>고객님의 주문이 완료되었습니다.</h2>
+                            </div>
+                            <p class="desc-block">주문내역 및 배송에 관한 안내는 <a href="/myshop/order/list.html"
+                                    class="line">주문내역</a>을 통하여 가능합니다.</p>
+                        </div>
+                        <div class="detail-block">
+                            <ul>
+                                <li>
+                                    <label>주문번호</label>
+                                    <span th:text="${oinfo.oid}"></span>
+                                </li>
+                                <li>
+                                    <label>결제금액</label>
+                                    <span th:text="${#numbers.formatInteger(oinfo.opayment,3,'COMMA')}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <a href="/myshop/order/list.html" class="btn btn-lg btn-dark"><span>주문내역 조회</span></a>
+                            <a href="/" class="btn btn-lg btn-white"><span>쇼핑계속하기</span></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="includes/footer :: footer"></th:block>
+    <script src="/js/cart.js"></script>
+</body>
+<script>
+    function calPay(tPrice, tDiscount, tDelivery, usedPoint) {
+        var pay = tPrice - tDiscount + tDelivery - usedPoint;
+        $("#paid").text((numberWithCommas(pay) + "원"));
+        $("input[name='oinfo.opayment']").val(pay);
+    }
+    $(document).ready(function () {
+        const maxPoint = $("#point").prop("max");
+
+        var totalPrice = 0;
+        var totalDiscount = 0;
+        $(".tprice").each(function () {
+            if ($(this).hasClass("live")) totalDiscount += +$(this).val();
+            totalPrice += +$(this).val();
+        })
+        $(".tdiscount").each(function () {
+            totalDiscount += +$(this).val();
+        })
+        totalDiscount = totalPrice - totalDiscount;
+        $("#totalPrice").text(numberWithCommas(totalPrice) + "원");
+        $("#totalDiscount").text(("- " + numberWithCommas(totalDiscount) + "원"))
+        $("input[name='oinfo.odiscount']").val(totalDiscount);
+        console.log(totalPrice, totalDiscount);
+        var delivery = totalPrice - totalDiscount >= 50000 ? 0 : 5000;
+        $("#delivery").text((numberWithCommas(delivery) + "원"));
+        var pay = totalPrice - totalDiscount + delivery;
+        $("#paid").text((numberWithCommas(pay) + "원"));
+        $("input[name='oinfo.opayment']").val(pay);
+        $("#point").keyup(function () {
+            if ($(this).val() > parseInt(maxPoint)) {
+                alert("사용 가능한 최대 포인트는 " + maxPoint + "P 입니다.");
+                $(this).val(maxPoint);
+            }
+            $("#usedPoint").text((numberWithCommas($(this).val()) + "원"));
+            calPay(totalPrice, totalDiscount, delivery, $(this).val());
+        })
+    })  
+</script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    // 우편번호 찾기 화면을 넣을 element
+    var element_layer = document.querySelector("#layer");
+
+    function closeDaumPostcode() {
+        // iframe을 넣은 element를 안보이게 한다.
+        element_layer.style.display = "none";
+    }
+
+    function getPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ""; // 주소 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === "R") {
+                    // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else {
+                    // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if (data.userSelectedType === "R") {
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                } else {
+                }
+                console.log(data);
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                $("#zipcode").val(data.zonecode);
+                $("#addr").val(addr);
+                // 커서를 상세주소 필드로 이동한다.
+                $("#addrDetail").focus();
+                element_layer.style.display = "none";
+                //$(".back .hold_body").removeClass("hold_body");
+            },
+            width: "100%",
+            height: "100%",
+            maxSuggestItems: 5,
+        }).embed(element_layer);
+
+        // iframe을 넣은 element를 보이게 한다.
+        element_layer.style.display = "block";
+
+        initLayerPosition();
+    }
+
+    // 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
+    // resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
+    // 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
+    function initLayerPosition() {
+        var width = 300; //우편번호서비스가 들어갈 element의 width
+        var height = 400; //우편번호서비스가 들어갈 element의 height
+        var borderWidth = 1; //샘플에서 사용하는 border의 두께
+
+        // 위에서 선언한 값들을 실제 element에 넣는다.
+        element_layer.style.width = width + "px";
+        element_layer.style.height = height + "px";
+        element_layer.style.border = borderWidth + "px solid";
+        // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
+        element_layer.style.left = ((window.innerWidth || document.documentElement.clientWidth) - width)
+            / 2 - borderWidth + "px";
+        element_layer.style.top = ((window.innerHeight || document.documentElement.clientHeight) - height)
+            / 2 - borderWidth + "px";
+    }
+</script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.7.js"></script>
+
+
+<script>
+    function requestPay() {
+        console.log($("input[name='oinfo.otel']").val());
+        const userCode = "imp65568526";
+        IMP.init(userCode);
+        IMP.request_pay({
+            pg: "kakaopay",
+            pay_method: "card",
+            merchant_uid: new Date(),
+            name: "HART",
+            amount: $("input[name='oinfo.opayment']").val(),
+            popup: true,
+            buyer_tel: $("input[name='oinfo.phone']").val(),
+        }, function (rsp) {
+            if (rsp.success) {
+                $("form[name=orderform]").submit();
+            }
+            console.log(rsp);
+        });
+    }
+</script>
+<script>
+    $(document).on("click", "#findAddr", function () {
+        // initLayerPosition 함수를 resize 이벤트 핸들러로 등록
+        window.addEventListener('resize', initLayerPosition);
+        getPostcode();
+
+    })
+
+</script>
+<script>
+    $(document).on("click", "#order", function () {
+        var pointTag = $("#point");
+        pointTag.val(pointTag.val().length == 0 ? 0 : pointTag.val());
+        requestPay();
+
+    })
+</script>
+
+</html>

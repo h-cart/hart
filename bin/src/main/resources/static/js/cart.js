@@ -1,6 +1,7 @@
 
 function NoItem() {
 	var emptyBasket = $('.pbody');
+	getCheckboxValue();
 	if (emptyBasket.children().length === 0) {
 		var str = '';
 		str += "<tr class='empty-basket'><td colspan='6'><img src='/img/icon.png' style='width:80px; height :80px; margin :0 auto 15px;'alt='icon' />"
@@ -9,16 +10,15 @@ function NoItem() {
 	}
 };
 
-function numberWithCommas(x) {
-	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
 
 
 
 $(document).on("click", ".thumb", function (e) {
 	// 이벤트가 발생한 요소가 이미지이면 체크박스를 클릭한 것처럼 동작
 	if ($(e.target).is("img")) {
-		$(this).find(".checkbox").click();
+		let thumbCheck = $(this).find(".checkbox");
+		let isCheck = thumbCheck.prop("checked");
+		thumbCheck.prop("checked",!isCheck);
 	}
 	// 이벤트가 발생한 요소가 체크박스이면 클릭 이벤트를 그대로 전파
 	else if ($(e.target).is(".checkbox")) {
@@ -28,29 +28,12 @@ $(document).on("click", ".thumb", function (e) {
 });
 
 
-$(document).on("click", ".fa-close", function () {
+$(document).on("click", ".cart__close", function () {
 	var pid = $(this).closest('tr').data('value');
 	deleteBtnEvent(pid);
 
 })
 
-$(".primary-btn").on("click", function () {
-	var form = $('<form></form>');
-	form.attr('method', 'post');
-	form.attr('action', '/order/list');
-	$("input[name=cartlist]:checked").each(function () {
-		var pos = $(this).prop('id').split('_')[1];
-		var pid = $('#' + pos).data('value');
-		var quantity = $('#quantity_' + pos).val();
-
-		form.append($('<input/>', { type: 'hidden', name: 'pids', value: pid }));
-		form.append($('<input/>', { type: 'hidden', name: 'pamounts', value: quantity }));
-
-	});
-	form.append($('<input/>', { type: 'hidden', name: '_csrf', value: token }));
-	form.appendTo('body');
-	form.submit();
-});
 
 
 $(document).on("click", ".btn_plus", function () {
@@ -82,12 +65,21 @@ $(document).on("click", ".btn_minus", function () {
 
 
 
+var allCheck = $("#allCheck");
+allCheck.on("click", function (e) {
+	var list = $("input[type='checkbox']");
+	var flag = $(this).prop("checked");
+	list.prop("checked", flag);
+
+	getCheckboxValue();
+});
 
 
 function getCheckboxValue() {
 	var result = 0;
 	var count = 0;
 	var discount = 0;
+	var totalLength = $(".checkbox").length;
 	$("input[name=cartlist]:checked").each(function () {
 		var pos = $(this).prop('id').split("_")[1];
 		if ($("#discount_" + pos).data('value') > 0) {
@@ -97,14 +89,13 @@ function getCheckboxValue() {
 		var price = $("#cprice_" + pos).data('value');
 		result += +price;
 	});
-
-	$(".gl_check_all").prop("checked", false);
+	$("#allCheck").prop("checked",(totalLength!=count || totalLength==0)?false:true);
 	var delivery = result > 0 ? result >= 50000 ? 0 : 5000 : 0;
 	var tprice = $(".tprice");
 	var pdiscount = $(".discount");
-	pdiscount.text('₩' + numberWithCommas(discount));
+	pdiscount.text(numberWithCommas(discount) + "원");
 	pdiscount.data('value', discount);
-	tprice.text('₩' + numberWithCommas(result));
+	tprice.text(numberWithCommas(result) + "원");
 	tprice.data('value', result);
 };
 
@@ -116,9 +107,10 @@ function selectRemove(entryNumber) {
 	msgStr = "선택하신 상품을 쇼핑백에서 삭제하시겠습니까?";
 	var entryNumber = "";
 	$("input:checkbox[name='cartlist']:checked").each(function () {
-		entryNumber += $(this).val() + ",";
+		entryNumber += $(this).closest("tr").data('value')+ ",";
 	});
 	entryNumber = entryNumber.substring(0, entryNumber.length - 1);
+	console.log(entryNumber);
 	deleteBtnEvent(entryNumber);
 
 }
@@ -133,6 +125,8 @@ function deleteBtnEvent(param) {
 	for (var i = 0; i < pids.length; i++) {
 		cartDTOList.push(pids[i]);
 	}
+	console.log(param);
+	console.log(cartDTOList);
 
 	$.ajax({
 		url: '/capi/removes',
@@ -157,3 +151,38 @@ function deleteBtnEvent(param) {
 
 	})
 };
+
+$(document).on("click", ".rbtn_plus", function () {
+
+	var pos = $(this).data('value');
+	var quantity = $("#quantity_" + pos).val();
+	console.log(pos);
+	if (+quantity + 1 >= 6) {
+		alert('6개 이상 상품 주문 불가능');
+		return;
+	}
+	$("#quantity_"+pos).val(+quantity+1);
+	calPrice(pos);
+});
+
+$(document).on("click", ".rbtn_minus", function () {
+
+	var pos = $(this).data('value');
+	var quantity = $("#quantity_" + pos).val();
+	console.log(pos);
+	if (+quantity - 1 <=0) {
+		alert('1개 이상 선택해주십시오.');
+		return;
+	}
+	$("#quantity_"+pos).val(+quantity-1);
+	calPrice(pos);
+});
+
+function calPrice(pos){
+	var totalPrice = $("#cprice_"+pos);
+	var price = $("#price_"+pos).data('value');
+	var quantity = $("#quantity_"+pos).val();
+	console.log(totalPrice,price,quantity);
+	totalPrice.text(numberWithCommas(+price*+quantity)+"원");
+	
+}

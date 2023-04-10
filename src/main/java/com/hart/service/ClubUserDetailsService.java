@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hart.domain.member.ClubAuthMemberDTO;
@@ -24,13 +25,14 @@ public class ClubUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private MemberMapper clubMemberRepository;
+	
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// 입력한 이메일로 ClubMember 찾음
 		ClubMember2 result = null;
 		try {
-			log.info(username);
 			result = clubMemberRepository.findByEmail(username, 0);
 		} catch (SQLException e) {
 			throw new UsernameNotFoundException("Check Email or Social!!");
@@ -46,16 +48,16 @@ public class ClubUserDetailsService implements UserDetailsService {
 			// clubMember 생성
 
 		ClubMember2 clubMember2 = result;
-		log.info("-------------------");
-		log.info(clubMember2);
-		log.info(clubMember2.getMroles().toString());
 
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + clubMember2.getMroles()));
 
 		// clubMember --> ClubAuthMemberDTO 변환
-		ClubAuthMemberDTO clubAuthMemberDTO = new ClubAuthMemberDTO(clubMember2.getMid(), clubMember2.getMpassword(),
-				clubMember2.getSocial(), authorities);
+//		ClubAuthMemberDTO clubAuthMemberDTO = new ClubAuthMemberDTO(clubMember2.getMid(), clubMember2.getMpassword(),
+//				clubMember2.getSocial(), authorities);
+		ClubAuthMemberDTO clubAuthMemberDTO = new ClubAuthMemberDTO(clubMember2.getMid(),
+				clubMember2.getMpassword(), 1, authorities,clubMember2.getCsno(),clubMember2.getMpoint()
+				,clubMember2.getMphone(),clubMember2.getMzipcode(),clubMember2.getMaddress(),clubMember2.getMaddressdetail());
 		// ClubAuthMemberDTO 값 세팅
 		clubAuthMemberDTO.setMname(clubMember2.getMname());
 		clubAuthMemberDTO.setSocial(clubMember2.getSocial());
