@@ -1,4 +1,5 @@
 package com.hart.controller;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -10,6 +11,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+<<<<<<< HEAD
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -35,12 +37,14 @@ public class ChatController {
 
 		String chatbotMessage = "";
 		log.info(voiceMessage+"voiceMessage");
+
 		String secretKey = "bkdVdGZTVERtTHdKd3ZFSWJQdVZyTU9IaGVVaVpDUFk=";
 		String apiUrl = "https://keepk4k7pu.apigw.ntruss.com/custom/v1/10080/6113693b24230d2699b8f0cacd34281fa09355ef64fccf83c71d0bec7dcb3a1b";
 
 		try {
 
-		
+
+
 			URL url = new URL(apiUrl);
 
 			String message = getReqMessage(voiceMessage);
@@ -90,6 +94,7 @@ public class ChatController {
 
 		try {
 			byte[] secrete_key_bytes = secretKey.getBytes("UTF-8");
+<<<<<<< HEAD
 			//비밀 키 문자열은 UTF-8 문자 인코딩을 사용하여 바이트 배열로 변환됩니다.
 			SecretKeySpec signingKey = new SecretKeySpec(secrete_key_bytes, "HmacSHA256");
 			//HmacSHA256" 알고리즘을 사용하여 새로운 Mac 개체가 생성되고 SecretKeySpec 개체로 초기화됩니다.메시지 문자열은 UTF-8 문자 인코딩을 사용하여 바이트 배열로 변환됩니다
@@ -101,6 +106,7 @@ public class ChatController {
 			encodeBase64String = Base64.encodeBase64String(rawHmac);
 			//원시 바이트 배열은 Base64.NO_WRAP 플래그와 함께 Base64 클래스의 encodeToString() 메서드를 사용하여 Base64 문자열로 인코딩됩니다. 
 			//즉, 출력에 줄바꿈이 추가되지 않습니다.
+
 			return encodeBase64String;
 
 		} catch (Exception e) {
@@ -112,6 +118,7 @@ public class ChatController {
 	}
 
 	public static String getReqMessage(String voiceMessage) {
+<<<<<<< HEAD
 		// voiceMessage라는 문자열 매개변수를 사용합니다. 여기에는 사용자가 보내려는 메시지 내용이 포함되어 있을 것으로 추정됩니다
 		String requestBody = "";// requestBody는 빈 문자열로 초기화되며 메시지 요청을 나타내는 최종 JSON 문자열을 저장하는 데 사용
 
@@ -159,4 +166,5 @@ public class ChatController {
 		return requestBody;
 
 	}
+
 }

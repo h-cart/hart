@@ -1592,7 +1592,7 @@ ol {
 
 .product__details__breadcrumb span {
   font-size: 15px;
-  color: #b7b7b7;
+  color: #000000;
   display: inline-block;
 }
 
@@ -1885,7 +1885,7 @@ ol {
 
 .product__details__tab .nav-tabs .nav-item .nav-link {
   font-size: 20px;
-  color: #b7b7b7;
+  color: #000000;
   padding: 0;
   border: none;
   font-weight: 700;
@@ -3616,7 +3616,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
     right: 2px;
   }
   .offcanvas__top__hover ul {
-    background: #111111;
+    background: #000000;
     display: inline-block;
     padding: 2px 0;
     position: absolute;
