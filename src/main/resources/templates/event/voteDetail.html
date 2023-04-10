@@ -136,6 +136,7 @@
 <script src="https://gsshopecorecipe.com/theme/basic/js/slick/slick.min.js?ver=210618"></script>
 <script src="https://gsshopecorecipe.com/theme/basic/js/custom_js.js?ver=210618"></script>
 <script src="https://gsshopecorecipe.com/theme/basic/js/aos/dist/aos.js?ver=210618"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="subpage">
 	<th:block th:replace="includes/header :: header1"></th:block>
@@ -229,7 +230,6 @@ ul.tagit input[type="text"] {
 	width: 100%;
 	height: 30px;
 }
-
 </style>
 	<link
 		rel="stylesheet"
@@ -317,6 +317,7 @@ ul.tagit input[type="text"] {
 						th:href="@{${'/event/vote?evid='+detail.evid}}"
 						class="btn_b01 btn"
 						title="목록"
+						style="background: #116530; border: 0;"
 					>목록으로</a></li>
 					<!--  -->
 				</ul>
@@ -347,11 +348,49 @@ ul.tagit input[type="text"] {
 		/>
 	</form>
 	<script>
-		function voting(e) {
-			let crid = $(e).data("crid");
-			$("#crid").val(crid);
-			$("#votelist").submit();
-		}
+    function voting(e) {
+        let mid = $("#mid").val();
+        let evid = $("#evid").val();
+        $.ajax({
+          url: "/event/api/checkVote?mid=" + mid + "&evid=" + evid,
+          type: "GET",
+          success: function (data) {
+            if (data == 1) {
+            	Swal.fire({
+                    text: "이미 투표하셨습니다.",
+                    icon: "warning",
+                    confirmButtonText: "확인",
+                    confirmButtonColor: '#116530',
+                  });
+            } else {
+            	Swal.fire({
+                    text: "투표하시겠습니까?",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonText: "확인",
+                    confirmButtonColor: '#116530',
+                    cancelButtonText: '취소',
+                  }).then((result)=>{
+                	  if(!result.isConfirmed) return
+                	  
+                	  if(result.isConfirmed){
+                		  'Deleted!',
+                	      'Your file has been deleted.',
+                	      'success'
+                	  }
+                	  let crid = $(e).data("crid");
+                      $("#crid").val(crid);
+                      $("#votelist").submit();
+                  })
+            	
+              
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Request failed: " + status + ", " + error);
+          },
+        });
+      }
 	</script>
 	<th:block th:replace="includes/footer :: footer"></th:block>
 </body>
