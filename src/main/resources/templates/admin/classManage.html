@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <th:block th:replace="admin/admin:: head"></th:block>
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <th:block th:replace="admin/admin:: sidebar"></th:block>
+      <!-- End of Sidebar -->
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <th:block th:replace="admin/admin:: Topbar"></th:block>
+          <!-- End of Topbar -->
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <nav class="navbar navbar-expand-lg">
+                  <div class="container-fluid">
+                    <a class="navbar-brand" href="#" style="font-weight: bold;color: #116530;">라이브 관리</a>
+                  </div>
+                  <!-- <button type="button" class="btn btn-primary" th:onclick="makeEvent(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 20%">이벤트 등록하기</button> -->
+                </nav>
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th style="text-align: center; vertical-align: baseline">번호</th>
+                        <th style="text-align: center; vertical-align: baseline">제목</th>
+                        <th style="text-align: center; vertical-align: baseline">수업 날짜</th>
+                        <th style="text-align: center; vertical-align: baseline">수업 시간</th>
+                        <th style="text-align: center; vertical-align: baseline">주 재료</th>
+                        <th style="text-align: center; vertical-align: baseline">VOD</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <!-- 
+                      <tr th:if="${#classList.isEmpty(classList)}">
+                        <td colspan="6" style="text-align: center; vertical-align: baseline">등록된 라이브클래스가 없습니다.</td>
+                      </tr>
+                       -->
+<!--                       <th:block th:if="${not #classList.isEmpty(classList)}"> -->
+                      <th:block>
+                        <tr th:each="list : ${classList}">
+                          <td th:text="${list.lcid}" style="text-align: center; vertical-align: baseline"></td>
+                          <td th:text="${list.lcname}" style="text-align: center; vertical-align: baseline"></td>
+                          <td style="text-align: center; vertical-align: baseline" th:text="${list.lcdate}"></td>
+                          <td style="text-align: center; vertical-align: baseline" th:text="${list.lcstart}+' ~ '+${list.lcend}"></td>
+                          <td th:text="${list.lckeyword}" style="text-align: center; vertical-align: baseline"></td>
+                          <td style="display: flex; justify-content: space-around">
+                            <!-- <button type="button" class="btn btn-outline-info" th:onclick="updateEvent([[${list}]])" data-bs-toggle="modal" data-bs-target="#exampleModal">수정</button> -->
+                            <button th:if="${list.classreg==0}" type="button" class="btn btn-outline-info" th:onclick="registerVOD([[${list.lcid}]],[[${list.lcname}]])" data-bs-toggle="modal" data-bs-target="#exampleModal">등록</button> 
+                            <button th:if="${list.classreg==1}" type="button" class="btn btn-outline-info" th:onclick="" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled='disabled' style="background: #116530;color: white;opacity: inherit;">등록완료</button> 
+                          </td>
+                        </tr>
+                      </th:block>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- 
+                <th:block th:if="${pageMaker.startPage!=1}">
+                  <nav>
+                    <ul class="pagination" style="justify-content: center">
+                      <li th:if="${pageMaker.prev}" class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
+                      </li>
+                      <li class="page-item" th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}"><a class="page-link" th:href="${num}" th:text="${num}">1</a></li>
+                      <li th:if="${pageMaker.next}" class="page-item">
+                        <a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </th:block>
+                 -->
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+        <!-- Button trigger modal -->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">VOD 등록</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <!-- 모달 등록 -->
+              <div class="modal-body">
+                <form id="enrollEvent" method="post" th:action="@{/class/register}">
+                  <div class="mb-3"><label for="exampleFormControlInput1">클래스 번호</label> <input class="form-control form-control-solid" name="classNumber" id="classnumber" type="text" readonly /></div>
+                  <div class="mb-3"><label for="exampleFormControlInput1">수업 이름</label> <input class="form-control form-control-solid" name="className" id="classname" type="text" readonly /></div>
+                  <div class="mb-3"><label for="exampleFormControlInput1">저장경로</label> <input class="form-control form-control-solid" name="classVodpath" id="classvodpath" type="text" /></div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" form="enrollEvent" class="btn" id="button">등록</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <th:block th:replace="admin/admin:: footer"></th:block>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i> </a>
+    
+    <script type="text/javascript">
+    function registerVOD(e,v){
+    	console.log("여기 실행 registerVOD");
+    	$("input[name='classNumber']").val(e);
+    	$("input[name='className']").val(v);
+    	
+    }
+    
+ 
+    
+    </script>
+    
+    <!-- <form id="pageForm" th:action="@{admin/eventManage}" th:method="get"><input type="hidden" name="pageNum" th:value="${pageMaker.cri.pageNum}" /> <input type="hidden" name="amount" th:value="${pageMaker.cri.amount}" /></form> -->
+    <!--  
+    <script>
+      function updateEvent(e) {
+        console.log("여기 실행 updateEvent");
+        $("input[name='evid']").val(e.evid);
+        $("#evtitle").val(e.evtitle);
+        let start_date = e.start_date.substring(0, 10);
+        let end_date = e.end_date.substring(0, 10);
+        let vstart_date = e.vstart_date.substring(0, 10);
+        let vend_date = e.vend_date.substring(0, 10);
+        $("#start_date").val(start_date);
+        $("#end_date").val(end_date);
+        $("#vstart_date").val(vstart_date);
+        $("#vend_date").val(vend_date);
+        $("#crmingredient").val(e.crmingredient);
+        // enrollEvent form의 action 변경
+        $("#enrollEvent").attr("action", "admin/eventModify");
+        $("#button").text("수정");
+      }
+
+      function makeEvent(e) {
+        $("input[name='evid']").parent().remove();
+        $("#evtitle").val("");
+        $("#start_date").val("");
+        $("#end_date").val("");
+        $("#vstart_date").val("");
+        $("#vend_date").val("");
+        $("#crmingredient").val("");
+        // enrollEvent form의 action 변경
+        $("#enrollEvent").attr("action", "admin/eventRegister");
+
+        //id 가 button인 버튼의 text를 수정하는 제이쿼리문
+        $("#button").text("등록");
+      }
+
+      function Voting(v, e) {
+        let evid = $("input[name='evid']").val();
+        location.href = "admin/votelist?crid=" + e + "&crvote=" + v + "&evid=" + evid;
+      }
+      $("#eventSort").change(function () {
+        let evidselect = $(this).val();
+        let pageForm = $("#pageForm");
+        pageForm.find("input[name='pageNum']").val("1");
+        pageForm.find("input[name='evid']").val(evidselect);
+        $("#pageForm").submit();
+      });
+      $(".pagination li a").on("click", function (e) {
+        e.preventDefault();
+        let pageForm = $("#pageForm");
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+      });
+
+      // exampleModal이 close될 때 마다
+      $("#exampleModal").on("hidden.bs.modal", function (e) {});
+    </script>
+    -->
+    <!-- Bootstrap core JavaScript-->
+    <th:block th:replace="admin/admin:: js"></th:block>
+  </body>
+</html>

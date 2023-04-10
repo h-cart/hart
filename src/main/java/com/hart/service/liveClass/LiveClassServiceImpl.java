@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.hart.domain.liveClass.LiveClassDetailDTO;
+import com.hart.domain.admin.AdminLiveClassDTO;
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
 import com.hart.domain.liveClass.LiveClassVideoDTO;
@@ -94,7 +94,6 @@ public class LiveClassServiceImpl implements LiveClassService{
 		}
 		log.info(list);
 		
-		
 		return list;
 		
 	}
@@ -107,6 +106,13 @@ public class LiveClassServiceImpl implements LiveClassService{
 		dto.setIngredientList(dto.getLcingredient().replaceAll(", ","@").split("@"));
 		
 		return dto;
+	}
+
+	@Override
+	public List<AdminLiveClassDTO> getClassAdminList() {
+		List<AdminLiveClassDTO> list = mapper.getAdminLiveClass();
+		
+		return list;
 	}
 
 }

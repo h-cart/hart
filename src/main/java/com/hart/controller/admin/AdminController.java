@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hart.domain.admin.AdminEventVO;
+import com.hart.domain.admin.AdminLiveClassDTO;
 import com.hart.domain.admin.Criteria;
 import com.hart.domain.admin.PageDTO;
 import com.hart.domain.event.CRecipeVO;
@@ -18,6 +18,7 @@ import com.hart.domain.event.EventListVO;
 import com.hart.domain.event.EventVoteVO;
 import com.hart.service.admin.AdminEventService;
 import com.hart.service.event.EventService;
+import com.hart.service.liveClass.LiveClassService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -31,6 +32,9 @@ public class AdminController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private LiveClassService classService;
 	
 	
 	// 관리자가 이벤트를 등록, 관리하는 페이지
@@ -133,5 +137,19 @@ public class AdminController {
 	public String getMethodName(){
 		return "admin/dialog";
 	}
+	
+	
+	
+	@GetMapping("/class")
+	public String liveClassDetailTest(Model model) {
+		log.info("무섭도록 코딩중");
+		
+		List<AdminLiveClassDTO> list = classService.getClassAdminList();
+		model.addAttribute("classList",list);
+		log.info("무섭도록 코딩완료");
+		log.info(list);
+		return "admin/classManage";
+	}
+	
 	
 }

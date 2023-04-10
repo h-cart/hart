@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.hart.domain.admin.AdminLiveClassDTO;
 import com.hart.domain.liveClass.LiveClassDetailDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
 import com.hart.domain.liveClass.LiveClassVideoDTO;
@@ -35,5 +36,7 @@ public interface LiveClassMapper {
 	public List<MyLiveClassInfoDTO> getMyLiveClassInfo(@Param("mid") String mid);
 	//수강 신청한 라이브 클래스 비디오 불러오기
 	public LiveClassVideoDTO getMyVideo(@Param("lcid") String lcid);
+	//라이브 클래스 관리자 목록 불러오기
+	public List<AdminLiveClassDTO> getAdminLiveClass();
 	
 }
