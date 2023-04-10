@@ -35,7 +35,9 @@ public class ProductsServiceImple implements ProductsService {
 		// 2대분류 카테고리 가져오기
 		return productsmapper.getcategorybar();
 	}
-
+	
+	
+	//상품디테일의 이미지와 설명 가져오기
 	@Override
 	public ProductsDetailVO getProductDetails(String pid) {
 		// 3 제품 상페 이미지 가져오기
