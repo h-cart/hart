@@ -48,6 +48,8 @@ public class ChatController {
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
+        
+        
         wr.write(message.getBytes("UTF-8"));
         wr.flush();
         wr.close();
