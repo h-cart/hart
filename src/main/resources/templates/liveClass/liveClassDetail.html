@@ -186,17 +186,7 @@
                   <table class="table table-borderless">
                     <tbody>
                       <tr>
-                        <!-- <td th:if="${Detail.detail.pdiscount != 0}"><h4 th:text="${Detail.detail.pdiscount} + '%'"></h4></td>
-                        <style></style> -->
-                        <!--
-                        <td>
-                            <span th:text="${#numbers.formatInteger(liveClass.liveClassListDTO.lcprice, 3, 'COMMA') + '원'}"></span>
-                        </td>
-<!-- 
-                        <td th:if="${Detail.detail.pdiscount == 0}">
-                          <span id="originPrice" th:text="${#numbers.formatInteger(Detail.detail.pprice, 3, 'COMMA') + '원'}" style="font-size: 30px"></span>
-                        </td>
-                         -->
+                        
                       </tr>
 
                       <tr>
@@ -220,12 +210,12 @@
                     </tbody>
                   </table>
                 </div>
-
+				<input type="hidden" id="quantity_-1" value="1"/>
                 <div class="product__details__cart__option row row-cols-sm-12">
                   <input type="checkbox" checked style="display: none" name="cartlist" id="chk_-1" />
-                  <!-- <input class="item" id="-1" type="hidden" th:data-value="${Detail.detail.pid}" name="pid" th:value="${Detail.detail.pid}" /> -->
+                  <input class="item" id="-1" type="hidden" th:data-value="${liveClass.liveClassListDTO.lcid}" name="pid" th:value="${liveClass.liveClassListDTO.lcid}" />
                   
-                  <a href="#" class="primary-btn addToCart col" style="margin: 10px; width: -webkit-fill-available" id="cartbtn">장바구니</a>
+                  <a href="#" th:onclick="addToCart(false,-1)" class="primary-btn addToCart col" style="margin: 10px; width: -webkit-fill-available" id="cartbtn">장바구니</a>
 
                   <a href="#" class="primary-btn orderDirect col" style="margin: 10px; width: -webkit-fill-available; background:white">바로구매</a>
                 </div>
@@ -322,62 +312,61 @@
     <script src="/js/dialog.js"></script>
     <!-- Code injected by live-server -->
     <!-- Code injected by live-server -->
-    <script th:inline="javascript">
+<script type="text/javascript"th:inline="javascript">
       /*<![CDATA[*/
-      function addToCart(flag) {
-        var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
-        console.log(isAdmin);
-        if (!isAdmin) {
-          Swal.fire({
-            title: "로그인이 필요한 활동입니다.",
-            text: "로그인 페이지로 이동하시겠습니까?",
-            icon: "info",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "네",
-            cancelButtonText: "아니요",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              location.href = "/member/login";
-            }
-          });
-          return;
-        }
-        var pamounts = [];
-        var pids = [];
-        $("input[name=cartlist]:checked").each(function () {
-          $(this).prop("checked", false);
-          var pos = $(this).prop("id").split("_")[1];
-          var pid = $("#" + pos).data("value");
-          var quantity = $("#quantity_" + pos).val();
-          pids.push(pid);
-          console.log(pos, pid, quantity);
-          pamounts.push(quantity);
-        });
-
-        if (pamounts.length == 0) {
-          Swal.fire({
-            icon: "error",
-            title: "수량을 선택해주세요.",
-            text: "수량을 0개 이상으로 선택 해주세요.",
-          });
-          return;
-        }
-        $.ajax({
-          url: "/capi/insert",
-          beforeSend: function (xhr) {
-            xhr.setRequestHeader(header, token);
-          },
-          type: "post",
-          contentType: "application/json",
-          data: JSON.stringify({
-            pids: pids,
-            pamounts: pamounts,
-          }),
-          success: function (result) {
-            console.log(result);
-            showModal(result);
+      function addToCart(flag,idx) {
+         var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
+         if (!isAdmin) {
+            Swal.fire({
+               title: '로그인이 필요한 활동입니다.',
+               text: "로그인 페이지로 이동하시겠습니까?",
+               icon: 'info',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               confirmButtonText: '네',
+               cancelButtonText: '아니요'
+            }).then((result) => {
+               if (result.isConfirmed) {
+                  location.href = "/member/login";
+               }
+            })
+            return;
+         }
+         var pamounts = [];
+         var pids = [];
+		 if(flag){
+		let ckItem = $("input[name=cartlist]:checked");
+         $(ckItem).each(function () {
+            var pos = $(this).prop('id').split('_')[1];
+            var pid = $('#' + pos).data('value');
+            var quantity = $("#quantity_" + pos).val();
+            pids.push(pid);
+            pamounts.push(quantity);
+         })
+		 }else {
+			
+			var pid = $("#" + idx).data("value");
+			 var quantity = "1";
+			 pids.push(pid);
+			 pamounts.push(quantity);
+			 console.log(pid,quantity);
+	   }
+         $.ajax({
+            url: '/capi/insert',
+            beforeSend: function (xhr) {
+               xhr.setRequestHeader(header, token);
+            },
+            type: 'post',
+            contentType: "application/json",
+            data: JSON.stringify({
+               pids: pids,
+               pamounts: pamounts
+            }),
+            success: function (result) {
+				console.log(result);
+				if(result.result==null)  showModal(result,true);
+				else showModal(result,flag);
           },
           error: function (err, xhr, status) {
             if (err.status == 405 || err.status == 400) {
@@ -388,10 +377,7 @@
       }
 
       /*]]>*/
-      $(document).on("click", ".addToCart", function () {
-        console.log("클");
-        addToCart();
-      });
+
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   </body>

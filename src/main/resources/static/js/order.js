@@ -8,7 +8,7 @@ $(".orderDirect").on("click", function () {
 		var pos = $(this).prop('id').split('_')[1];
 		var pid = $('#' + pos).data('value');
 		var quantity = $('#quantity_' + pos).val();
-
+		console.log(pos,pid,quantity);
 		form.append($('<input/>', { type: 'hidden', name: 'pids', value: pid }));
 		form.append($('<input/>', { type: 'hidden', name: 'pamounts', value: quantity }));
 
