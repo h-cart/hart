@@ -399,12 +399,16 @@
 						beforeSend: function (xhr) {
 							xhr.setRequestHeader(header, token);
 						},
-						success: function (result) {
+						success: function (data) {
 							console.log(result);
 							Swal.fire(
 								'공유 장바구니로 이동합니다.'
-							)
-							location.href = '/cart/share/' + result.result.csno;
+							).then((result) =>{
+								if(result.isConfirmed){
+									location.href = '/cart/share/' + data.result.csno;
+								}
+							})
+							
 						}, error: function (err, xhr, status) {
 							console.log(err.status);
 						}
