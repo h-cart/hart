@@ -31,7 +31,7 @@ public class ChatController {
 	}
 	
 	@PostMapping("/")
-	public String main(String voiceMessage) {
+	public String Chatbot(String voiceMessage) {
 		// voiceMessage라는 문자열 매개변수 ,사용자가 보내려는 메시지 내용이 포함되어 있을 것으로 추정됩니다.
 
 		String chatbotMessage = "";
@@ -41,8 +41,6 @@ public class ChatController {
 		String apiUrl = "https://keepk4k7pu.apigw.ntruss.com/custom/v1/10080/6113693b24230d2699b8f0cacd34281fa09355ef64fccf83c71d0bec7dcb3a1b";
 
 		try {
-
-
 
 			URL url = new URL(apiUrl);
 
@@ -87,6 +85,8 @@ public class ChatController {
 		return chatbotMessage;
 	}
 
+	
+	
 	public static String makeSignature(String message, String secretKey) {
 
 		String encodeBase64String = "";
