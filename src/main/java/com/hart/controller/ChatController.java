@@ -82,11 +82,11 @@ public class ChatController {
 			SecretKeySpec signingKey = new SecretKeySpec(secrete_key_bytes, "HmacSHA256");
 			Mac mac = Mac.getInstance("HmacSHA256");
 			mac.init(signingKey);
-
-			byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
-			encodeBase64String = Base64.encodeToString(rawHmac, Base64.NO_WRAP);
-
-			return encodeBase64String;
+//
+//			byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
+//			encodeBase64String = Base64.encodeToString(rawHmac, Base64.NO_WRAP);
+//
+//			return encodeBase64String;
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -128,12 +128,12 @@ public class ChatController {
             bubbles_obj.put("data", data_obj);
 
             JSONArray bubbles_array = new JSONArray();
-            bubbles_array.put(bubbles_obj);
-            
-            obj.put("bubbles", bubbles_array);
-            obj.put("event", "send");
-
-            requestBody = obj.toString();
+//            ((Object) bubbles_array).put(bubbles_obj);
+//            
+//            obj.put("bubbles", bubbles_array);
+//            obj.put("event", "send");
+//
+//            requestBody = obj.toString();
 
         } catch (Exception e){
             System.out.println("## Exception : " + e);

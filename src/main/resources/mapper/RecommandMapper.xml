@@ -39,8 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getRecommandRecipe" resultMap="RecommandRecipe">
 		SELECT
-		rid,rtitle,rimg, rlevel,rtime
-		FROM recipe
+		rc.rid,rtitle,rimg, rlevel,rtime,rc.rcano, rccategory
+		FROM recipe rc join recipe_category rct on rc.rcano = rct.rcano
 		WHERE rmingredient like
 		'%'||#{stag}||'%' OR
 		rtitle like '%'||#{stag}||'%'
@@ -51,9 +51,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="rimg" column="RIMG" />
 		<result property="rlevel" column="RLEVEL" />
 		<result property="rtime" column="RTIME" />
-		<!-- <result property="rcano" column="RCANO" /> -->
-		<!-- <result property="rccategory" column="RCCATEGORY" /> -->
-		<result property="rccategory" column="RTIME" />
+		<result property="rcano" column="RCANO" />
+		<result property="rccategory" column="RCCATEGORY" />
 		<collection property="items" column="rid"
 			ofType="IngredientDTO" javaType="java.util.ArrayList"
 			select="getIngredients" />

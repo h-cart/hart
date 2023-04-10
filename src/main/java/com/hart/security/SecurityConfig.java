@@ -72,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/").permitAll().antMatchers("/order/**").authenticated()
 				.antMatchers("/mypage/**").authenticated()
 				.antMatchers("/member/login/**").permitAll()
+				.antMatchers("/member/login_form").permitAll()
 				.antMatchers("/member/**").hasRole("USER");
 //				.antMatchers("/admin").hasRole("ADMIN");
 		// 인가 인증 문제시 로그인 화면
