@@ -1,119 +1,102 @@
 package com.hart.controller;
 
-
-
-  import android.media.MediaPlayer; 
-  import android.os.Environment; 
-  import android.util.Base64;
- 
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.security.Timestamp;
 import java.util.Date;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import android.util.Base64;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-
-
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class ChatController {
 
-  public static String main(String voiceMessage) {
-	  				//voiceMessage라는 문자열 매개변수 ,사용자가 보내려는 메시지 내용이 포함되어 있을 것으로 추정됩니다.
+	public static String main(String voiceMessage) {
+		// voiceMessage라는 문자열 매개변수 ,사용자가 보내려는 메시지 내용이 포함되어 있을 것으로 추정됩니다.
 
-        String chatbotMessage = "";
-        
-        String secretKey = "bkdVdGZTVERtTHdKd3ZFSWJQdVZyTU9IaGVVaVpDUFk=";
-        String apiUrl ="https://keepk4k7pu.apigw.ntruss.com/custom/v1/10080/6113693b24230d2699b8f0cacd34281fa09355ef64fccf83c71d0bec7dcb3a1b";
+		String chatbotMessage = "";
 
-        try {
-        	
-           // String apiURL1 = "https://keepk4k7pu.apigw.ntruss.com/custom/v1/10080/6113693b24230d2699b8f0cacd34281fa09355ef64fccf83c71d0bec7dcb3a1b";
+		String secretKey = "bkdVdGZTVERtTHdKd3ZFSWJQdVZyTU9IaGVVaVpDUFk=";
+		String apiUrl = "https://keepk4k7pu.apigw.ntruss.com/custom/v1/10080/6113693b24230d2699b8f0cacd34281fa09355ef64fccf83c71d0bec7dcb3a1b";
 
-            URL url = new URL(apiUrl);
+		try {
 
-            String message = getReqMessage(voiceMessage);
-            System.out.println("message##" + message);
+			// String apiURL1 =
+			// "https://keepk4k7pu.apigw.ntruss.com/custom/v1/10080/6113693b24230d2699b8f0cacd34281fa09355ef64fccf83c71d0bec7dcb3a1b";
 
-            String encodeBase64String = makeSignature(message, secretKey);
+			URL url = new URL(apiUrl);
 
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "application/json;UTF-8");
-            con.setRequestProperty("X-NCP-CHATBOT_SIGNATURE", encodeBase64String);
+			String message = getReqMessage(voiceMessage);
+			System.out.println("message##" + message);
 
-            // post request
-            con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.write(message.getBytes("UTF-8"));
-            wr.flush();
-            wr.close();
-            int responseCode = con.getResponseCode();
+			String encodeBase64String = makeSignature(message, secretKey);
 
-            BufferedReader br;
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("POST");
+			con.setRequestProperty("Content-Type", "application/json;UTF-8");
+			con.setRequestProperty("X-NCP-CHATBOT_SIGNATURE", encodeBase64String);
 
-            if(responseCode==200) { // Normal call
-                System.out.println(con.getResponseMessage());
+			// post request
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.write(message.getBytes("UTF-8"));
+			wr.flush();
+			wr.close();
+			int responseCode = con.getResponseCode();
 
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(
-                                con.getInputStream()));
-                String decodedString;
-                while ((decodedString = in.readLine()) != null) {
-                    chatbotMessage = decodedString;
-                }
-                //chatbotMessage = decodedString;
-                in.close();
+			BufferedReader br;
 
-            } else {  // Error occurred
-                chatbotMessage = con.getResponseMessage();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+			if (responseCode == 200) { // Normal call
+				System.out.println(con.getResponseMessage());
 
-        return chatbotMessage;
-    }
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String decodedString;
+				while ((decodedString = in.readLine()) != null) {
+					chatbotMessage = decodedString;
+				}
+				// chatbotMessage = decodedString;
+				in.close();
 
-    public static String makeSignature(String message, String secretKey) {
+			} else { // Error occurred
+				chatbotMessage = con.getResponseMessage();
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
-        String encodeBase64String = "";
+		return chatbotMessage;
+	}
 
-        try {
-            byte[] secrete_key_bytes = secretKey.getBytes("UTF-8");
+	public static String makeSignature(String message, String secretKey) {
 
-            SecretKeySpec signingKey = new SecretKeySpec(secrete_key_bytes, "HmacSHA256");
-            Mac mac = Mac.getInstance("HmacSHA256");
-            mac.init(signingKey);
+		String encodeBase64String = "";
 
-            byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
-            encodeBase64String = Base64.encodeToString(rawHmac, Base64.NO_WRAP);
+		try {
+			byte[] secrete_key_bytes = secretKey.getBytes("UTF-8");
 
-            return encodeBase64String;
+			SecretKeySpec signingKey = new SecretKeySpec(secrete_key_bytes, "HmacSHA256");
+			Mac mac = Mac.getInstance("HmacSHA256");
+			mac.init(signingKey);
 
-        } catch (Exception e){
-            System.out.println(e);
-        }
+			byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
+			encodeBase64String = Base64.encodeToString(rawHmac, Base64.NO_WRAP);
 
-        return encodeBase64String;
+			return encodeBase64String;
 
-    }
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
-    public static String getReqMessage(String voiceMessage) {
+		return encodeBase64String;
+
+	}
+
+	public static String getReqMessage(String voiceMessage) {
     					//voiceMessage라는 문자열 매개변수를 사용합니다. 여기에는 사용자가 보내려는 메시지 내용이 포함되어 있을 것으로 추정됩니다
         String requestBody = "";//requestBody는 빈 문자열로 초기화되며 메시지 요청을 나타내는 최종 JSON 문자열을 저장하는 데 사용
 
