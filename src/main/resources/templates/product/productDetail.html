@@ -200,7 +200,7 @@
                   <a href="#" class="primary-btn orderDirect col" style="margin: 10px; width: -webkit-fill-available">바로구매</a>
                 </div>
               </div>
-
+		
               <div class="product__details__widget">
                 <script>
                   // id가 discontPrice인 span 이있으면 해당 값이 id가 quantity_-1랑 곱해서 나타내주고  discontPrice인 span이 없으면 id가 originPrice인 span이랑 곱해서 나타내기
@@ -284,6 +284,8 @@
                   </div>
                   <div class="tab-pane" id="tabs-7" role="tabpanel">
                     <div class="product__details__tab__content">반품 환불</div>
+                  	<input type="checkbox" name="cartlist" display="none;" id="checkbox_-1"checked/>
+                  	
                   </div>
                 </div>
               </div>
@@ -328,7 +330,6 @@
         var pids = [];
         if(flag){
         $("input[name=cartlist]:checked").each(function () {
-          $(this).prop("checked", false);
           var pos = $(this).prop("id").split("_")[1];
           var pid = $("#" + pos).data("value");
           var quantity = $("#quantity_" + pos).val();
