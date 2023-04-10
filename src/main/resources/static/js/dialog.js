@@ -1,15 +1,12 @@
-let flag = false;
-
-function showModal(result) {
+function showModal(result,flag,title) {
   $("dialog").remove();
   var idx = 0;
+  if(result.result!=null){
   var lives = result.result.lives;
   var recipes = result.result.recipes;
-  if (!flag && lives.length == 0 && recipes.length == 0) {
-    flag = !flag;
-  }
-  console.log(lives.length);
-  console.log(recipes.length);
+	}
+   let dtitle = title==null?"장바구니에 담았습니다." :title;
+   
   var str = `<style>
    dialog::-webkit-scrollbar {
       display: none;
@@ -79,7 +76,7 @@ function showModal(result) {
 	<dialog>
       <div class="container">
       <div>
-      <h4 style="text-align: center" style="word-break: keep-all;">장바구니에 담겼습니다 <i class="fa-solid fa-x fa-xs dialog-close" style="color: #000000"></i></h4>
+      <h4 style="text-align: center" style="word-break: keep-all;">${dtitle}</h4>
       <img id="cart_product_img" src="https://tohomeimage.thehyundai.com/DP/DP018/2023/02/02/153935/lgjsv.jpg" alt="" />
       <h4 id="cart_item" style="text-align: center; word-break: keep-all; margin-bottom: 20px" ></h4>
 
@@ -233,12 +230,12 @@ function showModal(result) {
                </div>
             </div>`;
     }
-    str += `<div onclick="addToCart" class="addToCart" style="
+    if((lives.length!=0 ||recipes.length!=0)){
+    str += `<div onclick="addToCart(true)" class="addToCart" style="
    background-color: black;
    text-align: center; 
 "><a href="#" class="primary-btn">장바구니 담기</a></div>`;
-    flag = !flag;
-    console.log(flag);
+}
   }
   str += `</div>
       </div>
@@ -247,11 +244,19 @@ function showModal(result) {
   const dialog = document.querySelector("dialog");
 
   dialog.showModal();
-  let newSrc = $("#mainImg").attr("src");
-  $("#cart_product_img").attr("src", newSrc);
-  let newTitle = $("#pname").text();
-  $("#cart_item").text(newTitle);
+  if(result.result==null){
+	$("#cart_product_img").attr("src", "/img/logo.png");
+}else {
+  $("#cart_product_img").attr("src", result.result.pimg);
+  $("#cart_item").text(result.result.pname);
+  }
 }
-$(document).on("click", ".dialog-close", function () {
-  $("dialog").remove();
-});
+$(document).on("click","dialog",function(event){
+	 if ($(event.target).closest('#dialog').length !== 0) {
+    return;
+  }
+
+  // 다이얼로그를 숨기거나 제거하는 로직을 여기에 작성
+  // 예시: 다이얼로그를 숨기기
+  $(this).remove();
+})

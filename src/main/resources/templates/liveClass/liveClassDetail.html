@@ -152,6 +152,7 @@
 										<span id="btnBuy">수강 신청하기</span>
 									</button>
 									<button type="button"
+										th:onclick="addToCart(false,-1)"
 										class="btn btn-order btn-gray btn-basket addToCart"
 										>
 										<span>장바구니 담기</span>
@@ -220,9 +221,8 @@
 </script>
 <script type="text/javascript"th:inline="javascript">
       /*<![CDATA[*/
-      function addToCart(flag) {
+      function addToCart(flag,idx) {
          var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
-         console.log(isAdmin);
          if (!isAdmin) {
             Swal.fire({
                title: '로그인이 필요한 활동입니다.',
@@ -242,17 +242,22 @@
          }
          var pamounts = [];
          var pids = [];
-         let ckItem = $("input[name=cartlist]:checked");
+		 if(flag){
+		let ckItem = $("input[name=cartlist]:checked");
          $(ckItem).each(function () {
-            $(this).prop("checked",false);
             var pos = $(this).prop('id').split('_')[1];
             var pid = $('#' + pos).data('value');
             var quantity = $("#quantity_" + pos).val();
             pids.push(pid);
-            console.log(pos, pid, quantity);
             pamounts.push(quantity);
          })
-
+		 }else {
+			
+			var pid = $("#" + idx).data("value");
+			 var quantity = $("#quantity_" + idx).val();
+			 pids.push(pid);
+			 pamounts.push(quantity);
+	   }
          $.ajax({
             url: '/capi/insert',
             beforeSend: function (xhr) {
@@ -265,8 +270,10 @@
                pamounts: pamounts
             }),
             success: function (result) {
-               console.log(result);
-               showModal(result);
+				console.log(result);
+				if(result.result==null)  showModal(result,true);
+				else showModal(result,flag);
+               
 
             }, error: function (err, xhr, status) {
 
@@ -279,10 +286,6 @@
 
 
    /*]]>*/
-      $(document).on("click",".addToCart",function(){
-         console.log("클");
-         addToCart();
-      })
 </script>	
 				
 </body>

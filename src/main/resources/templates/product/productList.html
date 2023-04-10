@@ -86,12 +86,12 @@
                            </div>
                            <div class="product__item__text">
                              <h6>${product.pname}</h6>
-                             <a href="#" onclick='addToCart(false,${pidx})'class="add-cart">+ Add To Cart</a>
+                             <a href="#" onclick='addToCart(false,-${pidx})'class="add-cart">+ Add To Cart</a>
                             <h5>${pprice}원</h5>
 
           					
-                             <input type="hidden" id="${pidx}" data-value="${product.pid}"/>
-                             <input type="hidden" id="quantity_${pidx}" value="1"/>
+                             <input type="hidden" id="-${pidx}" data-value="${product.pid}"/>
+                             <input type="hidden" id="quantity_-${pidx}" value="1"/>
                              <div class="product__color__select">
                              
                              </div>
@@ -305,17 +305,14 @@
           var pid = $("#" + pos).data("value");
           var quantity = $("#quantity_" + pos).val();
           pids.push(pid);
-          console.log(pos, pid, quantity);
           pamounts.push(quantity);
         });
-        
 		}else {
 			
 			 var pid = $("#" + idx).data("value");
           	var quantity = $("#quantity_" + idx).val();
           	pids.push(pid);
          	 pamounts.push(quantity);
-         	 console.log(pid,quantity);
 		}
         $.ajax({
           url: "/capi/insert",
@@ -329,8 +326,7 @@
             pamounts: pamounts,
           }),
           success: function (result) {
-            console.log(result);
-            showModal(result);
+            showModal(result,flag);
           },
           error: function (err, xhr, status) {
             if (err.status == 405 || err.status == 400) {

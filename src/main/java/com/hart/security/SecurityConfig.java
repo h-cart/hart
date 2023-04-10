@@ -19,7 +19,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.hart.security.handler.LoginFailureHandler;
 import com.hart.security.handler.LoginSuccessHandler;
 import com.hart.service.ClubUserDetailsService;
-import com.nimbusds.jose.crypto.opts.UserAuthenticationRequired;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

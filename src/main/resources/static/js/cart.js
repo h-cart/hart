@@ -102,22 +102,39 @@ function getCheckboxValue() {
 
 
 function selectRemove(entryNumber) {
-
-	var msgStr = "";
-	msgStr = "선택하신 상품을 쇼핑백에서 삭제하시겠습니까?";
 	var entryNumber = "";
 	$("input:checkbox[name='cartlist']:checked").each(function () {
 		entryNumber += $(this).closest("tr").data('value')+ ",";
 	});
+		if (entryNumber.length == "") {
+		Swal.fire({
+  icon: 'error',
+  title: '선택된 상품이 없습니다.',
+  text: '삭제할 상품을 선택해 주세요.',
+  confirmButtonText: '닫기	' // 원하는 버튼 텍스트로 변경
+})
+		return false;
+	}
+	var msgStr = "선택하신 상품을 쇼핑백에서 삭제하시겠습니까?";
+	customConfirmWithAction("선택하신 상품을 쇼핑백에서 삭제하시겠습니까?","","확인","취소")
+	 .then((result) => {
+		if (result.isConfirmed) { // SweetAlert2에서 확인 버튼을 클릭한 경우
+
 	entryNumber = entryNumber.substring(0, entryNumber.length - 1);
-	console.log(entryNumber);
 	deleteBtnEvent(entryNumber);
+		}
+	  });
+	
 
 }
 function deleteBtnEvent(param) {
 	console.log(param);
 	if (param.length == "") {
-		alert("선택된 상품이 없습니다. <br /> 삭제할 상품을 선택해 주세요.");
+		Swal.fire({
+  icon: 'error',
+  title: '선택된 상품이 없습니다.',
+  text: '삭제할 상품을 선택해 주세요.',
+})
 		return false;
 	}
 	var pids = param.split(",");
@@ -186,3 +203,19 @@ function calPrice(pos){
 	totalPrice.text(numberWithCommas(+price*+quantity)+"원");
 	
 }
+
+
+	$(document).on("click",".recommand_btn",function(event){
+		event.preventDefault();
+			$.ajax({
+				url : '/recommand/list',
+				type : 'get',
+				contentType : "application/json",
+				success : function(result){
+					showModal(result,false,"최근에 담은 상품");		
+				},error : function(err,xhr,status){
+					console.log(err);
+				}
+			})
+			
+	})

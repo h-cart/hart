@@ -326,7 +326,6 @@
         }
         var pamounts = [];
         var pids = [];
-        console.log(flag);
         if(flag){
         $("input[name=cartlist]:checked").each(function () {
           $(this).prop("checked", false);
@@ -357,8 +356,8 @@
             pamounts: pamounts,
           }),
           success: function (result) {
-            console.log(result);
-            showModal(result);
+            
+            showModal(result,flag);
           },
           error: function (err, xhr, status) {
             if (err.status == 405 || err.status == 400) {
