@@ -91,10 +91,8 @@ public class LiveClassController {
 		model.addAttribute("liveClass",dto);
 		log.info(model);
 		
-		
 		return "liveClass/testdetail";
 	}
-	
 	
 	
 }

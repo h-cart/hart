@@ -162,11 +162,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3 col-md-3">
-				<div class="header__logo">
+				<div class="header__logo" style="padding-top: 27px;">
 					<a href="/"><img
-						src="/img/logo.png"
+						src="/img/hartlogo.jpg"
 						alt=""
-						style="height: 36px"
+						style="height: 36px "
 					/></a>
 				</div>
 			</div>
@@ -400,12 +400,16 @@
 						beforeSend: function (xhr) {
 							xhr.setRequestHeader(header, token);
 						},
-						success: function (result) {
+						success: function (data) {
 							console.log(result);
 							Swal.fire(
 								'공유 장바구니로 이동합니다.'
-							)
-							location.href = '/cart/share/' + result.result.csno;
+							).then((result) =>{
+								if(result.isConfirmed){
+									location.href = '/cart/share/' + data.result.csno;
+								}
+							})
+							
 						}, error: function (err, xhr, status) {
 							console.log(err.status);
 						}
