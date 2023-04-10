@@ -13,7 +13,7 @@
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-6">
-            <form class="form-inline">
+            <form class="form-inline" th:action="@{/chat}" method="post">
                 <div class="form-group">
                     <label for="connect">웹소켓 연결:</label>
                     <button id="connect" class="btn btn-default" type="submit">연결</button>
