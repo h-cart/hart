@@ -167,7 +167,7 @@
                   <table class="table table-borderless">
                     <tbody>
                       <tr>
-                        <td th:if="${Detail.detail.pdiscount != 0}"><h4 th:text="${Detail.detail.pdiscount} + '%'"></h4></td>
+                        <td th:if="${Detail.detail.pdiscount != 0}"><h4 th:text="${Detail.detail.pdiscount} + '%'" style="color:#dc3545"></h4></td>
                         <style></style>
                         <td th:if="${Detail.detail.pdiscount != 0}">
                           <span id="discontPrice" th:text="${#numbers.formatInteger(Detail.detail.pprice - (Detail.detail.pdiscount * Detail.detail.pprice /100), 3, 'COMMA') + '원'}" style="font-size: 30px"></span>

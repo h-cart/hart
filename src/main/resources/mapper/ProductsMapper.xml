@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.hart.mapper.ProductsMapper">
 	<!-- -->
 
-	<!-- 헤더 카테고리 가져오기 pcno_top=100571 넘기면 해당 육류가 전체 카테고리 받음 -->
+	<!-- 헤더 카테고리 가져오기 -->
 	<select id="getcategorybar"
 		resultType="com.hart.domain.product.CategoryVO">
 		SELECT pc.pcategory, pc.pcno, pc.pcno_top
@@ -108,7 +108,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (	select pname, pprice, pcno, pdiscount,pid 
 					from products 
 					order by pdiscount desc) pd 
-			
             ) pa join product_img pdimg on pa.pid=pdimg.pid
             where pdepth =0 and rownum <=8 
 		]]>
