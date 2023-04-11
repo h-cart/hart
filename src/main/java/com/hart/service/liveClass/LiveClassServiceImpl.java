@@ -1,5 +1,6 @@
 package com.hart.service.liveClass;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.hart.domain.admin.AdminLiveClassDTO;
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
+import com.hart.domain.liveClass.LiveClassRegisterDTO;
 import com.hart.domain.liveClass.LiveClassVideoDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.mapper.LiveClassMapper;
@@ -26,15 +28,25 @@ public class LiveClassServiceImpl implements LiveClassService{
 	@Override
 	public List<LiveClassListDTO> getList() {
 		log.info("getList 서비스 호출");
-		List<LiveClassListDTO> list = mapper.getLiveList();
-		log.info(list);
+		List<LiveClassListDTO> list= new ArrayList<>();
+		try {
+			list = mapper.getLiveList();
+			log.info(list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 
 	@Override
 	public LiveClassDetailInfoDTO getClassDetail(String lcid) {
 		log.info("getClassDetail 서비스 호출");
-		LiveClassListDTO dto = mapper.getLiveClassDetail(lcid);
+		LiveClassListDTO dto =  new LiveClassListDTO();
+		try {
+			dto = mapper.getLiveClassDetail(lcid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		log.info(dto);
 		LiveClassDetailInfoDTO infoDTO = new LiveClassDetailInfoDTO();
 		
@@ -46,7 +58,6 @@ public class LiveClassServiceImpl implements LiveClassService{
 		infoDTO.setLcStudentList(dto.getLcstudent().substring(1).split("-"));
 		
 		//infoDTO.setLcStudentList(dto.getLcstudent().replaceAll(" - ", "@").substring(1).split("@"));
-		
 		//infoDTO.setLctExplainList(dto.getLctexplain().split("-"));
 		//infoDTO.setLcStudentList(dto.getLcstudent().split(" - "));
 		infoDTO.setLiveClassListDTO(dto);
@@ -59,7 +70,12 @@ public class LiveClassServiceImpl implements LiveClassService{
 	@Override
 	public List<MyLiveClassInfoDTO> getMyClassInfo(String mid) {
 		log.info("getMyClassInfo 서비스 호출");
-		List<MyLiveClassInfoDTO> list = mapper.getMyLiveClassInfo(mid);
+		List<MyLiveClassInfoDTO> list =  new ArrayList<>();
+		try {
+			list = mapper.getMyLiveClassInfo(mid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		Calendar startTime = Calendar.getInstance(); 
 		Calendar endTime = Calendar.getInstance(); 
 		long now = System.currentTimeMillis();
@@ -101,18 +117,49 @@ public class LiveClassServiceImpl implements LiveClassService{
 	@Override
 	public LiveClassVideoDTO getClassVideo(String lcid) {
 		log.info("getClassVideo 서비스 호출");
-		LiveClassVideoDTO dto = mapper.getMyVideo(lcid);
-		
+		LiveClassVideoDTO dto = new LiveClassVideoDTO();
+		try {
+			dto = mapper.getMyVideo(lcid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		dto.setIngredientList(dto.getLcingredient().replaceAll(", ","@").split("@"));
-		
 		return dto;
 	}
 
 	@Override
 	public List<AdminLiveClassDTO> getClassAdminList() {
-		List<AdminLiveClassDTO> list = mapper.getAdminLiveClass();
-		
+		List<AdminLiveClassDTO> list = new ArrayList<>();
+		try {
+			list = mapper.getAdminLiveClass();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return list;
+	}
+
+	@Override
+	public void registerVOD(LiveClassRegisterDTO dto) {
+		String path = dto.getClassVodpath();
+		int result=0;
+		dto.setClassVodpath("https://dg15tp5w47tfz.cloudfront.net/"+path);
+		try {
+			result = mapper.registerLiveClassVOD(dto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		log.info(result);
+	}
+
+	@Override
+	public int checkClassMember(String lcid, String mid) {
+		int memberCheck=0;
+		try {
+			memberCheck = mapper.checkClassMember(lcid, mid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return memberCheck;
 	}
 
 }

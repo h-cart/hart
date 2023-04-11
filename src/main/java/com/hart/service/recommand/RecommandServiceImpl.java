@@ -28,22 +28,37 @@ public class RecommandServiceImpl  implements RecommandService{
 		RecommandDTO result =null;
 		if(csno == null) result = rMapper.getMyRecommand(mid);
 		else  result = rMapper.getShareRecommand(csno);
+		if(result==null) return result;
 		if(result.getRecipes()!=null) {
-			List<RecipeCategoryDTO> rcates = new ArrayList<>();
-			for(RrecipeDTO rDTO : result.getRecipes()) {
-				rcates.add(RecipeCategoryDTO.builder()
-							.rcano(rDTO.getRcano())
-							.rcname(rDTO.getRccategory())
-							.build());
-			}
-			result.setRcates(rcates);
+			result.setRcates(getCategory(result));
 		}
-		System.out.println(result);
 		return result;
 	}
 	
+	@Transactional
+	@Override
+	public RecommandDTO RecommandForProduct(String pid) throws Exception {
+		RecommandDTO result = rMapper.getProductRecommand(pid);
+		if(result==null) return result;
+		if(result.getRecipes()!=null) {
+			result.setRcates(getCategory(result));
+		}
+		return result;
+	}
+
 	public String dateFormatter(String odate) {
 		return odate.split(" ")[0].substring(2).replace("-","/");
+	}
+	
+	public List<RecipeCategoryDTO> getCategory(RecommandDTO result){
+		List<RecipeCategoryDTO> rcates = new ArrayList<>();
+		for(RrecipeDTO rDTO : result.getRecipes()) {
+			rcates.add(RecipeCategoryDTO.builder()
+						.rcano(rDTO.getRcano())
+						.rcname(rDTO.getRccategory())
+						.build());
+		}
+		return rcates;
 	}
 	
 }

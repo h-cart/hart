@@ -47,6 +47,8 @@ public class OrderServiceImpl implements OrderService{
 		if(oDTO.getCLists()!=null) {
 			if(oMapper.checkClass(oDTO.getOinfo().getMid(), oDTO.getCLists())==0) {
 			oMapper.insertClass(oDTO.getCLists(), oDTO.getOinfo());
+			log.info(oDTO.getCLists());
+			log.info(oDTO.getOinfo());
 			oMapper.intoMyClass(oDTO.getCLists(),oDTO.getOinfo());
 			}
 			else throw new Exception("수강 중인 클래스 존재");

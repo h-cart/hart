@@ -28,6 +28,8 @@ public interface ProductsService {
 
 	public List<ListVO> Productlist(ListVO list);
 
+	public List<CategoryVO> getcategorybar(int pcno);
+
 	
 	
 }

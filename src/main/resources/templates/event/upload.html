@@ -278,12 +278,7 @@ ul.tagit input[type="text"] {
 						id="divMainPhotoUpload"
 						class="cont_pic2"
 					>
-						<input
-							type="hidden"
-							name="main_photo"
-							id="main_photo"
-							value=""
-						/> <input
+					<input
 							type="hidden"
 							name="new_main_photo"
 							id="new_main_photo"
@@ -474,6 +469,7 @@ ul.tagit input[type="text"] {
 									value=""
 								/> <input
 									type="hidden"
+									data-name="요리순서의 사진1"
 									name="new_step_photo[]"
 									id="new_step_photo_1"
 									value=""
@@ -482,6 +478,7 @@ ul.tagit input[type="text"] {
 									<input
 										type="file"
 										name="crimg"
+										data-name="요리순서의 사진22"
 										id="q_step_file_1"
 										file_gubun="step"
 										accept="jpeg,png,gif"
@@ -584,6 +581,7 @@ ul.tagit input[type="text"] {
 							<input
 								id="q_auto_material"
 								class="form-control step_cont"
+								data-name="요리순서의 설명"
 								placeholder="<예시>
 [스테이크 재료] 돼지고기 500g, 양파 1/2개, 고추 1개, 간장
 [파절임] 대파 3개, 고춧가루 1숟가락, 매실엑기스 3숟가락, 식초 3숟가락
@@ -914,11 +912,11 @@ ul.tagit input[type="text"] {
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
-	<input
+<!-- 	<input
 		type="hidden"
 		name="isRestrict"
 		value="false"
-	/>
+	/> -->
 	<div
 		id="recentRecipeDiv"
 		class="container"
@@ -1365,10 +1363,10 @@ li {
         // newMaterial이라는 변수를 생성하고 해당 형식으로 값을 할당합니다.
         var newMaterial = `
        <li id="liMaterial_1_${materialCount}">
-           <input type="hidden" name="pid" value="${pid}">
+           <input type="hidden" name="pid" value="${pid? pid:0}">
       
-         <input type="text" name="iname" id="cok_material_nm_1_${materialCount}" class="form-control" value="${text}" style="width: 330px; background: #ffffff;" readOnly>
-         <input type="text" name="cricount" id="cricount_1_${materialCount}" class="form-control" placeholder="300g" style="width: 280px; background: #ffffff;" >
+         <input type="text" name="iname" data-name="재료명" id="cok_material_nm_1_${materialCount}" class="form-control" value="${text}" style="width: 330px; background: #ffffff;" readOnly>
+         <input type="text" name="cricount" data-name="재료 수량" id="cricount_1_${materialCount}" class="form-control" placeholder="300g" style="width: 280px; background: #ffffff;" >
          <a id="btnMaterialDel_1_${materialCount}" onclick="deletBtn(this)" class="btn-del" style="display: ${display};"></a>
        </li>`;
         // 모달창을 닫습니다.
@@ -1393,7 +1391,7 @@ li {
               flag = false;
               let desc = $(this).data("name");
               Swal.fire({
-                  text: desc+"을 채워주세요"+this[0],
+                  text: desc+"을 채워주세요",
                   icon: "warning",
                   confirmButtonText: "확인",
                 });
@@ -1401,7 +1399,7 @@ li {
               $(this).focus();
               return false;
             }
-            if ($("#divMaterialArea_1").children().length == 0) {
+     /*        if ($("#divMaterialArea_1").children().length == 0) {
               flag = false;
 
               Swal.fire({
@@ -1410,7 +1408,7 @@ li {
                 confirmButtonText: "확인",
               });
               return false;
-            }
+            } */
           });
         if (flag) {
           $("#insFrm").submit();

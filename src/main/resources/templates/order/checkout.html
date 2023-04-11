@@ -5,9 +5,7 @@
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+
     <th:block th:replace="includes/header :: header1"></th:block>
     <th:block th:replace="includes/header :: header2"></th:block>
     <th:block th:replace="includes/header :: header3"></th:block>
@@ -301,8 +299,8 @@
     $(document).on("click", "#order", function () {
         var pointTag = $("#point");
         pointTag.val(pointTag.val().length == 0 ? 0 : pointTag.val());
-        requestPay();
-        //$("form[name=orderform]").submit();
+        //requestPay();
+        $("form[name=orderform]").submit();
 
     })
 </script>

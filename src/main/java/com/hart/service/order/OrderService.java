@@ -18,4 +18,5 @@ public interface OrderService {
 	public OinfoDTO getOrder(String mid, int oid) throws Exception;
 	public List<SearchResultDTO> searchOrders(SearchDTO sDTO) throws Exception;
 	
+	
 }

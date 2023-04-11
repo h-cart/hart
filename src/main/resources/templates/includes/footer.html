@@ -49,19 +49,34 @@
 
     <style>
       #depth2 {
-        display: none;
+        display: block;
         position: absolute;
-        top: 0px;
+        top: 32px;
         left: 220px;
         bottom: 0;
         width: 219.99px;
-        height: 100%;
-        overflow-y: auto;
-        background: lightgrey;
+        height: 370px;
+        background: #f4f3ef;
+      }
+      #depth2 > li {
+        width: 100%;
+        height: 37px;
+        background-color: #f4f3ef;
       }
 
       #listCate li:hover > #depth2 {
         display: block;
+      }
+      .header__menu ul li a {
+        padding: 0px;
+        height: 37px;
+
+        color: #000000;
+      }
+
+      #listCate li:hover > #depth2 {
+        display: block;
+        height: 100%;
       }
     </style>
     <script th:inline="javascript">
@@ -78,8 +93,8 @@
               console.log(data.result[i].pcno_top);
               console.log(data.result[i].pcno);
               str += `
-             	<li style="border-bottom: 1px solid lightgray; ">
-             	  <a href="/product/list?pcno_top=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a><ul id="depth2">
+             	<li >
+             	  <a href="/product/list?pcno_top=${data.result[i].pcno}" style="font-size: 18px; color: #000000;">${data.result[i].pcategory}</a><ul id="depth22">
        					</ul>
              	</li>
        	`;
@@ -91,26 +106,42 @@
             }
             $("#listCate").append(str);
             $(".slicknav_nav .dropdown").append(str1);
+            getSmallCate();
           },
           error: function () {
             console.log("실패");
           },
         });
 
+        $(function () {
+          // listCate li 호버시 에이젝스 작동
+          $("#listCate li").mouseenter(function () {
+            alert("호버");
+          });
+        });
+      });
+    </script>
+    <script>
+      function getSmallCate() {
         $("#listCate li").on("mouseenter", function () {
           let pcno_top = $(this).find("a").attr("href").split("=")[1];
-          alert(pcno_top);
+          console.log(pcno_top);
+          let small = $(this);
+          $(this).css("background-color", "#f4f3ef");
+          $(this).find("a").css("color", "#116530");
+
           $.ajax({
             type: "get",
-            url: "/papi/clist",
+            url: "/papi/cSmallist?pcno=" + pcno_top,
             contentType: "application/json",
             success: function (data) {
+              console.table(data.result);
               let str = "";
               for (var i = 0; i < data.result.length; i++) {
                 if (pcno_top == data.result[i].pcno_top) {
                   str += `
-             		<li style="border-bottom: 1px solid lightgray; ">
-             	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 15px; color: gray;">${data.result[i].pcategory}</a>
+             		<li id="sdepth${i}">
+             	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 18px; color: gray;">${data.result[i].pcategory}</a>
              		</li>`;
                 }
               }
@@ -122,13 +153,14 @@
             },
           });
         });
-        $(function () {
-          // listCate li 호버시 에이젝스 작동
-          $("#listCate").mouseenter(function () {
-          
-          });
+
+        //호버가 끝나면 배경색 원래대로
+        $("#listCate li").on("mouseleave", function () {
+          $(this).css("background-color", "#ffffff");
+          $(this).find("a").css("color", "#000000");
+
         });
-      });
+      }
     </script>
     <!-- Search Begin -->
     <div class="search-model">

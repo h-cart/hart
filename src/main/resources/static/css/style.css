@@ -43,10 +43,10 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0;
-	color: #111111;
-	font-weight: 400;
-	font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  color: #111111;
+  font-weight: 400;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 h1 {
@@ -74,14 +74,12 @@ h6 {
 }
 
 p {
-
-	font-size: 15px;
-	font-family: 'Noto Sans KR', sans-serif;
-	color: #3d3d3d;
-	font-weight: 400;
-	line-height: 25px;
-	margin: 0 0 15px 0;
-
+  font-size: 15px;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #3d3d3d;
+  font-weight: 400;
+  line-height: 25px;
+  margin: 0 0 15px 0;
 }
 
 img {
@@ -325,14 +323,11 @@ ol {
 -----------------------*/
 
 .header {
-  
 }
 
 .header__top {
-
-	background: white;
-	padding: 10px 0 0 0;
-
+  background: white;
+  padding: 10px 0 0 0;
 }
 
 .header__top__left p {
@@ -1398,10 +1393,10 @@ ol {
 }
 
 .shop__sidebar__tags a:hover {
-  background: #111111;
+  background: #116530;
   color: #ffffff;
 }
-
+#accordion7 > td:nth-child(5)
 .shop__sidebar__accordion .card-heading a:after,
 .shop__sidebar__accordion .card-heading > a.active[aria-expanded="false"]:after {
   content: "\f078";
@@ -2363,19 +2358,17 @@ ol {
 
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text h5 {
   color: #0d0d0d;
-  font-weight: 700;
+  font-weight: 0;
+  font-size:13px;
 }
 
 .shopping__cart__table table tbody tr td.quantity__item {
   width: 175px;
 }
 
-.shopping__cart__table table tbody tr td.quantity__item .quantity .pro-qty-2 {
-  width: 100px;
-}
 
 .shopping__cart__table table tbody tr td.quantity__item .quantity .pro-qty-2 input {
-  width: 50px;
+  width: 30px;
   border: none;
   text-align: center;
   color: #111111;
@@ -2391,15 +2384,14 @@ ol {
 
 .shopping__cart__table table tbody tr td.cart__price {
   color: #111111;
-  font-size: 18px;
-  font-weight: 700;
-  width: 140px;
+  font-size: 15px;
+  width: 110px;
 }
 dialog .shopping__cart__table table tbody tr td.cart__price {
-  width: 100px;
+  width: 120px;
 }
 .accordion > td:nth-child(3) {
-  width: 110px;
+  width: 120px;
   text-align: center;
 }
 .shopping__cart__table table tbody tr td.cart__close i {
@@ -2757,7 +2749,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 
 .blog__item:hover a::after {
   width: 40px;
-  background: #e53637;
+  background: #116530;
 }
 
 .blog__item:hover .blog__item__text {
@@ -3479,11 +3471,11 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 
 @media only screen and (max-width: 767px) {
   /*ham 수정  */
-  .blog-hero{
-  	padding-top: 35px;
+  .blog-hero {
+    padding-top: 35px;
     padding-bottom: 145px;
   }
-	
+
   .canvas__open {
     display: block;
     font-size: 22px;
@@ -3513,8 +3505,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
     transition: all, 0.5s;
     visibility: hidden;
   }
-  
-  
+
   .offcanvas-menu-overlay.active {
     visibility: visible;
   }
@@ -3876,6 +3867,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 }
 dialog {
   height: 70vh;
+  border : 0;
 }
 .quantity {
   display: flex;
@@ -3887,4 +3879,9 @@ dialog {
 }
 .accordion > tr > td.quantity__item > div {
   text-align: center;
+}
+
+.shop__sidebar__tags .on{
+  background-color: #116530;
+  color:white ;
 }
