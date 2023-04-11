@@ -28,8 +28,8 @@ public class ShareServiceImpl implements ShareService{
 	@Transactional
 	@Override
 	public ShareDTO createCart(String mid)throws Exception {
-		int leftLimit = 48	; // numeral '0'
-		int rightLimit = 122; // letter 'z'
+		int leftLimit = '0'	; // numeral '0'
+		int rightLimit = 'z'; // letter 'z'
 		int targetStringLength = 20;
 		Random random = new Random();
 

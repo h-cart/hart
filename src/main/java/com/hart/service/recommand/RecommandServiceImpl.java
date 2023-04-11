@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hart.domain.recommand.IngredientDTO;
 import com.hart.domain.recommand.RecipeCategoryDTO;
 import com.hart.domain.recommand.RecommandDTO;
 import com.hart.domain.recommand.RrecipeDTO;
@@ -35,6 +36,12 @@ public class RecommandServiceImpl  implements RecommandService{
 		return result;
 	}
 	
+	@Override
+	public List<IngredientDTO> liveIngredients(String lcid) throws Exception {
+		
+		return rMapper.getIngredients(lcid);
+	}
+
 	@Transactional
 	@Override
 	public RecommandDTO RecommandForProduct(String pid) throws Exception {

@@ -178,7 +178,7 @@ ol {
 .site-btn {
   font-size: 14px;
   color: #ffffff;
-  background: #111111;
+  background: #116530;
   font-weight: 700;
   border: none;
   text-transform: uppercase;
@@ -2410,8 +2410,8 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 
 .continue__btn.update__btn a {
   color: #ffffff;
-  background: #111111;
-  border-color: #111111;
+  background: #116530;
+  border-color: #116530;
 }
 
 .continue__btn.update__btn a i {
@@ -2489,7 +2489,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 }
 
 .cart__total {
-  background: #f3f2ee;
+  border: 0.5px solid darkgray;
   padding: 35px 40px 40px;
 }
 
@@ -2509,6 +2509,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
   color: #444444;
   line-height: 40px;
   overflow: hidden;
+  border-bottom:0.5px solid darkgray;
 }
 
 .cart__total ul li span {
@@ -2653,8 +2654,8 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 }
 
 .checkout__order {
-  background: #f3f2ee;
   padding: 30px;
+  border: 0.5px solid darkgray;
 }
 
 .checkout__order .order__title {
@@ -3884,4 +3885,7 @@ dialog {
 .shop__sidebar__tags .on{
   background-color: #116530;
   color:white ;
+}
+.qtybtn, .select-all label, #ptable th:nth-child(2), .pimg, .cart__close i{
+	cursor: pointer;
 }
