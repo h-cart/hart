@@ -24,7 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select lc.lcid , lcstart,lcend, lcday,lcstatus,lcname,lcimg,to_char(lcday,'YYYY-MM-DD') lcdate,lcteacher,to_char(lcday,'dy') lcdayofweek
 		from live_class lc right join class_list cl on lc.lcid = cl.lcid
 		                   left join live_class_img lci on lci.lcid = cl.lcid
-		where mid = #{mid}  
+		where mid = #{mid}
+		order by lc.lcday desc
 	</select>
 	
 	<select id="getMyVideo"  resultType="com.hart.domain.liveClass.LiveClassVideoDTO">

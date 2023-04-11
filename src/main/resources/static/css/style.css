@@ -1889,7 +1889,7 @@ ol {
 }
 
 .product__details__tab .nav-tabs .nav-item .nav-link.active {
-  border-bottom: 2px solid #e53637;
+  border-bottom: 3px solid #116530;
 }
 
 .product__details__tab__content {
@@ -3076,9 +3076,9 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
   font-style: normal;
   margin-bottom: 20px;
 }
-
+/*ham 수정  */
 .blog__details__quote h6 {
-  color: #e53637;
+  /* color: #e53637; */
   font-size: 15px;
   font-weight: 700;
   text-transform: uppercase;

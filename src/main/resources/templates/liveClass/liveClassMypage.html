@@ -115,7 +115,7 @@
 																</button>
 																</div>
 																<div th:if=${list.lcstatus}==1>
-																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16" style="background-color: #E82E2E;">
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16" style="background-color: #ff6913;border : 1px solid #ff6913">
 																	<div th:if=${list.lcstatus}==1 th:onclick="moveVideo(1,[[${list.lcid}]])"><span style=" color: white; font-weight: bold;">ON - AIR</span></div>
 																</button>
 																</div>
@@ -177,8 +177,7 @@
 	function moveVideo(lcstatus,lcid) {
 		
 		if(lcstatus=='1'){//라이브 서버로 연결
-			alert("check");
-			location.href='라이브 클래스 방송 페이지';
+			location.href='http://112.221.184.62:50021';
 		}else if(lcstatus =='2'){//vod 서비스로 연결
 			location.href='/class/video/'+lcid;
 		}
