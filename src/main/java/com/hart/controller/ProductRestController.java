@@ -54,6 +54,27 @@ public class ProductRestController {
 
    }
 
+   @GetMapping(value = "/cSmallist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+      MediaType.APPLICATION_JSON_VALUE })
+public ResponseEntity<Map<String, List<CategoryVO>>> getCategory(int pcno) {
+
+   try {
+
+      Map<String, List<CategoryVO>> result = new HashMap<>();
+
+      List<CategoryVO> categorybar = pService.getcategorybar(pcno);
+
+      result.put("result", categorybar);
+
+      return new ResponseEntity<Map<String, List<CategoryVO>>>(result, HttpStatus.OK);
+
+   } catch (Exception e) {
+      log.info(e.getMessage());
+      return new ResponseEntity<Map<String, List<CategoryVO>>>(HttpStatus.BAD_REQUEST);
+   }
+
+}
+
    @PostMapping(value = "/productlist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
          MediaType.APPLICATION_JSON_VALUE })
    public ResponseEntity<Map<String, List<ListVO>>> getProductsList(@RequestBody ListVO data) {
