@@ -37,7 +37,7 @@
 						<div class="menu-block">
 							<ul>
 
-								<li class="js-order active"><a href="/mypage/order">주문내역</a></li>
+								<li class="js-order active"><a href="/mypage/order" style="font-weight: bold;">주문내역</a></li>
 								<li><a href="/mypage/class">수강내역</a></li>
 								<li onclick="logoutSubmit();"><a href="javascript:void(0)">로그아웃</a></li>
 							</ul>
@@ -55,20 +55,17 @@
 								<h2>주문내역</h2>
 							</div>
 
-							<nav id=tab-button-nav>
-								<div class="xans-element- xans-myshop xans-myshop-orderhistorytab order-tab ">
-									<ul class="menu">
-										<li class="tab_class selected"><a class="tab-button"
-												data-tab-section="tab-section-1">주문내역조회
 
-											</a></li>
-										<li class="tab_class_cs tab-button"><a class="tab-button"
-												data-tab-section="tab-section-2">취소내역
-											</a></li>
-									</ul>
-								</div>
-							</nav>
-							<!-- 
+                <nav id="tab-button-nav">
+                  <div class="xans-element- xans-myshop xans-myshop-orderhistorytab order-tab">
+                    <ul class="menu">
+                      <li class="tab_class selected"><a class="tab-button" data-tab-section="tab-section-1">주문내역조회 </a></li>
+                      <li class="tab_class_cs tab-button"><a class="tab-button" data-tab-section="tab-section-2">취소내역 </a></li>
+                    </ul>
+                  </div>
+                </nav>
+                <!-- 
+
 						<div class="ul-desc dash text-grey mt30 only-pc">
 							<ul>
 								<li>기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
@@ -77,11 +74,13 @@
 							</ul>
 						</div>
  -->
-							<!-- 날짜 검색 -->
+                <!-- 날짜 검색 -->
+
 
 							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
 								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead order-search-block" style="margin-top: 20px;">
 									<!-- 
+
 								<ul class="period-rage">
 									<li><a href="javascript:void(0);" days="00">오늘</a></li>
 									<li><a href="javascript:void(0);" days="07">1주일</a></li>
@@ -90,29 +89,26 @@
 									<li><a href="javascript:void(0);" days="180">6개월</a></li>
 								</ul>
 								 -->
-									<ul class="period-rage">
-										<li><a href="#" onclick="dateCal('1');" days="00">오늘</a></li>
-										<li><a href="#" onclick="dateCal('2');" days="07">1주일</a></li>
-										<li><a href="#" onclick="dateCal('3');" days="30">1개월</a></li>
-										<li><a href="#" onclick="dateCal('4');" days="90">3개월</a></li>
-										<li><a href="#" onclick="dateCal('5');" days="180">6개월</a></li>
-									</ul>
+                    <ul class="period-rage">
+                      <li><a href="#" onclick="dateCal('1');" days="00">오늘</a></li>
+                      <li><a href="#" onclick="dateCal('2');" days="07">1주일</a></li>
+                      <li><a href="#" onclick="dateCal('3');" days="30">1개월</a></li>
+                      <li><a href="#" onclick="dateCal('4');" days="90">3개월</a></li>
+                      <li><a href="#" onclick="dateCal('5');" days="180">6개월</a></li>
+                    </ul>
 
-									<ul class="period-search">
-										<li><input id="history_start_date" name="history_start_date"
-												class="fText hasDatepicker" readonly="readonly" size="10" value=""
-												type="text">
-											<button type="button" class="ui-datepicker-trigger">
-												<img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif"
-													alt="..." title="...">
-											</button>
-										</li>
-										<li>~</li>
-										<li><input id="history_end_date" name="history_end_date"
-												class="fText hasDatepicker" readonly="readonly" size="10" value=""
-												type="text">
+                    <ul class="period-search">
+                      <li>
+                        <input id="history_start_date" name="history_start_date" class="fText hasDatepicker" readonly="readonly" size="10" value="" type="text" />
+                        <button type="button" class="ui-datepicker-trigger">
+                          <img src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif" alt="..." title="..." />
+                        </button>
+                      </li>
+                      <li>~</li>
+                      <li>
+                        <input id="history_end_date" name="history_end_date" class="fText hasDatepicker" readonly="readonly" size="10" value="" type="text" />
 
-											<!-- 
+                        <!-- 
 									<button type="button" class="ui-datepicker-trigger">
 											<img
 												src="//img.echosting.cafe24.com/skin/admin_ko_KR/myshop/ico_cal.gif"
@@ -120,339 +116,305 @@
 										</button></li>
 										 -->
 
-											<!-- 
+                        <!-- 
 									<li><button type="submit" id="order_search_btn"
 											class="btn btn-dark">
 											<span>SEARCH</span>
 										</button></li>
 										 -->
+                      </li>
 
-										<li><button type="button" id="order_search_btn"
-												class="btn btn-dark order_period_btn" onclick="searchPeriod();">
-												<span>SEARCH</span>
-											</button></li>
+                      <li>
+                        <button type="button" id="order_search_btn" class="btn btn-dark order_period_btn" onclick="searchPeriod();">
+                          <span>SEARCH</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                  <input id="mode" name="mode" value="" type="hidden" /> <input id="term" name="term" value="" type="hidden" />
+                </form>
 
-									</ul>
-								</div>
-								<input id="mode" name="mode" value="" type="hidden"> <input id="term" name="term"
-									value="" type="hidden">
-							</form>
-
-							<section id="tab-section-1" class="tab-section">
-								<div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem order-list">
-									<!--
+                <section id="tab-section-1" class="tab-section">
+                  <div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem order-list">
+                    <!--
                         $login_url = /member/login.html
                         $count = 10
                     -->
-									
 
+                    <div class="empty-block mt40">
+                      <div class="empty-icon-block line">
+                        <div class="inner">
+                          <p>주문 내역이 없습니다.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
 
-										<div class="empty-block mt40">
-											<div class="empty-icon-block line">
-												<div class="inner">
-													<p>주문 내역이 없습니다.</p>
-												</div>
-											</div>
-										</div>
-
-								</div>
-							</section>
-
-							<!-- 취소 목록 section -->
-							<section id="tab-section-2" hidden="true" class="tab-section">
-								<div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem order-list">
-									<!--
+                <!-- 취소 목록 section -->
+                <section id="tab-section-2" hidden="true" class="tab-section">
+                  <div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem order-list">
+                    <!--
                         $login_url = /member/login.html
                         $count = 10
                     -->
-									
 
+                    <div class="empty-block mt40">
+                      <div class="empty-icon-block line">
+                        <div class="inner">
+                          <p>주문 내역이 없습니다.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <!-- // contents-block -->
+            </div>
+            <!-- // myshop-layout -->
+          </div>
+        </div>
+      </div>
+    </div>
 
-										<div class="empty-block mt40">
-											<div class="empty-icon-block line">
-												<div class="inner">
-													<p>주문 내역이 없습니다.</p>
-												</div>
-											</div>
-										</div>
+    <!-- 리셀 상품 등록 페이지 이동 form -->
+    <form action="/resell/register" method="get" class="reg_product">
+      <input type="hidden" name="pro_opt_id" class="send_pro_opt_id" />
+      <input type="hidden" name="order_no" class="send_order_no" />
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
 
-								</div>
-							</section>
+    <!-- 주문 취소 form -->
+    <form action="/mypage/myorder/cancel" method="post" class="cancel_order">
+      <input type="hidden" name="pro_opt_id" class="send_pro_opt_id" />
+      <input type="hidden" name="order_no" class="send_order_no" />
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
 
+    <th:block th:replace="includes/footer :: footer"></th:block>
 
-						</div>
-						<!-- // contents-block -->
-					</div>
-					<!-- // myshop-layout -->
-				</div>
-			</div>
-		</div>
-	</div>
+    <script>
+      function cancelOrder(oid) {
+        console.log("주문 번호: " + oid);
+        Swal.fire({
+          title: "해당 주문을 취소하시겠습니까?",
+          text: "주문 취소 시, 환불까지는 3일 걸립니다.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "아니요",
+          confirmButtonText: "주문 취소",
+        }).then((result) => {
+          $.ajax({
+            url: "/oapi/cancel",
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify({
+              oid: oid.toString(),
+            }),
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader(header, token);
+            },
+            success: function (result) {
+              searchPeriod();
+            },
+            error: function (err, xhr, status) {
+              Swal.fire({
+                icon: "error",
+                title: "주문 취소에 실패하였습니다.",
+                text: "잠시후 재시도 해주세요.",
+              });
+            },
+          });
+        });
+      }
+    </script>
 
-	<!-- 리셀 상품 등록 페이지 이동 form -->
-	<form action="/resell/register" method="get" class="reg_product">
-		<input type="hidden" name="pro_opt_id" class="send_pro_opt_id">
-		<input type="hidden" name="order_no" class="send_order_no">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	</form>
+    <script>
+      const $nav = document.querySelector("#tab-button-nav");
+      const $sections = document.querySelectorAll(".tab-section");
 
+      $nav.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("tab-button")) {
+          return;
+        }
 
-	<!-- 주문 취소 form -->
-	<form action="/mypage/myorder/cancel" method="post" class="cancel_order">
-		<input type="hidden" name="pro_opt_id" class="send_pro_opt_id">
-		<input type="hidden" name="order_no" class="send_order_no">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	</form>
+        const selectedTab = e.target.dataset.tabSection;
 
-	<th:block th:replace="includes/footer :: footer"></th:block>
+        $sections.forEach(($section) => {
+          if ($section.id === selectedTab) {
+            $section.removeAttribute("hidden");
+          } else {
+            $section.setAttribute("hidden", true);
+          }
+        });
+      });
+    </script>
 
-	<script>
-		function cancelOrder(oid) {
+    <script>
+      function dateCal(val) {
+        dateFormatter = function (newDay, today) {
+          let year = newDay.getFullYear();
+          let month = newDay.getMonth() + 1;
+          let date = newDay.getDate();
 
-			console.log("주문 번호: " + oid);
-			Swal.fire({
-				title: '해당 주문을 취소하시겠습니까?',
-				text: "주문 취소 시, 환불까지는 3일 걸립니다.",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				cancelButtonText: '아니요',
-				confirmButtonText: '주문 취소'
-			}).then((result) => {
-				$.ajax({
-					url: '/oapi/cancel',
-					type: 'post',
-					contentType: "application/json",
-					data: JSON.stringify({
-						oid: oid.toString()
-					}),
-					beforeSend: function (xhr) {
-						xhr.setRequestHeader(header, token);
-					}, success: function (result) {
-						searchPeriod();
-					}, error: function (err, xhr, status) {
-						Swal.fire({
-							icon: 'error',
-							title: '주문 취소에 실패하였습니다.',
-							text: '잠시후 재시도 해주세요.'
-						})
-					}
+          if (today) {
+            let todayDate = today.getDate();
 
-				});
-			})
+            if (date != todayDate) {
+              if (month == 0) year -= 1;
+              month = (month + 11) % 12;
+              date = new Date(year, month, 0).getDate();
+            }
+          }
+          year = ("0" + year).slice(-2);
+          month = ("0" + month).slice(-2);
+          date = ("0" + date).slice(-2);
 
+          return year + "/" + month + "/" + date;
+        };
+        let newDate = new Date();
+        let nowDate = new Date();
 
-		}
-	</script>
+        if (val == 1) {
+          let calNewDate = newDate.getDate();
+          newDate = dateFormatter(newDate);
+          nowDate = dateFormatter(nowDate);
 
-	<script>
-		const $nav = document.querySelector('#tab-button-nav')
-		const $sections = document.querySelectorAll('.tab-section');
+          $("#history_start_date").val(newDate);
+          $("#history_end_date").val(nowDate);
+        } else if (val == 2) {
+          let calNewDate = newDate.getDate() - 7;
+          let calNowDate = nowDate.getDate();
 
-		$nav.addEventListener('click', (e) => {
-			if (!e.target.classList.contains('tab-button')) {
-				return;
-			}
+          nowDate.setDate(calNowDate);
+          newDate.setDate(calNewDate);
 
-			const selectedTab = e.target.dataset.tabSection;
+          newDate = dateFormatter(newDate);
+          nowDate = dateFormatter(nowDate);
 
-			$sections.forEach(($section) => {
-				if ($section.id === selectedTab) {
-					$section.removeAttribute('hidden');
-				} else {
-					$section.setAttribute('hidden', true);
-				}
-			});
-		});
-	</script>
+          $("#history_start_date").val(newDate);
+          $("#history_end_date").val(nowDate);
+        } else if (val == 3) {
+          let calNewDate = newDate.getMonth() - 1;
+          let calNowDate = nowDate.getDate();
 
+          newDate.setMonth(calNewDate);
+          nowDate.setDate(calNowDate);
+          newDate = dateFormatter(newDate);
+          nowDate = dateFormatter(nowDate);
 
+          $("#history_start_date").val(newDate);
+          $("#history_end_date").val(nowDate);
+        } else if (val == 4) {
+          let calNowDate = nowDate.getDate();
+          let calNewDate = newDate.getMonth() - 3;
 
-	<script>
-		function dateCal(val) {
+          newDate.setMonth(calNewDate);
+          nowDate.setDate(calNowDate);
+          newDate = dateFormatter(newDate);
+          nowDate = dateFormatter(nowDate);
 
+          $("#history_start_date").val(newDate);
+          $("#history_end_date").val(nowDate);
+        } else if (val == 5) {
+          let calNewDate = newDate.getMonth() - 6;
+          let calNowDate = nowDate.getDate();
+          newDate.setMonth(calNewDate);
+          nowDate.setDate(calNowDate);
+          newDate = dateFormatter(newDate);
+          nowDate = dateFormatter(nowDate);
 
-			dateFormatter = function (newDay, today) {
-				let year = newDay.getFullYear();
-				let month = newDay.getMonth() + 1;
-				let date = newDay.getDate();
+          $("#history_start_date").val(newDate);
+          $("#history_end_date").val(nowDate);
+        }
+      }
+    </script>
 
-				if (today) {
+    <script>
+      function searchPeriod() {
+        let flag = $(".selected").hasClass("tab_class") ? 1 : -1;
+        let emptyOrder = flag == 1 ? "주문 내역이 없습니다." : "취소 내역이 없습니다.";
+        let intoBody = flag == 1 ? $("#tab-section-1 div") : $("#tab-section-2 div");
+        console.log(flag, emptyOrder);
+        console.log(intoBody);
+        let startDate = $("#history_start_date").val();
+        let endDate = $("#history_end_date").val();
+        console.log(startDate, endDate);
+        $.ajax({
+          url: "/oapi/search",
+          type: "post",
+          data: JSON.stringify({
+            sdate: startDate,
+            edate: endDate,
+            isCancel: flag,
+          }),
+          contentType: "application/json",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+          },
+          success: function (data) {
+            console.log(data.result.length);
+            if (data.result.length != 0) {
+              var searchbody = "<div class>";
+              console.log(data.result);
+              for (var i = 0; i < data.result.length; i++) {
+                var result = data.result;
+                for (var j = 0; j < result[i].oitems.length; j++) {
+                  var status = result[i].ostatus;
+                  console.log(status);
+                  searchbody += "<div class='items-block xans-record-'><div class='item-header'" + (j != 0 ? "style='display : none'" : "") + "><ul class='info-block'>";
+                  searchbody += "<li class='first'><ul><li class='sub-title'>주문일</li><li class='value'>" + result[i].odate + "</li>";
+                  searchbody += "<li class='sub-title'>주문번호</li><li class='value'>" + result[i].oid + "</li>";
+                  searchbody += "<li class='sub-title'>결제금액</li><li class='value'>" + numberWithCommas(result[i].opayment) + "</li></ul></li>";
+                  if (status == 0) {
+                    searchbody += "<li><a class='btn btn-sm btn-gray btn-pd16' href='#none'onclick='cancelOrder(" + result[i].oid + ")'><span>주문취소</span></a></li>";
+                  } else {
+                    searchbody += "<li class='sub-title'>주문상태</li><li class='value'>" + (status == 1 ? "구매확정" : "주문취소") + "</li>";
+                  }
+                  searchbody += "</ul></div>";
 
-					let todayDate = today.getDate();
+                  searchbody += "<div class='item-prod'><div class='block'><div class='thumb'><img style='width:90px; height : 90px;'src='" + result[i].oitems[j].pimg + "' alt=''></div><div class='item-desc'>";
+                  searchbody += "<div class='detail'><div class='name'>" + result[i].oitems[j].pname + "</div>";
+                  searchbody += "<div class='quantity text-center'>수량 : " + result[i].oitems[j].oamount + "</div><div class='order-price text-right'>가격 : " + numberWithCommas(result[i].oitems[j].pprice) + "</div></div></div></div>";
+                  searchbody += "<div class='status'><li>";
+                  if (result[i].ostatus == -1) {
+                    searchbody += "<p> 리뷰 작성 불가</p>";
+                  } else if (result[i].ostatus != -1 && result[i].oitems[j].rvcheck == 0) {
+                    searchbody += "<a class='btn btn-sm btn-gray btn-pd16' href='#none'onclick='reviewWrite()'><span>리뷰작성</span></a>";
+                  } else if (result[i].oitems[j].rvcheck == 1) {
+                    searchbody += "<p> 리뷰 작성 완료</p>";
+                  }
 
-					if (date != todayDate) {
-						if (month == 0) year -= 1
-						month = (month + 11) % 12;
-						date = new Date(year, month, 0).getDate();
-					}
-				}
-				year = ("0" + year).slice(-2);
-				month = ("0" + month).slice(-2);
-				date = ("0" + date).slice(-2);
-
-				return year + "/" + month + "/" + date;
-			}
-			let newDate = new Date();
-			let nowDate = new Date();
-
-
-			if (val == 1) {
-				let calNewDate = newDate.getDate();
-				newDate = dateFormatter(newDate);
-				nowDate = dateFormatter(nowDate);
-
-
-				$('#history_start_date').val(newDate);
-				$('#history_end_date').val(nowDate);
-
-			} else if (val == 2) {
-				let calNewDate = newDate.getDate() - 7;
-				let calNowDate = nowDate.getDate();
-
-				nowDate.setDate(calNowDate);
-				newDate.setDate(calNewDate);
-
-				newDate = dateFormatter(newDate);
-				nowDate = dateFormatter(nowDate);
-
-				$('#history_start_date').val(newDate);
-				$('#history_end_date').val(nowDate);
-
-			} else if (val == 3) {
-
-				let calNewDate = newDate.getMonth() - 1;
-				let calNowDate = nowDate.getDate();
-
-				newDate.setMonth(calNewDate);
-				nowDate.setDate(calNowDate);
-				newDate = dateFormatter(newDate);
-				nowDate = dateFormatter(nowDate);
-
-
-				$('#history_start_date').val(newDate);
-				$('#history_end_date').val(nowDate);
-			} else if (val == 4) {
-
-				let calNowDate = nowDate.getDate();
-				let calNewDate = newDate.getMonth() - 3;
-
-				newDate.setMonth(calNewDate);
-				nowDate.setDate(calNowDate);
-				newDate = dateFormatter(newDate);
-				nowDate = dateFormatter(nowDate);
-
-
-				$('#history_start_date').val(newDate);
-				$('#history_end_date').val(nowDate);
-			} else if (val == 5) {
-
-				let calNewDate = newDate.getMonth() - 6;
-				let calNowDate = nowDate.getDate();
-				newDate.setMonth(calNewDate);
-				nowDate.setDate(calNowDate);
-				newDate = dateFormatter(newDate);
-				nowDate = dateFormatter(nowDate);
-
-
-				$('#history_start_date').val(newDate);
-				$('#history_end_date').val(nowDate);
-			}
-		}
-	</script>
-
-	<script>
-		function searchPeriod() {
-			let flag = $(".selected").hasClass("tab_class")? 1 : -1;
-			let emptyOrder = flag==1?"주문 내역이 없습니다." : "취소 내역이 없습니다.";
-			let intoBody = flag==1 ? $("#tab-section-1 div") :$("#tab-section-2 div");
-			console.log(flag,emptyOrder);
-			console.log(intoBody);
-			let startDate = $('#history_start_date').val();
-			let endDate = $('#history_end_date').val();
-			console.log(startDate,endDate);
-			$.ajax({
-				url: "/oapi/search",
-				type: 'post',
-				data: JSON.stringify({
-					sdate: startDate,
-					edate: endDate,
-					isCancel :flag
-				}),
-				contentType: "application/json",
-				beforeSend: function (xhr) {
-					xhr.setRequestHeader(header, token);
-				}, success: function (data) {
-					console.log(data.result.length);
-					if(data.result.length!=0){
-					var searchbody = "<div class>";
-					console.log(data.result);
-					for (var i = 0; i < data.result.length; i++) {
-						var result = data.result;
-						for (var j = 0; j < result[i].oitems.length; j++) {
-						
-						var status = result[i].ostatus;
-						console.log(status);
-						searchbody += "<div class='items-block xans-record-'><div class='item-header'"+(j!=0?"style='display : none'":'')+"><ul class='info-block'>";
-						searchbody += "<li class='first'><ul><li class='sub-title'>주문일</li><li class='value'>" + result[i].odate + "</li>";
-						searchbody += "<li class='sub-title'>주문번호</li><li class='value'>" + result[i].oid + "</li>";
-						searchbody += "<li class='sub-title'>결제금액</li><li class='value'>" + numberWithCommas(result[i].opayment) + "</li></ul></li>";
-						if (status == 0) {
-							searchbody += "<li><a class='btn btn-sm btn-gray btn-pd16' href='#none'onclick='cancelOrder(" + result[i].oid + ")'><span>주문취소</span></a></li>"
-						}
-						else {
-							searchbody += "<li class='sub-title'>주문상태</li><li class='value'>" + (status == 1 ? '구매확정' : '주문취소') + "</li>";
-						}
-						searchbody += "</ul></div>";
-
-						
-
-							searchbody += "<div class='item-prod'><div class='block'><div class='thumb'><img style='width:90px; height : 90px;'src='" + result[i].oitems[j].pimg + "' alt=''></div><div class='item-desc'>";
-							searchbody += "<div class='detail'><div class='name'>" + result[i].oitems[j].pname + "</div>"
-							searchbody += "<div class='quantity text-center'>수량 : " + result[i].oitems[j].oamount + "</div><div class='order-price text-right'>가격 : " + numberWithCommas(result[i].oitems[j].pprice) + "</div></div></div></div>";
-							searchbody +="<div class='status'><li>";
-							if (result[i].ostatus == -1) {
-								searchbody += "<p> 리뷰 작성 불가</p>";
-							}
-							else if (result[i].ostatus != -1 && result[i].oitems[j].rvcheck == 0) {
-								searchbody += "<a class='btn btn-sm btn-gray btn-pd16' href='#none'onclick='reviewWrite()'><span>리뷰작성</span></a>";
-							}
-							else if (result[i].oitems[j].rvcheck == 1) {
-								searchbody += "<p> 리뷰 작성 완료</p>";
-							}
-
-							searchbody += "</li></div>";
-							searchbody += "</div>";
-						}
-					}
-					}else {
-						var searchbody = `<div class="empty-block mt40">
+                  searchbody += "</li></div>";
+                  searchbody += "</div>";
+                }
+              }
+            } else {
+              var searchbody = `<div class="empty-block mt40">
 											<div class="empty-icon-block line">
 												<div class="inner">
 													<p>${emptyOrder}</p>
 												</div>
 											</div>
-										</div>`
-					}
-					searchbody +="</div>";
-					intoBody.html(searchbody);
-				}, error: function (err, xhr, status) {
-					console.log(err);
-				}
-			})
-			//$(".search_product").submit();
-		}
-	</script>
-
-</body>
-<script>
-	$(document).ready(function () {
-		dateCal(1);
-		searchPeriod();
-	})
-
-
-</script>
-
+										</div>`;
+            }
+            searchbody += "</div>";
+            intoBody.html(searchbody);
+          },
+          error: function (err, xhr, status) {
+            console.log(err);
+          },
+        });
+        //$(".search_product").submit();
+      }
+    </script>
+  </body>
+  <script>
+    $(document).ready(function () {
+      dateCal(1);
+      searchPeriod();
+    });
+  </script>
 </html>

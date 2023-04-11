@@ -7,7 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getMyRecommand" resultMap="RecommandMap">
 		<![CDATA[
-		SELECT pid,pname,pimg, stag 
+		SELECT 
+			pid,pname,pimg, stag 
 		FROM (SELECT pc.pid,pname,stag,pimg 
 			FROM pcart pc join product_img pi on pc.pid = pi.pid and pdepth=0
 			WHERE mid = #{mid} order by cdate desc) j WHERE rownum <=1
@@ -49,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'%'||#{stag}||'%' OR
 		rtitle like '%'||#{stag}||'%'
 	</select>
+	
 	<resultMap id="RecommandRecipe" type="RrecipeDTO">
 		<result property="rid" column="RID" />
 		<result property="rtitle" column="RTITLE" />
@@ -78,13 +80,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="getIngredients" resultType="IngredientDTO">
-		SELECT
-		pd.pid,pname,pimg,pprice,pdiscount
-		FROM products pd join product_img pi
-		on pd.pid = pi.pid AND pdepth=0
-		WHERE pd.pid in (SELECT pid
-		FROM total_ingredient
-		WHERE rid =#{rid} OR rid=#{lcid})
+		SELECT 
+			pd.pid, 
+			pd.pname, 
+			pimg, 
+			pprice, 
+			pdiscount
+		FROM products pd
+		JOIN product_img pi ON pd.pid = pi.pid AND pdepth = 0
+		WHERE pd.pid IN (
+		    SELECT pid
+		    FROM total_ingredient
+		    WHERE rid = #{rid} OR rid = #{lcid}
+		);
+
 	</select>
 
 

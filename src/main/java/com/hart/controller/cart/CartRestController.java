@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -139,7 +140,7 @@ public class CartRestController {
 		}
 
 	}
-
+	
 	@PostMapping(value = "/create", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, ShareDTO>> createShare(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
@@ -232,12 +233,6 @@ public class CartRestController {
 			}
 	}
 	
-	@GetMapping(value="/getRecommand", consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Map<String,RecommandDTO>> getRecommand(@RequestBody Map<String,String> map){
-		
-		
-		return null;
-	}
-	
+
 
 }

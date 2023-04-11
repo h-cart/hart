@@ -24,8 +24,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
-	
-	
+
 	// 구성자 추가 SecurityConfig 에서 사용
 	public LoginSuccessHandler(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
@@ -42,34 +41,36 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws IOException, ServletException {
 		log.info("------------------------");
 		log.info("onAuthenticationSuccess");
-		
+
 		HttpSession session = request.getSession();
 		// 인증 객체에서 사용자 정보 저장
 		ClubAuthMemberDTO clubAuthMemberDTO = (ClubAuthMemberDTO) authentication.getPrincipal();
 		log.info(clubAuthMemberDTO);
 		// 소셜 사용자인지 확인
 		int fromSocial = clubAuthMemberDTO.getSocial();
-		// 사용자 암호 1111 인지 확인
+		String admin = clubAuthMemberDTO.getAuthorities().toString();
+
 		boolean passresult = passwordEncoder.matches("1111", clubAuthMemberDTO.getMpassword());
-		System.out.println("여기1");
 		RequestCache requestCache = new HttpSessionRequestCache();
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
-		System.out.println("여기2");
-		
-		String targetUrl ="/";
-		if (savedRequest!=null) {
-			 targetUrl = savedRequest.getRedirectUrl();
+
+		String targetUrl = "/";
+
+		if (savedRequest != null) {
+			targetUrl = savedRequest.getRedirectUrl();
 		}
-		System.out.println("타겟 : "+targetUrl);
-		System.out.println(passresult);
+		if (admin.equals("[ROLE_ADMIN]")) {
+			targetUrl = "/admin/eventManage";
+		}
 		// 소셜 사용자이고 암호 1111이면 modify.html 페이지로 이동
 		if ((fromSocial == 1) && passresult) {
-			
-			//redirectStrategy.sendRedirect(request, response, "/member/modify?social=social");
-			redirectStrategy.sendRedirect(request, response,targetUrl);
+
+			// redirectStrategy.sendRedirect(request, response,
+			// "/member/modify?social=social");
+			redirectStrategy.sendRedirect(request, response, targetUrl);
 		} // end if
-		
-		redirectStrategy.sendRedirect(request, response,targetUrl);
+
+		redirectStrategy.sendRedirect(request, response, targetUrl);
 
 	}// end onAu…
 

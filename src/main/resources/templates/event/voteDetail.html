@@ -359,6 +359,7 @@ ul.tagit input[type="text"] {
             	Swal.fire({
                     text: "이미 투표하셨습니다.",
                     icon: "warning",
+                    iconColor: "#116530",
                     confirmButtonText: "확인",
                     confirmButtonColor: '#116530',
                   });
@@ -366,13 +367,13 @@ ul.tagit input[type="text"] {
             	Swal.fire({
                     text: "투표하시겠습니까?",
                     icon: "info",
+                    iconColor: "#116530",
                     showCancelButton: true,
                     confirmButtonText: "확인",
                     confirmButtonColor: '#116530',
                     cancelButtonText: '취소',
                   }).then((result)=>{
                 	  if(!result.isConfirmed) return
-                	  
                 	  if(result.isConfirmed){
                 		  'Deleted!',
                 	      'Your file has been deleted.',
