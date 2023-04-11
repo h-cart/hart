@@ -24,7 +24,7 @@
     <th:block th:replace="includes/header :: header3"></th:block>
     <div class="d-flex flex-column flex-root">
       <!--begin::Authentication - Sign-in -->
-      <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(https://preview.keenthemes.com/jet-html-free/assets/media/illustrations/sigma-1/14.png)">
+      <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed">
         <!--begin::Content-->
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
           <!--begin::Wrapper-->
@@ -66,8 +66,8 @@
               <!--begin::Actions-->
               <div class="text-center">
                 <!--begin::Submit button-->
-                <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
-                  <span class="indicator-label"> Continue </span> <span class="indicator-progress"> Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span> </span>
+                <button type="submit" id="kt_sign_in_submit" class="btn btn-lg w-100 mb-5" style="background-color: #116530">
+                  <span class="indicator-label" style="color: white"> Continue </span> <span class="indicator-progress"> Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span> </span>
                 </button>
                 <!--end::Submit button-->
                 <!--begin::Separator-->
@@ -120,7 +120,7 @@
       var Url = location.href;
       var Agent = navigator.userAgent.toLowerCase();
       let hasTarget = $("#targetUrl").val();
-		console.log(hasTarget);
+      console.log(hasTarget);
       //alert(Agent);
       if (Agent.includes("kakao")) {
         // 카카오 브라우저로 실행 시킨 경우

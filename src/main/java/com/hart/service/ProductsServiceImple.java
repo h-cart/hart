@@ -29,6 +29,7 @@ public class ProductsServiceImple implements ProductsService {
 
 		return productsmapper.getproductslist(pcno);
 	}
+	
 
 	@Override
 	public List<CategoryVO> getcategorybar() {
@@ -36,6 +37,11 @@ public class ProductsServiceImple implements ProductsService {
 		return productsmapper.getcategorybar();
 	}
 	
+	@Override
+	public List<CategoryVO> getcategorybar(int pcno) {
+		
+		return productsmapper.getsmallcategorybar(pcno);
+	}
 	
 	//상품디테일의 이미지와 설명 가져오기
 	@Override
@@ -66,5 +72,7 @@ public class ProductsServiceImple implements ProductsService {
 		 
 		return productsmapper.Productlist(list);
 	}
+
+
 
 }
