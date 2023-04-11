@@ -470,6 +470,7 @@ ol {
 .header__menu ul li .dropdown li {
   display: block;
   margin-right: 0;
+  margin-bottom: 15px;
 }
 
 .header__menu ul li .dropdown li a {

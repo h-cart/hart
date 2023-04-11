@@ -48,14 +48,18 @@
     <!-- Search End -->
 
     <style>
+      #myclasslist,
+      #myorderlist {
+        display: none;
+      }
       #depth2 {
-        display: block;
+        display: none;
         position: absolute;
         top: 32px;
         left: 220px;
         bottom: 0;
-        width: 219.99px;
-        height: 370px;
+        width: 250px;
+        height: 520px;
         background: #f4f3ef;
       }
       #depth2 > li {
@@ -64,9 +68,6 @@
         background-color: #f4f3ef;
       }
 
-      #listCate li:hover > #depth2 {
-        display: block;
-      }
       .header__menu ul li a {
         padding: 0px;
         height: 37px;
@@ -129,6 +130,8 @@
           let small = $(this);
           $(this).css("background-color", "#f4f3ef");
           $(this).find("a").css("color", "#116530");
+          // id가 depth2인 요소를 display:block으로 변환
+          $("#depth2").css("display", "block");
 
           $.ajax({
             type: "get",
@@ -141,23 +144,35 @@
                 if (pcno_top == data.result[i].pcno_top) {
                   str += `
              		<li id="sdepth${i}">
-             	  <a href="/product/list?pcno=${data.result[i].pcno}" style="font-size: 18px; color: gray;">${data.result[i].pcategory}</a>
+             	  <a href="/product/list?pcno=${data.result[i].pcno}&pcno_top=${pcno_top}" style="font-size: 18px; color: gray;">${data.result[i].pcategory}</a>
              		</li>`;
                 }
               }
               $("#depth2").empty();
               $("#depth2").append(str);
+              //호버가 끝나면 배경색 원래대로
+              let here;
+              $("#listCate li").on("mouseleave", function () {
+                here = $(this);
+                $(this).css("background-color", "#ffffff");
+                $(this).find("a").css("color", "#000000");
+                $("#depth2 li").on("mouseleave", function () {
+                  $(this).find("a").css("font-weight", "");
+                });
+              });
+              $("#depth2 li").on("mouseenter", function () {
+                $(this).find("a").css("font-weight", "bold");
+                here.css("background-color", "#f4f3ef");
+              });
+              $("#depth2").on("mouseleave", function () {
+                $(this).css("display", "none");
+                here.css("background-color", "#ffffff");
+              });
             },
             error: function () {
               console.log("실패");
             },
           });
-        });
-
-        //호버가 끝나면 배경색 원래대로
-        $("#listCate li").on("mouseleave", function () {
-          $(this).css("background-color", "#ffffff");
-          $(this).find("a").css("color", "#000000");
         });
       }
     </script>
