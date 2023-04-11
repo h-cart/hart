@@ -121,8 +121,8 @@
               <li><a href="/recipe/list">레시피</a></li>
               <li><a href="/class">Live</a></li>
               <li><a href="/event?evid=1">공모전</a></li>
-              <li><a href="/mypage/order" id="myorderlist">주문내역</a></li>
-              <li><a href="/mypage/class" id="myclasslist">수강내역</a></li>
+              <li><a href="/mypage/order" id="myorderlist" style="margin-top: 30px" sec:authorize="isAuthenticated()">주문내역</a></li>
+              <li><a href="/mypage/class" id="myclasslist" sec:authorize="isAuthenticated()">수강내역</a></li>
             </ul>
           </nav>
         </div>
