@@ -1,71 +1,40 @@
 <!DOCTYPE html>
-<html
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <!-- Offcanvas Menu Begin -->
+  <div class="offcanvas-menu-overlay" th:fragment="header1"></div>
+  <style>
+    #myorderlist {
+      display: none;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      $(".offcanvas-menu-wrapper").click(function () {
+        $("#myorderlist").css("display", "block");
+      });
+    });
+  </script>
 
-<!-- Offcanvas Menu Begin -->
-<div
-	class="offcanvas-menu-overlay"
-	th:fragment="header1"
-></div>
-<div
-	class="offcanvas-menu-wrapper"
-	th:fragment="header2"
->
-	<div class="offcanvas__option">
-		<div class="offcanvas__links">
-			<a
-				href="/member/login"
-				sec:authorize="!isAuthenticated()"
-			>로그인</a> 
-			<a sec:authorize="isAuthenticated()" href="/mypage/order">마이페이지</a>
-			<a
-				href="/member/login"
-				sec:authorize="isAuthenticated()"
-			>로그아웃</a>
-		</div>
-	</div>
-	<div
-		class="offcanvas__nav__option"
-		style="width: 266px;"
-	>
-		 <a
-			sec:authorize="isAuthenticated() and principal.csno ==null"
-			class='share_cart'
-			href="#"
-		><i
-			class="fa-solid fa-users fa-xl"
-			style="color: #000000;"
-		></i></a> <a
-			sec:authorize="isAuthenticated() and principal.csno !=null"
-			Paid="kakao-link-btn"
-			href="javascript:kakaoShare()"
-		> <i
-			class="fa-solid fa-up-right-from-square fa-xl"
-			style="color: #000000;"
-		></i>
-		</a> <a href="/cart/mycart"><i
-			class="fa-solid fa-cart-shopping fa-xl"
-			style="color: #000000;"
-		></i></a><a href="/order/qr"><i
-			class="fa-solid fa-qrcode fa-beat fa-xl"
-			style="color: #000000;"
-		></i></a> <a
-			href="javascript: alarmToggle();"
-			onclick="updateCheckAlarm()"
-			id="mobile_alarm"
-		> <!--좌측 배너 알림내용 시작  --> <i
-			class="fa-solid fa-bell fa-xl"
-			style="color: #000000;"
-		></i> <span
-			class="badge badge-danger badge-counter"
-			id="alarmCnt2"
-			style="left: 15px; color: white"
-		></span> <!--좌측 배너 알림내용 시작  -->
-			<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="alertsDropdown" id="alarmlist1" style="width: 280px; top: 145px; left: 10px;" >
-				<h6 class="dropdown-header">알림</h6>
-				<!-- 
+
+  <div class="offcanvas-menu-wrapper" th:fragment="header2">
+    <div class="offcanvas__option">
+      <div class="offcanvas__links">
+        <a href="/member/login" sec:authorize="!isAuthenticated()">로그인</a>
+        <a sec:authorize="isAuthenticated()" href="/mypage/order">마이페이지</a>
+        <a href="/member/login" sec:authorize="isAuthenticated()">로그아웃</a>
+      </div>
+    </div>
+    <div class="offcanvas__nav__option" style="width: 266px">
+      <a href="#" class="search-switch"><i class="fas fa-solid fa-magnifying-glass fa-xl" style="color: #000000"></i></a> <a sec:authorize="isAuthenticated() and principal.csno ==null" class="share_cart" href="#"><i class="fa-solid fa-users fa-xl" style="color: #000000"></i></a> <a sec:authorize="isAuthenticated() and principal.csno !=null" Paid="kakao-link-btn" href="javascript:kakaoShare()"> <i class="fa-solid fa-up-right-from-square fa-xl" style="color: #000000"></i> </a>
+      <a href="/cart/mycart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000"></i></a><a href="/order/qr"><i class="fa-solid fa-qrcode fa-beat fa-xl" style="color: #000000"></i></a>
+      <a href="javascript: alarmToggle();" onclick="updateCheckAlarm()" id="mobile_alarm">
+        <!--좌측 배너 알림내용 시작  -->
+        <i class="fa-solid fa-bell fa-xl" style="color: #000000"></i> <span class="badge badge-danger badge-counter" id="alarmCnt2" style="left: 15px; color: white"></span>
+        <!--좌측 배너 알림내용 시작  -->
+        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="alarmlist1" style="width: 360px; top: 145px; left: 10px">
+          <h6 class="dropdown-header">알림</h6>
+          <!-- 
+
 						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
 						<div class="">
 							<div class="icon-circle bg-primary">
@@ -107,91 +76,73 @@
 						</div>
 					</a>
 					 -->
-				<a class="dropdown-item text-center small text-gray-500" href="#" ></a>
-			</div> <!--좌측 배너 알림내용 끝  --> <!-- </a> -->
-	</div>
-	<div id="mobile-menu-wrap"></div>
-</div>
-<!-- Offcanvas Menu End -->
-<!-- Header Section Begin -->
-<header
-	class="header header-wrap" th:fragment="header3" style="background: white;">
-	<div class="header__top" >
-		<div class="container" >
-			<div class="row">
-				<div class="col-lg-6 col-md-7">
-					<div class="header__top__left">
-						<p>HCART와 함께하는 쇼핑, HART에 오신걸 환영합니다.</p>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-5">
-					<div class="header__top__right">
-						<div
-							class="header__top__links"
-							sec:authorize="isAuthenticated()"
-						>
-							<a href="/mypage/order">마이페이지</a> <a href="/member/logout">로그아웃</a>
-						</div>
-						<div
-							class="header__top__links"
-							sec:authorize="!isAuthenticated()"
-						>
-							<a href="/member/login">로그인</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container" style="padding-left: 0px;padding-right: 0px;background: white;">
-		<div class="row">
-			<div class="col-lg-3 col-md-3">
-				<div class="header__logo" style="padding-top: 17px;">
-					<a href="/"><img
-						src="/img/hartlogo.jpg"
-						alt=""
-						style="height: 50px "
-					/></a>
-				</div>
-			</div>
-			<div class="col-lg-6 col-md-6">
-				<nav class="header__menu mobile-menu">
-					<ul style="margin-top: 0px; margin-bottom: 1rem;">
-						<li><a href="/product/list?pcno_top=100571"class="active">상품</a><ul class="dropdown" id="listCate" style="width: 220px; background: #ffffff; padding: 0px;" >
-							</ul><ul class="dropdown" id="depth2" style="padding: 0px;"></ul></li>
-						<li><a href="/recipe/list">레시피</a></li>
-						<li><a href="/class">Live</a></li>
-						<li><a href="/event?evid=1">공모전</a></li>
-					</ul>
-				</nav>
-			</div>
-			<div class="col-lg-3 col-md-3">
 
-				<div class="header__nav__option" style="width: 217px;">
-					<a sec:authorize="isAuthenticated() and principal.csno ==null"
-						class='share_cart' href="#"><i class="fa-solid fa-users fa-xl"
-						style="color: #000000;"></i></a> <a
-						sec:authorize="isAuthenticated() and principal.csno !=null"
-						Paid="kakao-link-btn"
-						href="javascript:kakaoShare()"
-					> <i
-						class="fa-solid fa-up-right-from-square fa-xl"
+          <a class="dropdown-item text-center small text-gray-500" href="#"></a>
+        </div>
+        <!--좌측 배너 알림내용 끝  -->
+      </a>
+    </div>
+    <div id="mobile-menu-wrap"></div>
+  </div>
+  <!-- Offcanvas Menu End -->
+  <!-- Header Section Begin -->
+  <header class="header header-wrap" th:fragment="header3">
+    <div class="header__top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-7">
+            <div class="header__top__left">
+              <p>HCART와 함께하는 쇼핑, HART에 오신걸 환영합니다.</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-5">
+            <div class="header__top__right">
+              <div class="header__top__links" sec:authorize="isAuthenticated()"><a href="/mypage/order">마이페이지</a> <a href="/member/logout">로그아웃</a></div>
+              <div class="header__top__links" sec:authorize="!isAuthenticated()">
+                <a href="/member/login">로그인</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="padding-left: 0px; padding-right: 0px; background: white">
+      <div class="row">
+        <div class="col-lg-3 col-md-3">
+          <div class="header__logo" style="padding-top: 17px">
+            <a href="/"><img src="/img/hartlogo.jpg" alt="" style="height: 50px" /></a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <nav class="header__menu mobile-menu">
+            <ul style="margin-top: 0px; margin-bottom: 1rem">
+              <li>
+                <a href="/product/list?pcno_top=100571" class="active">상품</a>
+                <ul class="dropdown" id="listCate" style="width: 220px; background: #ffffff; padding: 0px"></ul>
+                <ul class="dropdown" id="depth2" style="padding: 0px"></ul>
+              </li>
+              <li><a href="/recipe/list">레시피</a></li>
+              <li><a href="/class">Live</a></li>
+              <li><a href="/event?evid=1">공모전</a></li>
+              <li><a href="/mypage/order" id="myorderlist" style="margin-top: 30px" sec:authorize="isAuthenticated()">주문내역</a></li>
+              <li><a href="/mypage/class" id="myclasslist" sec:authorize="isAuthenticated()">수강내역</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-3 col-md-3">
+          <div class="header__nav__option" style="width: 217px">
+            <a href="#" class="search-switch"><i class="fa-solid fa-magnifying-glass fa-xl" style="color: #000000"></i></a>
+            <a sec:authorize="isAuthenticated() and principal.csno ==null" class="share_cart" href="#"><i class="fa-solid fa-users fa-xl" style="color: #000000"></i></a>
+            <a sec:authorize="isAuthenticated() and principal.csno !=null" Paid="kakao-link-btn" href="javascript:kakaoShare()"> <i class="fa-solid fa-up-right-from-square fa-xl" style="color: #000000"></i> </a> <a href="/cart/mycart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000"></i></a>
+            <a href="javascript: alarmToggle();" onclick="updateCheckAlarm()"
+              ><i class="fa-regular fa-bell fa-xl" style="color: #000000"></i>
+              <span class="badge badge-danger badge-counter" id="alarmCnt" style="left: 15px; color: white"></span>
+            </a>
 
-						style="color: #000000;"></i>
-					</a> <a href="/cart/mycart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i></a>
-					<a href="javascript: alarmToggle();" onclick="updateCheckAlarm()"><i class="fa-regular fa-bell fa-xl" style="color: #000000;"></i>
-						<span class="badge badge-danger badge-counter" id="alarmCnt" style="left: 15px; color:white"></span>
-					</a>
-					
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="alarmlist" style="width: 360px">
+              <h6 class="dropdown-header">알림</h6>
+              <!-- <a class="d-flex align-items-center" href="#" style="margin: 10px; border-bottom: solid lightgray;">
 
-					<div
-						class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-						aria-labelledby="alertsDropdown"
-						id="alarmlist"
-						style="width: 360px"
-					>
-						<h6 class="dropdown-header">알림</h6>
-						<!-- <a class="d-flex align-items-center" href="#" style="margin: 10px; border-bottom: solid lightgray;">
 							<div class="">
 								<div class="icon-circle bg-primary">
 									<i class="fas fa-file-alt text-white" aria-hidden="true"></i>
@@ -204,40 +155,34 @@
 							</div>
 						</a> 
 						 -->
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="canvas__open">
-			<i class="fa fa-bars" style="margin-top: 7px;"></i>
-		</div>
-	</div>
-	<script
-		sec:authorize="isAuthenticated() and principal.csno !=null"
-		src="/js/sse.js"
-	></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="canvas__open">
+        <i class="fa fa-bars" style="margin-top: 7px"></i>
+      </div>
+    </div>
+    <script sec:authorize="isAuthenticated() and principal.csno !=null" src="/js/sse.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $.ajax({
+          type: "POST",
+          url: "/alarm",
+          contentType: "application/json; charset=utf-8",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+          },
+          success: function (result) {
+            for (let i = 0; i < result.list.length; i++) {
+              let date = result.list[i].alarm_date;
+              let content = result.list[i].alarm_content;
+              //let date = result[i].alarm_date;
+              //let content = result[i].alarm_content;
+              //console.log(cnt);
+              let str = "";
 
-		$.ajax({
-			type: 'POST',
-			url : '/alarm',
-			contentType : "application/json; charset=utf-8",
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader(header, token);
-			},
-			success : function(result){
-				
-				for (let i = 0; i < result.list.length; i++) {
-
-					let date = result.list[i].alarm_date;
-					let content = result.list[i].alarm_content;
-					//let date = result[i].alarm_date;
-					//let content = result[i].alarm_content;
-					//console.log(cnt);
-					let str="";
-					
-					str+=`
+              str += `
 						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
 						<div class="">
 							<div class="icon-circle bg-primary">
@@ -251,69 +196,54 @@
 						</div>
 					</a>
 					
-					`
-					
-					$(".dropdown-list").append(str);
-					
-					  
-				}
-				
-				let laststr='';
-				laststr+=`<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
-				//$("#alarmlist").append(laststr);
-				$(".dropdown-list").append(laststr);
-				
-				
-				let cnt = result.alarmCount;
-				
-				if(cnt==0){
-					//$("#alarmCnt").html("");
-					$(".badge").html("");
-				}else{
-					//$("#alarmCnt").html(cnt+"+");	
-					$(".badge").html(cnt+"+");	
-				}
-	
-			},
-			error : function(result){
-				consoel.log("ajax 실패");
-				
-			}
-			
-		});  
-		
-		
-	});
-	
-	
-	
-	
-	
-	function updateCheckAlarm(){
-			
-			$.ajax({
-				type: 'POST',
-				url : '/alarm/update',
-				contentType : "application/json; charset=utf-8",
-				beforeSend: function (xhr) {
-					xhr.setRequestHeader(header, token);
-				},
-				success : function(){
-					console.log("ajax 성공");
-					$(".badge").html("");
-				},
-				error : function(){
-					consoel.log("ajax 실패");
-					
-				}
-				
-			});
-			
-			
-		}
-	</script>
-	<script>
-		/*
+
+					`;
+
+              $(".dropdown-list").append(str);
+            }
+
+            let laststr = "";
+            laststr += `<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
+            //$("#alarmlist").append(laststr);
+            $(".dropdown-list").append(laststr);
+
+            let cnt = result.alarmCount;
+
+            if (cnt == 0) {
+              //$("#alarmCnt").html("");
+              $(".badge").html("");
+            } else {
+              //$("#alarmCnt").html(cnt+"+");
+              $(".badge").html(cnt + "+");
+            }
+          },
+          error: function (result) {
+            consoel.log("ajax 실패");
+          },
+        });
+      });
+
+      function updateCheckAlarm() {
+        $.ajax({
+          type: "POST",
+          url: "/alarm/update",
+          contentType: "application/json; charset=utf-8",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+          },
+          success: function () {
+            console.log("ajax 성공");
+            $(".badge").html("");
+          },
+          error: function () {
+            consoel.log("ajax 실패");
+          },
+        });
+      }
+    </script>
+    <script>
+      /*
+
 		function alarmToggle(){
 			if($("#alarmlist").hasClass("show")){
 				$("#alarmlist").removeClass("show");
@@ -323,91 +253,73 @@
 			
 		}
 		*/
-		$(document).mouseup(function (e){
-		  var LayerPopup = $(".dropdown-list");
-		  if(LayerPopup.has(e.target).length === 0){
-		    LayerPopup.removeClass("show");
-		  }
-		});
-		
-		/* 알람창 외다른 곳 누르면 닫히게 */
-		function alarmToggle(){
-			if($(".dropdown-list").hasClass("show")){
-				$(".dropdown-list").removeClass("show");
-			}else{
-				$(".dropdown-list").addClass("show");
-			}
-			
-		}
-		
-		/*
+
+      function alarmToggle() {
+        if ($(".dropdown-list").hasClass("show")) {
+          $(".dropdown-list").removeClass("show");
+        } else {
+          $(".dropdown-list").addClass("show");
+        }
+      }
+
+      /*
+
 		$(document).mouseup(function (e){
 			$("#alarmlist").removeClass("show");
 		});
 		*/
-		
-		
-		
-		/* 
+
+      /* 
 		$(document).ready(function(){
 			$("body").on("click",function(){
 				$("#alarmlist").removeClass("show");
 			})
 		})
 		 */
-		
-		
-		
-		
-		
-		const token = $("meta[name='_csrf']").attr("content");
-		const header = $("meta[name='_csrf_header']").attr("content");
-		$(document).on("click", ".share_cart", function (e) {
 
-			e.preventDefault();
-			Swal.fire({
-				title: '공유 장바구니를 생성하시겠습니까?',
-				text: "공유 장바구니가 우선적으로 사용됩니다.",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonText: '아니',
-				cancelButtonColor: '#d33',
-				confirmButtonText: '생성'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					$.ajax({
-						url: '/capi/create',
-						type: 'post',
-						contentType: "application/json",
-						beforeSend: function (xhr) {
-							xhr.setRequestHeader(header, token);
-						},
-						success: function (data) {
-							console.log(result);
-							Swal.fire(
-								'공유 장바구니로 이동합니다.'
-							).then((result) =>{
-								if(result.isConfirmed){
-									location.href = '/cart/share/' + data.result.csno;
-								}
-							})
-							
-						}, error: function (err, xhr, status) {
-							console.log(err.status);
-						}
-					})
+      const token = $("meta[name='_csrf']").attr("content");
+      const header = $("meta[name='_csrf_header']").attr("content");
+      $(document).on("click", ".share_cart", function (e) {
+        e.preventDefault();
+        Swal.fire({
+          title: "공유 장바구니를 생성하시겠습니까?",
+          text: "공유 장바구니가 우선적으로 사용됩니다.",
+          icon: "warning",
+          iconColor: "#116530",
+          showCancelButton: true,
+          confirmButtonColor: "#116530",
+          cancelButtonText: "아니",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "생성",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "/capi/create",
+              type: "post",
+              contentType: "application/json",
+              beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+              },
+              success: function (data) {
+                console.log(result);
+                Swal.fire("공유 장바구니로 이동합니다.").then((result) => {
+                  if (result.isConfirmed) {
+                    location.href = "/cart/share/" + data.result.csno;
+                  }
+                });
+              },
+              error: function (err, xhr, status) {
+                console.log(err.status);
+              },
+            });
+          } else {
+            Swal.fire("공유 장바구니 생성 실패");
+          }
+        });
+      });
+    </script>
 
-				} else {
-					Swal.fire('공유 장바구니 생성 실패');
-				}
-			})
-		});
-	</script>
-
-	<script src="https://kit.fontawesome.com/41611c5120.js" crossorigin="anonymous"></script>
-
-
-</header>
-<!-- Header Section End -->
+    <script src="https://kit.fontawesome.com/41611c5120.js" crossorigin="anonymous"></script>
+  </header>
+  <!-- Header Section End -->
 </html>

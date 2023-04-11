@@ -54,7 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public RoleHierarchyImpl roleHierarchyImpl() {
-		log.info("실행");
 		RoleHierarchyImpl roleHierarchyImpl = new RoleHierarchyImpl();
 		roleHierarchyImpl.setHierarchy("ROLE_ADMIN > ROLE_MANAGER > ROLE_USER");
 		return roleHierarchyImpl;
@@ -80,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-		http.formLogin().loginPage("/member/login").loginProcessingUrl("/member/login_form").defaultSuccessUrl("/").failureHandler(getFailureHandler()).successHandler(successHandler())
+		http.formLogin().loginPage("/member/login").loginProcessingUrl("/member/login_form").defaultSuccessUrl("/admin").failureHandler(getFailureHandler()).successHandler(successHandler())
 				.permitAll();
 
 
