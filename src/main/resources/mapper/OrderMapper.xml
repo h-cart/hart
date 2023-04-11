@@ -58,12 +58,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{item.lcid}, #{item.pamount}, 0)
 		</foreach>
 	</update>
+
 	<update id="intoMyClass" parameterType="java.util.List">
-		<foreach collection="cLists" item="item" separator=";">
-			INSERT INTO
-			class_list (mid,lcid,alert_phone)
+		<foreach collection="cLists" item="item" open="INSERT ALL"
+			close="SELECT * FROM DUAL" separator=" ">
+			INTO
+			class_list
+			(mid,lcid,alert_phone)
 			VALUES
-			(#{oDTO.mid},#{item.lcid},#{oDTO.phone})
+			(#{oDTO.mid}, #{item.lcid},
+			#{oDTO.phone})
 		</foreach>
 	</update>
 

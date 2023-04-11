@@ -30,4 +30,14 @@ public class RecommandMapperTests {
 		RecommandDTO result = rMapper.getShareRecommand("77");
 		log.info(result);
 	}
+	
+	@Test
+	public void getProductRecommand() throws SQLException{
+		try {
+		RecommandDTO result = rMapper.getProductRecommand("S02012025650");
+		log.info(result);
+		}catch (Exception e) {
+			log.info(e.getMessage());
+		}
+	}
 }
