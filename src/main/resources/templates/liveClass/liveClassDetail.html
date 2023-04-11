@@ -32,6 +32,9 @@
     .addToCart:hover{
     	color: #fff;
     }
+    
+    
+    
   </style>
   <style>
     .product__cart__item__pic {
@@ -116,7 +119,7 @@
       font-weight: bold;
     }
     .orderDirect {
-      background: #dedede;
+      background: #dededecf;
       border: none;
       color: black;
     }
@@ -125,11 +128,6 @@
     	padding-top: 0px;
     }
     
-    .product__details__tab .nav-tabs .nav-item .nav-link.active {
-    	border-bottom: 3px solid #e53637;
-    	color: black;
-    
-    }
     
     .tab-pane{
     
@@ -151,6 +149,14 @@
     	}
 	
     }
+    
+    .addToCart:focus {
+		color: #fff;
+	}
+	
+	#orderbtnclass:focus{
+		color:black;
+	}
     
   </style>
   <body style="">
@@ -212,56 +218,22 @@
                   </table>
                 </div>
 				<input type="hidden" id="quantity_-1" value="1"/>
-                <div class="product__details__cart__option row row-cols-sm-12">
+                <div th:if="${memberCheck}==0" class="product__details__cart__option row row-cols-sm-12">
                   <input type="checkbox" checked style="display: none" name="cartlist" id="chk_-1" />
                   <input class="item" id="-1" type="hidden" th:data-value="${liveClass.liveClassListDTO.lcid}" name="pid" th:value="${liveClass.liveClassListDTO.lcid}" />
                   
                   <a href="#" th:onclick="addToCart(false,-1)" class="primary-btn addToCart col" style="margin: 10px; width: -webkit-fill-available" id="cartbtn">장바구니</a>
-
-                  <a href="#" class="primary-btn orderDirect col" style="margin: 10px; width: -webkit-fill-available;">바로구매</a>
+                  <a href="#" class="primary-btn orderDirect col"  id="orderbtnclass" style="margin: 10px; width: -webkit-fill-available;">바로구매</a>
+                  
+                </div>
+                <div th:if="${memberCheck}!=0" class="product__details__cart__option row row-cols-sm-12">
+                  <input type="checkbox" checked style="display: none" name="cartlist" id="chk_-1" />
+                  <input class="item" id="-1" type="hidden" th:data-value="${liveClass.liveClassListDTO.lcid}" name="pid" th:value="${liveClass.liveClassListDTO.lcid}" />
+                  <a th:onclick="" class="primary-btn addToCart col" style=" color:#fff; margin: 10px; width: -webkit-fill-available" id="cartbtn" >이미 구매한 강의입니다.</a>
                 </div>
               </div>
 
               <div class="product__details__widget">
-                <script>
-                  // id가 discontPrice인 span 이있으면 해당 값이 id가 quantity_-1랑 곱해서 나타내주고  discontPrice인 span이 없으면 id가 originPrice인 span이랑 곱해서 나타내기
-                  /*  
-                  function TotalPrice(e) {
-                    let discontPrice = $("#discontPrice").text().replace(/,/g, "").replace("원", "");
-                    let originPrice = $("#originPrice").text().replace(/,/g, "").replace("원", "");
-
-                    let quantity = $("#quantity_-1").val();
-                    let totalPrice = 0;
-
-                    if (discontPrice != "") {
-                      totalPrice = discontPrice * (parseInt(quantity) + parseInt(e));
-                      $("#totalPrice").text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
-                    } else {
-                      totalPrice = originPrice * (parseInt(quantity) + parseInt(e));
-                      $("#totalPrice").text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
-                    }
-                  }
-                  $(document).ready(function () {
-                    // id가 quantity_-1 의 값이 변경될때마다
-                    $("#quantity_-1").on("change", function () {
-                      TotalPrice(0);
-                    });
-
-                    $("span.inc").on("click", function () {
-                      TotalPrice(1);
-                    });
-                    $("span.dec").on("click", function () {
-                      let quantity = $("#quantity_-1").val();
-                      if (quantity == 1) {
-                        TotalPrice(0);
-                      } else {
-                        TotalPrice(-1);
-                      }
-                    });
-                  });
-                  */
-                </script>
-
                 <div class="row">
                   <span class="col-5">총 상품금액</span>
                   <h2 id="totalPrice" class="col-7" th:text="${#numbers.formatInteger(liveClass.liveClassListDTO.lcprice, 3, 'COMMA') + '원'}"></h2>
@@ -282,16 +254,27 @@
                   <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tabs-5" role="tab">필요재료</a></li>
                   <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">수강대상</a></li>
                 </ul>
-                <div class="tab-content" style="display: flex; justify-content: center; min-height: 460px;">
+                <div class="tab-content" style="display: flex; justify-content: center; min-height: 460px; margin-top: 35px">
                   <div class="tab-pane active" id="tabs-5" role="tabpanel" style="width: 800px; margin-top:20px;">
-                    <div th:each="ingredient : ${liveClass.ingredientList}" style="margin-bottom: 20px;">
-						<h6 th:text="'- '+${ingredient}" style="margin-top: 0px;">필요재료 설명</h6>
-					</div>
+                  	<div class="blog__details__quote">
+                            <i class="fa fa-quote-left"></i>
+                            <p>필수 재료들</p> 
+                            <div th:each="ingredient : ${liveClass.ingredientList}" style="margin-bottom: 20px;">
+								<h6 th:text="'- '+${ingredient}" style="margin-top: 0px;">필요재료 설명</h6>
+							</div>
+		            </div>
                   </div>
+                  
                   <div class="tab-pane" id="tabs-6" role="tabpanel" style="width: 800px; margin-top:20px;">
-                    <div th:each="lcStudent : ${liveClass.lcStudentList}" style="margin-bottom: 9px;">
-						<h6 th:text="'-'+${lcStudent}" style="margin-top: 0px;">수강대상</h6>
-					</div>
+                  	<div class="blog__details__quote">
+                            <i class="fa fa-quote-left"></i>
+                            <p>수강 대상</p> 
+                            <div th:each="lcStudent : ${liveClass.lcStudentList}" style="margin-bottom: 9px;">
+								<h6 th:text="'-'+${lcStudent}" style="margin-top: 0px;">수강대상</h6>
+							</div>
+		            </div>
+                  
+                    
                   </div>
                 </div>
                 
@@ -380,6 +363,8 @@
       /*]]>*/
 
     </script>
+
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   </body>
 </html>
