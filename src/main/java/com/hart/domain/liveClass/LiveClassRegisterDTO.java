@@ -11,4 +11,5 @@ public class LiveClassRegisterDTO {
 	private String classNumber;
 	private String className;
 	private String classVodpath;
+	private int columnSeq;
 }

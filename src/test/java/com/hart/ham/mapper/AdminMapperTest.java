@@ -2,6 +2,7 @@ package com.hart.ham.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class AdminMapperTest {
 	private LiveClassMapper mapper;
 	
 	@Test
-	public void testAdminLiveClass() {
+	public void testAdminLiveClass() throws SQLException {
 		log.info(mapper.getAdminLiveClass());
 		
 	}

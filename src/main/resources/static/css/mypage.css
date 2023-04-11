@@ -618,7 +618,7 @@ table tr.vertical-middle th,table tr.vertical-middle td {
   }
 
   .myshop-wrap .myshop-layout .contents-block .order-search-block .period-search li input[type=text] {
-      width: auto;
+      width: 88px;
       padding: 0 8px;
   }
 
@@ -3019,8 +3019,8 @@ button {
 }
 
 .btn-dark {
-  background-color: #1e1e1e;
-  border: 1px solid #1e1e1e;
+  background-color: #116530;
+  border: 1px solid #116530;
 }
 
 .btn-dark span {
