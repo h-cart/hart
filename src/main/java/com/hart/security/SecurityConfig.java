@@ -27,25 +27,24 @@ import lombok.extern.log4j.Log4j2;
 @Configuration
 @Log4j2
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	private final ClubUserDetailsService memberService;
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(memberService);
 		super.configure(auth);
 	}
-	
 
 	@Bean
 	public LoginSuccessHandler successHandler() {
 		return new LoginSuccessHandler(passwordEncoder());
-	}// 
+	}//
 
 	@Bean
 	LoginFailureHandler getFailureHandler() {
 		return new LoginFailureHandler();
 	}
-	
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -59,32 +58,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return roleHierarchyImpl;
 	}
 
-
-	
-
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// /samle/all 모든 사용자 가능
 		// /sample/member USER 롤 사용자만
-		http.authorizeRequests().antMatchers("/cart/**").authenticated()
-		.antMatchers("/").permitAll().antMatchers("/order/**").authenticated()
-				.antMatchers("/mypage/**").authenticated()
-				.antMatchers("/member/login/**").permitAll()
-				.antMatchers("/member/login_form").permitAll()
-				.antMatchers("/member/**").hasRole("USER");
+		http.authorizeRequests().antMatchers("/cart/**").authenticated().antMatchers("/").permitAll()
+				.antMatchers("/order/**").authenticated().antMatchers("/mypage/**").authenticated()
+				.antMatchers("/member/login/**").permitAll().antMatchers("/member/login_form").permitAll()
+				.antMatchers("/member/**").hasRole("USER").antMatchers("/admin/**").hasRole("ADMIN");
 //				.antMatchers("/admin").hasRole("ADMIN");
 		// 인가 인증 문제시 로그인 화면
 
-
-
-
-		http.formLogin().loginPage("/member/login").loginProcessingUrl("/member/login_form").defaultSuccessUrl("/admin").failureHandler(getFailureHandler()).successHandler(successHandler())
-				.permitAll();
-
-
-
-
+		http.formLogin().loginPage("/member/login").loginProcessingUrl("/member/login_form").defaultSuccessUrl("/admin")
+				.failureHandler(getFailureHandler()).successHandler(successHandler()).permitAll();
 
 		// crsf 비활성화
 		http.csrf();// .disable();
@@ -99,6 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.tokenValiditySeconds(60 * 60 * 24 * 7).userDetailsService(userDetailsService());
 
 	}
+
 	@Bean
 	public HttpFirewall defaultHttpFireWall() {
 		return new DefaultHttpFirewall();
@@ -108,10 +95,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.httpFirewall(defaultHttpFireWall());
 	}// end configure http
-	
+
 	@Bean
-    public RequestCache requestCache() {
-        return new HttpSessionRequestCache();
-    }
+	public RequestCache requestCache() {
+		return new HttpSessionRequestCache();
+	}
 
 }// end class
