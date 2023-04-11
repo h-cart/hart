@@ -15,6 +15,7 @@
     });
   </script>
 
+
   <div class="offcanvas-menu-wrapper" th:fragment="header2">
     <div class="offcanvas__option">
       <div class="offcanvas__links">
@@ -33,6 +34,7 @@
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="alarmlist1" style="width: 360px; top: 145px; left: 10px">
           <h6 class="dropdown-header">알림</h6>
           <!-- 
+
 						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
 						<div class="">
 							<div class="icon-circle bg-primary">
@@ -74,6 +76,7 @@
 						</div>
 					</a>
 					 -->
+
           <a class="dropdown-item text-center small text-gray-500" href="#"></a>
         </div>
         <!--좌측 배너 알림내용 끝  -->
@@ -139,6 +142,7 @@
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="alarmlist" style="width: 360px">
               <h6 class="dropdown-header">알림</h6>
               <!-- <a class="d-flex align-items-center" href="#" style="margin: 10px; border-bottom: solid lightgray;">
+
 							<div class="">
 								<div class="icon-circle bg-primary">
 									<i class="fas fa-file-alt text-white" aria-hidden="true"></i>
@@ -192,6 +196,7 @@
 						</div>
 					</a>
 					
+
 					`;
 
               $(".dropdown-list").append(str);
@@ -238,6 +243,7 @@
     </script>
     <script>
       /*
+
 		function alarmToggle(){
 			if($("#alarmlist").hasClass("show")){
 				$("#alarmlist").removeClass("show");
@@ -247,6 +253,7 @@
 			
 		}
 		*/
+
       function alarmToggle() {
         if ($(".dropdown-list").hasClass("show")) {
           $(".dropdown-list").removeClass("show");
@@ -256,6 +263,7 @@
       }
 
       /*
+
 		$(document).mouseup(function (e){
 			$("#alarmlist").removeClass("show");
 		});

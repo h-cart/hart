@@ -21,7 +21,11 @@ public class RecipeController {
 
 	@Autowired
 	RecipeService recipeservice;
-
+	
+	@GetMapping("/chat")
+	public void chat() {
+		
+	}
 	@GetMapping("/list")
 	public String recipelist(Model model) {
 		try {

@@ -38,7 +38,7 @@ public class ChatbotProc {
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json;UTF-8");
             con.setRequestProperty("X-NCP-CHATBOT_SIGNATURE", encodeBase64String);
-
+            
             // post request
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -137,6 +137,6 @@ public class ChatbotProc {
         }
 
         return requestBody;
-
+        
     }
 }

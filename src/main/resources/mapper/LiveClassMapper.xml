@@ -40,5 +40,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by lcid desc
 	</select>
 	
+	<insert id="registerLiveClassVOD" parameterType="com.hart.domain.liveClass.LiveClassRegisterDTO">
+		<selectKey keyProperty="columnSeq" resultType="int" order="BEFORE">
+	        select vod_seq.nextval from dual
+	    </selectKey>
+		INSERT INTO videos (vid,lcid,vpath)VALUES ('V'||#{columnSeq},#{classNumber}, #{classVodpath})
+	</insert>
+	
+	<select id="checkClassMember"  resultType="int">
+		select count(*) from class_list where mid = #{mid} and lcid=#{lcid}
+	</select>
+	
 	 
 </mapper>

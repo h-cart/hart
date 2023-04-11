@@ -49,9 +49,18 @@ public class LiveClassController {
 	}
 	
 	@GetMapping("/detail/{lcid}")
-	public String getLiveClassListDetail(Model model, @PathVariable String lcid) {
+	public String getLiveClassListDetail(Model model, @PathVariable String lcid, Principal pr) {
 		log.info("getLiveClassListDetail 컨트롤러 호출");
-		LiveClassDetailInfoDTO dto = service.getClassDetail(lcid);
+		LiveClassDetailInfoDTO dto = new LiveClassDetailInfoDTO();
+		dto = service.getClassDetail(lcid);
+		if(pr==null) {
+			model.addAttribute("memberCheck",0);
+		}else {
+			String mid = pr.getName();
+			int memberCheck = service.checkClassMember(lcid, mid);
+			model.addAttribute("memberCheck",memberCheck);
+		}
+		
 		model.addAttribute("liveClass",dto);
 		log.info(model);
 		return "liveClass/liveClassDetail";
@@ -80,7 +89,11 @@ public class LiveClassController {
 	public String registerVOD(Model model, LiveClassRegisterDTO dto) {
 		
 		log.info(dto);
-		
+		try {
+			service.registerVOD(dto);
+		} catch (Exception e) {
+			log.info("vod 등록에 실패했습니다.");
+		}
 		
 		return "redirect:/admin/class";
 	}
