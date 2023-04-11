@@ -101,8 +101,8 @@ function showModal(result,flag,title) {
                <div class="accordion" id="accordionClass">
                   <div class="card">
                      <div class="card-heading active">
-                        <a data-toggle="collapse" data-target="#collapseClass" class="" aria-expanded="true">라이브
-                           클래스 추천</a>
+                        <a data-toggle="collapse" data-target="#collapseClass" class="" aria-expanded="true">
+                           간단한 쿠킹 클래스 어떠세요?</a>
                      </div>
                      <div id="collapseClass" class="collapse show" data-parent="#accordionClass" style="">
                         <table>
@@ -111,10 +111,11 @@ function showModal(result,flag,title) {
       
       $.each(lives, function (index, value) {
         idx++;
-        var status = value.lcstatus == 0 ? value.lcday + "방송예정" : value.lcstatus == 1 ? "LIVE 방송 중" : "VOD로 수강하기";
-        str += `<tbody id="accordion${idx}"  class="accordion" data-parent="#accordionClass" style="">
-        <tr id="${idx}" data-value="${value.lcid}">
-        <td class="product__cart__item" colspan="2">
+        var status = value.lcstatus == 0 ? value.lcday + "&nbsp방송예정" : value.lcstatus == 1 ? "LIVE 방송 중" : "VOD로 수강하기";
+        str += `
+        <tr id="accordion${idx}"  class="accordion" data-parent="#accordionClass" style="">
+       
+        <td class="product__cart__item">
         <div class="product__cart__item__pic" style="
         margin-top: 20px;
     "><span class="thumb"><input name="cartlist" id="check_${idx}" type="checkbox"
@@ -123,12 +124,12 @@ function showModal(result,flag,title) {
                  style="width:90px;border-radius: 10px;height:90px;"></span></div>
         <div class="product__cart__item__text">
            <h6>${value.lcname}</h6><span class="price-box">
-              <h5 class="price" id="price_${idx}" data-value="${value.lcprice}">${status}</h5>
+              <span style="font-size:13px;"class="price" id="price_${idx}" data-value="${value.lcprice}">${status}</span>
            </span>
         </div>
      </td>
-     <input type="hidden" id="quantity_${idx}" value="1"/>     
-     <td data-value="${value.lcprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(value.lcprice)}원</td>
+     
+     <td data-value="${value.lcprice}" class="cart__price" id="cprice_${idx}" style="width:175px;">${numberWithCommas(value.lcprice)}원</td>
         <td data-toggle="collapse" data-target="#collapse${idx}" class="" aria-expanded="true"><span style="
         font-size: 12px;
         border: 1px solid gray;
@@ -136,13 +137,14 @@ function showModal(result,flag,title) {
         cursor: pointer;
         border-radius: 5px;
     ">관련상품</span></td>
-        
-     </tr></tbody><tbody id="collapse${idx}" class="collapse" data-parent="#accordion${idx}" style="">`;
+    <input type="hidden" id="${idx} data-value=${value.lcid}">
+    <input type="hidden" id="quantity_${idx}" value="1"/>    
+     </tr><tbody id="collapse${idx}" class="collapse" data-parent="#accordion${idx}" style="">`;
         $.each(value.items, function (lindex, item) {
           console.log(idx);
           idx++;
-          str += `<tr><td colspan="4">관련 상품목록</td></tr><tr id="${idx}" data-value="${item.pid}">
-            <td class="product__cart__item" colspan="2">
+          str += `<tr id="${idx}" data-value="${item.pid}">
+            <td class="product__cart__item">
                <div class="product__cart__item__pic"><span class="thumb"><input name="cartlist" id="check_${idx}" type="checkbox"
                         class="checkbox"><img class="pimg"
                         src="${item.pimg}" alt=""
@@ -160,7 +162,9 @@ function showModal(result,flag,title) {
                         data-value="${idx}" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-lg'></i></span></div>
                </div>
             </td>
-            <td data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
+            <td style="
+        font-size: 14px;
+    " data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
          </tr>`;
         });
         str += `</tbody>`;
@@ -185,7 +189,10 @@ function showModal(result,flag,title) {
                            <div class="shop__sidebar__tags">
                               `;
                               $.each(result.result.rcates,function(index,value){
-                                 str+=`<a href="#" class="rcategory_${value.rcano}">${value.rcname}</a>`;
+                                 if(index==0) 
+                                 str+=`<a class="rcategory_${value.rcano} on">${value.rcname}</a>`;
+                                 else
+                                 str+=`<a class="rcategory_${value.rcano}">${value.rcname}</a>`;
                               })
                               str+=`
                               
@@ -195,7 +202,10 @@ function showModal(result,flag,title) {
                            `;
       $.each(recipes, function (index, value) {
         idx++;
-        str += `<tr id="accordion${idx}"  class="accordion rcategory_${value.rcano}" data-parent="#accordionRecipe" style="">
+        str += `<tr id="accordion${idx}"  class="accordion"data-parent="#accordionRecipe" data-rcano="${value.rcano}"style="`
+        if(index!=0)
+        str+=`display:none;`
+        str+=`">
          <td class="product__cart__item">
             <div class="product__cart__item__pic"><span ><img class="pimg"
                      src="${value.rimg}" alt=""
@@ -234,18 +244,18 @@ function showModal(result,flag,title) {
                         style="width:90px;border-radius: 10px;height:90px;"></span></div>
                <div class="product__cart__item__text">
                   <h6>${item.pname}</h6><span class="price-box">
-                     <h5 class="price" id="price_${idx}" data-value="${item.pprice}">${numberWithCommas(item.pprice)}원</h5>
+                     <h5 class="price" style="font-size: 13px;"id="price_${idx}" data-value="${item.pprice}">${numberWithCommas(item.pprice)}원</h5>
                   </span>
                </div>
             </td>
             <td class="quantity__item">
                <div class="quantity">
                   <div class="pro-qty-2"><span data-value="${idx}" class="dec qtybtn rbtn_minus"
-                        aria-hidden="true"><i class='fa-solid fa-minus fa-lg'></i></span><input id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
+                        aria-hidden="true"><i class='fa-solid fa-minus fa-lg'></i></span><input style="width:30px;" id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
                         data-value="${idx}" class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-lg'></i></span></div>
                </div>
             </td>
-            <td data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
+            <td data-value="${item.pprice}" style="" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
          </tr>`;
         });
         str += `</tbody>`;
@@ -287,3 +297,22 @@ function showModal(result,flag,title) {
   $(this).remove();
 })
 */
+
+
+$(document).on("click",".shop__sidebar__tags a",function(){
+   $(".shop__sidebar__tags a").removeClass("on");
+  let rcano = $(this).prop("class").split("_")[1];	
+   console.log(rcano);
+   $("#collapseRecipe tr").each(function(){
+	if($(this).hasClass("accordion"))$(this).css("display","none");	
+})
+   $("#collapseRecipe tbody").each(function(){
+	if($(this).hasClass("show")) $(this).removeClass("show");
+})
+   
+  	$("tr[data-rcano="+rcano+"]").css("display","");
+   
+   $(this).addClass("on");
+   
+
+} )

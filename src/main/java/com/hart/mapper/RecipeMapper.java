@@ -16,6 +16,5 @@ public interface RecipeMapper {
 	
 	List<RecipeContentVO> RecipeContent(String rid);
 
-	
 
 }
