@@ -77,17 +77,17 @@
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i> </a>
-    <form id="pageForm" action="admin/recipeVote" method="get">
+    <form id="pageForm" action="/admin/recipeVote" method="get">
       <input type="hidden" id="evid" name="evid" th:value="${evid}" />
     </form>
     <script>
       function RecipeRegister(id) {
-        location.href = "admin/recipeRegister?&crid=" + id;
+        location.href = "/admin/recipeRegister?&crid=" + id;
       }
 
       function Voting(v, e) {
         let evid = $("input[name='evid']").val();
-        location.href = "admin/recipeVotelist?crid=" + e + "&crvote=" + v + "&evid=" + evid;
+        location.href = "/admin/recipeVotelist?crid=" + e + "&crvote=" + v + "&evid=" + evid;
       }
       $("#eventSort").change(function () {
         let evidselect = $(this).val();

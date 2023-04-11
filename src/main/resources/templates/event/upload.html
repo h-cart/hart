@@ -1393,22 +1393,13 @@ li {
               Swal.fire({
                   text: desc+"을 채워주세요",
                   icon: "warning",
+                  iconColor: "#116530",
                   confirmButtonText: "확인",
                 });
              
               $(this).focus();
               return false;
             }
-     /*        if ($("#divMaterialArea_1").children().length == 0) {
-              flag = false;
-
-              Swal.fire({
-                text: "재료를 입력해주세요",
-                icon: "warning",
-                confirmButtonText: "확인",
-              });
-              return false;
-            } */
           });
         if (flag) {
           $("#insFrm").submit();
