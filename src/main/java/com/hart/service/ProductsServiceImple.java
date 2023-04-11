@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hart.domain.product.CategoryVO;
 import com.hart.domain.product.ListVO;
+import com.hart.domain.product.MainProdVO;
 import com.hart.domain.product.ProductimgVO;
 import com.hart.domain.product.ProductsDetailVO;
 import com.hart.domain.product.ProductsVO;
@@ -29,21 +30,20 @@ public class ProductsServiceImple implements ProductsService {
 
 		return productsmapper.getproductslist(pcno);
 	}
-	
 
 	@Override
 	public List<CategoryVO> getcategorybar() {
 		// 2대분류 카테고리 가져오기
 		return productsmapper.getcategorybar();
 	}
-	
+
 	@Override
 	public List<CategoryVO> getcategorybar(int pcno) {
-		
+
 		return productsmapper.getsmallcategorybar(pcno);
 	}
-	
-	//상품디테일의 이미지와 설명 가져오기
+
+	// 상품디테일의 이미지와 설명 가져오기
 	@Override
 	public ProductsDetailVO getProductDetails(String pid) {
 		// 3 제품 상페 이미지 가져오기
@@ -62,17 +62,22 @@ public class ProductsServiceImple implements ProductsService {
 		return productsmapper.getproductcatrogrtlist(pcno);
 	}
 
-	// 에이작스 및 소 카테고리 및 필터적용 Mapper
+	// 에이작스 및 소 카테고리 및 필터적용 Mapper  및 무한스크롤
 	@Override
 	public List<ListVO> Productlist(ListVO list) {
-		//log.info("===============getproductcatrogrtlist Service ServiceImple ============>" + list);
-		log.info("===============getproductcatrogrtlist Service ServiceImple ============>"+ productsmapper.Productlist(list));
-		   
-		
-		 
+		// log.info("===============getproductcatrogrtlist Service ServiceImple
+		// ============>" + list);
+		log.info("===============getproductcatrogrtlist Service ServiceImple ============>"
+				+ productsmapper.Productlist(list));
+
 		return productsmapper.Productlist(list);
 	}
-
-
-
+	
+	
+	// 메인 페이지 상품 리스트 가져오기
+	@Override
+	public List<MainProdVO> getmainprod(){
+		log.info("productsmapper.getmainprod()"+productsmapper.getmainprod());
+		return productsmapper.getmainprod();
+	}
 }

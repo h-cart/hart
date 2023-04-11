@@ -112,6 +112,7 @@ public class ChatController {
     }
 
     //보낼 메세지를 네이버 챗봇에 포맷으로 변경해주는 메소드
+    
     public static String getReqMessage(String voiceMessage) {
 
         String requestBody = "";
