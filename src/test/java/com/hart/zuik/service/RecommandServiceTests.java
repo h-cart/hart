@@ -20,4 +20,9 @@ public class RecommandServiceTests {
 	public void getRecommandMine()  throws Exception{
 		log.info(rService.getRecommand("skarns23@gmail.com",null));
 	}
+	
+	@Test
+	public void getProductRecommand() throws Exception{
+		log.info(rService.RecommandForProduct("S02012025650"));
+	}
 }
