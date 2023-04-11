@@ -19,5 +19,9 @@ public class HomeController {
 	public String home() {
 		return "index";
 	}
-
+	
+	@GetMapping("/chat")
+	public void chat() {
+		
+	}
 }
