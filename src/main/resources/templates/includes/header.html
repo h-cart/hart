@@ -30,13 +30,7 @@
 		class="offcanvas__nav__option"
 		style="width: 266px;"
 	>
-		<a
-			href="#"
-			class="search-switch"
-		><i
-			class="fas fa-solid fa-magnifying-glass fa-xl"
-			style="color: #000000;"
-		></i></a> <a
+		 <a
 			sec:authorize="isAuthenticated() and principal.csno ==null"
 			class='share_cart'
 			href="#"
@@ -69,12 +63,7 @@
 			id="alarmCnt2"
 			style="left: 15px; color: white"
 		></span> <!--좌측 배너 알림내용 시작  -->
-			<div
-				class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in "
-				aria-labelledby="alertsDropdown"
-				id="alarmlist1"
-				style="width: 360px; top: 145px; left: 10px;"
-			>
+			<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="alertsDropdown" id="alarmlist1" style="width: 280px; top: 145px; left: 10px;" >
 				<h6 class="dropdown-header">알림</h6>
 				<!-- 
 						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
@@ -118,10 +107,7 @@
 						</div>
 					</a>
 					 -->
-				<a
-					class="dropdown-item text-center small text-gray-500"
-					href="#"
-				></a>
+				<a class="dropdown-item text-center small text-gray-500" href="#" ></a>
 			</div> <!--좌측 배너 알림내용 끝  --> <!-- </a> -->
 	</div>
 	<div id="mobile-menu-wrap"></div>
@@ -129,9 +115,7 @@
 <!-- Offcanvas Menu End -->
 <!-- Header Section Begin -->
 <header
-	class="header header-wrap"
-	th:fragment="header3"
->
+	class="header header-wrap" th:fragment="header3" style="background: white;">
 	<div class="header__top" >
 		<div class="container" >
 			<div class="row">
@@ -184,12 +168,9 @@
 			<div class="col-lg-3 col-md-3">
 
 				<div class="header__nav__option" style="width: 217px;">
-					<a href="#" class="search-switch"><i
-						class="fa-solid fa-magnifying-glass fa-xl" style="color: #000000;"></i></a>
 					<a sec:authorize="isAuthenticated() and principal.csno ==null"
 						class='share_cart' href="#"><i class="fa-solid fa-users fa-xl"
 						style="color: #000000;"></i></a> <a
-
 						sec:authorize="isAuthenticated() and principal.csno !=null"
 						Paid="kakao-link-btn"
 						href="javascript:kakaoShare()"
@@ -305,6 +286,9 @@
 	});
 	
 	
+	
+	
+	
 	function updateCheckAlarm(){
 			
 			$.ajax({
@@ -339,6 +323,14 @@
 			
 		}
 		*/
+		$(document).mouseup(function (e){
+		  var LayerPopup = $(".dropdown-list");
+		  if(LayerPopup.has(e.target).length === 0){
+		    LayerPopup.removeClass("show");
+		  }
+		});
+		
+		/* 알람창 외다른 곳 누르면 닫히게 */
 		function alarmToggle(){
 			if($(".dropdown-list").hasClass("show")){
 				$(".dropdown-list").removeClass("show");

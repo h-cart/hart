@@ -28,6 +28,10 @@
       display: flex;
       flex-wrap: wrap;
     }
+    
+    .addToCart:hover{
+    	color: #fff;
+    }
   </style>
   <style>
     .product__cart__item__pic {
@@ -112,8 +116,8 @@
       font-weight: bold;
     }
     .orderDirect {
-      background: #f3f2ee;
-      border: black solid;
+      background: #dedede;
+      border: none;
       color: black;
     }
     
@@ -214,7 +218,7 @@
                   
                   <a href="#" th:onclick="addToCart(false,-1)" class="primary-btn addToCart col" style="margin: 10px; width: -webkit-fill-available" id="cartbtn">장바구니</a>
 
-                  <a href="#" class="primary-btn orderDirect col" style="margin: 10px; width: -webkit-fill-available; background:white">바로구매</a>
+                  <a href="#" class="primary-btn orderDirect col" style="margin: 10px; width: -webkit-fill-available;">바로구매</a>
                 </div>
               </div>
 
