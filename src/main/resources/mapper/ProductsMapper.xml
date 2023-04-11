@@ -17,13 +17,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE pc.pcno_top IS NULL
 
 	</select>
-		<select id="getsmallcategorybar"
+	<select id="getsmallcategorybar"
 		resultType="com.hart.domain.product.CategoryVO">
 		SELECT pc.pcategory, pc.pcno, pc.pcno_top
 		FROM
 		product_category pc
 		JOIN product_category pc2 ON pc.pcno = pc2.pcno
-		WHERE pc.pcno_top  = #{pcno}
+		WHERE pc.pcno_top = #{pcno}
 
 	</select>
 
@@ -51,8 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 왼쪽 카테고리 리스트 가져옴 소카테고리 -->
 	<select id="getproductcatrogrtlist"
 		resultType="com.hart.domain.product.ListVO">
-		select pc.pcno, pc.pcategory, pc.pcno_top, pc2.pcategory as pcat
-		from product_category pc join product_category pc2 on pc.pcno_top =
+		select pc.pcno, pc.pcategory, pc.pcno_top, pc2.pcategory as
+		pcat
+		from product_category pc join product_category pc2 on pc.pcno_top
+		=
 		pc2.pcno
 		where pc.pcno_top=#{pcno}
 	</select>
@@ -62,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="Productlist"
 		resultType="com.hart.domain.product.ListVO"
 		parameterType="com.hart.domain.product.ListVO">
-		
+
 		select * from
 		(
 		SELECT pa.* ,(#{page} * 6 + 6) as totalcount, rownum rn
@@ -71,10 +73,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		p.pprice, p.pdiscount,p.pcno,p.pid
 		,p.stag,pc.pcategory,pc.pcno_top
 		from products p
-		join (select pimg, pid from product_img where pdepth =0
+		join (select pimg, pid
+		from product_img where pdepth =0
 		) pi
 		on pi.pid=p.pid
-		join product_category pc on p.pcno = pc.pcno and
+		join
+		product_category pc on p.pcno = pc.pcno and
 		pc.pcno_top = #{pcno_top}
 
 		<where>
@@ -92,5 +96,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		where rn between (#{page} * 6 + 1) AND (#{page} * 6 + 6)
 	</select>
+
+
+
+	<select id="getmainprod" resultType="MainProdVO">
+		<![CDATA[
+		     select rownum, pa.pname, pa.pid, pa.pcno, pa.pprice, pa.pdiscount,pimg 
+		     from
+            ( 
+             	select  rownum ,pd.* 
+			from (	select pname, pprice, pcno, pdiscount,pid 
+					from products 
+					order by pdiscount desc) pd 
+			
+            ) pa join product_img pdimg on pa.pid=pdimg.pid
+            where pdepth =0 and rownum <=8 
+		]]>
+	</select>
+
+
+
+
 
 </mapper>

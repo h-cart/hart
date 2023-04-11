@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="RecipeContent" resultType="RecipeContentVO">
 
-		select * from recipe_content where rid= #{rid}
+		select * from
+		recipe_content where rid= #{rid}
 
 	</select>
 
@@ -47,6 +48,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	</select>
+
+
+	<select id="mainrecipe" resultType="RecipeVO">
+	
+	<![CDATA[
+	
+	SELECT * 
+	FROM 
+	(
+	SELECT * FROM recipe ORDER BY dbms_random.value
+	)
+	WHERE rownum <=3
+	
+		]]>
+	</select>
+
 
 </mapper>
 

@@ -28,12 +28,12 @@
             </form>
         </div>
         <div class="col-md-6">
-            <form class="form-inline">
+            <form class="form-inline" th:action="/hello">
                 <div class="form-group">
                     <label for="msg">문의사항</label>
                     <input type="text" id="msg" class="form-control" placeholder="내용을 입력하세요....">
                 </div>
-               <button id="send" class="btn btn-default" disabled type="submit">보내기</button>
+               <button id="send" class="btn btn-default" type="submit">보내기</button>
 
             </form>
         </div>
@@ -52,14 +52,6 @@
         </div>
     </div>
 </div>
-<script>
-  // Wait for the document to load
-  document.addEventListener("DOMContentLoaded", function(event) {
-    
-    // Get the send button element by its ID and enable it
-    document.getElementById("send").disabled = false;
-    
-  });
-</script>
+
 </body>
 </html>

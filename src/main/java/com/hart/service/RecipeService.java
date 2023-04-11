@@ -16,6 +16,6 @@ public interface RecipeService {
 	
 	public RecipeDetailVO recipeDetail(String rid) throws Exception;
 
-
+	public List<RecipeVO> mainrecipe();
 
 }

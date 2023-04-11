@@ -42,6 +42,10 @@ public class RecipeServiceImple implements RecipeService{
 			return new RecipeDetailVO(recipedetailtop, Rcontent);
 	}
 	
-	
+	@Override
+	public List<RecipeVO> mainrecipe(){
+		
+		return recipemapper.mainrecipe();
+	}
 	
 }

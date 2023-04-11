@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.hart.domain.product.CategoryVO;
 import com.hart.domain.product.ListVO;
-import com.hart.domain.product.ProductCategorylistVO;
+import com.hart.domain.product.MainProdVO;
 import com.hart.domain.product.ProductsDetailVO;
 import com.hart.domain.product.ProductsVO;
 
@@ -19,18 +19,15 @@ public interface ProductsService {
 	
 	public List<CategoryVO> getcategorybar() throws Exception;
 	
-	
 	public ProductsDetailVO getProductDetails(String pid) throws Exception;
-
 	
-	public List<ListVO> getproductcatrogrtlist(int pcno) throws Exception;
-
+	public List<ListVO> getproductcatrogrtlist(int pcno) throws Exception; 
 
 	public List<ListVO> Productlist(ListVO list);
 
 	public List<CategoryVO> getcategorybar(int pcno);
-
 	
+	public List<MainProdVO> getmainprod();
 	
 }
 
