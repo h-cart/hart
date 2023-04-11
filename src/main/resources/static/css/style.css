@@ -43,10 +43,10 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0;
-	color: #111111;
-	font-weight: 400;
-	font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  color: #111111;
+  font-weight: 400;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 h1 {
@@ -74,14 +74,12 @@ h6 {
 }
 
 p {
-
-	font-size: 15px;
-	font-family: 'Noto Sans KR', sans-serif;
-	color: #3d3d3d;
-	font-weight: 400;
-	line-height: 25px;
-	margin: 0 0 15px 0;
-
+  font-size: 15px;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #3d3d3d;
+  font-weight: 400;
+  line-height: 25px;
+  margin: 0 0 15px 0;
 }
 
 img {
@@ -325,14 +323,11 @@ ol {
 -----------------------*/
 
 .header {
-  
 }
 
 .header__top {
-
-	background: white;
-	padding: 10px 0 0 0;
-
+  background: white;
+  padding: 10px 0 0 0;
 }
 
 .header__top__left p {
@@ -2754,7 +2749,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 
 .blog__item:hover a::after {
   width: 40px;
-  background: #e53637;
+  background: #116530;
 }
 
 .blog__item:hover .blog__item__text {
@@ -3476,11 +3471,11 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 
 @media only screen and (max-width: 767px) {
   /*ham 수정  */
-  .blog-hero{
-  	padding-top: 35px;
+  .blog-hero {
+    padding-top: 35px;
     padding-bottom: 145px;
   }
-	
+
   .canvas__open {
     display: block;
     font-size: 22px;
@@ -3510,8 +3505,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
     transition: all, 0.5s;
     visibility: hidden;
   }
-  
-  
+
   .offcanvas-menu-overlay.active {
     visibility: visible;
   }

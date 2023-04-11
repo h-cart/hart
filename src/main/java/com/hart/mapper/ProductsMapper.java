@@ -32,6 +32,8 @@ public interface ProductsMapper {
    //에이작스 및 소 카테고리 및 필터적용 Mapper
    public List<ListVO> Productlist(ListVO list);
 
+  public List<CategoryVO> getsmallcategorybar(int pcno);
+
 
 
 }
