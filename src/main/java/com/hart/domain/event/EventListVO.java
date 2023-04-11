@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 public class EventListVO {
 	int evid;
-	
 	String evtitle;
 	Date start_date;
 	Date end_date;
