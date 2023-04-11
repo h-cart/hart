@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.member.ClubAuthMemberDTO;
 import com.hart.domain.recommand.RecommandDTO;
+import com.hart.domain.recommand.RliveClassDTO;
 import com.hart.service.recommand.RecommandService;
 
 @RestController
@@ -42,6 +43,17 @@ public class RecommandRestController {
 		
 		return null;
 	}
+	
+	@GetMapping(value="/class/{lcid}/recommendations",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Map<String,RliveClassDTO>>RecommandForClass(@PathVariable("lcid")String lcid){
+		try {
+			
+		}catch(Exception e) {
+			
+		}
+		return null;
+	}
+	
 	
 	
 }
