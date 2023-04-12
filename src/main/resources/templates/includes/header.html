@@ -218,7 +218,7 @@
             }
           },
           error: function (result) {
-            consoel.log("ajax 실패");
+            console.log("ajax 실패");
           },
         });
       });
@@ -232,11 +232,10 @@
             xhr.setRequestHeader(header, token);
           },
           success: function () {
-            console.log("ajax 성공");
             $(".badge").html("");
           },
           error: function () {
-            consoel.log("ajax 실패");
+        	  console.log("ajax실패");
           },
         });
       }

@@ -2936,10 +2936,10 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
   padding-top: 125px;
   padding-bottom: 190px;
 }
-
+/*ham  */
 .blog__hero__text h2 {
   color: #111111;
-  font-size: 42px;
+  font-size: 36px;
   font-weight: 700;
   line-height: 50px;
   margin-bottom: 18px;
@@ -3082,7 +3082,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
 .blog__details__quote h6 {
   /* color: #e53637; */
   font-size: 15px;
-  font-weight: 700;
+  /* font-weight: 700; */
   text-transform: uppercase;
 }
 
@@ -3857,7 +3857,7 @@ dialog .shopping__cart__table table tbody tr td.cart__price {
     font-size: 16px;
   }
   .blog__hero__text h2 {
-    font-size: 36px;
+    font-size: 24px;
   }
   .categories__text h2 {
     font-size: 30px;
