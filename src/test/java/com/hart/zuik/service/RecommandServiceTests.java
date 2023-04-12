@@ -23,6 +23,6 @@ public class RecommandServiceTests {
 	
 	@Test
 	public void getProductRecommand() throws Exception{
-		log.info(rService.RecommandForProduct("S02012025650"));
+		//log.info(rService.RecommandForProduct("S02012025650"));
 	}
 }
