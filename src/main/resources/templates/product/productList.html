@@ -162,7 +162,7 @@
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-blog set-bg" data-setbg="/img/prodMain1.jpg"
-		style="background-image: url(/img/prodMain1.jpg;);">
+		style="background-image: url(&quot;https://tohomeimage.thehyundai.com/DP/DP018/2023/03/14/105207/sgbhm.jpg?RS=1204&amp;CS=1204x300&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -228,8 +228,7 @@ toggle="collapse" data-target="#collapseOne">카테고리</a>
 													<li th:each="cList:${cList}"><a href="#"
 														th:text="${cList.pcategory}"
 														th:onclick="sendpcno([[${cList.pcno}]], 0, 1); changeColor(this);"></a>
-														<input type="hidden" th:value="${cList.pcno}" name="pcno" />
-													</li>
+														<input type="hidden" th:value="${cList.pcno}" name="pcno" /></li>
 												</ul>
 
 
@@ -252,7 +251,7 @@ toggle="collapse" data-target="#collapseOne">카테고리</a>
 								<div class="shop__product__option__left">
 									<!-- <p>Showing 1–9 of 9 results</p> -->
 									<p>
-										Showing 1 – of <span th:text="${cList[0].totalcount}"></span>
+										Showing 1 – of <span th:text="${cList[5].totalcount}"></span>
 										results
 									</p>
 
@@ -378,8 +377,5 @@ toggle="collapse" data-target="#collapseOne">카테고리</a>
 	  });
 	}
 </script>
-
-
-
 </body>
 </html>

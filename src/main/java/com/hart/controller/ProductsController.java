@@ -23,20 +23,25 @@ public class ProductsController {
 	
    @Autowired
    private ProductsService productsservice;
-	/*
-	 * private Object cList; private Object productlist;
-	 */
+   private Object cList;
+   private Object productlist;
 
    @GetMapping("/list")
    public String productlist(Model model, ListVO list) {
 
-      log.info("pcno Productcontroller @@@@@@@@@@@@@@@ list.getPcno_top()="+ list.getPcno_top() + list.getPcno());
+      log.info("pcno Productcontroller @@@@@@@@@@@@@@@=");
+      
+     //asd =gpt.chatGPT("text");
+      
+      
+         //List<ListVO> cList = new ArrayList<>();
+      // List<CategoryVO> categorypcno = null;
       
       try {
          
          List<ListVO> cList = productsservice.getproductcatrogrtlist(list.getPcno_top());
          
-         System.out.println(cList + "<<Clist 컨트롤러 카테고리 리스트만 가져옴");//
+         //System.out.println(cList + "<<Clist 카테고리 리스트");//
          
          model.addAttribute("cList",cList); //왼족 카테고리 리스트\
          
