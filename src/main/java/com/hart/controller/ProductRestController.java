@@ -103,25 +103,6 @@ public ResponseEntity<Map<String, List<CategoryVO>>> getCategory(int pcno) {
       }
    }
 
-   /*
-    * @PostMapping(value = "/fillterbutton", produces = {
-    * MediaType.APPLICATION_JSON_VALUE }, consumes = {
-    * MediaType.APPLICATION_JSON_VALUE }) public ResponseEntity<Map<String,
-    * List<ListVO>>> getproductlisthigh(
-    * 
-    * @RequestBody ListVO data) {
-    * 
-    * try { log.info(data); List<ListVO> listtop = pService.List(data); //
-    * log.info("listtop=>>>" + listtop);
-    * 
-    * Map<String, List<ListVO>> result = new HashMap<>();
-    * result.put("getproductslist", listtop);
-    * 
-    * return new ResponseEntity<>(result, HttpStatus.OK);
-    * 
-    * } catch (Exception e) { log.info(e.getMessage()); return new
-    * ResponseEntity<>(HttpStatus.BAD_REQUEST); } }
-    */
 
    @PostMapping(value = "/recipelist", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
          MediaType.APPLICATION_JSON_VALUE })

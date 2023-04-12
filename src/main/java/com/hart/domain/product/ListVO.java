@@ -19,5 +19,8 @@ public class ListVO {
 	int sort;
 	String pcat;
 	int totalcount;
+	
+	
+
 
 };

@@ -67,7 +67,8 @@ public class ProductsServiceImple implements ProductsService {
 	public List<ListVO> Productlist(ListVO list) {
 		// log.info("===============getproductcatrogrtlist Service ServiceImple
 		// ============>" + list);
-		log.info("===============Productlist Service ServiceImple ============>"+ productsmapper.Productlist(list));
+		log.info("===============Productlist Service ServiceImple ============>"
+				+ productsmapper.Productlist(list));
 
 		return productsmapper.Productlist(list);
 	}
