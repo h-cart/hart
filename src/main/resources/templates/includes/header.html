@@ -297,8 +297,8 @@
           iconColor: "#116530",
           showCancelButton: true,
           confirmButtonColor: "#116530",
-          cancelButtonText: "아니",
-          cancelButtonColor: "#d33",
+          cancelButtonText: "취소",
+          cancelButtonColor: "gray",
           confirmButtonText: "생성",
         }).then((result) => {
           if (result.isConfirmed) {
@@ -322,7 +322,14 @@
               },
             });
           } else {
-            Swal.fire("공유 장바구니 생성 실패");
+    
+            Swal.fire({
+                text: "공유 장바구니 생성 실패",
+                icon: "warning",
+                iconColor: "#116530",
+                confirmButtonText: "확인",
+                confirmButtonColor: "#116530",
+              });
           }
         });
       });
