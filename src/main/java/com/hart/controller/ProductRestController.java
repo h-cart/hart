@@ -79,6 +79,8 @@ public ResponseEntity<Map<String, List<CategoryVO>>> getCategory(int pcno) {
          MediaType.APPLICATION_JSON_VALUE })
    public ResponseEntity<Map<String, List<ListVO>>> getProductsList(@RequestBody ListVO data) {
 
+	   	System.out.println("data >>>>" + data);
+	   
       try {
 
          List<ListVO> Productlist = pService.Productlist(data);

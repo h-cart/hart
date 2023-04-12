@@ -36,7 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="stag" column="STAG" />
 		<collection property="recipes" column="stag"
 			ofType="RrecipeDTO" javaType="java.util.ArrayList"
-			select="getRecommandRecipe" />
+			select="getRecommandRecipe" >
+			</collection>
 		<collection property="lives" column="stag"
 			ofType="RliveClassDTO" javaType="java.util.ArrayList"
 			select="getRecommandClass" />

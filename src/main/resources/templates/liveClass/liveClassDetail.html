@@ -219,7 +219,6 @@
                 </div>
 				<input type="hidden" id="quantity_-1" value="1"/>
                 <div th:if="${memberCheck}==0" class="product__details__cart__option row row-cols-sm-12">
-                  <input type="checkbox" checked style="display: none" name="cartlist" id="chk_-1" />
                   <input class="item" id="-1" type="hidden" th:data-value="${liveClass.liveClassListDTO.lcid}" name="pid" th:value="${liveClass.liveClassListDTO.lcid}" />
                   
                   <a href="#" th:onclick="addToCart(false,-1)" class="primary-btn addToCart col" style="margin: 10px; width: -webkit-fill-available" id="cartbtn">장바구니</a>
@@ -334,7 +333,7 @@
          var pamounts = [];
          var pids = [];
 		 if(flag){
-			targetUrl="/cart/insert";
+			targetUrl="/capi/insert";
 		let ckItem = $("input[name=cartlist]:checked");
          $(ckItem).each(function () {
             var pos = $(this).prop('id').split('_')[1];
