@@ -135,4 +135,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from event_vote where evid = #{evid} and mid = #{mid}
 	</select>
 
+	<select id="getEventId" resultType="EventListVO">
+		SELECT * FROM event_list 
+		WHERE SYSDATE between START_DATE AND  (VEND_DATE+1)
+	</select>
+
 </mapper>

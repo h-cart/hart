@@ -66,7 +66,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public CRecipeVO getRecipeDetail(EventVoteVO ev) {
 		CRecipeVO cr = mapper.getDetail(ev);
-		log.info("service cr ========="+cr);
+		log.info("service cr =========" + cr);
 		return cr;
 	}
 
@@ -75,6 +75,9 @@ public class EventServiceImpl implements EventService {
 		return mapper.checkVote(event);
 	}
 
-
+	@Override
+	public EventListVO getEventId() {
+		return mapper.getEventId();
+	}
 
 }

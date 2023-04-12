@@ -131,7 +131,10 @@
           .text()
           .replace(/(\d{4})년 (\d{2})월 (\d{2})일/, "$1-$2-$3");
         let today = new Date();
-        today = today.toISOString().slice(0, 10);
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, "0");
+        const day = today.getDate().toString().padStart(2, "0");
+        today = `${year}-${month}-${day}`;
 
         if (today >= start_date && today <= end_date) {
           location.href = "/event/upload?evid=" + evid;
@@ -156,8 +159,14 @@
           .text()
           .replace(/(\d{4})년 (\d{2})월 (\d{2})일/, "$1-$2-$3");
         let today = new Date();
-        today = today.toISOString().slice(0, 10);
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, "0");
+        const day = today.getDate().toString().padStart(2, "0");
+        today = `${year}-${month}-${day}`;
 
+        console.log(today);
+        console.log(start_date);
+        console.log(end_date);
         if (today >= start_date && today <= end_date) {
           location.href = "/event/vote?evid=" + evid;
         } else {

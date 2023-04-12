@@ -69,6 +69,7 @@
 													style="text-align: center; vertical-align: baseline"
 												></td>
 												<td
+													class="ellipsis"
 													th:text="${list.evtitle}"
 													style="text-align: center; vertical-align: baseline"
 												></td>
@@ -146,19 +147,19 @@
 					<div class="modal-content">
 						<div
 							class="modal-header"
-							style="justify-content: center;"
+							style="justify-content: center"
 						>
 							<h1
 								class="modal-title fs-5"
 								id="exampleModalLabel"
 							>이벤트</h1>
-						
 						</div>
 						<div class="modal-body">
 							<form
 								id="enrollEvent"
 								method="get"
-								th:action="@{admin/eventRegister}"
+								th:action="@{/admin/eventRegister}"
+								autocomplete="off"
 							>
 								<div class="mb-3">
 									<label for="exampleFormControlInput1">번호</label> <input
@@ -229,14 +230,15 @@
 						<div class="modal-footer">
 							<button
 								type="button"
-								class="btn btn-secondary"
+								class="btn"
 								data-bs-dismiss="modal"
 							>Close</button>
 							<button
-								type="submit"
+								type="button"
 								form="enrollEvent"
 								class="btn"
-								id="button"
+								style="background: #116430; color:white"
+								onclick="submitBtn()"
 							>수정</button>
 						</div>
 					</div>
@@ -271,62 +273,75 @@
 		/>
 	</form>
 	<script>
-		function updateEvent(e) {
-			console.log("여기 실행 updateEvent");
-			$("input[name='evid']").val(e.evid);
-			$("#evtitle").val(e.evtitle);
-			let start_date = e.start_date.substring(0, 10);
-			let end_date = e.end_date.substring(0, 10);
-			let vstart_date = e.vstart_date.substring(0, 10);
-			let vend_date = e.vend_date.substring(0, 10);
-			$("#start_date").val(start_date);
-			$("#end_date").val(end_date);
-			$("#vstart_date").val(vstart_date);
-			$("#vend_date").val(vend_date);
-			$("#crmingredient").val(e.crmingredient);
-			// enrollEvent form의 action 변경
-			$("#enrollEvent").attr("action", "/admin/eventModify");
-			$("#button").text("수정");
-		}
+      function updateEvent(e) {
+        console.log("여기 실행 updateEvent");
+        $("input[name='evid']").val(e.evid);
+        $("#evtitle").val(e.evtitle);
+        let start_date = e.start_date.substring(0, 10);
+        let end_date = e.end_date.substring(0, 10);
+        let vstart_date = e.vstart_date.substring(0, 10);
+        let vend_date = e.vend_date.substring(0, 10);
+        $("#start_date").val(start_date);
+        $("#end_date").val(end_date);
+        $("#vstart_date").val(vstart_date);
+        $("#vend_date").val(vend_date);
+        $("#crmingredient").val(e.crmingredient);
+        // enrollEvent form의 action 변경
+        $("#enrollEvent").attr("action", "/admin/eventModify");
+        $("#button").text("수정");
+      }
 
-		function makeEvent(e) {
-			$("input[name='evid']").parent().remove();
-			$("#evtitle").val("");
-			$("#start_date").val("");
-			$("#end_date").val("");
-			$("#vstart_date").val("");
-			$("#vend_date").val("");
-			$("#crmingredient").val("");
-			// enrollEvent form의 action 변경
-			$("#enrollEvent").attr("action", "admin/eventRegister");
+      function makeEvent(e) {
+        $("input[name='evid']").parent().remove();
+        $("#evtitle").val("");
+        $("#start_date").val("");
+        $("#end_date").val("");
+        $("#vstart_date").val("");
+        $("#vend_date").val("");
+        $("#crmingredient").val("");
+        // enrollEvent form의 action 변경
+        $("#enrollEvent").attr("action", "/admin/eventRegister");
 
-			//id 가 button인 버튼의 text를 수정하는 제이쿼리문
-			$("#button").text("등록");
-		}
+        //id 가 button인 버튼의 text를 수정하는 제이쿼리문
+        $("#button").text("등록");
+      }
 
-		function Voting(v, e) {
-			let evid = $("input[name='evid']").val();
-			location.href = "admin/votelist?crid=" + e + "&crvote=" + v
-					+ "&evid=" + evid;
-		}
-		$("#eventSort").change(function() {
-			let evidselect = $(this).val();
-			let pageForm = $("#pageForm");
-			pageForm.find("input[name='pageNum']").val("1");
-			pageForm.find("input[name='evid']").val(evidselect);
-			$("#pageForm").submit();
-		});
-		$(".pagination li a").on("click", function(e) {
-			e.preventDefault();
-			let pageForm = $("#pageForm");
-			pageForm.find("input[name='pageNum']").val($(this).attr("href"));
-			pageForm.submit();
-		});
+      function Voting(v, e) {
+        let evid = $("input[name='evid']").val();
+        location.href = "/admin/votelist?crid=" + e + "&crvote=" + v + "&evid=" + evid;
+      }
+      $("#eventSort").change(function () {
+        let evidselect = $(this).val();
+        let pageForm = $("#pageForm");
+        pageForm.find("input[name='pageNum']").val("1");
+        pageForm.find("input[name='evid']").val(evidselect);
+        $("#pageForm").submit();
+      });
+      $(".pagination li a").on("click", function (e) {
+        e.preventDefault();
+        let pageForm = $("#pageForm");
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+      });
 
-		// exampleModal이 close될 때 마다
-		$("#exampleModal").on("hidden.bs.modal", function(e) {
-		});
-	</script>
+      // exampleModal이 close될 때 마다
+      $("#exampleModal").on("hidden.bs.modal", function (e) {});
+    </script>
+	<script>
+      function submitBtn() {
+        Swal.fire({
+          text: "등록하시겠습니까?",
+          icon: "info",
+          showCancelButton: true,
+          confirmButtonText: "확인",
+          confirmButtonColor: "#116530",
+          cancelButtonText: "취소",
+        }).then((result) => {
+          if (!result.isConfirmed) return;
+          $("#enrollEvent").submit();
+        });
+      }
+    </script>
 	<!-- Bootstrap core JavaScript-->
 	<th:block th:replace="admin/admin:: js"></th:block>
 </body>

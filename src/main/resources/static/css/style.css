@@ -341,7 +341,7 @@ ol {
 
 .header__top__links {
   display: inline-block;
-  margin-right: 25px;
+  margin-right: 48px;
 }
 
 .header__top__links a {
@@ -425,7 +425,7 @@ ol {
 .header__menu ul li {
   list-style: none;
   display: inline-block;
-  margin-right: 45px;
+  margin-right: 40px;
   position: relative;
 }
 
@@ -971,9 +971,9 @@ ol {
   visibility: visible;
 }
 
-.product__item:hover .product__item__text h6 {
+/* .product__item:hover .product__item__text h6 {
   opacity: 0;
-}
+} */
 
 .product__item:hover .product__item__text .product__color__select {
   opacity: 1;
