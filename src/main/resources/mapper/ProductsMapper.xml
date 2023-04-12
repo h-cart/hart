@@ -75,12 +75,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from products p
 		join (select pimg, pid
 		from product_img where pdepth =0
-		) pi
+ 		) pi 
 		on pi.pid=p.pid
 		join
 		product_category pc on p.pcno = pc.pcno and
 		pc.pcno_top = #{pcno_top}
-
 		<where>
 			<if test="pcno != 0">
 				p.pcno = #{pcno}
