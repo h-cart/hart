@@ -299,6 +299,7 @@
 <script type="text/javascript"th:inline="javascript">
       /*<![CDATA[*/
       function addToCart(flag,idx) {
+		let targetUrl="/recommand/class/recommendations";
          var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
          if (!isAdmin) {
             Swal.fire({
@@ -320,6 +321,7 @@
          var pamounts = [];
          var pids = [];
 		 if(flag){
+			targetUrl="/cart/insert";
 		let ckItem = $("input[name=cartlist]:checked");
          $(ckItem).each(function () {
             var pos = $(this).prop('id').split('_')[1];
@@ -335,9 +337,9 @@
 			 pids.push(pid);
 			 pamounts.push(quantity);
 			 console.log(pid,quantity);
-	   }
+	   }	console.log(targetUrl);
          $.ajax({
-            url: '/capi/insert',
+            url: targetUrl,
             beforeSend: function (xhr) {
                xhr.setRequestHeader(header, token);
             },
@@ -349,14 +351,14 @@
             }),
             success: function (result) {
 				console.log(result);
-				if(result.result==null)  showModal(result,true);
+				if(!flag)  showModalLiveClass(result,true);
 				else showModal(result,flag);
           },
           error: function (err, xhr, status) {
             if (err.status == 405 || err.status == 400) {
               customConfirm("장바구니에 존재하는 상품입니다.", "확인하러 이동하기", "장바구니로", "아니요");
             }
-          },
+          }
         });
       }
 

@@ -63,7 +63,7 @@ public class CartRestController {
 				sseEmitters.insert(mDTO.getCsno());
 			} else {
 				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
-				cService.CartInsert(pids, pamounts, mid);
+				cService.cartInsert(pids, pamounts, mid);
 			}
 			result.put("result", rService.getRecommand(mDTO.getMid(), mDTO.getCsno()));
 			return new ResponseEntity<>(result, HttpStatus.OK);
