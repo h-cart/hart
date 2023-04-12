@@ -335,41 +335,40 @@ td:nth-child(1) span:nth-child(2) {
 			</div>
 		</div>
 	</section>
-	<!-- Shop Details Section End -->
-	<!-- Related Section Begin -->
-	<section class="related spad"></section>
-	<!-- Related Section End -->
-	<!-- Footer Section Begin -->
-	<th:block th:replace="includes/footer :: footer"></th:block>
-	<!-- Footer Section End -->
-	<!-- Code injected by live-server -->
-	<script src="/js/dialog.js"></script>
-	<!-- Code injected by live-server -->
-	<!-- Code injected by live-server -->
-	<script th:inline="javascript">
-      /*<![CDATA[*/
-      function addToCart(flag,idx) {
-        var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
-        if (!isAdmin) {
-          Swal.fire({
-            title: "로그인이 필요한 활동입니다.",
-            text: "로그인 페이지로 이동하시겠습니까?",
-            icon: "info",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "네",
-            cancelButtonText: "아니요",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              location.href = "/member/login";
-            }
-          });
-          return;
-        }
-        var pamounts = [];
-        var pids = [];
-        if(flag){
+
+  <!-- Related Section End -->
+  <!-- Footer Section Begin -->
+  <th:block th:replace="includes/footer :: footer"></th:block>
+  <!-- Footer Section End -->
+  <!-- Code injected by live-server -->
+  <script src="/js/dialog.js"></script>
+  <!-- Code injected by live-server -->
+  <!-- Code injected by live-server -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    function addToCart(flag, idx) {
+      var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
+      if (!isAdmin) {
+        Swal.fire({
+          title: "로그인이 필요한 활동입니다.",
+          text: "로그인 페이지로 이동하시겠습니까?",
+          icon: "info",
+          iconColor: "#116530",
+          showCancelButton: true,
+          confirmButtonText: "네",
+          cancelButtonText: "아니요",
+          confirmButtonColor: "#116530",
+          cancelButtonColor: "gray",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href = "/member/login";
+          }
+        });
+        return;
+      }
+      var pamounts = [];
+      var pids = [];
+      if (flag) {
 
         $("input[name=cartlist]:checked").each(function () {
           var pos = $(this).prop("id").split("_")[1];

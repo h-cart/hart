@@ -971,9 +971,9 @@ ol {
   visibility: visible;
 }
 
-/* .product__item:hover .product__item__text h6 {
+.product__item:hover .product__item__text h6 {
   opacity: 0;
-} */
+}
 
 .product__item:hover .product__item__text .product__color__select {
   opacity: 1;
@@ -1872,7 +1872,7 @@ ol {
 }
 
 .product__details__tab .nav-tabs .nav-item {
-  margin-right: 50px;
+  margin-right: 30px;
 }
 
 .product__details__tab .nav-tabs .nav-item:last-child {
