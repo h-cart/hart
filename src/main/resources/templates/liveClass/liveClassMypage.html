@@ -140,17 +140,34 @@
 
 
 
-	<script type="text/javascript">
+	<script th:inline="javascript">
+	/*<![CDATA[*/	
 		function classSt(e){
-			const classStatus = e;
 			
-			if(classStatus){
+			var list = /*[[${classList}]]*/
+			
+			alert(list);
+			
+			const classStatus = e;
+			if(classStatus==1){
+				for(let i=0; i< list.length; i++){
+					console.log(list[i].lcstatus);
+				}
 				
+			}else if(classStatus==2){
+				for(let i=0; i< list.length; i++){
+					console.log(list[i].lcstatus);
+					
+					
+				}
+				
+				
+			}else if(classStatus==3){
 				
 			}
 			
 		}
-	
+		 /*]]>*/
 	</script>
 	
 	
@@ -159,6 +176,9 @@
 			location.href="/class/detail/"+lcid;
 		}
 	
+		
+		
+		
 	
 		const $nav = document.querySelector('#tab-button-nav')
 		const $sections = document.querySelectorAll('.tab-section');
