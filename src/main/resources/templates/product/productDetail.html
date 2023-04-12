@@ -3,250 +3,244 @@
 
 <th:block th:replace="includes/headTag :: head_tag"></th:block>
 <style>
-  .product-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
+.product-container {
+	display: flex;
+	flex-wrap: wrap;
+}
 
-  .product-info {
-    width: 50%;
-    margin-right: 20px;
-  }
+.product-info {
+	width: 50%;
+	margin-right: 20px;
+}
 
-  .product-info img {
-    width: 100%;
-  }
+.product-info img {
+	width: 100%;
+}
 
-  .recommendation-container {
-    width: 50%;
-  }
+.recommendation-container {
+	width: 50%;
+}
 
-  .recommendation-container h3 {
-    margin-top: 0;
-  }
+.recommendation-container h3 {
+	margin-top: 0;
+}
 
-  .recommendation-list {
-    display: flex;
-    flex-wrap: wrap;
-  }
+.recommendation-list {
+	display: flex;
+	flex-wrap: wrap;
+}
 </style>
 <style>
-  .product__cart__item__pic {
-    position: relative;
-  }
+.product__cart__item__pic {
+	position: relative;
+}
 
-  .checkbox {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-  }
+.checkbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
 
-  .price-box h5,
-  .price-box h6 {
-    display: inline-block;
-    margin: 0;
-  }
+.price-box h5, .price-box h6 {
+	display: inline-block;
+	margin: 0;
+}
 
-  .product__cart__item__text {
-    overflow: hidden;
-  }
+.product__cart__item__text {
+	overflow: hidden;
+}
 
-  .pimg {
-    width: 90px;
-    height: 90px;
-  }
+.pimg {
+	width: 90px;
+	height: 90px;
+}
 
-  .product__cart__item__text .cost {
-    color: #999;
-    /* 회색으로 표시 */
-    font-size: 0.8em;
-    /* 작게 보이도록 설정 */
-    text-decoration: line-through;
-    /* 선 그어지도록 설정 */
-  }
+.product__cart__item__text .cost {
+	color: #999;
+	/* 회색으로 표시 */
+	font-size: 0.8em;
+	/* 작게 보이도록 설정 */
+	text-decoration: line-through;
+	/* 선 그어지도록 설정 */
+}
 
-  .empty-basket {
-    text-align: center;
-    font-size: 20px;
-    color: #666;
-  }
+.empty-basket {
+	text-align: center;
+	font-size: 20px;
+	color: #666;
+}
 
-  @media (max-width: 768px) {
-
-    .empty-basket {
-      font-size: 16px;
-    }
-  }
+@media ( max-width : 768px) {
+	.empty-basket {
+		font-size: 16px;
+	}
+}
 </style>
 <style>
-  .table-borderless td,
-  .table-borderless th {
-    border: none;
-    text-align: left;
-    font-size: 15px;
-  }
+.table-borderless td, .table-borderless th {
+	border: none;
+	text-align: left;
+	font-size: 15px;
+}
 
-  .table-borderless td:first-child {
-    font-weight: bold;
-  }
+.table-borderless td:first-child {
+	font-weight: bold;
+}
 
-  .product__details__pic {
-    margin-bottom: 0px;
-  }
+.product__details__pic {
+	margin-bottom: 0px;
+}
 
-  .product__details__text {
-    margin-top: 30px;
-    border-bottom: solid;
-    margin-bottom: 20px;
-  }
+.product__details__text {
+	margin-top: 30px;
+	border-bottom: solid;
+	margin-bottom: 20px;
+}
 
-  td:nth-child(1) span:nth-child(1) {
-    font-size: 15px;
-  }
+td:nth-child(1) span:nth-child(1) {
+	font-size: 15px;
+}
 
-  td:nth-child(1) span:nth-child(2) {
-    font-size: 25px;
-  }
+td:nth-child(1) span:nth-child(2) {
+	font-size: 25px;
+}
 
-  .col-5 {
-    font-size: 20px;
-    font-weight: bold;
-  }
+.col-5 {
+	font-size: 20px;
+	font-weight: bold;
+}
 
-  .orderDirect {
-    background: #dededecf;
-    border: none;
-    color: black;
-  }
+.orderDirect {
+	background: #dededecf;
+	border: none;
+	color: black;
+}
 
-  .primary-btn:hover {
-    color: white;
-    text-decoration: none;
-  }
+.primary-btn:hover {
+	color: white;
+	text-decoration: none;
+}
 
-  #orderbtn:hover {
-    color: black;
-    text-decoration: none;
-  }
+#orderbtn:hover {
+	color: black;
+	text-decoration: none;
+}
 
-  .primary-btn:focus {
-    color: white;
-    text-decoration: none;
-  }
+.primary-btn:focus {
+	color: white;
+	text-decoration: none;
+}
 
-  #orderbtn:focus {
-    color: black;
-    text-decoration: none;
-  }
+#orderbtn:focus {
+	color: black;
+	text-decoration: none;
+}
 </style>
-
 <body style="">
-  <script type="text/javascript" defer></script>
-  <!-- Page Preloder -->
+	<script type="text/javascript" defer></script>
+	<!-- Page Preloder -->
 
-  <th:block th:replace="includes/header :: header1"></th:block>
-  <th:block th:replace="includes/header :: header2"></th:block>
-  <th:block th:replace="includes/header :: header3"></th:block>
-  <!-- Header Section End -->
-  <!-- Shop Details Section Begin -->
-  <section class="shop-details">
-    <div class="product__details__pic">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="product__details__breadcrumb"><a href="./index.html">Home</a> <span href="./shop.html"
-                th:text="${Detail.detail.pcategory}"></span></div>
-          </div>
-        </div>
-        <div class="row row-cols-1 row-cols-lg-2">
-          <div class="col tab-content">
-            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-              <div class="product__details__pic__item">
-                <img id="mainImg" th:src="${Detail.pimg[0].pimg}" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="product__details__text">
-              <h4 id="pname" th:text="${Detail.detail.pname}" style="text-align: left"></h4>
+	<th:block th:replace="includes/header :: header1"></th:block>
+	<th:block th:replace="includes/header :: header2"></th:block>
+	<th:block th:replace="includes/header :: header3"></th:block>
+	<!-- Header Section End -->
+	<!-- Shop Details Section Begin -->
+	<section class="shop-details">
+		<div class="product__details__pic">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="product__details__breadcrumb">
+							<a href="./index.html">Home</a> <span href="./shop.html"
+								th:text="${Detail.detail.pcategory}"></span>
+						</div>
+					</div>
+				</div>
+				<div class="row row-cols-1 row-cols-lg-2">
+					<div class="col tab-content">
+						<div class="tab-pane active" id="tabs-1" role="tabpanel">
+							<div class="product__details__pic__item">
+								<img id="mainImg" th:src="${Detail.pimg[0].pimg}" alt="" />
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="product__details__text">
+							<h4 id="pname" th:text="${Detail.detail.pname}"
+								style="text-align: left"></h4>
 
-              <div class="product__details__last__option">
-                <table class="table table-borderless">
-                  <tbody>
-                    <tr>
-                      <td th:if="${Detail.detail.pdiscount != 0}">
-                        <h4 th:text="${Detail.detail.pdiscount} + '%'"></h4>
-                      </td>
-                      <style></style>
-                      <td th:if="${Detail.detail.pdiscount != 0}">
-                        <span id="discontPrice"
-                          th:text="${#numbers.formatInteger(Detail.detail.pprice - (Detail.detail.pdiscount * Detail.detail.pprice /100), 3, 'COMMA') + '원'}"
-                          style="font-size: 30px"></span>
+							<div class="product__details__last__option">
+								<table class="table table-borderless">
+									<tbody>
+										<tr>
+											<td th:if="${Detail.detail.pdiscount != 0}"><h4
+													th:text="${Detail.detail.pdiscount} + '%'"
+													style="color: #dc3545"></h4></td>
+											<style></style>
+											<td th:if="${Detail.detail.pdiscount != 0}"><span
+												id="discontPrice"
+												th:text="${#numbers.formatInteger(Detail.detail.pprice - (Detail.detail.pdiscount * Detail.detail.pprice /100), 3, 'COMMA') + '원'}"
+												style="font-size: 30px"></span> <strike
+												th:if="${Detail.detail.pdiscount != 0}"> <span
+													th:text="${#numbers.formatInteger(Detail.detail.pprice, 3, 'COMMA') + '원'}"></span>
+											</strike></td>
 
-                        <strike th:if="${Detail.detail.pdiscount != 0}">
-                          <span th:text="${#numbers.formatInteger(Detail.detail.pprice, 3, 'COMMA') + '원'}"></span>
-                        </strike>
-                      </td>
+											<td th:if="${Detail.detail.pdiscount == 0}"><span
+												id="originPrice"
+												th:text="${#numbers.formatInteger(Detail.detail.pprice, 3, 'COMMA') + '원'}"
+												style="font-size: 30px"></span></td>
+										</tr>
 
-                      <td th:if="${Detail.detail.pdiscount == 0}">
-                        <span id="originPrice"
-                          th:text="${#numbers.formatInteger(Detail.detail.pprice, 3, 'COMMA') + '원'}"
-                          style="font-size: 30px"></span>
-                      </td>
-                    </tr>
+										<tr>
+											<td>상품번호</td>
+											<td th:text="${Detail.detail.pid}"></td>
+										</tr>
+										<tr>
+											<td>카테고리</td>
+											<td th:text="${Detail.detail.pcategory}"></td>
+										</tr>
+										<tr>
+											<td>분류</td>
+											<td th:text="${Detail.detail.stag}"></td>
+										</tr>
+										<tr>
+											<td>원산지</td>
+											<td th:text="${Detail.detail.porigin}"></td>
+										</tr>
+										<tr>
+											<td>배송형태</td>
+											<td>새벽배송 / 밤 11시까지 결제 시</td>
+										</tr>
+										<tr>
+											<td>배송비</td>
+											<td>5,000원 (5만원 이상 구매 시 무료)</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 
-                    <tr>
-                      <td>상품번호</td>
-                      <td th:text="${Detail.detail.pid}"></td>
-                    </tr>
-                    <tr>
-                      <td>카테고리</td>
-                      <td th:text="${Detail.detail.pcategory}"></td>
-                    </tr>
-                    <tr>
-                      <td>분류</td>
-                      <td th:text="${Detail.detail.stag}"></td>
-                    </tr>
-                    <tr>
-                      <td>원산지</td>
-                      <td th:text="${Detail.detail.porigin}"></td>
-                    </tr>
-                    <tr>
-                      <td>배송형태</td>
-                      <td>새벽배송 / 밤 11시까지 결제 시</td>
-                    </tr>
-                    <tr>
-                      <td>배송비</td>
-                      <td>5,000원 (5만원 이상 구매 시 무료)</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+							<div class="product__details__cart__option row row-cols-sm-12">
+								<input class="item" id="-1" type="hidden"
+									th:data-value="${Detail.detail.pid}" name="pid"
+									th:value="${Detail.detail.pid}" />
+								<div class="quantity" style="width: 100%; margin: 10px">
+									<div class="pro-qty" style="display: flex; align-items: center">
+										<input class="item" id="quantity_-1" name="quantity"
+											type="text" value="1" style="width: 100%" />
+									</div>
+								</div>
+								<a href="#" class="primary-btn col"
+									th:onclick="'addToCart(false,-1)'"
+									style="margin: 10px; width: -webkit-fill-available">장바구니</a> <a
+									href="#" class="primary-btn orderDirect col" id="orderbtn"
+									style="margin: 10px; width: -webkit-fill-available">바로구매</a>
+							</div>
+						</div>
 
-              <div class="product__details__cart__option row row-cols-sm-12">
-                <input class="item" id="-1" type="hidden" th:data-value="${Detail.detail.pid}" name="pid"
-                  th:value="${Detail.detail.pid}" />
-                <div class="quantity" style="width: 100%; margin: 10px">
-                  <div class="pro-qty" style="display: flex; align-items: center"><input class="item" id="quantity_-1"
-                      name="quantity" type="text" value="1" style="width: 100%" /></div>
-                </div>
-                <a href="#" class="primary-btn col" th:onclick="'addToCart(false,-1)'"
-                  style="margin: 10px; width: -webkit-fill-available">장바구니</a>
+						<div class="product__details__widget">
+							<script>
 
-                <a href="#" class="primary-btn orderDirect col" id="orderbtn"
-                  style="margin: 10px; width: -webkit-fill-available">
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details__widget">
-              <script>
-
-                // id가 discontPrice인 span 이있으면 해당 값이 id가 quantity_-1랑 곱해서 나타내주고  discontPrice인 span이 없으면 id가 originPrice인 span이랑 곱해서 나타내기
-                function TotalPrice(e) {
-                  let discontPrice = $("#discontPrice").text().replace(/,/g, "").replace("원", "");
-                  let originPrice = $("#originPrice").text().replace(/,/g, "").replace("원", "");
 
                   let quantity = $("#quantity_-1").val();
                   let totalPrice = 0;
@@ -377,19 +371,78 @@
 						</div>
 					</div>
 				</div>
-			</div></div><div class="owl-item cloned" style="width: 1003px;"><div class="hero__items set-bg" data-setbg="img/mainpage.jpg" style="background-image: url(&quot;img/mainpage.jpg&quot;);">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-5 col-lg-7 col-md-8">
-							<div class="hero__text">
-								<h6>Summer Collection</h6>
-								<h2>Fall - Winter Collections 2030</h2>
-								<p>A specialist label creating luxury essentials. Ethically
-									crafted with an unwavering commitment to exceptional quality.</p>
-								<a href="#" class="primary-btn">Shop now <span class="arrow_right"></span>
-								</a>
-								<div class="hero__social">
-									<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+			</div>
+		</div>
+
+		<div class="product__details__content">
+			<div class="container">
+				<div class="row d-flex justify-content-center"></div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="product__details__tab">
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="nav-item"><a class="nav-link active"
+									data-toggle="tab" href="#tabs-5" role="tab">상품설명</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#tabs-6" role="tab">추천 레시피</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#tabs-7" role="tab">라이브 클래스</a></li>
+							</ul>
+							<div class="tab-content"
+								style="display: flex; justify-content: center">
+
+
+
+								<div class="tab-pane active" id="tabs-5" role="tabpanel"
+									style="width: 800px">
+									<br> <br>
+									<!--audio오디오-->
+
+									<div id="audio-container"
+										style="display: flex; justify-content: center; align-items: center;">
+										<audio id="audio-player" controls hidden="true" loop="-1">
+											<source src="/sound/전골 보글보글.mp3" type="audio/mpeg">
+										</audio>
+									</div>
+									
+											<script>
+											  const currentUrl = window.location.href;
+											  if (currentUrl === 'https://localhost/product/productDetail?pid=S02207105050') {
+											 
+											    const audioPlayer = document.getElementById('audio-player');
+											    audioPlayer.autoplay = true;
+											  }
+											</script>
+									<!-- 오디오 -->
+									<div class="product__details__tab__content"
+										style="display: flex; flex-direction: column; align-items: center;">
+										<br> <img th:src="${Detail.pimg[1].pimg}" alt="" />
+										<p class="note"></p>
+
+										<img th:each="detail, i : ${Detail.pimg}"
+											th:if="${i.index >= 2 and i.index <= #lists.size(Detail.pimg)}"
+											th:src="${detail.pimg}" />
+										<p th:src="${Detail.detail.pbdesc}"></p>
+
+										<div class="blog__details__quote" style="user-select: auto;">
+
+											<div class="product__details__tab__content__item">
+												<h3 th:text="${Detail.detail.ptitle}"></h3>
+
+												<p th:text="${Detail.detail.pdetail}"></p>
+											</div>
+										</div>
+										<div class="blog__details__quote" style="user-select: auto;">
+											<i class="fa fa-quote-left" aria-hidden="true"
+												style="user-select: auto;"></i>
+											<h5 th:text="${Detail.detail.pbname}"></h5>
+											<p th:text="${Detail.detail.pbsmall}"></p>
+											<p th:text="${Detail.detail.pbdesc}"></p>
+
+										</div>
+									</div>
+									<!--  <img th:src="${Detail.pimg[Detail.pimg.size() - 1].pimg}" /> -->
+
 								</div>
 							</div>
 						</div>

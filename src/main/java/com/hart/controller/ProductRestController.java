@@ -84,6 +84,7 @@ public ResponseEntity<Map<String, List<CategoryVO>>> getCategory(int pcno) {
          List<ListVO> Productlist = pService.Productlist(data);
 
          log.info("data=====>>>>" + data);
+         System.out.println("data=====>>>>" + data);
          log.info("getproductslis컨트롤러에서 찍힘>>>" + Productlist);
          log.info(Productlist);
 
