@@ -223,6 +223,7 @@ td:nth-child(1) span:nth-child(2) {
                     let discontPrice = $("#discontPrice").text().replace(/,/g, "").replace("원", "");
                     let originPrice = $("#originPrice").text().replace(/,/g, "").replace("원", "");
 
+
                     let quantity = $("#quantity_-1").val();
                     let totalPrice = 0;
 
@@ -369,6 +370,7 @@ td:nth-child(1) span:nth-child(2) {
         var pamounts = [];
         var pids = [];
         if(flag){
+
         $("input[name=cartlist]:checked").each(function () {
           var pos = $(this).prop("id").split("_")[1];
           var pid = $("#" + pos).data("value");

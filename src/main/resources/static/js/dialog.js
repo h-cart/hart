@@ -70,6 +70,7 @@ function showModal(result,flag,title) {
 
   dialog {
    max-width: 526px;
+   min-width:420px;
   }
   
   .quantity {
