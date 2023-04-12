@@ -68,6 +68,12 @@ public class LiveClassController {
 	
 	@GetMapping("/video/{lcid}")
 	public String getVideoDetail(@PathVariable String lcid, Model model) {
+		//라이브 클래스 정보 담는 부분
+		LiveClassDetailInfoDTO dto = new LiveClassDetailInfoDTO();
+		dto = service.getClassDetail(lcid);
+		model.addAttribute("liveClass",dto);
+		
+		
 		log.info("videoDetail 컨트롤러 호출");
 		LiveClassVideoDTO videoInfo =  service.getClassVideo(lcid);
 		log.info(videoInfo);
@@ -75,15 +81,8 @@ public class LiveClassController {
 		return "liveClass/liveClassVideo";
 	}
 	
-	@GetMapping("/mypage")
-	public String myPageTest(Principal pr,Model model) {
-		log.info("myPage 컨트롤러 호출");
-		String mid = pr.getName();
-		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
-		log.info(list);
-		model.addAttribute("classList",list);
-		return "liveClass/liveClassMypage";
-	}
+	
+	
 	
 	@PostMapping("/register")
 	public String registerVOD(Model model, LiveClassRegisterDTO dto) {
@@ -100,6 +99,18 @@ public class LiveClassController {
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@테스트용
+	
+	@GetMapping("/mypage")
+	public String myPageTest(Principal pr,Model model) {
+		log.info("myPage 수강내역 컨트롤러 호출");
+		String mid = pr.getName();
+		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
+		log.info(list);
+		model.addAttribute("classList",list);
+		return "liveClass/liveClassMypage";
+	}
+	
+	
 	@GetMapping("/testchat")
 	public String streamingTestChat() {
 		log.info("streamingTest 컨트롤러 호출");

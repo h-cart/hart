@@ -252,7 +252,7 @@
               <div class="product__details__tab">
                 <ul class="nav nav-tabs" role="tablist">
                   <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tabs-5" role="tab">필요재료</a></li>
-                  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">수강대상</a></li>
+                  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">세부정보</a></li>
                 </ul>
                 <div class="tab-content" style="display: flex; justify-content: center; min-height: 460px; margin-top: 35px">
                   <div class="tab-pane active" id="tabs-5" role="tabpanel" style="width: 800px; margin-top:20px;">
@@ -273,9 +273,21 @@
 								<h6 th:text="'-'+${lcStudent}" style="margin-top: 0px;">수강대상</h6>
 							</div>
 		            </div>
-                  
-                    
+		            
+		            <div class="blog__details__quote">
+                            <i class="fa fa-quote-left"></i>
+                            <p>강사 설명</p>
+                            
+                            <div th:each="lctexplain : ${liveClass.lctExplainList}" style="margin-bottom: 9px;">
+								<h6 th:text="'-'+${lctexplain}" style="margin-top: 0px;">수강대상</h6>
+							</div>
+							
+		            </div>
+		            
                   </div>
+                  
+                  
+                  
                 </div>
                 
                 
@@ -285,6 +297,7 @@
         </div>
       </div>
     </section>
+    
     <!-- Shop Details Section End -->
     <!-- Related Section Begin -->
     <section class="related spad" style="padding-bottom: 0px"></section>

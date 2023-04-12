@@ -1,7 +1,10 @@
 package com.hart.controller.alarm;
 
+import java.security.Principal;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.alarm.NoticeDTO;
@@ -30,21 +33,17 @@ public class AlarmRestController {
 	private final NoticeService service;
 	
 	@PostMapping
-	public NoticeDTO getalarm(){
-		//Principal pr
-		//String mid = pr.getName();
-		String mid = "skarns23@yu.ac.kr";
+	public NoticeDTO getalarm(Principal pr){
+		String mid = pr.getName();
 		NoticeDTO dto = service.getNoticeService(mid);
 		log.info(dto);
 		return dto;
 	}
 	
 	@PostMapping("/update")
-	public void alarmStatusUpdate(){
-		//Principal pr
-		//String mid = pr.getName();
+	public void alarmStatusUpdate(Principal pr){
+		String mid = pr.getName();
 		log.info("alarmStatusUpdate 컨트롤러 호출");
-		String mid = "skarns23@yu.ac.kr";
 		service.noticeUpdateService(mid);
 		
 	}

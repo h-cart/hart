@@ -6,13 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hart.controller.liveClass.LiveClassController;
-import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
-import com.hart.domain.liveClass.LiveClassListDTO;
-import com.hart.domain.liveClass.LiveClassVideoDTO;
 import com.hart.domain.liveClass.MyLiveClassInfoDTO;
 import com.hart.service.liveClass.LiveClassService;
 
@@ -41,7 +36,7 @@ private final LiveClassService service;
 	
 	@GetMapping("/class")
 	public String myPageClass(Principal pr,Model model) {
-		log.info("myPage 컨트롤러 호출");
+		log.info("myPage 수강내역 확인 컨트롤러 호출");
 		String mid = pr.getName();
 		log.info(mid);
 		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
@@ -52,7 +47,6 @@ private final LiveClassService service;
 	
 	@GetMapping("/order")
 	public String getOrderList() {
-		
 		return "member/orderlist";
 	}
 	
