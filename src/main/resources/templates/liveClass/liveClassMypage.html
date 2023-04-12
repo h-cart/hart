@@ -62,6 +62,7 @@
 							<!-- 날짜 검색 -->
 
 							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
+								<!-- 추후 수정
 								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead order-search-block " style="margin-top: 15px; margin-bottom: 15px;">
 									<ul class="period-rage">
 										<li><a onclick="classSt('1');"  style="border-radius: 20px;">전체</a></li>
@@ -69,6 +70,7 @@
 										<li><a onclick="classSt('3');"  style="border-radius: 20px;">강의 예정</a></li>
 									</ul>
 								</div>
+								 -->
 								<input id="mode" name="mode" value="" type="hidden"> <input id="term" name="term" value="" type="hidden">
 							</form>
 
@@ -123,6 +125,8 @@
 																</button>
 														</div>
 													</div>
+													
+													
 												</div>
 											</div>
 									</div>
@@ -144,26 +148,34 @@
 	/*<![CDATA[*/	
 		function classSt(e){
 			
-			var list = /*[[${classList}]]*/
-			
-			alert(list);
+			var classList = /*[[${classList}]]*/ false;
 			
 			const classStatus = e;
 			if(classStatus==1){
 				for(let i=0; i< list.length; i++){
 					console.log(list[i].lcstatus);
+					
 				}
 				
 			}else if(classStatus==2){
 				for(let i=0; i< list.length; i++){
 					console.log(list[i].lcstatus);
-					
+					if(list[i].lcstatus==2){
+						
+						
+					}
 					
 				}
 				
 				
 			}else if(classStatus==3){
-				
+				for(let i=0; i< list.length; i++){
+					console.log(list[i].lcstatus);
+					if(list[i].lcstatus==0){
+						
+					}
+					
+				}
 			}
 			
 		}

@@ -395,7 +395,8 @@ td:nth-child(1) span:nth-child(2) {
 			</div>
 		</div>
 	</section>
-
+ <!-- <div>
+	</div> -->
 	<!-- Related Section End -->
 	<!-- Footer Section Begin -->
 	<th:block th:replace="includes/footer :: footer"></th:block>
@@ -405,6 +406,7 @@ td:nth-child(1) span:nth-child(2) {
 	<!-- Code injected by live-server -->
 	<!-- Code injected by live-server -->
 	<script th:inline="javascript">
+
     /*<![CDATA[*/
     function addToCart(flag, idx) {
       var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;

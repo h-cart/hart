@@ -85,7 +85,13 @@
 				if(result.result == 'success')
 					location.href='/cart/mycart';
 				else{
-					alert('장바구니 공유 실패');
+					Swal.fire({
+			            text: "장바구니 공유 실패",
+			            icon: "warning",
+			            iconColor: "#116530",
+			            confirmButtonText: "확인",
+			            confirmButtonColor: "#116530",
+			          });
 				}
 			}, error :function(err, xhr, sts){
 				console.log(err);
