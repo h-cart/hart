@@ -64,9 +64,9 @@
 							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
 								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead order-search-block " style="margin-top: 15px; margin-bottom: 15px;">
 									<ul class="period-rage">
-										<li><a href="#" onclick="dateCal('1');" days="00" style="border-radius: 20px;">전체</a></li>
-										<li><a href="#" onclick="dateCal('2');" days="07" style="border-radius: 20px;">학습중</a></li>
-										<li><a href="#" onclick="dateCal('3');" days="30" style="border-radius: 20px;">강의 예정</a></li>
+										<li><a onclick="classSt('1');"  style="border-radius: 20px;">전체</a></li>
+										<li><a onclick="classSt('2');"  style="border-radius: 20px;">학습중</a></li>
+										<li><a onclick="classSt('3');"  style="border-radius: 20px;">강의 예정</a></li>
 									</ul>
 								</div>
 								<input id="mode" name="mode" value="" type="hidden"> <input id="term" name="term" value="" type="hidden">
@@ -93,7 +93,7 @@
 													<div class="item-prod" th:each="list : ${classList}">
 														<div class="block">
 															<div class="thumb">
-																<a href="#"><img th:src="${list.lcimg}" alt=""  style="height: 76px; width: 102px"></a>
+																<a><img th:src="${list.lcimg}" alt=""  style="height: 76px; width: 102px"></a>
 															</div>
 															<div class="item-desc">
 																<div class="detail">
@@ -103,9 +103,8 @@
 															</div>
 														</div>
 														<div class="status">
-															<!--@@수정중  -->
 																<div th:if=${list.lcstatus}==0>
-																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16" >
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16" style="cursor:default" disabled >
 																	<div th:if=${list.lcstatus}==0><span>강의 예정</span></div>
 																</button>
 																</div>
@@ -119,21 +118,9 @@
 																	<div th:if=${list.lcstatus}==1 th:onclick="moveVideo(1,[[${list.lcid}]])"><span style=" color: white; font-weight: bold;">ON - AIR</span></div>
 																</button>
 																</div>
-																<!-- 
-																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
-																	<div th:if=${list.lcstatus}==0><span>강의 예정</span></div>
-																	<div th:if=${list.lcstatus}==1 th:onclick="moveVideo(1,[[${list.lcid}]])"><span style=" color: white; font-weight: bold;">ON - AIR</span></div>
-																	<div th:if=${list.lcstatus}==2 th:onclick="moveVideo(2,[[${list.lcid}]])"><span>강의 보기</span></div>
+																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16" th:onclick="moveClassDetail([[${list.lcid}]])">
+																	<span>상세 보기</span>
 																</button>
-																 -->
-																<button id="hambtn" type="button" class="btn btn-sm btn-gray btn-pd16">
-																	<a href="http://192.168.0.5:3000"></a><span>상세 보기</span></a>
-																</button>
-															<button type="button"
-																class="btn btn-sm btn-gray btn-pd16 displaynone"
-																onclick="OrderHistory.getDetailInfo('?product_no=3363&amp;cate_no=26&amp;order_id=20221229-0003219&amp;ord_item_code=20221229-0003219-01');">
-																<span>상세정보</span>
-															</button>
 														</div>
 													</div>
 												</div>
@@ -151,8 +138,28 @@
 
 	<th:block th:replace="includes/footer :: footer"></th:block>
 
+
+
+	<script type="text/javascript">
+		function classSt(e){
+			const classStatus = e;
+			
+			if(classStatus){
+				
+				
+			}
+			
+		}
+	
+	</script>
+	
 	
 	<script>
+		function moveClassDetail(lcid){
+			location.href="/class/detail/"+lcid;
+		}
+	
+	
 		const $nav = document.querySelector('#tab-button-nav')
 		const $sections = document.querySelectorAll('.tab-section');
 
@@ -181,13 +188,12 @@
 		}else if(lcstatus =='2'){//vod 서비스로 연결
 			location.href='/class/video/'+lcid;
 		}
-		
-		
-		
-		
-		
-		
 	}
+</script>
+
+<script type="text/javascript">
+
+
 
 </script>
 

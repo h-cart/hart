@@ -31,7 +31,7 @@ public class CartServiceTests {
 			pamounts.add("2");
 			pamounts.add("3");
 			String mid = "skarns23@gmail.com";
-			log.info(cService.CartInsert(pids, pamounts, mid));
+			log.info(cService.cartInsert(pids, pamounts, mid));
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}

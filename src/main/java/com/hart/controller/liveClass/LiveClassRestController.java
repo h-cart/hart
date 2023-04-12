@@ -1,6 +1,7 @@
 package com.hart.controller.liveClass;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hart.domain.cart.CartDTO;
@@ -41,11 +44,18 @@ public class LiveClassRestController {
 
 	private final LiveClassService service;
 	
-	@PostMapping("/info")
-	public List<MyLiveClassInfoDTO> myLiveClassInfo(Principal pr) {
+	
+	@ResponseStatus(HttpStatus.OK)
+	@PostMapping("/class")
+	public List<MyLiveClassInfoDTO> myLiveClassInfo(Principal pr,@RequestParam("classStatus") int classStatus) {
 		String id = pr.getName();
-		log.info("myLiveClassInfo 컨트롤러 호출");
-		List<MyLiveClassInfoDTO> list = service.getMyClassInfo(id);
+		log.info("myLiveClassInfo rest 컨트롤러 호출");
+		log.info(classStatus);
+		
+		//List<MyLiveClassInfoDTO> list = service.getMyClassInfo(id);
+		
+		List<MyLiveClassInfoDTO> list = new ArrayList<MyLiveClassInfoDTO>();
+		
 		return list;
 		
 	}

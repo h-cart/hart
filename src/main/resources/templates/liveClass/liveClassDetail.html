@@ -252,7 +252,7 @@
               <div class="product__details__tab">
                 <ul class="nav nav-tabs" role="tablist">
                   <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tabs-5" role="tab">필요재료</a></li>
-                  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">수강대상</a></li>
+                  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">세부정보</a></li>
                 </ul>
                 <div class="tab-content" style="display: flex; justify-content: center; min-height: 460px; margin-top: 35px">
                   <div class="tab-pane active" id="tabs-5" role="tabpanel" style="width: 800px; margin-top:20px;">
@@ -273,9 +273,21 @@
 								<h6 th:text="'-'+${lcStudent}" style="margin-top: 0px;">수강대상</h6>
 							</div>
 		            </div>
-                  
-                    
+		            
+		            <div class="blog__details__quote">
+                            <i class="fa fa-quote-left"></i>
+                            <p>강사 설명</p>
+                            
+                            <div th:each="lctexplain : ${liveClass.lctExplainList}" style="margin-bottom: 9px;">
+								<h6 th:text="'-'+${lctexplain}" style="margin-top: 0px;">수강대상</h6>
+							</div>
+							
+		            </div>
+		            
                   </div>
+                  
+                  
+                  
                 </div>
                 
                 
@@ -285,6 +297,7 @@
         </div>
       </div>
     </section>
+    
     <!-- Shop Details Section End -->
     <!-- Related Section Begin -->
     <section class="related spad" style="padding-bottom: 0px"></section>
@@ -299,6 +312,7 @@
 <script type="text/javascript"th:inline="javascript">
       /*<![CDATA[*/
       function addToCart(flag,idx) {
+		let targetUrl="/recommand/class/recommendations";
          var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
          if (!isAdmin) {
             Swal.fire({
@@ -320,6 +334,7 @@
          var pamounts = [];
          var pids = [];
 		 if(flag){
+			targetUrl="/cart/insert";
 		let ckItem = $("input[name=cartlist]:checked");
          $(ckItem).each(function () {
             var pos = $(this).prop('id').split('_')[1];
@@ -335,9 +350,9 @@
 			 pids.push(pid);
 			 pamounts.push(quantity);
 			 console.log(pid,quantity);
-	   }
+	   }	console.log(targetUrl);
          $.ajax({
-            url: '/capi/insert',
+            url: targetUrl,
             beforeSend: function (xhr) {
                xhr.setRequestHeader(header, token);
             },
@@ -349,14 +364,14 @@
             }),
             success: function (result) {
 				console.log(result);
-				if(result.result==null)  showModal(result,true);
+				if(!flag)  showModalLiveClass(result,true);
 				else showModal(result,flag);
           },
           error: function (err, xhr, status) {
             if (err.status == 405 || err.status == 400) {
               customConfirm("장바구니에 존재하는 상품입니다.", "확인하러 이동하기", "장바구니로", "아니요");
             }
-          },
+          }
         });
       }
 

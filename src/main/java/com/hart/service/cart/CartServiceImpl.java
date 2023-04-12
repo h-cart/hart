@@ -21,7 +21,7 @@ public class CartServiceImpl implements CartService {
 
 	@Transactional
 	@Override
-	public int CartInsert(List<String> pids,List<String> pamounts ,String mid) throws Exception {
+	public int cartInsert(List<String> pids,List<String> pamounts ,String mid) throws Exception {
 		int result = 0;
 		for (int i=0;i<pids.size();i++) {
 			String pid = pids.get(i);

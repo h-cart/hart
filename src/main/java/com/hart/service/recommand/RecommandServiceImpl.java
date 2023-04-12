@@ -37,7 +37,7 @@ public class RecommandServiceImpl  implements RecommandService{
 	}
 	
 	@Override
-	public List<IngredientDTO> liveIngredients(String lcid) throws Exception {
+	public List<IngredientDTO> getIngredients(String lcid) throws Exception {
 		
 		return rMapper.getIngredients(lcid);
 	}

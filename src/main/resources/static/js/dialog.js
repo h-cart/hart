@@ -318,3 +318,162 @@ $(document).on("click",".shop__sidebar__tags a",function(){
    
 
 } )
+
+
+
+
+
+function showModalLiveClass(result,flag,title) {
+	console.log(result,flag);
+  $("dialog").remove();
+  var idx = 0;
+
+
+   let dtitle = title==null?"장바구니에 담았습니다." :title;
+   
+  var str = `<style>
+   dialog::-webkit-scrollbar {
+      display: none;
+   }
+   .product__cart__item__pic {
+		position: relative;
+	}
+
+	.checkbox {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+
+	}
+
+	.price-box h5,
+	.price-box h6 {
+		
+		display: inline-block;
+		margin: 0;
+	}
+
+	.product__cart__item__text {
+		overflow: hidden;
+	}
+
+	.product__cart__item__text .cost {
+		color: #999;
+		/* 회색으로 표시 */
+		font-size: 0.8em;
+		/* 작게 보이도록 설정 */
+		text-decoration: line-through;
+		/* 선 그어지도록 설정 */
+	}
+
+	.empty-basket {
+		text-align: center;
+		font-size: 20px;
+		color: #666;
+	}
+
+	@media (max-width: 768px) {
+		.empty-basket {
+			font-size: 16px;
+		}
+	}
+
+  #cart_product_img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 30px auto;
+
+  }
+  .row{
+	justify-content: center;
+  }
+  .col-5{
+   color:
+  }
+
+
+  dialog {
+   max-width: 526px;
+  }
+  
+  .quantity {
+	text-align : center;
+}
+
+</style>
+	<dialog>
+      <div class="container" >
+      <div>
+      <h4 style="text-align: center" style="word-break: keep-all;">${dtitle}</h4>
+
+       <div class="row row-col-lg-2" style="margin-top:20px; padding-bottom : 30px; border-bottom: 1px solid #e3e3e3">
+        <div class="col-5">
+          <button class="btn btn-primary btn-block dialog-close" type="button" style="word-break: keep-all; background-color: #116530; ">쇼핑 계속하기</button>
+        </div>
+        <div class="col-5">
+          <button class="btn btn-primary btn-block" type="button" style="background-color:#ffff;color:darkslategray;border: 1px solid gray; word-break: keep-all;" onclick="location.href='/cart/mycart'">장바구니 가기</button>
+        </div>
+      </div>
+    </div>
+         <div class="shopping__cart__table">`;
+
+      str += ` <div class="shop__sidebar__accordion" style="margin-top: 50px">
+               <div class="accordion" id="accordionClass">
+                  <div class="card">
+                     <div class="card-heading active">
+                        <a data-toggle="collapse" data-target="#collapseClass" class="" aria-expanded="true">
+                           쿠킹 클래스 관련 제품 어떠세요?</a>
+                     </div>
+                     <div id="collapseClass" class="collapse show" data-parent="#accordionClass" style="">
+                        <table>
+                           <tbody>`;
+
+        $.each(result.result, function (lindex, item) {
+          console.log(idx);
+          idx++;
+          str += `<tr id="${idx}" data-value="${item.pid}">
+            <td colspan="2" class="product__cart__item">
+               <div class="product__cart__item__pic" style="    width: fit-content;
+    float: left;
+    margin-right: 27px;
+"><span class="thumb"><input name="cartlist" id="check_${idx}" type="checkbox"
+                        class="checkbox"><img class="pimg"
+                        src="${item.pimg}" alt=""
+                        style="width:90px;border-radius: 10px;height:90px;"></span></div>
+               <div class="product__cart__item__text">
+                  <h6>${item.pname}</h6>
+                     <input type="hidden" class="price" id="price_${idx}" data-value="${item.pprice}"/>
+                  <div class="pro-qty-2"><span style="
+    padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
+                        aria-hidden="true"><i class='fa-solid fa-minus fa-xs'></i></span><input style="border:none; text-align:center; width:20px;" id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
+                        data-value="${idx}" style="
+    margin-left: 10px;
+"class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-xs'></i></span></div>
+               </div>
+            </td>
+            
+            <td style="
+        font-size: 14px;
+    " data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
+         </tr>`;
+        });
+      str += `</tbody></table>
+                     </div>
+                  </div>
+               </div>
+            </div>`;
+    
+    str += `<div onclick="addToCart(true)" class="addToCart" style="
+   background-color: #116530;
+   text-align: center; 
+"><a href="#" class="primary-btn">장바구니 담기</a></div>`;
+  str += `</div>
+      </div>
+   </dialog>`;
+  $("body").append(str);
+  const dialog = document.querySelector("dialog");
+
+  dialog.showModal();
+}

@@ -119,6 +119,7 @@ video {
 		    //qrResult.hidden = false;
 		    //canvasElement.hidden = true;
 		    //btnScanQR.hidden = false;
+		   	console.log(res);
 		    pids = [];
 		    pids.push(res);
 		    pamounts = [];
@@ -185,6 +186,73 @@ video {
 	})
 	</script>
 </body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function addToCart(flag, idx) {
+      var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
+      if (!isAdmin) {
+        Swal.fire({
+          title: "로그인이 필요한 활동입니다.",
+          text: "로그인 페이지로 이동하시겠습니까?",
+          icon: "info",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "네",
+          cancelButtonText: "아니요",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href = "/member/login";
+          }
+        });
+        return;
+      }
+      var pamounts = [];
+      var pids = [];
+      if (flag) {
+        $("input[name=cartlist]:checked").each(function () {
+          var pos = $(this).prop("id").split("_")[1];
+          var pid = $("#" + pos).data("value");
+          var quantity = $("#quantity_" + pos).val();
+          pids.push(pid);
+          console.log(pos, pid, quantity);
+          pamounts.push(quantity);
+        });
+
+      } else {
+
+        var pid = $("#" + idx).data("value");
+        var quantity = $("#quantity_" + idx).val();
+        pids.push(pid);
+        pamounts.push(quantity);
+      }
+      $.ajax({
+        url: "/capi/insert",
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader(header, token);
+        },
+        type: "post",
+        contentType: "application/json",
+        data: JSON.stringify({
+          pids: pids,
+          pamounts: pamounts,
+        }),
+        success: function (result) {
+
+          showModal(result, flag);
+        },
+        error: function (err, xhr, status) {
+          if (err.status == 405 || err.status == 400) {
+            customConfirm("장바구니에 존재하는 상품입니다.", "확인하러 이동하기", "장바구니로", "아니요");
+          }
+        },
+      });
+    }
+
+    /*]]>*/
+
+  </script>
 </html>
 
 
