@@ -154,7 +154,8 @@ td:nth-child(1) span:nth-child(2) {
 									<tbody>
 										<tr>
 											<td th:if="${Detail.detail.pdiscount != 0}"><h4
-													th:text="${Detail.detail.pdiscount} + '%'" style="color:rgb(246, 26, 98);"></h4></td>
+													th:text="${Detail.detail.pdiscount} + '%'"
+													style="color: rgb(246, 26, 98);"></h4></td>
 											<style></style>
 											<td th:if="${Detail.detail.pdiscount != 0}"><span
 												id="discontPrice"
@@ -285,11 +286,30 @@ td:nth-child(1) span:nth-child(2) {
 								style="display: flex; justify-content: center">
 								<div class="tab-pane active" id="tabs-5" role="tabpanel"
 									style="width: 800px">
-									<div class="product__details__tab__content" style="display: flex; flex-direction: column; align-items: center;">
-										<br>
+									<br>
+									<br>
+									<!--audio오디오-->
 
+									<div id="audio-container"
+										style="display: flex; justify-content: center; align-items: center;">
+										<audio id="audio-player" controls hidden="true" loop="-1">
+											<source src="/sound/전골 보글보글.mp3" type="audio/mpeg">
+										</audio>
+									</div>
 
-										<img th:src="${Detail.pimg[1].pimg}" alt="" />
+											<script>
+											  const currentUrl = window.location.href;
+											  if (currentUrl === 'https://localhost/product/productDetail?pid=S02207105050') {
+
+											    const audioPlayer = document.getElementById('audio-player');
+											    audioPlayer.autoplay = true;
+											  }
+											</script>
+									<!-- 오디오 -->
+									
+									<div class="product__details__tab__content"
+										style="display: flex; flex-direction: column; align-items: center;">
+										<br> <img th:src="${Detail.pimg[1].pimg}" alt="" />
 										<p class="note"></p>
 
 										<img th:each="detail, i : ${Detail.pimg}"
@@ -297,11 +317,11 @@ td:nth-child(1) span:nth-child(2) {
 											th:src="${detail.pimg}" />
 										<p th:src="${Detail.detail.pbdesc}"></p>
 
-										<div class="blog__details__quote" style="user-select: auto; ">
+										<div class="blog__details__quote" style="user-select: auto;">
 
 											<div class="product__details__tab__content__item">
 												<h3 th:text="${Detail.detail.ptitle}"></h3>
-										
+
 												<p th:text="${Detail.detail.pdetail}"></p>
 											</div>
 										</div>
@@ -317,7 +337,49 @@ td:nth-child(1) span:nth-child(2) {
 									<!--  <img th:src="${Detail.pimg[Detail.pimg.size() - 1].pimg}" /> -->
 								</div>
 								<div class="tab-pane" id="tabs-6" role="tabpanel">
-									<div class="product__details__tab__content">추천 레시피</div>
+									<div class="product__details__tab__content">
+										추천 레시피
+										
+										
+										<!-- 레시피 추천 추가 start -->
+
+										<!-- <div class="container" style="user-select: auto;">
+											<ul class="filter__controls" style="user-select: auto">
+												<li class="active" data-filter="*" style="user-select: auto">레시피
+													추천</li>
+											</ul>
+											<div class="row" id="recipeajax" style="user-select: auto;">
+												반복 시점
+												<div class="row" id="recipeajax" style="user-select: auto;">
+													<div class="col-lg-4 col-md-6 col-sm-6"
+														style="user-select: auto;">
+														<div class="blog__item" style="user-select: auto;">
+															<div class="product__item__pic set-bg" id="img"
+																data-setbg="https://tohomeimage.thehyundai.com/DP/DP018/2022/08/31/132615/wfnqk.jpg"
+																data-rid="R220831100006001"
+																onclick="gorecipeDetailPage(this)"
+																style="background-image: url(&quot;https://tohomeimage.thehyundai.com/DP/DP018/2022/08/31/132615/wfnqk.jpg&quot;); user-select: auto;"></div>
+
+															<div class="blog__item__text" style="user-select: auto;">
+																<span style="user-select: auto;">2022-08-31</span>
+																<h5 style="user-select: auto;">박찬일 셰프의 홍콩식 돼지고기 덮밥</h5>
+
+																<a href="/recipe/recipeDetail?rid=R220831100006001"
+																	style="user-select: auto;">레시피 보러가기</a>
+															</div>
+														</div>
+													</div>
+												</div>
+												반복 시점
+											</div>
+										</div> -->
+
+
+
+
+										<!-- 레시피 추천 추가 end-->
+										
+									</div>
 								</div>
 								<div class="tab-pane" id="tabs-7" role="tabpanel">
 									<div class="product__details__tab__content">라이브 클래스</div>
@@ -325,8 +387,6 @@ td:nth-child(1) span:nth-child(2) {
 									<div class="product__details__tab__content">반품 환불</div>
 									<input type="checkbox" name="cartlist" display="none;"
 										id="checkbox_-1" checked />
-
-
 								</div>
 							</div>
 						</div>
@@ -335,17 +395,18 @@ td:nth-child(1) span:nth-child(2) {
 			</div>
 		</div>
 	</section>
-	<div>
-	</div>
-  <!-- Related Section End -->
-  <!-- Footer Section Begin -->
-  <th:block th:replace="includes/footer :: footer"></th:block>
-  <!-- Footer Section End -->
-  <!-- Code injected by live-server -->
-  <script src="/js/dialog.js"></script>
-  <!-- Code injected by live-server -->
-  <!-- Code injected by live-server -->
-  <script th:inline="javascript">
+ <!-- <div>
+	</div> -->
+	<!-- Related Section End -->
+	<!-- Footer Section Begin -->
+	<th:block th:replace="includes/footer :: footer"></th:block>
+	<!-- Footer Section End -->
+	<!-- Code injected by live-server -->
+	<script src="/js/dialog.js"></script>
+	<!-- Code injected by live-server -->
+	<!-- Code injected by live-server -->
+	<script th:inline="javascript">
+
     /*<![CDATA[*/
     function addToCart(flag, idx) {
       var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
