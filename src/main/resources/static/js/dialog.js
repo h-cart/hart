@@ -300,6 +300,9 @@ function showModal(result,flag,title) {
 })
 */
 
+$(document).on("click",".dialog-close",function(){
+	$("dialog").remove();
+})
 
 $(document).on("click",".shop__sidebar__tags a",function(){
    $(".shop__sidebar__tags a").removeClass("on");
