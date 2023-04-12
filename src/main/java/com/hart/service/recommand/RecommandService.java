@@ -9,5 +9,5 @@ public interface RecommandService {
 	
 	public RecommandDTO getRecommand(String mid,String csno) throws Exception;
 	public RecommandDTO RecommandForProduct(String pid) throws Exception;
-	public List<IngredientDTO> liveIngredients(String lcid)throws Exception;
+	public List<IngredientDTO> getIngredients(String lcid)throws Exception;
 }
