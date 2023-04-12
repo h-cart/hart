@@ -49,18 +49,19 @@ public class RecommandRestController {
 
 	}
 
-	@GetMapping(value = "/products/{pid}/recommendations", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, RecommandDTO>> getRecommands(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @PathVariable("pid") String pid) {
-		Map<String,RecommandDTO> result = new HashMap<>();
-		try {
-			result.put("result",rService.RecommandForProduct(mDTO.getMid(),mDTO.getCsno(), pid));
-			return new ResponseEntity<Map<String,RecommandDTO>>(result,HttpStatus.OK);
-		}catch(Exception e) {
-			return new ResponseEntity<Map<String,RecommandDTO>>(HttpStatus.BAD_REQUEST);
-		}
-	}
-
+	/*
+	 * @GetMapping(value = "/products/{pid}/recommendations", consumes = {
+	 * MediaType.APPLICATION_JSON_VALUE }, produces = {
+	 * MediaType.APPLICATION_JSON_VALUE }) public ResponseEntity<Map<String,
+	 * RecommandDTO>> getRecommands(@AuthenticationPrincipal ClubAuthMemberDTO
+	 * mDTO, @PathVariable("pid") String pid) { Map<String,RecommandDTO> result =
+	 * new HashMap<>(); try {
+	 * result.put("result",rService.RecommandForProduct(mDTO.getMid(),mDTO.getCsno()
+	 * , pid)); return new
+	 * ResponseEntity<Map<String,RecommandDTO>>(result,HttpStatus.OK);
+	 * }catch(Exception e) { return new
+	 * ResponseEntity<Map<String,RecommandDTO>>(HttpStatus.BAD_REQUEST); } }
+	 */
 	@PostMapping(value = "/class/recommendations", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, List<IngredientDTO>>> RecommandForClass(
