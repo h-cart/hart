@@ -29,7 +29,7 @@
                         <br>
                         <p></p>
                         <br>
-                        <a href="https://localhost/product/list?pcno_top=100715" class="primary-btn">Shop now <span
+                        <a href="/product/list?pcno_top=100715" class="primary-btn">Shop now <span
                            class="arrow_right"></span>
                         </a>
                         <div class="hero__social">
@@ -86,12 +86,12 @@
 
               <div class="product__item__text">
                 <h6 th:text="${product.pname}"></h6>
-                <input class="item" th:id="-${productStat.index}" type="hidden"
+                <input class="item" th:id="-${productStat.count}" type="hidden"
 									th:data-value="${product.pid}" name="pid"
 									th:value="${product.pid}" />
-				<input class="item" th:id="'quantity_-'+${productStat.index}" name="quantity"
+				<input class="item" th:id="'quantity_-'+${productStat.count}" name="quantity"
 											type="hidden" value="1" style="width: 100%" />
-                <a href="#"  th:onclick="addToCart(false,-[[${productStat.index}]])" class="add-cart">+ Add To Cart</a>
+                <a href="#"  th:onclick="addToCart(false,-[[${productStat.count}]])" class="add-cart">+ Add To Cart</a>
                 <div>
                   <h5 th:if="${product.pdiscount != 0}" style="display: inline; color: #f61a62; margin-right: 8px" th:text=" ${product.pdiscount} +'%'"></h5>
 

@@ -325,7 +325,7 @@
 						for (; i < result.result.plists.length; i++) {
 							var price = plist[i].pprice;
 							if (plist[i].pdiscount != 0) {
-								price = price - plist[i].pprice * (plist[i].pdiscount / 100);
+								price = Math.ceil(price - plist[i].pprice * (plist[i].pdiscount / 100));
 							}
 							str += "<tr id='" + i + "' data-value='" + plist[i].pid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + i + "' type='checkbox' class='checkbox'><img class='pimg' src='" + plist[i].pimg + "' alt='' style='width:90px; height:90px;'/></span>"
 							str += "</div><div class='product__cart__item__text'><h6>" + plist[i].pname + "</h6>"

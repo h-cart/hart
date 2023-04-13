@@ -68,6 +68,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			// redirectStrategy.sendRedirect(request, response,
 			// "/member/modify?social=social");
 			redirectStrategy.sendRedirect(request, response, targetUrl);
+			return;
 		} // end if
 
 		redirectStrategy.sendRedirect(request, response, targetUrl);

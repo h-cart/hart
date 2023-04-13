@@ -5,9 +5,9 @@
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#116530',
-            cancelButtonText: 취소,
+            cancelButtonText: cancle,
             cancelButtonColor: 'gray',
-            confirmButtonText: 확인
+            confirmButtonText: confirm
          }).then((result) => {
             if (result.isConfirmed) {
                location.href = '/cart/mycart';
@@ -22,9 +22,9 @@
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#116530',
-            cancelButtonText: 취소,
+            cancelButtonText: '취소',
             cancelButtonColor: 'gray',
-            confirmButtonText: 확인
+            confirmButtonText: '확인'
          }).then((result) => {
             if (result.isConfirmed) {
                location.href = '/cart/mycart';
@@ -43,10 +43,31 @@
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#116530',
-            cancelButtonText: 취소,
+            cancelButtonText: cancle,
             cancelButtonColor: 'gray',
-            confirmButtonText: 확인
+            confirmButtonText: confirm
          })
          return result;
       }
+      
+      
+      
+     function noConfirm(msg, title, resvNum) {
+		swal({
+			title : title,
+			text : msg,
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			closeOnConfirm : false,
+			closeOnCancel : true,
+			showCancelButton :false
+		}, function(isConfirm) {
+			location.href="/cart/mycart"
+
+		});
+	}
+      
       
