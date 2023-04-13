@@ -292,19 +292,21 @@ td:nth-child(1) span:nth-child(2) {
 
 									<div id="audio-container"
 										style="display: flex; justify-content: center; align-items: center;">
-										<audio id="audio-player" controls hidden="true" loop="-1">
+										<audio id="audio-player" controls loop="-1">
 											<source src="/sound/전골 보글보글.mp3" type="audio/mpeg">
 										</audio>
 									</div>
-
 											<script>
 											  const currentUrl = window.location.href;
+											  //alert(currentUrl);
 											  if (currentUrl === 'https://localhost/product/productDetail?pid=S02207105050') {
-
+												//alert(currentUrl);
 											    const audioPlayer = document.getElementById('audio-player');
 											    audioPlayer.autoplay = true;
+											   // alert(audioPlayer.autoplay);
 											  }
 											</script>
+											
 									<!-- 오디오 -->
 									
 									<div class="product__details__tab__content"
