@@ -49,6 +49,8 @@ const sse = new EventSource("/capi/sse");
 	    	.then((result) => {
 		if (result.isConfirmed) {
 			location.href = '/cart/mycart'; // SweetAlert2에서 확인 버튼을 클릭한 경우
+		}else {
+			location.href="/";
 		}
 	  });
 	});
