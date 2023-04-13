@@ -16,8 +16,8 @@ function showModal(result,flag,title) {
    
   var str = `
 	<dialog>
-      <div class="container" >
-      <div>
+      <div class="container" style="padding : 0px 0px; min-width:400px" >
+      <div
       <h4 style="text-align: center" style="word-break: keep-all;">${dtitle}</h4>
 
        <div class="row row-col-lg-2" style="margin-top:20px; padding-bottom : 30px; border-bottom: 1px solid #e3e3e3">
@@ -61,7 +61,7 @@ function showModal(result,flag,title) {
                  class="checkbox"><img class="pimg"
                  src="${value.lcimg}" alt=""
                  style="width:90px;border-radius: 10px;height:90px;"></span></div>
-        <div class="product__cart__item__text">
+        <div class="product__cart__item__text" style="padding-bottom:10px;">
            <h6>${value.lcname}</h6><span class="price-box">
               <span style="font-size:13px;"class="price" id="price_${idx}" data-value="${value.lcprice}">${status}</span>
               </br>
@@ -154,18 +154,18 @@ function showModal(result,flag,title) {
     float: left;
     margin-right: 27px;
 "
-    ><span ><img class="pimg"
+        margin-top: 20px;
+    "><span ><img class="pimg"
                      src="${value.rimg}" alt=""
                      style="width:90px;border-radius: 10px;height:90px;"></span></div>
-            <div class="product__cart__item__text">
-               <h6>${value.rtitle}</h6>
-               <span style="font-size: 13px;">조리시간&nbsp : &nbsp${value.rtime}</span></br>
-               <span class="price-box">
+            <div class="product__cart__item__text" style="padding-bottom:10px;">
+               <h6>${value.rtitle}</h6><span class="price-box">
                  <span style="
                  font-size: 13px;
              ">난이도&nbsp : &nbsp${value.rlevel}</span>
                </span>
-               
+               </br>
+               <span style="font-size: 13px;">조리시간&nbsp : &nbsp${value.rtime}</span>
                <span data-toggle="collapse" data-target="#collapse${idx}" class="" aria-expanded="true" style="
         font-size: 12px;
         border: 1px solid gray;
