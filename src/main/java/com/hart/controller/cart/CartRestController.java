@@ -58,6 +58,7 @@ public class CartRestController {
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
+			System.out.println("역이 ");
 			if (mDTO.getCsno() != null) {
 				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
 				sseEmitters.insert(mDTO.getCsno());
@@ -65,6 +66,7 @@ public class CartRestController {
 				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
 				cService.cartInsert(pids, pamounts, mid);
 			}
+			
 			result.put("result", rService.getRecommand(mDTO.getMid(), mDTO.getCsno()));
 			return new ResponseEntity<>(result, HttpStatus.OK);
 

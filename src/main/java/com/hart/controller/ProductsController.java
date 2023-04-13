@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hart.domain.product.ListVO;
 import com.hart.domain.product.ProductsDetailVO;
+import com.hart.domain.recommand.RecommandDTO;
 import com.hart.service.ProductsService;
+import com.hart.service.recommand.RecommandService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -26,7 +28,9 @@ public class ProductsController {
 	/*
 	 * private Object cList; private Object productlist;
 	 */
-
+   @Autowired
+   private RecommandService rService;
+   
    @GetMapping("/list")
    public String productlist(Model model, ListVO list) {
 
@@ -56,13 +60,13 @@ public class ProductsController {
    public String ProductDtail(String pid, Model model) {
 
       try {
-
+    	 RecommandDTO rDTO = rService.RecommandForProduct(pid);
          ProductsDetailVO Detail = productsservice.getProductDetails(pid);
 
           System.out.println("Detail ==================>>>>>>" + Detail);
 
          model.addAttribute("Detail", Detail);
-
+         model.addAttribute("recommand",rDTO);
       } catch (Exception e) {
          e.printStackTrace();
       }

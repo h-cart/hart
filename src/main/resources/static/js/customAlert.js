@@ -4,10 +4,10 @@
             text: text,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonText: cancle,
-            cancelButtonColor: '#d33',
-            confirmButtonText: confirm
+            confirmButtonColor: '#116530',
+            cancelButtonText: 취소,
+            cancelButtonColor: 'gray',
+            confirmButtonText: 확인
          }).then((result) => {
             if (result.isConfirmed) {
                location.href = '/cart/mycart';
@@ -21,10 +21,10 @@
             text: text,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonText: cancle,
-            cancelButtonColor: '#d33',
-            confirmButtonText: confirm
+            confirmButtonColor: '#116530',
+            cancelButtonText: 취소,
+            cancelButtonColor: 'gray',
+            confirmButtonText: 확인
          }).then((result) => {
             if (result.isConfirmed) {
                location.href = '/cart/mycart';
@@ -42,10 +42,10 @@
             text: text,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonText: cancle,
-            cancelButtonColor: '#d33',
-            confirmButtonText: confirm
+            confirmButtonColor: '#116530',
+            cancelButtonText: 취소,
+            cancelButtonColor: 'gray',
+            confirmButtonText: 확인
          })
          return result;
       }

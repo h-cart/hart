@@ -33,6 +33,7 @@ public class RecommandServiceImpl implements RecommandService {
 	@Transactional
 	@Override
 	public RecommandDTO getRecommand(String mid, String csno) throws Exception {
+		try {
 		RecommandDTO result = null;
 		if (csno == null)
 			result = rMapper.getMyRecommand(mid);
@@ -54,6 +55,12 @@ public class RecommandServiceImpl implements RecommandService {
 			}
 		}
 		return result;
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		
 	}
 
 	@Override
@@ -65,23 +72,12 @@ public class RecommandServiceImpl implements RecommandService {
 
 	@Transactional
 	@Override
-	public RecommandDTO RecommandForProduct(String mid, String csno, String pid) throws Exception {
+	public RecommandDTO RecommandForProduct(String pid) throws Exception {
 		RecommandDTO result = rMapper.getProductRecommand(pid);
 		if (result == null)
 			return result;
 		if (result.getRecipes() != null) {
 			result.setRcates(getCategory(result));
-		}
-		
-		if(!result.getRecipes().isEmpty()) {
-			for(int i=0;i<result.getRecipes().size();i++) {
-				result.getRecipes().get(i).setItems(removeItem(mid,csno,result.getRecipes().get(i).getItems())) ;
-			}
-		}
-		if(!result.getLives().isEmpty()) {
-			for(int i=0;i<result.getLives().size();i++) {
-				result.getLives().get(i).setItems(removeItem(mid,csno,result.getLives().get(i).getItems())) ;
-			}
 		}
 		
 		return result;
@@ -102,6 +98,7 @@ public class RecommandServiceImpl implements RecommandService {
 	@Transactional
 	public List<IngredientDTO> removeItem(String mid, String csno, List<IngredientDTO> list)throws Exception {
 		List<IngredientDTO> result = new ArrayList<>();
+		System.out.println(mid+", "+csno);
 		if (csno != null) {
 			for (IngredientDTO temp : list) {
 				try {
@@ -115,7 +112,7 @@ public class RecommandServiceImpl implements RecommandService {
 		}else {
 			for (IngredientDTO temp : list) {
 				try {
-					if (cMapper.sameProducts(temp.getPid(), csno) == 0) {
+					if (cMapper.sameProducts(temp.getPid(), mid) == 0) {
 						result.add(temp);
 					}
 				} catch (Exception e) {
