@@ -1,35 +1,98 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-  <!-- Offcanvas Menu Begin -->
-  <div class="offcanvas-menu-overlay" th:fragment="header1"></div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <style>
-    #myorderlist {
-      display: none;
-    }
-  </style>
-  <script>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<!-- Offcanvas Menu Begin -->
+<div
+	class="offcanvas-menu-overlay"
+	th:fragment="header1"
+></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+#myorderlist {
+	display: none;
+}
+</style>
+<script>
     $(document).ready(function () {
-	
       $(".offcanvas-menu-wrapper").click(function () {
         $("#myorderlist").css("display", "block");
       });
+      
     });
+   
+
   </script>
-  <div class="offcanvas-menu-wrapper" th:fragment="header2">
-    <div class="offcanvas__option">
-      <div class="offcanvas__links"><a href="/member/login" sec:authorize="!isAuthenticated()">로그인</a> <a sec:authorize="isAuthenticated()" href="/mypage/order">마이페이지</a> <a href="/member/login" sec:authorize="isAuthenticated()">로그아웃</a></div>
-    </div>
-    <div class="offcanvas__nav__option" style="width: 266px">
-      <a href="#" class="search-switch"><i class="fas fa-solid fa-magnifying-glass fa-xl" style="color: #000000"></i></a> <a sec:authorize="isAuthenticated() and principal.csno ==null" class="share_cart" href="#"><i class="fa-solid fa-users fa-xl" style="color: #000000"></i></a> <a sec:authorize="isAuthenticated() and principal.csno !=null" Paid="kakao-link-btn" href="javascript:kakaoShare()"> <i class="fa-solid fa-up-right-from-square fa-xl" style="color: #000000"></i> </a>
-      <a href="/cart/mycart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000"></i></a><a href="/order/qr"><i class="fa-solid fa-qrcode fa-beat fa-xl" style="color: #000000"></i></a>
-      <a href="javascript: alarmToggle();" onclick="updateCheckAlarm()" id="mobile_alarm">
-        <!--좌측 배너 알림내용 시작  -->
-        <i class="fa-solid fa-bell fa-xl" style="color: #000000"></i> <span class="badge badge-danger badge-counter" id="alarmCnt2" style="left: 15px; color: white"></span>
-        <!--좌측 배너 알림내용 시작  -->
-        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="alarmlist1" style="width: 360px; top: 145px; left: 10px">
-          <h6 class="dropdown-header">알림</h6>
-          <!-- 
+<div
+	class="offcanvas-menu-wrapper"
+	th:fragment="header2"
+>
+	<div class="offcanvas__option">
+		<div class="offcanvas__links">
+			<a
+				href="/member/login"
+				sec:authorize="!isAuthenticated()"
+			>로그인</a> <a
+				sec:authorize="isAuthenticated()"
+				href="/mypage/order"
+			>마이페이지</a> <a
+				href="/member/login"
+				sec:authorize="isAuthenticated()"
+			>로그아웃</a>
+		</div>
+	</div>
+	<div
+		class="offcanvas__nav__option"
+		style="width: 266px"
+	>
+		<a
+			href="#"
+			class="search-switch"
+		><i
+			class="fas fa-solid fa-magnifying-glass fa-xl"
+			style="color: #000000"
+		></i></a> <a
+			sec:authorize="isAuthenticated() and principal.csno ==null"
+			class="share_cart"
+			href="#"
+		><i
+			class="fa-solid fa-users fa-xl"
+			style="color: #000000"
+		></i></a> <a
+			sec:authorize="isAuthenticated() and principal.csno !=null"
+			Paid="kakao-link-btn"
+			href="javascript:kakaoShare()"
+		> <i
+			class="fa-solid fa-up-right-from-square fa-xl"
+			style="color: #000000"
+		></i>
+		</a> <a href="/cart/mycart"><i
+			class="fa-solid fa-cart-shopping fa-xl"
+			style="color: #000000"
+		></i></a><a href="/order/qr"><i
+			class="fa-solid fa-qrcode fa-beat fa-xl"
+			style="color: #000000"
+		></i></a> <a
+			href="javascript: alarmToggle();"
+			onclick="updateCheckAlarm()"
+			id="mobile_alarm"
+		> <!--좌측 배너 알림내용 시작  --> <i
+			class="fa-solid fa-bell fa-xl"
+			style="color: #000000"
+		></i> <span
+			class="badge badge-danger badge-counter"
+			id="alarmCnt2"
+			style="left: 15px; color: white"
+		></span> <!--좌측 배너 알림내용 시작  -->
+			<div
+				class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+				aria-labelledby="alertsDropdown"
+				id="alarmlist1"
+				style="width: 360px; top: 145px; left: 10px"
+			>
+				<h6 class="dropdown-header">알림</h6>
+				<!-- 
 
 						<a class="d-flex align-items-center" href="/" style="margin: 10px; border-bottom: solid lightgray;" id="noticepart">
 						<div class="">
@@ -72,59 +135,111 @@
 						</div>
 					</a>
 					 -->
-          <a class="dropdown-item text-center small text-gray-500" href="#"></a>
-        </div>
-        <!--좌측 배너 알림내용 끝  -->
-      </a>
-    </div>
-    <div id="mobile-menu-wrap"></div>
-  </div>
-  <!-- Offcanvas Menu End -->
-  <!-- Header Section Begin -->
-  <header class="header header-wrap" th:fragment="header3">
-    <div class="header__top">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-7">
-            <div class="header__top__left">
-              <p>HCART와 함께하는 쇼핑, HART에 오신걸 환영합니다.</p>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-5">
-            <div class="header__top__right">
-              <div class="header__top__links" sec:authorize="isAuthenticated()"><a href="/mypage/order">마이페이지</a> <a href="/member/logout">로그아웃</a></div>
-              <div class="header__top__links" sec:authorize="!isAuthenticated()">
-                <a href="/member/login">로그인</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container" style="padding-left: 0px; padding-right: 0px; background: white">
-      <div class="row">
-        <div class="col-lg-3 col-md-3">
-          <div class="header__logo" style="padding-top: 17px">
-            <a href="/"><img src="/img/hartlogo.jpg" alt="" style="height: 50px" /></a>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6">
-          <nav class="header__menu mobile-menu">
-            <ul style="margin-top: 0px; margin-bottom: 1rem">
-              <li>
-                <a href="/product/list?pcno_top=100571" class="active">상품</a>
-                <ul class="dropdown" id="listCate" style="width: 220px; background: #ffffff; padding: 0px"></ul>
-                <ul class="dropdown" id="depth2" style="padding: 0px"></ul>
-              </li>
-              <li><a href="/recipe/list">레시피</a></li>
-              <li><a href="/class">Live</a></li>
-              <li><a id="eventId" href="/event?evid=1">공모전</a></li>
-              <li sytle="display: none"><a href="/mypage/order" id="myorderlist" style="margin-top: 30px" sec:authorize="isAuthenticated()">주문내역</a></li>
-              <li sytle="display: none"><a href="/mypage/class" id="myclasslist" sec:authorize="isAuthenticated()">수강내역</a></li>
-            </ul>
-          </nav>
-          <input type="hidden" id="eventinput" value="1" />
-          <script>
+				<a
+					class="dropdown-item text-center small text-gray-500"
+					href="#"
+				></a>
+			</div> <!--좌측 배너 알림내용 끝  -->
+		</a>
+	</div>
+	<div id="mobile-menu-wrap"></div>
+</div>
+<!-- Offcanvas Menu End -->
+<!-- Header Section Begin -->
+<header
+	class="header header-wrap"
+	th:fragment="header3"
+	style="height: 110px"
+>
+	<div class="header__top">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-7">
+					<div class="header__top__left">
+						<p>HCART와 함께하는 쇼핑, HART에 오신걸 환영합니다.</p>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-5">
+					<div class="header__top__right">
+						<div
+							class="header__top__links"
+							sec:authorize="isAuthenticated()"
+						>
+							<a href="/mypage/order">마이페이지</a> <a href="/member/logout">로그아웃</a>
+						</div>
+						<div
+							class="header__top__links"
+							sec:authorize="!isAuthenticated()"
+						>
+							<a href="/member/login">로그인</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div
+		class="container"
+		style="padding-left: 0px; padding-right: 0px; background: white"
+	>
+		<div
+			class="row"
+			style="height: 75px;"
+		>
+			<div class="col-lg-3 col-md-3">
+				<div
+					class="header__logo"
+					style="padding-top: 17px"
+				>
+					<a href="/"><img
+						src="/img/hartlogo.jpg"
+						alt=""
+						style="height: 50px"
+					/></a>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<nav class="header__menu mobile-menu">
+					<ul style="margin-top: 0px; margin-bottom: 1rem">
+						<li><a
+							href="/product/list?pcno_top=100571"
+							class="active"
+						>상품</a>
+							<ul
+								class="dropdown"
+								id="listCate"
+								style="width: 220px; background: #ffffff; padding: 0px"
+							></ul>
+							<ul
+								class="dropdown"
+								id="depth2"
+								style="padding: 0px"
+							></ul></li>
+						<li><a href="/recipe/list">레시피</a></li>
+						<li><a href="/class">Live</a></li>
+						<li><a
+							id="eventId"
+							href="/event?evid=1"
+						>공모전</a></li>
+						<li sytle="display: none"><a
+							href="/mypage/order"
+							id="myorderlist"
+							style="margin-top: 30px"
+							sec:authorize="isAuthenticated()"
+						>주문내역</a></li>
+						<li sytle="display: none"><a
+							href="/mypage/class"
+							id="myclasslist"
+							sec:authorize="isAuthenticated()"
+						>수강내역</a></li>
+					</ul>
+				</nav>
+				<input
+					type="hidden"
+					id="eventinput"
+					value="1"
+				/>
+				<script>
             $(document).ready(function () {
               $.ajax({
                 url: "/event/api/eventId",
@@ -145,14 +260,49 @@
               });
             });
           </script>
-        </div>
-        <div class="col-lg-3 col-md-3">
-          <div class="header__nav__option" style="width: 217px">
-            <a href="#" class="search-switch"><i class="fa-solid fa-magnifying-glass fa-xl" style="color: #000000"></i></a> <a sec:authorize="isAuthenticated() and principal.csno ==null" class="share_cart" href="#"><i class="fa-solid fa-users fa-xl" style="color: #000000"></i></a> <a sec:authorize="isAuthenticated() and principal.csno !=null" Paid="kakao-link-btn" href="javascript:kakaoShare()"> <i class="fa-solid fa-up-right-from-square fa-xl" style="color: #000000"></i> </a>
-            <a href="/cart/mycart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000"></i></a> <a href="javascript: alarmToggle();" onclick="updateCheckAlarm()"><i class="fa-regular fa-bell fa-xl" style="color: #000000"></i> <span class="badge badge-danger badge-counter" id="alarmCnt" style="left: 15px; color: white"></span> </a>
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="alarmlist" style="width: 360px">
-              <h6 class="dropdown-header">알림</h6>
-              <!-- <a class="d-flex align-items-center" href="#" style="margin: 10px; border-bottom: solid lightgray;">
+			</div>
+			<div class="col-lg-3 col-md-3">
+				<div
+					class="header__nav__option"
+					style="width: 217px"
+				>
+					<a
+						sec:authorize="isAuthenticated() and principal.csno ==null"
+						class="share_cart"
+						href="#"
+					><i
+						class="fa-solid fa-users fa-xl"
+						style="color: #000000"
+					></i></a> <a
+						sec:authorize="isAuthenticated() and principal.csno !=null"
+						Paid="kakao-link-btn"
+						href="javascript:kakaoShare()"
+					> <i
+						class="fa-solid fa-up-right-from-square fa-xl"
+						style="color: #000000"
+					></i>
+					</a> <a href="/cart/mycart"><i
+						class="fa-solid fa-cart-shopping fa-xl"
+						style="color: #000000"
+					></i></a> <a
+						href="javascript: alarmToggle();"
+						onclick="updateCheckAlarm()"
+					><i
+						class="fa-regular fa-bell fa-xl"
+						style="color: #000000"
+					></i> <span
+						class="badge badge-danger badge-counter"
+						id="alarmCnt"
+						style="left: 15px; color: white"
+					></span> </a>
+					<div
+						class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+						aria-labelledby="alertsDropdown"
+						id="alarmlist"
+						style="width: 360px"
+					>
+						<h6 class="dropdown-header">알림</h6>
+						<!-- <a class="d-flex align-items-center" href="#" style="margin: 10px; border-bottom: solid lightgray;">
 
 							<div class="">
 								<div class="icon-circle bg-primary">
@@ -178,6 +328,7 @@
     <script type="text/javascript" src="/js/toastmsg.js"></script>
     <script sec:authorize="isAuthenticated() and principal.csno !=null" src="/js/sse.js"></script>
     <script type="text/javascript">
+
       $(document).ready(function () {
 		showToast("야호야호야호ㅑ오햐오향호야홍햐 ~",1);
         $.ajax({
@@ -254,7 +405,7 @@
         });
       }
     </script>
-    <script>
+	<script>
       /*
 
 		function alarmToggle(){
@@ -353,7 +504,10 @@
         });
       });
     </script>
-    <script src="https://kit.fontawesome.com/41611c5120.js" crossorigin="anonymous"></script>
-  </header>
-  <!-- Header Section End -->
+	<script
+		src="https://kit.fontawesome.com/41611c5120.js"
+		crossorigin="anonymous"
+	></script>
+</header>
+<!-- Header Section End -->
 </html>
