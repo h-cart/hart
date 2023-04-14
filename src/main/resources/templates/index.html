@@ -5,6 +5,9 @@
       .hero {
         margin-bottom: 50px;
       }
+      .owl-nav {
+	display : none;
+}
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
@@ -85,7 +88,7 @@
               <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" th:data-setbg="${product.pimg}" onclick="goDetailPage(this)" th:data-pid="${product.pid}" style="cursor: pointer"></div>
 
               <div class="product__item__text">
-                <h6 th:data-pos="${product.pid}"th:text="${product.pname}"></h6>
+                <h6 th:text="${product.pname}"></h6>
                 <input class="item" th:id="-${productStat.count}" type="hidden"
 									th:data-value="${product.pid}" name="pid"
 									th:value="${product.pid}" />
@@ -108,9 +111,6 @@
     </section>
     <!-- Product Section End -->
     <script th:inline="javascript">
-	 logger.disableLogger();
-	console.log("sdfsd");
-
       function goDetailPage(e) {
         let pid = $(e).data("pid");
         location.href = "/product/productDetail?pid=" + pid;
@@ -140,25 +140,19 @@
           }
           var pamounts = [];
           var pids = [];
-          var pnames = [];
           if(flag){
           $("input[name=cartlist]:checked").each(function () {
             $(this).prop("checked", false);
             var pos = $(this).prop("id").split("_")[1];
             var pid = $("#" + pos).data("value");
             var quantity = $("#quantity_" + pos).val();
-            var pname = $("[data-pos="+pid+"]").text();
-            pnames.push(pname);
             pids.push(pid);
             pamounts.push(quantity);
-            
           });
   		}else {
   			
   			 var pid = $("#" + idx).data("value");
             	var quantity = $("#quantity_" + idx).val();
-            	var pname = $("[data-pos="+pid+"]").text();
-            pnames.push(pname);
             	pids.push(pid);
            	 pamounts.push(quantity);
            	 console.log(pid,quantity);
@@ -174,7 +168,6 @@
             data: JSON.stringify({
               pids: pids,
               pamounts: pamounts,
-              pnames : pnames
             }),
             success: function (result) {
               showModal(result,flag);
