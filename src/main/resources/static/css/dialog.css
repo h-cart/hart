@@ -53,7 +53,7 @@
 
   }
   .row{
-	justify-content: center;
+	justify-content: left;
   }
   .col-5{
    padding : 0px;
