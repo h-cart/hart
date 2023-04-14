@@ -37,15 +37,9 @@
     	  console.log($(window).height()-50 );
            console.log("페이지들어오니?->" + page);
           
-           if(keyword != null ){
-        	   let keyword = keyword;
-
-           }
-           
-           
            
            page++;
-              sendpcno($("input[name=pcno]").val(),page,sort); 
+              sendpcno($("input[name=pcno]").val(),page,sort,keyword); 
          }
       }); 
    });
@@ -183,7 +177,7 @@
 		 // <input name=pcno> 태그의 value 값을 가져옴
 		// $("input[name=pcno]").val();
 		
-		let keyword = document.querySelector('input[name=keyword]').value;
+		keyword = document.querySelector('input[name=keyword]').value;
 		console.log("keyword->>>"+ keyword);
 		sendpcno(0,0,1,keyword);
 		
