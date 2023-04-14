@@ -18,6 +18,9 @@
    let page = 0;
    let sort = 1;
    let pidx = 1;
+   let keyword = null;
+ 
+   
    $(document).ready(function(){
 
       let pcno = $("input[name=pcno]").val();
@@ -33,6 +36,14 @@
       if(($(window).scrollTop()) >= $(document).height()- $(window).height()-50  ){ 
     	  console.log($(window).height()-50 );
            console.log("페이지들어오니?->" + page);
+          
+           if(keyword != null ){
+        	   let keyword = keyword;
+
+           }
+           
+           
+           
            page++;
               sendpcno($("input[name=pcno]").val(),page,sort); 
          }
@@ -40,8 +51,10 @@
    });
 
       function sendpcno(pcno,pnum,order,keyword) {
-    	  console.log("send() 쪽에서의 keyword>>" +keyword);
+    	
+      console.log("send() 쪽에서의 keyword>>" +keyword);
       console.log("pnum>>"+pnum);
+      
       if(pnum==0) {
        page = pnum;
        $("input[name=pcno]").val(pcno);
@@ -52,10 +65,18 @@
        $(".current").text("가격 높은순");
 
       }
+      
       console.log(pcno,pnum,order,keyword);
+      
+    
       
       
        let pcno_top = $("input[name=pcno_top]").val();
+       if(keyword != null ){
+     	  pcno=0; 
+     	pcno_top =0;
+
+       }
       
           let element = {
             pcno: pcno,
