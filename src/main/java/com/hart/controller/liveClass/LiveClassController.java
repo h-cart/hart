@@ -37,9 +37,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @RequestMapping("/class")
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = "tps://dg15tp5w47tfz.cloudfront.net")
 @Log4j2
-@CrossOrigin(origins = "*", methods = RequestMethod.GET)
 public class LiveClassController {
 
 	private final LiveClassService service;
