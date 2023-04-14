@@ -12,7 +12,14 @@ const sse = new EventSource("/capi/sse");
 	
 	
 	sse.addEventListener('insert', (e) => {
-		const { data: receivedConnectData } = e;
+		const { data: receivedInsertData } = e;
+		let json = JSON.parse(receivedInsertData);
+		let pnameArr = json.pname.split(" ");
+		let pname = pnameArr[1] +" "+pnameArr[2];
+		let msg = json.mname+"님이 "+pname;
+		msg = json.count==0? msg+" 상품을 담았습니다." :msg+"외 "+count+"개의 상품을 담았습니다.";
+		$("#toast").addClass("show");
+		showToast(msg, 1);
 		CartList();  
 	});
 	
@@ -29,15 +36,22 @@ const sse = new EventSource("/capi/sse");
 	    
 	});
 	
+	
 	/* 공유 장바구니 상품 삭제 시 이벤트를 받아 화면 처리  */
 	sse.addEventListener('remove', e => {  
 	    const { data: receivedRemoves} = e;
-	    console.log(receivedRemoves);
-		let pids = JSON.parse(receivedRemoves);
-		console.log(pids);
+		let json = JSON.parse(receivedRemoves);
+		let pnameArr = json.pname.split(" ");
+		let pname = pnameArr[1] +" "+pnameArr[2];
+		let msg = json.mname+"님이 "+pname;
+		let count = json.count;
+		msg = json.count==0? msg+" 상품을 삭제했습니다." :msg+"외 "+count+"개의 상품을 삭제했습니다.";
+		let pids = json.pids;
 		for(var pid of pids){
 			$("[data-value="+pid+"]").remove();
 		}
+		$("#toast").addClass("show");
+		showToast(msg, -1);
 		NoItem();
 		getCheckboxValue();
 	});
@@ -55,3 +69,11 @@ const sse = new EventSource("/capi/sse");
 	  });
 	});
 	
+	/* 공유 장바구니 참여 시 이벤트를 받아 화면 처리  */
+	sse.addEventListener('join', e => {  
+	    const { data: receivedJoins} = e;
+		let msg = receivedJoins+" 님이 공유 장바구니에 참여했습니다.";
+		console.log(msg);
+		$("#toast").addClass("show");
+		showToast(msg,-1);
+	});

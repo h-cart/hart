@@ -146,7 +146,7 @@ td:nth-child(1) span:nth-child(2) {
 					</div>
 					<div class="col">
 						<div class="product__details__text">
-							<h4 id="pname" th:text="${Detail.detail.pname}"
+							<h4 id="pname" th:data-pos="${Detail.detail.pid}"th:text="${Detail.detail.pname}"
 								style="text-align: left"></h4>
 
 							<div class="product__details__last__option">
@@ -431,24 +431,29 @@ td:nth-child(1) span:nth-child(2) {
       }
       var pamounts = [];
       var pids = [];
+      var pnames = [];
       if (flag) {
-
+		
         $("input[name=cartlist]:checked").each(function () {
           var pos = $(this).prop("id").split("_")[1];
           var pid = $("#" + pos).data("value");
           var quantity = $("#quantity_" + pos).val();
+          var pname = $("[data-pos="+pid+"]").text();
           pids.push(pid);
-          console.log(pos, pid, quantity);
           pamounts.push(quantity);
+          pnames.push(pname);
         });
         
 		}else {
 			
-			 var pid = $("#" + idx).data("value");
+			var pid = $("#" + idx).data("value");
           	var quantity = $("#quantity_" + idx).val();
+          	var pname = $("[data-pos="+pid+"]").text();
           	pids.push(pid);
          	 pamounts.push(quantity);
+         	 pnames.push(pname);
 		}
+			console.log(pids,pamounts, pnames);
         $.ajax({
           url: "/capi/insert",
           beforeSend: function (xhr) {
@@ -459,6 +464,7 @@ td:nth-child(1) span:nth-child(2) {
           data: JSON.stringify({
             pids: pids,
             pamounts: pamounts,
+            pnames : pnames
           }),
           success: function (result) {
             

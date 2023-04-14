@@ -96,7 +96,7 @@
             <div class="product__item">
                 <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" data-setbg="${product.pimg}" onclick="goDetailPage(this)" style="cursor: pointer"></div>
                 <div class="product__item__text">
-                    <h6>${product.pname}</h6>
+                    <h6 data-pos=${product.pid}>${product.pname}</h6>
                     <a href="#" onclick='addToCart(false,-${pidx})'class="add-cart">+ Add To Cart</a>
                     <div>
                         ${pdiscountTag}
@@ -327,21 +327,26 @@ toggle="collapse" data-target="#collapseOne">카테고리</a>
         }
         var pamounts = [];
         var pids = [];
+        var pnames = [];
         if(flag){
         $("input[name=cartlist]:checked").each(function () {
           $(this).prop("checked", false);
           var pos = $(this).prop("id").split("_")[1];
           var pid = $("#" + pos).data("value");
           var quantity = $("#quantity_" + pos).val();
+          var pname = $("[data-pos="+pid+"]").text();
           pids.push(pid);
           pamounts.push(quantity);
+          pnames.push(pname);
         });
 		}else {
 			
 			 var pid = $("#" + idx).data("value");
           	var quantity = $("#quantity_" + idx).val();
+          	var pname = $("[data-pos="+pid+"]").text();
           	pids.push(pid);
          	 pamounts.push(quantity);
+         	 pnames.push(pname);
 		}
         $.ajax({
           url: "/capi/insert",
@@ -353,6 +358,7 @@ toggle="collapse" data-target="#collapseOne">카테고리</a>
           data: JSON.stringify({
             pids: pids,
             pamounts: pamounts,
+            pnames : pnames
           }),
           success: function (result) {
             showModal(result,flag);
@@ -378,5 +384,6 @@ toggle="collapse" data-target="#collapseOne">카테고리</a>
 	  });
 	}
 </script>
+
 </body>
 </html>

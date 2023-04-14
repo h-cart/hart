@@ -187,7 +187,7 @@
             </div>
             <div class="col">
               <div class="product__details__text">
-                <h4 id="pname" th:text="${liveClass.liveClassListDTO.lcname}" style="text-align: left; margin-bottom:30px;"></h4>
+                <h4 th:data-pos="${liveClass.liveClassListDTO.lcid}" id="pname" th:text="${liveClass.liveClassListDTO.lcname}" style="text-align: left; margin-bottom:30px;"></h4>
 
                 <div class="product__details__last__option">
                   <table class="table table-borderless">
@@ -332,6 +332,7 @@
          }
          var pamounts = [];
          var pids = [];
+         var pnames = [];
 		 if(flag){
 			targetUrl="/capi/insert";
 		let ckItem = $("input[name=cartlist]:checked");
@@ -339,6 +340,8 @@
             var pos = $(this).prop('id').split('_')[1];
             var pid = $('#' + pos).data('value');
             var quantity = $("#quantity_" + pos).val();
+            var pname = $("[data-pos="+pid+"]").text();
+            pnames.push(pname);
             pids.push(pid);
             pamounts.push(quantity);
          })
@@ -346,6 +349,8 @@
 			
 			var pid = $("#" + idx).data("value");
 			 var quantity = "1";
+			 var pname = $("[data-pos="+pid+"]").text();
+            pnames.push(pname);
 			 pids.push(pid);
 			 pamounts.push(quantity);
 			 console.log(pid,quantity);
@@ -359,7 +364,8 @@
             contentType: "application/json",
             data: JSON.stringify({
                pids: pids,
-               pamounts: pamounts
+               pamounts: pamounts,
+               pnames : pnames
             }),
             success: function (result) {
 				console.log(result);

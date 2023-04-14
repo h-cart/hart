@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hart.domain.member.ClubAuthMemberDTO;
 import com.hart.domain.recommand.IngredientDTO;
 import com.hart.domain.recommand.RecommandDTO;
+import com.hart.domain.share.SseEmitters;
 import com.hart.service.cart.CartService;
 import com.hart.service.recommand.RecommandService;
 import com.hart.service.share.ShareService;
@@ -28,6 +28,12 @@ import com.hart.service.share.ShareService;
 public class RecommandRestController {
 	@Autowired
 	private RecommandService rService;
+	
+	private final SseEmitters sseEmitters;
+
+	public RecommandRestController(SseEmitters sseEmitters) {
+		this.sseEmitters = sseEmitters;
+	}
 
 	@Autowired
 	private CartService cService;
@@ -49,19 +55,6 @@ public class RecommandRestController {
 
 	}
 
-	/*
-	 * @GetMapping(value = "/products/{pid}/recommendations", consumes = {
-	 * MediaType.APPLICATION_JSON_VALUE }, produces = {
-	 * MediaType.APPLICATION_JSON_VALUE }) public ResponseEntity<Map<String,
-	 * RecommandDTO>> getRecommands(@AuthenticationPrincipal ClubAuthMemberDTO
-	 * mDTO, @PathVariable("pid") String pid) { Map<String,RecommandDTO> result =
-	 * new HashMap<>(); try {
-	 * result.put("result",rService.RecommandForProduct(mDTO.getMid(),mDTO.getCsno()
-	 * , pid)); return new
-	 * ResponseEntity<Map<String,RecommandDTO>>(result,HttpStatus.OK);
-	 * }catch(Exception e) { return new
-	 * ResponseEntity<Map<String,RecommandDTO>>(HttpStatus.BAD_REQUEST); } }
-	 */
 	@PostMapping(value = "/class/recommendations", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, List<IngredientDTO>>> RecommandForClass(
@@ -70,9 +63,10 @@ public class RecommandRestController {
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
-
+			List<String> pnames = map.get("pnames");
 			if (mDTO.getCsno() != null) {
 				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
+				sseEmitters.insert(mDTO.getCsno(),mDTO.getMid(),mDTO.getMname(), pnames);
 			} else {
 				cService.cartInsert(pids, pamounts, mDTO.getMid());
 			}
