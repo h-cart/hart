@@ -96,7 +96,7 @@
 											type="hidden" value="1" style="width: 100%" />
                 <a href="#"  th:onclick="addToCart(false,-[[${productStat.count}]])" class="add-cart">+ Add To Cart</a>
                 <div>
-                  <h5 th:if="${product.pdiscount != 0}" style="display: inline; color: #f61a62; margin-right: 8px" th:text=" ${product.pdiscount} +'%'"></h5>
+                  <h5 th:if="${product.pdiscount != 0}" style="display: inline; color: #ff6913; margin-right: 8px" th:text=" ${product.pdiscount} +'%'"></h5>
 
                   <h5 th:if="${product.pdiscount != 0}" style="display: inline; color: black" id="salePrice" th:text="${#numbers.formatDecimal(product.pprice - (product.pprice * product.pdiscount / 100), 0,'COMMA',0,'POINT') +'원'}"></h5>
 
