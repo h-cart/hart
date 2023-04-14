@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hart.domain.liveClass.LiveClassDetailInfoDTO;
 import com.hart.domain.liveClass.LiveClassListDTO;
@@ -38,6 +39,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 @CrossOrigin(originPatterns = "tps://dg15tp5w47tfz.cloudfront.net")
 @Log4j2
+@CrossOrigin(origins = "*", methods = RequestMethod.GET)
 public class LiveClassController {
 
 	private final LiveClassService service;
@@ -69,6 +71,7 @@ public class LiveClassController {
 	}
 	
 	@GetMapping("/video/{lcid}")
+	@CrossOrigin(origins = "*", methods = RequestMethod.GET)
 	public String getVideoDetail(@PathVariable String lcid, Model model) {
 		//라이브 클래스 정보 담는 부분
 		LiveClassDetailInfoDTO dto = new LiveClassDetailInfoDTO();
