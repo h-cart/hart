@@ -79,7 +79,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// crsf 비활성화
 		http.csrf();// .disable();
-		http.cors();
 		// 로그 아웃 세팅
 		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.logoutSuccessUrl("/member/login");
