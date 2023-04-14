@@ -7,14 +7,14 @@ linkElement.type = 'text/css';
 // link 요소를 head 요소에 추가합니다.
 document.head.appendChild(linkElement);
 
-function showModal(result,flag,title) {
-  $("dialog").remove();
-  var idx = 0;
+function showModal(result, flag, title) {
+	$("dialog").remove();
+	var idx = 0;
 
 
-   let dtitle = title==null?"장바구니에 담았습니다." :title;
-   
-  var str = `
+	let dtitle = title == null ? "장바구니에 담았습니다." : title;
+
+	var str = `
 	<dialog class='recommand-layer'>
       <div class="container" style="padding : 0px 0px; min-width:400px" >
       <div
@@ -31,11 +31,11 @@ function showModal(result,flag,title) {
     </div>
          <div class="shopping__cart__table">`;
 
-  if (!flag && result.result!=null) {
-   var lives = result.result.lives;
-   var recipes = result.result.recipes;
-    if (lives.length != 0) {
-      str += ` <div class="shop__sidebar__accordion" style="margin-top: 50px">
+	if (!flag && result.result != null) {
+		var lives = result.result.lives;
+		var recipes = result.result.recipes;
+		if (lives.length != 0) {
+			str += ` <div class="shop__sidebar__accordion" style="margin-top: 50px">
                <div class="accordion" id="accordionClass">
                   <div class="card">
                      <div class="card-heading active">
@@ -46,11 +46,11 @@ function showModal(result,flag,title) {
                         <table>
                            `;
 
-      
-      $.each(lives, function (index, value) {
-        idx++;
-        var status = value.lcstatus == 0 ? value.lcday + "&nbsp방송예정" : value.lcstatus == 1 ? "LIVE 방송 중" : "VOD로 수강하기";
-        str += `
+
+			$.each(lives, function(index, value) {
+				idx++;
+				var status = value.lcstatus == 0 ? value.lcday + "&nbsp방송예정" : value.lcstatus == 1 ? "LIVE 방송 중" : "VOD로 수강하기";
+				str += `
         <tr id="accordion${idx}"  class="accordion" data-parent="#accordionClass" style="">
        
         <td  class="product__cart__item">
@@ -73,6 +73,7 @@ function showModal(result,flag,title) {
         padding: 5px 9px;
         cursor: pointer;
         border-radius: 5px;
+        margin-left: 85px;
     ">관련상품</span>
         </div>
      </td>
@@ -80,10 +81,10 @@ function showModal(result,flag,title) {
     <input type="hidden" id="${idx} data-value=${value.lcid}">
     <input type="hidden" id="quantity_${idx}" value="1"/>    
      </tr><tbody id="collapse${idx}" class="collapse" data-parent="#accordion${idx}" style="">`;
-        $.each(value.items, function (lindex, item) {
-          console.log(idx);
-          idx++;
-          str += `<tr id="${idx}" data-value="${item.pid}">
+				$.each(value.items, function(lindex, item) {
+					console.log(idx);
+					idx++;
+					str += `<tr id="${idx}" data-value="${item.pid}">
             <td  class="product__cart__item">
                <div class="product__cart__item__pic" style="    width: fit-content;
     float: left;
@@ -109,18 +110,18 @@ function showModal(result,flag,title) {
             </td>
             
          </tr>`;
-        });
-        str += `</tbody>`;
-      });
-      str += `</tbody></table>
+				});
+				str += `</tbody>`;
+			});
+			str += `</tbody></table>
                      </div>
                   </div>
                </div>
             </div>`;
-    }
-    if (recipes.length != 0) {
-      console.log(recipes);
-      str += `            <div class="shop__sidebar__accordion" style="margin-top: 50px">
+		}
+		if (recipes.length != 0) {
+			console.log(recipes);
+			str += `            <div class="shop__sidebar__accordion" style="margin-top: 50px">
                <div class="accordion" id="accordionRecipe">
                   <div class="card">
                      <div class="card-heading active">
@@ -131,24 +132,24 @@ function showModal(result,flag,title) {
                         <div class="card-body">
                            <div class="shop__sidebar__tags">
                               `;
-                              $.each(result.result.rcates,function(index,value){
-                                 if(index==0) 
-                                 str+=`<a class="rcategory_${value.rcano} on">${value.rcname}</a>`;
-                                 else
-                                 str+=`<a class="rcategory_${value.rcano}">${value.rcname}</a>`;
-                              })
-                              str+=`
+			$.each(result.result.rcates, function(index, value) {
+				if (index == 0)
+					str += `<a class="rcategory_${value.rcano} on">${value.rcname}</a>`;
+				else
+					str += `<a class="rcategory_${value.rcano}">${value.rcname}</a>`;
+			})
+			str += `
                               
                            </div>
                         </div>
                         <table>
                            `;
-      $.each(recipes, function (index, value) {
-        idx++;
-        str += `<tr id="accordion${idx}"  class="accordion"data-parent="#accordionRecipe" data-rcano="${value.rcano}"style="`
-        if(index!=0)
-        str+=`display:none;`
-        str+=`">
+			$.each(recipes, function(index, value) {
+				idx++;
+				str += `<tr id="accordion${idx}"  class="accordion"data-parent="#accordionRecipe" data-rcano="${value.rcano}"style="`
+				if (index != 0)
+					str += `display:none;`
+				str += `">
          <td class="product__cart__item" >
             <div class="product__cart__item__pic"style="    width: fit-content;
     float: left;
@@ -159,7 +160,7 @@ function showModal(result,flag,title) {
                      src="${value.rimg}" alt=""
                      style="width:90px;border-radius: 10px;height:90px;"></span></div>
             <div class="product__cart__item__text" style="padding-bottom:10px;">
-               <h6>${value.rtitle}</h6><span class="price-box">
+               <h6  style="margin-bottom: 30px;">${value.rtitle}</h6><span class="price-box">
                  <span style="
                  font-size: 13px;
              ">난이도&nbsp : &nbsp${value.rlevel}</span>
@@ -172,6 +173,7 @@ function showModal(result,flag,title) {
         padding: 5px 9px;
         cursor: pointer;
         border-radius: 5px;
+        margin-left: 85px;
     ">관련상품</span>
             </div>
          </td>
@@ -179,9 +181,9 @@ function showModal(result,flag,title) {
          
          
       </tr><tbody id="collapse${idx}" class="collapse" data-parent="#accordion${idx}" style="">`;
-        $.each(value.items, function (rindex, item) {
-          idx++;
-          str += `<tr id="${idx}" data-value="${item.pid}">
+				$.each(value.items, function(rindex, item) {
+					idx++;
+					str += `<tr id="${idx}" data-value="${item.pid}">
             <td class="product__cart__item">
                <div class="product__cart__item__pic" style="
     width: fit-content;
@@ -192,9 +194,9 @@ function showModal(result,flag,title) {
                         src="${item.pimg}" alt=""
                         style="width:90px;border-radius: 10px;height:90px;"></span></div>
                <div class="product__cart__item__text">
-                  <h6 data-pos=${item.pid}>${item.pname}</h6>
+                  <h6 data-pos=${item.pid}  style="margin-bottom: 30px;">${item.pname}</h6>
                      <input type="hidden" class="price" id="price_${idx}" data-value="${item.pprice}"/>
-               		<div class="pro-qty-2"><span style="
+               		<div class="pro-qty-2" style="display: flex; justify-content: space-around;"><span style="
     padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
                         aria-hidden="true"><i class='fa-solid fa-minus fa-xs'></i></span><input style="border:none; text-align:center; width:20px;" id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
                         data-value="${idx}" style="
@@ -206,77 +208,77 @@ function showModal(result,flag,title) {
             </td>
             
          </tr>`;
-        });
-        str += `</tbody>`;
-      });
-      str += `</table>
+				});
+				str += `</tbody>`;
+			});
+			str += `</table>
                      </div>
                   </div>
                </div>
             </div>`;
-    }
-    if((lives.length!=0 ||recipes.length!=0)){
-    str += `<div onclick="addToCart(true)" class="addToCart" style="
+		}
+		if ((lives.length != 0 || recipes.length != 0)) {
+			str += `<div onclick="addToCart(true)" class="addToCart" style="
    background-color: #116530;
    text-align: center; 
 "><a href="#" class="primary-btn">장바구니 담기</a></div>`;
-}
-  }
-  str += `</div>
+		}
+	}
+	str += `</div>
       </div>
    </dialog>`;
-  $("body").append(str);
-  const dialog = document.querySelector("dialog");
+	$("body").append(str);
+	const dialog = document.querySelector("dialog");
 
-  dialog.showModal();
-  if(result.result==null){
-	$("#cart_product_img").attr("src", "/img/logo.png");
-}else {
-  $("#cart_product_img").attr("src", result.result.pimg);
-  $("#cart_item").text(result.result.pname);
-  }
+	dialog.showModal();
+	if (result.result == null) {
+		$("#cart_product_img").attr("src", "/img/logo.png");
+	} else {
+		$("#cart_product_img").attr("src", result.result.pimg);
+		$("#cart_item").text(result.result.pname);
+	}
 }
-$("html").click(function(e){
-    	if($(e.target).hasClass('recommand-layer')){
-        	$("dialog").remove();
-        }
-    });
+$("html").click(function(e) {
+	if ($(e.target).hasClass('recommand-layer')) {
+		$("dialog").remove();
+	}
+});
 
-$(document).on("click",".dialog-close",function(){
+$(document).on("click", ".dialog-close", function() {
 	$("dialog").remove();
 })
 
-$(document).on("click",".shop__sidebar__tags a",function(){
-   $(".shop__sidebar__tags a").removeClass("on");
-  let rcano = $(this).prop("class").split("_")[1];	
-   console.log(rcano);
-   $("#collapseRecipe tr").each(function(){
-	if($(this).hasClass("accordion"))$(this).css("display","none");	
+$(document).on("click", ".shop__sidebar__tags a", function() {
+	$(".shop__sidebar__tags a").removeClass("on");
+	let rcano = $(this).prop("class").split("_")[1];
+	console.log(rcano);
+	$("#collapseRecipe tr").each(function() {
+		if ($(this).hasClass("accordion")) $(this).css("display", "none");
+	})
+	$("#collapseRecipe tbody").each(function() {
+		if ($(this).hasClass("show")) $(this).removeClass("show");
+	})
+
+	$("tr[data-rcano=" + rcano + "]").css("display", "");
+
+	$(this).addClass("on");
+
+
 })
-   $("#collapseRecipe tbody").each(function(){
-	if($(this).hasClass("show")) $(this).removeClass("show");
-})
-   
-  	$("tr[data-rcano="+rcano+"]").css("display","");
-   
-   $(this).addClass("on");
-   
-
-} )
 
 
 
 
 
-function showModalLiveClass(result,flag,title) {
-	console.log(result,flag);
-  $("dialog").remove();
-  var idx = 0;
+function showModalLiveClass(result, flag, title) {
+	console.log(result, flag);
+	$("dialog").remove();
+	var idx = 0;
 
 
-   let dtitle = title==null?"장바구니에 담았습니다." :title;
-   
-  var str = `<style>
+	let dtitle = title == null ? "장바구니에 담았습니다." : title;
+
+	var str = `<style>
    dialog::-webkit-scrollbar {
       display: none;
    }
@@ -364,7 +366,7 @@ function showModalLiveClass(result,flag,title) {
     </div>
          <div class="shopping__cart__table">`;
 
-      str += ` <div class="shop__sidebar__accordion" style="margin-top: 50px">
+	str += ` <div class="shop__sidebar__accordion" style="margin-top: 50px">
                <div class="accordion" id="accordionClass">
                   <div class="card">
                      <div class="card-heading active">
@@ -375,10 +377,10 @@ function showModalLiveClass(result,flag,title) {
                         <table>
                            <tbody>`;
 
-        $.each(result.result, function (lindex, item) {
-          console.log(idx);
-          idx++;
-          str += `<tr id="${idx}" data-value="${item.pid}">
+	$.each(result.result, function(lindex, item) {
+		console.log(idx);
+		idx++;
+		str += `<tr id="${idx}" data-value="${item.pid}">
             <td colspan="2" class="product__cart__item">
                <div class="product__cart__item__pic" style="    width: fit-content;
     float: left;
@@ -403,22 +405,22 @@ function showModalLiveClass(result,flag,title) {
         font-size: 14px;
     " data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
          </tr>`;
-        });
-      str += `</tbody></table>
+	});
+	str += `</tbody></table>
                      </div>
                   </div>
                </div>
             </div>`;
-    
-    str += `<div onclick="addToCart(true)" class="addToCart" style="
+
+	str += `<div onclick="addToCart(true)" class="addToCart" style="
    background-color: #116530;
    text-align: center; 
 "><a href="#" class="primary-btn">장바구니 담기</a></div>`;
-  str += `</div>
+	str += `</div>
       </div>
    </dialog>`;
-  $("body").append(str);
-  const dialog = document.querySelector("dialog");
+	$("body").append(str);
+	const dialog = document.querySelector("dialog");
 
-  dialog.showModal();
+	dialog.showModal();
 }
