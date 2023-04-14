@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<!--추천순, 가격순 등 카테고리 필터 리스트 -->
+	<!--추천순, 가격순 등 카테고리 필터 리스트 및 검색 -->
 	<select id="Productlist"
 		resultType="com.hart.domain.product.ListVO"
 		parameterType="com.hart.domain.product.ListVO">
@@ -75,14 +75,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from products p
 		join (select pimg, pid
 		from product_img where pdepth =0
- 		) pi 
+		) pi
 		on pi.pid=p.pid
 		join
-		product_category pc on p.pcno = pc.pcno and
-		pc.pcno_top = #{pcno_top}
+		product_category pc on p.pcno = pc.pcno 
+
 		<where>
+			<if test="pcno_top != 0">
+				pc.pcno_top = #{pcno_top}
+			</if>
 			<if test="pcno != 0">
 				p.pcno = #{pcno}
+			</if>
+			<if test="keyword !=null">
+				and pname like '%'||#{keyword}||'%'
 			</if>
 		</where>
 		<trim prefix="ORDER BY">
@@ -95,7 +101,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		where rn between (#{page} * 6 + 1) AND (#{page} * 6 + 6)
 	</select>
-
 
 
 	<select id="getmainprod" resultType="MainProdVO">
@@ -111,8 +116,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where pdepth =0 and rownum <=8 
 		]]>
 	</select>
-
-
 
 
 

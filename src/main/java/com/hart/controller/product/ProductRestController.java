@@ -1,4 +1,4 @@
-package com.hart.controller;
+package com.hart.controller.product;
 
 import java.util.HashMap;
 import java.util.List;
@@ -82,7 +82,8 @@ public ResponseEntity<Map<String, List<CategoryVO>>> getCategory(int pcno) {
 	   	System.out.println("data >>>>" + data);
 	   
       try {
-
+    	  System.out.println("data >>>>" + data);
+    	  
          List<ListVO> Productlist = pService.Productlist(data);
 
          log.info("data=====>>>>" + data);

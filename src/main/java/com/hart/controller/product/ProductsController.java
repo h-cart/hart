@@ -1,4 +1,4 @@
-package com.hart.controller;
+package com.hart.controller.product;
 
 import java.util.List;
 
@@ -21,13 +21,11 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/product")
 public class ProductsController {
 
-	//private ChatGPT bot;
+	
 	
    @Autowired
    private ProductsService productsservice;
-	/*
-	 * private Object cList; private Object productlist;
-	 */
+
    @Autowired
    private RecommandService rService;
    
@@ -47,6 +45,7 @@ public class ProductsController {
           log.info("cList>>>>>"+cList);
          model.addAttribute("pcno_top",list.getPcno_top());// input으로 넣어줌pcno_top을 히든으로 
          
+         model.addAttribute("pcno", list.getPcno());
       } catch (Exception e) {
          e.printStackTrace();
       }
@@ -60,13 +59,19 @@ public class ProductsController {
    public String ProductDtail(String pid, Model model) {
 
       try {
+    	  
     	 RecommandDTO rDTO = rService.RecommandForProduct(pid);
          ProductsDetailVO Detail = productsservice.getProductDetails(pid);
 
-          System.out.println("Detail ==================>>>>>>" + Detail);
-
+          //System.out.println("Detail ==================>>>>>>" + Detail);
+          
+//          System.out.println("rDTO.getRecipes() ==================>>>>>>" + rDTO.getRecipes());
+//          System.out.println("rDTO.getLives() ==================>>>>>>" + rDTO.getLives());
+          
+          
          model.addAttribute("Detail", Detail);
-         model.addAttribute("recommand",rDTO);
+         model.addAttribute("recipes",rDTO.getRecipes());
+         model.addAttribute("lives",rDTO.getLives());
       } catch (Exception e) {
          e.printStackTrace();
       }

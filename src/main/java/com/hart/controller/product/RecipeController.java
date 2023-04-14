@@ -1,4 +1,4 @@
-package com.hart.controller;
+package com.hart.controller.product;
 
 import java.util.List;
 
@@ -22,19 +22,12 @@ public class RecipeController {
 	@Autowired
 	RecipeService recipeservice;
 	
-	@GetMapping("/chat")
-	public void chat() {
-		
-	}
+	
 	@GetMapping("/list")
 	public String recipelist(Model model) {
 		try {
 
-			/*
-			 * List<RecipeVO> recipelist = recipeservice.recipelist(); //
-			 * log.info("recipelist===" +recipelist); model.addAttribute("recipelist",
-			 * recipelist);
-			 */
+		
 
 		} catch (Exception e) {
 
