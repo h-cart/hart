@@ -156,7 +156,7 @@ td:nth-child(1) span:nth-child(2) {
 										<tr>
 											<td th:if="${Detail.detail.pdiscount != 0}"><h4
 													th:text="${Detail.detail.pdiscount} + '%'"
-													style="color: rgb(246, 26, 98);"></h4></td>
+													style="color: #ff6913"></h4></td>
 											<style></style>
 											<td th:if="${Detail.detail.pdiscount != 0}"><span
 												id="discontPrice"
@@ -214,7 +214,7 @@ td:nth-child(1) span:nth-child(2) {
 									th:onclick="'addToCart(false,-1)'"
 									style="margin: 10px; width: -webkit-fill-available">장바구니</a> <a
 									href="#" class="primary-btn orderDirect col"
-									style="margin: 10px; width: -webkit-fill-available">바로구매</a>
+									style="margin: 10px; width: -webkit-fill-available; border: #ebeae4; background: #ebeae4;">바로구매</a>
 							</div>
 						</div>
 
@@ -277,32 +277,31 @@ td:nth-child(1) span:nth-child(2) {
 						<div class="product__details__tab">
 							<ul class="nav nav-tabs" role="tablist">
 
+							<script>
+							  $(document).ready(function() {
+							 
+								console.log($(".recommand-recipes"));
+							    if ($(".recommand-recipes") == null) {
+							      $(".recipe-tab").hide();
+							    }
+							    
+							    
+							    
+							  });
+							</script>
 								<script>
-					  $(document).ready(function() {
-					 
-						console.log($(".recommand-recipes"));
-					    if ($(".recommand-recipes") == null) {
-					      $(".recipe-tab").hide();
-					    }
-					    
-					    
-					    
-					  });
-					</script>
-
-								<script>
-$(document).ready(function(){
-    if (!$('.nav-item.recipe-tab').attr('rid')) {
-        $('.nav-item.recipe-tab').hide();
-    }
-});
-
-$(document).ready(function(){
-    if (!$('.nav-item.live-tab').attr('lcid')) {
-        $('.nav-item.live-tab').hide();
-    }
-});
-</script>
+								$(document).ready(function(){
+								    if (!$('.nav-item.recipe-tab').attr('rid')) {
+								        $('.nav-item.recipe-tab').hide();
+								    }
+								});
+								
+								$(document).ready(function(){
+								    if (!$('.nav-item.live-tab').attr('lcid')) {
+								        $('.nav-item.live-tab').hide();
+								    }
+								});
+								</script>
 
 								<li class="nav-item"><a class="nav-link active"
 									data-toggle="tab" href="#tabs-5" role="tab">상품설명</a></li>
