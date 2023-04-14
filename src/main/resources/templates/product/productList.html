@@ -39,29 +39,33 @@
       }); 
    });
 
-      function sendpcno(pcno,pnum,order) {
+      function sendpcno(pcno,pnum,order,keyword) {
+    	  console.log("send() 쪽에서의 keyword>>" +keyword);
       console.log("pnum>>"+pnum);
       if(pnum==0) {
-         page = pnum;
-         $("input[name=pcno]").val(pcno);
-              $("input[name=page]").val(pnum);
-              $(".selected").removeClass("selected");
-              $(".focus").removeClass("focus");
-              $('[data-value="1"]').addClass("selected focus");
-              $(".current").text("가격 높은순");
+       page = pnum;
+       $("input[name=pcno]").val(pcno);
+       $("input[name=page]").val(pnum);
+       $(".selected").removeClass("selected");
+       $(".focus").removeClass("focus");
+       $('[data-value="1"]').addClass("selected focus");
+       $(".current").text("가격 높은순");
 
       }
-      console.log(pcno,pnum,order);
+      console.log(pcno,pnum,order,keyword);
+      
+      
        let pcno_top = $("input[name=pcno_top]").val();
       
           let element = {
             pcno: pcno,
             page: page,
             pcno_top: pcno_top,
-            sort : order
+            sort : order,
+            keyword : keyword
           };
           
-      console.table("엘리먼트 >>>>>>>>>"+element);
+      console.table("엘리먼트keyword >>>>>>>>>"+keyword);
       
           $.ajax({
             type: "post",
@@ -148,6 +152,25 @@
 
          
     </script>
+
+	<script>
+	function search() {
+		 // <input name=pcno> 태그의 value 값을 0 으로 초기화함 
+		/*  $("input[name=pcno]").val(0);
+		 $("input[name=pcno_top]").val(0); */
+		 
+		 // <input name=pcno> 태그의 value 값을 가져옴
+		// $("input[name=pcno]").val();
+		
+		let keyword = document.querySelector('input[name=keyword]').value;
+		console.log("keyword->>>"+ keyword);
+		sendpcno(0,0,1,keyword);
+		
+		
+	}
+		
+	</script>
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<script type="text/javascript" defer></script>
@@ -162,7 +185,7 @@
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-blog set-bg" data-setbg="/img/prodMain1.jpg"
-		style="background-image: url(&quot;https://tohomeimage.thehyundai.com/DP/DP018/2023/03/14/105207/sgbhm.jpg?RS=1204&amp;CS=1204x300&quot;);">
+		style="background-image: url(&quot;/hart/src/main/resources/static/img/prodMain1.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -199,21 +222,30 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="shop__sidebar">
+
+
+
+
+
 						<div class="shop__sidebar__search">
-							<form action="#">
-								<input type="text" placeholder="Search..." />
-								<button type="submit">
+							<form>
+								<input name="keyword" type="text">
+								<button type="button" onclick="search()" value="검색">
 									<span class="icon_search"></span>
 								</button>
 							</form>
 						</div>
+
+
+
+
+
+
 						<div class="shop__sidebar__accordion">
 							<div class="accordion" id="accordionExample">
 								<div class="card">
 									<div class="card-heading" id="listbig">
-										<a 
-
-toggle="collapse" data-target="#collapseOne">카테고리</a>
+										<a toggle="collapse" data-target="#collapseOne">카테고리</a>
 									</div>
 									<div id="collapseOne" class="collapse show"
 										data-parent="#accordionExample">
@@ -228,7 +260,7 @@ toggle="collapse" data-target="#collapseOne">카테고리</a>
 													<li th:each="cList:${cList}"><a href="#"
 														th:text="${cList.pcategory}"
 														th:onclick="sendpcno([[${cList.pcno}]], 0, 1); changeColor(this);"></a>
-														<input type="hidden" th:value="${cList.pcno}" name="pcno" /></li>
+													</li>
 												</ul>
 
 
@@ -280,8 +312,8 @@ toggle="collapse" data-target="#collapseOne">카테고리</a>
 										</ul>
 
 										<input type="hidden" th:value="${pcno_top}" name="pcno_top" />
-										<input type="hidden" id="fil" value="0" name="page" />
-
+										<input type="hidden" id="fil" value="0" name="page" /> <input
+											type="hidden" th:value="${pcno}" name="pcno" />
 
 
 									</div>
