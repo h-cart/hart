@@ -16,7 +16,6 @@
 </style>
 <script>
     $(document).ready(function () {
-
       $(".offcanvas-menu-wrapper").click(function () {
         $("#myorderlist").css("display", "block");
       });
@@ -317,23 +316,21 @@
 							</div>
 						</a> 
 						 -->
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="canvas__open">
-			<i
-				class="fa fa-bars"
-				style="margin-top: 7px"
-			></i>
-		</div>
-	</div>
-	<script
-		sec:authorize="isAuthenticated() and principal.csno !=null"
-		src="/js/sse.js"
-	></script>
-	<script type="text/javascript">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="canvas__open">
+        <i class="fa fa-bars" style="margin-top: 7px"></i>
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="/js/toastmsg.js"></script>
+    <script sec:authorize="isAuthenticated() and principal.csno !=null" src="/js/sse.js"></script>
+    <script type="text/javascript">
+
       $(document).ready(function () {
+		showToast("야호야호야호ㅑ오햐오향호야홍햐 ~",1);
         $.ajax({
           type: "POST",
           url: "/alarm",
@@ -446,6 +443,22 @@
 
       const token = $("meta[name='_csrf']").attr("content");
       const header = $("meta[name='_csrf_header']").attr("content");
+      $(document).ready(function(){
+        let str=`<div data-v-3007c576="">	
+				<!---->
+				<div id="toast" class="toast md" data-v-66ae1b7c="">
+				<div class="wrap" data-v-66ae1b7c="">
+				<picture data-v-66ae1b7c=""  class="toast_img toast-icon" >
+				<img alt="" id="img_icon">
+				</picture>
+				<div class="toast-content" data-v-66ae1b7c="">
+				<p data-v-66ae1b7c=""></p>
+				</div>
+				</div>
+				</div>
+				</div>`;
+    $("body").append(str);
+      });
       $(document).on("click", ".share_cart", function (e) {
         e.preventDefault();
         Swal.fire({
@@ -480,7 +493,6 @@
               },
             });
           } else {
-    
             Swal.fire({
                 text: "공유 장바구니 생성 실패",
                 icon: "warning",

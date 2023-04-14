@@ -138,9 +138,14 @@ function deleteBtnEvent(param) {
 		return false;
 	}
 	var pids = param.split(",");
+	var pnames = [];
 	var cartDTOList = [];
 	for (var i = 0; i < pids.length; i++) {
 		cartDTOList.push(pids[i]);
+		console.log(pids[i]);
+		let pname = $("[data-pos="+pids[i]+"]").text();
+		console.log(pname);
+		pnames.push(pname);
 	}
 	console.log(param);
 	console.log(cartDTOList);
@@ -150,7 +155,8 @@ function deleteBtnEvent(param) {
 		type: 'post',
 		contentType: "application/json",
 		data: JSON.stringify({
-			pids: cartDTOList
+			pids: cartDTOList,
+			pnames : pnames
 		}),
 		beforeSend: function (xhr) {
 			xhr.setRequestHeader(header, token);

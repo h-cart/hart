@@ -15,7 +15,7 @@ function showModal(result,flag,title) {
    let dtitle = title==null?"장바구니에 담았습니다." :title;
    
   var str = `
-	<dialog>
+	<dialog class='recommand-layer'>
       <div class="container" style="padding : 0px 0px; min-width:400px" >
       <div
       <h4 style="text-align: center" style="word-break: keep-all;">${dtitle}</h4>
@@ -62,7 +62,7 @@ function showModal(result,flag,title) {
                  src="${value.lcimg}" alt=""
                  style="width:90px;border-radius: 10px;height:90px;"></span></div>
         <div class="product__cart__item__text" style="padding-bottom:10px;">
-           <h6>${value.lcname}</h6><span class="price-box">
+           <h6 data-pos=${value.lcid}>${value.lcname}</h6><span class="price-box">
               <span style="font-size:13px;"class="price" id="price_${idx}" data-value="${value.lcprice}">${status}</span>
               </br>
               <span style="font-size:13px;" data-value="${value.lcprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(value.lcprice)}원</span>
@@ -93,7 +93,7 @@ function showModal(result,flag,title) {
                         src="${item.pimg}" alt=""
                         style="width:90px;border-radius: 10px;height:90px;"></span></div>
                <div class="product__cart__item__text">
-                  <h6>${item.pname}</h6>
+                  <h6 data-pos=${item.pid}>${item.pname}</h6>
                      <input type="hidden" class="price" id="price_${idx}" data-value="${item.pprice}"/>
                   <div class="pro-qty-2"><span style="
     padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
@@ -192,7 +192,7 @@ function showModal(result,flag,title) {
                         src="${item.pimg}" alt=""
                         style="width:90px;border-radius: 10px;height:90px;"></span></div>
                <div class="product__cart__item__text">
-                  <h6>${item.pname}</h6>
+                  <h6 data-pos=${item.pid}>${item.pname}</h6>
                      <input type="hidden" class="price" id="price_${idx}" data-value="${item.pprice}"/>
                		<div class="pro-qty-2"><span style="
     padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
@@ -236,16 +236,11 @@ function showModal(result,flag,title) {
   $("#cart_item").text(result.result.pname);
   }
 }
-/*$(document).on("click","dialog",function(event){
-	 if ($(event.target).closest('#dialog').length !== 0) {
-    return;
-  }
-
-  // 다이얼로그를 숨기거나 제거하는 로직을 여기에 작성
-  // 예시: 다이얼로그를 숨기기
-  $(this).remove();
-})
-*/
+$("html").click(function(e){
+    	if($(e.target).hasClass('recommand-layer')){
+        	$("dialog").remove();
+        }
+    });
 
 $(document).on("click",".dialog-close",function(){
 	$("dialog").remove();
@@ -353,7 +348,7 @@ function showModalLiveClass(result,flag,title) {
 }
 
 </style>
-	<dialog>
+	<dialog class='recommand-layer'>
       <div class="container" style="padding: 0 0;" >
       <div>
       <h4 style="text-align: center" style="word-break: keep-all;">${dtitle}</h4>
@@ -393,7 +388,7 @@ function showModalLiveClass(result,flag,title) {
                         src="${item.pimg}" alt=""
                         style="width:90px;border-radius: 10px;height:90px;"></span></div>
                <div class="product__cart__item__text">
-                  <h6>${item.pname}</h6>
+                  <h6 data-pos=${item.pid}>${item.pname}</h6>
                      <input type="hidden" class="price" id="price_${idx}" data-value="${item.pprice}"/>
                   <div class="pro-qty-2"><span style="
     padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
