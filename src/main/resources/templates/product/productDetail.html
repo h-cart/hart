@@ -147,8 +147,8 @@ td:nth-child(1) span:nth-child(2) {
 					<div class="col">
 						<div class="product__details__text">
 
-							<h4 id="pname" th:data-pos="${Detail.detail.pid}"th:text="${Detail.detail.pname}"
-								style="text-align: left"></h4>
+							<h4 id="pname" th:data-pos="${Detail.detail.pid}"
+								th:text="${Detail.detail.pname}" style="text-align: left"></h4>
 
 							<div class="product__details__last__option">
 								<table class="table table-borderless">
@@ -277,7 +277,7 @@ td:nth-child(1) span:nth-child(2) {
 						<div class="product__details__tab">
 							<ul class="nav nav-tabs" role="tablist">
 
-					<script>
+								<script>
 					  $(document).ready(function() {
 					 
 						console.log($(".recommand-recipes"));
@@ -290,20 +290,29 @@ td:nth-child(1) span:nth-child(2) {
 					  });
 					</script>
 
+								<script>
+$(document).ready(function(){
+    if (!$('.nav-item.recipe-tab').attr('rid')) {
+        $('.nav-item.recipe-tab').hide();
+    }
+});
 
-
-
-
+$(document).ready(function(){
+    if (!$('.nav-item.live-tab').attr('lcid')) {
+        $('.nav-item.live-tab').hide();
+    }
+});
+</script>
 
 								<li class="nav-item"><a class="nav-link active"
 									data-toggle="tab" href="#tabs-5" role="tab">상품설명</a></li>
-								<li class="nav-item recipe-tab"><a class="nav-link" data-toggle="tab"
-									href="#tabs-6" role="tab">추천 레시피</a></li>
-								<li class="nav-item"><a class="nav-link" data-toggle="tab"
-									href="#tabs-7" role="tab">라이브 클래스</a></li>
+								<li class="nav-item recipe-tab"><a class="nav-link"
+									data-toggle="tab" href="#tabs-6" role="tab">추천 레시피</a></li>
+								<li class="nav-item live-tab"><a class="nav-link"
+									data-toggle="tab" href="#tabs-7" role="tab">라이브 클래스</a></li>
 							</ul>
 							<div class="tab-content"
-				 				style="display: flex; justify-content: center">
+								style="display: flex; justify-content: center">
 								<div class="tab-pane active" id="tabs-5" role="tabpanel"
 									style="width: 800px">
 									<br> <br>
@@ -371,14 +380,16 @@ td:nth-child(1) span:nth-child(2) {
 									</div>
 									<!--  <img th:src="${Detail.pimg[Detail.pimg.size() - 1].pimg}" /> -->
 								</div>
-								<div class="tab-pane" id="tabs-6" role="tabpanel">
+								<div class="tab-pane" id="tabs-6" role="tabpanel"
+									style="width: 100vw;">
 									<div class="product__details__tab__content">
 
 										<!-- 레시피 추천 추가 start -->
 
 										<div class="container" style="user-select: auto;">
 											<ul class="filter__controls" style="user-select: auto">
-												<li class="active" data-filter="*" style="user-select: auto">현재 상품으로 만들수 있는 레시피 추천 목록 입니다.</li>
+												<li class="active" data-filter="*" style="user-select: auto">현재
+													상품으로 만들수 있는 레시피 추천 목록 입니다.</li>
 											</ul>
 											<div class="row" id="recipeajax" style="user-select: auto;">
 
@@ -393,8 +404,8 @@ td:nth-child(1) span:nth-child(2) {
 														<div class="col-lg-4 col-md-6 col-sm-6"
 															th:each="recipes:${recipes}">
 															<div class="blog__item">
-																<div class="product__item__pic set-bg recommand-recipes" id="img"
-																	th:data-setbg="${recipes.rimg}"
+																<div class="product__item__pic set-bg recommand-recipes"
+																	id="img" th:data-setbg="${recipes.rimg}"
 																	th:data-rid="${recipes.rid}"
 																	onclick="gorecipeDetailPage(this)"
 																	style="background-image: url(&quot;https://tohomeimage.thehyundai.com/DP/DP018/2023/01/16/092349/scine.jpg&quot;);">
@@ -432,18 +443,19 @@ td:nth-child(1) span:nth-child(2) {
 
 									</div>
 								</div>
-								<div class="tab-pane" id="tabs-7" role="tabpanel">
+								<div class="tab-pane" id="tabs-7" role="tabpanel"
+									style="width: 100vw">
 									<div class="product__details__tab__content">
-									<div class="row" id="recipeajax">
-										<div class="col-lg-4 col-md-6 col-sm-6"
-											th:each="lives:${lives}">
-											<div class="blog__item">
-												<div class="product__item__pic set-bg" id="img"
-													th:data-setbg="${lives.lcimg}" th:data-rid="${lives.lcid}"
-													onclick="gorecipeDetailPage(this)"
-													style="background-image: url(&quot;https://tohomeimage.thehyundai.com/DP/DP018/2023/01/16/092349/scine.jpg&quot;);">
-												</div>
-												<!-- <div class="blog__item__text">
+										<div class="row" id="recipeajax">
+											<div class="col-lg-4 col-md-6 col-sm-6"
+												th:each="lives:${lives}">
+												<div class="blog__item">
+													<div class="product__item__pic set-bg" id="img"
+														th:data-setbg="${lives.lcimg}" th:data-rid="${lives.lcid}"
+														onclick="gorecipeDetailPage(this)"
+														style="background-image: url(&quot;https://tohomeimage.thehyundai.com/DP/DP018/2023/01/16/092349/scine.jpg&quot;);">
+													</div>
+													<!-- <div class="blog__item__text">
 													조리난이도<span th:text="${recipes.rlevel}"></span> <span
 														th:text="${recipes.rtime}"></span> -->
 													<h5 th:text="${lives.lcname}"></h5>
@@ -453,19 +465,19 @@ td:nth-child(1) span:nth-child(2) {
 											</div>
 										</div>
 									</div>
-</div>
-
-
-
-									<!-- <div class="product__details__tab__content">반품 환불</div> -->
-									<!-- <input type="checkbox" name="cartlist" display="none;" 
-										id="checkbox_-1" checked />-->
 								</div>
+
+
+
+								<!-- <div class="product__details__tab__content">반품 환불</div> -->
+								<!-- <input type="checkbox" name="cartlist" display="none;" 
+										id="checkbox_-1" checked />-->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</section>
 	<!-- <div>
