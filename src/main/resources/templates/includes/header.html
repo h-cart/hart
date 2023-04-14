@@ -13,6 +13,10 @@
 #myorderlist {
 	display: none;
 }
+
+div.col-lg-6.col-md-6>nav>ul {
+	margin-left: 80px;
+}
 </style>
 <script>
     $(document).ready(function () {
@@ -46,20 +50,10 @@
 		class="offcanvas__nav__option"
 		style="width: 266px"
 	>
-		<a
-			href="#"
-			class="search-switch"
-		><i
-			class="fas fa-solid fa-magnifying-glass fa-xl"
+		<a href="/order/qr"><i
+			class="fa-solid fa-qrcode fa-beat fa-xl"
 			style="color: #000000"
-		></i></a> <a
-			sec:authorize="isAuthenticated() and principal.csno ==null"
-			class="share_cart"
-			href="#"
-		><i
-			class="fa-solid fa-users fa-xl"
-			style="color: #000000"
-		></i></a> <a
+		></i></a><a
 			sec:authorize="isAuthenticated() and principal.csno !=null"
 			Paid="kakao-link-btn"
 			href="javascript:kakaoShare()"
@@ -69,9 +63,6 @@
 		></i>
 		</a> <a href="/cart/mycart"><i
 			class="fa-solid fa-cart-shopping fa-xl"
-			style="color: #000000"
-		></i></a><a href="/order/qr"><i
-			class="fa-solid fa-qrcode fa-beat fa-xl"
 			style="color: #000000"
 		></i></a> <a
 			href="javascript: alarmToggle();"
@@ -184,7 +175,7 @@
 	>
 		<div
 			class="row"
-			style="height: 75px;"
+			style="height: 75px; width: 100vw;"
 		>
 			<div class="col-lg-3 col-md-3">
 				<div
@@ -200,7 +191,7 @@
 			</div>
 			<div class="col-lg-6 col-md-6">
 				<nav class="header__menu mobile-menu">
-					<ul style="margin-top: 0px; margin-bottom: 1rem">
+					<ul style="margin-top: 0px; margin-bottom: 1rem;">
 						<li><a
 							href="/product/list?pcno_top=100571"
 							class="active"
@@ -221,6 +212,11 @@
 							id="eventId"
 							href="/event?evid=1"
 						>공모전</a></li>
+						<li><a
+							sec:authorize="isAuthenticated() and principal.csno ==null"
+							class="share_cart"
+							href="#"
+						>함께 장보기</a></li>
 						<li sytle="display: none"><a
 							href="/mypage/order"
 							id="myorderlist"
@@ -264,16 +260,9 @@
 			<div class="col-lg-3 col-md-3">
 				<div
 					class="header__nav__option"
-					style="width: 217px"
+					style="width: 217px; margin-left: 50px"
 				>
 					<a
-						sec:authorize="isAuthenticated() and principal.csno ==null"
-						class="share_cart"
-						href="#"
-					><i
-						class="fa-solid fa-users fa-xl"
-						style="color: #000000"
-					></i></a> <a
 						sec:authorize="isAuthenticated() and principal.csno !=null"
 						Paid="kakao-link-btn"
 						href="javascript:kakaoShare()"
@@ -316,18 +305,26 @@
 							</div>
 						</a> 
 						 -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="canvas__open">
-        <i class="fa fa-bars" style="margin-top: 7px"></i>
-      </div>
-    </div>
-    
-    <script type="text/javascript" src="/js/toastmsg.js"></script>
-    <script sec:authorize="isAuthenticated() and principal.csno !=null" src="/js/sse.js"></script>
-    <script type="text/javascript">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="canvas__open">
+			<i
+				class="fa fa-bars"
+				style="margin-top: 7px"
+			></i>
+		</div>
+	</div>
+	<script
+		type="text/javascript"
+		src="/js/toastmsg.js"
+	></script>
+	<script
+		sec:authorize="isAuthenticated() and principal.csno !=null"
+		src="/js/sse.js"
+	></script>
+	<script type="text/javascript">
 
       $(document).ready(function () {
 		showToast("야호야호야호ㅑ오햐오향호야홍햐 ~",1);
