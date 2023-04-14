@@ -196,7 +196,7 @@
       function Voting(v, e) {
     	  
           Swal.fire({
-              text: "취소하시겠습니까?",
+              text: v=="1"?"등록하시겠습니까?":"취소하시겠습니까?",
               icon: "info",
               showCancelButton: true,
               confirmButtonText: "확인",

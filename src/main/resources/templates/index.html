@@ -29,7 +29,7 @@
                         <br>
                         <p></p>
                         <br>
-                        <a href="https://localhost/product/list?pcno_top=100715" class="primary-btn">Shop now <span
+                        <a href="/product/list?pcno_top=100715" class="primary-btn">Shop now <span
                            class="arrow_right"></span>
                         </a>
                         <div class="hero__social">
@@ -85,13 +85,13 @@
               <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" th:data-setbg="${product.pimg}" onclick="goDetailPage(this)" th:data-pid="${product.pid}" style="cursor: pointer"></div>
 
               <div class="product__item__text">
-                <h6 th:text="${product.pname}"></h6>
-                <input class="item" th:id="-${productStat.index}" type="hidden"
+                <h6 th:data-pos="${product.pid}"th:text="${product.pname}"></h6>
+                <input class="item" th:id="-${productStat.count}" type="hidden"
 									th:data-value="${product.pid}" name="pid"
 									th:value="${product.pid}" />
-				<input class="item" th:id="'quantity_-'+${productStat.index}" name="quantity"
+				<input class="item" th:id="'quantity_-'+${productStat.count}" name="quantity"
 											type="hidden" value="1" style="width: 100%" />
-                <a href="#"  th:onclick="addToCart(false,-[[${productStat.index}]])" class="add-cart">+ Add To Cart</a>
+                <a href="#"  th:onclick="addToCart(false,-[[${productStat.count}]])" class="add-cart">+ Add To Cart</a>
                 <div>
                   <h5 th:if="${product.pdiscount != 0}" style="display: inline; color: #f61a62; margin-right: 8px" th:text=" ${product.pdiscount} +'%'"></h5>
 
@@ -108,6 +108,8 @@
     </section>
     <!-- Product Section End -->
     <script th:inline="javascript">
+	 logger.disableLogger();
+	console.log("sdfsd");
 
       function goDetailPage(e) {
         let pid = $(e).data("pid");
@@ -138,19 +140,25 @@
           }
           var pamounts = [];
           var pids = [];
+          var pnames = [];
           if(flag){
           $("input[name=cartlist]:checked").each(function () {
             $(this).prop("checked", false);
             var pos = $(this).prop("id").split("_")[1];
             var pid = $("#" + pos).data("value");
             var quantity = $("#quantity_" + pos).val();
+            var pname = $("[data-pos="+pid+"]").text();
+            pnames.push(pname);
             pids.push(pid);
             pamounts.push(quantity);
+            
           });
   		}else {
   			
   			 var pid = $("#" + idx).data("value");
             	var quantity = $("#quantity_" + idx).val();
+            	var pname = $("[data-pos="+pid+"]").text();
+            pnames.push(pname);
             	pids.push(pid);
            	 pamounts.push(quantity);
            	 console.log(pid,quantity);
@@ -166,6 +174,7 @@
             data: JSON.stringify({
               pids: pids,
               pamounts: pamounts,
+              pnames : pnames
             }),
             success: function (result) {
               showModal(result,flag);

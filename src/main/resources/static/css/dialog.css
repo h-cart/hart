@@ -1,0 +1,87 @@
+   dialog::-webkit-scrollbar {
+      display: none;
+   }
+   .product__cart__item__pic {
+		position: relative;
+	}
+
+	.checkbox {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+
+	}
+
+	.price-box h5,
+	.price-box h6 {
+		
+		display: inline-block;
+		margin: 0;
+	}
+
+	.product__cart__item__text {
+		overflow: hidden;
+	}
+
+	.product__cart__item__text .cost {
+		color: #999;
+		/* 회색으로 표시 */
+		font-size: 0.8em;
+		/* 작게 보이도록 설정 */
+		text-decoration: line-through;
+		/* 선 그어지도록 설정 */
+	}
+
+	.empty-basket {
+		text-align: center;
+		font-size: 20px;
+		color: #666;
+	}
+
+	@media (max-width: 768px) {
+		.empty-basket {
+			font-size: 16px;
+		}
+	}
+
+  #cart_product_img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 30px auto;
+
+  }
+  .row{
+	justify-content: center;
+  }
+  .col-5{
+   padding : 0px;
+   margin : 0px 5px;
+   
+  }
+
+
+  dialog {
+   max-width: 526px;
+  }
+  
+  .quantity {
+	text-align : center;
+}
+  dialog h4{
+	    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.3px;
+    color: rgb(47, 52, 56);
+    margin: 20px;
+}
+
+
+.product__cart__item .thumb {
+	margin-top : 20px;
+}
+

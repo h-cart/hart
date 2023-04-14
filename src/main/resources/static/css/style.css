@@ -1236,10 +1236,11 @@ ol {
 
 .shop__sidebar__accordion .card-heading a {
   color: #111111;
-  font-size: 23px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 500;
   text-transform: uppercase;
   display: block;
+  text-align : center;
 }
 
 .shop__sidebar__categories ul,
@@ -2342,6 +2343,7 @@ ol {
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__pic {
   float: left;
   margin-right: 30px;
+  margin-top:20px;
 }
 
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text {

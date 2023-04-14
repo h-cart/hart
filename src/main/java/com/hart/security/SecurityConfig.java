@@ -1,6 +1,8 @@
 
 package com.hart.security;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
@@ -15,6 +17,9 @@ import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.hart.security.handler.LoginFailureHandler;
 import com.hart.security.handler.LoginSuccessHandler;
@@ -74,6 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// crsf 비활성화
 		http.csrf();// .disable();
+		http.cors();
 		// 로그 아웃 세팅
 		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.logoutSuccessUrl("/member/login");
@@ -99,6 +105,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public RequestCache requestCache() {
 		return new HttpSessionRequestCache();
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("Origin URL 등록"));
+		configuration.setAllowedMethods(Arrays.asList("사용할 CRUD 메소드 등록"));
+		configuration.setAllowedHeaders(Arrays.asList("사용할 Header 등록"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
 	}
 
 }// end class

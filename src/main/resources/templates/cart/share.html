@@ -310,10 +310,10 @@
 						for (var i = 0; i < result.result.plists.length; i++) {
 							var price = plist[i].pprice;
 							if (plist[i].pdiscount != 0) {
-								price = price - plist[i].pprice * (plist[i].pdiscount / 100);
+								price =Math.ceil(price - plist[i].pprice * (plist[i].pdiscount / 100));
 							}
 							str += "<tr id='" + i + "' data-value='" + plist[i].pid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + i + "' type='checkbox' class='checkbox'><img class='pimg' src='" + plist[i].pimg + "' alt='' style='width:90px; height:90px;'/></span>"
-							str += "</div><div class='product__cart__item__text'><h6>" + plist[i].pname + "</h6>"
+							str += "</div><div class='product__cart__item__text'><h6 data-pos='"+plist[i].pid+"'>" + plist[i].pname + "</h6>"
 							str += "<span class='price-box'><h5 class='price'id='price_" + i + "'data-value='" + price + "' >₩" + numberWithCommas(price) + "</h5>"
 							if (plist[i].pdiscount != 0) {
 								str += "    <h6 class='cost' id='discount_" + i + "'data-value='" + plist[i].pprice + "'>₩" + numberWithCommas(plist[i].pprice) + "</h6>";
@@ -332,7 +332,7 @@
 									status = 'VOD';
 								}
 								str += "<tr id='" + (i + j + 1) + "' data-value='" + clist[j].lcid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + (i + j + 1) + "' type='checkbox' class='checkbox'><img class='pimg' src='" + clist[j].lcimg + "' alt='' style='width:90px; height:90px;'/></span>"
-								str += "</div><div class='product__cart__item__text'><h6>" + clist[j].lcname + "</h6>"
+								str += "</div><div class='product__cart__item__text'><h6 data-pos='"+clist[j].lcid+"'>" + clist[j].lcname + "</h6>"
 								str += "<span class='price-box'><h5 class='price'id='price_" + (i + j + 1) + "'data-value='" + clist[j].lcprice + "' >" + clist[j].lcteacher + "</h5>"
 								str += "</span></div></td><td class='quantity__item'><div class='quantity'><div class='pro-qty-2'>" + status + "<input id='quantity_" + (i+j+1) + "'type='hidden' value='1' readonly='readonly' />";
 								str += "</div></div></td><td data-value='" + clist[j].lcprice + "'class='cart__price' id='cprice_" + (i + j + 1) + "'>₩" + numberWithCommas(clist[j].lcprice) + "</td>"

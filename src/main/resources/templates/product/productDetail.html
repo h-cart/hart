@@ -147,9 +147,8 @@ td:nth-child(1) span:nth-child(2) {
 					<div class="col">
 						<div class="product__details__text">
 
-							<h4 id="pname" style="text-align: left">
-								</i>[[${Detail.detail.pname}]]
-							</h4>
+							<h4 id="pname" th:data-pos="${Detail.detail.pid}"th:text="${Detail.detail.pname}"
+								style="text-align: left"></h4>
 
 							<div class="product__details__last__option">
 								<table class="table table-borderless">
@@ -304,7 +303,7 @@ td:nth-child(1) span:nth-child(2) {
 									href="#tabs-7" role="tab">라이브 클래스</a></li>
 							</ul>
 							<div class="tab-content"
-								style="display: flex; justify-content: center">
+				 				style="display: flex; justify-content: center">
 								<div class="tab-pane active" id="tabs-5" role="tabpanel"
 									style="width: 800px">
 									<br> <br>
@@ -318,9 +317,8 @@ td:nth-child(1) span:nth-child(2) {
 									</div>
 									<script>
 											  const currentUrl = window.location.href;
-											  //alert(currentUrl);
-											  if (currentUrl === 'https://localhost/product/productDetail?pid=S02207105050') {
-												//alert(currentUrl);
+											  if (currentUrl === 'https://hcart.shop/product/productDetail?pid=S02207105050') {
+
 											    const audioPlayer = document.getElementById('audio-player');
 											    audioPlayer.autoplay = true;
 											   // alert(audioPlayer.autoplay);
@@ -505,24 +503,29 @@ td:nth-child(1) span:nth-child(2) {
       }
       var pamounts = [];
       var pids = [];
+      var pnames = [];
       if (flag) {
-
+		
         $("input[name=cartlist]:checked").each(function () {
           var pos = $(this).prop("id").split("_")[1];
           var pid = $("#" + pos).data("value");
           var quantity = $("#quantity_" + pos).val();
+          var pname = $("[data-pos="+pid+"]").text();
           pids.push(pid);
-          console.log(pos, pid, quantity);
           pamounts.push(quantity);
+          pnames.push(pname);
         });
         
 		}else {
 			
-			 var pid = $("#" + idx).data("value");
+			var pid = $("#" + idx).data("value");
           	var quantity = $("#quantity_" + idx).val();
+          	var pname = $("[data-pos="+pid+"]").text();
           	pids.push(pid);
          	 pamounts.push(quantity);
+         	 pnames.push(pname);
 		}
+			console.log(pids,pamounts, pnames);
         $.ajax({
           url: "/capi/insert",
           beforeSend: function (xhr) {
@@ -533,6 +536,7 @@ td:nth-child(1) span:nth-child(2) {
           data: JSON.stringify({
             pids: pids,
             pamounts: pamounts,
+            pnames : pnames
           }),
           success: function (result) {
             

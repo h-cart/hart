@@ -28,6 +28,7 @@ import com.hart.service.cart.CartService;
 import com.hart.service.recommand.RecommandService;
 import com.hart.service.share.ShareService;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import lombok.extern.log4j.Log4j2;
 
 @RestController
@@ -58,13 +59,13 @@ public class CartRestController {
 		try {
 			List<String> pids = map.get("pids");
 			List<String> pamounts = map.get("pamounts");
-			System.out.println("역이 ");
+			List<String> pnames = map.get("pnames");
 			if (mDTO.getCsno() != null) {
 				sService.cartInsert(pids, pamounts, Integer.parseInt(mDTO.getCsno()));
-				sseEmitters.insert(mDTO.getCsno());
+				sseEmitters.insert(mDTO.getCsno(),mDTO.getMid(), mDTO.getMname(), pnames);
 			} else {
-				String mid = mDTO == null ? "skarns23@gmail.com" : mDTO.getMid();
-				cService.cartInsert(pids, pamounts, mid);
+				
+				cService.cartInsert(pids, pamounts, mDTO.getMid());
 			}
 			
 			result.put("result", rService.getRecommand(mDTO.getMid(), mDTO.getCsno()));
@@ -124,6 +125,7 @@ public class CartRestController {
 		Map<String, String> result = new HashMap<>();
 		try {
 			List<String> pids = map.get("pids");
+			List<String> pnames = map.get("pnames");
 			// 공유 장바구니 없는 경우 일반 장바구니 삭제 로직
 			if (mDTO.getCsno() == null) {
 				count = cService.deleteProducts(pids, mDTO.getMid());
@@ -131,7 +133,7 @@ public class CartRestController {
 			} else { // 공유 장바구니 있는 경우 공유 장바구니 삭제 로직 넣기
 				count = sService.deleteProducts(pids, Integer.parseInt(mDTO.getCsno()));
 				msg = "공유 상품 삭제";
-				sseEmitters.remove(mDTO.getCsno(), pids);
+				sseEmitters.remove(mDTO.getCsno(),mDTO.getMid(),mDTO.getMname(), pids,pnames);
 			}
 			result.put("result", msg);
 			return new ResponseEntity<Map<String, String>>(result, HttpStatus.OK);
@@ -163,9 +165,9 @@ public class CartRestController {
 	@GetMapping(value = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public ResponseEntity<SseEmitter> connect(@AuthenticationPrincipal ClubAuthMemberDTO mDTO) {
 		if(mDTO.getCsno()==null) return null; 
-		SseEmitter emitter = new SseEmitter(120 * 1000L);
+		SseEmitter emitter = new SseEmitter(60 * 60*60L);
 		sseEmitters.add(mDTO.getCsno(), emitter, mDTO);
-
+		
 		try {
 			emitter.send(SseEmitter.event().name("connect").data("connected!"));
 		} catch (IOException e) {
@@ -186,9 +188,9 @@ public class CartRestController {
 			sDTO.setMid(mDTO.getMid());
 			log.info(sDTO);
 			if (sService.shareCsno(sDTO, mDTO.getCsno())) {
-				sseEmitters.deleteCarts(mDTO.getCsno(), mDTO.getMid());
+				sseEmitters.deleteCarts(mDTO.getCsno(), mDTO.getMid(),mDTO.getMname());
 			}
-			;
+			sseEmitters.add(String.valueOf(sDTO.getCsno()),new SseEmitter(60*60*60L),mDTO);
 			mDTO.setCsno(String.valueOf(sDTO.getCsno()));
 			msg = "success";
 		} catch (Exception e) {
@@ -207,7 +209,7 @@ public class CartRestController {
 		String msg = "";
 		try {
 			if (sService.cancleShare(mDTO.getMid(), mDTO.getCsno())) {
-				sseEmitters.deleteCarts(mDTO.getCsno(), mDTO.getMid());
+				sseEmitters.deleteCarts(mDTO.getCsno(), mDTO.getMid(),mDTO.getMname());
 				msg = "all";
 			} else {
 				msg = "one";
