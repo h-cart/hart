@@ -28,9 +28,10 @@ public class OrderController {
 	private OrderService oService;
 	
 	@GetMapping("/qr")
-	public void qrTest() {
+	public void qr() {
 
 	}
+
 
 	@GetMapping("/result")
 	public void result(@RequestParam(value = "pid", required = false) String pid, Model model) {
