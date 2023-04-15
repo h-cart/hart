@@ -17,7 +17,7 @@ function showModal(result, flag, title) {
 	var str = `
 	<dialog class='recommand-layer'>
       <div class="container" style="padding : 0px 0px; min-width:400px" >
-      <div
+      <div>
       <h4 style="text-align: center" style="word-break: keep-all;">${dtitle}</h4>
 
        <div class="row row-col-lg-2" style="margin-top:20px; padding-bottom : 30px; border-bottom: 1px solid #e3e3e3">
@@ -125,8 +125,7 @@ function showModal(result, flag, title) {
                <div class="accordion" id="accordionRecipe">
                   <div class="card">
                      <div class="card-heading active">
-                        <a data-toggle="collapse" data-target="#collapseRecipe" class="" aria-expanded="true">인기있는
-                           레시피</a>
+                        <a data-toggle="collapse" data-target="#collapseRecipe" class="" aria-expanded="true">메뉴 고민될 때 이런 레시피는 어떨까요?</a>
                      </div>
                      <div id="collapseRecipe" class="collapse show" data-parent="#accordionRecipe" style="">
                         <div class="card-body">
