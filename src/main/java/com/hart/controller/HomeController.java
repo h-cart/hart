@@ -43,9 +43,4 @@ public class HomeController {
 		return "index";
 	}
 
-	
-	@GetMapping("/chat")
-	public void chat() {
-
-	}
 }
