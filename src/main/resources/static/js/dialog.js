@@ -61,20 +61,22 @@ function showModal(result, flag, title) {
                  class="checkbox"><img class="pimg"
                  src="${value.lcimg}" alt=""
                  style="width:90px;border-radius: 10px;height:90px;"></span></div>
-        <div class="product__cart__item__text" style="padding-bottom:10px;">
-           <h6 data-pos=${value.lcid}>${value.lcname}</h6><span class="price-box">
+        <div class="product__cart__item__text" style="padding-bottom:10px; max-width:260px;">
+           <h6 data-pos=${value.lcid}>${value.lcname}</h6>
               <span style="font-size:13px;"class="price" id="price_${idx}" data-value="${value.lcprice}">${status}</span>
               </br>
+              <div style="display:flex;margin-top: 5px;justify-content: space-between;">
               <span style="font-size:13px;" data-value="${value.lcprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(value.lcprice)}원</span>
-           </span>
+           
                    <span data-toggle="collapse" data-target="#collapse${idx}" class="" aria-expanded="true" style="
         font-size: 12px;
         border: 1px solid gray;
         padding: 5px 9px;
         cursor: pointer;
         border-radius: 5px;
-        margin-left: 85px;
+        
     ">관련상품</span>
+    </div>
         </div>
      </td>
 
@@ -93,15 +95,15 @@ function showModal(result, flag, title) {
                         class="checkbox"><img class="pimg"
                         src="${item.pimg}" alt=""
                         style="width:90px;border-radius: 10px;height:90px;"></span></div>
-               <div class="product__cart__item__text">
+               <div class="product__cart__item__text" style="max-width:260px;">
                   <h6 data-pos=${item.pid}>${item.pname}</h6>
                      <input type="hidden" class="price" id="price_${idx}" data-value="${item.pprice}"/>
-                  <div class="pro-qty-2"><span style="
+                  <div class="pro-qty-2" style="display: flex;justify-content: space-between;margin-top: 30px;"><div><span style="
     padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
                         aria-hidden="true"><i class='fa-solid fa-minus fa-xs'></i></span><input style="border:none; text-align:center; width:20px;" id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
                         data-value="${idx}" style="
     margin-left: 10px;
-"class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-xs'></i></span>
+"class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-xs'></i></span></div>
 <span style="
         font-size: 14px;
     " data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</span>
@@ -192,15 +194,15 @@ function showModal(result, flag, title) {
                         class="checkbox"><img class="pimg"
                         src="${item.pimg}" alt=""
                         style="width:90px;border-radius: 10px;height:90px;"></span></div>
-               <div class="product__cart__item__text">
+               <div class="product__cart__item__text" style="max-width:260px;">
                   <h6 data-pos=${item.pid}  style="margin-bottom: 30px;">${item.pname}</h6>
                      <input type="hidden" class="price" id="price_${idx}" data-value="${item.pprice}"/>
-               		<div class="pro-qty-2" style="display: flex; justify-content: space-around;"><span style="
+               		<div class="pro-qty-2" style="display: flex;justify-content: space-between;"><div><span style="
     padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
                         aria-hidden="true"><i class='fa-solid fa-minus fa-xs'></i></span><input style="border:none; text-align:center; width:20px;" id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
                         data-value="${idx}" style="
     margin-left: 10px;
-"class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-xs'></i></span>
+"class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-xs'></i></span></div>
 <span data-value="${item.pprice}" style="" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</span>
 </div>
                </div>
@@ -380,29 +382,27 @@ function showModalLiveClass(result, flag, title) {
 		console.log(idx);
 		idx++;
 		str += `<tr id="${idx}" data-value="${item.pid}">
-            <td colspan="2" class="product__cart__item">
-               <div class="product__cart__item__pic" style="    width: fit-content;
+            <td class="product__cart__item">
+               <div class="product__cart__item__pic" style="
+    width: fit-content;
     float: left;
     margin-right: 27px;
 "><span class="thumb"><input name="cartlist" id="check_${idx}" type="checkbox"
                         class="checkbox"><img class="pimg"
                         src="${item.pimg}" alt=""
                         style="width:90px;border-radius: 10px;height:90px;"></span></div>
-               <div class="product__cart__item__text">
-                  <h6 data-pos=${item.pid}>${item.pname}</h6>
+               <div class="product__cart__item__text" style="max-width:260px;">
+                  <h6 data-pos=${item.pid}  style="margin-bottom: 30px;">${item.pname}</h6>
                      <input type="hidden" class="price" id="price_${idx}" data-value="${item.pprice}"/>
-                  <div class="pro-qty-2"><span style="
-    padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
+               		<div class="pro-qty-2" style="display: flex;justify-content: space-between;"><div ><span style="font-size:inherit;  padding-right:10px;"data-value="${idx}" class="dec qtybtn rbtn_minus"
                         aria-hidden="true"><i class='fa-solid fa-minus fa-xs'></i></span><input style="border:none; text-align:center; width:20px;" id="quantity_${idx}" type="text" value="1" readonly="readonly"><span
                         data-value="${idx}" style="
     margin-left: 10px;
 "class="inc qtybtn rbtn_plus" aria-hidden="true"><i class='fa-solid fa-plus fa-xs'></i></span></div>
+<span data-value="${item.pprice}" style="font-size:inherit;" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</span>
+</div>
                </div>
             </td>
-            
-            <td style="
-        font-size: 14px;
-    " data-value="${item.pprice}" class="cart__price" id="cprice_${idx}">${numberWithCommas(item.pprice)}원</td>
          </tr>`;
 	});
 	str += `</tbody></table>

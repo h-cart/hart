@@ -178,7 +178,10 @@
 	}
 		
 	</script>
+	
+	
 
+	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<script type="text/javascript" defer></script>
@@ -217,12 +220,12 @@
 
 
 						<div class="shop__sidebar__search">
-							<form>
-								<input name="keyword" type="text" onkeyup="enterkey();">
+							<div>
+								<input name="keyword" type="text">
 								<button type="button" onclick="search()" value="검색">
 									<span class="icon_search"></span>
 								</button>
-							</form>
+							</div>
 						</div>
 
 						<div class="shop__sidebar__accordion">
@@ -401,6 +404,12 @@
 	  });
 	}
 </script>
-
+	<script type="text/javascript">
+    $("input[name=keyword]").on("keyup",function(key){
+        if(key.keyCode==13) {
+          search();
+        }
+    });
+</script>
 </body>
 </html>
