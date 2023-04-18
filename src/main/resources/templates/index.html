@@ -1,116 +1,110 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
-  <th:block th:replace="includes/headTag :: head_tag"></th:block>
-  <body>
-    <style>
-      .hero {
-        margin-bottom: 50px;
-      }
-      .owl-nav {
-	display : none;
+<th:block th:replace="includes/headTag :: head_tag"></th:block>
+<body>
+	<style>
+.hero {
+	margin-bottom: 50px;
 }
-    </style>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script src="/js/main.js"></script>
-    <!-- Header Section Begin -->
-    <th:block th:replace="includes/header :: header1"></th:block>
-    <th:block th:replace="includes/header :: header2"></th:block>
-    <th:block th:replace="includes/header :: header3"></th:block>
-   <!-- Hero Section Begin -->
-   <section class="hero">
-      <div class="hero__slider owl-carousel">
-         <div class="hero__items set-bg" data-setbg="img/mainfood2222.jpg">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-5 col-lg-7 col-md-8">
-                     <div class="hero__text">
-                        <h6></h6>
-                        <br>
-                        <h2></h2>
-                        <br>
-                        <br>
-                        <p></p>
-                        <br>
-                        <a href="/product/list?pcno_top=100715" class="primary-btn">Shop now <span
-                           class="arrow_right"></span>
-                        </a>
-                        <div class="hero__social">
-                           <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                              class="fa fa-twitter"></i></a>  <a href="https://localhost/product/list?pcno_top=100715"><i
-                              class="fa fa-pinterest"></i></a><a href="https://localhost/product/list?pcno_top=100715"><i
-                              class="fa fa-instagram"></i></a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="hero__items set-bg" data-setbg="img/mainpage.jpg">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-5 col-lg-7 col-md-8">
-                     <div class="hero__text">
-                        <h6>Summer Collection</h6>
-                        <h2></h2>
-                        <p></p>
-                        <a href="#" class="primary-btn">Shop now <span
-                           class="arrow_right"></span>
-                        </a>
-                        <div class="hero__social">
-                           <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                              class="fa fa-twitter"></i></a> <a href="#"><i
-                              class="fa fa-pinterest"></i></a> <a href="#"><i
-                              class="fa fa-instagram"></i></a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- Hero Section End -->
+.owl-nav {
+	display: none;
+}
+</style>
 
-    <!-- Product Section Begin -->
-    <section class="product spad">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <ul class="filter__controls">
-              <li class="active" data-filter="*">베스트 상품</li>
-            </ul>
-          </div>
-        </div>
-        <div class="row product__filter">
-          <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals" th:each="product: ${mainprod}">
-            <div class="product__item">
-              <div class="product__item__pic set-bg" id="img" data-pid="${product.pid}" th:data-setbg="${product.pimg}" onclick="goDetailPage(this)" th:data-pid="${product.pid}" style="cursor: pointer"></div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<script src="/js/main.js"></script>
+	<!-- Header Section Begin -->
+	<th:block th:replace="includes/header :: header1"></th:block>
+	<th:block th:replace="includes/header :: header2"></th:block>
+	<th:block th:replace="includes/header :: header3"></th:block>
+	<!-- Hero Section Begin -->
+	<section class="hero">
+		<div class="hero__slider owl-carousel">
+			<div class="hero__items set-bg" data-setbg="img/mainfood2222.jpg">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-5 col-lg-7 col-md-8">
+							<div class="hero__text">
+								<h6></h6>
+								<br>
+								<h2></h2>
+								<br> <br>
+								<p></p>
+								<br> <a href="/product/list?pcno_top=100715"
+									class="primary-btn">Shop now <span class="arrow_right"></span>
+								</a>
+								<div class="hero__social">
+									<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+										class="fa fa-twitter"></i></a> <a
+										href="https://localhost/product/list?pcno_top=100715"><i
+										class="fa fa-pinterest"></i></a><a
+										href="https://localhost/product/list?pcno_top=100715"><i
+										class="fa fa-instagram"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</section>
+	<!-- Hero Section End -->
 
-              <div class="product__item__text">
-                <h6 th:text="${product.pname}"></h6>
-                <input class="item" th:id="-${productStat.count}" type="hidden"
-									th:data-value="${product.pid}" name="pid"
-									th:value="${product.pid}" />
-				<input class="item" th:id="'quantity_-'+${productStat.count}" name="quantity"
-											type="hidden" value="1" style="width: 100%" />
-                <a href="#"  th:onclick="addToCart(false,-[[${productStat.count}]])" class="add-cart">+ Add To Cart</a>
-                <div>
-                  <h5 th:if="${product.pdiscount != 0}" style="display: inline; color: #ff6913; margin-right: 8px" th:text=" ${product.pdiscount} +'%'"></h5>
+	<!-- Product Section Begin -->
+	<section class="product spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<ul class="filter__controls">
+						<li class="active" data-filter="*">베스트 상품</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row product__filter">
+				<div
+					class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals"
+					th:each="product: ${mainprod}">
+					<div class="product__item">
+						<div class="product__item__pic set-bg" id="img"
+							data-pid="${product.pid}" th:data-setbg="${product.pimg}"
+							onclick="goDetailPage(this)" th:data-pid="${product.pid}"
+							style="cursor: pointer"></div>
 
-                  <h5 th:if="${product.pdiscount != 0}" style="display: inline; color: black" id="salePrice" th:text="${#numbers.formatDecimal(product.pprice - (product.pprice * product.pdiscount / 100), 0,'COMMA',0,'POINT') +'원'}"></h5>
+						<div class="product__item__text">
+							<h6 th:text="${product.pname}"></h6>
+							<input class="item" th:id="-${productStat.count}" type="hidden"
+								th:data-value="${product.pid}" name="pid"
+								th:value="${product.pid}" /> <input class="item"
+								th:id="'quantity_-'+${productStat.count}" name="quantity"
+								type="hidden" value="1" style="width: 100%" /> <a href="#"
+								th:onclick="addToCart(false,-[[${productStat.count}]])"
+								class="add-cart">+ Add To Cart</a>
+							<div>
+								<h5 th:if="${product.pdiscount != 0}"
+									style="display: inline; color: #ff6913; margin-right: 8px"
+									th:text=" ${product.pdiscount} +'%'"></h5>
 
-                  <del style="display: inline; margin-right: 8px" id="originPrice" th:text="${#numbers.formatDecimal(product.pprice, 0,'COMMA',0,'POINT')}+'원'"> </del>
-                </div>
-                <div class="product__color__select"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Product Section End -->
-    <script th:inline="javascript">
+								<h5 th:if="${product.pdiscount != 0}"
+									style="display: inline; color: black" id="salePrice"
+									th:text="${#numbers.formatDecimal(product.pprice - (product.pprice * product.pdiscount / 100), 0,'COMMA',0,'POINT') +'원'}"></h5>
+
+								<del style="display: inline; margin-right: 8px" id="originPrice"
+									th:text="${#numbers.formatDecimal(product.pprice, 0,'COMMA',0,'POINT')}+'원'">
+								</del>
+							</div>
+							<div class="product__color__select"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Product Section End -->
+	<script th:inline="javascript">
       function goDetailPage(e) {
         let pid = $(e).data("pid");
         location.href = "/product/productDetail?pid=" + pid;
@@ -182,89 +176,97 @@
         /*]]>*/
     </script>
 
-    <!-- Categories Section Begin -->
-    <section class="categories spad">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="categories__text">
-              <h2>
-                <span style="word-break: keep-all">당신만의 레시피를 보여주세요</span>
-              </h2>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="categories__hot__deal">
-              <img src="/img/recipemain.png" alt="" />
-              <div class="hot__deal__sticker">
-                <h5>우와~</h5>
-                <h5>맛있겠다</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 offset-lg-1">
-            <div class="categories__deal__countdown">
-              <span></span>
-              <h2>레시피 공모전 남은 시간</h2>
-              <div class="categories__deal__countdown__timer" id="countdown"></div>
-              <a href="#" id="applyContest" class="primary-btn">공모전 지원하기</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+	<!-- Categories Section Begin -->
+	<section class="categories spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="categories__text" >
+						<h2>
+							<span style="word-break: keep-all" >당신만 알고있는 레시피를 보여주세요</span>
+							
+						</h2>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="categories__hot__deal">
+						<img src="/img/recipemain.png" alt="" />
+						<div class="hot__deal__sticker">
+							<h5>우와~</h5>
+							<h5>맛있겠다</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 offset-lg-1">
+					<div class="categories__deal__countdown">
+						<span></span>
+						<h2>레시피 공모전</h2>
+						<h2>레시피 공모전 남은 시간</h2>
+						<div class="categories__deal__countdown__timer" id="countdown"></div>
+						<a href="#" id="applyContest" class="primary-btn">공모전 지원하기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    <!-- Categories Section End -->
+	<!-- Categories Section End -->
 
-    <!-- Latest Blog Section Begin -->
-    <section class="latest spad">
-      <div class="container">
-        <ul class="filter__controls" style="user-select: auto">
-          <li class="active" data-filter="*" style="user-select: auto">레시피 추천</li>
-        </ul>
+	<!-- Latest Blog Section Begin -->
+	<section class="latest spad">
+		<div class="container">
+			<ul class="filter__controls" style="user-select: auto">
+				<li class="active" data-filter="*" style="user-select: auto">레시피
+					추천</li>
+			</ul>
 
-        <div class="row" id="recipeajax">
-          <!-- 반복 시점 -->
-          <div class="row" id="recipeajax">
-            <div class="col-lg-4 col-md-6 col-sm-6" th:each="recipelist : ${mainrecipe}">
-              <div class="blog__item">
-                <div class="product__item__pic set-bg" id="img" th:data-setbg="${recipelist.rimg}" th:data-rid="${recipelist.rid}" th:onclick="gorecipeDetailPage(this)"></div>
+			<div class="row" id="recipeajax">
+				<!-- 반복 시점 -->
+				<div class="row" id="recipeajax">
+					<div class="col-lg-4 col-md-6 col-sm-6"
+						th:each="recipelist : ${mainrecipe}">
+						<div class="blog__item">
+							<div class="product__item__pic set-bg" id="img"
+								th:data-setbg="${recipelist.rimg}"
+								th:data-rid="${recipelist.rid}"
+								th:onclick="gorecipeDetailPage(this)"></div>
 
-                <div class="blog__item__text">
-                  <span th:text="${recipelist.rregdate}">등록날짜</span>
-                  <h5 th:text="${recipelist.rtitle}"></h5>
+							<div class="blog__item__text">
+								<span th:text="${recipelist.rregdate}">등록날짜</span>
+								<h5 th:text="${recipelist.rtitle}"></h5>
 
-                 <a th:href="@{/recipe/recipeDetail(rid=${recipelist.rid})}">레시피 보러가기</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- 반복 시점 -->
-        </div>
-      </div>
-    </section>
-    <!-- Latest Blog Section End -->
-    <script src="/js/dialog.js"></script>
-    <script type="text/javascript" defer>
+								<a th:href="@{/recipe/recipeDetail(rid=${recipelist.rid})}">레시피
+									보러가기</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 반복 시점 -->
+			</div>
+		</div>
+	</section>
+	<!-- Latest Blog Section End -->
+	<script src="/js/dialog.js"></script>
+	<script type="text/javascript" defer>
       function gorecipeDetailPage(e) {
         let rid = $(e).data("rid");
 
         location.href = "/recipe/recipeDetail?rid=" + rid;
       }
     </script>
-    <!-- Footer Section Begin -->
-    <th:block th:replace="includes/footer :: footer"></th:block>
-    <!-- Footer Section End -->
+	<!-- Footer Section Begin -->
+	<th:block th:replace="includes/footer :: footer"></th:block>
+	<!-- Footer Section End -->
 
-    <!-- Search Begin -->
-    <div class="search-model">
-      <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="search-close-switch">+</div>
-        <form class="search-model-form">
-          <input type="text" id="search-input" placeholder="Search here....." />
-        </form>
-      </div>
-    </div>
-    <!-- Search End -->
-  </body>
+	<!-- Search Begin -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form">
+				<input type="text" id="search-input" placeholder="Search here....." />
+			</form>
+		</div>
+	</div>
+	<!-- Search End -->
+</body>
 </html>
