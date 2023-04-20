@@ -277,7 +277,7 @@ td:nth-child(1) span:nth-child(2) {
 						<div class="product__details__tab">
 							<ul class="nav nav-tabs" role="tablist">
 
-							
+
 								<script>
 							$(document).ready(function(){
 									let recipes = $(".recommand-recipes").length;
@@ -310,19 +310,40 @@ td:nth-child(1) span:nth-child(2) {
 
 									<div id="audio-container"
 										style="display: flex; justify-content: center; align-items: center;">
-										<audio id="audio-player" hidden="false" controls loop="-1">
-											<source src="/sound/전골 보글보글.mp3" type="audio/mpeg">
+										
+										<audio id="audio-player" hidden="true" controls loop="-1">
+											<source src="/sound/보글보글.mp3" type="audio/mpeg">
 										</audio>
-									</div>
-									<script>
-											  const currentUrl = window.location.href;
-											  if (currentUrl === 'https://hcart.shop/product/productDetail?pid=S02207105050') {
 
-											    const audioPlayer = document.getElementById('audio-player');
-											    audioPlayer.autoplay = true;
-											   // alert(audioPlayer.autoplay);
-											  }
-											</script>
+										<audio id="meet" hidden="true" controls loop="-1">
+											<source src="/sound/beerSound.mp3" type="audio/mpeg">
+										</audio>
+										
+									</div>
+
+									<script>
+									
+									const currentUrl = window.location.href;
+									  if (currentUrl === 'https://hcart.shop/product/productDetail?pid=S02207105050') {
+									    const audioPlayer = document.getElementById('audio-player');
+									    audioPlayer.autoplay = true;
+									    
+									  }
+									  
+									</script>
+									
+			 						<script>
+									  const currentUrl = window.location.href;
+									  if (currentUrl === 'https://hcart.shop/product/productDetail?pid=S02105051251') {
+									    const meet = document.getElementById('meet');
+									    meet.autoplay = true;
+									  }
+									  
+									</script>
+ 
+
+
+
 									<!-- 음향 소리 -->
 									<script>
 								      window.onload = function() {
@@ -337,6 +358,11 @@ td:nth-child(1) span:nth-child(2) {
 								        }
 								      }
 								    </script>
+								    
+								    
+								    
+								    
+								    
 									<!-- 소리 end -->
 
 									<!-- 오디오 -->
@@ -440,8 +466,9 @@ td:nth-child(1) span:nth-child(2) {
 											<div class="col-lg-4 col-md-6 col-sm-6"
 												th:each="lives:${lives}">
 												<div class="blog__item">
-													<div class="product__item__pic set-bg recommand-lives" id="img"
-														th:data-setbg="${lives.lcimg}" th:data-rid="${lives.lcid}"
+													<div class="product__item__pic set-bg recommand-lives"
+														id="img" th:data-setbg="${lives.lcimg}"
+														th:data-rid="${lives.lcid}"
 														onclick="gorecipeDetailPage(this)"
 														style="background-image: url(&quot;https://tohomeimage.thehyundai.com/DP/DP018/2023/01/16/092349/scine.jpg&quot;);">
 													</div>
