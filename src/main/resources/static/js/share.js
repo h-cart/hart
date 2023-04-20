@@ -52,7 +52,7 @@ function kakaoShare() {
 				content: {
 					title: 'HCART와 함께하는 쇼핑',
 					description: '공유 장바구니로 하나되어 하는 쇼핑',
-					imageUrl: '/img/logo.png',
+					imageUrl: 'https://img.freepik.com/premium-vector/sunflower-pot-illustration-cartoon-with-a-shopping-cart-cute-style-design-for-t-shirt-sticker-logo-element_152558-19556.jpg',
 					link: {
 						mobileWebUrl: url,
 						webUrl: url,

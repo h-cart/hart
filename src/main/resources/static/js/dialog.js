@@ -49,7 +49,8 @@ function showModal(result, flag, title) {
 
 			$.each(lives, function(index, value) {
 				idx++;
-				var status = value.lcstatus == 0 ? value.lcday + "&nbsp방송예정" : value.lcstatus == 1 ? "LIVE 방송 중" : "VOD로 수강하기";
+				var status = value.lcstatus == 0 ? (value.lcday.substr(6)+"/"+value.lcday.substr(0,5)) + "&nbsp방송예정" : value.lcstatus == 1 ? "LIVE 방송 중" : "VOD로 수강하기";
+				console.log(status);
 				str += `
         <tr id="accordion${idx}"  class="accordion" data-parent="#accordionClass" style="">
        
@@ -80,7 +81,7 @@ function showModal(result, flag, title) {
         </div>
      </td>
 
-    <input type="hidden" id="${idx} data-value=${value.lcid}">
+    <input type="hidden" id="${idx}" data-value=${value.lcid}>
     <input type="hidden" id="quantity_${idx}" value="1"/>    
      </tr><tbody id="collapse${idx}" class="collapse" data-parent="#accordion${idx}" style="">`;
 				$.each(value.items, function(lindex, item) {
@@ -161,7 +162,7 @@ function showModal(result, flag, title) {
                      src="${value.rimg}" alt=""
                      style="width:90px;border-radius: 10px;height:90px;"></span></div>
             <div class="product__cart__item__text" style="padding-bottom:10px;">
-               <h6  style="margin-bottom: 30px;">${value.rtitle}</h6><span class="price-box">
+               <h6>${value.rtitle}</h6><span class="price-box">
                  <span style="
                  font-size: 13px;
              ">난이도&nbsp : &nbsp${value.rlevel}</span>
@@ -230,7 +231,9 @@ function showModal(result, flag, title) {
    </dialog>`;
 	$("body").append(str);
 	const dialog = document.querySelector("dialog");
-
+	if(!flag&&result.result==null){
+		$(".shopping__cart__table").attr("style","hegith:50vh;");
+	}
 	dialog.showModal();
 	if (result.result == null) {
 		$("#cart_product_img").attr("src", "/img/logo.png");

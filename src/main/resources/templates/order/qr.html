@@ -123,7 +123,7 @@
 			if (res) {
 				outputData.innerText = res;
 				console.log(res); // 전체 객체 출력
-
+			
 				//location.href = "/order/test";
 				//scanning = false;
 				video.srcObject.getTracks().forEach(track => {
@@ -132,10 +132,15 @@
 				//qrResult.hidden = false;
 				//canvasElement.hidden = true;
 				//btnScanQR.hidden = false;
+				const decodedText = decodeURIComponent(escape(res.split("-")[1]));
+				console.log(decodedText);
+				outputData.innerText = decodedText;
 				pids = [];
-				pids.push(res);
+				pids.push(res.split("-")[0]);
 				pamounts = [];
 				pamounts.push("1");
+				pnames = [];
+				pnames.push(decodedText);
 				$.ajax({
 					url: '/capi/insert',
 					beforeSend: function (xhr) {
@@ -145,7 +150,8 @@
 					contentType: "application/json",
 					data: JSON.stringify({
 						pids: pids,
-						pamounts: pamounts
+						pamounts: pamounts,
+						pnames : pnames
 					}),
 					success: function (result) {
 						console.log(result);
