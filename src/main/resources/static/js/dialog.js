@@ -230,9 +230,20 @@ function showModal(result, flag, title) {
       </div>
    </dialog>`;
 	$("body").append(str);
+	
 	const dialog = document.querySelector("dialog");
-	if(!flag&&result.result==null){
-		$(".shopping__cart__table").attr("style","hegith:50vh;");
+	console.log(result.result);
+	if(result.result.lives.length==0&&result.result.recipes.length==0||flag){
+		let dialogCart = dialog.querySelector(".shopping__cart__table");
+      let ment  = !flag? "추천 레시피 / 클래스가 존재하지 않습니다.":"추천 상품을 담아 재추천하지 않습니다.";
+      dialogCart.style.height='50vh';
+      dialogCart.style.textAlign='center';
+      dialogCart.style.display='flex';
+      dialogCart.style.justifyContent='center';
+      dialogCart.style.flexDirection="column";
+      dialogCart.style.alignItems="center";
+      let notExistComment = `<img src='/img/icon.png' style='width:80px; height :80px; margin-bottom:20px;'alt='icon' /><span>${ment}</span>`;
+      dialogCart.innerHTML = notExistComment;
 	}
 	dialog.showModal();
 	if (result.result == null) {
