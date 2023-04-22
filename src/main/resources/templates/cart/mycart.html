@@ -316,18 +316,16 @@
 				},
 				success: function (result) {
 					var i = 0;
-					console.log(result.result.plists);
 					str = "";
 					var plist = result.result.plists;
 					var clist = result.result.clists;
-					console.log(plist.length, clist.length);
 					if (plist.length != 0 || clist.length != 0) {
 						for (; i < result.result.plists.length; i++) {
 							var price = plist[i].pprice;
 							if (plist[i].pdiscount != 0) {
 								price = Math.ceil(price - plist[i].pprice * (plist[i].pdiscount / 100));
 							}
-							str += "<tr id='" + i + "' data-value='" + plist[i].pid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + i + "' type='checkbox' class='checkbox'><img class='pimg' src='" + plist[i].pimg + "' alt='' style='width:90px; height:90px;'/></span>"
+							str += "<tr id='" + i + "' data-value='" + plist[i].pid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='mcartlist' id='check_" + i + "' type='checkbox' class='checkbox'><img class='pimg' src='" + plist[i].pimg + "' alt='' style='width:90px; height:90px;'/></span>"
 							str += "</div><div class='product__cart__item__text'><h6>" + plist[i].pname + "</h6>"
 							str += "<span class='price-box'><h5 class='price'id='price_" + i + "'data-value='" + price + "' >" + numberWithCommas(price) + "원</h5>"
 							if (plist[i].pdiscount != 0) {
@@ -338,14 +336,13 @@
 							str += "<td class='cart__close'><i class='fa-solid fa-x fa-xl' style='color: #000000;'></i></td></tr>"
 						}
 						if (clist.length != 0) {
-							console.log(clist);
 							for (var j = 0; j < clist.length; j++) {
 								var status = 'LIVE 방송</br>';
 								status += clist[j].lcday.substring(2, 10);
 								if (clist[j].lcstatus == 1) {
 									status = 'VOD';
 								}
-								str += "<tr id='" + (i + j + 1) + "' data-value='" + clist[j].lcid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='cartlist' id='check_" + (i + j + 1) + "' type='checkbox' class='checkbox'><img class='pimg' src='" + clist[j].lcimg + "' alt='' style='width:90px; height:90px;'/></span>"
+								str += "<tr id='" + (i + j + 1) + "' data-value='" + clist[j].lcid + "'><td class='product__cart__item'><div class='product__cart__item__pic'><span class='thumb'><input name='mcartlist' id='check_" + (i + j + 1) + "' type='checkbox' class='checkbox'><img class='pimg' src='" + clist[j].lcimg + "' alt='' style='width:90px; height:90px;'/></span>"
 								str += "</div><div class='product__cart__item__text'><h6>" + clist[j].lcname + "</h6>"
 								str += "<span class='price-box'><h5 class='price'id='price_" + (i + j + 1) + "'data-value='" + clist[j].lcprice + "' >" + clist[j].lcteacher + "</h5>"
 								str += "</span></div></td><td class='quantity__item' style='font-size:13px;'><div class='quantity'><div class='pro-qty-2'>" + status + "<input id='quantity_" + (i + j + 1) + "'type='hidden' value='1' readonly='readonly' />";
@@ -374,7 +371,85 @@
 
 
 
+<script th:inline="javascript">
 
+    /*<![CDATA[*/
+    function addToCart(flag, idx) {
+      var isAdmin = /*[[${#authorization.expression('isAuthenticated()')}]]*/ false;
+      if (!isAdmin) {
+        Swal.fire({
+          title: "로그인이 필요한 활동입니다.",
+          text: "로그인 페이지로 이동하시겠습니까?",
+          icon: "info",
+          iconColor: "#116530",
+          showCancelButton: true,
+          confirmButtonText: "네",
+          cancelButtonText: "아니요",
+          confirmButtonColor: "#116530",
+          cancelButtonColor: "gray",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href = "/member/login";
+          }
+        });
+        return;
+      }
+      var pamounts = [];
+      var pids = [];
+      var pnames = [];
+      if (flag) {
+		
+        $("input[name=cartlist]:checked").each(function () {
+          var pos = $(this).prop("id").split("_")[1];
+          var pid = $("#" + pos).data("value");
+          var quantity = $("#quantity_" + pos).val();
+          var pname = $("[data-pos="+pid+"]").text();
+          pids.push(pid);
+          pamounts.push(quantity);
+          pnames.push(pname);
+        });
+                 if(pids.length==0){
+				showToast("추천 상품이 선택되지 않았습니다.", -1);
+				return ;
+			}
+		}else {
+			
+			var pid = $("#" + idx).data("value");
+          	var quantity = $("#quantity_" + idx).val();
+          	var pname = $("[data-pos="+pid+"]").text();
+          	pids.push(pid);
+         	 pamounts.push(quantity);
+         	 pnames.push(pname);
+		}
+			console.log(pids,pamounts, pnames);
+        $.ajax({
+          url: "/capi/insert",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+          },
+          type: "post",
+          contentType: "application/json",
+          data: JSON.stringify({
+            pids: pids,
+            pamounts: pamounts,
+            pnames : pnames
+          }),
+          success: function (result) {
+            
+            showModal(result,flag);
+            CartList();
+          },
+          error: function (err, xhr, status) {
+            if (err.status == 405 || err.status == 400) {
+              customConfirm("장바구니에 존재하는 상품입니다.", "확인하러 이동하기", "장바구니로", "아니요");
+            }
+          },
+        });
+      }
+
+      /*]]>*/
+
+    </script>
 </body>
 <!-- Js Plugins -->
 

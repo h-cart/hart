@@ -24,6 +24,18 @@ import com.hart.mapper.OrderMapper;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @since : 2023. 3. 20.
+ * @FileName: OrderServiceImpl.java
+ * @author : 남승현
+ * @설명 : 주문 관련 OrderService 구현 클래스
+ * 
+ *     <pre>
+ *   수정일         수정자               수정내용
+ * ----------      --------    ---------------------------
+ * 2023. 3. 20.     남승현       OrderServiceImpl 구현
+ *     </pre>
+ */
 @Service
 @Log4j2
 public class OrderServiceImpl implements OrderService{
@@ -37,6 +49,13 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private MemberMapper mMapper;
 	
+
+	/* *Author : 남승현
+	 * 기능 : 주문 시 활용되는 메서드
+	 * 매개변수 : 사용자 정보 인스턴스, 주문에 필요한 상품 정보
+	 * 기타 : 사용자 주문 정보 저장 및 마일리지 변경 등 다수 기능 적용을 위한
+	 * 		 @Transactional 어노테이션 활용
+	 */
 	@Transactional
 	@Override
 	public Map<String,Object> insertOrder(ClubAuthMemberDTO mDTO, OrderInsertDTO oDTO) throws Exception {
@@ -47,8 +66,6 @@ public class OrderServiceImpl implements OrderService{
 		if(oDTO.getCLists()!=null) {
 			if(oMapper.checkClass(oDTO.getOinfo().getMid(), oDTO.getCLists())==0) {
 			oMapper.insertClass(oDTO.getCLists(), oDTO.getOinfo());
-			log.info(oDTO.getCLists());
-			log.info(oDTO.getOinfo());
 			oMapper.intoMyClass(oDTO.getCLists(),oDTO.getOinfo());
 			}
 			else throw new Exception("수강 중인 클래스 존재");
@@ -63,11 +80,17 @@ public class OrderServiceImpl implements OrderService{
 		}
 		mDTO.setMpoint(mMapper.findByEmail(mDTO.getMid(), mDTO.getSocial()).getMpoint());
 		result.put("mDTO",mDTO);
-		System.out.println(mDTO);
 		return result;
 	
 	}
 
+
+	/* *Author : 남승현
+	 * 기능 : 주문에 필요한 상품 정보를 불러오는 메서드
+	 * 매개변수 : 상품 아이디, 상품 수량 
+	 * 기타 : 주문 페이지로 넘어올 때, 상품 목록 및 클래스 목록을 불러옴
+	 * 		 @Transactional 어노테이션 활용
+	 */
 	@Transactional
 	@Override
 	public OrderTotalDTO getInfo(List<String> pids, List<Integer> pamounts) throws Exception {
@@ -88,7 +111,6 @@ public class OrderServiceImpl implements OrderService{
 						throw new Exception("pid가 존재하지 않음");
 					}
 				} catch (Exception e) {
-					log.info(e.getMessage());
 					throw e;
 				}
 			}else {
@@ -145,12 +167,15 @@ public class OrderServiceImpl implements OrderService{
 		return odate.split(" ")[0].substring(2).replace("-","/");
 	}
 
+	/* *Author : 남승현
+	 * 기능 : 주문 데이터 중 상세 데이터를 불러오는 기능
+	 * 매개변수 : 사용자 아이디, 주문 번호
+	 */
 	@Override
 	public OinfoDTO getOrder(String mid, int oid) throws Exception {
 		try {
 			return oMapper.getOrder(oid, mid);
 		}catch (Exception e) {
-			log.info(e);
 			throw e;
 		}
 	}

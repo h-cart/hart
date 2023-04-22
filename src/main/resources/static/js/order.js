@@ -3,7 +3,7 @@ $(".orderDirect").on("click", function () {
 	form.attr('method', 'post');
 	form.attr('action', '/order/list');
 	var notSelect = false;
-	$("input[name=cartlist]:checked").each(function () {
+	$("input[name=mcartlist]:checked").each(function () {
 		notSelect = true;
 		var pos = $(this).prop('id').split('_')[1];
 		var pid = $('#' + pos).data('value');
