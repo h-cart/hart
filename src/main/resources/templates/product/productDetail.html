@@ -544,7 +544,10 @@ td:nth-child(1) span:nth-child(2) {
           pamounts.push(quantity);
           pnames.push(pname);
         });
-        
+                 if(pids.length==0){
+				showToast("추천 상품이 선택되지 않았습니다.", -1);
+				return ;
+			}
 		}else {
 			
 			var pid = $("#" + idx).data("value");
