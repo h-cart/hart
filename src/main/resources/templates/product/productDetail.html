@@ -312,11 +312,11 @@ td:nth-child(1) span:nth-child(2) {
 										style="display: flex; justify-content: center; align-items: center;">
 										
 										<audio id="audio-player" hidden="true" controls loop="-1">
-											<source src="/sound/보글보글.mp3" type="audio/mpeg">
+											<source src="/sound/보글이.mp3" type="audio/mpeg">
 										</audio>
 
-										<audio id="meet" hidden="true" controls loop="-1">
-											<source src="/sound/beerSound.mp3" type="audio/mpeg">
+										<audio id="meets" hidden="true" controls loop="-1">
+											<source src="/sound/meet.mp3" type="audio/mpeg">
 										</audio>
 										
 									</div>
@@ -324,21 +324,15 @@ td:nth-child(1) span:nth-child(2) {
 									<script>
 									
 									const currentUrl = window.location.href;
-									  if (currentUrl === 'https://hcart.shop/product/productDetail?pid=S02207105050') {
+									  if (currentUrl === 'https://localhost/product/productDetail?pid=S02207105050') {
 									    const audioPlayer = document.getElementById('audio-player');
 									    audioPlayer.autoplay = true;
-									    
 									  }
-									  
-									</script>
-									
-			 						<script>
-									  const currentUrl = window.location.href;
-									  if (currentUrl === 'https://hcart.shop/product/productDetail?pid=S02105051251') {
-									    const meet = document.getElementById('meet');
+							
+									  if (currentUrl === 'https://localhost/product/productDetail?pid=S02105051251') {
+									    const meet = document.getElementById("meets");
 									    meet.autoplay = true;
 									  }
-									  
 									</script>
  
 
@@ -347,12 +341,16 @@ td:nth-child(1) span:nth-child(2) {
 									<!-- 음향 소리 -->
 									<script>
 								      window.onload = function() {
-								        // Get the current URL
 								        var currentUrl = window.location.href;
-								        
-								        // Check if the URL contains the product ID you are looking for
 								        if (currentUrl.includes('pid=S02207105050')) {
-								          // Update the h4 element to include the volume icon
+								          var h4Element = document.getElementById('pname');
+								          h4Element.innerHTML = '<i class="fas fa-volume-high" style="margin-right: 15px;"></i>' + h4Element.innerHTML;
+								        }
+								      }
+								 
+								      window.onload = function() {
+								        var currentUrl = window.location.href;
+								        if (currentUrl.includes('pid=S02105051251')) {
 								          var h4Element = document.getElementById('pname');
 								          h4Element.innerHTML = '<i class="fas fa-volume-high" style="margin-right: 15px;"></i>' + h4Element.innerHTML;
 								        }
