@@ -10,10 +10,18 @@ import com.hart.domain.product.MainProdVO;
 import com.hart.domain.product.ProductsDetailVO;
 import com.hart.domain.product.ProductsVO;
 
+
+
+/**
+ * @since : 2023. 03.28.
+ * @FileName: ProductsService.java
+ * @author : 박정훈
+ * @설명 : 상품 리스트 및 상세 서비스
+ * 
+ */
 @Service
 public interface ProductsService {
 
-	// (받을거 넣기 가격, 할인율, 할인후 가격, 상품이름)
 	
 	public List<ProductsVO> getproductslist(int pcno) throws Exception;
 	

@@ -15,6 +15,13 @@ import com.hart.mapper.ProductsMapper;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @since : 2023. 03.28.
+ * @FileName: ProductsServiceImple.java
+ * @author : 박정훈
+ * @설명 : 상품 리스트 및 상세 서비스 임플리먼트
+ * 
+ */
 @Log4j2
 @Service
 public class ProductsServiceImple implements ProductsService {
@@ -24,60 +31,46 @@ public class ProductsServiceImple implements ProductsService {
 
 	@Override
 	public List<ProductsVO> getproductslist(int pcno) {
-
-		// log.info("#############productVO getProductListImple @@@@@@@@@=" + pcno);
-		// 1제품 목록 가져오기
-
 		return productsmapper.getproductslist(pcno);
 	}
 
 	@Override
 	public List<CategoryVO> getcategorybar() {
-		// 2대분류 카테고리 가져오기
 		return productsmapper.getcategorybar();
 	}
-
+	
+	//상단 카테고리 가져오기
 	@Override
 	public List<CategoryVO> getcategorybar(int pcno) {
-
 		return productsmapper.getsmallcategorybar(pcno);
 	}
 
 	// 상품디테일의 이미지와 설명 가져오기
 	@Override
 	public ProductsDetailVO getProductDetails(String pid) {
-		// 3 제품 상페 이미지 가져오기
 		ProductsVO detail = productsmapper.getproductDetail(pid);
 		List<ProductimgVO> pimg = productsmapper.getproductDetailimg(pid);
-		// 4 제품 상세 이미지 가져오기
 		return new ProductsDetailVO(detail, pimg);
-
 	}
 
 	@Override
 	public List<ListVO> getproductcatrogrtlist(int pcno) throws Exception {
-		// log.info("===============getproductcatrogrtlist ServiceImple ============>" +
-		// pcno);
 
 		return productsmapper.getproductcatrogrtlist(pcno);
 	}
 
-	// 에이작스 및 소 카테고리 및 필터적용 Mapper  및 무한스크롤
+	// 에이작스 및 소 카테고리 및 필터적용 Mapper 및 무한스크롤
 	@Override
 	public List<ListVO> Productlist(ListVO list) {
-		// log.info("===============getproductcatrogrtlist Service ServiceImple
-		// ============>" + list);
-		log.info("===============Productlist Service ServiceImple ============>"
-				+ productsmapper.Productlist(list));
+		log.info("===============Productlist Service ServiceImple ============>" + productsmapper.Productlist(list));
 
 		return productsmapper.Productlist(list);
 	}
-	
-	
+
 	// 메인 페이지 상품 리스트 가져오기
 	@Override
-	public List<MainProdVO> getmainprod(){
-		log.info("productsmapper.getmainprod()"+productsmapper.getmainprod());
+	public List<MainProdVO> getmainprod() {
+		log.info("productsmapper.getmainprod()" + productsmapper.getmainprod());
 		return productsmapper.getmainprod();
 	}
 }

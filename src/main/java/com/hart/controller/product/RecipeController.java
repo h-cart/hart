@@ -1,7 +1,5 @@
 package com.hart.controller.product;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hart.domain.product.RecipeDetailVO;
-import com.hart.domain.product.RecipeVO;
 import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
 
+
+/**
+ * @since : 2023. 03. 25.
+ * @FileName: RecipeController.java
+ * @author : 박정훈
+ * @설명 : 레시피 리스트 및 레시피 상세 컨트롤러
+ * 
+ */
 @Controller
 @RequestMapping("/recipe")
 @Log4j2

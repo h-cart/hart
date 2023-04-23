@@ -22,6 +22,14 @@ import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @since : 2023. 04. 1.
+ * @FileName: ProductRestController.java
+ * @author : 박정훈
+ * @설명 : 상품리스트, 페이징,레시피 등 에이작스 처리 컨트롤러
+ * 
+ */
+
 @RestController
 @RequestMapping("/papi")
 @Log4j2

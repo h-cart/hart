@@ -4,6 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
+<!-- /**
+ * @since : 2023. 03.10.
+ * @FileName: ProductsMapper.xml
+ * @author : 박정훈
+ * @설명 : 상품 동적쿼리 및 상품 카테고리 정보 가져옴
+ * 
+ */ -->
+
 <mapper namespace="com.hart.mapper.ProductsMapper">
 	<!-- -->
 

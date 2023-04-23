@@ -15,6 +15,14 @@ import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
 
+
+/**
+ * @since : 2023. 04. 8.
+ * @FileName: HomeController.java
+ * @author : 박정훈
+ * @설명 : 메인페이지 상품 및 레시피 추천 컨트롤러
+ * 
+ */
 @Log4j2
 @Controller
 @RequestMapping("/")
