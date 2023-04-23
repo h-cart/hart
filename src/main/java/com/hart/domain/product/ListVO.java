@@ -2,6 +2,12 @@ package com.hart.domain.product;
 
 import lombok.Data;
 
+/**
+ * @since : 2023. 03. 1.
+ * @FileName: ListVO
+ * @author : 박정훈
+ * @설명 : 상품 목록 페이지VO
+ */
 @Data
 public class ListVO {
 

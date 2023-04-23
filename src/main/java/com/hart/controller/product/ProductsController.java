@@ -16,6 +16,13 @@ import com.hart.service.recommand.RecommandService;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @since : 2023. 03. 25.
+ * @FileName: ProductsController
+ * @author : 박정훈
+ * @설명 : 상품목록 및 상품 상세 정보 출력 부분
+ */
+
 @Controller
 @Log4j2
 @RequestMapping("/product")

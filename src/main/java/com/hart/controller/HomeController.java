@@ -15,6 +15,14 @@ import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
 
+
+/**
+ * @since : 2023. 04. 12.
+ * @FileName: HomeController
+ * @author : 박정훈
+ * @설명 : 메인페이지 상품 출력 및 레시피 공모전 시간 출력
+ */
+
 @Log4j2
 @Controller
 @RequestMapping("/")

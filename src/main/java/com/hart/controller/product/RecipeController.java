@@ -14,6 +14,13 @@ import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
 
+
+/**
+ * @since : 2023. 03. 29.
+ * @FileName: RecipeController
+ * @author : 박정훈
+ * @설명 : 레시피 리스트 및 레시피 목록 출력 부분
+ */
 @Controller
 @RequestMapping("/recipe")
 @Log4j2
