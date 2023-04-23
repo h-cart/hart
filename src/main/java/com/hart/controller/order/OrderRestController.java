@@ -65,7 +65,7 @@ public class OrderRestController {
 	/* *Author : 남승현
 	 * 기능 : 주문 조회
 	 * 매개변수 : SearchDTO(사용자 아이디, 조회 시작일, 조회 종료일, 취소 여부)
-	 * 기타 : 
+	 * 기타 : 조회 시작일 - 조회 종료일 내에 사용자를 통해 주문 / 주문 취소 된 내역 조회
 	 */
 	@PostMapping(value="/search", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Map<String,List<SearchResultDTO>>> searchOrder(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @RequestBody SearchDTO sDTO){

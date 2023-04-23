@@ -207,14 +207,13 @@ public class ShareServiceImpl implements ShareService{
 	}
 
 	/* *Author : 남승현
-	 * 기능 : 장바구니 공유 요청 메서드
-	 * 매개변수 : ShareDTO(공유 장바구니 번호, 비밀번호, 사용자 아이디), 공유 장바구니 번호
+	 * 기능 : 공유 장바구니 취소 메서드
+	 * 매개변수 : 사용자 아이디, 공유 자압구니 번호
 	 */
 	@Override
 	public boolean cancleShare(String mid,String csno) throws Exception {
 		boolean result = false;
-		log.info(mid);
-		log.info(csno);
+
 		try {
 			if(sMapper.isOwner(mid)==1) {
 				result = true;
@@ -222,7 +221,6 @@ public class ShareServiceImpl implements ShareService{
 			}else sMapper.deleteOne(mid);
 			return result;
 		}catch (Exception e) {
-			log.info(e.getMessage());
 			throw e;
 		}
 

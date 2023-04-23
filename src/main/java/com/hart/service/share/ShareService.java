@@ -10,7 +10,7 @@ import com.hart.domain.share.ShareDTO;
  * @since : 2023. 3. 25.
  * @FileName: ShareService.java
  * @author : 남승현
- * @설명 : 추천 관련 ShareService 구현 클래스
+ * @설명 : 공유 관련 ShareService 구현 클래스
  * 
  *     <pre>
  *   수정일         수정자               수정내용

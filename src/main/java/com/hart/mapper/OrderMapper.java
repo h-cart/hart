@@ -55,6 +55,8 @@ public interface OrderMapper {
 	
 	// 클래스 주문 후, 나의 클래스 내역에 넣는 메서드
 	public OinfoDTO getOrder(@Param("oid") int oid,@Param("mid") String mid)throws SQLException;
+	
+	// 주문 조회 시, 활용되는 메서
 	public List<SearchResultDTO> getOrders(SearchDTO sDTo) throws SQLException;
 	
 }

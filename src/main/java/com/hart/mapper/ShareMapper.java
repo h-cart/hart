@@ -61,6 +61,6 @@ public interface ShareMapper {
 	// 공유 장바구니 참여 취소 시, 개인이 나갈때 활용되는 메서드
 	int deleteOne(String mid)throws SQLException;
 	
-	// 공유 장바구니 참여 취소 시, 개인이 나갈때 활용되는 메서드
+	// 공유 장바구니에 같은 상품 존재 여부 확인 메서드
 	int sameProducts(@Param("pid") String pid,@Param("csno") String csno)throws SQLException;
 }

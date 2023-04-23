@@ -14,7 +14,7 @@ import com.hart.domain.order.SearchResultDTO;
  * @since : 2023. 3. 20.
  * @FileName: OrderService.java
  * @author : 남승현
- * @설명 : 장바구니 관련 OrderService Interface
+ * @설명 : 주문 관련 OrderService Interface
  * 
  *     <pre>
  *   수정일         수정자               수정내용
