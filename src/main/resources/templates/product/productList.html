@@ -5,14 +5,11 @@
 
 	<script type="text/javascript" defer>
 
-      //상품 디테일 페이지에 pid를 보내줌
       function goDetailPage(e) {
         let pid = $(e).data("pid");
         location.href = "/product/productDetail?pid=" + pid;
       }
     </script>
-
-
 
 	<script>
    let page = 0;
@@ -26,18 +23,12 @@
       let pcno = $("input[name=pcno]").val();
       
       
-     // console.log("pcno********>>"+pcno);
       sendpcno(pcno,page,sort);
       
       
       $(window).scroll(function() {
-      //   console.log("scroll(function()==");
          
       if(($(window).scrollTop()) >= $(document).height()- $(window).height()-50  ){ 
-    	//  console.log($(window).height()-50 );
-       //    console.log("페이지들어오니?->" + page);
-          
-           
            page++;
               sendpcno($("input[name=pcno]").val(),page,sort,keyword); 
          }
@@ -45,10 +36,6 @@
    });
 
       function sendpcno(pcno,pnum,order,keyword) {
-    	
-     // console.log("send() 쪽에서의 keyword>>" +keyword);
-     // console.log("pnum>>"+pnum);
-      
       if(pnum==0) {
        page = pnum;
        $("input[name=pcno]").val(pcno);
@@ -59,11 +46,6 @@
        $(".current").text("가격 높은순");
 
       }
-      
-     // console.log(pcno,pnum,order,keyword);
-      
-    
-      
       
        let pcno_top = $("input[name=pcno_top]").val();
        if(keyword != null ){
@@ -79,8 +61,6 @@
             sort : order,
             keyword : keyword
           };
-          
-    //  console.table("엘리먼트keyword >>>>>>>>>"+keyword);
       
           $.ajax({
             type: "post",
@@ -92,14 +72,11 @@
             },
             dataType: "json",
             success: function (result) {
-               console.log("버튼누르면 들어온다==")
               let str = "";
-            /* console.log(result); */
            $.each(result.productlist, function (index, product) {
     if (index == 0) {
         $('.shop__product__option__left').find('span').text(product.totalcount);
     }
-  //  console.log(product);
     let pprice = product.pprice.toLocaleString('ko-KR');
     let pdiscount = product.pdiscount;
     originalprice = ((1 - (pdiscount / 100)) * (product.pprice)).toLocaleString('ko-KR');
@@ -131,7 +108,6 @@
                        pidx++;
               });
 
-  //          console.log("if 쪽 page------------>>"+ page);
             
            if (page == 0) {
              $("#productlistajax").html(str);
@@ -140,8 +116,7 @@
              $("#productlistajax").append(str);
            } 
        
-            console.log(result.length)
-             //page++;
+           // console.log(result.length)
               $("input[name=page]").val(page);
               
               $(".set-bg").each(function () {
@@ -151,17 +126,14 @@
               
             },
             error: function (err,xhr,status) {
-           //   console.log("실패 카테고리 리스트 에이작스 ");
             },
             
           });
           
         }  //function sendpcno(pcno)
    
-        //클릭 옵션 하면 function작동함 ->0넣기
          $(document).on("click",".option", function(){
             sort = $(this).data('value');
-            //console.log(sort);
             sendpcno($("input[name=pcno]").val(),0,sort);
          })
 
@@ -170,10 +142,8 @@
 
 	<script>
 	function search() {
-		
 		keyword = document.querySelector('input[name=keyword]').value;
 		$("#search").text(keyword);
-	//	console.log("keyword->>>"+ keyword);
 		sendpcno(0,0,1,keyword);
 	}
 		
@@ -214,10 +184,6 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="shop__sidebar">
-
-
-
-
 
 						<div class="shop__sidebar__search">
 							<div>
@@ -359,6 +325,10 @@
           pamounts.push(quantity);
           pnames.push(pname);
         });
+                 if(pids.length==0){
+				showToast("추천 상품이 선택되지 않았습니다.", -1);
+				return ;
+			}
 		}else {
 			
 			 var pid = $("#" + idx).data("value");

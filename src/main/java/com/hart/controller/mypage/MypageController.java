@@ -52,6 +52,11 @@ private final LiveClassService service;
 		return "liveClass/liveClassMypage";
 	}
 	
+	/* *Author : 남승현
+	 * 기능 : 마이페이지내 주문내역 페이지로 이동
+	 * 매개변수 : X
+	 * 기타 : 기본 값으로 주문내역 조회 / 페이지내 선택을 통해 주문취소 내역 조회 가능
+	 */
 	@GetMapping("/order")
 	public String getOrderList() {
 		log.info("myPage 주문내역 컨트롤러");

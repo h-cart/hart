@@ -226,7 +226,7 @@
                   
                 </div>
                 <div th:if="${memberCheck}!=0" class="product__details__cart__option row row-cols-sm-12">
-                  <input type="checkbox" checked style="display: none" name="cartlist" id="chk_-1" />
+                
                   <input class="item" id="-1" type="hidden" th:data-value="${liveClass.liveClassListDTO.lcid}" name="pid" th:value="${liveClass.liveClassListDTO.lcid}" />
                   <a th:onclick="" class="primary-btn addToCart col" style=" color:#fff; margin: 10px; width: -webkit-fill-available" id="cartbtn" >이미 구매한 강의입니다.</a>
                 </div>
@@ -345,6 +345,10 @@
             pids.push(pid);
             pamounts.push(quantity);
          })
+         if(pids.length==0){
+				showToast("추천 상품이 선택되지 않았습니다.", -1);
+				return ;
+			}
 		 }else {
 			
 			var pid = $("#" + idx).data("value");

@@ -75,5 +75,5 @@ const sse = new EventSource("/capi/sse");
 		let msg = receivedJoins+" 님이 공유 장바구니에 참여했습니다.";
 		console.log(msg);
 		$("#toast").addClass("show");
-		showToast(msg,-1);
+		showToast(msg,1);
 	});

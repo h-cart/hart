@@ -22,6 +22,22 @@ import com.hart.service.RecipeService;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @since : 2023. 04. 1.
+ * @FileName: ProductsController.java
+ * @author : 박정훈
+ * @설명 : 상품리스트, 페이징,레시피 등 에이작스 처리 컨트롤러
+ *  *     <pre>
+ *   수정일         수정자               수정내용
+ * ----------      --------    ---------------------------
+ * 2023. 03. 29.    박정훈       Prod 구현
+ * 2023. 04. 03.    박정훈       ProductRestController 구현
+ * 2023. 04. 05.    박정훈       productlist 에이작스 구현 및 수정 
+ * 2023. 04. 07.    박정훈       recipelist 에이작스 구현 
+ *     </pre>
+ * 
+ */
+
 @RestController
 @RequestMapping("/papi")
 @Log4j2
@@ -113,13 +129,11 @@ public ResponseEntity<Map<String, List<CategoryVO>>> getCategory(int pcno) {
       try {
          System.out.println("data>>" + data);
          List<RecipeVO> recipelist = recipeservice.recipelist(data);
-
          
          
          System.out.println("recipelist>>" + recipelist);
          Map<String, List<RecipeVO>> result = new HashMap<>();
          result.put("recipelist", recipelist);
-
 
          return new ResponseEntity<Map<String, List<RecipeVO>>>(result, HttpStatus.OK);
 

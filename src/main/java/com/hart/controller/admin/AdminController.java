@@ -23,6 +23,27 @@ import com.hart.service.liveClass.LiveClassService;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @since : 2023. 03. 27.
+ * @FileName: AdminController.java
+ * @author : 이승규
+ * @설명 : 공모전 관리자 관련 요청 처리 컨트롤러
+ * 
+ *     <pre>
+ *   수정일         수정자               수정내용
+ * ----------      --------    ---------------------------
+ * 2023. 03. 27.     이승규       AdminController 구현
+ * 2023. 03. 29.     이승규       votelist 구현
+ * 2023. 04. 03.     이승규       recipeVote 구현
+ * 2023. 04. 03.     이승규       recipeVotelist 구현
+ * 2023. 04. 04.     이승규       recipeRegister 구현
+ * 2023. 04. 06.     이승규       eventMange 구현
+ * 2023. 04. 06.     이승규       eventRegister 구현
+ * 2023. 04. 06.     이승규       eventModify 구현
+ * 2023. 04. 07.     이승규       recipePreview 구현
+ * 2023. 04. 10.     함세강       liveClassDetailTest 구현
+ *     </pre>
+ */
 @Controller
 @Log4j2
 @RequestMapping("/admin")
@@ -42,8 +63,6 @@ public class AdminController {
 	@GetMapping("/eventManage")	
 	public String eventMange(Criteria cri, Model model) {
 		List<EventListVO> lists = eService.getEventManageList(cri);
-		
-		
 		int totalCnt = eService.getEventTotalCount();
 		
 		model.addAttribute("lists", lists);
@@ -52,14 +71,12 @@ public class AdminController {
 		return "admin/eventManage";
 	}
 	
-
+	//어드민 메인페이지 (이벤트 리스트)
 	@GetMapping("")
 	public String home(Criteria cri, Model model) {
 		List<AdminEventVO> eventList = eService.getEventList();
-		log.info(eventList);
 		if (cri.getEvid() == 0) {
 			cri.setEvid(eventList.get(0).getEvid());
-			log.info("여기 실행:");
 		}
 
 		List<AdminEventVO> lists = eService.getList(cri);
@@ -72,15 +89,15 @@ public class AdminController {
 
 		return "admin/main";
 	}
-
+	
+	//어드민 메인페이지 (레시피 투표 페이지지)
 	@GetMapping("/recipeVote")
 	public String recipeVote(Criteria cri, Model model) {
 		List<AdminEventVO> eventList = eService.getEventList();
-		log.info(cri);
+	
 		if (cri.getEvid() == 0) {
 			cri.setEvid(eventList.get(0).getEvid());
 		}
-
 		List<AdminEventVO> lists = eService.getVoteList(cri);
 
 		model.addAttribute("evid", cri.getEvid());
@@ -89,24 +106,24 @@ public class AdminController {
 
 		return "admin/recipeVote";
 	}
-
+	
+	//어드민 메인페이지 (레시피 투표 리스트)
 	@GetMapping("/votelist")
 	public String votelist(AdminEventVO event) {
-		// log.info(event);
 		eService.voteList(event);
 		return "redirect:/admin?evid=" + event.getEvid();
 	}
 
+	//어드민 메인페이지 (레시피 투표하기)
 	@GetMapping("/recipeVotelist")
 	public String recipeVotelist(AdminEventVO event) {
-		// log.info(event);
 		eService.voteList(event);
 		return "redirect:/admin/recipeVote?evid=" + event.getEvid();
 	}
 
+	//어드민 메인페이지 (레시피 등록하기)
 	@GetMapping("/recipeRegister")
 	public String recipeRegister(AdminEventVO event) {
-		log.info("1. 여기 들어옴 " + event);
 		eService.recipeRegister(event);
 		return "redirect:/admin/recipeVote?evid=" + event.getEvid();
 	}
@@ -133,18 +150,10 @@ public class AdminController {
 		model.addAttribute("detail", cr);
 		return "admin/recipePreview";
 	}
-
-	@GetMapping("/dialog")
-	public String getMethodName(){
-		return "admin/dialog";
-	}
 	
-	
-	
+	// 라이브 클래스 관리 페이지
 	@GetMapping("/class")
 	public String liveClassDetailTest(Model model) {
-		log.info("무섭도록 코딩중");
-		
 		List<AdminLiveClassDTO> list;
 		try {
 			list = classService.getClassAdminList();
@@ -152,6 +161,7 @@ public class AdminController {
 		} catch (SQLException e) {
 			log.info(e.getMessage());
 		}
+
 		return "admin/classManage";
 	}
 	
