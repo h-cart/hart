@@ -20,6 +20,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.hart.security.handler.LoginFailureHandler;
 import com.hart.security.handler.LoginSuccessHandler;
@@ -31,7 +33,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 @Configuration
 @Log4j2
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	private final ClubUserDetailsService memberService;
 
@@ -40,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(memberService);
 		super.configure(auth);
 	}
+	
 
 	@Bean
 	public LoginSuccessHandler successHandler() {
@@ -79,7 +82,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// crsf 비활성화
 		http.csrf();// .disable();
-		http.cors();
 		// 로그 아웃 세팅
 		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.logoutSuccessUrl("/member/login");

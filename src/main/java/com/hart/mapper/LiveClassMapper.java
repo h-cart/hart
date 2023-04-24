@@ -19,11 +19,18 @@ import com.hart.domain.liveClass.MyLiveClassInfoDTO;
  * @author : 함세강
  * @설명 : 데이터베이스 mybatis Interface
  * 
- *     <pre>
+ *<pre>
  *   수정일         수정자               수정내용
  * ----------      --------    ---------------------------
- * 2023. 3. 15.     함세강           LiveClassMapper
- *     </pre>
+ * 2023. 3. 15.     함세강          getLiveList mapper 구현
+ * 2023. 3. 17.     함세강      	getLiveClassDetail mapper 구현
+ * 2023. 3. 20.     함세강      	getLiveClassDetailInfo mapper 구현
+ * 2023. 3. 21.     함세강      	checkClassMember mapper 구현
+ * 2023. 3. 25.     함세강      	getMyLiveClassInfo mapper 구현
+ * 2023. 3. 27.     함세강      	getMyVideo mapper 구현
+ * 2023. 3. 27.     함세강      	getAdminLiveClass mapper 구현
+ * 2023. 3. 27.     함세강      	registerLiveClassVOD mapper 구현
+ *</pre>
  */
 
 @Mapper

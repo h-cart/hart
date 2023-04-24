@@ -1,6 +1,7 @@
 package com.hart.controller.mypage;
 
 import java.security.Principal;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import lombok.extern.log4j.Log4j2;
  *   수정일         수정자               수정내용
  * ----------      --------    ---------------------------
  * 2023. 3. 15.     함세강       myPageClass 핸들러 추가
+ * 2023. 3. 17.     함세강       getOrderList 핸들러 추가
  *     </pre>
  */
 @Controller
@@ -36,26 +38,25 @@ private final LiveClassService service;
 	
 	@GetMapping("/class")
 	public String myPageClass(Principal pr,Model model) {
-		log.info("myPage 수강내역 확인 컨트롤러 호출");
+		log.info("myPage 수강내역 컨트롤러");
 		String mid = pr.getName();
 		log.info(mid);
-		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
-		log.info(list);
-		model.addAttribute("classList",list);
+		List<MyLiveClassInfoDTO> list;
+		try {
+			list = service.getMyClassInfo(mid);
+			log.info(list);
+			model.addAttribute("classList",list);
+		} catch (SQLException e) {
+			log.info(e.getMessage());
+		}
 		return "liveClass/liveClassMypage";
 	}
 	
 	@GetMapping("/order")
 	public String getOrderList() {
+		log.info("myPage 주문내역 컨트롤러");
 		return "member/orderlist";
 	}
 	
 	
-//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@테스트용
-	@GetMapping("/testchat")
-	public String streamingTestChat() {
-		log.info("streamingTest 컨트롤러 호출");
-		
-		return "liveClass/liveClassChatTestStream";
-	}
 }

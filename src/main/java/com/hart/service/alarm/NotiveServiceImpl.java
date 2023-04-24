@@ -13,6 +13,19 @@ import com.hart.mapper.AlarmMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @since : 2023. 04. 04.
+ * @FileName: AlarmService.java
+ * @author : 함세강
+ * @설명 : NoticeService 구현
+ * 
+ *     <pre>
+ *   수정일         수정자               수정내용
+ * ----------      --------    ---------------------------
+ * 2023. 04. 04.     함세강       getNoticeService 서비스 추가
+ * 2023. 04. 05.     함세강       noticeUpdateService 서비스 추가
+ *     </pre>
+ */
 @Service
 @Log4j2
 @RequiredArgsConstructor
@@ -26,7 +39,7 @@ public class NotiveServiceImpl implements NoticeService{
 		Map<String, Object> map = new HashMap<>();
 		map.put("mid", mid);
 		map.put("alarmCount", null);
-		mapper.noticeListCall(map);
+		mapper.noticeListCall(map);//아이디와 알람수를 키값으로 가지는 map 객체를 매개변수로 사용
 		
 		NoticeDTO dto = new NoticeDTO();
 		dto.setList((List<AlarmDTO>)map.get("key"));
@@ -39,7 +52,6 @@ public class NotiveServiceImpl implements NoticeService{
 	public void noticeUpdateService(String mid) {
 		log.info("noticeUpdateService 호출");
 		mapper.updateNoticeList(mid);
-		log.info("noticeUpdateService 호출완료");
 	}
 
 }

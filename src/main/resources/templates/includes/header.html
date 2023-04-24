@@ -330,7 +330,6 @@
     <script type="text/javascript">
 
       $(document).ready(function () {
-		showToast("야호야호야호ㅑ오햐오향호야홍햐 ~",1);
         $.ajax({
           type: "POST",
           url: "/alarm",
@@ -342,9 +341,6 @@
             for (let i = 0; i < result.list.length; i++) {
               let date = result.list[i].alarm_date;
               let content = result.list[i].alarm_content;
-              //let date = result[i].alarm_date;
-              //let content = result[i].alarm_content;
-              //console.log(cnt);
               let str = "";
 
               str += `
@@ -369,16 +365,13 @@
 
             let laststr = "";
             laststr += `<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
-            //$("#alarmlist").append(laststr);
             $(".dropdown-list").append(laststr);
 
             let cnt = result.alarmCount;
 
             if (cnt == 0) {
-              //$("#alarmCnt").html("");
               $(".badge").html("");
             } else {
-              //$("#alarmCnt").html(cnt+"+");
               $(".badge").html(cnt + "+");
             }
           },
@@ -406,18 +399,6 @@
       }
     </script>
 	<script>
-      /*
-
-		function alarmToggle(){
-			if($("#alarmlist").hasClass("show")){
-				$("#alarmlist").removeClass("show");
-			}else{
-				$("#alarmlist").addClass("show");
-			}
-			
-		}
-		*/
-
       function alarmToggle() {
         if ($(".dropdown-list").hasClass("show")) {
           $(".dropdown-list").removeClass("show");
@@ -425,21 +406,6 @@
           $(".dropdown-list").addClass("show");
         }
       }
-
-      /*
-
-		$(document).mouseup(function (e){
-			$("#alarmlist").removeClass("show");
-		});
-		*/
-
-      /* 
-		$(document).ready(function(){
-			$("body").on("click",function(){
-				$("#alarmlist").removeClass("show");
-			})
-		})
-		 */
 
       const token = $("meta[name='_csrf']").attr("content");
       const header = $("meta[name='_csrf_header']").attr("content");
