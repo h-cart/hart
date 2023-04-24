@@ -345,9 +345,6 @@ div.col-lg-6.col-md-6>nav>ul {
             for (let i = 0; i < result.list.length; i++) {
               let date = result.list[i].alarm_date;
               let content = result.list[i].alarm_content;
-              //let date = result[i].alarm_date;
-              //let content = result[i].alarm_content;
-              //console.log(cnt);
               let str = "";
 
               str += `
@@ -386,7 +383,6 @@ div.col-lg-6.col-md-6>nav>ul {
             }
           },
           error: function (result) {
-            console.log("ajax 실패");
           },
         });
       });
@@ -403,23 +399,12 @@ div.col-lg-6.col-md-6>nav>ul {
             $(".badge").html("");
           },
           error: function () {
-        	  console.log("ajax실패");
           },
         });
       }
     </script>
 	<script>
-      /*
-
-		function alarmToggle(){
-			if($("#alarmlist").hasClass("show")){
-				$("#alarmlist").removeClass("show");
-			}else{
-				$("#alarmlist").addClass("show");
-			}
-			
-		}
-		*/
+ 
 
       function alarmToggle() {
         if ($(".dropdown-list").hasClass("show")) {
@@ -428,21 +413,6 @@ div.col-lg-6.col-md-6>nav>ul {
           $(".dropdown-list").addClass("show");
         }
       }
-
-      /*
-
-		$(document).mouseup(function (e){
-			$("#alarmlist").removeClass("show");
-		});
-		*/
-
-      /* 
-		$(document).ready(function(){
-			$("body").on("click",function(){
-				$("#alarmlist").removeClass("show");
-			})
-		})
-		 */
 
       const token = $("meta[name='_csrf']").attr("content");
       const header = $("meta[name='_csrf_header']").attr("content");

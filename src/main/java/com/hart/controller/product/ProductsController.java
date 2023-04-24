@@ -21,7 +21,12 @@ import lombok.extern.log4j.Log4j2;
  * @FileName: ProductsController.java
  * @author : 박정훈
  * @설명 : 상품 리스트 및 상품 상세 컨트롤러
- * 
+ *   수정일         수정자               수정내용
+ * ----------      --------    ---------------------------
+ * 2023. 03. 15.    박정훈       ProductsController 구현
+ * 2023. 03. 18.    박정훈       list 페이지 구현
+ * 2023. 03. 23.    박정훈       productDetail 페이지 구현
+ * 2023. 03. 26.    박정훈       product 수정
  */
 
 @Controller
@@ -37,32 +42,27 @@ public class ProductsController {
    @Autowired
    private RecommandService rService;
    
+   //레시피 목록 페이지 
    @GetMapping("/list")
    public String productlist(Model model, ListVO list) {
 
-      log.info("pcno Productcontroller @@@@@@@@@@@@@@@ list.getPcno_top()="+ list.getPcno_top() + list.getPcno());
-      
       try {
+       List<ListVO> cList = productsservice.getproductcatrogrtlist(list.getPcno_top());
+       //왼족 카테고리 리스트
+       model.addAttribute("cList",cList); 
          
-         List<ListVO> cList = productsservice.getproductcatrogrtlist(list.getPcno_top());
+       // input으로 넣어줌pcno_top을 히든으로 
+       model.addAttribute("pcno_top",list.getPcno_top());
          
-         System.out.println(cList + "<<Clist 컨트롤러 카테고리 리스트만 가져옴");//
-         
-         model.addAttribute("cList",cList); //왼족 카테고리 리스트\
-         
-          log.info("cList>>>>>"+cList);
-         model.addAttribute("pcno_top",list.getPcno_top());// input으로 넣어줌pcno_top을 히든으로 
-         
-         model.addAttribute("pcno", list.getPcno());
+       model.addAttribute("pcno", list.getPcno());
+       
       } catch (Exception e) {
          e.printStackTrace();
       }
-      
       return "product/productList";
    }
 
-
-
+   //레시피 상세 페이지 
    @GetMapping("/productDetail")
    public String ProductDtail(String pid, Model model) {
 
@@ -70,20 +70,12 @@ public class ProductsController {
     	  
     	 RecommandDTO rDTO = rService.RecommandForProduct(pid);
          ProductsDetailVO Detail = productsservice.getProductDetails(pid);
-
-          //System.out.println("Detail ==================>>>>>>" + Detail);
-          
-//          System.out.println("rDTO.getRecipes() ==================>>>>>>" + rDTO.getRecipes());
-//          System.out.println("rDTO.getLives() ==================>>>>>>" + rDTO.getLives());
-          
-          
          model.addAttribute("Detail", Detail);
          model.addAttribute("recipes",rDTO.getRecipes());
          model.addAttribute("lives",rDTO.getLives());
       } catch (Exception e) {
          e.printStackTrace();
       }
-
       return "product/productDetail";
    }
 

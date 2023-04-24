@@ -15,7 +15,6 @@ import com.hart.domain.product.ProductsVO;
  * @FileName: ProductsMapper.java
  * @author : 박정훈
  * @설명 : 데이터베이스 마이바티스 인터페이스
- * 
  */
 @Mapper
 public interface ProductsMapper {
