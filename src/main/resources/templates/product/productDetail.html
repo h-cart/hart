@@ -515,17 +515,21 @@ td:nth-child(1) span:nth-child(2) {
           pamounts.push(quantity);
           pnames.push(pname);
         });
-        
-      }else {
-         
-         var pid = $("#" + idx).data("value");
-             var quantity = $("#quantity_" + idx).val();
-             var pname = $("[data-pos="+pid+"]").text();
-             pids.push(pid);
-             pamounts.push(quantity);
-             pnames.push(pname);
-      }
-         console.log(pids,pamounts, pnames);
+
+                 if(pids.length==0){
+				showToast("추천 상품이 선택되지 않았습니다.", -1);
+				return ;
+			}
+		}else {
+			
+			var pid = $("#" + idx).data("value");
+          	var quantity = $("#quantity_" + idx).val();
+          	var pname = $("[data-pos="+pid+"]").text();
+          	pids.push(pid);
+         	 pamounts.push(quantity);
+         	 pnames.push(pname);
+		}
+			console.log(pids,pamounts, pnames);
         $.ajax({
           url: "/capi/insert",
           beforeSend: function (xhr) {

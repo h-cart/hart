@@ -69,7 +69,7 @@ var allCheck = $("#allCheck");
 allCheck.on("click", function (e) {
 	var list = $("input[type='checkbox']");
 	var flag = $(this).prop("checked");
-	list.prop("checked", flag);
+	list.prop("checked",flag);
 
 	getCheckboxValue();
 });
@@ -80,7 +80,7 @@ function getCheckboxValue() {
 	var count = 0;
 	var discount = 0;
 	var totalLength = $(".checkbox").length;
-	$("input[name=cartlist]:checked").each(function () {
+	$("input[name=mcartlist]:checked").each(function () {
 		var pos = $(this).prop('id').split("_")[1];
 		if ($("#discount_" + pos).data('value') > 0) {
 			discount += ($("#discount_" + pos).data('value') - $("#price_" + pos).data('value')) * $("#quantity_" + pos).val();
@@ -103,7 +103,7 @@ function getCheckboxValue() {
 
 function selectRemove(entryNumber) {
 	var entryNumber = "";
-	$("input:checkbox[name='cartlist']:checked").each(function () {
+	$("input:checkbox[name='mcartlist']:checked").each(function () {
 		entryNumber += $(this).closest("tr").data('value')+ ",";
 	});
 		if (entryNumber.length == "") {

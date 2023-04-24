@@ -20,6 +20,19 @@ import com.hart.domain.order.OrderInsertDTO;
 import com.hart.domain.order.OrderTotalDTO;
 import com.hart.service.order.OrderService;
 
+
+/**
+ * @since : 2023. 3. 20.
+ * @FileName: OrderController.java
+ * @author : 남승현
+ * @설명 : 주문 관련 요청 처리 컨트롤러 
+ * 
+ *     <pre>
+ *   수정일         수정자               수정내용
+ * ----------      --------    ---------------------------
+ * 2023. 3. 20.     남승현       OrderController 구현
+ *     </pre>
+ */
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -27,38 +40,47 @@ public class OrderController {
 	@Autowired
 	private OrderService oService;
 	
+	/* *Author : 남승현
+	 * 기능 : QR 스캐너 페이지로 이동
+	 * 매개변수 : X
+	 */
 	@GetMapping("/qr")
 	public void qr() {
 
 	}
 
-
-	@GetMapping("/result")
-	public void result(@RequestParam(value = "pid", required = false) String pid, Model model) {
-		if (pid != null)
-			model.addAttribute("pid", pid);
-	}
-	
+	/* *Author : 남승현
+	 * 기능 : 주문 페이지로 이동
+	 * 매개변수 : X
+	 */
 	@GetMapping("/checkout")
 	public void showItems() {
 		
 	}
+
+	/* *Author : 남승현
+	 * 기능 : Post Method로 주문 상품관련 데이터를 받아, 페이지로 보내줌
+	 * 매개변수 : 상품 아이디, 상품 수량
+	 * 기타 : PRG 패턴 적용을 위해, Post 형태로 받아 Redirect 시킴
+	 */
 	@PostMapping("/list")
 	public String list(@RequestParam("pids") List<String> pids, @RequestParam("pamounts") List<Integer> pamounts,RedirectAttributes model) {
 		String url = "/order/checkout";
-		System.out.println(pids);
-		System.out.println(pamounts);
 		try {
 			OrderTotalDTO oDTO = oService.getInfo(pids, pamounts);
 			model.addFlashAttribute("oDTO",oDTO);
 		}catch (Exception e) {
 			model.addFlashAttribute("msg", "ERROR");
-			System.out.println(e.getMessage());
 			url = "error";
 		}
 		return "redirect:"+url;
 	}
-	
+
+	/* *Author : 남승현
+	 * 기능 : 주문 기능
+	 * 매개변수 : OrderInsertDTO(주문정보 / 구매 클래스,상품 목록 / 주소 저장여부)
+	 * 기타 : 주문 데이터 삽입 
+	 */
 	@PostMapping("/complete")
 	public String insertOrder(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @ModelAttribute OrderInsertDTO insertDTO) {
 		String url = "";
@@ -76,11 +98,15 @@ public class OrderController {
 			}else
 				url = "/cart/mycart";
 			
-			e.printStackTrace();
 		}
 		return "redirect:"+url;
 	}
 	
+	/* *Author : 남승현
+	 * 기능 : 주문 완료 페이지로 이동
+	 * 매개변수 : 주문 번호
+	 * 기타 : 주문 프로세스 진행시 PRG 패턴을 통해, 주문 완료 페이지로 이동시킴 
+	 */
 	@GetMapping("/complete")
 	public String orderComplete(@AuthenticationPrincipal ClubAuthMemberDTO mDTO, @RequestParam("oid") String oid, Model model) {
 		String url = "order/complete";
