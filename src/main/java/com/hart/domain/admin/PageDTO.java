@@ -1,7 +1,5 @@
 package com.hart.domain.admin;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data

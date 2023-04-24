@@ -82,10 +82,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		<where>
 			<if test="pcno_top != 0">
-				pc.pcno_top = #{pcno_top}
+			and	pc.pcno_top = #{pcno_top}
 			</if>
 			<if test="pcno != 0">
-				p.pcno = #{pcno}
+				and p.pcno = #{pcno}
 			</if>
 			<if test="keyword !=null">
 				and pname like '%'||#{keyword}||'%'
