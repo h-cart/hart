@@ -137,7 +137,7 @@
          
       if(($(window).scrollTop()) >= $(document).height()- $(window).height()-1  ){ 
          page++;
-           console.log("page==>" + page + "sort>>"+sort);
+           //console.log("page==>" + page + "sort>>"+sort);
            scroll(page,sort);  
          }
       });  
@@ -152,7 +152,6 @@
             sort :sort
           };
           
-      console.table("엘리먼트 >>>>>>>>>"+element);
       
           $.ajax({
             type: "post",
@@ -164,7 +163,6 @@
             },
             dataType: "json",
             success: function (result) {
-               console.log("펑션(success: function) 쪽 들어온다==>"+ result)
               let str = "";
             
                $.each(result.recipelist, function (index, recipelist) {
@@ -186,15 +184,12 @@
                       </div>`;
                   });
 
-            console.log(" page------------>>"+ page);
-            
            if (page == 0) {
              $("#recipeajax").html(str);
            } else {
              $("#recipeajax").append(str);
            } 
        
-            console.log("result.length>>"+result.length);
             
             $(".set-bg").each(function () {
                
@@ -206,14 +201,10 @@
               
             },
             error: function (err,xhr,status) {
-              console.log("실패 카테고리 리스트 에이작스 ");
             },
-            
-            
           });
           
         }  //function 
-        //클릭 옵션 하면 function작동함 ->0넣기
         $(document).on("click",".option", function(){
            sort = $(this).data('value');
            console.log(sort);
