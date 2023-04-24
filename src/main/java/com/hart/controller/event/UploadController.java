@@ -27,6 +27,21 @@ import com.hart.service.event.EventService;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * @since : 2023. 03. 15.
+ * @FileName: UploadController.java
+ * @author : 이승규
+ * @설명 : 공모전 관련 요청 처리 컨트롤러
+ * 
+ *     <pre>
+ *   수정일         수정자               수정내용
+ * ----------      --------    ---------------------------
+ * 2023. 03. 17.     이승규       searchProduct 구현
+ * 2023. 03. 30.     이승규       displayImg 구현
+ * 2023. 04. 10.     이승규       checkVote 구현
+ * 2023. 04. 14.     이승규       getEventId 구현
+ *     </pre>
+ */
 @RestController
 @Log4j2
 @RequestMapping("/event/api")
@@ -36,29 +51,16 @@ public class UploadController {
 	private String uploadPath;
 	@Autowired
 	private EventService eventService;
-
-	@PostMapping("/uploadAjax")
-	public void uploadFile(MultipartFile[] uploadFiles) {
-
-		log.info(uploadFiles);
-		for (MultipartFile i : uploadFiles) {
-			// [IE] 실제 파일 이름 전체 경로가 들어오므로
-			// String fileName =
-			// originalName.substring(originalName.lastIndexOf("\\"+1));
-			String originalName = i.getOriginalFilename();
-			log.info("fileName :" + originalName);
-		} // end for
-
-	}// end void
-
+	
+	//추천 검색어
 	@GetMapping("/search")
 	public ResponseEntity<List<ProductsVO>> searchProduct(String keyword) throws SQLException {
 		return ResponseEntity.ok(eventService.getList(keyword));
 	}
 
+	// 이미지 가져오기
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> displayImg(@RequestParam("imgName") String imgName) {
-		log.info("sdfs");
 		ResponseEntity<byte[]> result = null;
 		try {
 			String srcFileName = URLDecoder.decode(imgName, "UTF-8");
@@ -81,6 +83,7 @@ public class UploadController {
 		return ResponseEntity.ok(eventService.checkVote(event));
 	}
 
+	// 이벤트 목록 가져오기
 	@GetMapping("/eventId")
 	public ResponseEntity<EventListVO> getEventId() throws SQLException {
 		return ResponseEntity.ok(eventService.getEventId());
