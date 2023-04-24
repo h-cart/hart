@@ -1,4 +1,4 @@
-package com.hart.zuik.controller;
+package com.hart.controller;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -19,45 +19,31 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.google.gson.Gson;
+import com.hart.domain.order.SearchDTO;
 
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @WebAppConfiguration
-public class CartApiControllerTests {
+public class OrderApiControllerTests {
 
   @Autowired
   private MockMvc mockMvc;
 
+
+  
+
   @Test
-  public void insertCarts() throws Exception  {
+  public void cancleOrder() throws Exception  {
     
-    Map<String, List<String>> requestBody = new HashMap<>();
-    List<String> pids = new ArrayList<>();
-    List<String> pamounts = new ArrayList<>();
-    pids.add("S02203100153");
-    pids.add("S02103036855");
-    pamounts.add("2");
-    pamounts.add("2");
-    requestBody.put("pids", pids);
-    requestBody.put("pamounts", pamounts);
+    Map<String,String> requestBody = new HashMap<>();
+    
+    
+    requestBody.put("oid", "48");
     String json = new Gson().toJson(requestBody);
-    mockMvc.perform(post("/capi/insert")
+    MvcResult result = mockMvc.perform(post("/oapi/cancle")
     		.with(csrf())
     		.content(json)
-    		.contentType(MediaType.APPLICATION_JSON_VALUE))
-    .andExpect(status().isOk());
-  }
-  
-  
-  @Test
-  public void getCarts() throws Exception  {
-    
-    Map<String, List<String>> requestBody = new HashMap<>();
-
-    String json = new Gson().toJson(requestBody);
-    MvcResult result = mockMvc.perform(post("/capi/get")
-    		.with(csrf())
     		.contentType(MediaType.APPLICATION_JSON_VALUE))
     .andExpect(status().isOk()).andReturn();
     String responseJson = result.getResponse().getContentAsString();
@@ -65,15 +51,15 @@ public class CartApiControllerTests {
   }
   
   @Test
-  public void removeCarts() throws Exception  {
+  public void searchOrder() throws Exception  {
     
-    Map<String, List<String>> requestBody = new HashMap<>();
-    List<String> pids = new ArrayList<>();
-    pids.add("S02103036855");
-    pids.add("S02203100153");
-    requestBody.put("pids", pids);
-    String json = new Gson().toJson(requestBody);
-    MvcResult result = mockMvc.perform(post("/capi/removes")
+    SearchDTO sDTO = SearchDTO.builder()
+    				.sdate("23/03/26")
+    				.edate("23/03/28")
+    				.mid("skarns23@gmail.com")
+    				.build();
+    String json = new Gson().toJson(sDTO);
+    MvcResult result = mockMvc.perform(post("/oapi/search")
     		.with(csrf())
     		.content(json)
     		.contentType(MediaType.APPLICATION_JSON_VALUE))

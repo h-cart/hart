@@ -1,4 +1,4 @@
-package com.hart.zuik.service;
+package com.hart.service;
 
 import java.util.ArrayList;
 import java.util.List;

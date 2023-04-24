@@ -1,4 +1,4 @@
-package com.hart.zuik.mapper;
+package com.hart.mapper;
 
 import java.util.ArrayList;
 import java.util.List;

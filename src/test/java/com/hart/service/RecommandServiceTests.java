@@ -1,4 +1,4 @@
-package com.hart.zuik.service;
+package com.hart.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
