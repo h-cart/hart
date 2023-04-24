@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * @since : 2023. 3. 28.
  * @FileName: RrecipeDTO.java
  * @author : 남승현
- * @설명 : 추천 라이브 클래스 DTO
+ * @설명 : 추천 레시피 DTO
  * 
  *     <pre>
  *   수정일         수정자               수정내용

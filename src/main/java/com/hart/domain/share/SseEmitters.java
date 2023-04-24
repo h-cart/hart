@@ -49,7 +49,7 @@ public class SseEmitters {
 				try {
 					emmiter.getSse().send(SseEmitter.event().name("join").data(mDTO.getMname()));
 				}catch (Exception e) {
-					
+					log.info(e.getMessage());
 				}catch (Error e) {
 					throw new RuntimeErrorException(e);
 				}
@@ -83,7 +83,7 @@ public class SseEmitters {
 			} catch (Error e) {
 				throw new RuntimeErrorException(e);
 			} catch (IOException e) {
-				new Exception(e.getMessage());
+				log.info(e.getMessage());
 			}
 		});
 	}
@@ -102,8 +102,7 @@ public class SseEmitters {
 			} catch (Error e) {
 				throw new RuntimeErrorException(e);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.info(e.getMessage());
 			}
 		});
 	}
@@ -127,15 +126,15 @@ public class SseEmitters {
 			} catch (Error e) {
 				throw new RuntimeErrorException(e);
 			} catch (IOException e) {
-				
+				log.info(e.getMessage());
 			}
 		});
 	}
 
 	/* *Author : 남승현
 	 * 기능 : 공유 장바구니 삭제 이벤트 알림 메서드
-	 * 매개변수 : 공유 장바구니 번호, 사용자 아이디, 사용자 이름, 상품 아이디 목록, 상품 이름 목록
-	 * 기타 : 변경한 사용자의 이름과 함께 상품 목록 데이터를 담아서 공유 장바구니 사용자에게 보냄
+	 * 매개변수 : 공유 장바구니 번호, 사용자 아이디, 사용자 이름
+	 * 기타 : 공유 장바구니 삭제 혹은 탈퇴 시 데이터를 담아 공유 장바구니 사용자에게 보냄
 	 */
 	public void deleteCarts(String csno, String mid, String mname) {
 
@@ -147,7 +146,7 @@ public class SseEmitters {
 			} catch (Error e) {
 				throw new RuntimeErrorException(e);
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.info(e.getMessage());
 			}
 
 		});

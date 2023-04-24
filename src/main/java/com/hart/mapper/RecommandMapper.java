@@ -31,6 +31,6 @@ public interface RecommandMapper {
 	// 상품 관련 레시피, 클래스를 반환하는 메서드
 	public RecommandDTO getProductRecommand(String pid) throws SQLException;
 	
-	// 자신의 장바구니 상품에 대해 추천을 받는 메서드
+	// 추천 레시피 및 클래스 관련 상품을 불러오는 메서드
 	public List<IngredientDTO> getIngredients(String lcid)throws SQLException;
 }

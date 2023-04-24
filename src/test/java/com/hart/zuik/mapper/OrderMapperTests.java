@@ -22,15 +22,14 @@ public class OrderMapperTests {
 
 	@Test
 	public void getProducts() throws Exception{
-		List<String> list = new ArrayList<>();
-		log.info(oMapper);
-		list.add("S02209125009");
-		list.add("S02105049300");
-		list.add("S02006004340");
-		list.add("S02006004339");
 		
+		log.info(oMapper.pInfos("S02209125009"));
 		
-				
+	}
+	
+	@Test
+	public void getInfoProduct() throws Exception {
+		log.info(oMapper.pInfos("S02209125009"));
 	}
 	
 	

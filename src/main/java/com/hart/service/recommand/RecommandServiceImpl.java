@@ -81,7 +81,7 @@ public class RecommandServiceImpl implements RecommandService {
 
 	/* *Author : 남승현
 	 * 기능 : 사용자 아이디, 공유 장바구니 번호, 클래스 아이디
-	 * 매개변수 : 관련 상품 추가를 진행하나, 내부적으로 중복된 상품에 대해 띄워주지 않기 위해, 중복 상품을 삭제하는 메서드
+	 * 매개변수 : 관련 상품을 불러오는 메서드
 	 */
 	@Transactional
 	@Override
@@ -126,8 +126,8 @@ public class RecommandServiceImpl implements RecommandService {
 	}
 
 	/* *Author : 남승현
-	 * 기능 : 레시피 카테고리를 담기 위한 메서드
-	 * 매개변수 : 추천 결과 데이터
+	 * 기능 : 관련 상품 중, 장바구니에 존재하는 중복 상품을 제거하는 메서드
+	 * 매개변수 : 사용자 아이디, 공유 장바구니 번호, 재료 목록
 	 */
 	@Transactional
 	public List<IngredientDTO> removeItem(String mid, String csno, List<IngredientDTO> list)throws Exception {

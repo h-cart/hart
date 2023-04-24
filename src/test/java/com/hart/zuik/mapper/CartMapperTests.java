@@ -33,8 +33,12 @@ public class CartMapperTests {
 	
 	@Test
 	public void isExistProduct() throws Exception{
-		log.info(cMapper.isExistProduct(""
-				+ ""));
+		log.info(cMapper.isExistProduct("S02211132600"));
+	}
+	
+	@Test
+	public void isExistLiveClass() throws Exception{
+		log.info(cMapper.isExistClass("L0001"));
 	}
 	
 	@Test
@@ -59,6 +63,11 @@ public class CartMapperTests {
 	@Test
 	public void getClasss() throws Exception {
 		log.info(cMapper.getLClass("skarns23@gmail.com"));
+	}
+	
+	@Test
+	public void sameProducts() throws Exception{
+		log.info(cMapper.sameProducts("S02211132600", "skarns23@gmai.com"));
 	}
 	
 }

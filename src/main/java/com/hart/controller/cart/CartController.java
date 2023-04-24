@@ -107,7 +107,6 @@ public class CartController {
 		String url = "";
 		if (mDTO.getCsno() == null || Integer.parseInt(mDTO.getCsno()) != csno) {
 			url = "error/share";
-
 			model.addAttribute("msg", "허용되지 않은 접근입니다.");
 		} else {
 			url = "cart/share";

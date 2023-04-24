@@ -25,6 +25,6 @@ public interface RecommandService {
 	// 상품 관련, 추천 레시피 및 클래스 불러오는 기능
 	public RecommandDTO RecommandForProduct(String pid) throws Exception;
 	
-	// 사용자 장바구니 상품 관련, 추천 레시피 및 클래스 불러오는 기능
+	// 클래스 상품 구매시, 관련 상품을 불러오는 기능
 	public List<IngredientDTO> getIngredients(String mid, String csno,String lcid)throws Exception;
 }
