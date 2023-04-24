@@ -16,11 +16,14 @@ import com.hart.domain.liveClass.LiveClassListDTO;
  * @author : 함세강
  * @설명 : 데이터베이스 mybatis Interface
  * 
- *     <pre>
+ *<pre>
  *   수정일         수정자               수정내용
  * ----------      --------    ---------------------------
- * 2023. 3. 15.     함세강           LiveClassMapper
- *     </pre>
+ * 2023. 4. 01.     함세강           getApplicantInfoCall mapper 구현
+ * 2023. 4. 01.     함세강           addApplicantTodayAlarm mapper 구현
+ * 2023. 4. 02.     함세강           noticeListCall 구현
+ * 2023. 4. 02.     함세강           updateNoticeList 구현
+ *</pre>
  */
 
 @Mapper
@@ -29,14 +32,9 @@ public interface AlarmMapper {
 	public void getApplicantInfoCall(Map<String,Object> map);
 	//강의 당일날 알림 추가
 	public void addApplicantTodayAlarm();
-	
-	/*
 	//헤더 알람 목록 가져오기
-	public List<AlarmDTO> getAlarmList(String mid);
-	*/
-	
-	//헤더 알람 목록 가져오기(최신)
 	public void noticeListCall(Map<String,Object>map);
+	//헤더 알람 목록 최신으로 만들기
 	public int updateNoticeList(@Param("mid") String mid);
 	
 }

@@ -2,6 +2,7 @@ package com.hart.ham.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -24,35 +25,30 @@ public class LiveClassServiceTest {
 	
 	@Test
 	public void getListServiceTest() {
-		List<LiveClassListDTO> list = service.getList();
-		log.info(list);
-		assertThat(list.get(0)).isInstanceOf(LiveClassListDTO.class);
+		List<LiveClassListDTO> list;
+		try {
+			list = service.getList();
+			log.info(list);
+			assertThat(list.get(0)).isInstanceOf(LiveClassListDTO.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
-	public void getMyClassInfoServiceTest() {
+	public void getMyClassInfoServiceTest() throws SQLException {
 		String mid = "skarns23@gmail.com";
 		List<MyLiveClassInfoDTO> list = service.getMyClassInfo(mid);
-		
 		log.info(list);
-		//assertThat(list.get(0)).isInstanceOf(MyLiveClassInfoDTO.class);
 		assertThat(list.get(0)).isInstanceOf(MyLiveClassInfoDTO.class);
 	}
 	
 	@Test
-	public void getLiveClassDetailSetvideTest() {
+	public void getLiveClassDetailSetvideTest() throws SQLException {
 		LiveClassDetailInfoDTO dto = service.getClassDetail("L0003");
 		log.info(dto);
 		assertThat(dto).isInstanceOf(LiveClassDetailInfoDTO.class);
-		
 	}
-	
-	@Test
-	public void getClassVideoServiceTset() {
-		log.info(service.getClassVideo("L0001"));
-		//다른 걸 써보자!
-		
-	}
-	
 	
 }

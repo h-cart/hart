@@ -1,6 +1,7 @@
 package com.hart.controller.liveClass;
 
 import java.security.Principal;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -32,11 +33,16 @@ import lombok.extern.log4j.Log4j2;
  *   수정일         수정자               수정내용
  * ----------      --------    ---------------------------
  * 2023. 3. 15.     함세강       LiveClassController 구현
+ * 2023. 3. 16.     함세강       getLiveClassList 구현
+ * 2023. 3. 20.     함세강       getLiveClassListDetail 구현
+ * 2023. 3. 21.     함세강       getVideoDetail 구현
+ * 2023. 3. 25.     함세강       registerVOD 구현
  *     </pre>
  */
 @Controller
 @RequestMapping("/class")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "https://localhost:80")
 @Log4j2
 public class LiveClassController {
 
@@ -45,8 +51,21 @@ public class LiveClassController {
 	@GetMapping
 	public String getLiveClassList(Model model) {
 		log.info("getLiveClassList 컨트롤러 호출");
-		List<LiveClassListDTO> list = service.getList();
-		model.addAttribute("liveClassList",list);
+		//라이브 클래스 목록 불러오는 서비스 호출
+		List<LiveClassListDTO> list;
+		String msg = "";
+		int status =0;
+		try {
+			list = service.getList();
+			model.addAttribute("liveClassList",list);
+			status =1;
+		} catch (Exception e) {
+			msg = "라이브 클래스 목록을 불러올 수 없습니다.";
+			model.addAttribute("message",msg);
+			log.info(e.getMessage());
+			status = -1;
+		}
+		model.addAttribute("status", status);
 		return "liveClass/liveClassList";
 	}
 	
@@ -54,80 +73,60 @@ public class LiveClassController {
 	public String getLiveClassListDetail(Model model, @PathVariable String lcid, Principal pr) {
 		log.info("getLiveClassListDetail 컨트롤러 호출");
 		LiveClassDetailInfoDTO dto = new LiveClassDetailInfoDTO();
-		dto = service.getClassDetail(lcid);
+		try {
+			dto = service.getClassDetail(lcid);
+		} catch (SQLException e) {
+			log.info(e.getMessage());
+		}
 		if(pr==null) {
 			model.addAttribute("memberCheck",0);
 		}else {
 			String mid = pr.getName();
-			int memberCheck = service.checkClassMember(lcid, mid);
-			model.addAttribute("memberCheck",memberCheck);
+			int memberCheck;
+			try {//이미 구매한 강의인지 체크해 주는 과정
+				memberCheck = service.checkClassMember(lcid, mid);
+				model.addAttribute("memberCheck",memberCheck);
+			} catch (SQLException e) {
+				log.info(e.getMessage());
+			}
 		}
-		
 		model.addAttribute("liveClass",dto);
-		log.info(model);
 		return "liveClass/liveClassDetail";
 	}
 	
 	@GetMapping("/video/{lcid}")
 	@CrossOrigin(origins = "*", methods = RequestMethod.GET)
 	public String getVideoDetail(@PathVariable String lcid, Model model) {
-		//라이브 클래스 정보 담는 부분
+		//라이브 클래스 정보 담는 과정
 		LiveClassDetailInfoDTO dto = new LiveClassDetailInfoDTO();
-		dto = service.getClassDetail(lcid);
+		try {
+			dto = service.getClassDetail(lcid);
+		} catch (SQLException e) {
+			log.info(e.getMessage());
+		}
 		model.addAttribute("liveClass",dto);
-		
-		
 		log.info("videoDetail 컨트롤러 호출");
-		LiveClassVideoDTO videoInfo =  service.getClassVideo(lcid);
-		log.info(videoInfo);
-		model.addAttribute("videoInfo",videoInfo);
+		LiveClassVideoDTO videoInfo;
+		try {
+			videoInfo = service.getClassVideo(lcid);
+			model.addAttribute("videoInfo",videoInfo);
+		} catch (SQLException e) {
+			log.info(e.getMessage());
+		}
 		return "liveClass/liveClassVideo";
 	}
 	
-	
-	
-	
+
 	@PostMapping("/register")
 	public String registerVOD(Model model, LiveClassRegisterDTO dto) {
-		
-		log.info(dto);
 		try {
+			//라이브 클래스 관리자 부분에서 VOD를 등록하는 서비스
 			service.registerVOD(dto);
 		} catch (Exception e) {
 			log.info("vod 등록에 실패했습니다.");
 		}
 		
 		return "redirect:/admin/class";
-	}
-	
-	
-//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@테스트용
-	
-	@GetMapping("/mypage")
-	public String myPageTest(Principal pr,Model model) {
-		log.info("myPage 수강내역 컨트롤러 호출");
-		String mid = pr.getName();
-		List<MyLiveClassInfoDTO> list =  service.getMyClassInfo(mid);
-		log.info(list);
-		model.addAttribute("classList",list);
-		return "liveClass/liveClassMypage";
-	}
-	
-	
-	@GetMapping("/testchat")
-	public String streamingTestChat() {
-		log.info("streamingTest 컨트롤러 호출");
-		
-		return "liveClass/liveClassChatTestStream";
-	}
-	
-	@GetMapping("/testdetail/{lcid}")
-	public String liveClassDetailTest(Model model, @PathVariable String lcid) {
-		LiveClassDetailInfoDTO dto = service.getClassDetail(lcid);
-		model.addAttribute("liveClass",dto);
-		log.info(model);
-		
-		return "liveClass/testdetail";
 	}
 	
 	

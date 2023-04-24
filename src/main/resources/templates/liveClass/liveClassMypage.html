@@ -3,23 +3,8 @@
 <link rel="stylesheet" type="text/css" href="/css/main1.css">
 <link rel="stylesheet" type="text/css" href="/css/main2.css">
 <link rel="stylesheet" type="text/css" href="/css/mypage.css">
-<script type="text/javascript">
-	$(document).ready(function () {
-		$(".tab_class_cs").on("click", function () {
-			$(".tab_class").removeClass("selected");
-			$(this).addClass("selected");
-		});
-
-		$(".tab_class").on("click", function () {
-			$(".tab_class_cs").removeClass("selected");
-			$(this).addClass("selected");
-		});
-	});
-</script>
-
 
 <body>
-
 	<th:block th:replace="includes/header :: header1"></th:block>
 	<th:block th:replace="includes/header :: header2"></th:block>
 	<th:block th:replace="includes/header :: header3"></th:block>
@@ -28,10 +13,8 @@
 		<div id="container">
 			<div id="contents">
 				<div class="myshop-wrap" style=" padding-top:12px;">
-
 					<div class="xans-element- xans-myshop xans-myshop-asyncbenefit header" style="padding-bottom: 0px;">
 					</div>
-
 					<!-- myshop-layout -->
 					<div class="myshop-layout">
 						<!-- menu-block -->
@@ -41,39 +24,17 @@
 								<li><a href="/mypage/class" style="color: black;font-weight: bold;">수강 내역</a></li>
 								<li onclick="logoutSubmit();"><a href="javascript:void(0)">로그아웃</a></li>
 							</ul>
-
 							<form id="logoutFrm" action="/member/logout" method="post">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							</form>
 						</div>
-
-
 						<!-- contents-block -->
 						<div class="contents-block">
-
 							<div class="title-block">
 								<h2>나의 수강내역</h2>
 							</div>
-
 							<nav id=tab-button-nav>
-               
 							</nav>
-						
-							<!-- 날짜 검색 -->
-
-							<form method="GET" id="OrderHistoryForm" name="OrderHistoryForm">
-								
-								<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead order-search-block " style="margin-top: 15px; margin-bottom: 15px;">
-									<ul class="period-rage">
-										<li><a onclick="classSt('1');"  style="border-radius: 20px;">전체</a></li>
-										<li><a onclick="classSt('2');"  style="border-radius: 20px;">학습중</a></li>
-										<li><a onclick="classSt('3');"  style="border-radius: 20px;">강의 예정</a></li>
-									</ul>
-								</div>
-								
-								<input id="mode" name="mode" value="" type="hidden"> <input id="term" name="term" value="" type="hidden">
-							</form>
-
 							<section id="tab-section-1" class="tab-section">
 								<div class="xans-element- xans-myshop xans-myshop-orderhistorylistitem order-list">
 											<div class="">
@@ -125,8 +86,6 @@
 																</button>
 														</div>
 													</div>
-													
-													
 												</div>
 											</div>
 									</div>
@@ -141,94 +100,21 @@
 	</div>
 
 	<th:block th:replace="includes/footer :: footer"></th:block>
-
-
-
-	<script th:inline="javascript">
-	/*<![CDATA[*/	
-		function classSt(e){
-			
-			var classList = /*[[${classList}]]*/ false;
-			
-			const classStatus = e;
-			if(classStatus==1){
-				for(let i=0; i< list.length; i++){
-					console.log(list[i].lcstatus);
-					
-				}
-				
-			}else if(classStatus==2){
-				for(let i=0; i< list.length; i++){
-					console.log(list[i].lcstatus);
-					if(list[i].lcstatus==2){
-						
-						
-					}
-					
-				}
-				
-				
-			}else if(classStatus==3){
-				for(let i=0; i< list.length; i++){
-					console.log(list[i].lcstatus);
-					if(list[i].lcstatus==0){
-						
-					}
-					
-				}
-			}
-			
-		}
-		 /*]]>*/
-	</script>
-	
-	
-	<script>
-		function moveClassDetail(lcid){
-			location.href="/class/detail/"+lcid;
-		}
-	
-		
-		
-		
-	
-		const $nav = document.querySelector('#tab-button-nav')
-		const $sections = document.querySelectorAll('.tab-section');
-
-		$nav.addEventListener('click', (e) => {
-			if (!e.target.classList.contains('tab-button')) {
-				return;
-			}
-
-			const selectedTab = e.target.dataset.tabSection;
-
-			$sections.forEach(($section) => {
-				if ($section.id === selectedTab) {
-					$section.removeAttribute('hidden');
-				} else {
-					$section.setAttribute('hidden', true);
-				}
-			});
-		});
-	</script>
-
 <script type="text/javascript">
+
+	function moveClassDetail(lcid){
+		location.href="/class/detail/"+lcid;
+	}
+
 	function moveVideo(lcstatus,lcid) {
 		
 		if(lcstatus=='1'){//라이브 서버로 연결
-			location.href='http://112.221.184.62:50021';
+			location.href='http://hartlive.shop:50021';
 		}else if(lcstatus =='2'){//vod 서비스로 연결
 			location.href='/class/video/'+lcid;
 		}
 	}
 </script>
-
-<script type="text/javascript">
-
-
-
-</script>
-
 
 </body>
 

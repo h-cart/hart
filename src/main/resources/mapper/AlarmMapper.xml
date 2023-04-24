@@ -37,9 +37,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	
-	<!-- <resultMap id="noticeCnt" type="hashmap"></resultMap> -->
-	
 	<resultMap id="noticeResulttMap" type="com.hart.domain.alarm.AlarmDTO">
 	  <result property="alarm_content" column="alarm_content"/>
 	  <result property="alarm_date" column="alarm_date"/>

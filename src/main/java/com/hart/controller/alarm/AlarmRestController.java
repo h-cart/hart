@@ -21,7 +21,8 @@ import lombok.extern.log4j.Log4j2;
  *     <pre>
  *   수정일         수정자               수정내용
  * ----------      --------    ---------------------------
- * 2023. 04. 04.     함세강       LiveClassController 구현
+ * 2023. 04. 04.     함세강       getalarm 핸들러 추가
+ * 2023. 04. 05.     함세강       alarmStatusUpdate 핸들러 추가
  *     </pre>
  */
 @RestController
@@ -36,7 +37,7 @@ public class AlarmRestController {
 	public NoticeDTO getalarm(Principal pr){
 		String mid = pr.getName();
 		NoticeDTO dto = service.getNoticeService(mid);
-		log.info(dto);
+		log.info("getalarm 컨트롤러 추가");
 		return dto;
 	}
 	

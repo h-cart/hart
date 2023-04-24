@@ -30,7 +30,5 @@ public class AdminMapperTest {
 		log.info(mapper.getAdminLiveClass());
 		
 	}
-
-
 	
 }

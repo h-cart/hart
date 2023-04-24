@@ -368,16 +368,13 @@ div.col-lg-6.col-md-6>nav>ul {
 
             let laststr = "";
             laststr += `<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
-            //$("#alarmlist").append(laststr);
             $(".dropdown-list").append(laststr);
 
             let cnt = result.alarmCount;
 
             if (cnt == 0) {
-              //$("#alarmCnt").html("");
               $(".badge").html("");
             } else {
-              //$("#alarmCnt").html(cnt+"+");
               $(".badge").html(cnt + "+");
             }
           },
@@ -403,8 +400,6 @@ div.col-lg-6.col-md-6>nav>ul {
       }
     </script>
 	<script>
- 
-
       function alarmToggle() {
         if ($(".dropdown-list").hasClass("show")) {
           $(".dropdown-list").removeClass("show");

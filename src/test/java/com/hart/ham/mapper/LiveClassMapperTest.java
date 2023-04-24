@@ -25,7 +25,6 @@ public class LiveClassMapperTest {
 	@Autowired
 	private LiveClassMapper mapper;
 	
-	
 	@Test
 	public void getListService() throws SQLException {
 		log.info(mapper.getLiveList());

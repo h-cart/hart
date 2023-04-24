@@ -23,32 +23,6 @@ public class AlarmMapperTest {
 	@Autowired
 	private AlarmMapper mapper;
 	
-	/*
-	@Transactional
-	@Test
-	public void getApplicantInfo() {
-		log.info(mapper.getApplicantInfo());
-		try {
-			Map<String, Object> resultMap = mapper.getApplicantInfo();
-			
-			ResultSet resultSet = (ResultSet)resultMap.get("cursor");
-			
-			List<LiveClassApplicantDTO> resultList = new ArrayList<>();
-		
-		
-			while (resultSet.next()) {
-				LiveClassApplicantDTO dto = new LiveClassApplicantDTO();
-				dto.setMid(resultSet.getString("MID"));
-				resultList.add(dto);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	*/
-	
 	@Test
 	public void test() {
 		HashMap<String,Object> map = new HashMap<String,Object>();
@@ -57,11 +31,9 @@ public class AlarmMapperTest {
 		log.info(list);
 	}
 
-
 	@Test
 	public void testAlarm() {
 		mapper.addApplicantTodayAlarm();
-		
 	}
 
 	@Test
@@ -78,7 +50,6 @@ public class AlarmMapperTest {
 	@Test
 	public void alarmUpdateTest() {
 		String mid = "skarns23@yu.ac.kr";
-		
 		assertThat(mapper.updateNoticeList(mid)).isEqualTo(3);
 	}
 	

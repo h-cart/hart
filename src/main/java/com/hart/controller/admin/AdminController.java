@@ -1,5 +1,6 @@
 package com.hart.controller.admin;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,8 +154,14 @@ public class AdminController {
 	// 라이브 클래스 관리 페이지
 	@GetMapping("/class")
 	public String liveClassDetailTest(Model model) {
-		List<AdminLiveClassDTO> list = classService.getClassAdminList();
-		model.addAttribute("classList",list);
+		List<AdminLiveClassDTO> list;
+		try {
+			list = classService.getClassAdminList();
+			model.addAttribute("classList",list);
+		} catch (SQLException e) {
+			log.info(e.getMessage());
+		}
+
 		return "admin/classManage";
 	}
 	
