@@ -39,9 +39,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		log.info("------------------------");
-		log.info("onAuthenticationSuccess");
-
 		HttpSession session = request.getSession();
 		// 인증 객체에서 사용자 정보 저장
 		ClubAuthMemberDTO clubAuthMemberDTO = (ClubAuthMemberDTO) authentication.getPrincipal();
