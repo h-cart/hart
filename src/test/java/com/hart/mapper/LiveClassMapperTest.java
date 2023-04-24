@@ -1,4 +1,4 @@
-package com.hart.ham.mapper;
+package com.hart.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

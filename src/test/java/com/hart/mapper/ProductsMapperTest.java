@@ -1,4 +1,4 @@
-package com.hart.hoon;
+package com.hart.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -1,24 +1,20 @@
-package com.hart.ham;
+package com.hart.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.hart.mapper.TestMapper;
+import com.hart.service.recommand.RecommandService;
 
 import lombok.extern.log4j.Log4j2;
 
 @SpringBootTest
 @Log4j2
-public class TestHam {
+public class RecommandServiceTests {
 	
 	@Autowired
-	TestMapper mapper;
+	private RecommandService rService;
 	
 	
-	@Test
-	public void Test() {
-		log.info(mapper.getTest());
-	}
 
 }
